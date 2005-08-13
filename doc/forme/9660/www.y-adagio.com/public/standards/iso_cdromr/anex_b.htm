@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//SQ//DTD HTML 2.0 HoTMetaL + extensions//EN">
+<HTML>
+
+<!-- Mirrored from www.y-adagio.com/public/standards/iso_cdromr/anex_b.htm by HTTrack Website Copier/3.x [XR&CO'2005], Sat, 13 Aug 2005 07:13:27 GMT -->
+<HEAD>
+<TITLE>ISO/IEC 9660:1999 Annex B</TITLE>
+</HEAD>
+
+<BODY>
+<br>
+<center>
+<h2><a name =anx_a>
+Annex B
+</a></h2>
+<h4>
+(informative)
+</h4>
+<h3>
+Historical Background and Changes from ISO 9660:1988
+</h3>
+</center>
+<br>
+<br>
+
+<h3>
+B.1 Historical Background</h3>
+<p>
+Responding to the increase of requirements for ISO 9660 revision, the JTC1 periodical review on ISO 9660 resulted in establishment of the an JTC1/SC15 project to revise the ISO 9660 <a href="#ref1">[1]</a>. SC15 appointed Mr. Andrew Young as an Project Editor and started the revision works. In the SC15/WG1 meeting in December 1993, a number of user requirements for ISO 9660 revision were clarified and confirmed <a href="#ref2">[2]</a>,<a href="#ref3">[3]</a>.
+<p>
+After discussions on the user requirements including those late distributed <a href="#ref4">[4]</a>,<a href="#ref5">[5]</a>, the Project Editor prepared working drafts <a href="#ref6">[6]</a>,<a href="#ref7">[7]</a> taking account of the related issues <a href="#ref8">[8]</a>,<a href="#ref9">[9]</a>. National Body of Japan reviewed them and proposed comments <a href="#ref10">[10]</a> and a revised working draft <a href="#ref11">[11]</a>. In the SC15 meeting in June 1995, the basic strategy for ISO 9660 revision was resolved.
+<p>
+Changing the US position to O-member from P-member in SC15, ECMA proposed a disbandment of SC15 (see JTC1 N3497). JTC1 held a meeting of Ad-hoc Group on SC15 and discussed the ECMA's proposal. According to the recommendation of the Ad-hoc Group, JTC1 decided that SC15 should be disbanded in July 1997. As for maintenance of SC15 projects, JTC1 assigned National Body of Japan to maintain the Project of ISO 9660 and ECMA to all other projects (see JTC1 N4222).
+<p>
+Responding to the discussion in JTC1/SC15, the JTC1 National Body of Japan disbanded SC15/Japan and assigned Format Committee, Optical Disk Standardization in OITDA (Optical Industry Technology Development Association) for actual works of maintenance of ISO 9660. The committee prepared a revised text in Japanese language and submit it as a draft of JIS (Japanese Industrial Standard): Volume and file structure of CD-ROM for information interchange, to MITI (Ministry of International Trade and Industry, Japan) in February 1998. MITI/JISC approved and published it as JIS X 0606:1998 in October 1998.
+<p>
+The JTC1 National Body of Japan submitted, in November 1998, its English text to JTC1 for approval under a fast track procedure, considering the fact that at that time there was no subcommittees taking responsibility to develop volume and file structures of optical storage media.
+
+<h3>
+B.2 Changes from ISO 9660:1988 to this International Standard</h3>
+<h4>
+B.2.1 Major changes</h4>
+<p>
+Enhanced Volume Descriptor was added. The following specifications were introduced for the Enhanced Volume Descriptor.
+<p>
+<dl>
+<dt>a) The Volume Descriptor Version is changed to indicate the new structure;
+<dd>Version number 2 indicated the new specification.
+<dt>b) The File Structure Version is changed to indicate the new structure;
+<dd>Version number 2 indicated the new specification.
+<dt>c) The limitation in the Depth of Hierarchy is lifted;
+<dd>The levels in the hierarchy can exceed eight.
+<dt>d) The File Identifier is not separated to components;
+<dd>The SEPARATORS are not specified.<br>
+A complex file name can be expressed.
+<dt>e) The File Identifier does not have File Version Numbers;
+<dd>File with and without Version Numbers should not exist in the same directory.
+<dt>f) The character used for filling byte positions which are specified to be characters is subject to agreement between the originator and the recipient of the volume;
+<dd>
+<dt>g) The length of File Identifier is limited to 207;
+<dd>Long file name can be expressed.
+<dt>h) The length of a Directory Identifier is limited to 207;
+<dd>Long directory name can be expressed.
+</dl>
+<p>
+<b>NOTE</b>: Without using the Enhanced Volume Descriptor, this International Standard can be read as ISO 9660:1988.
+
+<h4>
+B.2.2 Details of the changes</h4>
+<p>
+<dl>
+<dt>a) The limitation in the Depth of Hierarchy is lifted by using Enhanced Volume Descriptor.
+<dd>6.8.2.1
+<dt>b) FILLER was defined.
+<dd>7.4.3.2<br>
+(20) Changed to FILLER<br>
+7.4.5, 8.4.20, 8.4.21, 8.4.22, 8.4.23, 8.4.24, 8.4.25, 8.5.14, 8.5.15, 8.5.16, 8.5.17, 8.5.18, 8.5.19, 9.3
+<dt>c) Within the Volume that identified by Enhanced Volume Descriptor, the SEPARATORS are not specified.
+<dd>7.4.3.1
+<dt>d) Enhanced Volume Descriptor was added to use of characters.
+<dd>7.4.4, 8.5.5, 8.5.13, 8.5.17, 8.5.18, 8.5.19
+<dt>e) File Identifier format for Enhanced Volume Descriptor was added.
+<dd>7.5.1
+<dt>f) Directory Identifier for Enhanced Volume Descriptor was added.
+<dd>7.6.1, 7.6.3
+<dt>g) File Structure Version number for Enhanced Volume Descriptor was specified.
+<dd>8.4.30
+<dt>h) Enhanced Volume Descriptor was added to Volume Descriptors.
+<dd>6.7, 6.7.1.3, 8.5, Table 6
+<dt>i) Enhanced Volume Descriptor was added in Volume Descriptor Type and Volume Descriptor Version.
+<dd>8.5.1, 8.5.2
+<dt>j) Interchange Level 1 for a Volume identified by an Enhanced Volume Descriptor was added.
+<dd>10.1
+<dt>k) Other changes which have relation to Enhanced Volume Descriptor.
+<dd>6.8.2, 6.8.3, 7.5.2, 8.1.1, 10.2, 12.3.2, 13.3.2, 13.5.1
+<dt>l) Other changes which do not have relation to Enhanced Volume Descriptor.
+<dd>Foreward, Annex B
+<dt>m) Update for referenced Standards.
+<dd>2.1, 3, 6.1.1, 9.5.9<br>
+4.15 was deleted.
+</dl>
+
+<h3>
+B.3 References</h3>
+<p>
+<ul>
+<li><a name=ref1>[1]</a> JTC1/SC15 N413, Table of replies on the periodical review of ISO 9660, 1993-08.
+<li><a name=ref2>[2]</a> JTC1/SC15/WG1 N49, System use sharing protocol, version 1, 1993-12.
+<li><a name=ref3>[3]</a> JTC1/SC15/WG1 N51, Rock ridge interchange protocol, version 1, 1993-12.
+<li><a name=ref4>[4]</a> JTC1/SC15/WG1 N53, Multisession CD writing KODAK implementation, 1994-03.
+<li><a name=ref5>[5]</a> JTC1/SC15/WG1 N54, Extending ISO 9660 handling Unicode, 1994-03.
+<li><a name=ref6>[6]</a> JTC1/SC15/WG1 N76, Proposed revision for ISO 9660:1988, 1995-01.
+<li><a name=ref7>[7]</a> JTC1/SC15/WG1 N77, Proposed ISO 9660 modifications, 1995-01.
+<li><a name=ref8>[8]</a> JTC1/SC15/WG1 N78, IEEE P1281 system use sharing protocol - Draft standard version 1.14, 1995-01.
+<li><a name=ref9>[9]</a> JTC1/SC15/WG1 N79, IEEE P1282 Rock ridge interchange protocol - Draft standard version 1.14, 1995-01.
+<li><a name=ref10>[10]</a> JTC1/SC15/WG1 N95, Comments on SC15/WG1 N76: proposed revision for ISO 9660:1998 and related documents, 1995-05.
+<li><a name=ref11>[11]</a> JTC1/SC15/WG1 N96, Proposed ISO 9660 modifications for extending the volume identified by the supplementary volume descriptor to handle wide character sets, deep directory hierarchy, long complex file names and file size larger than 4 giga bytes (32bits), 1995-05.
+</ul>
+
+</BODY>
+
+<!-- Mirrored from www.y-adagio.com/public/standards/iso_cdromr/anex_b.htm by HTTrack Website Copier/3.x [XR&CO'2005], Sat, 13 Aug 2005 07:13:27 GMT -->
+</HTML>
+
+

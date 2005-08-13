@@ -1,0 +1,117 @@
+supposed to have:
+-volume space (logical blocks)
+ -system area: 16 logical sectors
+ -data area: the rest
+  -volume descriptor
+   -1x primary volume descriptor
+   -0..nx supplementary volume descriptors
+   -0..nx volume partition descriptors
+   -0..nx boot records
+   -1..nx volume descriptor set terminators
+  -file sections = extent
+   -file units
+  -file descriptors
+  -directory descriptors
+  -path tables
+
+actually have:
+
+0000 0000 - 0000 7FFF (32768 bytes, 16 sectors) - zeroes - system area - unused
+
+BEGIN volume descriptor
+0000 8000 - 0000 8000 - 0x01 - volume descriptor type - pvd - 7.1.1
+0000 8001 - 0000 8005 - 'CD001' - standard identifier
+0000 8006 - 0000 8006 - 0x01 - volume descriptor version (0x01 for pvd) - 7.1.1
+
+BEGIN pvd
+0000 8007 - 0000 8007 - 0x00 - unused (should be 0x00)
+0000 8008 - 0000 8027 - 'LINUX                          ' - system identifier - 'a' characters
+0000 8028 - 0000 8047 - 'Slk101d1                       ' - volume identifier - 'd' characters
+0000 8048 - 0000 804F - zeroes - unused (should be zeroes)
+0000 8050 - 0000 8057 - 0x0004F3E3 d324579 - volume space size - 7.3.3
+0000 8058 - 0000 8077 - zeroes - unused (should be zeroes)
+0000 8078 - 0000 807B - 0x0001 d1 - volume set size - 7.2.3
+0000 807C - 0000 807F - 0x0001 d1 - volume sequence number - 7.2.3
+0000 8080 - 0000 8083 - 0x0800 d2048 - logical block size - 7.2.3
+0000 8084 - 0000 808B - 0x000001F0 d496 - path table size - 7.3.3
+0000 808C - 0000 808F - 0x00000015 d21 - location of typeL path table - 7.3.1
+0000 8090 - 0000 8093 - 0x00000000 d0 - location of optional typeL path table - none - 7.3.1
+0000 8094 - 0000 8097 - 0x00000017 d23 - location of typeM path table - 7.3.1
+0000 8098 - 0000 809B - 0x00000000 d0 - location of optional typeM path table - none - 7.3.1
+BEGIN root directory record
+0000 809C - 0000 809C - 0x22 d34 - length of directory record - 7.1.1
+0000 809D - 0000 809D - 0x00 - extended attribute record length - none - 7.1.1
+0000 809E - 0000 80A5 - 0x0000001D d29 - location of extent - 7.3.3
+0000 80A6 - 0000 80AD - 0x00001000 d4096 - data length of file section - 7.3.3
+0000 80AE - 0000 80AE - 0x69 d105 - years since 1900 - 7.1.1
+0000 80AF - 0000 80AF - 0x02 d2 - month - 7.1.1
+0000 80B0 - 0000 80B0 - 0x02 d2 - day - 7.1.1
+0000 80B1 - 0000 80B1 - 0x12 d18 - hour - 7.1.1
+0000 80B2 - 0000 80B2 - 0x36 d54 - minute - 7.1.1
+0000 80B3 - 0000 80B3 - 0x19 d25 - second - 7.1.1
+0000 80B4 - 0000 80B4 - 0xE0 - gmt offset - 7.1.2
+0000 80B5 - 0000 80B5 - bin00000010 - file flags:
+                      bit0 - 0 - existence - true
+		      bit1 - 1 - directory - true
+		      bit2 - 0 - associated file - false
+		      bit3 - 0 - record - no record format field
+		      bit4 - 0 - protection - no oid, gid, anyone may read or execute
+		      bit5-6 - 0 - reserved (should be 0)
+		      bit7 - 0 - multiextent - this is the final record for the file
+0000 80B6 - 0000 80B6 - 0x00 - file unit size - not in interleaved mode - 7.1.1
+0000 80B7 - 0000 80B7 - 0x00 - interleave gap size - not in interleaved mode - 7.1.1
+0000 80B8 - 0000 80BB - 0x0001 d1 - volume sequence number
+0000 80BC - 0000 80BC - 0x01 d1 - length of file identifier - 7.1.1
+0000 80BD - 0000 80BD - 0x00 - file identifier - ??
+??system use LEN_SU
+END root directory record (34 bytes)
+0000 80BE - 0000 813D - zeroes - volume set identifier - ?? - 'd' characters
+0000 813E - 0000 81BD - 'Slackware Linux, Inc. <info@slackware.com>                                                                                     '
+                      - publisher identifier - 'a' characters
+0000 81BE - 0000 823D - 'Slackware Linux, Inc. <info@slackware.com>                                                                                     '
+                      - data preparer identifier - 'a' characters
+0000 823E - 0000 82BD - 'Slackware Linux 10.1 disc 1                                                                                                    '
+		      - application identifier - 'a' characters
+0000 82BE - 0000 82E2 - spaces - copyright file identifier - none - 7.5
+0000 82E3 - 0000 8307 - spaces - abstract file identifier - none - 7.5
+0000 8308 - 0000 832C - spaces - bibliographic file identifier - none - 7.5
+0000 832D - 0000 833C - '2005020219011600' - volume creation date - digits
+0000 833D - 0000 833D - 0xE0 - gmt offset - 7.1.2
+0000 833E - 0000 834D - '2005020219011600' - volume modification date - digits
+0000 834E - 0000 834E - 0xE0 - gmt offset - 7.1.2
+0000 834F - 0000 835E - '0000000000000000' - volume expiration date - not specified - digits
+0000 835F - 0000 835F - 0x00 - gmt offset - not specified - 7.1.2
+0000 8360 - 0000 836F - '2005020219011600' - volume effective date - digits
+0000 8370 - 0000 8370 - 0xE0 - gmt offset - 7.1.2
+0000 8371 - 0000 8371 - 0x01 - file structure version (should be 0x01) - 7.1.1
+0000 8372 - 0000 8372 - 0x00 - reserved (should be 0x00)
+0000 8373 - 0000 8572 - spaces - application use
+0000 8573 - 0000 87FF - zeroes - reserved (should be zeroes)
+END pvd
+END volume descriptor (2048 bytes, 1 sector)
+
+BEGIN volume descriptor
+0000 8800 - 0000 8800 - 0x00 - vd type - boot record - 7.1.1
+0000 8801 - 0000 8805 - 'CD001' - sid
+0000 8806 - 0000 8806 - 0x01 - volume descriptor version (0x01 for boot record) - 7.1.1
+
+BEGIN boot record
+0000 8807 - 0000 8826 - 'EL TORITO SPECIFICATION' + 9 zeroes - boot system id - 'a' characters
+0000 8827 - 0000 8846 - zeroes - boot identifier - 'a' characters
+0000 8847 - 0000 9000 - boot system use
+END boot record
+END volume descriptor
+
+BEGIN volume descriptor
+0000 9000 - 0000 9000 - 0x02 - vd type - supplementary vd - 7.1.1
+0000 9001 - 0000 9005 - 'CD001' - sid
+0000 9006 - 0000 9006 - 0x01 - volume descriptor version (0x01 for svd) - 7.1.1
+
+BEGIN supplementary vd
+0000 9007 - 0000 9007 - bin00000000 - volume flags - registered esc seq
+sid, vid different!
+path table size different!
+l, m locations different!
+
+END supplementary vd
+END volume descriptor

@@ -1,0 +1,13 @@
+HTTrack3.33-2 launched on Sat, 13 Aug 2005 03:13:24 at http://www.y-adagio.com/public/standards/iso_cdromr/tocont.htm r1
+(winhttrack http://www.y-adagio.com/public/standards/iso_cdromr/tocont.htm -O "/home/andrei/websites/9660" -%v r1 )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+03:13:25	Error: 	"Unable to get server's address" (-5) after 2 retries at link r1/robots.txt (from primary/primary)
+03:13:27	Error: 	"Unable to get server's address" (-5) after 2 retries at link r1/ (from primary/primary)
+
+HTTrack Website Copier/3.33-2 mirror complete in 3 seconds : 13 links scanned, 8 files written (215369 bytes overall) [34298 bytes received at 11432 bytes/sec], 212272 bytes transfered using HTTP compression in 6 files, ratio 13%, 2.2 requests per connection
+(2 errors, 0 warnings, 0 messages)

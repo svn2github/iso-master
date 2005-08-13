@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//SQ//DTD HTML 2.0 HoTMetaL + extensions//EN">
+<HTML>
+
+<!-- Mirrored from www.y-adagio.com/public/standards/iso_cdromr/sect_1.htm by HTTrack Website Copier/3.x [XR&CO'2005], Sat, 13 Aug 2005 07:13:25 GMT -->
+<HEAD>
+<TITLE>ISO/IEC 9660:1999 Section one</TITLE>
+<style type="text/css">
+span.super {vertical-align : super}
+</style>
+</HEAD>
+
+<BODY>
+<h4 align=right>
+ISO/IEC DIS 9660:1999
+</h4>
+
+<h1>
+Information technology - Volume and file structure of CD-ROM for information interchange
+</h1>
+<br>
+<center>
+<h2>
+Section one: General
+</h2>
+</center>
+
+<h3><a name=cls_1>
+1 Scope and field of application
+</a></h3>
+<p>
+This International Standard specifies the volume and file structure of compact read only optical disks (CD-ROM) for the interchange of information between users of information processing systems.
+<p>
+This International Standard specifies
+<ul>
+<li>the attributes of the volume and the descriptors recorded on it;
+<li>the relationship among volumes of a volume set;
+<li>the placement of files:
+<li>the attributes of the files;
+<li>record structures intended for use in the input or output data streams of an application program when such data streams are required to be organized as sets of records;
+<li>three nested levels of medium interchange;
+<li>two nested levels of implementation;
+<li>requirements for the processes which are provided within information processing systems, to enable information to be interchanged between different systems, utilizing recorded CD-ROM as the medium of interchange; for this purpose it specifies the functions to be provided within systems which are intended to originate or receive CD-ROM which conform to this International Standard.
+</ul>
+
+<h3><a name=cls_2>
+2 Conformance
+</a></h3>
+<h4>
+2.1 Conformance of a CD-ROM
+</h4>
+<p>
+A CD-ROM shall be in conformance with this International Standard when all information recorded on it conforms to the requirements of section two of this International Standard. A statement of conformance shall identify the lowest level of interchange to which the contents of the CD-ROM conform.
+<p>
+A prerequisite to such conformance is conformance of the CD-ROM to ISO/IEC 10149:1995.
+
+<h4>
+2.2 Conformance of an information processing system
+</h4>
+<p>
+An information processing system shall be in conformance with this International Standard if it meets the requirements specified in sections two and three of this International Standard either for an originating system, or for a receiving system, or for both types of system. A statement of conformance shall identify which level of these requirements can be met by the system.
+
+<h3><a name=cls_3>
+3 References
+</a></h3>
+<p>
+IS0/lEC 646:1991, <i>Information processing - ISO 7-bit coded character set for information interchange</i>.
+<p>
+ISO/IEC 1539-1:1997, <i>Information technology - Programming languages - Fortran - Part 1: Base language</i>.
+<p>
+IS0/IEC 2022:1994, <i>Information technology - Character code structure and extension techniques</i>.
+<p>
+ISO 2375:1985, <i>Data processing - Procedure for registration of escape sequences</i>.
+<p>
+ISO/IEC 10149:1995, <i>Information technology - Data interchange on read-only 120 mm optical data disks (CD-ROM)</i>.
+
+<h3><a name=cls_4>
+4 Definitions
+</a></h3>
+<p>
+For the purposes of this International Standard, the following definitions apply:
+
+<h4>
+4.1 application program: 
+</h4>
+<p>
+A program that processes the contents of a file, and may also process selected attribute data relating to the file or to the volume(s) on which the file is recorded.
+<p>
+NOTE - An application program is a specific class of user, as defined in this International Standard.
+<h4>
+4.2 byte: 
+</h4>
+<p>
+A string of eight binary digits operated upon as a unit.
+<h4>
+4.3 Data Field of a sector: 
+</h4>
+<p>
+A fixed-length field containing the data of a sector.
+<h4>
+4.4 data preparer: 
+</h4>
+<p>
+A person or other entity which controls the preparation of the data to be recorded on a volume group.
+<p>
+NOTE - A data preparer is a specific class of user as defined in this International Standard.
+<h4>
+4.5 descriptor: 
+</h4>
+<p>
+A structure containing descriptive information about a volume or a file.
+<h4>
+4.6 Extent: 
+</h4>
+<p>
+A set of logical blocks, the logical block numbers of which form a continuous ascending sequence.
+<h4>
+4.7 file: 
+</h4>
+<p>
+A named collection of information.
+<h4>
+4.8 File Section: 
+</h4>
+<p>
+That part of a file that is recorded in any one extent.
+<h4>
+4.9 implementation: 
+</h4>
+<p>
+A set of processes which enable an information processing system to behave as an originating system, or as a receiving system, or as both types of system.
+<h4>
+4.10 Logical Block: 
+</h4>
+<p>
+A group of 2<span class=super>n+9</span> bytes treated as a logical unit, where n equals 0 or a positive integer.
+<h4>
+4.11 originating system: 
+</h4>
+<p>
+An information processing system which can create a set of files on a volume set for the purpose of data interchange with another system.
+<h4>
+4.12 receiving system: 
+</h4>
+<p>
+An information processing system which can read a set of files from a volume set which has been created by another system for the purpose of data interchange.
+<h4>
+4.13 record: 
+</h4>
+<p>
+A sequence of bytes treated as a unit of information.
+<h4>
+4.14 sector: 
+</h4>
+<p>
+The smallest addressable part of the recorded area on a CD-ROM that can be accessed independently of other addressable parts of the recorded area.
+<h4>
+4.15 user: 
+</h4>
+<p>
+A person or other entity (for example, an application program) that causes the invocation of the services provided by an implementation.
+<h4>
+4.16 volume: 
+</h4>
+<p>
+A dismountable CD-ROM.
+<h4>
+4.17 Volume Set: 
+</h4>
+<p>
+A collection of one or more volumes, on which a set of files is recorded. 
+
+<h3><a name=cls_5>
+5 Notation
+</a></h3>
+<p>
+The following notation is used in this International Standard.
+
+<h4>
+5.1 Decimal and hexadecimal notations
+</h4>
+<p>
+Numbers in decimal notation are represented by decimal digits, namely O to 9.
+<p>
+Numbers in hexadecimal notation are represented by hexadecimal digits, namely O to 9 and A to F, shown in parentheses.
+
+<h4>
+5.2 Other notation
+</h4>
+<table>
+<tr>
+<td>BP<td>       : Byte position within a descriptor, starting with 1
+<tr>
+<td>RBP<td>      : Byte position within a descriptor field, starting with 1
+<tr>
+<td>ZERO<td>     : A single bit with the value O
+<tr>
+<td>ONE<td>      : A single bit with the value 1
+<tr>
+<td>Digit(s)<td> : Any digit from DIGIT ZERO to DIGIT NINE
+</tr>
+</table>
+
+</BODY>
+
+<!-- Mirrored from www.y-adagio.com/public/standards/iso_cdromr/sect_1.htm by HTTrack Website Copier/3.x [XR&CO'2005], Sat, 13 Aug 2005 07:13:25 GMT -->
+</HTML>
+
+
+

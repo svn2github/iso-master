@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//SQ//DTD HTML 2.0 HoTMetaL + extensions//EN">
+<HTML>
+
+<!-- Mirrored from www.y-adagio.com/public/standards/iso_cdromr/sect_3.htm by HTTrack Website Copier/3.x [XR&CO'2005], Sat, 13 Aug 2005 07:13:26 GMT -->
+<HEAD>
+<TITLE>ISO/IEC 9660:1999 Section three</TITLE>
+<style type="text/css">
+span.super {vertical-align : super}
+</style>
+</HEAD>
+
+<BODY>
+<br>
+<center>
+<h2>
+Section three: Requirements for systems
+</h2>
+</center>
+
+<h3><a name=cls_11>
+11 Requirement for the description of systems
+</a></h3>
+<p>
+This International Standard specifies that certain information shall be communicated between a user and an implementation (see clauses 12 and 13).
+<p>
+An information processing system that conforms to this International Standard shall be the subject of a description which identifies the means by which the user may supply such information, or may obtain it when it is made available, as specified in this International Standard.
+<p>
+
+<h3><a name=cls_12>
+12 Requirements for an originating system
+</a></h3>
+<h4>
+12.1 General
+</h4>
+<p>
+The implementation shall be capable of recording a set of files, and all descriptors that are specified in this International Standard, on a Volume Set in accordance with one of the interchange levels specified in this International Standard.
+<h4>
+12.2 Files
+</h4>
+<p>
+The implementation shall obtain from the data preparer the information that constitutes the set of files to be recorded.
+<h4>
+12.3 Descriptors
+</h4>
+<p>
+<b>12.3.1</b> The implementation shall allow the data preparer to supply the information that is to be recorded in each of the descriptor fields listed below, and shall supply the information for a field if the data preparer does not supply it.
+<p>
+For the Primary Volume Descriptor:
+<ul>
+<li>System Identifier
+<li>Volume Identifier
+<li>Logical Block Size
+<li>Location of Occurrence of Type L Path Table
+<li>Location of Optional Occurrence of Type L Path Table
+<li>Location of Occurrence of Type M Path Table
+<li>Location of Optional Occurrence of Type M Path Table
+<li>Volume Set Identifier
+<li>Publisher Identifier
+<li>Data Preparer Identifier
+<li>Application Identifier
+<li>Copyright File Identifier
+<li>Abstract File Identifier
+<li>Bibliographic File Identifier
+<li>Volume Creation Date and Time
+<li>Volume Modification Date and Time
+<li>Volume Expiration Date and Time
+<li>Volume Effective Date and Time
+<li>Application Use
+</ul>
+<p>
+For each Path Table Record:
+<ul>
+<li>Extended Attribute Record Length
+<li>Location of Extent
+<li>Parent Directory Number
+<li>Directory identifier
+</ul>
+<p>
+For each Directory Record:
+<ul>
+<li>Extended Attribute Record Length
+<li>Location of Extent
+<li>Data Length
+<li>Recording Date and Time
+<li>Existence bit of the File Flags field
+<li>Directory bit of the File Flags field
+<li>Associated File bit of the File Flags field
+<li>Record bit of the File Flags field
+<li>Protection bit of the File Flags field
+<li>File Unit Size
+<li>Interleave Gap Size
+<li>Volume Sequence Number
+<li>File Name of a File Identifier
+<li>File Name Extension of a File Identifier
+<li>File Version Number of a File Identifier
+<li>System Use
+</ul>
+<p>
+<b>12.3.2</b> The implementation shall allow the data preparer to supply the information that is to be recorded in the descriptor fields listed below, and shall not record the Supplementary Volume Descriptor or the Enhanced Volume Descriptor if the data preparer does not supply the information.
+<p>
+For each Supplementary Volume Descriptor or Enhanced Volume Descriptor:
+<ul>
+<li>System Identifier
+<li>Volume Identifier
+<li>Logical Block Size
+<li>Location of Occurrence of Type L Path Table
+<li>Location of Optional Occurrence of Type L Path Table
+<li>Location of Occurrence of Type M Path Table
+<li>Location of Optional Occurrence of Type M Path Table
+<li>Bit O of the Volume Flags field
+<li>Escape Sequences
+<li>Volume Set Identifier
+<li>Publisher Identifier
+<li>Data Preparer Identifier
+<li>Application Identifier
+<li>Copyright File Identifier
+<li>Abstract File Identifier
+<li>Bibliographic File Identifier
+<li>Volume Creation Date and Time
+<li>Volume Modification Date and Time
+<li>Volume Expiration Date and Time
+<li>Volume Effective Date and Time
+<li>Application Use
+</ul>
+<p>
+<b>12.3.3</b> The implementation shall allow the data preparer to supply the information that is to be recorded in the descriptor fields listed below, and shall not record the Volume Partition Descriptor if the data preparer does not supply the information.
+<p>
+For each Volume Partition Descriptor:
+<ul>
+<li>System Identifier
+<li>Volume Partition Identifier
+<li>Volume Partition Location
+<li>Volume Partition Size
+<li>System Use
+</ul>
+<p>
+<b>12.3.4</b> The implementation shall allow the data preparer to supply the information that is to be recorded in the descriptor fields listed below, and shall not record the Boot Record if the data preparer does not supply the information.
+<p>
+For each Boot Record:
+<ul>
+<li>Boot System Identifier
+<li>Boot Identifier
+<li>Boot System Use
+</ul>
+<p>
+<b>12.3.5</b> The implementation shall allow the data preparer to supply the information that is to be recorded in the descriptor fields listed below, and need not record the Extended Attribute Record if the data preparer does not supply the information for any of the descriptor fields listed below. If the Extended Attribute Record is recorded, the implementation shall supply the information for a field if the data preparer dose not supply it.
+<p>
+For each Extended Attribute Record:
+<ul>
+<li>Owner Identification
+<li>Group identification
+<li>Permissions
+<li>File Creation Data and Time
+<li>File Modification Data and Time
+<li>File Expiration Data and Time
+<li>File Effective Data and Time
+<li>Record Format
+<li>Record Attributes
+<li>Record Length
+<li>System Identifier
+<li>System Use
+<li>Length of Escape Sequences
+<li>Length of Application Use
+<li>Application Use
+<li>Escape Sequences
+</ul>
+<h4>
+12.4 System Area
+</h4>
+<p>
+The implementation shall allow the data preparer to supply the information that is to be recorded on the Logical Sectors with Logical Sector Numbers 0 to 15.
+
+<h3><a name=cls_13>
+13 Requirements for a receiving system
+</a></h3>
+<h4>
+13.1 General
+</h4>
+<p>
+The implementation shall be capable of reading the files and the recorded descriptors from a Volume Set that has been recorded in accordance with one of the interchange levels specified in this International Standard, except Associated Files.
+<h4>
+13.2 Files
+</h4>
+<p>
+The implementation shall make available to the user the information that constitutes the recorded files, except any Associated File.
+<p>
+If the implementation allows the user to specify that the information constituting a file is to be interpreted according to 6.10, the implementation shall make available to the user the length of each record in the file.
+<h4>
+13.3 Descriptors
+</h4>
+<p>
+<b>13.3.1</b> The implementation shall allow the user to supply information sufficient to enable the implementation to locate the files required by the user, and to locate the volumes on which these are recorded.
+<p>
+<b>13.3.2</b> The implementation shall make available to the user the information that is recorded in each of the descriptor fields listed below.
+<p>
+For the Primary Volume Descriptor:
+<ul>
+<li>Volume Identifier
+<li>Volume Set Identifier
+<li>Copyright File Identifier
+<li>Abstract File Identifier
+<li>Bibliographic File Identifier
+</ul>
+<p>
+For each Supplementary Volume Descriptor or Enhanced Volume Descriptor:
+<ul>
+<li>Volume Identifier
+<li>Bit O of the Volume Flags field
+<li>Escape Sequences
+<li>Volume Set Identifier
+<li>Copyright File Identifier
+<li>Abstract File Identifier
+<li>Bibliographic File Identifier
+</ul>
+<p>
+For each Path Table Record:
+<ul>
+<li>Parent Directory Number
+<li>Directory Identifier
+</ul>
+<p>
+For each Directory Record:
+<ul>
+<li>File Name of a File Identifier
+<li>File Name Extension of a File Identifier
+<li>The Directory bit of the File Flags field
+</ul>
+<h4>
+13.4 Restrictions
+</h4>
+<p>
+The implementation may impose a limit on the length of a record to be made available to be user. The implementation is not required to make available to the user any byte beyond the first n bytes of a record, where n is the value of the imposed limit.
+<h4>
+13.5 Levels of Implementation
+</h4>
+<p>
+This International Standard specifies two nested levels of implementation.
+<h4>
+13.5.1 Level 1
+</h4>
+<p>
+At Level 1 the implementation is permitted not to make available to the user:
+<ul>
+<li>the information that constitutes the files identified in a Directory Hierarchy that is identified in a Supplementary Volume Descriptor or in an Enhanced Volume Descriptor;
+<li>the information that is recorded in the descriptor fields of a Supplementary Volume Descriptor or the descriptor fields of an Enhanced Volume Descriptor and of the associated Path Table Records, associated Directory Records, and Extended Attribute Records identified by the associated Directory Records.
+</ul>
+<h4>
+13.5.2 Level 2
+</h4>
+<p>
+At Level 2 no such restrictions shall apply.
+
+</BODY>
+
+<!-- Mirrored from www.y-adagio.com/public/standards/iso_cdromr/sect_3.htm by HTTrack Website Copier/3.x [XR&CO'2005], Sat, 13 Aug 2005 07:13:26 GMT -->
+</HTML>
+
+
