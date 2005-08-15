@@ -1,3 +1,4 @@
+#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -47,36 +48,6 @@ typedef struct
     
 } DateTimeDR;
 
-/* primary volume descriptor version 1 (original iso9660 standard)
-* all strings are size +1 for the null byte */
-typedef struct
-{
-    char sysId[33];
-    char volId[33];
-    unsigned volSpaceSize;
-    unsigned short volSetSize;
-    unsigned short volSeqNum;
-    unsigned short lbSize;
-    unsigned pathTableSize;
-    unsigned locTypeLPathTable;
-    unsigned locOptTypeLPathTable;
-    unsigned locTypeMPathTable;
-    unsigned locOptTypeMPathTable;
-    // root dir record will not be here
-    char volSetId[129];
-    char publId[129];
-    char dataPrepId[129];
-    char appId[129];
-    char copyrightFid[38];
-    char abstractFid[38];
-    char biblFid[38];
-    DateTimeVD volCreatTime;
-    DateTimeVD volModTime;
-    DateTimeVD volExpTime;
-    DateTimeVD volEffTime;
-    
-} Pvdv1;
-
 typedef struct
 {
     int type; /* DRTYPE_9660, DRTYPE_JOLIET, ... */
@@ -96,6 +67,37 @@ typedef struct
     
 } Dr;
 
+/* primary volume descriptor version 1 (original iso9660 standard)
+* all strings are size +1 for the null byte */
+typedef struct
+{
+    char sysId[33];
+    char volId[33];
+    unsigned volSpaceSize;
+    unsigned short volSetSize;
+    unsigned short volSeqNum;
+    unsigned short lbSize;
+    unsigned pathTableSize;
+    unsigned locTypeLPathTable;
+    unsigned locOptTypeLPathTable;
+    unsigned locTypeMPathTable;
+    unsigned locOptTypeMPathTable;
+    Dr rootDir;
+    char volSetId[129];
+    char publId[129];
+    char dataPrepId[129];
+    char appId[129];
+    char copyrightFid[38];
+    char abstractFid[38];
+    char biblFid[38];
+    DateTimeVD volCreatTime;
+    DateTimeVD volModTime;
+    DateTimeVD volExpTime;
+    DateTimeVD volEffTime;
+    
+} Pvdv1;
+
+bool haveNextRecordInSector(int file);
 void oops(char* msg);
 void printByte(char byte);
 void printUCS2(char* ucsString, int numBytes);
@@ -112,26 +114,29 @@ int read733(int file, unsigned* value);
 int readUnused(int file, unsigned numBytes);
 
 int readDR(int file, Dr* dr);
-int readPVDv1(int file, Pvdv1* pvd, Dr* rootDir);
+int readPVDv1(int file, Pvdv1* pvd);
 int readVdTypeVer(int file, unsigned char* type, unsigned char* version);
 
 int main(int argc, char** argv)
 {
     int image;
     Pvdv1 pvd1, svd1;
-    Dr rootDirP, rootDirS;
-    
     int rc;
+    
+    Dr dirRec;
+    char str[256];
+    int count;
     
     unsigned char vdType;
     unsigned char vdVersion;
     
-    //image = open("abc.iso", O_RDONLY);
     image = open(argv[1], O_RDONLY);
     if(image == -1)
         oops("unable to open image\n");
     
-    readUnused(image, NB_SYSTEM_AREA);
+    rc = readUnused(image, NB_SYSTEM_AREA);
+    if(rc <= 0)
+        oops("problem with system area()");
     
     rc = readVdTypeVer(image, &vdType, &vdVersion);
     if(rc <= 0)
@@ -140,12 +145,11 @@ int main(int argc, char** argv)
     if(vdType != VDTYPE_PRIMARY)
         oops("primary vd expected");
     
-    rc = readPVDv1(image, &pvd1, &rootDirP);
+    rc = readPVDv1(image, &pvd1);
     if(rc <= 0)
         oops("problem with pvd1");
     
     readUnused(image, 2048);
-    
     
     rc = readVdTypeVer(image, &vdType, &vdVersion);
     if(rc <= 0)
@@ -154,7 +158,7 @@ int main(int argc, char** argv)
     if(vdType != VDTYPE_SUPPLEMENTARY)
         oops("suppl vd expected");
 
-    rc = readPVDv1(image, &svd1, &rootDirS);
+    rc = readPVDv1(image, &svd1);
     if(rc <= 0)
         oops("problem with svd1");
     
@@ -209,15 +213,57 @@ int main(int argc, char** argv)
     printf("M: %d\n", pvd1.locTypeMPathTable);
     printf("M: %d\n", svd1.locTypeMPathTable);
     
-    printf("root extent at: %d\n", rootDirP.locExtent);
-    printf("root extent at: %d\n", rootDirS.locExtent);
+    printf("root extent at: %d\n", pvd1.rootDir.locExtent);
+    printf("root extent at: %d\n", svd1.rootDir.locExtent);
     
-    printf("data length; %d\n", rootDirP.dataLength);
-    printf("data length; %d\n", rootDirS.dataLength);
+    printf("data length; %d\n", pvd1.rootDir.dataLength);
+    printf("data length; %d\n", svd1.rootDir.dataLength);
+    
+    lseek(image, 2048 * 29, SEEK_SET);
+    
+    /* root */
+    readDR(image, &dirRec);
+    printf("self at %d\n", dirRec.locExtent);
+    /* root */
+    readDR(image, &dirRec);
+    printf("parent %d\n", dirRec.locExtent);
+    
+    /* skip some more records */
+    for(count = 0; count < 21; count++)
+    {
+        if( !haveNextRecordInSector(image) )
+            lseek(image, 2048 * 30, SEEK_SET);
+
+        rc = readDR(image, &dirRec);
+
+        strncpy(str, dirRec.fullName, dirRec.fullNameLen);
+        str[dirRec.fullNameLen] = '\0';
+        printf("record %d filename: %s, extent: %d\n", count + 1, str, dirRec.locExtent);
+    }
     
     close(image);
     
     return 0;
+}
+
+/* if the next byte is zero returns false otherwise true
+* file position remains unchanged
+* returns false on read error */
+bool haveNextRecordInSector(int file)
+{
+    off_t origPos;
+    char testByte;
+    int rc;
+    
+    origPos = lseek(file, 0, SEEK_CUR);
+    
+    rc = read(file, &testByte, 1);
+    if(rc != 1)
+        return false;
+    
+    lseek(file, origPos, SEEK_SET);
+    
+    return (testByte == 0) ? false : true;
 }
 
 void printByte(char byte)
@@ -343,7 +389,7 @@ int read733(int file, unsigned* value)
 
 int readUnused(int file, unsigned numBytes)
 {
-    unsigned count;
+    int count;
     char byte;
     int rc;
     
@@ -360,94 +406,119 @@ int readUnused(int file, unsigned numBytes)
 int readDR(int file, Dr* dr)
 {
     int rc;
+    int count = 0;
+    int unusedNB;
     
     rc = read711(file, &(dr->recordLength));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read711(file, &(dr->extAttrRecLen));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read733(file, &(dr->locExtent));
     if(rc != 4)
         return -1;
+    count += 8;
     
     rc = read733(file, &(dr->dataLength));
     if(rc != 4)
         return -1;
+    count += 8;
     
     /* BEGIN read time */    
     rc = read711(file, &((dr->recordedTime).year));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read711(file, &((dr->recordedTime).month));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read711(file, &((dr->recordedTime).day));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read711(file, &((dr->recordedTime).hour));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read711(file, &((dr->recordedTime).minute));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read711(file, &((dr->recordedTime).second));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read712(file, &((dr->recordedTime).gmtOffset));
     if(rc != 1)
         return -1;
+    count += 1;
     /* END read time */
     
     rc = read711(file, &(dr->fileFlags));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read711(file, &(dr->fileUnitSize));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read711(file, &(dr->interleaveGapSize));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read723(file, &(dr->volSeqNum));
     if(rc != 2)
         return -1;
+    count += 4;
     
     rc = read711(file, &(dr->fullNameLen));
     if(rc != 1)
         return -1;
+    count += 1;
     
     rc = read(file, dr->fullName, dr->fullNameLen);
     if(rc != dr->fullNameLen)
         return -1;
+    count += dr->fullNameLen;
     
     if(dr->fullNameLen % 2 == 0)
     {
         rc = readUnused(file, 1);
         if(rc != 1)
             return -1;
+        count += 1;
     }
     
-    if( dr->recordLength > (33 + dr->fullNameLen + (dr->fullNameLen % 2 == 0 ? 1 : 0)) )
-        rc = readUnused( file, dr->recordLength - (33 + dr->fullNameLen + (dr->fullNameLen % 2 == 0 ? 1 : 0)) );
+    unusedNB = dr->recordLength - (33 + dr->fullNameLen + (dr->fullNameLen % 2 == 0 ? 1 : 0));
+    if(unusedNB > 0)
+    {
+        rc = readUnused(file, unusedNB);
+        if(rc != unusedNB)
+            return -1;
+        count += unusedNB;
+    }
     
-    return 1;
+    return count;
 }
 
-int readPVDv1(int file, Pvdv1* pvd, Dr* rootDir)
+int readPVDv1(int file, Pvdv1* pvd)
 {
     int rc;
-    
     unsigned char fsver; /* file structure version */
     
     rc = readUnused(file, 1);
@@ -509,13 +580,14 @@ int readPVDv1(int file, Pvdv1* pvd, Dr* rootDir)
         return -1;
     
     /* BEGIN root dir record */
-    rootDir->type = DRTYPE_9660;
-    rootDir->currentDir = true;
-    rootDir->parentDir = true;
+    pvd->rootDir.type = DRTYPE_9660;
+    pvd->rootDir.currentDir = true;
+    pvd->rootDir.parentDir = true;
     
-    readDR(file, rootDir);
-    
-    /* BEGIN root dir record */
+    rc = readDR(file, &(pvd->rootDir));
+    if(rc != 34)
+        return -1;
+    /* END root dir record */
     
     rc = read(file, pvd->volSetId, 128);
     if(rc != 128)
@@ -526,7 +598,7 @@ int readPVDv1(int file, Pvdv1* pvd, Dr* rootDir)
     if(rc != 128)
         return -1;
     pvd->publId[128] = '\0';
-
+    
     rc = read(file, pvd->dataPrepId, 128);
     if(rc != 128)
         return -1;
@@ -711,14 +783,15 @@ int readPVDv1(int file, Pvdv1* pvd, Dr* rootDir)
     rc = read711(file, &fsver);
     if(rc != 1)
         return -1;
-    if(fsver != 1)
+    if(fsver != 1) /* should be 1 for a pvd */
         return -1;
     
-    rc = readUnused(file, 1166);
+    /* the rest of the 2048 bytes, always this size for a pvd */
+    rc = readUnused(file, 1166); 
     if(rc != 1166)
         return -1;
     
-    return 1;
+    return 2041;
 }
 
 /*******************************************************************************
@@ -771,5 +844,5 @@ int readVdTypeVer(int file, unsigned char* type, unsigned char* version)
     if(*version != 1)
         return -4;
     
-    return 1;
+    return 7;
 }
