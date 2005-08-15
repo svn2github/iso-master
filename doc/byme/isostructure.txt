@@ -62,10 +62,10 @@ BEGIN root directory record
 0000 80B7 - 0000 80B7 - 0x00 - interleave gap size - not in interleaved mode - 7.1.1
 0000 80B8 - 0000 80BB - 0x0001 d1 - volume sequence number
 0000 80BC - 0000 80BC - 0x01 d1 - length of file identifier - 7.1.1
-0000 80BD - 0000 80BD - 0x00 - file identifier - ??
-??system use LEN_SU
+0000 80BD - 0000 80BD - 0x00 - file identifier - root/itself id
+??system use LEN_SU. not for root??
 END root directory record (34 bytes)
-0000 80BE - 0000 813D - zeroes - volume set identifier - ?? - 'd' characters
+0000 80BE - 0000 813D - spaces - volume set identifier - 'd' characters
 0000 813E - 0000 81BD - 'Slackware Linux, Inc. <info@slackware.com>                                                                                     '
                       - publisher identifier - 'a' characters
 0000 81BE - 0000 823D - 'Slackware Linux, Inc. <info@slackware.com>                                                                                     '
@@ -108,10 +108,6 @@ BEGIN volume descriptor
 0000 9006 - 0000 9006 - 0x01 - volume descriptor version (0x01 for svd) - 7.1.1
 
 BEGIN supplementary vd
-0000 9007 - 0000 9007 - bin00000000 - volume flags - registered esc seq
-sid, vid different!
-path table size different!
-l, m locations different!
 
 END supplementary vd
 END volume descriptor

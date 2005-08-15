@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define NB_SYSTEM_AREA 32768
 
@@ -12,7 +13,13 @@
 #define VDTYPE_VOLUMEPARTITION 3
 #define VDTYPE_TERMINATOR 255
 
-/* date/time as described in 8.4.26.1 (pvd)
+#define DRTYPE_9660 0
+#define DRTYPE_JOLIET 1
+
+#define SEPARATOR1 0x2E
+#define SEPARATOR2 0x3B
+
+/* date/time for volume descriptors
 * all strings are size +1 for the null byte */
 typedef struct
 {
@@ -25,7 +32,20 @@ typedef struct
     char hundredthSecond[3];
     signed char gmtOffset; /* number not character */
     
-} dateTime;
+} DateTimeVD;
+
+/* date/time for file and directory descriptors */
+typedef struct
+{
+    unsigned char year;
+    unsigned char month;
+    unsigned char day;
+    unsigned char hour;
+    unsigned char minute;
+    unsigned char second;
+    signed char gmtOffset;
+    
+} DateTimeDR;
 
 /* primary volume descriptor version 1 (original iso9660 standard)
 * all strings are size +1 for the null byte */
@@ -42,7 +62,7 @@ typedef struct
     unsigned locOptTypeLPathTable;
     unsigned locTypeMPathTable;
     unsigned locOptTypeMPathTable;
-    //root dir record
+    // root dir record will not be here
     char volSetId[129];
     char publId[129];
     char dataPrepId[129];
@@ -50,12 +70,35 @@ typedef struct
     char copyrightFid[38];
     char abstractFid[38];
     char biblFid[38];
-    dateTime volCreatTime;
-    dateTime volModTime;
-    dateTime volExpTime;
-    dateTime volEffTime;
+    DateTimeVD volCreatTime;
+    DateTimeVD volModTime;
+    DateTimeVD volExpTime;
+    DateTimeVD volEffTime;
     
-} pvdv1;
+} Pvdv1;
+
+typedef struct
+{
+    int type; /* DRTYPE_9660, DRTYPE_JOLIET, ... */
+    bool currentDir; /* describes itself */
+    bool parentDir; /* describes parent dir */
+    unsigned char recordLength;
+    unsigned char extAttrRecLen;
+    unsigned locExtent;
+    unsigned dataLength;
+    DateTimeDR recordedTime;
+    unsigned char fileFlags;
+    unsigned char fileUnitSize; /* interleaved mode only */
+    unsigned char interleaveGapSize; /* interleaved mode only */
+    unsigned short volSeqNum;
+    unsigned char fullNameLen; /* name + extension + separators + version */
+    char fullName[128]; /* exactly as read (128 max for joliet) */
+    
+} Dr;
+
+void oops(char* msg);
+void printByte(char byte);
+void printUCS2(char* ucsString, int numBytes);
 
 int read711(int file, unsigned char* value);
 int read712(int file, signed char* value);
@@ -68,32 +111,15 @@ int read733(int file, unsigned* value);
 
 int readUnused(int file, unsigned numBytes);
 
+int readDR(int file, Dr* dr);
+int readPVDv1(int file, Pvdv1* pvd, Dr* rootDir);
 int readVdTypeVer(int file, unsigned char* type, unsigned char* version);
-
-int readPVDv1(int file, pvdv1* pvd);
-
-void oops(char* msg)
-{
-    fprintf(stderr, "OOPS, %s\n", msg);
-    exit(0);
-}
-
-void printByte(char byte)
-{
-    int count = 8;
-    while(count--)
-    {
-        printf("%d", ( byte & 128 ) ? 1 : 0 );
-        if(count == 4)
-            putchar(' ');
-        byte <<= 1;
-    }
-}
 
 int main(int argc, char** argv)
 {
     int image;
-    pvdv1 pvd1, svd1;
+    Pvdv1 pvd1, svd1;
+    Dr rootDirP, rootDirS;
     
     int rc;
     
@@ -114,7 +140,7 @@ int main(int argc, char** argv)
     if(vdType != VDTYPE_PRIMARY)
         oops("primary vd expected");
     
-    rc = readPVDv1(image, &pvd1);
+    rc = readPVDv1(image, &pvd1, &rootDirP);
     if(rc <= 0)
         oops("problem with pvd1");
     
@@ -128,15 +154,15 @@ int main(int argc, char** argv)
     if(vdType != VDTYPE_SUPPLEMENTARY)
         oops("suppl vd expected");
 
-    rc = readPVDv1(image, &svd1);
+    rc = readPVDv1(image, &svd1, &rootDirS);
     if(rc <= 0)
         oops("problem with svd1");
     
     printf("sysid: \'%s\'\n", pvd1.sysId);
-    printf("sysid: \'%s\'\n", svd1.sysId);
+    printf("sysid: ");printUCS2(svd1.sysId, 128);putchar('\n');
     
     printf("volid: \'%s\'\n", pvd1.volId);
-    printf("volid: \'%s\'\n", svd1.volId);
+    printf("volid: ");printUCS2(svd1.volId, 128);putchar('\n');
     
     printf("lb size: %d\n", pvd1.lbSize);
     printf("lb size: %d\n", svd1.lbSize);
@@ -151,13 +177,13 @@ int main(int argc, char** argv)
     printf("pathtable size: %d\n", svd1.pathTableSize);
 
     printf("vsid: \'%s\'\n", pvd1.volSetId);
-    printf("vsid: \'%s\'\n", svd1.volSetId);
+    printf("vsid: ");printUCS2(svd1.volSetId, 128);putchar('\n');
     
     printf("publ: \'%s\'\n", pvd1.publId);
-    printf("publ: \'%s\'\n", svd1.publId);
+    printf("publ: ");printUCS2(svd1.publId, 128);putchar('\n');
     
     printf("dprp: \'%s\'\n", pvd1.dataPrepId);
-    printf("dprp: \'%s\'\n", svd1.dataPrepId);
+    printf("dprp: ");printUCS2(svd1.dataPrepId, 128);putchar('\n');
     
     printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", pvd1.volCreatTime.day,
                                                       pvd1.volCreatTime.month,
@@ -183,9 +209,51 @@ int main(int argc, char** argv)
     printf("M: %d\n", pvd1.locTypeMPathTable);
     printf("M: %d\n", svd1.locTypeMPathTable);
     
+    printf("root extent at: %d\n", rootDirP.locExtent);
+    printf("root extent at: %d\n", rootDirS.locExtent);
+    
+    printf("data length; %d\n", rootDirP.dataLength);
+    printf("data length; %d\n", rootDirS.dataLength);
+    
     close(image);
     
     return 0;
+}
+
+void printByte(char byte)
+{
+    int count = 8;
+    
+    while(count--)
+    {
+        printf("%d", ( byte & 128 ) ? 1 : 0 );
+        if(count == 4)
+            putchar(' ');
+        byte <<= 1;
+    }
+}
+
+void printUCS2(char* ucsString, int numBytes)
+{
+    int count;
+    
+    putchar('\'');
+    
+    for(count = 0; count < numBytes; count++)
+    {
+        if( ucsString[count] == 0 && ucsString[count + 1] == 0 )
+            break;
+        
+        printf("%c", ucsString[count + 1]);
+    }
+    
+    printf("\' (UCS-2)");
+}
+
+void oops(char* msg)
+{
+    fprintf(stderr, "OOPS, %s\n", msg);
+    exit(0);
 }
 
 int read711(int file, unsigned char* value)
@@ -289,60 +357,94 @@ int readUnused(int file, unsigned numBytes)
     return count;
 }
 
-/*******************************************************************************
-* readVdTypeVer()
-* read type and version of a volume descriptor
-*
-* type can be:
-* - VDTYPE_BOOT
-* - VDTYPE_PRIMARY
-* - VDTYPE_SUPPLEMENTARY
-* - VDTYPE_VOLUMEPARTITION
-* - VDTYPE_TERMINATOR
-*
-* version can be:
-* - 1
-* 
-* Parameters:
-* - int file to read from
-* - unsigned char* vd type
-* - unsigned char* vd version
-* Return:
-* - 1 if all ok
-* - -1 if failed to read anything
-* - -2 if vd type unknown
-* - -3 if sid not right
-* - -4 if vd version unknown
-*  */
-int readVdTypeVer(int file, unsigned char* type, unsigned char* version)
+int readDR(int file, Dr* dr)
 {
-    char sid[5];
     int rc;
     
-    rc = read711(file, type);
+    rc = read711(file, &(dr->recordLength));
     if(rc != 1)
         return -1;
-    if(*type != VDTYPE_BOOT && *type != VDTYPE_PRIMARY && 
-       *type != VDTYPE_SUPPLEMENTARY && *type != VDTYPE_VOLUMEPARTITION &&
-       *type != VDTYPE_TERMINATOR)
-        return -2;
     
-    rc = read(file, sid, 5);
-    if(rc != 5)
-        return -1;
-    if( strncmp(sid, "CD001", 5) != 0 )
-        return -3;
-    
-    rc = read711(file, version);
+    rc = read711(file, &(dr->extAttrRecLen));
     if(rc != 1)
         return -1;
-    if(*version != 1)
-        return -4;
+    
+    rc = read733(file, &(dr->locExtent));
+    if(rc != 4)
+        return -1;
+    
+    rc = read733(file, &(dr->dataLength));
+    if(rc != 4)
+        return -1;
+    
+    /* BEGIN read time */    
+    rc = read711(file, &((dr->recordedTime).year));
+    if(rc != 1)
+        return -1;
+    
+    rc = read711(file, &((dr->recordedTime).month));
+    if(rc != 1)
+        return -1;
+    
+    rc = read711(file, &((dr->recordedTime).day));
+    if(rc != 1)
+        return -1;
+    
+    rc = read711(file, &((dr->recordedTime).hour));
+    if(rc != 1)
+        return -1;
+    
+    rc = read711(file, &((dr->recordedTime).minute));
+    if(rc != 1)
+        return -1;
+    
+    rc = read711(file, &((dr->recordedTime).second));
+    if(rc != 1)
+        return -1;
+    
+    rc = read712(file, &((dr->recordedTime).gmtOffset));
+    if(rc != 1)
+        return -1;
+    /* END read time */
+    
+    rc = read711(file, &(dr->fileFlags));
+    if(rc != 1)
+        return -1;
+    
+    rc = read711(file, &(dr->fileUnitSize));
+    if(rc != 1)
+        return -1;
+    
+    rc = read711(file, &(dr->interleaveGapSize));
+    if(rc != 1)
+        return -1;
+    
+    rc = read723(file, &(dr->volSeqNum));
+    if(rc != 2)
+        return -1;
+    
+    rc = read711(file, &(dr->fullNameLen));
+    if(rc != 1)
+        return -1;
+    
+    rc = read(file, dr->fullName, dr->fullNameLen);
+    if(rc != dr->fullNameLen)
+        return -1;
+    
+    if(dr->fullNameLen % 2 == 0)
+    {
+        rc = readUnused(file, 1);
+        if(rc != 1)
+            return -1;
+    }
+    
+    if( dr->recordLength > (33 + dr->fullNameLen + (dr->fullNameLen % 2 == 0 ? 1 : 0)) )
+        rc = readUnused( file, dr->recordLength - (33 + dr->fullNameLen + (dr->fullNameLen % 2 == 0 ? 1 : 0)) );
     
     return 1;
 }
 
-int readPVDv1(int file, pvdv1* pvd)
+int readPVDv1(int file, Pvdv1* pvd, Dr* rootDir)
 {
     int rc;
     
@@ -406,8 +508,14 @@ int readPVDv1(int file, pvdv1* pvd)
     if(rc != 4)
         return -1;
     
-    // root dir record
-    readUnused(file, 34);
+    /* BEGIN root dir record */
+    rootDir->type = DRTYPE_9660;
+    rootDir->currentDir = true;
+    rootDir->parentDir = true;
+    
+    readDR(file, rootDir);
+    
+    /* BEGIN root dir record */
     
     rc = read(file, pvd->volSetId, 128);
     if(rc != 128)
@@ -609,6 +717,59 @@ int readPVDv1(int file, pvdv1* pvd)
     rc = readUnused(file, 1166);
     if(rc != 1166)
         return -1;
+    
+    return 1;
+}
+
+/*******************************************************************************
+* readVdTypeVer()
+* read type and version of a volume descriptor
+*
+* type can be:
+* - VDTYPE_BOOT
+* - VDTYPE_PRIMARY
+* - VDTYPE_SUPPLEMENTARY
+* - VDTYPE_VOLUMEPARTITION
+* - VDTYPE_TERMINATOR
+*
+* version can be:
+* - 1
+* 
+* Parameters:
+* - int file to read from
+* - unsigned char* vd type
+* - unsigned char* vd version
+* Return:
+* - 1 if all ok
+* - -1 if failed to read anything
+* - -2 if vd type unknown
+* - -3 if sid not right
+* - -4 if vd version unknown
+*  */
+int readVdTypeVer(int file, unsigned char* type, unsigned char* version)
+{
+    char sid[5];
+    int rc;
+    
+    rc = read711(file, type);
+    if(rc != 1)
+        return -1;
+    if(*type != VDTYPE_BOOT && *type != VDTYPE_PRIMARY && 
+       *type != VDTYPE_SUPPLEMENTARY && *type != VDTYPE_VOLUMEPARTITION &&
+       *type != VDTYPE_TERMINATOR)
+        return -2;
+    
+    rc = read(file, sid, 5);
+    if(rc != 5)
+        return -1;
+    if( strncmp(sid, "CD001", 5) != 0 )
+        return -3;
+    
+    rc = read711(file, version);
+    if(rc != 1)
+        return -1;
+    if(*version != 1)
+        return -4;
     
     return 1;
 }
