@@ -53,6 +53,7 @@ typedef struct
     int type; /* DRTYPE_9660, DRTYPE_JOLIET, ... */
     bool currentDir; /* describes itself */
     bool parentDir; /* describes parent dir */
+    
     unsigned char recordLength;
     unsigned char extAttrRecLen;
     unsigned locExtent;
@@ -64,8 +65,18 @@ typedef struct
     unsigned short volSeqNum;
     unsigned char fullNameLen; /* name + extension + separators + version */
     char fullName[128]; /* exactly as read (128 max for joliet) */
+    void* dir; /* this is a Dir* */
     
 } Dr;
+
+typedef struct
+{
+    Dr self;
+    Dr parent;
+    int numEntries; /* not including self and parent */
+    Dr* child; /* all the rest of the children */
+    
+} Dir;
 
 /* primary volume descriptor version 1 (original iso9660 standard)
 * all strings are size +1 for the null byte */
@@ -97,6 +108,9 @@ typedef struct
     
 } Pvdv1;
 
+bool drDescribesParent(Dr* dr);
+bool drDescribesSelf(Dr* dr);
+bool drisadir(Dr* dr);
 bool haveNextRecordInSector(int file);
 void oops(char* msg);
 void printByte(char byte);
@@ -113,6 +127,7 @@ int read733(int file, unsigned* value);
 
 int readUnused(int file, unsigned numBytes);
 
+int readDir(int file, Dir* dir);
 int readDR(int file, Dr* dr);
 int readPVDv1(int file, Pvdv1* pvd);
 int readVdTypeVer(int file, unsigned char* type, unsigned char* version);
@@ -244,6 +259,30 @@ int main(int argc, char** argv)
     close(image);
     
     return 0;
+}
+
+bool drDescribesParent(Dr* dr)
+{
+    if(dr->fullNameLen == 1 && dr->fullName[0] == 0x01)
+        return true;
+    else
+        return false;
+}
+
+bool drDescribesSelf(Dr* dr)
+{
+    if(dr->fullNameLen == 1 && dr->fullName[0] == 0x00)
+        return true;
+    else
+        return false;
+}
+
+bool drisadir(Dr* dr)
+{
+    if( dr->fileFlags >> 1 & 1 )
+        return true;
+    else
+        return false;
 }
 
 /* if the next byte is zero returns false otherwise true
@@ -513,7 +552,32 @@ int readDR(int file, Dr* dr)
         count += unusedNB;
     }
     
+    if( drisadir(dr) && !drDescribesSelf(dr)&& !drDescribesParent(dr) )
+    {
+        dr->dir = malloc(sizeof(Dir));
+        rc = readDir( file, dr->dir );
+        if(rc <= 0)
+            return -1;
+        count += rc;
+    }
+    else
+    {
+        dr->dir = NULL;
+    }
+    
     return count;
+}
+
+int readDir(int file, Dir* dir)
+{
+    //int rc;
+    //int count = 0;
+    
+    /* read self */
+    
+    /* read parent */
+    
+    /* read children and increase numEntries */
 }
 
 int readPVDv1(int file, Pvdv1* pvd)
