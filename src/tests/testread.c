@@ -48,12 +48,8 @@ typedef struct
     
 } DateTimeDR;
 
-typedef struct
+struct Dr
 {
-    int type; /* DRTYPE_9660, DRTYPE_JOLIET, ... */
-    bool currentDir; /* describes itself */
-    bool parentDir; /* describes parent dir */
-    
     unsigned char recordLength;
     unsigned char extAttrRecLen;
     unsigned locExtent;
@@ -65,18 +61,26 @@ typedef struct
     unsigned short volSeqNum;
     unsigned char fullNameLen; /* name + extension + separators + version */
     char fullName[128]; /* exactly as read (128 max for joliet) */
-    void* dir; /* this is a Dir* */
+    struct Dir* dir;
     
-} Dr;
+};
 
-typedef struct
+struct DrLL
 {
-    Dr self;
-    Dr parent;
-    int numEntries; /* not including self and parent */
-    Dr* child; /* all the rest of the children */
+    struct Dr dr;
+    struct DrLL* next;
     
-} Dir;
+};
+
+struct Dir
+{
+    struct Dr self;
+    struct Dr parent;
+    int numEntries; /* not including self and parent */
+    //Dr* child; /* all the rest of the children */
+    struct DrLL* children;
+        
+};
 
 /* primary volume descriptor version 1 (original iso9660 standard)
 * all strings are size +1 for the null byte */
@@ -93,7 +97,7 @@ typedef struct
     unsigned locOptTypeLPathTable;
     unsigned locTypeMPathTable;
     unsigned locOptTypeMPathTable;
-    Dr rootDir;
+    struct Dr rootDR;
     char volSetId[129];
     char publId[129];
     char dataPrepId[129];
@@ -108,9 +112,9 @@ typedef struct
     
 } Pvdv1;
 
-bool drDescribesParent(Dr* dr);
-bool drDescribesSelf(Dr* dr);
-bool drisadir(Dr* dr);
+bool drDescribesParent(struct Dr* dr);
+bool drDescribesSelf(struct Dr* dr);
+bool drisadir(struct Dr* dr);
 bool haveNextRecordInSector(int file);
 void oops(char* msg);
 void printByte(char byte);
@@ -127,8 +131,8 @@ int read733(int file, unsigned* value);
 
 int readUnused(int file, unsigned numBytes);
 
-int readDir(int file, Dir* dir);
-int readDR(int file, Dr* dr);
+int readDir(int file, struct Dir* dir);
+int readDR(int file, struct Dr* dr);
 int readPVDv1(int file, Pvdv1* pvd);
 int readVdTypeVer(int file, unsigned char* type, unsigned char* version);
 
@@ -138,9 +142,12 @@ int main(int argc, char** argv)
     Pvdv1 pvd1, svd1;
     int rc;
     
-    Dr dirRec;
+    /*struct Dr dirRec;
     char str[256];
     int count;
+    */
+    
+    struct Dir tree;
     
     unsigned char vdType;
     unsigned char vdVersion;
@@ -164,104 +171,89 @@ int main(int argc, char** argv)
     if(rc <= 0)
         oops("problem with pvd1");
     
-    readUnused(image, 2048);
+    //~ readUnused(image, 2048);
     
-    rc = readVdTypeVer(image, &vdType, &vdVersion);
-    if(rc <= 0)
-        oops("problem with readVdTypeVer()");
-    printf("vd type: %d, version: %d\n", vdType, vdVersion);
-    if(vdType != VDTYPE_SUPPLEMENTARY)
-        oops("suppl vd expected");
+    //~ rc = readVdTypeVer(image, &vdType, &vdVersion);
+    //~ if(rc <= 0)
+        //~ oops("problem with readVdTypeVer()");
+    //~ printf("vd type: %d, version: %d\n", vdType, vdVersion);
+    //~ if(vdType != VDTYPE_SUPPLEMENTARY)
+        //~ oops("suppl vd expected");
 
-    rc = readPVDv1(image, &svd1);
-    if(rc <= 0)
-        oops("problem with svd1");
+    //~ rc = readPVDv1(image, &svd1);
+    //~ if(rc <= 0)
+        //~ oops("problem with svd1");
     
-    printf("sysid: \'%s\'\n", pvd1.sysId);
-    printf("sysid: ");printUCS2(svd1.sysId, 128);putchar('\n');
+    //~ printf("sysid: \'%s\'\n", pvd1.sysId);
+    //~ printf("sysid: ");printUCS2(svd1.sysId, 128);putchar('\n');
     
-    printf("volid: \'%s\'\n", pvd1.volId);
-    printf("volid: ");printUCS2(svd1.volId, 128);putchar('\n');
+    //~ printf("volid: \'%s\'\n", pvd1.volId);
+    //~ printf("volid: ");printUCS2(svd1.volId, 128);putchar('\n');
     
-    printf("lb size: %d\n", pvd1.lbSize);
-    printf("lb size: %d\n", svd1.lbSize);
+    //~ printf("lb size: %d\n", pvd1.lbSize);
+    //~ printf("lb size: %d\n", svd1.lbSize);
 
-    printf("volume space size: %u\n", pvd1.volSpaceSize);
-    printf("volume space size: %u\n", svd1.volSpaceSize);
+    //~ printf("volume space size: %u\n", pvd1.volSpaceSize);
+    //~ printf("volume space size: %u\n", svd1.volSpaceSize);
 
-    printf("human-readable volume size: %dB, %dMB, %dMiB\n", pvd1.lbSize * pvd1.volSpaceSize,
-                                                             pvd1.lbSize * pvd1.volSpaceSize / 1024000,
-                                                             pvd1.lbSize * pvd1.volSpaceSize / 1048576);
-    printf("pathtable size: %d\n", pvd1.pathTableSize);
-    printf("pathtable size: %d\n", svd1.pathTableSize);
+    //~ printf("human-readable volume size: %dB, %dMB, %dMiB\n", pvd1.lbSize * pvd1.volSpaceSize,
+                                                             //~ pvd1.lbSize * pvd1.volSpaceSize / 1024000,
+                                                             //~ pvd1.lbSize * pvd1.volSpaceSize / 1048576);
+    //~ printf("pathtable size: %d\n", pvd1.pathTableSize);
+    //~ printf("pathtable size: %d\n", svd1.pathTableSize);
 
-    printf("vsid: \'%s\'\n", pvd1.volSetId);
-    printf("vsid: ");printUCS2(svd1.volSetId, 128);putchar('\n');
+    //~ printf("vsid: \'%s\'\n", pvd1.volSetId);
+    //~ printf("vsid: ");printUCS2(svd1.volSetId, 128);putchar('\n');
     
-    printf("publ: \'%s\'\n", pvd1.publId);
-    printf("publ: ");printUCS2(svd1.publId, 128);putchar('\n');
+    //~ printf("publ: \'%s\'\n", pvd1.publId);
+    //~ printf("publ: ");printUCS2(svd1.publId, 128);putchar('\n');
     
-    printf("dprp: \'%s\'\n", pvd1.dataPrepId);
-    printf("dprp: ");printUCS2(svd1.dataPrepId, 128);putchar('\n');
+    //~ printf("dprp: \'%s\'\n", pvd1.dataPrepId);
+    //~ printf("dprp: ");printUCS2(svd1.dataPrepId, 128);putchar('\n');
     
-    printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", pvd1.volCreatTime.day,
-                                                      pvd1.volCreatTime.month,
-                                                      pvd1.volCreatTime.year,
-                                                      pvd1.volCreatTime.hour,
-                                                      pvd1.volCreatTime.minute,
-                                                      pvd1.volCreatTime.second,
-                                                      pvd1.volCreatTime.hundredthSecond,
-                                                      pvd1.volCreatTime.gmtOffset);
+    //~ printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", pvd1.volCreatTime.day,
+                                                      //~ pvd1.volCreatTime.month,
+                                                      //~ pvd1.volCreatTime.year,
+                                                      //~ pvd1.volCreatTime.hour,
+                                                      //~ pvd1.volCreatTime.minute,
+                                                      //~ pvd1.volCreatTime.second,
+                                                      //~ pvd1.volCreatTime.hundredthSecond,
+                                                      //~ pvd1.volCreatTime.gmtOffset);
     
-    printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", svd1.volCreatTime.day,
-                                                      svd1.volCreatTime.month,
-                                                      svd1.volCreatTime.year,
-                                                      svd1.volCreatTime.hour,
-                                                      svd1.volCreatTime.minute,
-                                                      svd1.volCreatTime.second,
-                                                      svd1.volCreatTime.hundredthSecond,
-                                                      svd1.volCreatTime.gmtOffset);
+    //~ printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", svd1.volCreatTime.day,
+                                                      //~ svd1.volCreatTime.month,
+                                                      //~ svd1.volCreatTime.year,
+                                                      //~ svd1.volCreatTime.hour,
+                                                      //~ svd1.volCreatTime.minute,
+                                                      //~ svd1.volCreatTime.second,
+                                                      //~ svd1.volCreatTime.hundredthSecond,
+                                                      //~ svd1.volCreatTime.gmtOffset);
     
-    printf("L: %d\n", pvd1.locTypeLPathTable);
-    printf("L: %d\n", svd1.locTypeLPathTable);
+    //~ printf("L: %d\n", pvd1.locTypeLPathTable);
+    //~ printf("L: %d\n", svd1.locTypeLPathTable);
     
-    printf("M: %d\n", pvd1.locTypeMPathTable);
-    printf("M: %d\n", svd1.locTypeMPathTable);
+    //~ printf("M: %d\n", pvd1.locTypeMPathTable);
+    //~ printf("M: %d\n", svd1.locTypeMPathTable);
     
-    printf("root extent at: %d\n", pvd1.rootDir.locExtent);
-    printf("root extent at: %d\n", svd1.rootDir.locExtent);
+    //~ printf("root extent at: %d\n", pvd1.rootDR.locExtent);
+    //~ printf("root extent at: %d\n", svd1.rootDR.locExtent);
     
-    printf("data length; %d\n", pvd1.rootDir.dataLength);
-    printf("data length; %d\n", svd1.rootDir.dataLength);
-    
+    //~ printf("data length; %d\n", pvd1.rootDR.dataLength);
+    //~ printf("data length; %d\n", svd1.rootDR.dataLength);
+
     lseek(image, 2048 * 29, SEEK_SET);
     
-    /* root */
-    readDR(image, &dirRec);
-    printf("self at %d\n", dirRec.locExtent);
-    /* root */
-    readDR(image, &dirRec);
-    printf("parent %d\n", dirRec.locExtent);
-    
-    /* skip some more records */
-    for(count = 0; count < 21; count++)
-    {
-        if( !haveNextRecordInSector(image) )
-            lseek(image, 2048 * 30, SEEK_SET);
-
-        rc = readDR(image, &dirRec);
-
-        strncpy(str, dirRec.fullName, dirRec.fullNameLen);
-        str[dirRec.fullNameLen] = '\0';
-        printf("record %d filename: %s, extent: %d\n", count + 1, str, dirRec.locExtent);
-    }
+    rc = readDir(image, &tree);
+    if(rc <= 0)
+        oops("failed to read tree");
+    printf("TOTAL READ %d bytes\n", rc);
     
     close(image);
     
     return 0;
 }
 
-bool drDescribesParent(Dr* dr)
+bool drDescribesParent(struct Dr* dr)
 {
     if(dr->fullNameLen == 1 && dr->fullName[0] == 0x01)
         return true;
@@ -269,7 +261,7 @@ bool drDescribesParent(Dr* dr)
         return false;
 }
 
-bool drDescribesSelf(Dr* dr)
+bool drDescribesSelf(struct Dr* dr)
 {
     if(dr->fullNameLen == 1 && dr->fullName[0] == 0x00)
         return true;
@@ -277,7 +269,7 @@ bool drDescribesSelf(Dr* dr)
         return false;
 }
 
-bool drisadir(Dr* dr)
+bool drisadir(struct Dr* dr)
 {
     if( dr->fileFlags >> 1 & 1 )
         return true;
@@ -442,12 +434,12 @@ int readUnused(int file, unsigned numBytes)
     return count;
 }
 
-int readDR(int file, Dr* dr)
+int readDR(int file, struct Dr* dr)
 {
     int rc;
     int count = 0;
     int unusedNB;
-    
+    printf("readDR: ");
     rc = read711(file, &(dr->recordLength));
     if(rc != 1)
         return -1;
@@ -462,7 +454,7 @@ int readDR(int file, Dr* dr)
     if(rc != 4)
         return -1;
     count += 8;
-    
+    printf("extent %d, ", dr->locExtent);
     rc = read733(file, &(dr->dataLength));
     if(rc != 4)
         return -1;
@@ -534,7 +526,17 @@ int readDR(int file, Dr* dr)
     if(rc != dr->fullNameLen)
         return -1;
     count += dr->fullNameLen;
-    
+    if(drDescribesSelf(dr))
+        printf("name: SELF, ");
+    else if(drDescribesParent(dr))
+        printf("name: PARENT, ");
+    else
+    {
+        char temp[200];
+        strncpy(temp, dr->fullName, dr->fullNameLen);
+        dr->fullName[dr->fullNameLen] = '\0';
+        printf("name: %s, ", dr->fullName);
+    }
     if(dr->fullNameLen % 2 == 0)
     {
         rc = readUnused(file, 1);
@@ -553,31 +555,133 @@ int readDR(int file, Dr* dr)
     }
     
     if( drisadir(dr) && !drDescribesSelf(dr)&& !drDescribesParent(dr) )
+    /* move the file pointer to the location of the new directory
+    *  and back when it's finished */
     {
-        dr->dir = malloc(sizeof(Dir));
+        off_t origPos;
+        
+        origPos = lseek(file, 0, SEEK_CUR);
+        
+        lseek(file, 2048 * dr->locExtent, SEEK_SET);
+        
+        dr->dir = (struct Dir*)malloc(sizeof(struct Dir));
+        if(dr->dir == NULL)
+            return -2;
+        
+        dr->dir->children = NULL;
         rc = readDir( file, dr->dir );
         if(rc <= 0)
             return -1;
+        
+        lseek(file, origPos, SEEK_SET);
+        
         count += rc;
     }
     else
     {
         dr->dir = NULL;
     }
-    
+    if(drDescribesSelf(dr))
+        printf("end SELF\n");
+    else if(drDescribesParent(dr))
+        printf("end PARENT\n");
+    else
+    {
+        char temp[200];
+        strncpy(temp, dr->fullName, dr->fullNameLen);
+        dr->fullName[dr->fullNameLen] = '\0';
+        printf("end %s\n", dr->fullName);
+    }
     return count;
 }
 
-int readDir(int file, Dir* dir)
-{
-    //int rc;
-    //int count = 0;
+int readDir(int file, struct Dir* dir)
+{printf("\n");
+    int rc;
+    int bytesRead = 0;
+    int childrenBytesRead;
+    struct DrLL* last;
     
     /* read self */
+    rc = readDR(file, &(dir->self));
+    if(rc <= 0)
+        return -1;
+    bytesRead += rc;
     
     /* read parent */
+    rc = readDR(file, &(dir->parent));
+    if(rc <= 0)
+        return -1;
+    bytesRead += rc;
     
-    /* read children and increase numEntries */
+    /* BEGIN READ CHILDREN and increase numEntries */
+    childrenBytesRead = 0;
+    while(childrenBytesRead + bytesRead < dir->self.dataLength)
+    {
+        if(haveNextRecordInSector(file))
+        /* read it */
+        {
+            if(dir->children == NULL)
+            /* first one */
+            {
+                dir->children = (struct DrLL*)malloc(sizeof(struct DrLL));
+                if(dir->children == NULL)
+                    return -2;
+                last = dir->children;
+            }
+            else
+            {
+                last->next = (struct DrLL*)malloc(sizeof(struct DrLL));
+                if(last->next == NULL)
+                    return -2;
+                last = last->next;
+            }
+            
+            rc = readDR(file, &(last->dr));
+            if(rc <= 0)
+                return -1;
+            childrenBytesRead += last->dr.recordLength;
+            
+            dir->numEntries++;
+        }
+        else
+        /* read zeroes until get to next record (that would be in the next
+        *  sector btw) or get to the end of data (dir->self.dataLength) */
+        {
+            char testByte;
+            off_t origPos;
+            
+            do
+            {
+                origPos = lseek(file, 0, SEEK_CUR);
+                
+                rc = read(file, &testByte, 1);
+                if(rc != 1)
+                    return -1;
+                
+                if(testByte != 0)
+                {
+                    lseek(file, origPos, SEEK_SET);
+                    break;
+                }
+                
+                childrenBytesRead += 1;
+                
+            } while (childrenBytesRead + bytesRead < dir->self.dataLength);
+        }
+    }
+    /* END READ CHILDREN and increase numEntries */
+    
+    if(dir->numEntries == 0)
+    /* read no children */
+        dir->children = NULL; //!! this is already done in readDR
+    else
+    /* terminate DrLL* dir->children */
+        last->next = NULL;
+    
+    bytesRead += childrenBytesRead;
+    
+    return bytesRead;
 }
 
 int readPVDv1(int file, Pvdv1* pvd)
@@ -643,15 +747,9 @@ int readPVDv1(int file, Pvdv1* pvd)
     if(rc != 4)
         return -1;
     
-    /* BEGIN root dir record */
-    pvd->rootDir.type = DRTYPE_9660;
-    pvd->rootDir.currentDir = true;
-    pvd->rootDir.parentDir = true;
-    
-    rc = readDR(file, &(pvd->rootDir));
+    rc = readDR(file, &(pvd->rootDR));
     if(rc != 34)
         return -1;
-    /* END root dir record */
     
     rc = read(file, pvd->volSetId, 128);
     if(rc != 128)
