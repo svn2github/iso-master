@@ -86,9 +86,11 @@ struct Dir
 * all strings are size +1 for the null byte */
 typedef struct
 {
+    unsigned char volumeFlags; /* only used in svd */
     char sysId[33];
     char volId[33];
     unsigned volSpaceSize;
+    char escapeSequences[32]; /* only used in svd */
     unsigned short volSetSize;
     unsigned short volSeqNum;
     unsigned short lbSize;
@@ -110,7 +112,15 @@ typedef struct
     DateTimeVD volExpTime;
     DateTimeVD volEffTime;
     
-} Pvdv1;
+} Vd;
+
+typedef struct
+{
+    Vd pvd;
+    int numSvds;
+    
+    
+} VdSet;
 
 bool drDescribesParent(struct Dr* dr);
 bool drDescribesSelf(struct Dr* dr);
@@ -133,13 +143,14 @@ int readUnused(int file, unsigned numBytes);
 
 int readDir(int file, struct Dir* dir);
 int readDR(int file, struct Dr* dr);
-int readPVDv1(int file, Pvdv1* pvd);
-int readVdTypeVer(int file, unsigned char* type, unsigned char* version);
+int reaVD(int file, Vd* pvd);
+int readVDTypeVer(int file, unsigned char* type, unsigned char* version);
 
 int main(int argc, char** argv)
 {
     int image;
-    Pvdv1 pvd1, svd1;
+    Vd pvd1;
+    //Vd svd1;
     int rc;
     
     /*struct Dr dirRec;
@@ -160,65 +171,65 @@ int main(int argc, char** argv)
     if(rc <= 0)
         oops("problem with system area()");
     
-    rc = readVdTypeVer(image, &vdType, &vdVersion);
+    rc = readVDTypeVer(image, &vdType, &vdVersion);
     if(rc <= 0)
-        oops("problem with readVdTypeVer()");
+        oops("problem with readVDTypeVer()");
     printf("vd type: %d, version: %d\n", vdType, vdVersion);
     if(vdType != VDTYPE_PRIMARY)
         oops("primary vd expected");
     
-    rc = readPVDv1(image, &pvd1);
+    rc = readVD(image, &pvd1);
     if(rc <= 0)
         oops("problem with pvd1");
     
     //~ readUnused(image, 2048);
     
-    //~ rc = readVdTypeVer(image, &vdType, &vdVersion);
+    //~ rc = readVDTypeVer(image, &vdType, &vdVersion);
     //~ if(rc <= 0)
-        //~ oops("problem with readVdTypeVer()");
+        //~ oops("problem with readVDTypeVer()");
     //~ printf("vd type: %d, version: %d\n", vdType, vdVersion);
     //~ if(vdType != VDTYPE_SUPPLEMENTARY)
         //~ oops("suppl vd expected");
 
-    //~ rc = readPVDv1(image, &svd1);
+    //~ rc = readVD(image, &svd1);
     //~ if(rc <= 0)
         //~ oops("problem with svd1");
     
-    //~ printf("sysid: \'%s\'\n", pvd1.sysId);
+    printf("sysid: \'%s\'\n", pvd1.sysId);
     //~ printf("sysid: ");printUCS2(svd1.sysId, 128);putchar('\n');
     
-    //~ printf("volid: \'%s\'\n", pvd1.volId);
+    printf("volid: \'%s\'\n", pvd1.volId);
     //~ printf("volid: ");printUCS2(svd1.volId, 128);putchar('\n');
     
-    //~ printf("lb size: %d\n", pvd1.lbSize);
+    printf("lb size: %d\n", pvd1.lbSize);
     //~ printf("lb size: %d\n", svd1.lbSize);
 
-    //~ printf("volume space size: %u\n", pvd1.volSpaceSize);
+    printf("volume space size: %u\n", pvd1.volSpaceSize);
     //~ printf("volume space size: %u\n", svd1.volSpaceSize);
 
-    //~ printf("human-readable volume size: %dB, %dMB, %dMiB\n", pvd1.lbSize * pvd1.volSpaceSize,
-                                                             //~ pvd1.lbSize * pvd1.volSpaceSize / 1024000,
-                                                             //~ pvd1.lbSize * pvd1.volSpaceSize / 1048576);
-    //~ printf("pathtable size: %d\n", pvd1.pathTableSize);
+    printf("human-readable volume size: %dB, %dMB, %dMiB\n", pvd1.lbSize * pvd1.volSpaceSize,
+                                                             pvd1.lbSize * pvd1.volSpaceSize / 1024000,
+                                                             pvd1.lbSize * pvd1.volSpaceSize / 1048576);
+    printf("pathtable size: %d\n", pvd1.pathTableSize);
     //~ printf("pathtable size: %d\n", svd1.pathTableSize);
 
-    //~ printf("vsid: \'%s\'\n", pvd1.volSetId);
+    printf("vsid: \'%s\'\n", pvd1.volSetId);
     //~ printf("vsid: ");printUCS2(svd1.volSetId, 128);putchar('\n');
     
-    //~ printf("publ: \'%s\'\n", pvd1.publId);
+    printf("publ: \'%s\'\n", pvd1.publId);
     //~ printf("publ: ");printUCS2(svd1.publId, 128);putchar('\n');
     
-    //~ printf("dprp: \'%s\'\n", pvd1.dataPrepId);
+    printf("dprp: \'%s\'\n", pvd1.dataPrepId);
     //~ printf("dprp: ");printUCS2(svd1.dataPrepId, 128);putchar('\n');
     
-    //~ printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", pvd1.volCreatTime.day,
-                                                      //~ pvd1.volCreatTime.month,
-                                                      //~ pvd1.volCreatTime.year,
-                                                      //~ pvd1.volCreatTime.hour,
-                                                      //~ pvd1.volCreatTime.minute,
-                                                      //~ pvd1.volCreatTime.second,
-                                                      //~ pvd1.volCreatTime.hundredthSecond,
-                                                      //~ pvd1.volCreatTime.gmtOffset);
+    printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", pvd1.volCreatTime.day,
+                                                     pvd1.volCreatTime.month,
+                                                     pvd1.volCreatTime.year,
+                                                     pvd1.volCreatTime.hour,
+                                                     pvd1.volCreatTime.minute,
+                                                     pvd1.volCreatTime.second,
+                                                     pvd1.volCreatTime.hundredthSecond,
+                                                     pvd1.volCreatTime.gmtOffset);
     
     //~ printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", svd1.volCreatTime.day,
                                                       //~ svd1.volCreatTime.month,
@@ -229,19 +240,19 @@ int main(int argc, char** argv)
                                                       //~ svd1.volCreatTime.hundredthSecond,
                                                       //~ svd1.volCreatTime.gmtOffset);
     
-    //~ printf("L: %d\n", pvd1.locTypeLPathTable);
+    printf("L: %d\n", pvd1.locTypeLPathTable);
     //~ printf("L: %d\n", svd1.locTypeLPathTable);
     
-    //~ printf("M: %d\n", pvd1.locTypeMPathTable);
+    printf("M: %d\n", pvd1.locTypeMPathTable);
     //~ printf("M: %d\n", svd1.locTypeMPathTable);
     
-    //~ printf("root extent at: %d\n", pvd1.rootDR.locExtent);
+    printf("root extent at: %d\n", pvd1.rootDR.locExtent);
     //~ printf("root extent at: %d\n", svd1.rootDR.locExtent);
     
-    //~ printf("data length; %d\n", pvd1.rootDR.dataLength);
+    printf("data length; %d\n", pvd1.rootDR.dataLength);
     //~ printf("data length; %d\n", svd1.rootDR.dataLength);
 
-    lseek(image, 2048 * 29, SEEK_SET);
+    lseek(image, 2048 * pvd1.rootDR.locExtent, SEEK_SET);
     
     rc = readDir(image, &tree);
     if(rc <= 0)
@@ -596,7 +607,8 @@ int readDR(int file, struct Dr* dr)
 }
 
 int readDir(int file, struct Dir* dir)
-{printf("\n");
+{
+    printf("\n");
     int rc;
     int bytesRead = 0;
     int childrenBytesRead;
@@ -622,7 +634,7 @@ int readDir(int file, struct Dir* dir)
         /* read it */
         {
             if(dir->children == NULL)
-            /* first one */
+            /* first one in dir */
             {
                 dir->children = (struct DrLL*)malloc(sizeof(struct DrLL));
                 if(dir->children == NULL)
@@ -684,12 +696,15 @@ int readDir(int file, struct Dir* dir)
     return bytesRead;
 }
 
-int readPVDv1(int file, Pvdv1* pvd)
+int readVD(int file, Vd* pvd)
 {
     int rc;
     unsigned char fsver; /* file structure version */
     
-    rc = readUnused(file, 1);
+    /*rc = readUnused(file, 1);
+    if(rc != 1)
+        return -1;*/
+    rc = read(file, &(pvd->volumeFlags), 1);
     if(rc != 1)
         return -1;
     
@@ -710,10 +725,14 @@ int readPVDv1(int file, Pvdv1* pvd)
     rc = read733(file, &(pvd->volSpaceSize));
     if(rc != 4)
         return -1;
-    
-    rc = readUnused(file, 32);
+
+    /*rc = readUnused(file, 32);
+    if(rc != 32)
+        return -1;*/
+    rc = read(file, pvd->escapeSequences, 32);
     if(rc != 32)
         return -1;
+
     
     rc = read723(file, &(pvd->volSetSize));
     if(rc != 2)
@@ -957,7 +976,7 @@ int readPVDv1(int file, Pvdv1* pvd)
 }
 
 /*******************************************************************************
-* readVdTypeVer()
+* readVDTypeVer()
 * read type and version of a volume descriptor
 *
 * type can be:
@@ -981,7 +1000,7 @@ int readPVDv1(int file, Pvdv1* pvd)
 * - -3 if sid not right
 * - -4 if vd version unknown
 *  */
-int readVdTypeVer(int file, unsigned char* type, unsigned char* version)
+int readVDTypeVer(int file, unsigned char* type, unsigned char* version)
 {
     char sid[5];
     int rc;
