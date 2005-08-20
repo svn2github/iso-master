@@ -6,7 +6,9 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define NB_SYSTEM_AREA 32768
+//#define NB_SYSTEM_AREA 32768
+#define NLS_SYSTEM_AREA 16
+#define NBYTES_LOGICAL_SECTOR 2048
 
 #define VDTYPE_BOOT 0
 #define VDTYPE_PRIMARY 1
@@ -19,6 +21,10 @@
 
 #define SEPARATOR1 0x2E
 #define SEPARATOR2 0x3B
+
+#define UCSTYPE_LEVEL1 0
+#define UCSTYPE_LEVEL2 1
+#define UCSTYPE_LEVEL3 2
 
 /* date/time for volume descriptors
 * all strings are size +1 for the null byte */
@@ -77,12 +83,12 @@ struct Dir
     struct Dr self;
     struct Dr parent;
     int numEntries; /* not including self and parent */
-    //Dr* child; /* all the rest of the children */
     struct DrLL* children;
         
 };
 
-/* primary volume descriptor version 1 (original iso9660 standard)
+/* good for either a primary or a secondary volume descriptor
+* whomever uses the pvd should know to ignore volumeFlags and escapeSequences
 * all strings are size +1 for the null byte */
 typedef struct
 {
@@ -117,10 +123,14 @@ typedef struct
 typedef struct
 {
     Vd pvd;
-    int numSvds;
-    
+    bool haveSvd;
+    Vd svd;
+    // volume partition descriptors
+    // boot records
     
 } VdSet;
+
+void displayDirTree(struct Dir* tree, bool isJoliet, int level);
 
 bool drDescribesParent(struct Dr* dr);
 bool drDescribesSelf(struct Dr* dr);
@@ -143,125 +153,113 @@ int readUnused(int file, unsigned numBytes);
 
 int readDir(int file, struct Dir* dir);
 int readDR(int file, struct Dr* dr);
-int reaVD(int file, Vd* pvd);
+int readVD(int file, Vd* pvd);
 int readVDTypeVer(int file, unsigned char* type, unsigned char* version);
+int readVDSet(int file, VdSet* vdset);
+
+int svdGetJolietType(Vd* svd);
 
 int main(int argc, char** argv)
 {
     int image;
-    Vd pvd1;
-    //Vd svd1;
+    VdSet vdset;
     int rc;
-    
-    /*struct Dr dirRec;
-    char str[256];
-    int count;
-    */
     
     struct Dir tree;
     
-    unsigned char vdType;
-    unsigned char vdVersion;
-    
+    /* open image file for reading */
     image = open(argv[1], O_RDONLY);
     if(image == -1)
         oops("unable to open image\n");
     
-    rc = readUnused(image, NB_SYSTEM_AREA);
+    /* system area */
+    rc = readUnused(image, NLS_SYSTEM_AREA * NBYTES_LOGICAL_SECTOR);
     if(rc <= 0)
         oops("problem with system area()");
     
-    rc = readVDTypeVer(image, &vdType, &vdVersion);
+    /* volume descriptor set */
+    rc = readVDSet(image, &vdset);
     if(rc <= 0)
-        oops("problem with readVDTypeVer()");
-    printf("vd type: %d, version: %d\n", vdType, vdVersion);
-    if(vdType != VDTYPE_PRIMARY)
-        oops("primary vd expected");
+        oops("problem reading vd set");
     
-    rc = readVD(image, &pvd1);
-    if(rc <= 0)
-        oops("problem with pvd1");
+    printf("lb size: %d\n", vdset.pvd.lbSize);
     
-    //~ readUnused(image, 2048);
+    printf("volume space size: %u\n", vdset.pvd.volSpaceSize);
     
-    //~ rc = readVDTypeVer(image, &vdType, &vdVersion);
-    //~ if(rc <= 0)
-        //~ oops("problem with readVDTypeVer()");
-    //~ printf("vd type: %d, version: %d\n", vdType, vdVersion);
-    //~ if(vdType != VDTYPE_SUPPLEMENTARY)
-        //~ oops("suppl vd expected");
+    printf("human-readable volume size: %dB, %dMB, %dMiB\n", vdset.pvd.lbSize * vdset.pvd.volSpaceSize,
+                                                             vdset.pvd.lbSize * vdset.pvd.volSpaceSize / 1024000,
+                                                             vdset.pvd.lbSize * vdset.pvd.volSpaceSize / 1048576);
+    printf("pathtable size: %d\n", vdset.pvd.pathTableSize);
+    
+    printf("vsid: \'%s\'\n", vdset.pvd.volSetId);
+    
+    printf("publ: \'%s\'\n", vdset.pvd.publId);
+    
+    printf("dprp: \'%s\'\n", vdset.pvd.dataPrepId);
+    
+    printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", vdset.pvd.volCreatTime.day,
+                                                     vdset.pvd.volCreatTime.month,
+                                                     vdset.pvd.volCreatTime.year,
+                                                     vdset.pvd.volCreatTime.hour,
+                                                     vdset.pvd.volCreatTime.minute,
+                                                     vdset.pvd.volCreatTime.second,
+                                                     vdset.pvd.volCreatTime.hundredthSecond,
+                                                     vdset.pvd.volCreatTime.gmtOffset);
+    
+    
+    printf("L path table: %d\n", vdset.pvd.locTypeLPathTable);
+    
+    printf("M path table: %d\n", vdset.pvd.locTypeMPathTable);
+    
+    printf("root extent at: %d\n", vdset.pvd.rootDR.locExtent);
+    
+    printf("data length: %d\n", vdset.pvd.rootDR.dataLength);
+    
+    printf("joliet type: %d\n", svdGetJolietType(&(vdset.svd)));
+    printf("joliet root extent at: %d\n", vdset.svd.rootDR.locExtent);
 
-    //~ rc = readVD(image, &svd1);
-    //~ if(rc <= 0)
-        //~ oops("problem with svd1");
+    /* read directory tree */
+    lseek(image, NBYTES_LOGICAL_SECTOR * vdset.svd.rootDR.locExtent, SEEK_SET);
     
-    printf("sysid: \'%s\'\n", pvd1.sysId);
-    //~ printf("sysid: ");printUCS2(svd1.sysId, 128);putchar('\n');
-    
-    printf("volid: \'%s\'\n", pvd1.volId);
-    //~ printf("volid: ");printUCS2(svd1.volId, 128);putchar('\n');
-    
-    printf("lb size: %d\n", pvd1.lbSize);
-    //~ printf("lb size: %d\n", svd1.lbSize);
-
-    printf("volume space size: %u\n", pvd1.volSpaceSize);
-    //~ printf("volume space size: %u\n", svd1.volSpaceSize);
-
-    printf("human-readable volume size: %dB, %dMB, %dMiB\n", pvd1.lbSize * pvd1.volSpaceSize,
-                                                             pvd1.lbSize * pvd1.volSpaceSize / 1024000,
-                                                             pvd1.lbSize * pvd1.volSpaceSize / 1048576);
-    printf("pathtable size: %d\n", pvd1.pathTableSize);
-    //~ printf("pathtable size: %d\n", svd1.pathTableSize);
-
-    printf("vsid: \'%s\'\n", pvd1.volSetId);
-    //~ printf("vsid: ");printUCS2(svd1.volSetId, 128);putchar('\n');
-    
-    printf("publ: \'%s\'\n", pvd1.publId);
-    //~ printf("publ: ");printUCS2(svd1.publId, 128);putchar('\n');
-    
-    printf("dprp: \'%s\'\n", pvd1.dataPrepId);
-    //~ printf("dprp: ");printUCS2(svd1.dataPrepId, 128);putchar('\n');
-    
-    printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", pvd1.volCreatTime.day,
-                                                     pvd1.volCreatTime.month,
-                                                     pvd1.volCreatTime.year,
-                                                     pvd1.volCreatTime.hour,
-                                                     pvd1.volCreatTime.minute,
-                                                     pvd1.volCreatTime.second,
-                                                     pvd1.volCreatTime.hundredthSecond,
-                                                     pvd1.volCreatTime.gmtOffset);
-    
-    //~ printf("created: %s-%s-%s, %s:%s:%s:%s GMT%d\n", svd1.volCreatTime.day,
-                                                      //~ svd1.volCreatTime.month,
-                                                      //~ svd1.volCreatTime.year,
-                                                      //~ svd1.volCreatTime.hour,
-                                                      //~ svd1.volCreatTime.minute,
-                                                      //~ svd1.volCreatTime.second,
-                                                      //~ svd1.volCreatTime.hundredthSecond,
-                                                      //~ svd1.volCreatTime.gmtOffset);
-    
-    printf("L: %d\n", pvd1.locTypeLPathTable);
-    //~ printf("L: %d\n", svd1.locTypeLPathTable);
-    
-    printf("M: %d\n", pvd1.locTypeMPathTable);
-    //~ printf("M: %d\n", svd1.locTypeMPathTable);
-    
-    printf("root extent at: %d\n", pvd1.rootDR.locExtent);
-    //~ printf("root extent at: %d\n", svd1.rootDR.locExtent);
-    
-    printf("data length; %d\n", pvd1.rootDR.dataLength);
-    //~ printf("data length; %d\n", svd1.rootDR.dataLength);
-
-    lseek(image, 2048 * pvd1.rootDR.locExtent, SEEK_SET);
-    
+    tree.children = NULL;
     rc = readDir(image, &tree);
     if(rc <= 0)
         oops("failed to read tree");
-    printf("TOTAL READ %d bytes\n", rc);
+    printf("tree: total read %d bytes\n", rc);
+    
+    displayDirTree(&tree, true, 0);
     
     close(image);
     
     return 0;
+}
+
+void displayDirTree(struct Dir* tree, bool isJoliet, int level)
+{
+    int count;
+    struct DrLL* entry;
+    
+    entry = tree->children;
+    while(entry != NULL)
+    {
+        /* display file or directory name */
+        for(count = 0; count < level * 2; count++)
+            printf(" ");
+        
+        if(!isJoliet)
+            printf("%s\n", entry->dr.fullName);
+        else
+        {
+            printUCS2(entry->dr.fullName, 128);
+            printf("\n");
+        }
+        
+        if( drisadir(&(entry->dr)) )
+        /* display subdirectory */
+            displayDirTree(entry->dr.dir, isJoliet, level + 1);
+        
+        entry = entry->next;
+    }
 }
 
 bool drDescribesParent(struct Dr* dr)
@@ -325,17 +323,13 @@ void printUCS2(char* ucsString, int numBytes)
 {
     int count;
     
-    putchar('\'');
-    
-    for(count = 0; count < numBytes; count++)
+    for(count = 0; count < numBytes; count += 2)
     {
         if( ucsString[count] == 0 && ucsString[count + 1] == 0 )
             break;
         
         printf("%c", ucsString[count + 1]);
     }
-    
-    printf("\' (UCS-2)");
 }
 
 void oops(char* msg)
@@ -450,7 +444,7 @@ int readDR(int file, struct Dr* dr)
     int rc;
     int count = 0;
     int unusedNB;
-    printf("readDR: ");
+    //printf("readDR: ");
     rc = read711(file, &(dr->recordLength));
     if(rc != 1)
         return -1;
@@ -465,7 +459,7 @@ int readDR(int file, struct Dr* dr)
     if(rc != 4)
         return -1;
     count += 8;
-    printf("extent %d, ", dr->locExtent);
+    //printf("extent %d, ", dr->locExtent);
     rc = read733(file, &(dr->dataLength));
     if(rc != 4)
         return -1;
@@ -537,17 +531,17 @@ int readDR(int file, struct Dr* dr)
     if(rc != dr->fullNameLen)
         return -1;
     count += dr->fullNameLen;
-    if(drDescribesSelf(dr))
-        printf("name: SELF, ");
-    else if(drDescribesParent(dr))
-        printf("name: PARENT, ");
-    else
-    {
-        char temp[200];
-        strncpy(temp, dr->fullName, dr->fullNameLen);
-        dr->fullName[dr->fullNameLen] = '\0';
-        printf("name: %s, ", dr->fullName);
-    }
+    //~ if(drDescribesSelf(dr))
+        //~ printf("name: SELF, ");
+    //~ else if(drDescribesParent(dr))
+        //~ printf("name: PARENT, ");
+    //~ else
+    //~ {
+        //~ char temp[200];
+        //~ strncpy(temp, dr->fullName, dr->fullNameLen);
+        //~ dr->fullName[dr->fullNameLen] = '\0';
+        //~ printf("name: %s, ", dr->fullName);
+    //~ }
     if(dr->fullNameLen % 2 == 0)
     {
         rc = readUnused(file, 1);
@@ -573,7 +567,7 @@ int readDR(int file, struct Dr* dr)
         
         origPos = lseek(file, 0, SEEK_CUR);
         
-        lseek(file, 2048 * dr->locExtent, SEEK_SET);
+        lseek(file, NBYTES_LOGICAL_SECTOR * dr->locExtent, SEEK_SET);
         
         dr->dir = (struct Dir*)malloc(sizeof(struct Dir));
         if(dr->dir == NULL)
@@ -592,23 +586,23 @@ int readDR(int file, struct Dr* dr)
     {
         dr->dir = NULL;
     }
-    if(drDescribesSelf(dr))
-        printf("end SELF\n");
-    else if(drDescribesParent(dr))
-        printf("end PARENT\n");
-    else
-    {
-        char temp[200];
-        strncpy(temp, dr->fullName, dr->fullNameLen);
-        dr->fullName[dr->fullNameLen] = '\0';
-        printf("end %s\n", dr->fullName);
-    }
+    //~ if(drDescribesSelf(dr))
+        //~ printf("end SELF\n");
+    //~ else if(drDescribesParent(dr))
+        //~ printf("end PARENT\n");
+    //~ else
+    //~ {
+        //~ char temp[200];
+        //~ strncpy(temp, dr->fullName, dr->fullNameLen);
+        //~ dr->fullName[dr->fullNameLen] = '\0';
+        //~ printf("end %s\n", dr->fullName);
+    //~ }
     return count;
 }
 
 int readDir(int file, struct Dir* dir)
 {
-    printf("\n");
+    //printf("\n");
     int rc;
     int bytesRead = 0;
     int childrenBytesRead;
@@ -745,6 +739,8 @@ int readVD(int file, Vd* pvd)
     rc = read723(file, &(pvd->lbSize));
     if(rc != 2)
         return -1;
+    if(pvd->lbSize != NBYTES_LOGICAL_SECTOR)
+        return -2;
     
     rc = read733(file, &(pvd->pathTableSize));
     if(rc != 4)
@@ -967,12 +963,83 @@ int readVD(int file, Vd* pvd)
     if(fsver != 1) /* should be 1 for a pvd */
         return -1;
     
-    /* the rest of the 2048 bytes, always this size for a pvd */
+    /* the rest of the NBYTES_LOGICAL_SECTOR bytes, always this size for a pvd */
     rc = readUnused(file, 1166); 
     if(rc != 1166)
         return -1;
     
     return 2041;
+}
+
+/*
+* this will:
+* - read one pvd
+* - skip everything before next
+* - read one svd
+* - skip everything before next
+* - read terminator
+* */
+int readVDSet(int file, VdSet* vdset)
+{
+    int rc;
+    unsigned char vdType;
+    unsigned char vdVersion;
+    int bytesRead = 0;
+    bool keepGoing;
+    
+    /* READ PVD */
+    rc = readVDTypeVer(file, &vdType, &vdVersion);
+    if(rc <= 0)
+        return -1;
+    bytesRead += rc;
+    
+    if(vdType != VDTYPE_PRIMARY)
+        return -2;
+    
+    rc = readVD(file, &(vdset->pvd));
+    if(rc <= 0)
+        return -1;
+    bytesRead += rc;
+    /* END READ PVD */
+    
+    vdset->haveSvd = false;
+    keepGoing = true;
+    do
+    {
+        rc = readVDTypeVer(file, &vdType, &vdVersion);
+        if(rc <= 0)
+            return -1;
+        bytesRead += rc;
+        
+        if(vdType == VDTYPE_TERMINATOR)
+        {
+            rc = readUnused(file, NBYTES_LOGICAL_SECTOR - 7);
+            if(rc != NBYTES_LOGICAL_SECTOR - 7)
+                return -1;
+            bytesRead += rc;
+            keepGoing = false;
+        }
+        else if(vdType == VDTYPE_SUPPLEMENTARY && vdset->haveSvd == false)
+        /* will only read one svd (should be joliet btw) */
+        {
+            vdset->haveSvd = true;
+            rc = readVD(file, &(vdset->svd));
+            if(rc <= 0)
+                return -1;
+            bytesRead += rc;
+        }
+        else
+        /* ignore all other vds */
+        {
+            rc = readUnused(file, NBYTES_LOGICAL_SECTOR - 7);
+            if(rc != NBYTES_LOGICAL_SECTOR - 7)
+                return -1;
+            bytesRead += rc;
+        }
+        
+    } while (keepGoing);
+    
+    return bytesRead;
 }
 
 /*******************************************************************************
@@ -994,7 +1061,7 @@ int readVD(int file, Vd* pvd)
 * - unsigned char* vd type
 * - unsigned char* vd version
 * Return:
-* - 1 if all ok
+* - 7 (bytes read) if all ok
 * - -1 if failed to read anything
 * - -2 if vd type unknown
 * - -3 if sid not right
@@ -1026,4 +1093,45 @@ int readVDTypeVer(int file, unsigned char* type, unsigned char* version)
         return -4;
     
     return 7;
+}
+
+/*
+* a joliet svd will have:
+* -bit 0 of volumeFlags set to 0 (only registered escape sequences)
+* -one of the following in escapeSequences[] and no others:
+* UCS-2 Level 1: (25)(2F)(40) = "%\@"
+* UCS-2 Level 2: (25)(2F)(43) = "%\C"
+* UCS-2 Level 3: (25)(2F)(45) = "%\E"
+* 
+* returns one of:
+* -1 (not valid joliet)
+* UCSTYPE_LEVEL1
+* UCSTYPE_LEVEL2
+* UCSTYPE_LEVEL3
+*/
+int svdGetJolietType(Vd* svd)
+{
+    if( ((svd->volumeFlags >> 1) & 1) != 0 )
+        return -1;
+    
+    if(svd->escapeSequences[0] == 0x25 &&
+       svd->escapeSequences[1] == 0x2F &&
+       svd->escapeSequences[2] == 0x40)
+    {
+        return UCSTYPE_LEVEL1;
+    }
+    else if(svd->escapeSequences[0] == 0x25 &&
+            svd->escapeSequences[1] == 0x2F &&
+            svd->escapeSequences[2] == 0x43)
+    {
+        return UCSTYPE_LEVEL2;
+    }
+    else if(svd->escapeSequences[0] == 0x25 &&
+            svd->escapeSequences[1] == 0x2F &&
+            svd->escapeSequences[2] == 0x45)
+    {
+        return UCSTYPE_LEVEL3;
+    }
+    else
+        return -1;
 }

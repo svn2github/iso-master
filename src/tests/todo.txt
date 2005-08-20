@@ -1,7 +1,10 @@
 9660 READ:
+files:
 identical file descriptors in one dir (multi-extent files)
-volume descriptor set
-extended attr. records
-files (interleaved or not )
-volume partitions?
+extended attr. record
+file (interleaved or not)
+
+volume partition
 volume set
+boot record
+
