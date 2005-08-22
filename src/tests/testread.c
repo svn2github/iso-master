@@ -6,7 +6,8 @@
 #include <string.h>
 #include <stdbool.h>
 
-//#define NB_SYSTEM_AREA 32768
+//#define TEST_READ_DR
+
 #define NLS_SYSTEM_AREA 16
 #define NBYTES_LOGICAL_SECTOR 2048
 
@@ -67,7 +68,9 @@ struct Dr
     unsigned short volSeqNum;
     unsigned char fullNameLen; /* name + extension + separators + version */
     char fullName[128]; /* exactly as read (128 max for joliet) */
-    struct Dir* dir;
+    int suFieldsLen;
+    char suFields[222]; /* max 256 - 34 (remember minus fullNameLen) */
+    struct Dir* dir; /* if a directory, otherwise null */
     
 };
 
@@ -84,7 +87,7 @@ struct Dir
     struct Dr parent;
     int numEntries; /* not including self and parent */
     struct DrLL* children;
-        
+    
 };
 
 /* good for either a primary or a secondary volume descriptor
@@ -217,9 +220,9 @@ int main(int argc, char** argv)
     
     printf("joliet type: %d\n", svdGetJolietType(&(vdset.svd)));
     printf("joliet root extent at: %d\n", vdset.svd.rootDR.locExtent);
-
+    
     /* read directory tree */
-    lseek(image, NBYTES_LOGICAL_SECTOR * vdset.svd.rootDR.locExtent, SEEK_SET);
+    lseek(image, NBYTES_LOGICAL_SECTOR * vdset.pvd.rootDR.locExtent, SEEK_SET);
     
     tree.children = NULL;
     rc = readDir(image, &tree);
@@ -227,7 +230,7 @@ int main(int argc, char** argv)
         oops("failed to read tree");
     printf("tree: total read %d bytes\n", rc);
     
-    displayDirTree(&tree, true, 0);
+    displayDirTree(&tree, false, 0);
     
     close(image);
     
@@ -242,12 +245,14 @@ void displayDirTree(struct Dir* tree, bool isJoliet, int level)
     entry = tree->children;
     while(entry != NULL)
     {
-        /* display file or directory name */
+        /* display file or subdirectory name */
         for(count = 0; count < level * 2; count++)
             printf(" ");
         
         if(!isJoliet)
+        {
             printf("%s\n", entry->dr.fullName);
+        }
         else
         {
             printUCS2(entry->dr.fullName, 128);
@@ -444,7 +449,11 @@ int readDR(int file, struct Dr* dr)
     int rc;
     int count = 0;
     int unusedNB;
-    //printf("readDR: ");
+    
+    #ifdef TEST_READ_DR
+        printf("readDR: ");
+    #endif
+    
     rc = read711(file, &(dr->recordLength));
     if(rc != 1)
         return -1;
@@ -459,7 +468,11 @@ int readDR(int file, struct Dr* dr)
     if(rc != 4)
         return -1;
     count += 8;
-    //printf("extent %d, ", dr->locExtent);
+    
+    #ifdef TEST_READ_DR
+        printf("extent %d, ", dr->locExtent);
+    #endif
+    
     rc = read733(file, &(dr->dataLength));
     if(rc != 4)
         return -1;
@@ -531,17 +544,24 @@ int readDR(int file, struct Dr* dr)
     if(rc != dr->fullNameLen)
         return -1;
     count += dr->fullNameLen;
-    //~ if(drDescribesSelf(dr))
-        //~ printf("name: SELF, ");
-    //~ else if(drDescribesParent(dr))
-        //~ printf("name: PARENT, ");
-    //~ else
-    //~ {
-        //~ char temp[200];
-        //~ strncpy(temp, dr->fullName, dr->fullNameLen);
-        //~ dr->fullName[dr->fullNameLen] = '\0';
-        //~ printf("name: %s, ", dr->fullName);
-    //~ }
+
+    #ifdef TEST_READ_DR
+        if(drDescribesSelf(dr))
+            printf("name: SELF, ");
+        else if(drDescribesParent(dr))
+            printf("name: PARENT, ");
+        else
+        {
+            char temp[200];
+            strncpy(temp, dr->fullName, dr->fullNameLen);
+            dr->fullName[dr->fullNameLen] = '\0';
+            //printf("name: %s, ", dr->fullName);
+            printf("name: ");
+            printUCS2(dr->fullName, dr->fullNameLen);
+            printf(", ");
+        }
+    #endif
+        
     if(dr->fullNameLen % 2 == 0)
     {
         rc = readUnused(file, 1);
@@ -586,28 +606,37 @@ int readDR(int file, struct Dr* dr)
     {
         dr->dir = NULL;
     }
-    //~ if(drDescribesSelf(dr))
-        //~ printf("end SELF\n");
-    //~ else if(drDescribesParent(dr))
-        //~ printf("end PARENT\n");
-    //~ else
-    //~ {
-        //~ char temp[200];
-        //~ strncpy(temp, dr->fullName, dr->fullNameLen);
-        //~ dr->fullName[dr->fullNameLen] = '\0';
-        //~ printf("end %s\n", dr->fullName);
-    //~ }
+    #ifdef TEST_READ_DR
+        if(drDescribesSelf(dr))
+            printf("end SELF\n");
+        else if(drDescribesParent(dr))
+            printf("end PARENT\n");
+        else
+        {
+            char temp[200];
+            strncpy(temp, dr->fullName, dr->fullNameLen);
+            dr->fullName[dr->fullNameLen] = '\0';
+            //printf("end %s\n", dr->fullName);
+            printf("end ");
+            printUCS2(dr->fullName, dr->fullNameLen);
+            putchar('\n');
+        }
+    #endif
+        
     return count;
 }
 
 int readDir(int file, struct Dir* dir)
 {
-    //printf("\n");
     int rc;
     int bytesRead = 0;
     int childrenBytesRead;
     struct DrLL* last;
     
+    #ifdef TEST_READ_DR
+        printf("\n");
+    #endif
+
     /* read self */
     rc = readDR(file, &(dir->self));
     if(rc <= 0)
