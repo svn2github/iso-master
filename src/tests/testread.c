@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-//#define TEST_READ_DR
+#define TEST_READ_DR
 
 #define NLS_SYSTEM_AREA 16
 #define NBYTES_LOGICAL_SECTOR 2048
@@ -69,7 +69,7 @@ struct Dr
     unsigned char fullNameLen; /* name + extension + separators + version */
     char fullName[128]; /* exactly as read (128 max for joliet) */
     int suFieldsLen;
-    char suFields[222]; /* max 256 - 34 (remember minus fullNameLen) */
+    char suFields[223]; /* max 256 - 33 (remember minus fullNameLen) */
     struct Dir* dir; /* if a directory, otherwise null */
     
 };
@@ -233,7 +233,7 @@ int main(int argc, char** argv)
         oops("failed to read tree");
     printf("tree: total read %d bytes\n", rc);
     
-    displayDirTree(&tree, false, 0);
+    //displayDirTree(&tree, true, 0);
     
     close(image);
     
