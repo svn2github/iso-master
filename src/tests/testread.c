@@ -74,6 +74,8 @@ struct Dr
     
 };
 
+/* linked list because i don't know how many children a dir has
+*  until i read them all */
 struct DrLL
 {
     struct Dr dr;
@@ -156,6 +158,7 @@ int readUnused(int file, unsigned numBytes);
 
 int readDir(int file, struct Dir* dir);
 int readDR(int file, struct Dr* dr);
+int readSuFields(int file, struct Dr* dr);
 int readVD(int file, Vd* pvd);
 int readVDTypeVer(int file, unsigned char* type, unsigned char* version);
 int readVDSet(int file, VdSet* vdset);
@@ -251,7 +254,8 @@ void displayDirTree(struct Dir* tree, bool isJoliet, int level)
         
         if(!isJoliet)
         {
-            printf("%s\n", entry->dr.fullName);
+            printf("%s", entry->dr.fullName);
+            printf("\n");
         }
         else
         {
@@ -448,7 +452,7 @@ int readDR(int file, struct Dr* dr)
 {
     int rc;
     int count = 0;
-    int unusedNB;
+    //int unusedNB;
     
     #ifdef TEST_READ_DR
         printf("readDR: ");
@@ -555,10 +559,10 @@ int readDR(int file, struct Dr* dr)
             char temp[200];
             strncpy(temp, dr->fullName, dr->fullNameLen);
             dr->fullName[dr->fullNameLen] = '\0';
-            //printf("name: %s, ", dr->fullName);
-            printf("name: ");
-            printUCS2(dr->fullName, dr->fullNameLen);
-            printf(", ");
+            printf("name: %s, ", dr->fullName);
+            //~ printf("name: ");
+            //~ printUCS2(dr->fullName, dr->fullNameLen);
+            //~ printf(", ");
         }
     #endif
         
@@ -570,13 +574,17 @@ int readDR(int file, struct Dr* dr)
         count += 1;
     }
     
-    unusedNB = dr->recordLength - (33 + dr->fullNameLen + (dr->fullNameLen % 2 == 0 ? 1 : 0));
-    if(unusedNB > 0)
+    dr->suFieldsLen = dr->recordLength - (33 + dr->fullNameLen + (dr->fullNameLen % 2 == 0 ? 1 : 0));
+    if(dr->suFieldsLen > 0)
     {
-        rc = readUnused(file, unusedNB);
-        if(rc != unusedNB)
+        /* !! this may modify dr->recordLength and dr->suFieldsLen !! */
+        //rc = readSuFields(file, dr);
+        //rc = readUnused(file, dr->suFieldsLen);
+        rc = read(file, dr->suFields, dr->suFieldsLen);
+        if(rc < 0)
             return -1;
-        count += unusedNB;
+        
+        count += rc;
     }
     
     if( drisadir(dr) && !drDescribesSelf(dr)&& !drDescribesParent(dr) )
@@ -606,6 +614,7 @@ int readDR(int file, struct Dr* dr)
     {
         dr->dir = NULL;
     }
+    
     #ifdef TEST_READ_DR
         if(drDescribesSelf(dr))
             printf("end SELF\n");
@@ -616,14 +625,82 @@ int readDR(int file, struct Dr* dr)
             char temp[200];
             strncpy(temp, dr->fullName, dr->fullNameLen);
             dr->fullName[dr->fullNameLen] = '\0';
-            //printf("end %s\n", dr->fullName);
-            printf("end ");
-            printUCS2(dr->fullName, dr->fullNameLen);
-            putchar('\n');
+            printf("end %s\n", dr->fullName);
+            //~ printf("end ");
+            //~ printUCS2(dr->fullName, dr->fullNameLen);
+            //~ putchar('\n');
         }
     #endif
         
     return count;
+}
+
+/* 
+* allowed fields:
+* -SP
+* -ER (ignored and rewritten)
+* -PX (regular file)
+* -NM 
+* */
+int readSuFields(int file, struct Dr* dr)
+{
+    /* read an su record
+    *  decide whether it should stay
+    *  write to suFields */
+    
+    int rc;
+    unsigned char allFields[256];
+    int offset1 = 0; /* for allFields (source) */
+    int offset2 = 0; /* for suFields (destination) */
+    int count;
+    
+    rc = read(file, allFields, dr->suFieldsLen);
+    if(rc != dr->suFieldsLen)
+        return -1;
+    
+    // !! check that suFieldsLen is not too big
+    
+    while(offset1 < dr->suFieldsLen)
+    {
+        if(allFields[offset1] == 0)
+        /* padding zero */
+            break;
+        
+        if( (allFields[offset1] == 'S' && allFields[offset1 + 1] == 'P') ||
+            (allFields[offset1] == 'P' && allFields[offset1 + 1] == 'X') ||
+            (allFields[offset1] == 'N' && allFields[offset1 + 1] == 'M') )
+        {
+            /* copy record */
+            for(count = 0; count < allFields[offset1 + 2]; count++)
+            {
+                (dr->suFields)[offset2 + count] = allFields[offset1 + count];
+            }
+            
+            offset2 += count;
+        }
+        /* else skip record */
+        
+        offset1 += allFields[offset1 + 2];
+    }
+    
+    /* offset2 is now the new su fields length */
+    
+    if( (dr->recordLength - dr->suFieldsLen + offset2) % 2 == 1 )
+    /* add a padding 0x00 to make it even (9660 spec) */
+    {
+        offset2 += 1;
+        (dr->suFields)[offset2] = 0x00;
+    }
+    printf("%d %d -> ", dr->recordLength, dr->suFieldsLen);
+    /* original length was dr->recordLength
+    *  original su fields length was dr->suFieldsLen
+    *  new length is dr->recordLength - dr->suFieldsLen + offset2 */
+    dr->recordLength = dr->recordLength - dr->suFieldsLen + offset2;
+    dr->suFieldsLen = offset2;
+    
+    printf("%d %d\n", dr->recordLength, dr->suFieldsLen);
+    
+    return rc;
 }
 
 int readDir(int file, struct Dir* dir)
@@ -707,10 +784,7 @@ int readDir(int file, struct Dir* dir)
     }
     /* END READ CHILDREN and increase numEntries */
     
-    if(dir->numEntries == 0)
-    /* read no children */
-        dir->children = NULL; //!! this is already done in readDR
-    else
+    if(dir->numEntries > 0)
     /* terminate DrLL* dir->children */
         last->next = NULL;
     
