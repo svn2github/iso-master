@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define TEST_READ_DR
+//#define TEST_READ_DR
 
 #define NLS_SYSTEM_AREA 16
 #define NBYTES_LOGICAL_SECTOR 2048
@@ -233,7 +233,7 @@ int main(int argc, char** argv)
         oops("failed to read tree");
     printf("tree: total read %d bytes\n", rc);
     
-    //displayDirTree(&tree, true, 0);
+    displayDirTree(&tree, false, 0);
     
     close(image);
     
@@ -321,7 +321,6 @@ void printByte(char byte)
     
     while(count--)
     {
-        printf("%d", ( byte & 128 ) ? 1 : 0 );
         if(count == 4)
             putchar(' ');
         byte <<= 1;
@@ -331,7 +330,7 @@ void printByte(char byte)
 void printUCS2(char* ucsString, int numBytes)
 {
     int count;
-    
+    printf("%d", numBytes);
     for(count = 0; count < numBytes; count += 2)
     {
         if( ucsString[count] == 0 && ucsString[count + 1] == 0 )

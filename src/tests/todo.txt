@@ -1,7 +1,7 @@
 9660 READ:
 files:
 identical file descriptors in one dir (multi-extent files)
-extended attr. record
+skip extended attr. record
 file (interleaved or not)
 
 volume partition
