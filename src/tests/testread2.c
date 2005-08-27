@@ -8,7 +8,10 @@
 #include "read7x.h"
 #include "vd.h"
 
-const PxInfo posixDefaults = {0, 0, 0, 0, 0};
+//~ const PxInfo posixFileDefaults = {0, 0, 0, 0, 0};
+//~ const PxInfo posixDirDefaults = {0, 0, 0, 0, 0};
+const unsigned posixFileDefaults = 33188; /* octal 100644 */
+const unsigned posixDirDefaults = 16841; /* octal 40711 */
 
 int main(int argc, char** argv)
 {
@@ -41,8 +44,6 @@ int main(int argc, char** argv)
                                                              vdset.pvd.lbSize * vdset.pvd.volSpaceSize / 1048576);
     printf("pathtable size: %d\n", vdset.pvd.pathTableSize);
     
-    printf("vsid: \'%s\'\n", vdset.pvd.volSetId);
-    
     printf("publ: \'%s\'\n", vdset.pvd.publId);
     
     printf("dprp: \'%s\'\n", vdset.pvd.dataPrepId);
@@ -58,14 +59,16 @@ int main(int argc, char** argv)
     //printf("joliet type: %d\n", svdGetJolietType(&(vdset.svd)));
     printf("joliet root extent at: %d\n", vdset.svd.rootDR.locExtent);
     
-    // seek location of root dr inside the vd
+    
     lseek(image, vdset.pvd.rootDROffset, SEEK_SET);
-    // prepare tree
+    
     tree.directories = NULL;
     tree.files = NULL;
-    // readDir()
-    rc = readDir(image, &tree, FNTYPE_9660, false);
+    
+    rc = readDir(image, &tree, FNTYPE_ROCKRIDGE, true);
+    
     printf("readDir ended with %d\n", rc);
+    
     
     close(image);
     
@@ -133,6 +136,8 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
     unsigned char lenFileId9660; /* also len joliet fileid (bytes) */
     int lenSU; /* calculated as recordLength - 33 - lenFileId9660 */
     off_t origPos;
+    char rootTestByte;
+    bool isRoot;
     
     rc = read(image, &recordLength, 1);
     if(rc != 1)
@@ -158,74 +163,133 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
     if(lenFileId9660 % 2 == 0)
         lenSU -= 1;
     
+    /* FIND out if root */
+    origPos = lseek(image, 0, SEEK_CUR);
+    
+    rc = read(image, &rootTestByte, 1);
+    if(rc != 1)
+        return -1;
+    
+    lseek(image, origPos, SEEK_SET);
+    
+    if(lenFileId9660 == 1 && rootTestByte == 0x00)
+    {
+        isRoot = true;
+        dir->name[0] = '\0';
+    }
+    else
+        isRoot = false;
+    /* END FIND out if root */
+    
     if(filenameType == FNTYPE_9660)
     {
-        char nameAsOnDisk[256];
+        if(!isRoot)
+        {
+            char nameAsOnDisk[256];
+            
+            rc = read(image, nameAsOnDisk, lenFileId9660);
+            if(rc != lenFileId9660)
+                return -1;
+            
+            strncpy(dir->name, nameAsOnDisk, lenFileId9660);
+            
+            dir->name[lenFileId9660] = '\0';
+            
+            if( strlen(dir->name) > NCHARS_FILE_ID_MAX - 1 )
+                return -2;
         
-        rc = read(image, nameAsOnDisk, lenFileId9660);
-        if(rc != lenFileId9660)
-            return -1;
-        
-        strncpy(dir->name, nameAsOnDisk, lenFileId9660);
-        
-        dir->name[lenFileId9660] = '\0';
-        
-        if( strlen(dir->name) > NCHARS_FILE_ID_MAX - 1 )
-            return -2;
+            /* padding field */
+            if(lenFileId9660 % 2 == 0)
+                lseek(image, 1, SEEK_CUR);
+        }
     }
     else if(filenameType == FNTYPE_JOLIET)
     {
-        char nameAsOnDisk[256];
-        char nameInAscii[256];
-        int ucsCount, byteCount;
-        
-        if(lenFileId9660 % 2 != 0 && lenFileId9660 != 1)
-            return -3;
-        
-        rc = read(image, nameAsOnDisk, lenFileId9660);
-        if(rc != lenFileId9660)
-            return -1;
-        
-        for(ucsCount = 1, byteCount = 0; ucsCount < lenFileId9660;
-            ucsCount += 2, byteCount += 1)
+        if(!isRoot)
         {
-            nameInAscii[byteCount] = nameAsOnDisk[ucsCount];
+            char nameAsOnDisk[256];
+            char nameInAscii[256];
+            int ucsCount, byteCount;
+            
+            if(lenFileId9660 % 2 != 0)
+                return -3;
+            
+            rc = read(image, nameAsOnDisk, lenFileId9660);
+            if(rc != lenFileId9660)
+                return -1;
+            
+            for(ucsCount = 1, byteCount = 0; ucsCount < lenFileId9660;
+                ucsCount += 2, byteCount += 1)
+            {
+                nameInAscii[byteCount] = nameAsOnDisk[ucsCount];
+            }
+            nameInAscii[byteCount] = '\0';
+            
+            if( strlen(nameInAscii) > NCHARS_FILE_ID_MAX - 1 )
+                return -2;
+            
+            strcpy(dir->name, nameInAscii);
+            
+            /* padding field */
+            if(lenFileId9660 % 2 == 0)
+                lseek(image, 1, SEEK_CUR);
         }
-        
-        if(lenFileId9660 == 1)
-        /* root dir */
-            dir->name[0] = '\0';
-        else
-        {
-            strncpy(dir->name, nameInAscii, lenFileId9660 / 2);
-            dir->name[lenFileId9660 / 2] = '\0';
-        }
-        
-        if( strlen(dir->name) > NCHARS_FILE_ID_MAX - 1 )
-            return -2;
     }
     else if(filenameType == FNTYPE_ROCKRIDGE)
     {
-        ; // fancy
+        /* skip 9660 filename */
+        lseek(image, lenFileId9660, SEEK_CUR);
+        /* skip padding field */
+        if(lenFileId9660 % 2 == 0)
+            lseek(image, 1, SEEK_CUR);
+        
+        if(!isRoot)
+        {
+            rc = readRockridgeFilename(image, dir->name, lenSU);
+            if(rc < 0)
+                return rc;
+        }
     }
     else
         oops("readDir(): dude, what filename type did you ask for?");
-    printf("dir name: \'%s\'\n", dir->name);
-    /* padding field */
-    if(lenFileId9660 % 2 == 0)
-        lseek(image, 1, SEEK_CUR);
     
     if(readPosix)
     {
-        ; // fancy
+        if(isRoot)
+        {
+            unsigned char realRootRecordLen;
+            
+            origPos = lseek(image, 0, SEEK_CUR);
+            
+            /* go to real root record */
+            lseek(image, locExtent * NBYTES_LOGICAL_BLOCK, SEEK_SET);
+            
+            /* read record length */
+            read(image, &realRootRecordLen, 1);
+            if(rc != 1)
+                return -1;
+            
+            /*go to sys use fields */
+            lseek(image, 33, SEEK_CUR);
+            
+            readPosixInfo(image, &(dir->posixFileMode), realRootRecordLen - 34);
+            
+            /* return */
+            lseek(image, origPos, SEEK_SET);
+        }
+        else
+        {
+            readPosixInfo(image, &(dir->posixFileMode), lenSU);
+        }
     }
     else
     {
-        dir->posix = posixDefaults;
-        
-        lseek(image, lenSU, SEEK_CUR);
+        /* this is good for root also */
+        dir->posixFileMode = posixDirDefaults;
     }
-                    
+    
+    lseek(image, lenSU, SEEK_CUR);
+
     origPos = lseek(image, 0, SEEK_CUR);
     
     lseek(image, locExtent * NBYTES_LOGICAL_BLOCK, SEEK_SET);
@@ -262,15 +326,6 @@ int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readP
         if(haveNextRecordInSector(image))
         /* read it */
         {
-            //off_t origPos;
-            
-            // is dir?
-              // append to directories
-              // read dir
-            // is file?
-              // append to files
-              //read file info
-            
             if( dirDrFollows(image) )
             /* directory descriptor record */
             {
@@ -383,6 +438,10 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
         
         if( strlen(file->name) > NCHARS_FILE_ID_MAX - 1 )
             return -2;
+    
+        /* padding field */
+        if(lenFileId9660 % 2 == 0)
+            lseek(image, 1, SEEK_CUR);
     }
     else if(filenameType == FNTYPE_JOLIET)
     {
@@ -407,28 +466,36 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
         
         if( strlen(file->name) > NCHARS_FILE_ID_MAX - 1 )
             return -2;
+    
+        /* padding field */
+        if(lenFileId9660 % 2 == 0)
+            lseek(image, 1, SEEK_CUR);
     }
     else if(filenameType == FNTYPE_ROCKRIDGE)
     {
-        ; // fancy
+        /* skip 9660 filename */
+        lseek(image, lenFileId9660, SEEK_CUR);
+        /* skip padding field */
+        if(lenFileId9660 % 2 == 0)
+            lseek(image, 1, SEEK_CUR);
+
+        rc = readRockridgeFilename(image, file->name, lenSU);
+        if(rc < 0)
+            return rc;
     }
     else
         oops("readDir(): dude, what filename type did you ask for?");
-    printf("filename: \'%s\'\n", file->name);
-    /* padding field */
-    if(lenFileId9660 % 2 == 0)
-        lseek(image, 1, SEEK_CUR);
     
     if(readPosix)
     {
-        ; // fancy
+        readPosixInfo(image, &(file->posixFileMode), lenSU);
     }
     else
     {
-        file->posix = posixDefaults;
-        
-        lseek(image, lenSU, SEEK_CUR);
+        file->posixFileMode = posixFileDefaults;
     }
+    
+    lseek(image, lenSU, SEEK_CUR);
     
     file->onImage = true;
     file->position = locExtent * NBYTES_LOGICAL_BLOCK;
@@ -455,9 +522,95 @@ unsigned char readNextRecordLen(int image)
     return length;
 }
 
+int readPosixInfo(int image, unsigned* posixFileMode, int lenSU)
+{
+    off_t origPos;
+    unsigned char suFields[256];
+    int rc;
+    bool foundPosix;
+    int count;
+    
+    origPos = lseek(image, 0, SEEK_CUR);
+    
+    rc = read(image, suFields, lenSU);
+    if(rc != lenSU)
+        return -1;
+    
+    lseek(image, origPos, SEEK_SET);
+    
+    count = 0;
+    foundPosix = false;
+    while(count < lenSU && !foundPosix)
+    {
+        if(suFields[count] == 'P' && suFields[count + 1] == 'X')
+        {
+            read733FromCharArray(suFields + count + 4, posixFileMode);
+            
+            /* not interested in anything else from this field */
+            
+            foundPosix = true;
+        }
+        else
+        /* skip su record */
+        {
+            count += suFields[count + 2];
+        }
+    }
+    
+    return 1;
+}
+
+/*
+* leaves the file pointer where it was
+*/
+int readRockridgeFilename(int image, char* dest, int lenSU)
+{
+    off_t origPos;
+    unsigned char suFields[256];
+    char nameAsRead[256];
+    int rc;
+    int count;
+    int lengthAsRead;
+    bool foundName;
+    
+    origPos = lseek(image, 0, SEEK_CUR);
+    
+    rc = read(image, suFields, lenSU);
+    if(rc != lenSU)
+        return -1;
+    
+    lseek(image, origPos, SEEK_SET);
+    
+    count = 0;
+    foundName = false;
+    while(count < lenSU && !foundName)
+    {
+        if(suFields[count] == 'N' && suFields[count + 1] == 'M')
+        {
+            lengthAsRead = suFields[count + 2] - 5;
+            
+            strncpy(nameAsRead, suFields + count + 5, lengthAsRead);
+            
+            if(lengthAsRead > NCHARS_FILE_ID_MAX - 1)
+                return -2;
+            
+            strncpy(dest, nameAsRead, lengthAsRead);
+            
+            foundName = true;
+        }
+        else
+        /* skip su record */
+        {
+            count += suFields[count + 2];
+        }
+    }
+    
+    return 1;
+}
+
 /*
 * filenames as read from 9660 Sometimes end with ;1 (terminator+version num)
-* this removes the useless ending and terminated the destination with a '\0'
+* this removes the useless ending and terminates the destination with a '\0'
 */
 void removeCrapFromFilename(char* src, char* dest, int length)
 {

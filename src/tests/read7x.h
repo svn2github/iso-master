@@ -23,3 +23,4 @@ int read723(int image, unsigned short* value);
 int read731(int image, unsigned* value);
 int read732(int image, unsigned* value);
 int read733(int image, unsigned* value);
+void read733FromCharArray(unsigned char* array, unsigned* value);

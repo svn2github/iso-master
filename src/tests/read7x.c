@@ -92,3 +92,21 @@ int read733(int image, unsigned* value)
     
     return 8;
 }
+
+void read733FromCharArray(unsigned char* array, unsigned* value)
+{
+    //~ *value = array[0];
+    //~ *value <<= 8;
+    //~ *value |= array[1];
+    //~ *value <<= 8;
+    //~ *value |= array[2];
+    //~ *value <<= 8;
+    //~ *value |= array[3];
+    *value = array[4];
+    *value <<= 8;
+    *value |= array[5];
+    *value <<= 8;
+    *value |= array[6];
+    *value <<= 8;
+    *value |= array[7];
+}

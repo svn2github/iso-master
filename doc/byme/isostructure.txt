@@ -111,3 +111,83 @@ BEGIN supplementary vd
 
 END supplementary vd
 END volume descriptor
+
+BEGIN boot record
+0000 8807 - 0000 8826 - 'EL TORITO SPECIFICATION' + 9 zeroes - boot system id - 'a' characters
+0000 8827 - 0000 8846 - zeroes - boot identifier - 'a' characters
+el torito system use follows:
+0000 8847 - 0000 884A - 0xDF000000 d223 - location of first sector of boot catalog (sector#)
+0000 884B - 0000 9000 - zeroes - unused (must be zeroes)
+END boot record
+
+BEGIN boot catalog (sector d223):
+BEGIN validation entry
+0006 F800 - 0006 F800 - 0x01 - header (must be 0x01)
+0006 F801 - 0006 F801 - 0x00 - platform - x86
+0006 F802 - 0006 F804 - 0x0000 - reserved (must be zero)
+0006 F805 - 0006 F81B - "Slackware Linux, Inc. <" (0x00 terminated) - id string
+0006 F81C - 0006 F81D - 0x9BA3 d39843 - checksum
+0006 F81E - 0006 F81E - 0x55 - key (must be 0x55)
+0006 F81F - 0006 F81F - 0xAA - key (must be 0xAA)
+END validation entry
+BEGIN default entry
+0006 F820 - 0006 F820 - 0x88 - boot indicator - bootable
+0006 F821 - 0006 F821 - 0x00 - boot media type - no emulation
+0006 F822 - 0006 F823 - 0x0000 - load segment - use default
+0006 F824 - 0006 F824 - 0x00 - system type ??
+0006 F825 - 0006 F825 - 0x00 - unused (must be 0x00)
+0006 F826 - 0006 F827 - 0x0400 d4 - virtual sector count
+0006 F828 - 0006 F82B - 0xE0000000 d224 - block number for virtual disk - sector at 0x70000
+0006 F82C - 0006 FFFF - zeroes - unused (must be zeroes)
+END default entry
+END boot catalog
+
+BEGIN boot image
+0007 0000 - 0007 2733 - boot image
+0007 2734 - 0007 27FF - zeroes
+END boot image
+
+BEGIN 9660 root dir
+#1 (136 su bytes):
+0000 E800 - 0000 E800 - d136 - record len 
+0000 E801 - 0000 E81F - whatever
+0000 E820 - 0000 E820 - d1 - len file id
+0000 E821 - 0000 E821 - 0x00 - file id
+0000 E822 - 0000 E828 - SP
+0000 E829 - 0000 E82D - RR
+0000 E82E - 0000 E851 - PX
+0000 E852 - 0000 E86B - TF
+0000 E86C - 0000 E887 - CE
+
+#2
+0000 E888 - 0000 E888 - d102 - record len
+0000 E889 - 0000 E8A7 - whatever
+0000 E8A8 - 0000 E8A8 - d1 -len file id
+0000 E8A9 - 0000 E8A9 - 0x01 - file id
+68 su bytes:
+0000 E8AA - 0000 E8AE - RR
+0000 E8AF - 0000 E8D2 - PX
+0000 E8D3 - 0000 E8EC - TF
+0000 E8ED - 0000 E8ED - 0x00 - make the byte count even
+
+END 9660 root dir
+
+susp requires:
+- SP - protocol identifier (first dir record)
+- ER - extension reference
+rockridge requires:
+- PX - posix attributes
+
+slack has:
+- SP - protocol identifier (first dir record)
+- RR - old rockridge - safe to drop
+- PX - posix attributes
+- TF - timestamp
+- CE - continuation area - more sys use entries
+- NM - alternate name
+
+ignore everything but:
+SP (first record)
+ER (ignore but create a min length (first record))
+PX (regular file only)
+NM

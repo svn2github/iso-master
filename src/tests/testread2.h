@@ -32,20 +32,20 @@
 
 /* all contents of this are defined in posix 5.6.1
 * now where could i get a copy of that.. */
-typedef struct
-{
-    unsigned fileMode;
-    unsigned numLinks;
-    unsigned uid;
-    unsigned gid;
-    unsigned serialNum; // ?? was this removed from the final standard ??
+//~ typedef struct
+//~ {
+    //~ unsigned fileMode;
+    //~ unsigned numLinks;
+    //~ unsigned uid;
+    //~ unsigned gid;
+    //~ unsigned serialNum; // ?? was this removed from the final standard ??
     
-} PxInfo;
+//~ } PxInfo;
 
 typedef struct
 {
     char name[NCHARS_FILE_ID_MAX];
-    PxInfo posix;
+    unsigned posixFileMode;
     struct DirLL* directories;
     struct FileLL* files;
     
@@ -61,7 +61,7 @@ typedef struct DirLL
 typedef struct
 {
     char name[NCHARS_FILE_ID_MAX];
-    PxInfo posix;
+    unsigned posixFileMode;
     bool onImage;
     unsigned position; /* if on image, in bytes */
     unsigned size; /* if on image, in bytes */
@@ -82,6 +82,8 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix);
 int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readPosix);
 int readFileInfo(int image, File* file, int filenameType, bool readPosix);
 unsigned char readNextRecordLen(int image);
+int readPosixInfo(int image, unsigned* posixFileMode, int lenSU);
+int readRockridgeFilename(int image, char* dest, int lenSU);
 void removeCrapFromFilename(char* src, char* dest, int length);
 int skipDR(int image);
 
