@@ -2,6 +2,7 @@
 #define vd_h
 
 #include <stdbool.h>
+#include <sys/types.h>
 
 #define NBYTES_LOGICAL_SECTOR 2048
 
@@ -73,6 +74,8 @@ typedef struct
     unsigned locOptTypeLPathTable;
     unsigned locTypeMPathTable;
     unsigned locOptTypeMPathTable;
+    // offset from beginning of disk to rootDR (to read it later)
+    off_t rootDROffset;
     RootDR rootDR;
     char volSetId[129];
     char publId[129];

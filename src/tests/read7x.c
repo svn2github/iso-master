@@ -1,26 +1,26 @@
 #include <unistd.h>
 
-int read711(int file, unsigned char* value)
+int read711(int image, unsigned char* value)
 {
-    return read(file, value, 1);
+    return read(image, value, 1);
 }
 
-int read712(int file, signed char* value)
+int read712(int image, signed char* value)
 {
-    return read(file, value, 1);
+    return read(image, value, 1);
 }
 
-int read721(int file, unsigned short* value)
+int read721(int image, unsigned short* value)
 {
-    return read(file, value, 2);
+    return read(image, value, 2);
 }
 
-int read722(int file, unsigned short* value)
+int read722(int image, unsigned short* value)
 {
     int rc;
     char byte;
     
-    rc = read(file, value, 2);
+    rc = read(image, value, 2);
     if(rc != 2)
         return rc;
     
@@ -31,31 +31,35 @@ int read722(int file, unsigned short* value)
     return rc;
 }
 
-int read723(int file, unsigned short* value)
+int read723(int image, unsigned short* value)
 {
     int rc;
     short trash;
     
-    rc = read(file, value, 2);
+    rc = read(image, value, 2);
     if(rc != 2)
         return rc;
     
-    return read(file, &trash, 2);
+    rc = read(image, &trash, 2);
+    if(rc != 2)
+        return rc;
+    
+    return 4;
 }
 
-int read731(int file, unsigned* value)
+int read731(int image, unsigned* value)
 {
-    return read(file, value, 4);
+    return read(image, value, 4);
 }
 
-int read732(int file, unsigned* value)
+int read732(int image, unsigned* value)
 {
     int rc;
     char byte2;
     char byte3;
     char byte4;
     
-    rc = read(file, value, 4);
+    rc = read(image, value, 4);
     if(rc != 4)
         return rc;
     
@@ -73,14 +77,18 @@ int read732(int file, unsigned* value)
     return rc;
 }
 
-int read733(int file, unsigned* value)
+int read733(int image, unsigned* value)
 {
     int rc;
     int trash;
     
-    rc = read(file, value, 4);
+    rc = read(image, value, 4);
     if(rc != 4)
         return rc;
     
-    return read(file, &trash, 4);
+    rc = read(image, &trash, 4);
+    if(rc != 4)
+        return rc;
+    
+    return 8;
 }

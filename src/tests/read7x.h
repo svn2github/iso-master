@@ -15,11 +15,11 @@
 * !! these functions are not platform independent
 * */
 
-int read711(int file, unsigned char* value);
-int read712(int file, signed char* value);
-int read721(int file, unsigned short* value);
-int read722(int file, unsigned short* value);
-int read723(int file, unsigned short* value);
-int read731(int file, unsigned* value);
-int read732(int file, unsigned* value);
-int read733(int file, unsigned* value);
+int read711(int image, unsigned char* value);
+int read712(int image, signed char* value);
+int read721(int image, unsigned short* value);
+int read722(int image, unsigned short* value);
+int read723(int image, unsigned short* value);
+int read731(int image, unsigned* value);
+int read732(int image, unsigned* value);
+int read733(int image, unsigned* value);

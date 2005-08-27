@@ -22,7 +22,7 @@ int readDR(int file, RootDR* dr)
     count += 1;
     
     rc = read733(file, &(dr->locExtent));
-    if(rc != 4)
+    if(rc != 8)
         return -1;
     count += 8;
     
@@ -31,7 +31,7 @@ int readDR(int file, RootDR* dr)
     #endif
     
     rc = read733(file, &(dr->dataLength));
-    if(rc != 4)
+    if(rc != 8)
         return -1;
     count += 8;
     
@@ -88,7 +88,7 @@ int readDR(int file, RootDR* dr)
     count += 1;
     
     rc = read723(file, &(dr->volSeqNum));
-    if(rc != 2)
+    if(rc != 4)
         return -1;
     count += 4;
     
@@ -186,30 +186,30 @@ int readVD(int file, Vd* vd)
     lseek(file, 8, SEEK_CUR);
     
     rc = read733(file, &(vd->volSpaceSize));
-    if(rc != 4)
+    if(rc != 8)
         return -1;
-
+    
     rc = read(file, vd->escapeSequences, 32);
     if(rc != 32)
         return -1;
 
     
     rc = read723(file, &(vd->volSetSize));
-    if(rc != 2)
+    if(rc != 4)
         return -1;
     
     rc = read723(file, &(vd->volSeqNum));
-    if(rc != 2)
+    if(rc != 4)
         return -1;
     
     rc = read723(file, &(vd->lbSize));
-    if(rc != 2)
+    if(rc != 4)
         return -1;
     if(vd->lbSize != NBYTES_LOGICAL_SECTOR)
         return -2;
     
     rc = read733(file, &(vd->pathTableSize));
-    if(rc != 4)
+    if(rc != 8)
         return -1;
     
     rc = read731(file, &(vd->locTypeLPathTable));
@@ -228,6 +228,7 @@ int readVD(int file, Vd* vd)
     if(rc != 4)
         return -1;
     
+    vd->rootDROffset = lseek(file, 0, SEEK_CUR);
     rc = readDR(file, &(vd->rootDR));
     if(rc != 34)
         return -1;
@@ -465,7 +466,7 @@ int readVDSet(int file, VdSet* vdset)
     
     rc = readVD(file, &(vdset->pvd));
     if(rc <= 0)
-        return -1;
+        return rc;
     bytesRead += rc;
     /* END READ PVD */
     

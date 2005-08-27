@@ -4,7 +4,7 @@
 #include <stdbool.h>
 
 #define NLS_SYSTEM_AREA 16
-#define NBYTES_LOGICAL_SECTOR 2048
+#define NBYTES_LOGICAL_BLOCK 2048
 
 #define FNTYPE_9660 0
 #define FNTYPE_ROCKRIDGE 1
@@ -42,7 +42,6 @@ typedef struct
     
 } PxInfo;
 
-
 typedef struct
 {
     char name[NCHARS_FILE_ID_MAX];
@@ -52,14 +51,12 @@ typedef struct
     
 } Dir;
 
-
 typedef struct DirLL
 {
     Dir dir;
     struct DirLL* next;
     
 } DirLL;
-
 
 typedef struct
 {
@@ -72,7 +69,6 @@ typedef struct
     
 } File;
 
-
 typedef struct FileLL
 {
     File file;
@@ -80,6 +76,13 @@ typedef struct FileLL
     
 } FileLL;
 
-int readDir(int image, Dir* dir, int filenameType);
+bool haveNextRecordInSector(int image);
+void oops(char* msg);
+int readDir(int image, Dir* dir, int filenameType, bool readPosix);
+int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readPosix);
+int readFileInfo(int image, File* file, int filenameType, bool readPosix);
+unsigned char readNextRecordLen(int image);
+void removeCrapFromFilename(char* src, char* dest, int length);
+int skipDR(int image);
 
 #endif
