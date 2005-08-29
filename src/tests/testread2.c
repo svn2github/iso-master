@@ -69,6 +69,7 @@ int main(int argc, char** argv)
     
     printf("readDir ended with %d\n", rc);
     
+    showDir(&tree, 0);
     
     close(image);
     
@@ -305,21 +306,22 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
 
 /*
 * size is number of bytes
+* hope you love pointers
 */
 int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readPosix)
 {
     int rc;
     int bytesRead = 0;
     int childrenBytesRead;
-    DirLL* nextDir;
-    FileLL* nextFile;
+    DirLL** nextDir; /* pointer to pointer to modify pointer :) */
+    FileLL** nextFile;
     
     /* skip self and parent */
     bytesRead += skipDR(image);
     bytesRead += skipDR(image);
     
-    nextDir = dir->directories;
-    nextFile = dir->files;
+    nextDir = &(dir->directories);
+    nextFile = &(dir->files);
     childrenBytesRead = 0;
     while(childrenBytesRead + bytesRead < size)
     {
@@ -331,36 +333,36 @@ int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readP
             {
                 int recordLength;
                 
-                nextDir = malloc(sizeof(DirLL));
-                if(nextDir == NULL)
+                *nextDir = malloc(sizeof(DirLL));
+                if(*nextDir == NULL)
                     return -2;
                 
-                recordLength = readDir(image, &(nextDir->dir), filenameType, readPosix);
+                recordLength = readDir(image, &((*nextDir)->dir), filenameType, readPosix);
                 if(recordLength < 0)
                     return recordLength;
                 
                 childrenBytesRead += recordLength;
                 
-                nextDir = nextDir->next;
-                nextDir = NULL;
+                nextDir = &((*nextDir)->next);
+                *nextDir = NULL;
             }
             else
             /* file descriptor record */
             {
                 int recordLength;
 
-                nextFile = malloc(sizeof(FileLL));
-                if(nextFile == NULL)
+                *nextFile = malloc(sizeof(FileLL));
+                if(*nextFile == NULL)
                     return -2;
                 
-                recordLength = readFileInfo(image, &(nextFile->file), filenameType, readPosix);
+                recordLength = readFileInfo(image, &((*nextFile)->file), filenameType, readPosix);
                 if(recordLength < 0)
                     return recordLength;
                 
                 childrenBytesRead += recordLength;
                 
-                nextFile = nextFile->next;
-                nextFile = NULL;
+                nextFile = &((*nextFile)->next);
+                *nextFile = NULL;
             }
         }
         else
@@ -389,7 +391,7 @@ int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readP
             } while (childrenBytesRead + bytesRead < size);
         }
     }
-
+    
     return bytesRead;
 }
 
@@ -640,4 +642,35 @@ int skipDR(int image)
     lseek(image, dRLen - 1, SEEK_CUR);
     
     return dRLen;
+}
+
+void showDir(Dir* dir, int level)
+{
+    DirLL* dirNode;
+    FileLL* fileNode;
+    int count;
+    
+    dirNode = dir->directories;
+    
+    while(dirNode != NULL)
+    {
+        for(count = 0; count < level; count++)
+            printf("  ");
+        printf("%s\n", dirNode->dir.name);
+        
+        showDir(&(dirNode->dir), level + 1);
+        
+        dirNode = dirNode->next;
+    }
+    
+    fileNode = dir->files;
+    
+    while(fileNode != NULL)
+    {
+        for(count = 0; count < level; count++)
+            printf("  ");
+        printf("%s - %d bytes @%08X\n", fileNode->file.name, fileNode->file.size, fileNode->file.position);
+        fileNode = fileNode->next;
+    }
+
 }

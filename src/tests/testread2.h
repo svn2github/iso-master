@@ -86,5 +86,6 @@ int readPosixInfo(int image, unsigned* posixFileMode, int lenSU);
 int readRockridgeFilename(int image, char* dest, int lenSU);
 void removeCrapFromFilename(char* src, char* dest, int length);
 int skipDR(int image);
+void showDir(Dir* dir, int level);
 
 #endif
