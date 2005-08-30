@@ -80,6 +80,7 @@ typedef struct
 
 bool deleteFile(Dir* tree, FilePath* pathAndName);
 bool dirDrFollows(int image);
+int extractFile(int image, Dir* tree, FilePath* pathAndName, int file);
 bool haveNextRecordInSector(int image);
 void oops(char* msg);
 int readDir(int image, Dir* dir, int filenameType, bool readPosix);

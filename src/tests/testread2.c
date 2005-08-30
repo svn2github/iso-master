@@ -3,6 +3,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include "testread2.h"
 #include "read7x.h"
@@ -21,10 +22,10 @@ int main(int argc, char** argv)
     
     Dir tree;
     FilePath somePath;
+    int someFile;
     
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
-    printf("%s\n", argv[1]);
     if(image == -1)
         oops("unable to open image\n");
     
@@ -74,14 +75,28 @@ int main(int argc, char** argv)
     strcpy(somePath.dirPath.dirs[0], "isolinux");
     somePath.dirPath.dirs[1] = malloc(strlen("sbootmgr") + 1);
     strcpy(somePath.dirPath.dirs[1], "sbootmgr");
-    strcpy(somePath.filename, "sbootmgr.ds");
+    strcpy(somePath.filename, "README.TXT");
     
-    deleteFile(&tree, &somePath);
+    //deleteFile(&tree, &somePath);
     
-    printf("\n--------------------\n\n");
-    showDir(&tree, 0);
+    //printf("\n--------------------\n\n");
+    //showDir(&tree, 0);
+    
+    //~ someFile = open(somePath.filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
+    //~ if(someFile == -1)
+      //~ oops("faled to open file for writing");
+    
+    //~ rc = extractFile(image, &tree, &somePath, someFile);
+    //~ if(rc <= 0)
+        //~ oops("problem extracting file");
+    
+    //~ close(someFile);
+    //~ if(someFile == -1)
+      //~ oops("faled to close someFile");
     
     close(image);
+    if(someFile == -1)
+      oops("faled to close image");
     
     return 0;
 }
@@ -166,6 +181,80 @@ bool dirDrFollows(int image)
         return true;
     else
         return false;
+}
+
+int extractFile(int image, Dir* tree, FilePath* pathAndName, int file)
+{
+    Dir* parentDir;
+    DirLL* searchDir;
+    bool dirFound;
+    FileLL* pointerToIt; /* pointer to the file to read */
+    bool fileFound;
+    int count;
+    off_t origPos;
+    int rc;
+    char byte;
+    
+    parentDir = tree;
+    for(count = 0; count < pathAndName->dirPath.numDirs; count++)
+    /* each directory in the path */
+    {
+        searchDir = parentDir->directories;
+        dirFound = false;
+        while(searchDir != NULL && !dirFound)
+        /* find the directory */
+        {
+            if(strcmp(searchDir->dir.name, pathAndName->dirPath.dirs[count]) == 0)
+            {
+                dirFound = true;
+                parentDir = &(searchDir->dir);
+            }
+            else
+                searchDir = searchDir->next;
+        }
+        if(!dirFound)
+            oops("extractFile(): directory not found in tree");
+    }
+    
+    /* now i have parentDir pointing to the parent directory */
+    
+    pointerToIt = parentDir->files;
+    fileFound = false;
+    while(pointerToIt != NULL && !fileFound)
+    {
+        if(strcmp(pointerToIt->file.name, pathAndName->filename) == 0)
+        {
+            if(!pointerToIt->file.onImage)
+                return -1;
+            
+            fileFound = true;
+            
+            origPos = lseek(image, 0, SEEK_CUR);
+            
+            lseek(image, pointerToIt->file.position, SEEK_SET);
+            
+            for(count = 0; count < pointerToIt->file.size; count++)
+            {
+                rc = read(image, &byte, 1);
+                if(rc != 1)
+                    return -2;
+                    
+                rc = write(file, &byte, 1);
+                if(rc != 1)
+                    return -3;
+            }
+            
+            lseek(image, origPos, SEEK_SET);
+        }
+        else
+        {
+            pointerToIt = pointerToIt->next;
+        }
+    }
+    if(!fileFound)
+        oops("extractFile(): file not found in tree");
+    
+    return pointerToIt->file.size;
 }
 
 /* if the next byte is zero returns false otherwise true
