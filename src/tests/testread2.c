@@ -20,6 +20,7 @@ int main(int argc, char** argv)
     int rc;
     
     Dir tree;
+    FilePath somePath;
     
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
@@ -59,21 +60,87 @@ int main(int argc, char** argv)
     //printf("joliet type: %d\n", svdGetJolietType(&(vdset.svd)));
     printf("joliet root extent at: %d\n", vdset.svd.rootDR.locExtent);
     
-    
     lseek(image, vdset.pvd.rootDROffset, SEEK_SET);
-    
     tree.directories = NULL;
     tree.files = NULL;
-    
     rc = readDir(image, &tree, FNTYPE_ROCKRIDGE, true);
-    
     printf("readDir ended with %d\n", rc);
     
+    //showDir(&tree, 0);
+    
+    somePath.dirPath.dirs = malloc(sizeof(char*) * 2);
+    somePath.dirPath.dirs[0] = malloc(strlen("isolinux") + 1);
+    strcpy(somePath.dirPath.dirs[0], "isolinux");
+    somePath.dirPath.dirs[1] = malloc(strlen("sbootmgr") + 1);
+    strcpy(somePath.dirPath.dirs[1], "sbootmgr");
+    somePath.dirPath.numDirs = 2;
+    strcpy(somePath.filename, "sbootmgr.dsk");
+    
+    deleteFile(&tree, &somePath);
+    
+    printf("\n--------------------\n\n");
     showDir(&tree, 0);
     
     close(image);
     
     return 0;
+}
+
+bool deleteFile(Dir* tree, FilePath* pathAndName)
+{
+    Dir* parentDir;
+    DirLL* searchDir;
+    bool dirFound;
+    FileLL** pointerToIt; /* pointer to pointer to the file to delete */
+    FileLL* pointerToNext; /* to assign to the pointer pointed to by the pointer above
+                           * no i'm not kidding */
+    bool fileFound;
+    int count;
+    
+    parentDir = tree;
+    for(count = 0; count < pathAndName->dirPath.numDirs; count++)
+    /* each directory in the path */
+    {
+        searchDir = parentDir->directories;
+        dirFound = false;
+        while(searchDir != NULL && !dirFound)
+        /* find the directory */
+        {
+            if(strcmp(searchDir->dir.name, pathAndName->dirPath.dirs[count]) == 0)
+            {
+                dirFound = true;
+                parentDir = &(searchDir->dir);
+                printf("current dir is %s\n", pathAndName->dirPath.dirs[count]);
+            }
+            else
+                searchDir = searchDir->next;
+        }
+    }
+    
+    /* now i should have parentDir pointing to the parent directory */
+    
+    pointerToIt = &(parentDir->files);
+    fileFound = false;
+    while(*pointerToIt != NULL && !fileFound)
+    {
+        if(strcmp((*pointerToIt)->file.name, pathAndName->filename) == 0)
+        /* delete the node */
+        {
+            pointerToNext = (*pointerToIt)->next;
+            
+            free(*pointerToIt);
+            
+            *pointerToIt = pointerToNext;
+            
+            fileFound = true;
+        }
+        else
+        {
+            pointerToIt = &((*pointerToIt)->next);
+        }
+    }
+    
+    return 1;
 }
 
 bool dirDrFollows(int image)
@@ -350,7 +417,7 @@ int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readP
             /* file descriptor record */
             {
                 int recordLength;
-
+                
                 *nextFile = malloc(sizeof(FileLL));
                 if(*nextFile == NULL)
                     return -2;
@@ -506,23 +573,23 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
     return recordLength;
 }
 
-unsigned char readNextRecordLen(int image)
-{
-    unsigned char rc;
-    unsigned char length;
-    off_t origPos;
+//~ unsigned char readNextRecordLen(int image)
+//~ {
+    //~ unsigned char rc;
+    //~ unsigned char length;
+    //~ off_t origPos;
     
-    origPos = lseek(image, 0, SEEK_CUR);
+    //~ origPos = lseek(image, 0, SEEK_CUR);
     
-    rc = read711(image, &length);
-    if(rc != 1)
-    // !! i don't like this int->char cast
-        return rc;
+    //~ rc = read711(image, &length);
+    //~ if(rc != 1)
+    //~ // !! i don't like this int->char cast
+        //~ return rc;
     
-    lseek(image, origPos, SEEK_SET);
+    //~ lseek(image, origPos, SEEK_SET);
     
-    return length;
-}
+    //~ return length;
+//~ }
 
 int readPosixInfo(int image, unsigned* posixFileMode, int lenSU)
 {
@@ -669,7 +736,11 @@ void showDir(Dir* dir, int level)
     {
         for(count = 0; count < level; count++)
             printf("  ");
-        printf("%s - %d bytes @%08X\n", fileNode->file.name, fileNode->file.size, fileNode->file.position);
+        printf("%s - %d bytes - %o - ", fileNode->file.name, fileNode->file.size, fileNode->file.posixFileMode);
+        if(fileNode->file.onImage)
+            printf("on image @%08X\n", fileNode->file.position);
+        else
+            printf("on disk: \'%s\'\n", fileNode->file.pathAndName);
         fileNode = fileNode->next;
     }
 

@@ -30,18 +30,6 @@
 #define NCHARS_FILE_ID_MAX 65
 #define NCHARS_FILE_ID_FS_MAX 256
 
-/* all contents of this are defined in posix 5.6.1
-* now where could i get a copy of that.. */
-//~ typedef struct
-//~ {
-    //~ unsigned fileMode;
-    //~ unsigned numLinks;
-    //~ unsigned uid;
-    //~ unsigned gid;
-    //~ unsigned serialNum; // ?? was this removed from the final standard ??
-    
-//~ } PxInfo;
-
 typedef struct
 {
     char name[NCHARS_FILE_ID_MAX];
@@ -76,6 +64,22 @@ typedef struct FileLL
     
 } FileLL;
 
+typedef struct
+{
+    unsigned numDirs;
+    char** dirs;
+    
+} DirPath;
+
+typedef struct
+{
+    DirPath dirPath;
+    char filename[256];
+    
+} FilePath;
+
+bool deleteFile(Dir* tree, FilePath* pathAndName);
+bool dirDrFollows(int image);
 bool haveNextRecordInSector(int image);
 void oops(char* msg);
 int readDir(int image, Dir* dir, int filenameType, bool readPosix);
