@@ -68,13 +68,13 @@ int main(int argc, char** argv)
     
     //showDir(&tree, 0);
     
-    somePath.dirPath.dirs = malloc(sizeof(char*) * 2);
+    somePath.dirPath.numDirs = 2;
+    somePath.dirPath.dirs = malloc(sizeof(char*) * somePath.dirPath.numDirs);
     somePath.dirPath.dirs[0] = malloc(strlen("isolinux") + 1);
     strcpy(somePath.dirPath.dirs[0], "isolinux");
     somePath.dirPath.dirs[1] = malloc(strlen("sbootmgr") + 1);
     strcpy(somePath.dirPath.dirs[1], "sbootmgr");
-    somePath.dirPath.numDirs = 2;
-    strcpy(somePath.filename, "sbootmgr.dsk");
+    strcpy(somePath.filename, "sbootmgr.ds");
     
     deleteFile(&tree, &somePath);
     
@@ -110,14 +110,15 @@ bool deleteFile(Dir* tree, FilePath* pathAndName)
             {
                 dirFound = true;
                 parentDir = &(searchDir->dir);
-                printf("current dir is %s\n", pathAndName->dirPath.dirs[count]);
             }
             else
                 searchDir = searchDir->next;
         }
+        if(!dirFound)
+            oops("deleteFile(): directory not found in tree");
     }
     
-    /* now i should have parentDir pointing to the parent directory */
+    /* now i have parentDir pointing to the parent directory */
     
     pointerToIt = &(parentDir->files);
     fileFound = false;
@@ -139,6 +140,8 @@ bool deleteFile(Dir* tree, FilePath* pathAndName)
             pointerToIt = &((*pointerToIt)->next);
         }
     }
+    if(!fileFound)
+        oops("deleteFile(): file not found in tree");
     
     return 1;
 }
