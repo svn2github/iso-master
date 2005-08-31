@@ -63,7 +63,7 @@ BEGIN root directory record
 0000 80B8 - 0000 80BB - 0x0001 d1 - volume sequence number
 0000 80BC - 0000 80BC - 0x01 d1 - length of file identifier - 7.1.1
 0000 80BD - 0000 80BD - 0x00 - file identifier - root/itself id
-??system use LEN_SU. not for root??
+this one doesn't have su fields (nor should it)
 END root directory record (34 bytes)
 0000 80BE - 0000 813D - spaces - volume set identifier - 'd' characters
 0000 813E - 0000 81BD - 'Slackware Linux, Inc. <info@slackware.com>                                                                                     '

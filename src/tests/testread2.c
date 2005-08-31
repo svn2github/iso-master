@@ -23,6 +23,7 @@ int main(int argc, char** argv)
     Dir tree;
     FilePath filePath;
     Path destDir;
+    Path srcDir;
     //int someFile;
     
     /* open image file for reading */
@@ -85,13 +86,22 @@ int main(int argc, char** argv)
     destDir.dirs[1] = malloc(strlen("andrew" + 1));
     strcpy(destDir.dirs[1], "andrew");
     
+    srcDir.numDirs = 1;
+    srcDir.dirs = malloc(sizeof(char*) * srcDir.numDirs);
+    srcDir.dirs[0] = malloc(strlen("isolinux" + 1));
+    strcpy(destDir.dirs[0], "isolinux");
+    
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
     //showDir(&tree, 0);
     
-    rc = extractFile(image, &tree, &filePath, &destDir, true);
+    //rc = extractFile(image, &tree, &filePath, &destDir, true);
+    //if(rc <= 0)
+    //  oops("problem extracting file");
+    
+    rc = extractDir(image, &tree, &srcDir, &destDir, false);
     if(rc <= 0)
-        oops("problem extracting file");
+      oops("problem extracting dir");
     
     close(image);
     if(image == -1)
@@ -180,6 +190,16 @@ bool dirDrFollows(int image)
         return true;
     else
         return false;
+}
+
+int extractDir(int image, Dir* tree, Path* srcDir, Path* destDir,
+                                                        bool keepPermissions)
+{
+    // create dir on fs
+    // extractFile() each file
+    // extractDir() eaxh dir
+    
+    return 1;
 }
 
 int extractFile(int image, Dir* tree, FilePath* pathAndName, Path* destDir,

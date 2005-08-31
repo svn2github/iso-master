@@ -80,6 +80,8 @@ typedef struct
 
 bool deleteFile(Dir* tree, FilePath* pathAndName);
 bool dirDrFollows(int image);
+int extractDir(int image, Dir* tree, Path* srcDir, Path* destDir,
+                                                        bool keepPermissions);
 int extractFile(int image, Dir* tree, FilePath* pathAndName, Path* destDir,
                                                         bool keepPermissions);
 bool haveNextRecordInSector(int image);
