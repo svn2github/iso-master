@@ -21,8 +21,9 @@ int main(int argc, char** argv)
     int rc;
     
     Dir tree;
-    FilePath somePath;
-    int someFile;
+    FilePath filePath;
+    Path destDir;
+    //int someFile;
     
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
@@ -69,33 +70,31 @@ int main(int argc, char** argv)
     
     //showDir(&tree, 0);
     
-    somePath.dirPath.numDirs = 2;
-    somePath.dirPath.dirs = malloc(sizeof(char*) * somePath.dirPath.numDirs);
-    somePath.dirPath.dirs[0] = malloc(strlen("isolinux") + 1);
-    strcpy(somePath.dirPath.dirs[0], "isolinux");
-    somePath.dirPath.dirs[1] = malloc(strlen("sbootmgr") + 1);
-    strcpy(somePath.dirPath.dirs[1], "sbootmgr");
-    strcpy(somePath.filename, "README.TXT");
+    filePath.path.numDirs = 2;
+    filePath.path.dirs = malloc(sizeof(char*) * filePath.path.numDirs);
+    filePath.path.dirs[0] = malloc(strlen("isolinux") + 1);
+    strcpy(filePath.path.dirs[0], "isolinux");
+    filePath.path.dirs[1] = malloc(strlen("sbootmgr") + 1);
+    strcpy(filePath.path.dirs[1], "sbootmgr");
+    strcpy(filePath.filename, "README.TXT");
     
-    //deleteFile(&tree, &somePath);
+    destDir.numDirs = 2;
+    destDir.dirs = malloc(sizeof(char*) * destDir.numDirs);
+    destDir.dirs[0] = malloc(strlen("home" + 1));
+    strcpy(destDir.dirs[0], "home");
+    destDir.dirs[1] = malloc(strlen("andrew" + 1));
+    strcpy(destDir.dirs[1], "andrew");
     
+    //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
     //showDir(&tree, 0);
     
-    //~ someFile = open(somePath.filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRWXU);
-    //~ if(someFile == -1)
-      //~ oops("faled to open file for writing");
-    
-    //~ rc = extractFile(image, &tree, &somePath, someFile);
-    //~ if(rc <= 0)
-        //~ oops("problem extracting file");
-    
-    //~ close(someFile);
-    //~ if(someFile == -1)
-      //~ oops("faled to close someFile");
+    rc = extractFile(image, &tree, &filePath, &destDir, true);
+    if(rc <= 0)
+        oops("problem extracting file");
     
     close(image);
-    if(someFile == -1)
+    if(image == -1)
       oops("faled to close image");
     
     return 0;
@@ -113,7 +112,7 @@ bool deleteFile(Dir* tree, FilePath* pathAndName)
     int count;
     
     parentDir = tree;
-    for(count = 0; count < pathAndName->dirPath.numDirs; count++)
+    for(count = 0; count < pathAndName->path.numDirs; count++)
     /* each directory in the path */
     {
         searchDir = parentDir->directories;
@@ -121,7 +120,7 @@ bool deleteFile(Dir* tree, FilePath* pathAndName)
         while(searchDir != NULL && !dirFound)
         /* find the directory */
         {
-            if(strcmp(searchDir->dir.name, pathAndName->dirPath.dirs[count]) == 0)
+            if(strcmp(searchDir->dir.name, pathAndName->path.dirs[count]) == 0)
             {
                 dirFound = true;
                 parentDir = &(searchDir->dir);
@@ -183,20 +182,29 @@ bool dirDrFollows(int image)
         return false;
 }
 
-int extractFile(int image, Dir* tree, FilePath* pathAndName, int file)
+int extractFile(int image, Dir* tree, FilePath* pathAndName, Path* destDir,
+                                                        bool keepPermissions)
 {
+    /* vars to find file location on image */
     Dir* parentDir;
     DirLL* searchDir;
     bool dirFound;
-    FileLL* pointerToIt; /* pointer to the file to read */
+    FileLL* pointerToIt; /* pointer to the node with file to read */
     bool fileFound;
+    
+    char* destPathAndName;
+    int destPathAndNameLen;
+    int destPathAndNameFilled;
+    unsigned destFilePerms;
+    int destFile; /* returned by open() */
+    
     int count;
     off_t origPos;
     int rc;
     char byte;
     
     parentDir = tree;
-    for(count = 0; count < pathAndName->dirPath.numDirs; count++)
+    for(count = 0; count < pathAndName->path.numDirs; count++)
     /* each directory in the path */
     {
         searchDir = parentDir->directories;
@@ -204,7 +212,7 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, int file)
         while(searchDir != NULL && !dirFound)
         /* find the directory */
         {
-            if(strcmp(searchDir->dir.name, pathAndName->dirPath.dirs[count]) == 0)
+            if(strcmp(searchDir->dir.name, pathAndName->path.dirs[count]) == 0)
             {
                 dirFound = true;
                 parentDir = &(searchDir->dir);
@@ -221,13 +229,49 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, int file)
     pointerToIt = parentDir->files;
     fileFound = false;
     while(pointerToIt != NULL && !fileFound)
+    /* find the file in parentDir */
     {
         if(strcmp(pointerToIt->file.name, pathAndName->filename) == 0)
+        /* this is the file */
         {
             if(!pointerToIt->file.onImage)
                 return -1;
             
             fileFound = true;
+            
+            /* MAKE a string with path and filename */
+            destPathAndNameLen = 0;
+            for(count = 0; count < destDir->numDirs; count++)
+                destPathAndNameLen += strlen(destDir->dirs[count]) + 1; /* 1 for slash before */
+            destPathAndNameLen += 1; /* 1 for slash after */
+            destPathAndNameLen += strlen(pathAndName->filename);
+            destPathAndNameLen += 1; /* '\0' */
+            
+            destPathAndName = malloc(destPathAndNameLen);
+            if(destPathAndName == NULL)
+                return -2;
+            
+            destPathAndNameFilled = 0;
+            for(count = 0; count < destDir->numDirs; count++)
+            {
+                (destPathAndName + destPathAndNameFilled)[0] = '/';
+                strcpy(destPathAndName + destPathAndNameFilled + 1, destDir->dirs[count]);
+                destPathAndNameFilled += strlen(destDir->dirs[count]) + 1;
+            }
+            strcpy(destPathAndName + destPathAndNameFilled, "/");
+            strcpy(destPathAndName + destPathAndNameFilled + 1, pathAndName->filename);
+            /* END MAKE a string with path and filename */
+            
+            /* WRITE file */
+            if(keepPermissions)
+                destFilePerms = pointerToIt->file.posixFileMode;
+            else
+                destFilePerms = posixFileDefaults;
+            
+            destFile = open(destPathAndName, O_WRONLY | O_CREAT | O_TRUNC, destFilePerms);
+            if(destFile == -1)
+              return -3;
+            free(destPathAndName);
             
             origPos = lseek(image, 0, SEEK_CUR);
             
@@ -239,12 +283,19 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, int file)
                 if(rc != 1)
                     return -2;
                     
-                rc = write(file, &byte, 1);
+                rc = write(destFile, &byte, 1);
                 if(rc != 1)
                     return -3;
             }
             
             lseek(image, origPos, SEEK_SET);
+            
+            close(destFile);
+            if(destFile == -1)
+              return -4;
+            /* END WRITE file */
+            
+            
         }
         else
         {

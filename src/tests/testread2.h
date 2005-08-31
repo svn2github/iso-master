@@ -69,18 +69,19 @@ typedef struct
     unsigned numDirs;
     char** dirs;
     
-} DirPath;
+} Path;
 
 typedef struct
 {
-    DirPath dirPath;
+    Path path;
     char filename[256];
     
 } FilePath;
 
 bool deleteFile(Dir* tree, FilePath* pathAndName);
 bool dirDrFollows(int image);
-int extractFile(int image, Dir* tree, FilePath* pathAndName, int file);
+int extractFile(int image, Dir* tree, FilePath* pathAndName, Path* destDir,
+                                                        bool keepPermissions);
 bool haveNextRecordInSector(int image);
 void oops(char* msg);
 int readDir(int image, Dir* dir, int filenameType, bool readPosix);
