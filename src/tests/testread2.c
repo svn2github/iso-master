@@ -12,7 +12,7 @@
 //~ const PxInfo posixFileDefaults = {0, 0, 0, 0, 0};
 //~ const PxInfo posixDirDefaults = {0, 0, 0, 0, 0};
 const unsigned posixFileDefaults = 33188; /* octal 100644 */
-const unsigned posixDirDefaults = 16841; /* octal 40711 */
+const unsigned posixDirDefaults = 16877; /* octal 40711 */
 
 int main(int argc, char** argv)
 {
@@ -94,7 +94,7 @@ int main(int argc, char** argv)
     //if(rc <= 0)
     //  oops("problem extracting file");
     
-    rc = extractDir(image, &tree, &srcDir, dest, false);
+    rc = extractDir(image, &tree, &srcDir, dest, true);
     if(rc <= 0)
       oops("problem extracting dir");
     
@@ -187,45 +187,115 @@ bool dirDrFollows(int image)
         return false;
 }
 
+/*
+* don't try to extract root, don't know what will happen
+*/
 int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
                                                         bool keepPermissions)
 {
     int rc;
     int count;
     
+    /* vars to find file location on image */
+    Dir* srcDirInTree;
+    DirLL* searchDir; /* to find a dir in the tree */
+    bool dirFound;
+    
     /* vars to create destination dir */
-    char* destPath;
+    char* newDestDir;
     unsigned destDirPerms;
     
-    FilePath* filePath;
+    /* vars to extract files */
+    FilePath filePath;
+    FileLL* currentFile;
+    
+    /* vars to extract subdirectories */
+    DirLL* currentDir;
     Path* newSrcDir;
     
-    /* CREATE destination dir */
-    destPath = malloc(strlen(destDir) + strlen( (srcDir->dirs)[srcDir->numDirs - 1] ) + 1);
-    if(destPath == NULL)
-        return -2;
-    strcpy(destPath, destDir);
-    strcat(destPath, (srcDir->dirs)[srcDir->numDirs - 1]);
+    /* FIND parent dir to know what the contents are */
+    srcDirInTree = tree;
+    for(count = 0; count < srcDir->numDirs; count++)
+    /* each directory in the path */
+    {
+        searchDir = srcDirInTree->directories;
+        dirFound = false;
+        while(searchDir != NULL && !dirFound)
+        /* find the directory */
+        {
+            if(strcmp(searchDir->dir.name, srcDir->dirs[count]) == 0)
+            {
+                dirFound = true;
+                srcDirInTree = &(searchDir->dir);
+            }
+            else
+                searchDir = searchDir->next;
+        }
+        if(!dirFound)
+            oops("extractDir(): directory not found in tree");
+    }
+    /* END FIND parent dir to know what the contents are */
     
-    destDirPerms = posixDirDefaults;
-    rc = mkdir(destPath, destDirPerms);
+    /* CREATE destination dir */
+    /* 1 for '/', 1 for '\0' */
+    newDestDir = malloc(strlen(destDir) + strlen( (srcDir->dirs)[srcDir->numDirs - 1] ) + 2);
+    if(newDestDir == NULL)
+        return -2;
+    strcpy(newDestDir, destDir);
+    strcat(newDestDir, (srcDir->dirs)[srcDir->numDirs - 1]);
+    strcat(newDestDir, "/");
+    
+    if(keepPermissions)
+        destDirPerms = srcDirInTree->posixFileMode;
+    else
+        destDirPerms = posixDirDefaults;
+    rc = mkdir(newDestDir, destDirPerms);
     if(rc == -1)
         return -1;
     /* END CREATE destination dir */
     
-    // extractFile each
+    /* BEGIN extract each file in directory */
+    filePath.path = *srcDir; /* filePath is readonly so pointer sharing is ok here */
+    currentFile = srcDirInTree->files;
+    while(currentFile != NULL)
+    {
+        strcpy(filePath.filename, currentFile->file.name);
+        printf("extracting %s into %s... ", filePath.filename, newDestDir);fflush(stdout);
+        rc = extractFile(image, tree, &filePath, newDestDir, keepPermissions);
+        if(rc < 0) /* returns size of file extracted */
+            return rc;
+        printf("done\n");
+        currentFile = currentFile->next;
+    }
+    /* END extract each file in directory */
     
-    // new srcDir
-      // extractDir each
+    /* BEGIN extract each subdirectory */
+    currentDir = srcDirInTree->directories;
+    while(currentDir != NULL)
+    {
+        rc = makeLongerPath(srcDir, currentDir->dir.name, &newSrcDir);
+        if(rc <= 0)
+            return rc;
+        
+        rc = extractDir(image, tree, newSrcDir, newDestDir, keepPermissions);
+        if(rc <= 0)
+            return rc;
+        
+        freePath(newSrcDir);
+        
+        currentDir = currentDir->next;
+    }
+    /* END extract each subdirectory */
     
-    
-    free(destPath);
+    free(newDestDir);
     
     return 1;
 }
 
 /*
-* destDir with trailing slash
+* destDir must have trailing slash
+* read/write loop is waaay to slow when doing 1 byte at a time so changed it to
+*  do 1024 instead
 */
 int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
                                                         bool keepPermissions)
@@ -242,10 +312,12 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
     unsigned destFilePerms;
     int destFile; /* returned by open() */
     
+    char block[102400]; /* 100K */
+    int numBlocks;
+    int sizeLastBlock;
+    
     int count;
-    off_t origPos;
     int rc;
-    char byte;
     
     parentDir = tree;
     for(count = 0; count < pathAndName->path.numDirs; count++)
@@ -300,22 +372,27 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
               return -3;
             free(destPathAndName);
             
-            origPos = lseek(image, 0, SEEK_CUR);
-            
             lseek(image, pointerToIt->file.position, SEEK_SET);
             
-            for(count = 0; count < pointerToIt->file.size; count++)
+            numBlocks = pointerToIt->file.size / 102400;
+            sizeLastBlock = pointerToIt->file.size % 102400;
+            
+            for(count = 0; count < numBlocks; count++)
             {
-                rc = read(image, &byte, 1);
-                if(rc != 1)
+                rc = read(image, block, 102400);
+                if(rc != 102400)
                     return -3;
-                    
-                rc = write(destFile, &byte, 1);
-                if(rc != 1)
+                rc = write(destFile, block, 102400);
+                if(rc != 102400)
                     return -4;
             }
             
-            lseek(image, origPos, SEEK_SET);
+            rc = read(image, block, sizeLastBlock);
+            if(rc != sizeLastBlock)
+                    return -3;
+            rc = write(destFile, block, sizeLastBlock);
+            if(rc != sizeLastBlock)
+                    return -4;
             
             close(destFile);
             if(destFile == -1)
@@ -331,6 +408,16 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
         oops("extractFile(): file not found in tree");
     
     return pointerToIt->file.size;
+}
+
+void freePath(Path* path)
+{
+    int count;
+    
+    for(count = 0; count < path->numDirs; count++)
+        free(path->dirs[count]);
+    free(path->dirs);
+    free(path);
 }
 
 /* if the next byte is zero returns false otherwise true
@@ -353,34 +440,34 @@ bool haveNextRecordInSector(int image)
     return (testByte == 0) ? false : true;
 }
 
-int makeLongerPath(Path* origPath, char* newDir, Path* newPath)
+int makeLongerPath(Path* origPath, char* newDir, Path** newPath)
 {
     int count;
     
-    newPath  = malloc(sizeof(Path));
-    if(newPath == NULL)
+    *newPath  = malloc(sizeof(Path));
+    if(*newPath == NULL)
         return -1;
     
-    newPath->numDirs = origPath->numDirs + 1;
+    (*newPath)->numDirs = origPath->numDirs + 1;
     
-    newPath->dirs = malloc(sizeof(char*) * newPath->numDirs);
-    if(newPath->dirs == NULL)
+    (*newPath)->dirs = malloc(sizeof(char*) * (*newPath)->numDirs);
+    if((*newPath)->dirs == NULL)
         return -1;
     
     /* copy original */
     for(count = 0; count < origPath->numDirs; count++)
     {
-        (newPath->dirs)[count] = malloc(strlen((origPath->dirs)[count]) + 1);
-        if((newPath->dirs)[count] == 0)
+        (*newPath)->dirs[count] = malloc(strlen((origPath->dirs)[count]) + 1);
+        if((*newPath)->dirs[count] == NULL)
             return -1;
-        strcpy((newPath->dirs)[count], (origPath->dirs)[count]);
+        strcpy((*newPath)->dirs[count], (origPath->dirs)[count]);
     }
     
     /* new dir */
-    (newPath->dirs)[count] = malloc(strlen(newDir));
-    if((newPath->dirs)[count] == 0)
+    (*newPath)->dirs[count] = malloc(strlen(newDir));
+    if((*newPath)->dirs[count] == NULL)
         return -1;
-    strcpy((newPath->dirs)[count], newDir);
+    strcpy((*newPath)->dirs[count], newDir);
     
     return 1;
 }

@@ -84,8 +84,9 @@ int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
                                                         bool keepPermissions);
 int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
                                                         bool keepPermissions);
+void freePath(Path* path);
 bool haveNextRecordInSector(int image);
-int makeLongerPath(Path* origPath, char* newDir, Path* newPath);
+int makeLongerPath(Path* origPath, char* newDir, Path** newPath);
 void oops(char* msg);
 int readDir(int image, Dir* dir, int filenameType, bool readPosix);
 int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readPosix);
