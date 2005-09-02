@@ -260,11 +260,11 @@ int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
     while(currentFile != NULL)
     {
         strcpy(filePath.filename, currentFile->file.name);
-        printf("extracting %s into %s... ", filePath.filename, newDestDir);fflush(stdout);
+        
         rc = extractFile(image, tree, &filePath, newDestDir, keepPermissions);
         if(rc < 0) /* returns size of file extracted */
             return rc;
-        printf("done\n");
+        
         currentFile = currentFile->next;
     }
     /* END extract each file in directory */
@@ -295,7 +295,7 @@ int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
 /*
 * destDir must have trailing slash
 * read/write loop is waaay to slow when doing 1 byte at a time so changed it to
-*  do 1024 instead
+*  do 100K at a time instead
 */
 int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
                                                         bool keepPermissions)
