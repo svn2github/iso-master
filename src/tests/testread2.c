@@ -23,6 +23,7 @@ int main(int argc, char** argv)
     Dir tree;
     FilePath filePath;
     Path srcDir;
+    Path dirPath;
     char* dest; /* destination directory */
     
     /* open image file for reading */
@@ -78,34 +79,171 @@ int main(int argc, char** argv)
     strcpy(filePath.path.dirs[1], "sbootmgr");
     strcpy(filePath.filename, "README.TXT");
     
+    dirPath.numDirs = 1;
+    dirPath.dirs = malloc(sizeof(char*) * dirPath.numDirs);
+    dirPath.dirs[0] = malloc(strlen("kernels") + 1);
+    strcpy(dirPath.dirs[0], "kernels");
+    
     srcDir.numDirs = 1;
     srcDir.dirs = malloc(sizeof(char*) * srcDir.numDirs);
     srcDir.dirs[0] = malloc(strlen("isolinux" + 1));
     strcpy(srcDir.dirs[0], "isolinux");
     
+    dest = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
+    strcpy(dest, "/home/andrei/prog/isomaster/src/tests/");
+    
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
     //showDir(&tree, 0);
     
-    dest = malloc(strlen("/home/andrew/prog/isomaster/src/tests/") + 1);
-    strcpy(dest, "/home/andrew/prog/isomaster/src/tests/");
+    deleteDir(&tree, &dirPath);
+    printf("\n--------------------\n\n");
+    showDir(&tree, 0);
     
     //rc = extractFile(image, &tree, &filePath, dest, true);
     //if(rc <= 0)
-    //  oops("problem extracting file");
+    //    oops("problem extracting file");
     
-    rc = extractDir(image, &tree, &srcDir, dest, true);
-    if(rc <= 0)
-      oops("problem extracting dir");
+    //rc = extractDir(image, &tree, &srcDir, dest, true);
+    //if(rc <= 0)
+    //    oops("problem extracting dir");
     
     close(image);
     if(image == -1)
-      oops("faled to close image");
+        oops("faled to close image");
     
     return 0;
 }
 
-bool deleteFile(Dir* tree, FilePath* pathAndName)
+int deleteDir(Dir* tree, Path* srcDir)
+{
+    int count;
+    int rc;
+    
+    /* vars to find the dir in the tree */
+    Dir* srcDirInTree;
+    DirLL* searchDir;
+    bool dirFound;
+    
+    /* vars to delete files */
+    FileLL* currentFile;
+    FileLL* nextFile;
+    
+    /* vars to delete subdirectories */
+    DirLL* currentDir;
+    Path* newSrcDir;
+    
+    /* vars to delete the directory */
+    Dir* parentDirInTree;
+    bool parentDirFound;
+    DirLL** parentDirLL;
+    DirLL* parentDirNextLL;
+    
+    /* FIND dir to know what the contents are */
+    srcDirInTree = tree;
+    for(count = 0; count < srcDir->numDirs; count++)
+    /* each directory in the path */
+    {
+        searchDir = srcDirInTree->directories;
+        dirFound = false;
+        while(searchDir != NULL && !dirFound)
+        /* find the directory */
+        {
+            if(strcmp(searchDir->dir.name, srcDir->dirs[count]) == 0)
+            {
+                dirFound = true;
+                srcDirInTree = &(searchDir->dir);
+            }
+            else
+                searchDir = searchDir->next;
+        }
+        if(!dirFound)
+            oops("deleteDir(): directory not found in tree");
+    }
+    /* END FIND dir to know what the contents are */
+    
+    /* DELETE all files */
+    currentFile = srcDirInTree->files;
+    while(currentFile != NULL)
+    {
+        nextFile = currentFile->next;
+        
+        free(currentFile);
+        
+        currentFile = nextFile;
+    }
+    //srcDirInTree->files = NULL; // remove this
+    /* END DELETE all files */
+    
+    /* DELETE all directories */
+    currentDir = srcDirInTree->directories;
+    while(currentDir != NULL)
+    {
+        rc = makeLongerPath(srcDir, currentDir->dir.name, &newSrcDir);
+        if(rc <= 0)
+            return rc;
+        
+        rc = deleteDir(tree, newSrcDir);
+        if(rc <= 0)
+            return rc;
+        
+        freePath(newSrcDir);
+        
+        currentDir = currentDir->next;
+    }
+    //srcDirInTree->directories = NULL; // remove this
+    /* END DELETE all directories */
+    
+    /* GET A pointer to the parent dir */
+    parentDirInTree = tree;
+    for(count = 0; count < srcDir->numDirs - 1; count++)
+    /* each directory in the path except the last one */
+    {
+        searchDir = parentDirInTree->directories;
+        parentDirFound = false;
+        while(searchDir != NULL && !parentDirFound)
+        /* find the directory, last one found will be the parent */
+        {
+            if(strcmp(searchDir->dir.name, srcDir->dirs[count]) == 0)
+            {
+                parentDirFound = true;
+                parentDirInTree = &(searchDir->dir);
+            }
+            else
+                searchDir = searchDir->next;
+        }
+        if(!dirFound)
+            oops("deleteDir(): directory not found in tree");
+    }
+    /* END GET A pointer to the parent dir */
+    
+    /* DELETE self */
+    parentDirLL = &(parentDirInTree->directories);
+    dirFound = false;
+    while(*parentDirLL != NULL && !dirFound)
+    {
+        if(strcmp( (*parentDirLL)->dir.name, srcDir->dirs[srcDir->numDirs - 1] ) == 0 )
+        {
+            parentDirNextLL = (*parentDirLL)->next;
+            
+            free(*parentDirLL);
+            
+            *parentDirLL = parentDirNextLL;
+            
+            dirFound = true;
+        }
+        else
+            parentDirLL = &((*parentDirLL)->next);
+    }
+    if(!dirFound)
+    /* should not happen since i already found this dir above */
+        oops("deleteDir(): directory not found in tree");
+    /* END DELETE self */
+    
+    return 1;
+}
+
+int deleteFile(Dir* tree, FilePath* pathAndName)
 {
     Dir* parentDir;
     DirLL* searchDir;
@@ -162,7 +300,7 @@ bool deleteFile(Dir* tree, FilePath* pathAndName)
     if(!fileFound)
         oops("deleteFile(): file not found in tree");
     
-    return 1;
+    return true;
 }
 
 bool dirDrFollows(int image)

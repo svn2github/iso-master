@@ -78,7 +78,8 @@ typedef struct
     
 } FilePath;
 
-bool deleteFile(Dir* tree, FilePath* pathAndName);
+int deleteDir(Dir* tree, Path* srcDir);
+int deleteFile(Dir* tree, FilePath* pathAndName);
 bool dirDrFollows(int image);
 int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
                                                         bool keepPermissions);
