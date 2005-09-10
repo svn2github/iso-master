@@ -89,16 +89,16 @@ int main(int argc, char** argv)
     srcDir.dirs[0] = malloc(strlen("isolinux" + 1));
     strcpy(srcDir.dirs[0], "isolinux");
     
-    dest = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
-    strcpy(dest, "/home/andrei/prog/isomaster/src/tests/");
+    dest = malloc(strlen("/home/andrew/prog/isomaster/src/tests/") + 1);
+    strcpy(dest, "/home/andrew/prog/isomaster/src/tests/");
     
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
     //showDir(&tree, 0);
     
-    deleteDir(&tree, &dirPath);
-    printf("\n--------------------\n\n");
-    showDir(&tree, 0);
+    //deleteDir(&tree, &dirPath);
+    //printf("\n--------------------\n\n");
+    //showDir(&tree, 0);
     
     //rc = extractFile(image, &tree, &filePath, dest, true);
     //if(rc <= 0)
@@ -113,6 +113,17 @@ int main(int argc, char** argv)
         oops("faled to close image");
     
     return 0;
+}
+
+int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
+{
+    // find directory to add to
+    // figure out 9660 filename
+    // find FileLL just before where this is supposed o go
+    // add to files
+    // position, size = 0
+    
+    return 1;
 }
 
 int deleteDir(Dir* tree, Path* srcDir)
@@ -169,10 +180,10 @@ int deleteDir(Dir* tree, Path* srcDir)
         nextFile = currentFile->next;
         
         free(currentFile);
+        //! free file->pathandname!
         
         currentFile = nextFile;
     }
-    //srcDirInTree->files = NULL; // remove this
     /* END DELETE all files */
     
     /* DELETE all directories */
@@ -191,7 +202,6 @@ int deleteDir(Dir* tree, Path* srcDir)
         
         currentDir = currentDir->next;
     }
-    //srcDirInTree->directories = NULL; // remove this
     /* END DELETE all directories */
     
     /* GET A pointer to the parent dir */
@@ -287,6 +297,7 @@ int deleteFile(Dir* tree, FilePath* pathAndName)
             pointerToNext = (*pointerToIt)->next;
             
             free(*pointerToIt);
+            //! free pathandname!
             
             *pointerToIt = pointerToNext;
             
@@ -489,6 +500,7 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
         /* this is the file */
         {
             if(!pointerToIt->file.onImage)
+            //! maybe just make a copy of the file here!
                 return -1;
             
             fileFound = true;
@@ -612,6 +624,7 @@ int makeLongerPath(Path* origPath, char* newDir, Path** newPath)
 
 void oops(char* msg)
 {
+    fflush(NULL);
     fprintf(stderr, "OOPS, %s\n", msg);
     exit(0);
 }
@@ -719,6 +732,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             nameInAscii[byteCount] = '\0';
             
             if( strlen(nameInAscii) > NCHARS_FILE_ID_MAX - 1 )
+            //! maybe just truncate the name instead!
                 return -2;
             
             strcpy(dir->name, nameInAscii);
@@ -806,7 +820,7 @@ int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readP
     int bytesRead = 0;
     int childrenBytesRead;
     DirLL** nextDir; /* pointer to pointer to modify pointer :) */
-    FileLL** nextFile;
+    FileLL** nextFile; /* ditto */
     
     /* skip self and parent */
     bytesRead += skipDR(image);
@@ -928,6 +942,7 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
         if(rc != lenFileId9660)
             return -1;
         
+        //! overflow!
         removeCrapFromFilename(nameAsOnDisk, file->name, lenFileId9660);
         
         if( strlen(file->name) > NCHARS_FILE_ID_MAX - 1 )
@@ -956,6 +971,7 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
             nameInAscii[byteCount] = nameAsOnDisk[ucsCount];
         }
         
+        //! overflow!
         removeCrapFromFilename(nameInAscii, file->name, lenFileId9660 / 2);
         
         if( strlen(file->name) > NCHARS_FILE_ID_MAX - 1 )
@@ -994,6 +1010,7 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
     file->onImage = true;
     file->position = locExtent * NBYTES_LOGICAL_BLOCK;
     file->size = lenExtent;
+    file->pathAndName = NULL;
     
     return recordLength;
 }

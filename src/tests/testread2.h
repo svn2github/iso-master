@@ -53,7 +53,8 @@ typedef struct
     bool onImage;
     unsigned position; /* if on image, in bytes */
     unsigned size; /* if on image, in bytes */
-    char pathAndName[NCHARS_FILE_ID_FS_MAX]; /* if on filesystem, full path + filename */
+    char* pathAndName; /* if on filesystem, full path + filename
+                       * is to be freed by whenever the File is freed */
     
 } File;
 
@@ -78,6 +79,7 @@ typedef struct
     
 } FilePath;
 
+int addFile(Dir* tree, char* srcPathAndName, Path* destDir);
 int deleteDir(Dir* tree, Path* srcDir);
 int deleteFile(Dir* tree, FilePath* pathAndName);
 bool dirDrFollows(int image);
