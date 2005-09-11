@@ -9,8 +9,6 @@
 #include "read7x.h"
 #include "vd.h"
 
-//~ const PxInfo posixFileDefaults = {0, 0, 0, 0, 0};
-//~ const PxInfo posixDirDefaults = {0, 0, 0, 0, 0};
 const unsigned posixFileDefaults = 33188; /* octal 100644 */
 const unsigned posixDirDefaults = 16877; /* octal 40711 */
 
@@ -86,11 +84,11 @@ int main(int argc, char** argv)
     
     srcDir.numDirs = 1;
     srcDir.dirs = malloc(sizeof(char*) * srcDir.numDirs);
-    srcDir.dirs[0] = malloc(strlen("isolinux" + 1));
-    strcpy(srcDir.dirs[0], "isolinux");
+    srcDir.dirs[0] = malloc(strlen("kernels" + 1));
+    strcpy(srcDir.dirs[0], "kernels");
     
-    dest = malloc(strlen("/home/andrew/prog/isomaster/src/tests/") + 1);
-    strcpy(dest, "/home/andrew/prog/isomaster/src/tests/");
+    dest = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
+    strcpy(dest, "/home/andrei/prog/isomaster/src/tests/");
     
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
@@ -115,13 +113,116 @@ int main(int argc, char** argv)
     return 0;
 }
 
+/*
+* file gets appended to the end of the list (screw the 9660 sorting, it's stupid)
+* takes ownership of srcPathAndName's string
+*/
 int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
 {
-    // find directory to add to
-    // figure out 9660 filename
-    // find FileLL just before where this is supposed o go
-    // add to files
-    // position, size = 0
+    int count;
+    int rc;
+    FileLL** lastFile;
+    char filename[256];
+    struct stat statStruct;
+    
+    /* vars to find the dir in the tree */
+    Dir* destDirInTree;
+    DirLL* searchDir;
+    bool dirFound;
+    
+    rc = getFilenameFromPath(srcPathAndName, filename);
+    if(rc <= 0)
+        return rc;
+    
+    if(strlen(filename) > NCHARS_FILE_ID_MAX - 1)
+        return -3;
+    
+    /* FIND dir to add to */
+    destDirInTree = tree;
+    for(count = 0; count < destDir->numDirs; count++)
+    /* each directory in the path */
+    {
+        searchDir = destDirInTree->directories;
+        dirFound = false;
+        while(searchDir != NULL && !dirFound)
+        /* find the directory */
+        {
+            if(strcmp(searchDir->dir.name, destDir->dirs[count]) == 0)
+            {
+                dirFound = true;
+                destDirInTree = &(searchDir->dir);
+            }
+            else
+                searchDir = searchDir->next;
+        }
+        if(!dirFound)
+            return -1;
+    }
+    /* END FIND dir to add to */
+    
+    /* FIND last pointer in file list */
+    lastFile = &(destDirInTree->files);
+    while(*lastFile != NULL)
+    {
+        lastFile = &((*lastFile)->next);
+    }
+    /* END FIND last pointer in file list */
+    
+    /* ADD file */
+    *lastFile = malloc(sizeof(FileLL));
+    if(*lastFile == NULL)
+        return -2;
+    
+    (*lastFile)->next = NULL;
+    
+    strcpy((*lastFile)->file.name, filename);
+    
+    //!! posix
+    rc = stat(srcPathAndName, &statStruct);
+    if(rc == -1)
+        return -4;
+    
+    (*lastFile)->file.onImage = false;
+    
+    (*lastFile)->file.position = 0;
+    (*lastFile)->file.size = 0;
+    
+    (*lastFile)->file.pathAndName = srcPathAndName;
+    /* END ADD file */
+    
+    return 1;
+}
+
+int getFilenameFromPath(char* srcPathAndName, char* filename)
+{
+    int count;
+    int srcLen;
+    int indexLastSlash;
+    bool found = false;
+    int count2;
+    
+    srcLen = strlen(srcPathAndName);
+    
+    for(count = 0; count < srcLen; count++)
+    {
+        if(srcPathAndName[count] == '/')
+        {
+            indexLastSlash = count;
+            found = true;
+        }
+    }
+    if(!found)
+        return -1;
+    
+    if(indexLastSlash == srcLen - 1)
+    /* string ended with '/' */
+        return -2;
+    
+    /* loop copies null byte also */
+    for(count = indexLastSlash + 1, count2 = 0; count <= srcLen; count++, count2++)
+    {
+        filename[count2] = srcPathAndName[count];
+    }
     
     return 1;
 }
@@ -179,8 +280,10 @@ int deleteDir(Dir* tree, Path* srcDir)
     {
         nextFile = currentFile->next;
         
+        if(!currentFile->file.onImage)
+            free(currentFile->file.pathAndName);
+        
         free(currentFile);
-        //! free file->pathandname!
         
         currentFile = nextFile;
     }
@@ -296,8 +399,10 @@ int deleteFile(Dir* tree, FilePath* pathAndName)
         {
             pointerToNext = (*pointerToIt)->next;
             
+            if( (*pointerToIt)->file.onImage )
+                free( (*pointerToIt)->file.pathAndName );
+            
             free(*pointerToIt);
-            //! free pathandname!
             
             *pointerToIt = pointerToNext;
             
@@ -500,7 +605,7 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
         /* this is the file */
         {
             if(!pointerToIt->file.onImage)
-            //! maybe just make a copy of the file here!
+            //!! maybe just make a copy of the file here
                 return -1;
             
             fileFound = true;
@@ -732,7 +837,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             nameInAscii[byteCount] = '\0';
             
             if( strlen(nameInAscii) > NCHARS_FILE_ID_MAX - 1 )
-            //! maybe just truncate the name instead!
+            //!! maybe just truncate the name instead
                 return -2;
             
             strcpy(dir->name, nameInAscii);
@@ -942,12 +1047,13 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
         if(rc != lenFileId9660)
             return -1;
         
-        //! overflow!
-        removeCrapFromFilename(nameAsOnDisk, file->name, lenFileId9660);
+        removeCrapFromFilename(nameAsOnDisk, lenFileId9660);
         
-        if( strlen(file->name) > NCHARS_FILE_ID_MAX - 1 )
+        if( strlen(nameAsOnDisk) > NCHARS_FILE_ID_MAX - 1 )
             return -2;
-    
+        
+        strcpy(file->name, nameAsOnDisk);
+        
         /* padding field */
         if(lenFileId9660 % 2 == 0)
             lseek(image, 1, SEEK_CUR);
@@ -971,12 +1077,13 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
             nameInAscii[byteCount] = nameAsOnDisk[ucsCount];
         }
         
-        //! overflow!
-        removeCrapFromFilename(nameInAscii, file->name, lenFileId9660 / 2);
+        removeCrapFromFilename(nameInAscii, lenFileId9660 / 2);
         
-        if( strlen(file->name) > NCHARS_FILE_ID_MAX - 1 )
+        if( strlen(nameInAscii) > NCHARS_FILE_ID_MAX - 1 )
             return -2;
-    
+        
+        strcpy(file->name, nameAsOnDisk);
+        
         /* padding field */
         if(lenFileId9660 % 2 == 0)
             lseek(image, 1, SEEK_CUR);
@@ -1123,20 +1230,22 @@ int readRockridgeFilename(int image, char* dest, int lenSU)
 * filenames as read from 9660 Sometimes end with ;1 (terminator+version num)
 * this removes the useless ending and terminates the destination with a '\0'
 */
-void removeCrapFromFilename(char* src, char* dest, int length)
+void removeCrapFromFilename(char* filename, int length)
 {
     int count;
     bool stop = false;
     
     for(count = 0; count < NCHARS_FILE_ID_MAX_READ && count < length && !stop; count++)
     {
-        if(src[count] != ';')
-            dest[count] = src[count];
-        else
+        if(filename[count] == ';')
+        {
+            filename[count] = '\0';
             stop = true;
+        }
     }
     
-    dest[count] = '\0';
+    /* if did not get a ';' terminate string anyway */
+    filename[count - 1] = '\0';
 }
 
 int skipDR(int image)
@@ -1185,5 +1294,4 @@ void showDir(Dir* dir, int level)
             printf("on disk: \'%s\'\n", fileNode->file.pathAndName);
         fileNode = fileNode->next;
     }
-
 }

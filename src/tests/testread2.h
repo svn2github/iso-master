@@ -88,6 +88,7 @@ int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
 int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
                                                         bool keepPermissions);
 void freePath(Path* path);
+int getFilenameFromPath(char* srcPathAndName, char* filename);
 bool haveNextRecordInSector(int image);
 int makeLongerPath(Path* origPath, char* newDir, Path** newPath);
 void oops(char* msg);
@@ -97,7 +98,7 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix);
 unsigned char readNextRecordLen(int image);
 int readPosixInfo(int image, unsigned* posixFileMode, int lenSU);
 int readRockridgeFilename(int image, char* dest, int lenSU);
-void removeCrapFromFilename(char* src, char* dest, int length);
+void removeCrapFromFilename(char* filename, int length);
 int skipDR(int image);
 void showDir(Dir* dir, int level);
 
