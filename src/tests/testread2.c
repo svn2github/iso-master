@@ -23,6 +23,7 @@ int main(int argc, char** argv)
     Path srcDir;
     Path dirPath;
     char* dest; /* destination directory */
+    char* fileToAdd;
     
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
@@ -79,8 +80,8 @@ int main(int argc, char** argv)
     
     dirPath.numDirs = 1;
     dirPath.dirs = malloc(sizeof(char*) * dirPath.numDirs);
-    dirPath.dirs[0] = malloc(strlen("kernels") + 1);
-    strcpy(dirPath.dirs[0], "kernels");
+    dirPath.dirs[0] = malloc(strlen("isolinux") + 1);
+    strcpy(dirPath.dirs[0], "isolinux");
     
     srcDir.numDirs = 1;
     srcDir.dirs = malloc(sizeof(char*) * srcDir.numDirs);
@@ -89,6 +90,9 @@ int main(int argc, char** argv)
     
     dest = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
     strcpy(dest, "/home/andrei/prog/isomaster/src/tests/");
+    
+    fileToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/read7x.o") + 1);
+    strcpy(fileToAdd, "/home/andrei/prog/isomaster/src/tests/read7x.o");
     
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
@@ -106,6 +110,11 @@ int main(int argc, char** argv)
     //if(rc <= 0)
     //    oops("problem extracting dir");
     
+    rc = addFile(&tree, fileToAdd, &dirPath);
+    if(rc <= 0)
+        oops("problem adding file");
+    showDir(&tree, 0);
+    
     close(image);
     if(image == -1)
         oops("faled to close image");
@@ -116,6 +125,7 @@ int main(int argc, char** argv)
 /*
 * file gets appended to the end of the list (screw the 9660 sorting, it's stupid)
 * takes ownership of srcPathAndName's string
+* will only add a regular file (symblic links are followed, see stat(2))
 */
 int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
 {
@@ -177,15 +187,21 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     
     strcpy((*lastFile)->file.name, filename);
     
-    //!! posix
     rc = stat(srcPathAndName, &statStruct);
     if(rc == -1)
         return -4;
     
+    if( !(statStruct.st_mode & S_IFREG) )
+    /* not a regular file */
+        return -5;
+    
+    (*lastFile)->file.posixFileMode = statStruct.st_mode;
+    
+    (*lastFile)->file.size = statStruct.st_size;
+    
     (*lastFile)->file.onImage = false;
     
     (*lastFile)->file.position = 0;
-    (*lastFile)->file.size = 0;
     
     (*lastFile)->file.pathAndName = srcPathAndName;
     /* END ADD file */

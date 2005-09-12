@@ -10,7 +10,7 @@
 #define FNTYPE_ROCKRIDGE 1
 #define FNTYPE_JOLIET 2
 
-/* note on maximum file/directory name lengths:
+/* long note on maximum file/directory name lengths:
 * max 128 (joliet)
 *     + 2 separator1 (9660, just in case)
 *     + 2 separator2 (9660, just in case)
@@ -50,9 +50,9 @@ typedef struct
 {
     char name[NCHARS_FILE_ID_MAX];
     unsigned posixFileMode;
+    unsigned size; /* in bytes */
     bool onImage;
     unsigned position; /* if on image, in bytes */
-    unsigned size; /* if on image, in bytes */
     char* pathAndName; /* if on filesystem, full path + filename
                        * is to be freed by whenever the File is freed */
     
