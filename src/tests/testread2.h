@@ -79,6 +79,7 @@ typedef struct
     
 } FilePath;
 
+int addDir(Dir* tree, char* srcPath, Path* destDir);
 int addFile(Dir* tree, char* srcPathAndName, Path* destDir);
 int deleteDir(Dir* tree, Path* srcDir);
 int deleteFile(Dir* tree, FilePath* pathAndName);

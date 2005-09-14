@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <dirent.h>
 
 #include "testread2.h"
 #include "read7x.h"
@@ -24,6 +25,7 @@ int main(int argc, char** argv)
     Path dirPath;
     char* dest; /* destination directory */
     char* fileToAdd;
+    char* dirToAdd;
     
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
@@ -94,13 +96,14 @@ int main(int argc, char** argv)
     fileToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/read7x.o") + 1);
     strcpy(fileToAdd, "/home/andrei/prog/isomaster/src/tests/read7x.o");
     
+    dirToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
+    strcpy(dirToAdd, "/home/andrei/prog/isomaster/src/tests/");
+    
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
-    //showDir(&tree, 0);
     
     //deleteDir(&tree, &dirPath);
     //printf("\n--------------------\n\n");
-    //showDir(&tree, 0);
     
     //rc = extractFile(image, &tree, &filePath, dest, true);
     //if(rc <= 0)
@@ -110,16 +113,45 @@ int main(int argc, char** argv)
     //if(rc <= 0)
     //    oops("problem extracting dir");
     
-    rc = addFile(&tree, fileToAdd, &dirPath);
+    //rc = addFile(&tree, fileToAdd, &dirPath);
+    //if(rc <= 0)
+    //    oops("problem adding file");
+    
+    rc = addDir(&tree, dirToAdd, &dirPath);
     if(rc <= 0)
         oops("problem adding file");
-    showDir(&tree, 0);
+    
+    //showDir(&tree, 0);
     
     close(image);
     if(image == -1)
         oops("faled to close image");
     
     return 0;
+}
+
+int addDir(Dir* tree, char* srcPath, Path* destDir)
+{
+    DIR* srcDir;
+    struct dirent* dirEnt;
+    
+    // find destdir
+    // add to DirLL* of dest
+    // ignore first 2 entries (. ..)
+    // stat each of the rest and either addDir or addFile each
+    
+    
+    srcDir = opendir(srcPath);
+    if(srcDir == NULL)
+        return -1;
+    
+    while( (dirEnt = readdir(srcDir)) != NULL )
+    {
+        //printf(" %s\n", dirEnt->d_name);
+        
+    }
+    
+    return 1;
 }
 
 /*
@@ -205,40 +237,6 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     
     (*lastFile)->file.pathAndName = srcPathAndName;
     /* END ADD file */
-    
-    return 1;
-}
-
-int getFilenameFromPath(char* srcPathAndName, char* filename)
-{
-    int count;
-    int srcLen;
-    int indexLastSlash;
-    bool found = false;
-    int count2;
-    
-    srcLen = strlen(srcPathAndName);
-    
-    for(count = 0; count < srcLen; count++)
-    {
-        if(srcPathAndName[count] == '/')
-        {
-            indexLastSlash = count;
-            found = true;
-        }
-    }
-    if(!found)
-        return -1;
-    
-    if(indexLastSlash == srcLen - 1)
-    /* string ended with '/' */
-        return -2;
-    
-    /* loop copies null byte also */
-    for(count = indexLastSlash + 1, count2 = 0; count <= srcLen; count++, count2++)
-    {
-        filename[count2] = srcPathAndName[count];
-    }
     
     return 1;
 }
@@ -689,6 +687,40 @@ void freePath(Path* path)
         free(path->dirs[count]);
     free(path->dirs);
     free(path);
+}
+
+int getFilenameFromPath(char* srcPathAndName, char* filename)
+{
+    int count;
+    int srcLen;
+    int indexLastSlash;
+    bool found = false;
+    int count2;
+    
+    srcLen = strlen(srcPathAndName);
+    
+    for(count = 0; count < srcLen; count++)
+    {
+        if(srcPathAndName[count] == '/')
+        {
+            indexLastSlash = count;
+            found = true;
+        }
+    }
+    if(!found)
+        return -1;
+    
+    if(indexLastSlash == srcLen - 1)
+    /* string ended with '/' */
+        return -2;
+    
+    /* loop copies null byte also */
+    for(count = indexLastSlash + 1, count2 = 0; count <= srcLen; count++, count2++)
+    {
+        filename[count2] = srcPathAndName[count];
+    }
+    printf("gffp: '%s'\n", filename);
+    return 1;
 }
 
 /* if the next byte is zero returns false otherwise true
