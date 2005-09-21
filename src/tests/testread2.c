@@ -130,33 +130,58 @@ int main(int argc, char** argv)
     return 0;
 }
 
+/*
+* maybe should make sure tree is not modified if cannot opendir()
+*/
 int addDir(Dir* tree, char* srcPath, Path* destDir)
 {
+    /* to add dir to tree */
+    char srcDirName[256];
+    
+    /* to read contents of a dir on fs */
     DIR* srcDir;
     struct dirent* dirEnt;
+    struct stat anEntry;
     
-    // find destdir
-    // add to DirLL* of dest
-    // ignore first 2 entries (. ..)
-    // stat each of the rest and either addDir or addFile each
+    /* for children */
+    Path* newDestDir;
+    int newSrcPathLen; /* length of new path (including trailing '/' but not filename) */
+    char* newSrcPathAndName; /* both for child dirs and child files */
     
+    // find destdir and get name of last directory from srcPath
     
+    // add dir to tree (with null lists)
+    
+    // allocate newSrcPathAndName (+255 +possible trailing '/') and copy srcPath into it
+    
+    // makeLongerPath newDestDir
+    
+    /* ADD contents of directory */
     srcDir = opendir(srcPath);
     if(srcDir == NULL)
         return -1;
     
     while( (dirEnt = readdir(srcDir)) != NULL )
     {
-        //printf(" %s\n", dirEnt->d_name);
-        
+        if( strcmp(dirEnt->d_name, ".") == 0 || strcmp(dirEnt->d_name, "..") == 0 )
+            printf("skipped '%s'\n", dirEnt->d_name);
+        else
+        {
+            // append name to newSrcPathAndName
+            
+            // if dir, append '/' and addDir()
+            // if regular file, addFile()
+        }
     }
+    /* END ADD contents of directory */
+    
+    // free local memory
     
     return 1;
 }
 
 /*
 * file gets appended to the end of the list (screw the 9660 sorting, it's stupid)
-* takes ownership of srcPathAndName's string
 * will only add a regular file (symblic links are followed, see stat(2))
 */
 int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
@@ -203,6 +228,7 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     /* END FIND dir to add to */
     
     /* FIND last pointer in file list */
+    //!! if not sorting, might as well append to beginnig of list
     lastFile = &(destDirInTree->files);
     while(*lastFile != NULL)
     {
@@ -235,7 +261,8 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     
     (*lastFile)->file.position = 0;
     
-    (*lastFile)->file.pathAndName = srcPathAndName;
+    (*lastFile)->file.pathAndName = malloc(strlen(srcPathAndName) + 1);
+    strcpy((*lastFile)->file.pathAndName, srcPathAndName);
     /* END ADD file */
     
     return 1;
@@ -719,7 +746,7 @@ int getFilenameFromPath(char* srcPathAndName, char* filename)
     {
         filename[count2] = srcPathAndName[count];
     }
-    printf("gffp: '%s'\n", filename);
+    
     return 1;
 }
 
