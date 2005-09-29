@@ -135,7 +135,7 @@ int main(int argc, char** argv)
     return 0;
 }
 
-/*
+/* 
 * when working on this make sure tree is not modified if cannot opendir()
 */
 int addDir(Dir* tree, char* srcPath, Path* destDir)
