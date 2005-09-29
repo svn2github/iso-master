@@ -79,6 +79,11 @@ typedef struct
     
 } FilePath;
 
+/*
+files to make:
+
+*/
+
 int addDir(Dir* tree, char* srcPath, Path* destDir);
 int addFile(Dir* tree, char* srcPathAndName, Path* destDir);
 int deleteDir(Dir* tree, Path* srcDir);
@@ -90,6 +95,7 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
                                                         bool keepPermissions);
 void freePath(Path* path);
 int getFilenameFromPath(char* srcPathAndName, char* filename);
+int getLastDirFromString(char* srcPath, char* dirName);
 bool haveNextRecordInSector(int image);
 int makeLongerPath(Path* origPath, char* newDir, Path** newPath);
 void oops(char* msg);

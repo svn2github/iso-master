@@ -26,6 +26,7 @@ int main(int argc, char** argv)
     char* dest; /* destination directory */
     char* fileToAdd;
     char* dirToAdd;
+    //char dirName[256];
     
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
@@ -90,14 +91,18 @@ int main(int argc, char** argv)
     srcDir.dirs[0] = malloc(strlen("kernels" + 1));
     strcpy(srcDir.dirs[0], "kernels");
     
-    dest = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
-    strcpy(dest, "/home/andrei/prog/isomaster/src/tests/");
+    dest = malloc(strlen("/home/andrew/prog/isomaster/src/tests/") + 1);
+    strcpy(dest, "/home/andrew/prog/isomaster/src/tests/");
     
-    fileToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/read7x.o") + 1);
-    strcpy(fileToAdd, "/home/andrei/prog/isomaster/src/tests/read7x.o");
+    fileToAdd = malloc(strlen("/home/andrew/prog/isomaster/src/tests/read7x.o") + 1);
+    strcpy(fileToAdd, "/home/andrew/prog/isomaster/src/tests/read7x.o");
     
-    dirToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
-    strcpy(dirToAdd, "/home/andrei/prog/isomaster/src/tests/");
+    dirToAdd = malloc(strlen("/home/andrew/prog/isomaster/src/tests/") + 1);
+    strcpy(dirToAdd, "/home/andrew/prog/isomaster/src/tests/");
+    
+    /*if(getLastDirFromString(dirToAdd, dirName) < 0)
+        printf("bad gldfs()\n");
+    printf("last dir: '%s'\n", dirName);*/
     
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
@@ -119,9 +124,9 @@ int main(int argc, char** argv)
     
     rc = addDir(&tree, dirToAdd, &dirPath);
     if(rc <= 0)
-        oops("problem adding file");
+        oops("problem adding dir");
     
-    //showDir(&tree, 0);
+    showDir(&tree, 0);
     
     close(image);
     if(image == -1)
@@ -131,51 +136,157 @@ int main(int argc, char** argv)
 }
 
 /*
-* maybe should make sure tree is not modified if cannot opendir()
+* when working on this make sure tree is not modified if cannot opendir()
 */
 int addDir(Dir* tree, char* srcPath, Path* destDir)
 {
-    /* to add dir to tree */
-    char srcDirName[256];
+    int count;
+    int rc;
     
-    /* to read contents of a dir on fs */
+    /* vars to add dir to tree */
+    char srcDirName[256];
+    Dir* destDirInTree;
+    DirLL* searchDir;
+    bool dirFound;
+    DirLL** lastDir;
+    struct stat statStruct;
+    
+    /* vars to read contents of a dir on fs */
     DIR* srcDir;
     struct dirent* dirEnt;
     struct stat anEntry;
     
-    /* for children */
+    /* vars for children */
     Path* newDestDir;
     int newSrcPathLen; /* length of new path (including trailing '/' but not filename) */
     char* newSrcPathAndName; /* both for child dirs and child files */
     
-    // find destdir and get name of last directory from srcPath
+    if(srcPath[strlen(srcPath - 1)] != '/')
+    /* must have trailing slash */
+        return -9;
     
-    // add dir to tree (with null lists)
+    /* FIND dir to add to */
+    destDirInTree = tree;
+    for(count = 0; count < destDir->numDirs; count++)
+    /* each directory in the path */
+    {
+        searchDir = destDirInTree->directories;
+        dirFound = false;
+        while(searchDir != NULL && !dirFound)
+        /* find the directory */
+        {
+            if(strcmp(searchDir->dir.name, destDir->dirs[count]) == 0)
+            {
+                dirFound = true;
+                destDirInTree = &(searchDir->dir);
+            }
+            else
+                searchDir = searchDir->next;
+        }
+        if(!dirFound)
+            return -1;
+    }
+    /* END FIND dir to add to */
     
-    // allocate newSrcPathAndName (+255 +possible trailing '/') and copy srcPath into it
+    /* get the name of the directory to be added */
+    rc = getLastDirFromString(srcPath, srcDirName);
+    if(rc <= 0)
+        return rc;
     
-    // makeLongerPath newDestDir
+    // check length of dir
+    
+    /* find last dir in list */
+    //!! if not sorting, might as well append to beginnig of list
+    lastDir = &(destDirInTree->directories);
+    while(*lastDir != NULL)
+        lastDir = &((*lastDir)->next);
+    
+    /* ADD directory to tree */
+    rc = stat(srcPath, &statStruct);
+    if(rc == -1)
+        return -4;
+    
+    if( !(statStruct.st_mode & S_IFDIR) )
+    /* not a directory */
+        return -5;
+    
+    *lastDir = malloc(sizeof(DirLL));
+    if(*lastDir == NULL)
+        return -3;
+    
+    (*lastDir)->next = NULL;
+    
+    strcpy((*lastDir)->dir.name, srcDirName);
+    
+    (*lastDir)->dir.posixFileMode = statStruct.st_mode;
+    
+    (*lastDir)->dir.directories = NULL;
+    (*lastDir)->dir.files = NULL;
+    /* END ADD directory to tree */
+    
+    /* remember length of original */
+    newSrcPathLen = strlen(srcPath);
+    
+    /* including the file/dir name and the trailing '/' and the '\0' */
+    newSrcPathAndName = malloc(newSrcPathLen + 257);
+    if(newSrcPathAndName == NULL)
+        return -3;
+    
+    strcpy(newSrcPathAndName, srcPath);
+    
+    rc = makeLongerPath(destDir, srcDirName, &newDestDir);
+    if(rc <= 0)
+        return rc;
     
     /* ADD contents of directory */
     srcDir = opendir(srcPath);
     if(srcDir == NULL)
-        return -1;
+        return -2;
     
+    /* it may be possible but in any case very unlikely that readdir() will fail
+    * if it does, null is returned (same as end of dir) */
     while( (dirEnt = readdir(srcDir)) != NULL )
     {
-        if( strcmp(dirEnt->d_name, ".") == 0 || strcmp(dirEnt->d_name, "..") == 0 )
-            printf("skipped '%s'\n", dirEnt->d_name);
-        else
+        if( strcmp(dirEnt->d_name, ".") != 0 && strcmp(dirEnt->d_name, "..") != 0 )
+        /* not "." or ".." */
         {
-            // append name to newSrcPathAndName
+            /* append file/dir name */
+            strcpy(newSrcPathAndName + newSrcPathLen, dirEnt->d_name);
             
-            // if dir, append '/' and addDir()
-            // if regular file, addFile()
-        }
-    }
+            rc = stat(newSrcPathAndName, &anEntry);
+            if(rc == -1)
+                return -6;
+            
+            if(anEntry.st_mode & S_IFDIR)
+            /* directory */
+            {
+                strcat(newSrcPathAndName, "/");
+                
+                addDir(tree, newSrcPathAndName, newDestDir);
+            }
+            else if(anEntry.st_mode & S_IFREG)
+            /* regular file */
+            {
+                addFile(tree, newSrcPathAndName, newDestDir);
+            }
+            else
+            /* not regular file or directory */
+            {
+                return -7;
+            }
+            
+        } /* if */
+        
+    } /* while */
+    
+    rc = closedir(srcDir);
+    if(rc != 0)
+    /* exotic error */
+        return -8;
     /* END ADD contents of directory */
     
-    // free local memory
+    free(newSrcPathAndName);
+    freePath(newDestDir);
     
     return 1;
 }
@@ -242,6 +353,8 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
         return -2;
     
     (*lastFile)->next = NULL;
+    
+    // check length of filename
     
     strcpy((*lastFile)->file.name, filename);
     
@@ -746,6 +859,43 @@ int getFilenameFromPath(char* srcPathAndName, char* filename)
     {
         filename[count2] = srcPathAndName[count];
     }
+    
+    return 1;
+}
+
+/*
+* srcPath must have trailing slash
+* dirName will not have a slash
+*/
+int getLastDirFromString(char* srcPath, char* dirName)
+{
+    int prevSlashIndex = 0;
+    int lastSlashIndex = 0;
+    int count;
+    int srcPathLen;
+    
+    srcPathLen = strlen(srcPath);
+    
+    if(srcPath[srcPathLen - 1] != '/')
+    /* does not end with trailing slash, error */
+        return -1;
+    
+    /* find indeces of last and just before last slashes */
+    for(count = 0; count < srcPathLen; count++)
+    {
+        if(srcPath[count] == '/')
+        {
+            prevSlashIndex = lastSlashIndex;
+            lastSlashIndex = count;
+        }
+    }
+    
+    /* copy all characters in between the slashes found */
+    for(count = 0; count < lastSlashIndex - prevSlashIndex - 1; count++)
+    {
+        dirName[count] = srcPath[prevSlashIndex + 1 + count];
+    }
+    dirName[count] = '\0';
     
     return 1;
 }
