@@ -1,13 +1,15 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <string.h>
 
 #include "bk.h"
 #include "bkRead.h"
+#include "bkRead7x.h"
 
 /* these 2 are defined in bkExtract.c */
-extern posixDirDefaults;
-extern posixFileDefaults;
+extern const unsigned posixDirDefaults;
+extern const unsigned posixFileDefaults;
 
 bool dirDrFollows(int image)
 {
@@ -180,7 +182,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
         }
     }
     else
-        oops("readDir(): dude, what filename type did you ask for?");
+        return -2;
     
     if(readPosix)
     {

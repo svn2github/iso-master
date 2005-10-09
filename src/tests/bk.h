@@ -73,7 +73,7 @@ typedef struct
 typedef struct
 {
     Path path;
-    char filename[256];
+    char filename[NCHARS_FILE_ID_FS_MAX];
     
 } FilePath;
 

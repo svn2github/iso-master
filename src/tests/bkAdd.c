@@ -2,8 +2,11 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "bk.h"
+#include "bkPath.h"
+#include "bkAdd.h"
 
 /*
 * when working on this make sure tree is not modified if cannot opendir()
@@ -14,7 +17,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     int rc;
     
     /* vars to add dir to tree */
-    char srcDirName[256];
+    char srcDirName[NCHARS_FILE_ID_FS_MAX];
     Dir* destDirInTree;
     DirLL* searchDir;
     bool dirFound;
@@ -114,7 +117,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
         return -2;
     
     /* it may be possible but in any case very unlikely that readdir() will fail
-    * if it does, null is returned (same as end of dir) */
+    * if it does, it returns NULL (same as end of dir) */
     while( (dirEnt = readdir(srcDir)) != NULL )
     {
         if( strcmp(dirEnt->d_name, ".") != 0 && strcmp(dirEnt->d_name, "..") != 0 )
@@ -170,7 +173,7 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     int count;
     int rc;
     FileLL** lastFile;
-    char filename[256];
+    char filename[NCHARS_FILE_ID_FS_MAX];
     struct stat statStruct;
     
     /* vars to find the dir in the tree */

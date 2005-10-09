@@ -1,7 +1,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "bk.h"
+#include "bkPath.h"
 
 int deleteDir(Dir* tree, Path* srcDir)
 {

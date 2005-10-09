@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "bk.h"
 
@@ -8,7 +9,9 @@ void freePath(Path* path)
     int count;
     
     for(count = 0; count < path->numDirs; count++)
+    {
         free(path->dirs[count]);
+    }
     free(path->dirs);   
     free(path);
 }
@@ -108,7 +111,7 @@ int makeLongerPath(Path* origPath, char* newDir, Path** newPath)
     }
     
     /* new dir */
-    (*newPath)->dirs[count] = malloc(strlen(newDir));
+    (*newPath)->dirs[count] = malloc(strlen(newDir) + 1);
     if((*newPath)->dirs[count] == NULL)
         return -1;
     strcpy((*newPath)->dirs[count], newDir);

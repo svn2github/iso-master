@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <string.h>
+#include <sys/stat.h>
 
 #include "bk.h"
 #include "bkExtract.h"
+#include "bkPath.h"
 
 const unsigned posixFileDefaults = 33188; /* octal 100644 */
 const unsigned posixDirDefaults = 16877; /* octal 40711 */
@@ -54,7 +57,7 @@ int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            oops("extractDir(): directory not found in tree");
+            return -3;
     }
     /* END FIND parent dir to know what the contents are */
     

@@ -114,6 +114,10 @@ int main(int argc, char** argv)
     rc = readDir(image, &tree, FNTYPE_ROCKRIDGE, true);
     printf("readDir ended with %d\n", rc);
     
+    close(image);
+    if(image == -1)
+        oops("faled to close image");
+    
     //showDir(&tree, 0);
     
     filePath.path.numDirs = 2;
@@ -140,8 +144,8 @@ int main(int argc, char** argv)
     fileToAdd = malloc(strlen("/home/andrew/prog/isomaster/src/tests/read7x.o") + 1);
     strcpy(fileToAdd, "/home/andrew/prog/isomaster/src/tests/read7x.o");
     
-    dirToAdd = malloc(strlen("/home/andrew/prog/isomaster/src/tests/") + 1);
-    strcpy(dirToAdd, "/home/andrew/prog/isomaster/src/tests/");
+    dirToAdd = malloc(strlen("/etc/") + 1);
+    strcpy(dirToAdd, "/etc/");
     
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
@@ -166,10 +170,6 @@ int main(int argc, char** argv)
         oops("problem adding dir");
     
     showDir(&tree, 0);
-    
-    close(image);
-    if(image == -1)
-        oops("faled to close image");
     
     return 0;
 }
