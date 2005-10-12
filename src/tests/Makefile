@@ -1,11 +1,11 @@
-testread2: testread2.c bkRead7x.o vd.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o
-	cc testread2.c bkRead7x.o vd.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o -Wall -o testread2
+testread2: testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o
+	cc testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o -Wall -o testread2
 
 clean: 
 	rm *.o testread2
 
-vd.o: vd.c vd.h
-	cc vd.c -c
+#vd.o: vd.c vd.h
+#	cc vd.c -c
 
 bkRead7x.o: bkRead7x.c bkRead7x.h
 	cc bkRead7x.c -Wall -c

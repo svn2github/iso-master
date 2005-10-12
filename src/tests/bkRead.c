@@ -7,6 +7,13 @@
 #include "bkRead.h"
 #include "bkRead7x.h"
 
+/* numbers as recorded on image */
+#define VDTYPE_BOOT 0
+#define VDTYPE_PRIMARY 1
+#define VDTYPE_SUPPLEMENTARY 2
+#define VDTYPE_VOLUMEPARTITION 3
+#define VDTYPE_TERMINATOR 255
+
 /* these 2 are defined in bkExtract.c */
 extern const unsigned posixDirDefaults;
 extern const unsigned posixFileDefaults;
@@ -583,11 +590,62 @@ int skipDR(int image)
 
 int readVolInfo(int image, VolInfo* volInfo)
 {
-    /* make sure pvd exists */
+    int rc;
+    unsigned char type;
     
-    /* 9660 to filenametypes */
+    char escapeSequences[32];
+    
+    /* skip system area */
+    lseek(image, NLS_SYSTEM_AREA * NBYTES_LOGICAL_BLOCK, SEEK_SET);
+    
+    /* make sure pvd exists */
+    rc = read711(image, &type);
+    if(rc != 1)
+        return -1;
+    
+    /* first descriptor must be primary */
+    if(type != VDTYPE_PRIMARY)
+        return -2;
+    
+    /* will always have this unless image is broken */
+    volInfo->filenameTypes = FNTYPE_9660;
+    
+    /* might not have supplementary descriptor */
+    volInfo->sRootDrOffset = 0;
+    
+    //!! have to read into this one day
+    volInfo->creationTime = 0;
     
     /* record publ, dataprep */
+    lseek(image, 87, SEEK_CUR);
+    
+    /* pvd escape sequences */
+    rc = read(image, escapeSequences, 32);
+    if(rc != 32)
+        return -1;
+    
+    lseek(image, 36, SEEK_CUR);
+    
+    /* am now at root dr */
+    volInfo->pRootDrOffset = lseek(image, 0, SEEK_CUR);
+    
+    lseek(image, 162, SEEK_CUR);
+    
+    rc = read(image, volInfo->publisher, 128);
+    if(rc != 128)
+        return -1;
+    volInfo->publisher[128] = '\0';
+    printf("'%s'\n", volInfo->publisher);
+    rc = read(image, volInfo->dataPreparer, 128);
+    if(rc != 128)
+        return -1;
+    volInfo->dataPreparer[128] = '\0';
+    printf("'%s'\n", volInfo->dataPreparer);
+    // skip until date
+    
+    // skip date (to be recorded later)
+    
+    // skip the rest of the descriptor
     
     /* see if rockridge exists */
     

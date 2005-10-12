@@ -48,7 +48,7 @@ int deleteDir(Dir* tree, Path* srcDir)
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            oops("deleteDir(): directory not found in tree");
+            return -10;
     }
     /* END FIND dir to know what the contents are */
     
@@ -104,7 +104,7 @@ int deleteDir(Dir* tree, Path* srcDir)
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            oops("deleteDir(): directory not found in tree");
+            return -10;
     }
     /* END GET A pointer to the parent dir */
     
@@ -128,7 +128,7 @@ int deleteDir(Dir* tree, Path* srcDir)
     }
     if(!dirFound)
     /* should not happen since i already found this dir above */
-        oops("deleteDir(): directory not found in tree");
+        return -10;
     /* END DELETE self */
     
     return 1;
@@ -163,7 +163,7 @@ int deleteFile(Dir* tree, FilePath* pathAndName)
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            oops("deleteFile(): directory not found in tree");
+            return -10;
     }
     
     /* now i have parentDir pointing to the parent directory */
@@ -192,7 +192,7 @@ int deleteFile(Dir* tree, FilePath* pathAndName)
         }
     }
     if(!fileFound)
-        oops("deleteFile(): file not found in tree");
+        return -10;
     
     return true;
 }

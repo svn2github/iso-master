@@ -6,13 +6,6 @@
 #define NLS_SYSTEM_AREA 16
 #define NBYTES_LOGICAL_BLOCK 2048
 
-/* numbers as recorded on image */
-#define VDTYPE_BOOT 0
-#define VDTYPE_PRIMARY 1
-#define VDTYPE_SUPPLEMENTARY 2
-#define VDTYPE_VOLUMEPARTITION 3
-#define VDTYPE_TERMINATOR 255
-
 /* can be |ed */
 #define FNTYPE_9660 1
 #define FNTYPE_ROCKRIDGE 2
@@ -44,7 +37,7 @@ typedef struct
     /* bk use */
     unsigned filenameTypes;
     off_t pRootDrOffset; /* primary (9660 and maybe rockridge) */
-    off_t sRootDrOffset; /* secondary (joliet) */
+    off_t sRootDrOffset; /* secondary (joliet), 0 if does not exist */
     //!! boot record
     
     /* public use */

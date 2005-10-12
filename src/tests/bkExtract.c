@@ -163,7 +163,7 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            oops("extractFile(): directory not found in tree");
+            return -10;
     }
     
     /* now i have parentDir pointing to the parent directory */
@@ -232,7 +232,7 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
         }
     }
     if(!fileFound)
-        oops("extractFile(): file not found in tree");
+        return -10;
     
     return pointerToIt->file.size;
 }
