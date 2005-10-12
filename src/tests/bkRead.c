@@ -420,7 +420,7 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
             return rc;
     }
     else
-        oops("readDir(): dude, what filename type did you ask for?");
+        return -10;
     
     if(readPosix)
     {
@@ -579,4 +579,20 @@ int skipDR(int image)
     lseek(image, dRLen - 1, SEEK_CUR);
     
     return dRLen;
+}
+
+int readVolInfo(int image, VolInfo* volInfo)
+{
+    /* make sure pvd exists */
+    
+    /* 9660 to filenametypes */
+    
+    /* record publ, dataprep */
+    
+    /* see if rockridge exists */
+    
+    /* see if svd exists */
+      /* make sure it's joliet */
+    
+    return 0;
 }

@@ -1,12 +1,22 @@
 #ifndef bk_h
 #define bk_h
 
+#include <stdbool.h>
+
 #define NLS_SYSTEM_AREA 16
 #define NBYTES_LOGICAL_BLOCK 2048
 
-#define FNTYPE_9660 0
-#define FNTYPE_ROCKRIDGE 1
-#define FNTYPE_JOLIET 2
+/* numbers as recorded on image */
+#define VDTYPE_BOOT 0
+#define VDTYPE_PRIMARY 1
+#define VDTYPE_SUPPLEMENTARY 2
+#define VDTYPE_VOLUMEPARTITION 3
+#define VDTYPE_TERMINATOR 255
+
+/* can be |ed */
+#define FNTYPE_9660 1
+#define FNTYPE_ROCKRIDGE 2
+#define FNTYPE_JOLIET 4
 
 /* long note on maximum file/directory name lengths:
 * max 128 (joliet)
@@ -28,9 +38,25 @@
 #define NCHARS_FILE_ID_MAX 65
 #define NCHARS_FILE_ID_FS_MAX 256
 
+/* strings are '\0' terminated */
 typedef struct
 {
-    char name[NCHARS_FILE_ID_MAX];
+    /* bk use */
+    unsigned filenameTypes;
+    off_t pRootDrOffset; /* primary (9660 and maybe rockridge) */
+    off_t sRootDrOffset; /* secondary (joliet) */
+    //!! boot record
+    
+    /* public use */
+    char publisher[129];
+    char dataPreparer[129];
+    time_t creationTime;
+    
+} VolInfo;
+
+typedef struct
+{
+    char name[NCHARS_FILE_ID_MAX]; /* '\0' terminated */
     unsigned posixFileMode;
     struct DirLL* directories;
     struct FileLL* files;
@@ -46,7 +72,7 @@ typedef struct DirLL
 
 typedef struct
 {
-    char name[NCHARS_FILE_ID_MAX];
+    char name[NCHARS_FILE_ID_MAX]; /* '\0' terminated */
     unsigned posixFileMode;
     unsigned size; /* in bytes */
     bool onImage;
@@ -73,7 +99,7 @@ typedef struct
 typedef struct
 {
     Path path;
-    char filename[NCHARS_FILE_ID_FS_MAX];
+    char filename[NCHARS_FILE_ID_FS_MAX]; /* '\0' terminated */
     
 } FilePath;
 

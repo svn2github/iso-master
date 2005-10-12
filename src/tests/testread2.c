@@ -59,10 +59,11 @@ void showDir(Dir* dir, int level)
 int main(int argc, char** argv)
 {
     int image;
-    VdSet vdset;
+    //VdSet vdset;
+    VolInfo volInfo;
     int rc;
     
-    Dir tree;
+    //Dir tree;
     FilePath filePath;
     Path srcDir;
     Path dirPath;
@@ -74,12 +75,12 @@ int main(int argc, char** argv)
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
     if(image == -1)
-        oops("unable to open image\n");
+        oops("unable to open image");
     
-    /* skip system area */
+    /* skip system area 
     lseek(image, NLS_SYSTEM_AREA * NBYTES_LOGICAL_BLOCK, SEEK_SET);
     
-    /* volume descriptor set */
+    // volume descriptor set 
     rc = readVDSet(image, &vdset);
     if(rc <= 0)
         oops("problem reading vd set");
@@ -107,12 +108,17 @@ int main(int argc, char** argv)
     
     //printf("joliet type: %d\n", svdGetJolietType(&(vdset.svd)));
     printf("joliet root extent at: %d\n", vdset.svd.rootDR.locExtent);
+    */
     
-    lseek(image, vdset.pvd.rootDROffset, SEEK_SET);
+    /*lseek(image, vdset.pvd.rootDROffset, SEEK_SET);
     tree.directories = NULL;
     tree.files = NULL;
     rc = readDir(image, &tree, FNTYPE_ROCKRIDGE, true);
-    printf("readDir ended with %d\n", rc);
+    printf("readDir ended with %d\n", rc);*/
+    
+    rc = readVolInfo(image, &volInfo);
+    if(image <= 0)
+        oops("failed to read volume info");
     
     close(image);
     if(image == -1)
@@ -165,11 +171,11 @@ int main(int argc, char** argv)
     //if(rc <= 0)
     //    oops("problem adding file");
     
-    rc = addDir(&tree, dirToAdd, &dirPath);
-    if(rc <= 0)
-        oops("problem adding dir");
+    //rc = addDir(&tree, dirToAdd, &dirPath);
+    //if(rc <= 0)
+    //    oops("problem adding dir");
     
-    showDir(&tree, 0);
+    //showDir(&tree, 0);
     
     return 0;
 }
