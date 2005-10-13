@@ -635,12 +635,12 @@ int readVolInfo(int image, VolInfo* volInfo)
     if(rc != 128)
         return -1;
     volInfo->publisher[128] = '\0';
-    printf("'%s'\n", volInfo->publisher);
+    
     rc = read(image, volInfo->dataPreparer, 128);
     if(rc != 128)
         return -1;
     volInfo->dataPreparer[128] = '\0';
-    printf("'%s'\n", volInfo->dataPreparer);
+    
     // skip until date
     
     // skip date (to be recorded later)

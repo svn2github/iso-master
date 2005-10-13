@@ -120,8 +120,8 @@ int main(int argc, char** argv)
     if(image <= 0)
         oops("failed to read volume info");
     
-    close(image);
-    if(image == -1)
+    rc = close(image);
+    if(rc == -1)
         oops("faled to close image");
     
     //showDir(&tree, 0);
