@@ -78,10 +78,10 @@ int main(int argc, char** argv)
     if(rc <= 0)
         oops("problem reading vd set");
     
-    lseek(image, vdset.svd.rootDROffset, SEEK_SET);
+    lseek(image, vdset.pvd.rootDROffset, SEEK_SET);
     tree.directories = NULL;
     tree.files = NULL;
-    rc = readDir(image, &tree, FNTYPE_9660, true);
+    rc = readDir(image, &tree, FNTYPE_ROCKRIDGE, true);
     
     rc = close(image);
     if(rc == -1)

@@ -523,9 +523,6 @@ int readVDSet(int file, VdSet* vdset)
 * - VDTYPE_VOLUMEPARTITION
 * - VDTYPE_TERMINATOR
 *
-* version can be:
-* - 1
-* 
 * Parameters:
 * - int file to read from
 * - unsigned char* vd type

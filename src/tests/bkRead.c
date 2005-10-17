@@ -591,21 +591,12 @@ int skipDR(int image)
 int readVolInfo(int image, VolInfo* volInfo)
 {
     int rc;
-    unsigned char type;
+    unsigned char vdType;
+    
+    int numDescriptorsRead;
+    
     
     char escapeSequences[32];
-    
-    /* skip system area */
-    lseek(image, NLS_SYSTEM_AREA * NBYTES_LOGICAL_BLOCK, SEEK_SET);
-    
-    /* make sure pvd exists */
-    rc = read711(image, &type);
-    if(rc != 1)
-        return -1;
-    
-    /* first descriptor must be primary */
-    if(type != VDTYPE_PRIMARY)
-        return -2;
     
     /* will always have this unless image is broken */
     volInfo->filenameTypes = FNTYPE_9660;
@@ -613,18 +604,20 @@ int readVolInfo(int image, VolInfo* volInfo)
     /* might not have supplementary descriptor */
     volInfo->sRootDrOffset = 0;
     
-    //!! have to read into this one day
-    volInfo->creationTime = 0;
+    /* skip system area */
+    lseek(image, NLS_SYSTEM_AREA * NBYTES_LOGICAL_BLOCK, SEEK_SET);
     
-    /* record publ, dataprep */
-    lseek(image, 87, SEEK_CUR);
-    
-    /* pvd escape sequences */
-    rc = read(image, escapeSequences, 32);
-    if(rc != 32)
+    /* READ PVD */
+    /* make sure pvd exists */
+    rc = read711(image, &vdType);
+    if(rc != 1)
         return -1;
     
-    lseek(image, 36, SEEK_CUR);
+    /* first descriptor must be primary */
+    if(vdType != VDTYPE_PRIMARY)
+        return -2;
+    
+    lseek(image, 155, SEEK_CUR);
     
     /* am now at root dr */
     volInfo->pRootDrOffset = lseek(image, 0, SEEK_CUR);
@@ -635,22 +628,79 @@ int readVolInfo(int image, VolInfo* volInfo)
     if(rc != 128)
         return -1;
     volInfo->publisher[128] = '\0';
-    printf("'%s'\n", volInfo->publisher);
+    
     rc = read(image, volInfo->dataPreparer, 128);
     if(rc != 128)
         return -1;
     volInfo->dataPreparer[128] = '\0';
-    printf("'%s'\n", volInfo->dataPreparer);
-    // skip until date
     
-    // skip date (to be recorded later)
+    lseek(image, 239, SEEK_CUR);
     
-    // skip the rest of the descriptor
+    //!! skip creation date for now
+    lseek(image, 17, SEEK_CUR);
+    volInfo->creationTime = 0;
+    
+    /* skip the rest of the extent */
+    lseek(image, 1277, SEEK_CUR);
+    /* END READ PVD */
     
     /* see if rockridge exists */
+    
+    /* find boot record */
     
     /* see if svd exists */
       /* make sure it's joliet */
     
+    // can have unlimited number of volume descriptors, but they must end with terminator
+    // for the sake of sanity i wll set the maximum to 10
+    
+    
     return 0;
+}
+
+/*******************************************************************************
+* readVDType()
+* read type of a volume descriptor
+*
+* type can be:
+* - VDTYPE_BOOT
+* - VDTYPE_PRIMARY
+* - VDTYPE_SUPPLEMENTARY
+* - VDTYPE_VOLUMEPARTITION
+* - VDTYPE_TERMINATOR
+*
+* Parameters:
+* - int file to read from
+* - unsigned char* vd type
+* Return:
+* - 7 (bytes read) if all ok
+* - -1 if failed to read anything
+* - -2 if vd type unknown
+* - -3 if sid not right
+* - -4 if vd version unknown
+*  */
+int readVDTypeVer(int image, unsigned char* type)
+{
+    char sid[5];
+    unsigned char tryByte;
+    int rc;
+    
+    rc = read711(image, &tryByte);
+    if(rc != 1)
+        return -1;
+    if(tryByte != VDTYPE_BOOT && tryByte != VDTYPE_PRIMARY &&
+       tryByte != VDTYPE_SUPPLEMENTARY && tryByte != VDTYPE_VOLUMEPARTITION &&
+       tryByte != VDTYPE_TERMINATOR)
+        return -2;
+    
+    /* just to minimize the posibility that i'm reading random data: */
+    rc = read(image, sid, 5);
+    if(rc != 5)
+        return -1;
+    if( strncmp(sid, "CD001", 5) != 0 )
+        return -3;
+    
+    *type = tryByte;
+    
+    return 7;
 }
