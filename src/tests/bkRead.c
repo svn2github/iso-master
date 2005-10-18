@@ -134,7 +134,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             
             if( strlen(dir->name) > NCHARS_FILE_ID_MAX - 1 )
                 return -2;
-        
+            
             /* padding field */
             if(lenFileId9660 % 2 == 0)
                 lseek(image, 1, SEEK_CUR);
@@ -227,7 +227,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
     }
     
     lseek(image, lenSU, SEEK_CUR);
-
+    
     origPos = lseek(image, 0, SEEK_CUR);
     
     lseek(image, locExtent * NBYTES_LOGICAL_BLOCK, SEEK_SET);
@@ -591,12 +591,8 @@ int skipDR(int image)
 int readVolInfo(int image, VolInfo* volInfo)
 {
     int rc;
-    unsigned char vdType;
-    
-    int numDescriptorsRead;
-    
-    
-    char escapeSequences[32];
+    unsigned char vdType; /* to check what descriptor follows */
+    //char escapeSequences[32];
     
     /* will always have this unless image is broken */
     volInfo->filenameTypes = FNTYPE_9660;
@@ -641,66 +637,39 @@ int readVolInfo(int image, VolInfo* volInfo)
     volInfo->creationTime = 0;
     
     /* skip the rest of the extent */
-    lseek(image, 1277, SEEK_CUR);
+    lseek(image, 1218, SEEK_CUR);
     /* END READ PVD */
     
     /* see if rockridge exists */
     
-    /* find boot record */
-    
-    /* see if svd exists */
-      /* make sure it's joliet */
-    
-    // can have unlimited number of volume descriptors, but they must end with terminator
-    // for the sake of sanity i wll set the maximum to 10
-    
-    
-    return 0;
-}
-
-/*******************************************************************************
-* readVDType()
-* read type of a volume descriptor
-*
-* type can be:
-* - VDTYPE_BOOT
-* - VDTYPE_PRIMARY
-* - VDTYPE_SUPPLEMENTARY
-* - VDTYPE_VOLUMEPARTITION
-* - VDTYPE_TERMINATOR
-*
-* Parameters:
-* - int file to read from
-* - unsigned char* vd type
-* Return:
-* - 7 (bytes read) if all ok
-* - -1 if failed to read anything
-* - -2 if vd type unknown
-* - -3 if sid not right
-* - -4 if vd version unknown
-*  */
-int readVDTypeVer(int image, unsigned char* type)
-{
-    char sid[5];
-    unsigned char tryByte;
-    int rc;
-    
-    rc = read711(image, &tryByte);
+    /* TRY read boot record */
+    rc = read711(image, &vdType);
     if(rc != 1)
         return -1;
-    if(tryByte != VDTYPE_BOOT && tryByte != VDTYPE_PRIMARY &&
-       tryByte != VDTYPE_SUPPLEMENTARY && tryByte != VDTYPE_VOLUMEPARTITION &&
-       tryByte != VDTYPE_TERMINATOR)
-        return -2;
     
-    /* just to minimize the posibility that i'm reading random data: */
-    rc = read(image, sid, 5);
-    if(rc != 5)
+    if(vdType == VDTYPE_BOOT)
+    {
+        lseek(image, 2047, SEEK_CUR);
+    }
+    else
+    {
+        lseek(image, -1, SEEK_CUR);
+    }
+    /* END TRY read boot record */
+    
+    /* TRY read svd */
+    rc = read711(image, &vdType);
+    if(rc != 1)
         return -1;
-    if( strncmp(sid, "CD001", 5) != 0 )
-        return -3;
     
-    *type = tryByte;
+    if(vdType == VDTYPE_SUPPLEMENTARY)
+    {
+        /* make sure it's joliet */
+        
+        /* record root offset */
+        
+    }
+    /* END TRY read svd */
     
-    return 7;
+    return 0;
 }
