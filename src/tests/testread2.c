@@ -59,11 +59,10 @@ void showDir(Dir* dir, int level)
 int main(int argc, char** argv)
 {
     int image;
-    //VdSet vdset;
     VolInfo volInfo;
     int rc;
     
-    //Dir tree;
+    Dir tree;
     FilePath filePath;
     Path srcDir;
     Path dirPath;
@@ -77,54 +76,42 @@ int main(int argc, char** argv)
     if(image == -1)
         oops("unable to open image");
     
-    /* skip system area 
-    lseek(image, NLS_SYSTEM_AREA * NBYTES_LOGICAL_BLOCK, SEEK_SET);
-    
-    // volume descriptor set 
-    rc = readVDSet(image, &vdset);
-    if(rc <= 0)
-        oops("problem reading vd set");
-    
-    printf("lb size: %d\n", vdset.pvd.lbSize);
-    
-    printf("volume space size: %u\n", vdset.pvd.volSpaceSize);
-    
-    printf("human-readable volume size: %dB, %dMB, %dMiB\n", vdset.pvd.lbSize * vdset.pvd.volSpaceSize,
-                                                             vdset.pvd.lbSize * vdset.pvd.volSpaceSize / 1024000,
-                                                             vdset.pvd.lbSize * vdset.pvd.volSpaceSize / 1048576);
-    printf("pathtable size: %d\n", vdset.pvd.pathTableSize);
-    
-    printf("publ: \'%s\'\n", vdset.pvd.publId);
-    
-    printf("dprp: \'%s\'\n", vdset.pvd.dataPrepId);
-    
-    printf("L path table: %d\n", vdset.pvd.locTypeLPathTable);
-    
-    printf("M path table: %d\n", vdset.pvd.locTypeMPathTable);
-    
-    printf("root extent at: %d\n", vdset.pvd.rootDR.locExtent);
-    
-    printf("data length: %d\n", vdset.pvd.rootDR.dataLength);
-    
-    //printf("joliet type: %d\n", svdGetJolietType(&(vdset.svd)));
-    printf("joliet root extent at: %d\n", vdset.svd.rootDR.locExtent);
-    */
-    
-    /*lseek(image, vdset.pvd.rootDROffset, SEEK_SET);
-    tree.directories = NULL;
-    tree.files = NULL;
-    rc = readDir(image, &tree, FNTYPE_ROCKRIDGE, true);
-    printf("readDir ended with %d\n", rc);*/
-    
     rc = readVolInfo(image, &volInfo);
     if(image <= 0)
         oops("failed to read volume info");
+    if(volInfo.filenameTypes & FNTYPE_9660)
+        printf("Have 9660 @ 0x%X\n", (int)volInfo.pRootDrOffset);
+    if(volInfo.filenameTypes & FNTYPE_ROCKRIDGE)
+        printf("Have Rockridge @ 0x%X\n", (int)volInfo.pRootDrOffset);
+    if(volInfo.filenameTypes & FNTYPE_JOLIET)
+        printf("Have Joliet @ 0x%X\n", (int)volInfo.sRootDrOffset);
+    
+    tree.directories = NULL;
+    tree.files = NULL;
+    if(volInfo.filenameTypes & FNTYPE_JOLIET)
+    {
+        lseek(image, volInfo.sRootDrOffset, SEEK_SET);
+        rc = readDir(image, &tree, FNTYPE_JOLIET, true);
+        printf("(joliet) readDir ended with %d\n", rc);
+    }
+    else if(volInfo.filenameTypes & FNTYPE_ROCKRIDGE)
+    {
+        lseek(image, volInfo.pRootDrOffset, SEEK_SET);
+        rc = readDir(image, &tree, FNTYPE_ROCKRIDGE, true);
+        printf("(rockridge) readDir ended with %d\n", rc);
+    }
+    else
+    {
+        lseek(image, volInfo.pRootDrOffset, SEEK_SET);
+        rc = readDir(image, &tree, FNTYPE_9660, true);
+        printf("(9660) readDir ended with %d\n", rc);
+    }
     
     rc = close(image);
     if(rc == -1)
         oops("faled to close image");
     
-    //showDir(&tree, 0);
+    showDir(&tree, 0);
     
     filePath.path.numDirs = 2;
     filePath.path.dirs = malloc(sizeof(char*) * filePath.path.numDirs);

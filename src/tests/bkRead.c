@@ -408,7 +408,7 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
         if( strlen(nameInAscii) > NCHARS_FILE_ID_MAX - 1 )
             return -2;
         
-        strcpy(file->name, nameAsOnDisk);
+        strcpy(file->name, nameInAscii);
         
         /* padding field */
         if(lenFileId9660 % 2 == 0)
@@ -553,6 +553,174 @@ int readRockridgeFilename(int image, char* dest, int lenSU)
 }
 
 /*
+* assumes pvd is first descriptor in set
+*/
+int readVolInfo(int image, VolInfo* volInfo)
+{
+    int rc;
+    unsigned char vdType; /* to check what descriptor follows */
+    bool haveMorePvd; /* to skip extra pvds */
+    unsigned char escapeSequence[3]; /* only interested in a joliet sequence */
+    
+    /* vars for checking rockridge */
+    unsigned realRootLoc; /* location of the root dr inside root dir */
+    unsigned char recordLen; /* length of rood dr */
+    unsigned char sPsUentry[7]; /* su entry SP */
+    
+    /* will always have this unless image is broken */
+    volInfo->filenameTypes = FNTYPE_9660;
+    
+    /* might not have supplementary descriptor */
+    volInfo->sRootDrOffset = 0;
+    
+    /* skip system area */
+    lseek(image, NLS_SYSTEM_AREA * NBYTES_LOGICAL_BLOCK, SEEK_SET);
+    
+    /* READ PVD */
+    /* make sure pvd exists */
+    rc = read711(image, &vdType);
+    if(rc != 1)
+        return -1;
+    
+    /* first descriptor must be primary */
+    if(vdType != VDTYPE_PRIMARY)
+        return -2;
+    
+    lseek(image, 155, SEEK_CUR);
+    
+    /* am now at root dr */
+    volInfo->pRootDrOffset = lseek(image, 0, SEEK_CUR);
+    
+        /* SEE if rockridge exists */
+        lseek(image, 2, SEEK_CUR);
+        
+        rc = read733(image, &realRootLoc);
+        if(rc != 8)
+            return -3;
+        realRootLoc *= NBYTES_LOGICAL_BLOCK;
+        
+        lseek(image, realRootLoc, SEEK_SET);
+        
+        rc = read711(image, &recordLen);
+        if(rc != 1)
+            return -1;
+        
+        if(recordLen >= 41)
+        /* a minimum root with SP su field */
+        {
+            /* root dr has filename length of 1 */
+            lseek(image, 33, SEEK_CUR);
+            
+            /* a rockridge root dr has an SP su entry here */
+            
+            rc = read(image, &sPsUentry, 7);
+            if(rc != 7)
+                return -1;
+            
+            if( sPsUentry[0] == 0x53 && sPsUentry[1] == 0x50 &&
+                sPsUentry[2] == 7 && 
+                sPsUentry[4] == 0xBE && sPsUentry[5] == 0xEF )
+            /* rockridge it is */
+            {
+                volInfo->filenameTypes |= FNTYPE_ROCKRIDGE;
+            }
+        }
+        
+        /* go back to where it was before trying rockridge */
+        lseek(image, volInfo->pRootDrOffset, SEEK_SET);
+        /* END SEE if rockridge exists */
+    
+    lseek(image, 162, SEEK_CUR);
+    
+    //!! strip spaces from the end of these two
+    rc = read(image, volInfo->publisher, 128);
+    if(rc != 128)
+        return -1;
+    volInfo->publisher[128] = '\0';
+    
+    rc = read(image, volInfo->dataPreparer, 128);
+    if(rc != 128)
+        return -1;
+    volInfo->dataPreparer[128] = '\0';
+    
+    lseek(image, 239, SEEK_CUR);
+    
+    //!! skip creation date for now
+    lseek(image, 17, SEEK_CUR);
+    volInfo->creationTime = 0;
+    
+    /* skip the rest of the extent */
+    lseek(image, 1218, SEEK_CUR);
+    /* END READ PVD */
+    
+    /* SKIP all extra copies of pvd */
+    haveMorePvd = true;
+    while(haveMorePvd)
+    {
+        rc = read711(image, &vdType);
+        if(rc != 1)
+            return -1;
+        
+        if(vdType == VDTYPE_PRIMARY)
+        {
+            lseek(image, 2047, SEEK_CUR);
+        }
+        else
+        {
+            lseek(image, -1, SEEK_CUR);
+            haveMorePvd = false;
+        }
+    }
+    /* END SKIP all extra copies of pvd */
+    
+    /* TRY read boot record */
+    rc = read711(image, &vdType);
+    if(rc != 1)
+        return -1;
+    
+    if(vdType == VDTYPE_BOOT)
+    {
+        lseek(image, 2047, SEEK_CUR);
+    }
+    else
+    {
+        lseek(image, -1, SEEK_CUR);
+    }
+    /* END TRY read boot record */
+    
+    /* TRY read svd */
+    rc = read711(image, &vdType);
+    if(rc != 1)
+        return -1;
+    
+    if(vdType == VDTYPE_SUPPLEMENTARY)
+    /* make sure it's joliet (by escape sequence) */
+    {
+        lseek(image, 87, SEEK_CUR);
+        
+        read(image, escapeSequence, 3);
+        
+        if( (escapeSequence[0] == 0x25 && escapeSequence[1] == 0x2F &&
+             escapeSequence[2] == 0x40) ||
+            (escapeSequence[0] == 0x25 && escapeSequence[1] == 0x2F &&
+             escapeSequence[2] == 0x43) ||
+            (escapeSequence[0] == 0x25 && escapeSequence[1] == 0x2F &&
+             escapeSequence[2] == 0x45) )
+        /* is indeed joliet */
+        {
+            lseek(image, 65, SEEK_CUR);
+            
+            volInfo->sRootDrOffset = lseek(image, 0, SEEK_CUR);
+            
+            volInfo->filenameTypes |= FNTYPE_JOLIET;
+        }
+    }
+    /* END TRY read svd */
+    
+    return 0;
+}
+
+/*
 * filenames as read from 9660 Sometimes end with ;1 (terminator+version num)
 * this removes the useless ending and terminates the destination with a '\0'
 */
@@ -586,90 +754,4 @@ int skipDR(int image)
     lseek(image, dRLen - 1, SEEK_CUR);
     
     return dRLen;
-}
-
-int readVolInfo(int image, VolInfo* volInfo)
-{
-    int rc;
-    unsigned char vdType; /* to check what descriptor follows */
-    //char escapeSequences[32];
-    
-    /* will always have this unless image is broken */
-    volInfo->filenameTypes = FNTYPE_9660;
-    
-    /* might not have supplementary descriptor */
-    volInfo->sRootDrOffset = 0;
-    
-    /* skip system area */
-    lseek(image, NLS_SYSTEM_AREA * NBYTES_LOGICAL_BLOCK, SEEK_SET);
-    
-    /* READ PVD */
-    /* make sure pvd exists */
-    rc = read711(image, &vdType);
-    if(rc != 1)
-        return -1;
-    
-    /* first descriptor must be primary */
-    if(vdType != VDTYPE_PRIMARY)
-        return -2;
-    
-    lseek(image, 155, SEEK_CUR);
-    
-    /* am now at root dr */
-    volInfo->pRootDrOffset = lseek(image, 0, SEEK_CUR);
-    
-    lseek(image, 162, SEEK_CUR);
-    
-    rc = read(image, volInfo->publisher, 128);
-    if(rc != 128)
-        return -1;
-    volInfo->publisher[128] = '\0';
-    
-    rc = read(image, volInfo->dataPreparer, 128);
-    if(rc != 128)
-        return -1;
-    volInfo->dataPreparer[128] = '\0';
-    
-    lseek(image, 239, SEEK_CUR);
-    
-    //!! skip creation date for now
-    lseek(image, 17, SEEK_CUR);
-    volInfo->creationTime = 0;
-    
-    /* skip the rest of the extent */
-    lseek(image, 1218, SEEK_CUR);
-    /* END READ PVD */
-    
-    /* see if rockridge exists */
-    
-    /* TRY read boot record */
-    rc = read711(image, &vdType);
-    if(rc != 1)
-        return -1;
-    
-    if(vdType == VDTYPE_BOOT)
-    {
-        lseek(image, 2047, SEEK_CUR);
-    }
-    else
-    {
-        lseek(image, -1, SEEK_CUR);
-    }
-    /* END TRY read boot record */
-    
-    /* TRY read svd */
-    rc = read711(image, &vdType);
-    if(rc != 1)
-        return -1;
-    
-    if(vdType == VDTYPE_SUPPLEMENTARY)
-    {
-        /* make sure it's joliet */
-        
-        /* record root offset */
-        
-    }
-    /* END TRY read svd */
-    
-    return 0;
 }

@@ -39,6 +39,7 @@ typedef struct
     off_t pRootDrOffset; /* primary (9660 and maybe rockridge) */
     off_t sRootDrOffset; /* secondary (joliet), 0 if does not exist */
     //!! boot record
+    /* maybe one day record LEN_SKP from SP */
     
     /* public use */
     char publisher[129];
