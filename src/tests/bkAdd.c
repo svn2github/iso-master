@@ -8,8 +8,18 @@
 #include "bkPath.h"
 #include "bkAdd.h"
 
-/*
-* when working on this make sure tree is not modified if cannot opendir()
+/*******************************************************************************
+* addDir()
+* adds a directory from the filesystem to the image
+*
+* Receives:
+* - Dir*, root of tree to add to
+* - char*, path of directory to add, must end with trailing slash
+* - Path*, destination on image
+* Returns:
+* - 
+* Notes:
+*  when working on this make sure tree is not modified if cannot opendir()
 */
 int addDir(Dir* tree, char* srcPath, Path* destDir)
 {
@@ -22,7 +32,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     DirLL* searchDir;
     bool dirFound;
     DirLL** lastDir;
-    struct stat statStruct;
+    struct stat statStruct; /* to get info on the dir */
     
     /* vars to read contents of a dir on fs */
     DIR* srcDir;
@@ -66,7 +76,8 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     if(rc <= 0)
         return rc;
     
-    // check length of dir
+    if(strlen(srcDirName) > NCHARS_FILE_ID_MAX - 1)
+        return -6;
     
     /* find last dir in list */
     //!! if not sorting, might as well append to beginnig of list
@@ -107,6 +118,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     
     strcpy(newSrcPathAndName, srcPath);
     
+    /* destination for children */
     rc = makeLongerPath(destDir, srcDirName, &newDestDir);
     if(rc <= 0)
         return rc;
@@ -121,7 +133,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     while( (dirEnt = readdir(srcDir)) != NULL )
     {
         if( strcmp(dirEnt->d_name, ".") != 0 && strcmp(dirEnt->d_name, "..") != 0 )
-        /* not "." or ".." */
+        /* not "." or ".." (safely ignore those two) */
         {
             /* append file/dir name */
             strcpy(newSrcPathAndName + newSrcPathLen, dirEnt->d_name);
@@ -145,6 +157,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
             else
             /* not regular file or directory */
             {
+                //!! i don't know, maybe ignore and move to the next file
                 return -7;
             }
             
@@ -164,9 +177,19 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     return 1;
 }
 
-/*
-* file gets appended to the end of the list (screw the 9660 sorting, it's stupid)
-* will only add a regular file (symblic links are followed, see stat(2))
+/*******************************************************************************
+* addFile()
+* adds a file from the filesystem to the image
+*
+* Receives:
+* - Dir*, root of tree to add to
+* - char*, path and name of file to add, must end with trailing slash
+* - Path*, destination on image
+* Returns:
+* - 
+* Notes:
+*  file gets appended to the end of the list (screw the 9660 sorting, it's stupid)
+*  will only add a regular file (symblic links are followed, see stat(2))
 */
 int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
 {
@@ -226,8 +249,6 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
         return -2;
     
     (*lastFile)->next = NULL;
-    
-    // check length of filename
     
     strcpy((*lastFile)->file.name, filename);
     

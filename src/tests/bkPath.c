@@ -41,7 +41,7 @@ int getFilenameFromPath(char* srcPathAndName, char* filename)
     /* string ended with '/' */
         return -2;
     
-    /* loop copies null byte also */
+    /* this loop copies null byte also */
     for(count = indexLastSlash + 1, count2 = 0; count <= srcLen; count++, count2++)
     {
         filename[count2] = srcPathAndName[count];

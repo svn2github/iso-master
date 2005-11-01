@@ -1,9 +1,16 @@
+/*******************************************************************************
+* bk.h
+* global #defines and definitions for structures
+* */
+
 #ifndef bk_h
 #define bk_h
 
 #include <stdbool.h>
 
+/* number of logical sectors in system area (in practice always 16) */
 #define NLS_SYSTEM_AREA 16
+/* number of bytes in a logical block (in practice always 2048) */
 #define NBYTES_LOGICAL_BLOCK 2048
 
 /* can be |ed */
@@ -31,7 +38,10 @@
 #define NCHARS_FILE_ID_MAX 65
 #define NCHARS_FILE_ID_FS_MAX 256
 
-/* strings are '\0' terminated */
+/*******************************************************************************
+* VolInfo
+* information about a volume (one image)
+* strings are '\0' terminated */
 typedef struct
 {
     /* bk use */
@@ -48,6 +58,9 @@ typedef struct
     
 } VolInfo;
 
+/*******************************************************************************
+* Dir
+* information about a directory and it's contents */
 typedef struct
 {
     char name[NCHARS_FILE_ID_MAX]; /* '\0' terminated */
@@ -57,6 +70,9 @@ typedef struct
     
 } Dir;
 
+/*******************************************************************************
+* DirLL
+* list of directories */
 typedef struct DirLL
 {
     Dir dir;
@@ -64,6 +80,9 @@ typedef struct DirLL
     
 } DirLL;
 
+/*******************************************************************************
+* File
+* information about a file, whether on the image or on the filesystem */
 typedef struct
 {
     char name[NCHARS_FILE_ID_MAX]; /* '\0' terminated */
@@ -76,6 +95,9 @@ typedef struct
     
 } File;
 
+/*******************************************************************************
+* FileLL
+* list of files */
 typedef struct FileLL
 {
     File file;
@@ -83,6 +105,9 @@ typedef struct FileLL
     
 } FileLL;
 
+/*******************************************************************************
+* Path
+* full path of a directory on the image */
 typedef struct
 {
     unsigned numDirs;
@@ -90,6 +115,9 @@ typedef struct
     
 } Path;
 
+/*******************************************************************************
+* FilePath
+* full path of a file on the image */
 typedef struct
 {
     Path path;
