@@ -7,6 +7,7 @@
 #define bk_h
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 /* number of logical sectors in system area (in practice always 16) */
 #define NLS_SYSTEM_AREA 16

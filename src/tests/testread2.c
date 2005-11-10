@@ -71,6 +71,8 @@ int main(int argc, char** argv)
     char* dirToAdd;
     //char dirName[256];
     
+    //Dir newTree;
+    
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
     if(image == -1)
