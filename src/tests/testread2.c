@@ -12,6 +12,7 @@
 #include "bkRead.h"
 #include "bkDelete.h"
 #include "bkExtract.h"
+#include "bkMangle.h"
 
 #include "vd.h"
 
@@ -71,7 +72,7 @@ int main(int argc, char** argv)
     char* dirToAdd;
     //char dirName[256];
     
-    //Dir newTree;
+    Dir newTree;
     
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
@@ -81,12 +82,12 @@ int main(int argc, char** argv)
     rc = readVolInfo(image, &volInfo);
     if(image <= 0)
         oops("failed to read volume info");
-    if(volInfo.filenameTypes & FNTYPE_9660)
-        printf("Have 9660 @ 0x%X\n", (int)volInfo.pRootDrOffset);
-    if(volInfo.filenameTypes & FNTYPE_ROCKRIDGE)
-        printf("Have Rockridge @ 0x%X\n", (int)volInfo.pRootDrOffset);
-    if(volInfo.filenameTypes & FNTYPE_JOLIET)
-        printf("Have Joliet @ 0x%X\n", (int)volInfo.sRootDrOffset);
+    //~ if(volInfo.filenameTypes & FNTYPE_9660)
+        //~ printf("Have 9660 @ 0x%X\n", (int)volInfo.pRootDrOffset);
+    //~ if(volInfo.filenameTypes & FNTYPE_ROCKRIDGE)
+        //~ printf("Have Rockridge @ 0x%X\n", (int)volInfo.pRootDrOffset);
+    //~ if(volInfo.filenameTypes & FNTYPE_JOLIET)
+        //~ printf("Have Joliet @ 0x%X\n", (int)volInfo.sRootDrOffset);
     
     tree.directories = NULL;
     tree.files = NULL;
@@ -113,7 +114,7 @@ int main(int argc, char** argv)
     if(rc == -1)
         oops("faled to close image");
     
-    showDir(&tree, 0);
+    //showDir(&tree, 0);
     
     filePath.path.numDirs = 2;
     filePath.path.dirs = malloc(sizeof(char*) * filePath.path.numDirs);
@@ -141,6 +142,8 @@ int main(int argc, char** argv)
     
     dirToAdd = malloc(strlen("/etc/") + 1);
     strcpy(dirToAdd, "/etc/");
+    
+    mangleDir(&tree, &newTree, FNTYPE_9660);
     
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");

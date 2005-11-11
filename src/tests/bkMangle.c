@@ -34,23 +34,25 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
     
     prevOrigFileName[0] = '\0';
     prevOrigDirName[0] = '\0';
-    while(nextOrigFile != NULL && nextOrigDir != NULL)
+    while( !(nextOrigFile == NULL && nextOrigDir == NULL) )
     /* have a file or directory to convert */
     {
         if(nextOrigFile == NULL)
         /* no files left */
         {
             takeDirNext = true;
-            
+            printf("no files left\n");
             mangleDirName(nextOrigDir->dir.name, nextOrigDirName, fileNameType);
+            printf("next dir: %s -> '%s'\n", nextOrigDir->dir.name, nextOrigDirName);
         }
         else if(nextOrigDir == NULL)
         /* no directories left */
         {
             takeDirNext = false;
-            
+            printf("no dirs left\n");
             mangleFileName(nextOrigFile->file.name, nextOrigFileName, fileNameType);
             splitFileName(nextOrigFileName, nextOrigFileBase, nextOrigFileExt);
+            printf("next file: %s -> '%s'\n", nextOrigFile->file.name, nextOrigFileName);
         }
         else
         /* have both a file and a directory */
@@ -60,6 +62,8 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
             mangleFileName(nextOrigFile->file.name, nextOrigFileName, fileNameType);
             splitFileName(nextOrigFileName, nextOrigFileBase, nextOrigFileExt);
             
+            printf("next dir: %s -> '%s'\n", nextOrigDir->dir.name, nextOrigDirName);
+            printf("next file: %s -> '%s'\n", nextOrigFile->file.name, nextOrigFileName);
             /* find the lesser string, that's what i want to use */
             if( strcmp(nextOrigFileName, nextOrigDirName) > 0 )
             /* filename > dirname */
@@ -114,32 +118,65 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
             
             nextOrigFile = nextOrigFile->next;
         }
-        
     } /* while (have a file or directory to convert) */
-    
+    printf("finished\n");
     return 1;
 }
 
 void mangleDirName(char* src, char* dest, int fileNameType)
 {
-    strcpy(src, dest);
+    strcpy(dest, src);
     
     dest[8] = '\0';
     
     // get rid of bad characters
 }
 
-void mangleFileName(char* src, char* dest, int fileNameType)
+void mangleFileName(char* src, char* dest, int fileNameType, char* base, char* extension)
 {
-    char base[NCHARS_FILE_ID_MAX];
-    char extension[5];
+    int baseMaxLen;
+    int extMaxLen;
+    int lenOrig;
+    int splitAt;
     
-    splitFileName(src, base, extension);
+    //!! other types, 9660 should be default
+    if(fileNameType & FNTYPE_9660)
+    {
+        baseMaxLen = 8;
+        extMaxLen = 3;
+    }
     
-    strncpy(dest, base, 8);
+    /* SPLIT name */
+    lenOrig = strlen(src);
+    
+    /* find the dot at most extMaxLen + 1 characters from the end */
+    splitAt = lenOrig - 1;
+    while(splitAt > lenOrig - extMaxLen + 1 && splitAt >= 0 && src[splitAt] != '.')
+        splitAt--;
+    
+    /* copy base (don't want a trailing dot) */
+    if(src[splitAt] == '.')
+    {
+        strncpy(base, src, splitAt);
+        base[splitAt] = '\0';
+    }
+    else
+    {
+        strncpy(base, src, splitAt + 1);
+        base[splitAt + 1] = '\0';
+    }
+    
+    /* copy extension */
+    strncpy(extension, src + splitAt + 1, extMaxLen + 1);
+    extension[extMaxLen + 1] = '\0';
+    /* END SPLIT name */
+    
+    strncpy(dest, base, baseMaxLen);
+    dest[baseMaxLen] = '\0';
     
     strcat(dest, ".");
     
+    extension[extMaxLen] = '\0';
     strcat(dest, extension);
     
     // get rid of bad characters
@@ -157,9 +194,19 @@ void splitFileName(char* src, char* base, char* extension)
     while(splitAt > lenOrig - 5 && splitAt >= 0 && src[splitAt] != '.')
         splitAt--;
     
-    /* copy base */
-    strncpy(base, src, splitAt);
+    /* copy base (don't want a trailing dot) */
+    if(src[splitAt] == '.')
+    {
+        strncpy(base, src, splitAt);
+        base[splitAt] = '\0';
+    }
+    else
+    {
+        strncpy(base, src, splitAt + 1);
+        base[splitAt + 1] = '\0';
+    }
     
     /* copy extension */
-    strncpy(extension, src + splitAt + 1, 4);
+    strncpy(extension, src + splitAt + 1, 5);
+    extension[5] = '\0';
 }
