@@ -76,6 +76,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     if(rc <= 0)
         return rc;
     
+    //!! max len on fs
     if(strlen(srcDirName) > NCHARS_FILE_ID_MAX - 1)
         return -6;
     
@@ -208,6 +209,7 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     if(rc <= 0)
         return rc;
     
+    //!! max len on fs
     if(strlen(filename) > NCHARS_FILE_ID_MAX - 1)
         return -3;
     
