@@ -1,0 +1,26 @@
+To run the test, you must use a remote terminal application such as telnet or putty to connect 
+to the cs1 server. These instructions assume you will be using the telnet client that comes 
+with every windows machine.
+
+Under the start menu there is an item called 'Run', click that.
+
+Type this into the box and click ok:
+  telnet cs1.senecac.on.ca
+
+It will prompt for a username (use b5301a07) and password (use 05343521).
+
+The following command will run the test:
+ ./testread2 slackd1-head.iso | less
+
+You may use the pageUp and pageDown keys to scroll the list. When finished, press the letter 
+'q' to quit the test and type exit to close the session.
+
+The contents of list of files and directories displayed will match the list posted on the 
+website. I have very little control over the linux 'ls' command that was used to generate the 
+static list so the order of elements is not very straight-forward. For example:
+ - the 'ls' command mixes files and directories based on alphabetical order
+ - the 'ls' command shows all contents of a directory first and then the contents of every 
+subdirectory while my program shows the contents of each (sub)directory as it is encountered
+
+If comparing the results is too difficult using a text file, I can provide a copy of the CD and you can use Windows 
+Explorer to view it's contents.

@@ -1,0 +1,11 @@
+Download isomuster.tar.gz to a linux machine (will not work on windows). Can be done using remote shell on matrix since no gui is being used.
+
+Extract it: tar xvzf isomuster.tar.gz
+
+Enter the directory: cd isomuster
+
+Compile library and test: make unittest
+
+Run test: ./unittest
+
+If any test fails, it will not say 'OK!' in the end.
