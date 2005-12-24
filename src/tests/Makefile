@@ -1,5 +1,5 @@
-testread2: testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o bkMangle.o
-	cc testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o bkMangle.o -Wall -o testread2
+testread2: testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o bkMangle.o bkWrite.o bkWrite7x.o bkTime.o
+	cc testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o bkMangle.o bkWrite.o bkWrite7x.o bkTime.o -Wall -o testread2
 
 clean: 
 	rm *.o testread2
@@ -18,4 +18,10 @@ bkPath.o: bkPath.c bkPath.h bk.h
 	cc bkPath.c -Wall -c
 bkMangle.o: bkMangle.c bkMangle.h
 	cc bkMangle.c -Wall -c
+bkWrite.o: bkWrite.c bkWrite.h
+	cc bkWrite.c -Wall -c
+bkWrite7x.o: bkWrite7x.c bkWrite7x.h
+	cc bkWrite7x.c -Wall -c
+bkTime.o: bkTime.c bkTime.h
+	cc bkTime.c -Wall -c
 

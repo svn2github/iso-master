@@ -6,6 +6,7 @@
 #include "bk.h"
 #include "bkRead.h"
 #include "bkRead7x.h"
+#include "bkTime.h"
 
 /* numbers as recorded on image */
 #define VDTYPE_BOOT 0
@@ -540,6 +541,8 @@ int readRockridgeFilename(int image, char* dest, int lenSU)
             
             strncpy(dest, nameAsRead, lengthAsRead);
             
+            dest[lengthAsRead] = '\0';
+            
             foundName = true;
         }
         else
@@ -549,7 +552,10 @@ int readRockridgeFilename(int image, char* dest, int lenSU)
         }
     }
     
-    return 1;
+    if(!foundName)
+        return -1;
+    else
+        return 1;
 }
 
 /*
@@ -561,6 +567,7 @@ int readVolInfo(int image, VolInfo* volInfo)
     unsigned char vdType; /* to check what descriptor follows */
     bool haveMorePvd; /* to skip extra pvds */
     unsigned char escapeSequence[3]; /* only interested in a joliet sequence */
+    char timeString[17]; /* for creation time */
     
     /* vars for checking rockridge */
     unsigned realRootLoc; /* location of the root dr inside root dir */
@@ -586,7 +593,15 @@ int readVolInfo(int image, VolInfo* volInfo)
     if(vdType != VDTYPE_PRIMARY)
         return -2;
     
-    lseek(image, 155, SEEK_CUR);
+    lseek(image, 39, SEEK_CUR);
+    
+    rc = read(image, volInfo->volId, 32);
+    if(rc != 32)
+        return -1;
+    volInfo->volId[32] = '\0';
+    //!! strip spaces from the end of this
+    
+    lseek(image, 84, SEEK_CUR);
     
     /* am now at root dr */
     volInfo->pRootDrOffset = lseek(image, 0, SEEK_CUR);
@@ -645,9 +660,11 @@ int readVolInfo(int image, VolInfo* volInfo)
     
     lseek(image, 239, SEEK_CUR);
     
-    //!! skip creation date for now
-    lseek(image, 17, SEEK_CUR);
-    volInfo->creationTime = 0;
+    rc = read(image, timeString, 17);
+    if(rc != 17)
+        return -1;
+    
+    longStringToEpoch(timeString, &(volInfo->creationTime));
     
     /* skip the rest of the extent */
     lseek(image, 1218, SEEK_CUR);

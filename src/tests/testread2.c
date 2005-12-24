@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <stdbool.h>
+#include <time.h>
 
 #include "bk.h"
 #include "bkAdd.h"
@@ -13,6 +14,7 @@
 #include "bkDelete.h"
 #include "bkExtract.h"
 #include "bkMangle.h"
+#include "bkWrite.h"
 
 #include "vd.h"
 
@@ -60,10 +62,12 @@ void showDir(Dir* dir, int level)
 int main(int argc, char** argv)
 {
     int image;
+    int newImage;
     VolInfo volInfo;
     int rc;
     
     Dir tree;
+    Dir newTree;
     FilePath filePath;
     Path srcDir;
     Path dirPath;
@@ -71,8 +75,6 @@ int main(int argc, char** argv)
     char* fileToAdd;
     char* dirToAdd;
     //char dirName[256];
-    
-    Dir newTree;
     
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
@@ -91,17 +93,17 @@ int main(int argc, char** argv)
     
     tree.directories = NULL;
     tree.files = NULL;
-    if(volInfo.filenameTypes & FNTYPE_JOLIET)
-    {
-        lseek(image, volInfo.sRootDrOffset, SEEK_SET);
-        rc = readDir(image, &tree, FNTYPE_JOLIET, true);
-        printf("(joliet) readDir ended with %d\n", rc);
-    }
-    else if(volInfo.filenameTypes & FNTYPE_ROCKRIDGE)
+    if(volInfo.filenameTypes & FNTYPE_ROCKRIDGE)
     {
         lseek(image, volInfo.pRootDrOffset, SEEK_SET);
         rc = readDir(image, &tree, FNTYPE_ROCKRIDGE, true);
         printf("(rockridge) readDir ended with %d\n", rc);
+    }
+    else if(volInfo.filenameTypes & FNTYPE_JOLIET)
+    {
+        lseek(image, volInfo.sRootDrOffset, SEEK_SET);
+        rc = readDir(image, &tree, FNTYPE_JOLIET, true);
+        printf("(joliet) readDir ended with %d\n", rc);
     }
     else
     {
@@ -109,6 +111,9 @@ int main(int argc, char** argv)
         rc = readDir(image, &tree, FNTYPE_9660, true);
         printf("(9660) readDir ended with %d\n", rc);
     }
+    
+    printf("vol id: '%s'\n", volInfo.volId);
+    printf("created: %s\n", ctime(&(volInfo.creationTime)));
     
     rc = close(image);
     if(rc == -1)
@@ -143,8 +148,6 @@ int main(int argc, char** argv)
     dirToAdd = malloc(strlen("/etc/") + 1);
     strcpy(dirToAdd, "/etc/");
     
-    mangleDir(&tree, &newTree, FNTYPE_9660);
-    
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
     
@@ -167,7 +170,30 @@ int main(int argc, char** argv)
     //if(rc <= 0)
     //    oops("problem adding dir");
     
+    //mangleDir(&tree, &newTree, FNTYPE_9660);
+    
     //showDir(&tree, 0);
     
+    newImage = open("out.iso", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    if(image == -1)
+        oops("unable to open image for writing");
+    
+    rc = writeByteBlock(newImage, 0, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA);
+    if(rc <= 0)
+        oops("unable to write blank space");
+    
+    rc = writePriVolDescriptor(newImage, &volInfo, 0, 0, time(NULL));
+    if(rc <= 0)
+        oops("unable to write volume descriptor");
+    
+    rc = writeVdsetTerminator(newImage);
+    if(rc <= 0)
+        oops("unable to write terminator");
+    
+    rc = close(newImage);
+    if(rc == -1)
+        oops("faled to close new image");
+
+
     return 0;
 }

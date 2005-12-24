@@ -53,6 +53,7 @@ typedef struct
     /* maybe one day record LEN_SKP from SP */
     
     /* public use */
+    char volId[33];
     char publisher[129];
     char dataPreparer[129];
     time_t creationTime;
@@ -105,6 +106,31 @@ typedef struct FileLL
     struct FileLL* next;
     
 } FileLL;
+
+typedef struct
+{
+    char name9660[13]; /* 8.3 max */
+    char nameRock[NCHARS_FILE_ID_MAX];
+    char nameJoliet[NCHARS_FILE_ID_MAX];
+    unsigned posixFileMode;
+    off_t extentLocationOffset; /* where on image to write location of extent 
+                                 for this directory */
+    
+    struct DirToWrite* directories;
+    struct FileToWrite* files;
+    
+} DirToWrite;
+
+typedef struct
+{
+    char name9660[13]; /* 8.3 max */
+    char nameRock[NCHARS_FILE_ID_MAX];
+    char nameJoliet[NCHARS_FILE_ID_MAX];
+    unsigned posixFileMode;
+    off_t extentLocationOffset; /* where on image to write location of extent 
+                                 for this file */
+    
+} FileToWrite;
 
 /*******************************************************************************
 * Path

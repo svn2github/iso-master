@@ -1,5 +1,5 @@
 /*******************************************************************************
-* read7x
+* bkRead7x
 * functions to read simple variables as described in sections 7.x of iso9660
 * not including filenames (7.4, 7.5, 7.6)
 * 

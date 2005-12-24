@@ -1,22 +1,25 @@
 #include "bk.h"
 #include "bkMangle.h"
 
+#include <stdio.h>
 #include <string.h>
 
 //!! origDir files and dirs have to be sorted
 int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
 {
     DirLL* nextOrigDir;
-    char nextOrigDirName[NCHARS_FILE_ID_MAX];
-    char prevOrigDirName[NCHARS_FILE_ID_MAX];
+    char nextOrigDirName[NCHARS_FILE_ID_MAX]; /* mangled */
+    //char prevOrigDirName[NCHARS_FILE_ID_MAX];
     
     FileLL* nextOrigFile;
-    char nextOrigFileName[NCHARS_FILE_ID_MAX];
-    char nextOrigFileBase[NCHARS_FILE_ID_MAX];
-    char nextOrigFileExt[5];
-    char prevOrigFileName[NCHARS_FILE_ID_MAX];
+    char nextOrigFileName[NCHARS_FILE_ID_MAX]; /* mangled */
+    char nextOrigFileBase[NCHARS_FILE_ID_MAX]; /* in case need to insert ~xxx */
+    char nextOrigFileExt[5]; /* in case need to insert ~xxx */
+    //char prevOrigFileName[NCHARS_FILE_ID_MAX];
     /*char prevOrigFileBase[NCHARS_FILE_ID_MAX];
     char prevOrigFileExt[6];*/
+    
+    char prevOrigName[NCHARS_FILE_ID_MAX]; /* either file or dir */
     
     DirLL** nextNewDir;
     FileLL** nextNewFile;
@@ -32,9 +35,11 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
     nextNewDir = &(newDir->directories);
     *nextNewDir = NULL;
     
-    prevOrigFileName[0] = '\0';
-    prevOrigDirName[0] = '\0';
-    while( !(nextOrigFile == NULL && nextOrigDir == NULL) )
+    //prevOrigFileName[0] = '\0';
+    //prevOrigDirName[0] = '\0';
+    prevOrigName[0] = '\0';
+    fileNumber = -1;
+    while( nextOrigFile != NULL || nextOrigDir != NULL )
     /* have a file or directory to convert */
     {
         if(nextOrigFile == NULL)
@@ -62,8 +67,8 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
             mangleFileName(nextOrigFile->file.name, nextOrigFileName, fileNameType, 
                            nextOrigFileBase, nextOrigFileExt);
             
-            printf("next dir: %s -> '%s'\n", nextOrigDir->dir.name, nextOrigDirName);
-            printf("next file: %s -> '%s'\n", nextOrigFile->file.name, nextOrigFileName);
+            printf("c next dir: %s -> '%s'\n", nextOrigDir->dir.name, nextOrigDirName);
+            printf("c next file: %s -> '%s'\n", nextOrigFile->file.name, nextOrigFileName);
             /* find the lesser string, that's what i want to use */
             if( strcmp(nextOrigFileName, nextOrigDirName) > 0 )
             /* filename > dirname */
@@ -79,20 +84,18 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
         
         if(takeDirNext)
         {
-            if( strcmp(nextOrigDirName, prevOrigDirName) == 0 ||
-                strcmp(nextOrigDirName, prevOrigFileName) == 0 )
+            //~ if( strcmp(nextOrigDirName, prevOrigDirName) == 0 ||
+                //~ strcmp(nextOrigDirName, prevOrigFileName) == 0 )
+            if( strcmp(nextOrigDirName, prevOrigName) == 0 )
             {
-                /* save name before ~xxx is added */
-                strcpy(nextOrigDirName, prevOrigDirName);
-                
                 // insert ~xxx in dir name 
                 
-                
+                fileNumber++;
             }
             else
             {
                 /* save name */
-                strcpy(nextOrigDirName, prevOrigDirName);
+                strcpy(prevOrigName, nextOrigDirName);
                 
                 fileNumber = -1;
             }
@@ -104,20 +107,18 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
         else
         /* take file next */
         {
-            if( strcmp(nextOrigFileName, prevOrigFileName) == 0 ||
-                strcmp(nextOrigFileName, prevOrigDirName) == 0 )
+            //~ if( strcmp(nextOrigFileName, prevOrigFileName) == 0 ||
+                //~ strcmp(nextOrigFileName, prevOrigDirName) == 0 )
+            if( strcmp(nextOrigFileName, prevOrigName) == 0 )
             {
-                /* save name before ~xxx is added */
-                strcpy(nextOrigFileName, prevOrigFileName);
-                
                 // insert ~xxx in file name 
                 
-                
+                fileNumber++;
             }
             else
             {
                 /* save name */
-                strcpy(nextOrigFileName, prevOrigFileName);
+                strcpy(prevOrigName, nextOrigFileName);
                 
                 fileNumber = -1;
             }
@@ -126,6 +127,7 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
             
             nextOrigFile = nextOrigFile->next;
         }
+        
     } /* while (have a file or directory to convert) */
     printf("finished\n");
     return 1;
