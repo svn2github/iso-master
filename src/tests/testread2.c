@@ -37,7 +37,7 @@ void showDir(Dir* dir, int level)
     {
         for(count = 0; count < level; count++)
             printf("  ");
-        printf("%s\n", dirNode->dir.name);
+        printf("%s - %o\n", dirNode->dir.name, dirNode->dir.posixFileMode);
         
         showDir(&(dirNode->dir), level + 1);
         
@@ -59,6 +59,40 @@ void showDir(Dir* dir, int level)
     }
 }
 
+void showNewDir(DirToWrite* dir, int level)
+{
+    DirToWriteLL* dirNode;
+    FileToWriteLL* fileNode;
+    int count;
+    
+    dirNode = dir->directories;
+    
+    while(dirNode != NULL)
+    {
+        for(count = 0; count < level; count++)
+            printf("  ");
+        printf("%s - %s - %o\n", dirNode->dir.name9660, dirNode->dir.nameRock, dirNode->dir.posixFileMode);
+        
+        showNewDir(&(dirNode->dir), level + 1);
+        
+        dirNode = dirNode->next;
+    }
+    
+    fileNode = dir->files;
+    
+    while(fileNode != NULL)
+    {
+        for(count = 0; count < level; count++)
+            printf("  ");
+        printf("%s - %s - %d bytes - %o - ", fileNode->file.name9660, fileNode->file.nameRock, fileNode->file.size, fileNode->file.posixFileMode);
+        if(fileNode->file.onImage)
+            printf("on image @%08X\n", fileNode->file.position);
+        else
+            printf("on disk: \'%s\'\n", fileNode->file.pathAndName);
+        fileNode = fileNode->next;
+    }
+}
+
 int main(int argc, char** argv)
 {
     int image;
@@ -67,7 +101,7 @@ int main(int argc, char** argv)
     int rc;
     
     Dir tree;
-    Dir newTree;
+    DirToWrite newTree;
     FilePath filePath;
     Path srcDir;
     Path dirPath;
@@ -112,8 +146,8 @@ int main(int argc, char** argv)
         printf("(9660) readDir ended with %d\n", rc);
     }
     
-    printf("vol id: '%s'\n", volInfo.volId);
-    printf("created: %s\n", ctime(&(volInfo.creationTime)));
+    //printf("vol id: '%s'\n", volInfo.volId);
+    //printf("created: %s\n", ctime(&(volInfo.creationTime)));
     
     rc = close(image);
     if(rc == -1)
@@ -170,7 +204,8 @@ int main(int argc, char** argv)
     //if(rc <= 0)
     //    oops("problem adding dir");
     
-    //mangleDir(&tree, &newTree, FNTYPE_9660);
+    mangleDir(&tree, &newTree, FNTYPE_9660 | FNTYPE_ROCKRIDGE);
+    //showNewDir(&newTree, 0);
     
     //showDir(&tree, 0);
     
@@ -189,6 +224,10 @@ int main(int argc, char** argv)
     rc = writeVdsetTerminator(newImage);
     if(rc <= 0)
         oops("unable to write terminator");
+    
+    rc = writeDir(image, &newTree, 0, 0, 0, time(NULL), FNTYPE_9660 | FNTYPE_ROCKRIDGE, true);
+    if(rc <= 0)
+        oops("unable to write tree");
     
     rc = close(newImage);
     if(rc == -1)

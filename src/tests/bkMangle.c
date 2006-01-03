@@ -4,39 +4,44 @@
 #include <stdio.h>
 #include <string.h>
 
+/*
+mangle_get_prefix
+is_valid_name
+
+*/
+
 //!! origDir files and dirs have to be sorted
-int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
+int mangleDir(Dir* origDir, DirToWrite* newDir, int fileNameTypes)
 {
     DirLL* nextOrigDir;
     char nextOrigDirName[NCHARS_FILE_ID_MAX]; /* mangled */
-    //char prevOrigDirName[NCHARS_FILE_ID_MAX];
     
     FileLL* nextOrigFile;
     char nextOrigFileName[NCHARS_FILE_ID_MAX]; /* mangled */
     char nextOrigFileBase[NCHARS_FILE_ID_MAX]; /* in case need to insert ~xxx */
     char nextOrigFileExt[5]; /* in case need to insert ~xxx */
-    //char prevOrigFileName[NCHARS_FILE_ID_MAX];
-    /*char prevOrigFileBase[NCHARS_FILE_ID_MAX];
-    char prevOrigFileExt[6];*/
     
     char prevOrigName[NCHARS_FILE_ID_MAX]; /* either file or dir */
     
-    DirLL** nextNewDir;
-    FileLL** nextNewFile;
+    DirToWriteLL** nextNewDir;
+    FileToWriteLL** nextNewFile;
     
     bool takeDirNext; /* what to work on next, a dir or a file? */
     int fileNumber; /* long~001.txt */
     
-    nextOrigFile = origDir->files;
-    nextOrigDir = origDir->directories;
+    int rc;
     
-    nextNewFile = &(newDir->files);
-    *nextNewFile = NULL;
+    //!! i really really don't want to do this:
+    newDir->posixFileMode = origDir->posixFileMode;
+    
+    nextOrigDir = origDir->directories;
+    nextOrigFile = origDir->files;
+    
     nextNewDir = &(newDir->directories);
     *nextNewDir = NULL;
+    nextNewFile = &(newDir->files);
+    *nextNewFile = NULL;
     
-    //prevOrigFileName[0] = '\0';
-    //prevOrigDirName[0] = '\0';
     prevOrigName[0] = '\0';
     fileNumber = -1;
     while( nextOrigFile != NULL || nextOrigDir != NULL )
@@ -46,29 +51,25 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
         /* no files left */
         {
             takeDirNext = true;
-            printf("no files left\n");
-            mangleDirName(nextOrigDir->dir.name, nextOrigDirName, fileNameType);
-            printf("next dir: %s -> '%s'\n", nextOrigDir->dir.name, nextOrigDirName);
+            
+            mangleDirName(nextOrigDir->dir.name, nextOrigDirName);
         }
         else if(nextOrigDir == NULL)
         /* no directories left */
         {
             takeDirNext = false;
-            printf("no dirs left\n");
-            mangleFileName(nextOrigFile->file.name, nextOrigFileName, fileNameType, 
+            
+            mangleFileName(nextOrigFile->file.name, nextOrigFileName, 
                            nextOrigFileBase, nextOrigFileExt);
-            printf("next file: %s -> '%s'\n", nextOrigFile->file.name, nextOrigFileName);
         }
         else
         /* have both a file and a directory */
         {
-            mangleDirName(nextOrigDir->dir.name, nextOrigDirName, fileNameType);
+            mangleDirName(nextOrigDir->dir.name, nextOrigDirName);
             
-            mangleFileName(nextOrigFile->file.name, nextOrigFileName, fileNameType, 
+            mangleFileName(nextOrigFile->file.name, nextOrigFileName, 
                            nextOrigFileBase, nextOrigFileExt);
             
-            printf("c next dir: %s -> '%s'\n", nextOrigDir->dir.name, nextOrigDirName);
-            printf("c next file: %s -> '%s'\n", nextOrigFile->file.name, nextOrigFileName);
             /* find the lesser string, that's what i want to use */
             if( strcmp(nextOrigFileName, nextOrigDirName) > 0 )
             /* filename > dirname */
@@ -84,13 +85,13 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
         
         if(takeDirNext)
         {
-            //~ if( strcmp(nextOrigDirName, prevOrigDirName) == 0 ||
-                //~ strcmp(nextOrigDirName, prevOrigFileName) == 0 )
             if( strcmp(nextOrigDirName, prevOrigName) == 0 )
             {
-                // insert ~xxx in dir name 
-                
                 fileNumber++;
+                
+                /* there will only be a conflict if names have been shortned,
+                * so the name will always be 8 chars long */
+                sprintf(nextOrigDirName + 4, "~%03d", fileNumber);
             }
             else
             {
@@ -100,20 +101,49 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
                 fileNumber = -1;
             }
             
-            // add dir with new name to new list
+            *nextNewDir = malloc(sizeof(DirToWriteLL));
+            if(*nextNewDir == NULL)
+                return -1;
+            
+            strcpy((*nextNewDir)->dir.name9660, nextOrigDirName);
+            
+            if(fileNameTypes | FNTYPE_ROCKRIDGE)
+                strcpy((*nextNewDir)->dir.nameRock, nextOrigDir->dir.name);
+            else
+                (*nextNewDir)->dir.nameRock[0] = '\0';
+            
+            if(fileNameTypes | FNTYPE_JOLIET)
+                strcpy((*nextNewDir)->dir.nameJoliet, nextOrigDir->dir.name);
+            else
+                (*nextNewDir)->dir.nameJoliet[0] = '\0';
+            
+            (*nextNewDir)->dir.posixFileMode = nextOrigDir->dir.posixFileMode;
+            
+            (*nextNewDir)->dir.extentLocationOffset = 0;
+            
+            (*nextNewDir)->dir.extentNumber = 0;
+            
+            (*nextNewDir)->dir.dataLength = 0;
+                
+            rc = mangleDir( &(nextOrigDir->dir), &((*nextNewDir)->dir), fileNameTypes);
+            if(rc < 0)
+                return rc;
+            
+            nextNewDir = &((*nextNewDir)->next);
+            *nextNewDir = NULL;
             
             nextOrigDir = nextOrigDir->next;
         }
         else
         /* take file next */
         {
-            //~ if( strcmp(nextOrigFileName, prevOrigFileName) == 0 ||
-                //~ strcmp(nextOrigFileName, prevOrigDirName) == 0 )
             if( strcmp(nextOrigFileName, prevOrigName) == 0 )
             {
-                // insert ~xxx in file name 
-                
                 fileNumber++;
+                
+                /* there will only be a conflict if names have been shortned,
+                * so the name will always be 8 chars long */
+                sprintf(nextOrigFileBase + 4, "~%03d", fileNumber);
             }
             else
             {
@@ -123,59 +153,82 @@ int mangleDir(Dir* origDir, Dir* newDir, int fileNameType)
                 fileNumber = -1;
             }
             
-            // add file with new name to new list
+            *nextNewFile = malloc(sizeof(FileToWriteLL));
+            if(*nextNewFile == NULL)
+                return -1;
+            
+            strcpy((*nextNewFile)->file.name9660, nextOrigFileName);
+            
+            if(fileNameTypes | FNTYPE_ROCKRIDGE)
+                strcpy((*nextNewFile)->file.nameRock, nextOrigFile->file.name);
+            else
+                (*nextNewFile)->file.nameRock[0] = '\0';
+            
+            if(fileNameTypes | FNTYPE_JOLIET)
+                strcpy((*nextNewFile)->file.nameJoliet, nextOrigFile->file.name);
+            else
+                (*nextNewFile)->file.nameJoliet[0] = '\0';
+            
+            (*nextNewFile)->file.posixFileMode = nextOrigFile->file.posixFileMode;
+            
+            (*nextNewFile)->file.extentLocationOffset = 0;
+            
+            (*nextNewFile)->file.extentNumber = 0;
+            
+            (*nextNewFile)->file.dataLength = 0;
+            
+            (*nextNewFile)->file.size = nextOrigFile->file.size;
+            
+            (*nextNewFile)->file.onImage = nextOrigFile->file.onImage;
+            
+            (*nextNewFile)->file.position = nextOrigFile->file.position;
+                
+            nextNewFile = &((*nextNewFile)->next);
+            *nextNewFile = NULL;
             
             nextOrigFile = nextOrigFile->next;
         }
         
     } /* while (have a file or directory to convert) */
-    printf("finished\n");
+    
     return 1;
 }
 
-void mangleDirName(char* src, char* dest, int fileNameType)
+void mangleDirName(char* src, char* dest)
 {
-    int maxLen;
+    static int maxLen = 8;
     
-    //!! other types, 9660 should be default
-    if(fileNameType == FNTYPE_9660)
-    {
-        maxLen = 8;
-    }
-    
-    strcpy(dest, src);
+    strncpy(dest, src, maxLen);
     
     dest[maxLen] = '\0';
     
-    replaceIllegalChars(dest, fileNameType);
+    replaceIllegalChars(dest);
 }
 
 // will this work with file "a" ?
-void mangleFileName(char* src, char* dest, int fileNameType, char* base, char* extension)
+void mangleFileName(char* src, char* dest, char* base, char* extension)
 {
-    int baseMaxLen;
-    int extMaxLen;
+    static int baseMaxLen = 8;
+    static int extMaxLen = 3;
     int lenOrig;
-    int splitAt;
-    
-    //!! other types, 9660 should be default
-    if(fileNameType == FNTYPE_9660)
-    {
-        baseMaxLen = 8;
-        extMaxLen = 3;
-    }
+    int splitAt; /* index of dot or if no dot exists,
+                    character just before extension, or if no extension exists,
+                    last character in name */
+    int count;
+    int count2;
     
     /* SPLIT name */
     lenOrig = strlen(src);
     
     /* find the dot at most extMaxLen + 1 characters from the end */
     splitAt = lenOrig - 1;
-    while(splitAt > lenOrig - extMaxLen - 1 && splitAt >= 1 && src[splitAt] != '.')
+    while(splitAt > lenOrig - 1 - extMaxLen && splitAt > 1 && src[splitAt] != '.')
         splitAt--;
     
     /* copy base (don't want a trailing dot) */
     if(src[splitAt] == '.')
     {
+        /* index of dot = len of string before dot */
         strncpy(base, src, splitAt);
         base[splitAt] = '\0';
     }
@@ -185,13 +238,13 @@ void mangleFileName(char* src, char* dest, int fileNameType, char* base, char* e
         base[splitAt + 1] = '\0';
     }
     
-    replaceIllegalChars(base, fileNameType);
+    replaceIllegalChars(base);
     
-    /* copy extension */
-    strncpy(extension, src + splitAt + 1, extMaxLen + 1);
-    extension[extMaxLen + 1] = '\0';
+    /* copy extension including null byte. works if no extension exists */
+    for(count = splitAt + 1, count2 = 0; count <= lenOrig; count++, count2++)
+        extension[count2] = src[count];
     
-    replaceIllegalChars(extension, fileNameType);
+    replaceIllegalChars(extension);
     /* END SPLIT name */
     
     strncpy(dest, base, baseMaxLen);
@@ -199,44 +252,38 @@ void mangleFileName(char* src, char* dest, int fileNameType, char* base, char* e
     
     strcat(dest, ".");
     
-    extension[extMaxLen] = '\0';
     strcat(dest, extension);
 }
 
-void replaceIllegalChars(char* string, int fileNameType)
+void replaceIllegalChars(char* string)
 {
     int count;
     int stringLen;
     
     stringLen = strlen(string);
     
-    //!! other types, 9660 should be default
-    if(fileNameType == FNTYPE_9660)
+    for(count = 0; count < stringLen; count++)
     {
-        for(count = 0; count < stringLen; count++)
+        if( string[count] >= 97 && string[count] <= 122 )
+        /* lowercase alpha */
         {
-            if( string[count] >= 97 && string[count] <= 122 )
-            /* lowercase alpha */
-            {
-                /* convert to uppercase */
-                string[count] = string[count] - 32;
-            }
-            else if( (string[count] >= 48 && string[count] <= 57) ||
-                     (string[count] >= 65 && string[count] <= 90) ||
-                     string[count] == '.' ||
-                     string[count] == '-' ||
-                     string[count] == '_' )
-            /* these are ok */
-            {
-                /* do nothing */
-                ;
-            }
-            else
-            /* some fancy character */
-            {
-                /* convert to '0' */
-                string[count] = '0';
-            }
+            /* convert to uppercase */
+            string[count] = string[count] - 32;
+        }
+        else if( (string[count] >= 48 && string[count] <= 57) ||
+                 (string[count] >= 65 && string[count] <= 90) ||
+                 string[count] == '.' ||
+                 string[count] == '-' ||
+                 string[count] == '_' )
+        /* these are ok */
+        {
+            /* do nothing */
+            ;
+        }
+        else
+        /* some fancy character */
+        {
+            string[count] = '_';
         }
     }
 }

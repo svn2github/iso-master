@@ -1,6 +1,6 @@
 /*******************************************************************************
 * bk.h
-* global #defines and definitions for structures
+* global #defines and definitions for structures used throughout bkisofs
 * */
 
 #ifndef bk_h
@@ -115,11 +115,20 @@ typedef struct
     unsigned posixFileMode;
     off_t extentLocationOffset; /* where on image to write location of extent 
                                  for this directory */
+    unsigned extentNumber; /* extent number */
+    unsigned dataLength; /* bytes, including blank */
     
-    struct DirToWrite* directories;
-    struct FileToWrite* files;
+    struct DirToWriteLL* directories;
+    struct FileToWriteLL* files;
     
 } DirToWrite;
+
+typedef struct DirToWriteLL
+{
+    DirToWrite dir;
+    struct DirToWriteLL* next;
+    
+} DirToWriteLL;
 
 typedef struct
 {
@@ -129,8 +138,23 @@ typedef struct
     unsigned posixFileMode;
     off_t extentLocationOffset; /* where on image to write location of extent 
                                  for this file */
+    unsigned extentNumber; /* extent number */
+    unsigned dataLength; /* bytes, including blank */
+    
+    unsigned size; /* in bytes */
+    bool onImage;
+    unsigned position; /* if on image, in bytes */
+    char* pathAndName; /* if on filesystem, full path + filename
+                       * is to be freed by whenever the File is freed */
     
 } FileToWrite;
+
+typedef struct FileToWriteLL
+{
+    FileToWrite file;
+    struct FileToWriteLL* next;
+    
+} FileToWriteLL;
 
 /*******************************************************************************
 * Path
