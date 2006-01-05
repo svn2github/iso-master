@@ -148,14 +148,14 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
         }
     }
     
-    selfDir.dataLength = lseek(image, 0, SEEK_CUR) - startPos;
-    
     /* write blank to conclude extent */
     numUnusedBytes = NBYTES_LOGICAL_BLOCK - 
                      lseek(image, 0, SEEK_CUR) % NBYTES_LOGICAL_BLOCK;
     rc = writeByteBlock(image, 0x00, numUnusedBytes);
     if(rc != numUnusedBytes)
         return rc;
+    
+    selfDir.dataLength = lseek(image, 0, SEEK_CUR) - startPos;
     
     /* write subdirectories */
     nextDir = dir->directories;
@@ -169,8 +169,10 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
         if(rc < 0)
             return rc;
         
-        nextDir->dir.dataLength = lseek(image, 0, SEEK_CUR) - 
-                                  nextDir->dir.extentNumber * NBYTES_LOGICAL_BLOCK;
+        //!! what about subdirectories
+        //~ nextDir->dir.dataLength = lseek(image, 0, SEEK_CUR) - 
+                                  //~ nextDir->dir.extentNumber * NBYTES_LOGICAL_BLOCK;
+        nextDir->dir.dataLength = rc;
         
         nextDir = nextDir->next;
     }
