@@ -62,7 +62,7 @@ bool haveNextRecordInSector(int image)
 }
 
 /*
-* do not use this to read self or parent records unless it's the root
+* do not use this to read self or parent records unless it's the following:
 * if the root dr (inside vd) is read, it's filename will be ""
 * note: directory identifiers do not end with ";1"
 */

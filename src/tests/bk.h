@@ -45,18 +45,18 @@
 * strings are '\0' terminated */
 typedef struct
 {
-    /* bk use */
+    /* bk use for reading from original image */
     unsigned filenameTypes;
     off_t pRootDrOffset; /* primary (9660 and maybe rockridge) */
     off_t sRootDrOffset; /* secondary (joliet), 0 if does not exist */
-    //!! boot record
-    /* maybe one day record LEN_SKP from SP */
     
-    /* public use */
+    /* read only public use */
+    time_t creationTime;
+    
+    /* public use, read/write */
     char volId[33];
     char publisher[129];
     char dataPreparer[129];
-    time_t creationTime;
     
 } VolInfo;
 
@@ -115,6 +115,7 @@ typedef struct
     unsigned posixFileMode;
     off_t extentLocationOffset; /* where on image to write location of extent 
                                  for this directory */
+    off_t extentLocationOffset2; /* for svd (joliet) */
     unsigned extentNumber; /* extent number */
     unsigned dataLength; /* bytes, including blank */
     
@@ -138,6 +139,7 @@ typedef struct
     unsigned posixFileMode;
     off_t extentLocationOffset; /* where on image to write location of extent 
                                  for this file */
+    off_t extentLocationOffset2; /* for svd (joliet) */
     unsigned extentNumber; /* extent number */
     unsigned dataLength; /* bytes, including blank */
     

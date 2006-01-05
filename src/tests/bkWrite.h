@@ -7,8 +7,13 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
              bool isRoot);
 int writeDr(int image, DirToWrite* dir, time_t recordingTime, bool isADir, 
             bool isSelfOrParent, bool isFirstRecord, int filenameTypes);
-int writePriVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
-                          unsigned rootDrSize, time_t creationTime);
+int writeFileContents(int oldImage, int newImage, DirToWrite* dir, 
+                      int filenameTypes);
+int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
+               time_t creationTime, int filenameTypes);
+int writeJolietStringField(int image, char* name, int fieldSize);
+int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
+                       unsigned rootDrSize, time_t creationTime, bool isPrimary);
 int writeRockER(int image);
 int writeRockNM(int image, char* name);
 int writeRockPX(int image, DirToWrite* dir, bool isADir);
