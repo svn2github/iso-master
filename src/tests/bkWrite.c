@@ -148,14 +148,14 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
         }
     }
     
+    selfDir.dataLength = lseek(image, 0, SEEK_CUR) - startPos;
+    
     /* write blank to conclude extent */
     numUnusedBytes = NBYTES_LOGICAL_BLOCK - 
                      lseek(image, 0, SEEK_CUR) % NBYTES_LOGICAL_BLOCK;
     rc = writeByteBlock(image, 0x00, numUnusedBytes);
     if(rc != numUnusedBytes)
         return rc;
-    
-    selfDir.dataLength = lseek(image, 0, SEEK_CUR) - startPos;
     
     /* write subdirectories */
     nextDir = dir->directories;
@@ -473,6 +473,8 @@ int writeFileContents(int oldImage, int newImage, DirToWrite* dir,
                 return -2;
         }
         
+        nextFile->file.dataLength = lseek(newImage, 0, SEEK_CUR) - nextFile->file.extentNumber * NBYTES_LOGICAL_BLOCK;
+        
         /* FILL extent with zeroes */
         numUnusedBytes = NBYTES_LOGICAL_BLOCK - 
                          lseek(newImage, 0, SEEK_CUR) % NBYTES_LOGICAL_BLOCK;
@@ -483,8 +485,6 @@ int writeFileContents(int oldImage, int newImage, DirToWrite* dir,
         /* END FILL extent with zeroes */
         
         endPos = lseek(newImage, 0, SEEK_CUR);
-        
-        nextFile->file.dataLength = endPos - nextFile->file.extentNumber * NBYTES_LOGICAL_BLOCK;
         
         /* WRITE file location and size */
         lseek(newImage, nextFile->file.extentLocationOffset, SEEK_SET);
@@ -607,8 +607,8 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     if(filenameTypes & FNTYPE_JOLIET)
     {
         printf("writing svd\n");
-        rc = writeVolDescriptor(newImage, volInfo, pRealRootDrOffset, 
-                                pRootDirSize, creationTime, false);
+        rc = writeVolDescriptor(newImage, volInfo, sRealRootDrOffset, 
+                                sRootDirSize, creationTime, false);
         if(rc <= 0)
             return rc;
     }
@@ -673,8 +673,13 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
     unsigned short anUnsignedShort;
     size_t currPos;
     
-    /* volume descriptor type */
-    byte = 1;
+    /* VOLUME descriptor type */
+    if(isPrimary)
+        byte = 1;
+    else
+        byte = 2;
+    /* END VOLUME descriptor type */
+
     rc = write711(image, &byte);
     if(rc != 1)
         return -1;
