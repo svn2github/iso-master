@@ -645,6 +645,10 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
         sRootDirSize = rc;
     }
     
+    // write 9660 type l, m path tables
+    
+    // maybe write joliet type l, m path tables
+    
     printf("writing files\n");fflush(NULL);
     /* all files and offsets/sizes */
     rc = writeFileContents(oldImage, newImage, &newTree, filenameTypes);
@@ -669,6 +673,13 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     }
     
     // delete tree to write
+    
+    return 1;
+}
+
+int writePathTable(int image)
+{
+    
     
     return 1;
 }

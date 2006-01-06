@@ -205,7 +205,7 @@ int main(int argc, char** argv)
     if(image == -1)
         oops("unable to open image for writing");
     
-    rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET);
+    rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 /* | FNTYPE_ROCKRIDGE  | FNTYPE_JOLIET*/);
     if(rc < 0)
         oops("failed to write image");
     
