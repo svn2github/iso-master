@@ -114,7 +114,7 @@ typedef struct
     char nameJoliet[NCHARS_FILE_ID_MAX];
     unsigned posixFileMode;
     off_t extentLocationOffset; /* where on image to write location of extent 
-                                 for this directory */
+                                *  for this directory */
     unsigned extentNumber; /* extent number */
     unsigned dataLength; /* bytes, including blank */
     off_t extentLocationOffset2; /* for svd (joliet) */
@@ -140,7 +140,7 @@ typedef struct
     char nameJoliet[NCHARS_FILE_ID_MAX];
     unsigned posixFileMode;
     off_t extentLocationOffset; /* where on image to write location of extent 
-                                 for this file */
+                                *  for this file */
     unsigned extentNumber; /* extent number */
     unsigned dataLength; /* bytes, including blank */
     off_t extentLocationOffset2; /* for svd (joliet) */

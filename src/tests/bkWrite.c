@@ -53,7 +53,7 @@ int writeByteBlock(int image, unsigned char byteToWrite, int numBytes)
             return -1;
     }
     
-    return count;
+    return 1;
 }
 
 /* returns data length of the dir written */
@@ -67,7 +67,7 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     int numUnusedBytes;
     off_t endPos;
     
-    DirToWrite selfDir;
+    DirToWrite selfDir; /* will have a different filename */
     DirToWrite parentDir;
     
     bool takeDirNext;
@@ -91,13 +91,25 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     /* this should never happen */
         return -10;
     
-    selfDir.extentNumber = startPos / NBYTES_LOGICAL_BLOCK;
+    if(filenameTypes & FNTYPE_JOLIET)
+        dir->extentNumber2 = startPos / NBYTES_LOGICAL_BLOCK;
+    else
+        dir->extentNumber = startPos / NBYTES_LOGICAL_BLOCK;
     
     /* write self */
     if(isRoot)
+    {
         rc = writeDr(image, &selfDir, recordingTime, true, true, true, filenameTypes);
+        
+        if(filenameTypes & FNTYPE_JOLIET)
+            dir->extentLocationOffset2 = selfDir.extentLocationOffset2;
+        else
+            dir->extentLocationOffset = selfDir.extentLocationOffset;
+    }
     else
+    {
         rc = writeDr(image, &selfDir, recordingTime, true, true, false, filenameTypes);
+    }
     if(rc < 0)
         return rc;
     
@@ -152,30 +164,32 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     numUnusedBytes = NBYTES_LOGICAL_BLOCK - 
                      lseek(image, 0, SEEK_CUR) % NBYTES_LOGICAL_BLOCK;
     rc = writeByteBlock(image, 0x00, numUnusedBytes);
-    if(rc != numUnusedBytes)
+    if(rc < 0)
         return rc;
     
-    selfDir.dataLength = lseek(image, 0, SEEK_CUR) - startPos;
+    if(filenameTypes & FNTYPE_JOLIET)
+        dir->dataLength2 = lseek(image, 0, SEEK_CUR) - startPos;
+    else
+        dir->dataLength = lseek(image, 0, SEEK_CUR) - startPos;
     
     /* write subdirectories */
     nextDir = dir->directories;
     while(nextDir != NULL)
     {
         if(filenameTypes & FNTYPE_JOLIET)
-            nextDir->dir.extentNumber2 = lseek(image, 0, SEEK_CUR) / NBYTES_LOGICAL_BLOCK;
+        {
+            rc = writeDir(image, &(nextDir->dir), dir->extentNumber2, 
+                          dir->dataLength2, dir->posixFileMode, recordingTime,
+                          filenameTypes, false);
+        }
         else
-            nextDir->dir.extentNumber = lseek(image, 0, SEEK_CUR) / NBYTES_LOGICAL_BLOCK;
-        
-        rc = writeDir(image, &(nextDir->dir), selfDir.extentNumber, 
-                      selfDir.dataLength, dir->posixFileMode, recordingTime,
-                      filenameTypes, false);
+        {
+            rc = writeDir(image, &(nextDir->dir), dir->extentNumber, 
+                          dir->dataLength, dir->posixFileMode, recordingTime,
+                          filenameTypes, false);
+        }
         if(rc < 0)
             return rc;
-        
-        if(filenameTypes & FNTYPE_JOLIET)
-            nextDir->dir.dataLength2 = rc;
-        else
-            nextDir->dir.dataLength = rc;
         
         nextDir = nextDir->next;
     }
@@ -188,13 +202,26 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     else
         lseek(image, selfDir.extentLocationOffset, SEEK_SET);
     
-    rc = write733(image, &(selfDir.extentNumber));
-    if(rc < 0)
-        return rc;
-    
-    rc = write733(image, &(selfDir.dataLength));
-    if(rc < 0)
-        return rc;
+    if(filenameTypes & FNTYPE_JOLIET)
+    {
+        rc = write733(image, &(dir->extentNumber2));
+        if(rc < 0)
+            return rc;
+        
+        rc = write733(image, &(dir->dataLength2));
+        if(rc < 0)
+            return rc;
+    }
+    else
+    {
+        rc = write733(image, &(dir->extentNumber));
+        if(rc < 0)
+            return rc;
+        
+        rc = write733(image, &(dir->dataLength));
+        if(rc < 0)
+            return rc;
+    }
     /* END SELF extent location and size */
     
     /* PARENT extent location and size */
@@ -206,13 +233,26 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     if(parentLbNum == 0)
     /* root, parent is same as self */
     {
-        rc = write733(image, &(selfDir.extentNumber));
-        if(rc < 0)
-            return rc;
-        
-        rc = write733(image, &(selfDir.dataLength));
-        if(rc < 0)
-            return rc;
+        if(filenameTypes & FNTYPE_JOLIET)
+        {
+            rc = write733(image, &(dir->extentNumber2));
+            if(rc < 0)
+                return rc;
+            
+            rc = write733(image, &(dir->dataLength2));
+            if(rc < 0)
+                return rc;
+        }
+        else
+        {
+            rc = write733(image, &(dir->extentNumber));
+            if(rc < 0)
+                return rc;
+            
+            rc = write733(image, &(dir->dataLength));
+            if(rc < 0)
+                return rc;
+        }
     }
     else
     /* normal parent */
@@ -260,7 +300,9 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     }
     /* ALL subdir extent locations and sizes */
     
-    return selfDir.dataLength;
+    lseek(image, endPos, SEEK_SET);
+    
+    return dir->dataLength;
 }
 
 /* returns length of record written */
@@ -493,7 +535,7 @@ int writeFileContents(int oldImage, int newImage, DirToWrite* dir,
                          lseek(newImage, 0, SEEK_CUR) % NBYTES_LOGICAL_BLOCK;
         
         rc = writeByteBlock(newImage, 0x00, numUnusedBytes);
-        if(rc != numUnusedBytes)
+        if(rc < 0)
             return rc;
         /* END FILL extent with zeroes */
         
@@ -514,7 +556,7 @@ int writeFileContents(int oldImage, int newImage, DirToWrite* dir,
         /* also update location and size on joliet tree */
         {
             lseek(newImage, nextFile->file.extentLocationOffset2, SEEK_SET);
-        
+            
             rc = write733(newImage, &(nextFile->file.extentNumber));
             if(rc < 0)
                 return rc;
@@ -752,7 +794,7 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
     
     /* unused field */
     rc = writeByteBlock(image, 0, 8);
-    if(rc != 8)
+    if(rc < 0)
         return -1;
     
     /* VOLUME space size (number of logical blocks, absolutely everything) */
@@ -773,7 +815,7 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
     if(isPrimary)
     {
         rc = writeByteBlock(image, 0, 32);
-        if(rc != 32)
+        if(rc < 0)
             return -1;
     }
     else
@@ -788,7 +830,7 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
             return -1;
         
         rc = writeByteBlock(image, 0, 29);
-        if(rc != 29)
+        if(rc < 0)
             return -1;
     }
     
@@ -817,7 +859,7 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
     
     /*!! 4 path table locations (don't have them yet) */
     rc = writeByteBlock(image, 0, 16);
-    if(rc != 16)
+    if(rc < 0)
         return -1;
     
     /* ROOT dr */
@@ -890,7 +932,7 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
     if(isPrimary)
     {
         rc = writeByteBlock(image, ' ', 128);
-        if(rc != 128)
+        if(rc < 0)
             return -1;
     }
     else
@@ -928,7 +970,7 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
             return -1;
         
         rc = writeByteBlock(image, ' ', 118);
-        if(rc != 118)
+        if(rc < 0)
             return -1;
     }
     else
@@ -944,7 +986,7 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
     if(isPrimary)
     {
         rc = writeByteBlock(image, ' ', 239);
-        if(rc != 239)
+        if(rc < 0)
             return -1;
     }
     else
@@ -983,7 +1025,7 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
     
     /* VOLUME expiration date (none) */
     rc = writeByteBlock(image, '0', 16);
-    if(rc != 16)
+    if(rc < 0)
         return -1;
     
     byte = 0;
@@ -1005,7 +1047,7 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
     
     /* reserved, applications use, reserved */
     rc = writeByteBlock(image, 0, 1166);
-    if(rc != 1166)
+    if(rc < 0)
         return -1;
     
     return 1;
@@ -1186,7 +1228,7 @@ int writeVdsetTerminator(int image)
         return -1;
     
     rc = writeByteBlock(image, 0, 2041);
-    if(rc != 2041)
+    if(rc < 0)
         return -1;
     
     return 1;
