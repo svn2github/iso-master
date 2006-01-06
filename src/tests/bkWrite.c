@@ -74,12 +74,12 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     DirToWriteLL* nextDir;
     FileToWriteLL* nextFile;
     
+    /* names other then 9660 are not used for self and parent */
     selfDir.name9660[0] = 0x00;
     selfDir.posixFileMode = dir->posixFileMode;
     
     parentDir.name9660[0] = 0x01;
     parentDir.name9660[1] = '\0';
-    // joliet, rockridge
     if(isRoot)
         parentDir.posixFileMode = selfDir.posixFileMode;
     else
@@ -161,7 +161,10 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     nextDir = dir->directories;
     while(nextDir != NULL)
     {
-        nextDir->dir.extentNumber = lseek(image, 0, SEEK_CUR) / NBYTES_LOGICAL_BLOCK;
+        if(filenameTypes & FNTYPE_JOLIET)
+            nextDir->dir.extentNumber2 = lseek(image, 0, SEEK_CUR) / NBYTES_LOGICAL_BLOCK;
+        else
+            nextDir->dir.extentNumber = lseek(image, 0, SEEK_CUR) / NBYTES_LOGICAL_BLOCK;
         
         rc = writeDir(image, &(nextDir->dir), selfDir.extentNumber, 
                       selfDir.dataLength, dir->posixFileMode, recordingTime,
@@ -169,10 +172,10 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
         if(rc < 0)
             return rc;
         
-        //!! what about subdirectories
-        //~ nextDir->dir.dataLength = lseek(image, 0, SEEK_CUR) - 
-                                  //~ nextDir->dir.extentNumber * NBYTES_LOGICAL_BLOCK;
-        nextDir->dir.dataLength = rc;
+        if(filenameTypes & FNTYPE_JOLIET)
+            nextDir->dir.dataLength2 = rc;
+        else
+            nextDir->dir.dataLength = rc;
         
         nextDir = nextDir->next;
     }
@@ -229,23 +232,33 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     while(nextDir != NULL)
     {
         if(filenameTypes & FNTYPE_JOLIET)
+        {
             lseek(image, nextDir->dir.extentLocationOffset2, SEEK_SET);
+            
+            rc = write733(image, &(nextDir->dir.extentNumber2));
+            if(rc < 0)
+                return rc;
+            
+            rc = write733(image, &(nextDir->dir.dataLength2));
+            if(rc < 0)
+                return rc;
+        }
         else
+        {
             lseek(image, nextDir->dir.extentLocationOffset, SEEK_SET);
-        
-        rc = write733(image, &(nextDir->dir.extentNumber));
-        if(rc < 0)
-            return rc;
-        
-        rc = write733(image, &(nextDir->dir.dataLength));
-        if(rc < 0)
-            return rc;
+            
+            rc = write733(image, &(nextDir->dir.extentNumber));
+            if(rc < 0)
+                return rc;
+            
+            rc = write733(image, &(nextDir->dir.dataLength));
+            if(rc < 0)
+                return rc;
+        }
         
         nextDir = nextDir->next;
     }
     /* ALL subdir extent locations and sizes */
-    
-    lseek(image, endPos, SEEK_SET);
     
     return selfDir.dataLength;
 }
@@ -278,12 +291,10 @@ int writeDr(int image, DirToWrite* dir, time_t recordingTime, bool isADir,
     else
         dir->extentLocationOffset = lseek(image, 0, SEEK_CUR);
     
-    /* location of extent (logical bock number)
-    * not recorded in this function */
+    /* location of extent not recorded in this function */
     lseek(image, 8, SEEK_CUR);
     
-    /* data length (number of bytes)
-    * not recorded in this function */
+    /* data length not recorded in this function */
     lseek(image, 8, SEEK_CUR);
     
     /* RECORDING time and date */
@@ -543,14 +554,14 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     off_t sRealRootDrOffset;
     int sRootDirSize;
     
-    printf("mangling\n");
+    printf("mangling\n");fflush(NULL);
     /* create tree to write */
     rc = mangleDir(oldTree, &newTree, filenameTypes);
     if(rc <= 0)
         return rc;
     //showNewDir(&newTree, 0);
     
-    printf("writing blank and terminator\n");
+    printf("writing blank and terminator\n");fflush(NULL);
     /* system area, always zeroes */
     rc = writeByteBlock(newImage, 0, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA);
     if(rc <= 0)
@@ -569,7 +580,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     
     pRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
     
-    printf("writing primary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));
+    printf("writing primary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
     /* 9660 and maybe rockridge dir tree */
     rc = writeDir(newImage, &newTree, 0, 0, 0, creationTime, 
                   filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE), true);
@@ -581,7 +592,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     /* joliet dir tree */
     if(filenameTypes & FNTYPE_JOLIET)
     {
-        printf("writing supplementary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));
+        printf("writing supplementary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
         sRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
         
         rc = writeDir(newImage, &newTree, 0, 0, 0, creationTime, 
@@ -592,7 +603,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
         sRootDirSize = rc;
     }
     
-    printf("writing files\n");
+    printf("writing files\n");fflush(NULL);
     /* all files and offsets/sizes */
     rc = writeFileContents(oldImage, newImage, &newTree, filenameTypes);
     if(rc <= 0)
@@ -600,7 +611,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     
     lseek(newImage, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA, SEEK_SET);
     
-    printf("writing pvd\n");
+    printf("writing pvd\n");fflush(NULL);
     rc = writeVolDescriptor(newImage, volInfo, pRealRootDrOffset, 
                             pRootDirSize, creationTime, true);
     if(rc <= 0)
@@ -608,7 +619,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     
     if(filenameTypes & FNTYPE_JOLIET)
     {
-        printf("writing svd\n");
+        printf("writing svd\n");fflush(NULL);
         rc = writeVolDescriptor(newImage, volInfo, sRealRootDrOffset, 
                                 sRootDirSize, creationTime, false);
         if(rc <= 0)

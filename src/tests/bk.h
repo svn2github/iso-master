@@ -115,10 +115,12 @@ typedef struct
     unsigned posixFileMode;
     off_t extentLocationOffset; /* where on image to write location of extent 
                                  for this directory */
-    off_t extentLocationOffset2; /* for svd (joliet) */
     unsigned extentNumber; /* extent number */
     unsigned dataLength; /* bytes, including blank */
+    off_t extentLocationOffset2; /* for svd (joliet) */
     
+    unsigned extentNumber2; /* for svd (joliet) */
+    unsigned dataLength2; /* for svd (joliet) */
     struct DirToWriteLL* directories;
     struct FileToWriteLL* files;
     
@@ -139,9 +141,9 @@ typedef struct
     unsigned posixFileMode;
     off_t extentLocationOffset; /* where on image to write location of extent 
                                  for this file */
-    off_t extentLocationOffset2; /* for svd (joliet) */
     unsigned extentNumber; /* extent number */
     unsigned dataLength; /* bytes, including blank */
+    off_t extentLocationOffset2; /* for svd (joliet) */
     
     unsigned size; /* in bytes */
     bool onImage;

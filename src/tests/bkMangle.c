@@ -126,6 +126,10 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int fileNameTypes)
             (*nextNewDir)->dir.dataLength = 0;
             
             (*nextNewDir)->dir.extentLocationOffset2 = 0;
+            
+            (*nextNewDir)->dir.extentNumber2 = 0;
+            
+            (*nextNewDir)->dir.dataLength2 = 0;
                 
             rc = mangleDir( &(nextOrigDir->dir), &((*nextNewDir)->dir), fileNameTypes);
             if(rc < 0)
@@ -178,6 +182,8 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int fileNameTypes)
             (*nextNewFile)->file.extentNumber = 0;
             
             (*nextNewFile)->file.dataLength = 0;
+            
+            (*nextNewFile)->file.extentLocationOffset2 = 0;
             
             (*nextNewFile)->file.size = nextOrigFile->file.size;
             
