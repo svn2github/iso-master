@@ -677,9 +677,22 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     return 1;
 }
 
-int writePathTable(int image)
+int writePathTable(int image, DirToWrite* dir, bool isTypeL, int filenameType)
 {
+    // find tree height
+    // for y 1 .. height
+        // wptrid 1, y
     
+    // wptrid()
+    // you are at level x
+    // write all children at level y
+    
+    // if x == y
+      // write all child dirs
+    // else if x < y
+      // wptrid all child dirs x+1, y
+    // else if x > y
+      // return
     
     return 1;
 }
