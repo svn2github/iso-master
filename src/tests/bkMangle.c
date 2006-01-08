@@ -3,16 +3,198 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+
+/* length of aaa in aaa~xxxx.bbb */
+#define NCHARS_9660_BASE 3
+
+/* these are the characters we use in the 8.3 hash. Must be 36 chars long */
+static const char *baseChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+#define FNV1_PRIME 0x01000193
+/*the following number is a fnv1 of the string: idra@samba.org 2002 */
+#define FNV1_INIT  0xa6b93095
+
+/*
+* note that some unsigned ints in mangling functions are
+* required to be 32 bits long for the hashing to work
+* see the samba code for details
+*/
 
 /*
 mangle_get_prefix
 is_valid_name
 
+name_map
+
 */
+
+bool charIsValid9660(char theChar)
+{
+    if( (theChar >= '0' && theChar <= '9') ||
+        (theChar >= 'a' && theChar <= 'z') ||
+        (theChar >= 'A' && theChar <= 'Z') ||
+        strchr("_-$~", theChar) )
+    {
+        return true;
+    }
+    else
+        return false;
+}
+
+/* 
+   hash a string of the specified length. The string does not need to be
+   null terminated 
+
+   this hash needs to be fast with a low collision rate (what hash doesn't?)
+*/
+unsigned hashString(const char *str, unsigned int length)
+{
+    unsigned value;
+    unsigned i;
+    
+    /* Set the initial value from the key size. */
+    value = FNV1_INIT;
+    for (i = 0; i < length; i++)
+    {
+        value *= (unsigned)FNV1_PRIME;
+        value ^= (unsigned)(str[i]);
+    }
+
+    /* note that we force it to a 31 bit hash, to keep within the limits
+       of the 36^6 mangle space */
+    return value & ~0x80000000;  
+}
+
+void mangleNameFor9660(char* origName, char* newName, bool isADir)
+{
+    char *dot_p;
+    int i;
+    char base[7]; /* max 6 chars */
+    char extension[4]; /* max 3 chars */
+    int extensionLen;
+    unsigned hash;
+    unsigned v;
+    
+    /* FIND extension */
+    if(isADir)
+    /* no extension */
+    {
+        dot_p = NULL;
+    }
+    else
+    {
+        dot_p = strrchr(origName, '.');
+        
+        if(dot_p)
+        {
+            /* if the extension contains any illegal characters or
+               is too long (> 3) or zero length then we treat it as part
+               of the prefix */
+            for(i = 0; i < 4 && dot_p[i + 1] != '\0'; i++)
+            {
+                if( !charIsValid9660(dot_p[i + 1]) )
+                {
+                    dot_p = NULL;
+                    break;
+                }
+            }
+            
+            if(i == 0 || i == 4)
+                dot_p = NULL;
+        }
+    }
+    /* END FIND extension */
+    
+    /* GET base */
+    /* the leading characters in the mangled name is taken from
+       the first characters of the name, if they are ascii otherwise
+       '_' is used
+    */
+    for(i = 0; i < NCHARS_9660_BASE && origName[i] != '\0'; i++)
+    {
+        base[i] = origName[i];
+        
+        if ( !charIsValid9660(origName[i]) )
+            base[i] = '_';
+        
+        base[i] = toupper(base[i]);
+    }
+    
+    /* make sure base doesn't contain part of the extension */
+    if(dot_p != NULL)
+    {
+        //!! test this
+        if(i > dot_p - origName)
+            i = dot_p - origName;
+    }
+    
+    /* fixed length */
+    while(i < NCHARS_9660_BASE)
+    {
+        base[i] = '_';
+        
+        i++;
+    }
+    
+    base[NCHARS_9660_BASE] = '\0';
+    /* END GET base */
+    
+    /* GET extension */
+    /* the extension of the mangled name is taken from the first 3
+       ascii chars after the dot */
+    extensionLen = 0;
+    if(dot_p)
+    {
+        for(i = 1; extensionLen < 3 && dot_p[i] != '\0'; i++)
+        {
+            extension[extensionLen] = toupper(dot_p[i]);
+            
+            extensionLen++;
+        }
+    }
+    
+    extension[extensionLen] = '\0';
+    /* END GET extension */
+    
+    /* find the hash for this prefix */
+    hash = hashString(origName, strlen(origName));
+    
+    /* now form the mangled name. */
+    for(i = 0; i < NCHARS_9660_BASE; i++)
+    {
+            newName[i] = base[i];
+    }
+    
+    newName[NCHARS_9660_BASE] = '~';
+    
+    v = hash;
+    newName[7] = baseChars[v % 36];
+    for(i = 6; i > NCHARS_9660_BASE; i--)
+    {
+        v = v / 36;
+        newName[i] = baseChars[v % 36];
+    }
+    
+    /* add the extension and terminate string */
+    if(extensionLen > 0)
+    {
+        newName[8] = '.';
+        
+        strcpy(newName + 9, extension);
+    }
+    else
+    {
+        newName[8] = '\0';
+    }
+    printf("'%s' -> '%s'\n", origName, newName);
+}
 
 //!! origDir files and dirs have to be sorted
 int mangleDir(Dir* origDir, DirToWrite* newDir, int fileNameTypes)
 {
+    char newMangleTest[NCHARS_FILE_ID_MAX];
+    
     DirLL* nextOrigDir;
     char nextOrigDirName[NCHARS_FILE_ID_MAX]; /* mangled */
     
@@ -85,6 +267,8 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int fileNameTypes)
         
         if(takeDirNext)
         {
+            mangleNameFor9660(nextOrigDir->dir.name, newMangleTest, true);
+            //printf("%s\n", newMangleTest);
             if( strcmp(nextOrigDirName, prevOrigName) == 0 )
             {
                 fileNumber++;
@@ -143,6 +327,8 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int fileNameTypes)
         else
         /* take file next */
         {
+            mangleNameFor9660(nextOrigFile->file.name, newMangleTest, false);
+            //printf("%s\n", newMangleTest);
             if( strcmp(nextOrigFileName, prevOrigName) == 0 )
             {
                 fileNumber++;
