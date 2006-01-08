@@ -4,7 +4,7 @@
 bool dirDrFollows(int image);
 bool haveNextRecordInSector(int image);
 int readDir(int image, Dir* dir, int filenameType, bool readPosix);
-int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readPosix);
+int readDirContents(int image, Dir* dir, unsigned size, int filenameType, bool readPosix);
 int readFileInfo(int image, File* file, int filenameType, bool readPosix);
 unsigned char readNextRecordLen(int image);
 int readPosixInfo(int image, unsigned* posixFileMode, int lenSU);

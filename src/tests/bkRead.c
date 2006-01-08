@@ -234,7 +234,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
     
     lseek(image, locExtent * NBYTES_LOGICAL_BLOCK, SEEK_SET);
     
-    rc = readDir9660(image, dir, lenExtent, filenameType, readPosix);
+    rc = readDirContents(image, dir, lenExtent, filenameType, readPosix);
     if(rc < 0)
         return rc;
     
@@ -247,7 +247,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
 * size is number of bytes
 * hope you love pointers
 */
-int readDir9660(int image, Dir* dir, unsigned size, int filenameType, bool readPosix)
+int readDirContents(int image, Dir* dir, unsigned size, int filenameType, bool readPosix)
 {
     int rc;
     int bytesRead = 0;

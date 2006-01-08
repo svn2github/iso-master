@@ -41,6 +41,89 @@ int copyByteBlock(int src, int dest, unsigned numBytes)
     return 1;
 }
 
+int countDirsOnLevel(DirToWrite* dir, int targetLevel, int thisLevel)
+{
+    DirToWriteLL* nextDir;
+    int sum;
+    
+    if(targetLevel == thisLevel)
+    {
+        return 1;
+    }
+    else
+    {
+        sum = 0;
+        
+        nextDir = dir->directories;
+        while(nextDir != NULL)
+        {
+            sum += countDirsOnLevel(&(nextDir->dir), targetLevel, thisLevel + 1);
+            
+            nextDir = nextDir->next;
+        }
+        
+        return sum;
+    }
+}
+
+int countTreeHeight(DirToWrite* dir, int heightSoFar)
+{
+    DirToWriteLL* nextDir;
+    int maxHeight;
+    int thisHeight;
+    
+    if(dir->directories == NULL)
+    {
+        return heightSoFar;
+    }
+    else
+    {
+        maxHeight = heightSoFar;
+        nextDir = dir->directories;
+        while(nextDir != NULL)
+        {
+            thisHeight = countTreeHeight(&(nextDir->dir), heightSoFar + 1);
+            
+            if(thisHeight > maxHeight)
+                maxHeight = thisHeight;
+            
+            nextDir = nextDir->next;
+        }
+        
+        return maxHeight;
+    }
+}
+
+void freeDirToWriteContents(DirToWrite* dir)
+{
+    DirToWriteLL* currentDir;
+    DirToWriteLL* nextDir;
+    FileToWriteLL* currentFile;
+    FileToWriteLL* nextFile;
+    
+    currentDir = dir->directories;
+    while(currentDir != NULL)
+    {
+        freeDirToWriteContents(&(currentDir->dir));
+        
+        nextDir = currentDir->next;
+        
+        free(currentDir);
+        
+        currentDir = nextDir;
+    }
+    
+    currentFile = dir->files;
+    while(currentFile != NULL)
+    {
+        nextFile = currentFile->next;
+        
+        free(currentFile);
+        
+        currentFile = nextFile;
+    }
+}
+
 int writeByteBlock(int image, unsigned char byteToWrite, int numBytes)
 {
     int rc;
@@ -586,117 +669,6 @@ int writeFileContents(int oldImage, int newImage, DirToWrite* dir,
     return 1;
 }
 
-int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
-               time_t creationTime, int filenameTypes)
-{
-    int rc;
-    DirToWrite newTree;
-    off_t pRealRootDrOffset;
-    int pRootDirSize;
-    off_t sRealRootDrOffset;
-    int sRootDirSize;
-    
-    printf("mangling\n");fflush(NULL);
-    /* create tree to write */
-    rc = mangleDir(oldTree, &newTree, filenameTypes);
-    if(rc <= 0)
-        return rc;
-    //showNewDir(&newTree, 0);
-    
-    printf("writing blank and terminator\n");fflush(NULL);
-    /* system area, always zeroes */
-    rc = writeByteBlock(newImage, 0, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA);
-    if(rc <= 0)
-        return rc;
-    
-    /* skip pvd (1 block), write it after files */
-    lseek(newImage, NBYTES_LOGICAL_BLOCK, SEEK_CUR);
-    
-    if(filenameTypes & FNTYPE_JOLIET)
-    /* skip svd (1 block), write it after pvd */
-        lseek(newImage, NBYTES_LOGICAL_BLOCK, SEEK_CUR);
-    
-    rc = writeVdsetTerminator(newImage);
-    if(rc <= 0)
-        return rc;
-    
-    pRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
-    
-    printf("writing primary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
-    /* 9660 and maybe rockridge dir tree */
-    rc = writeDir(newImage, &newTree, 0, 0, 0, creationTime, 
-                  filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE), true);
-    if(rc <= 0)
-        return rc;
-    
-    pRootDirSize = rc;
-    
-    /* joliet dir tree */
-    if(filenameTypes & FNTYPE_JOLIET)
-    {
-        printf("writing supplementary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
-        sRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
-        
-        rc = writeDir(newImage, &newTree, 0, 0, 0, creationTime, 
-                      FNTYPE_JOLIET, true);
-        if(rc <= 0)
-            return rc;
-        
-        sRootDirSize = rc;
-    }
-    
-    // write 9660 type l, m path tables
-    
-    // maybe write joliet type l, m path tables
-    
-    printf("writing files\n");fflush(NULL);
-    /* all files and offsets/sizes */
-    rc = writeFileContents(oldImage, newImage, &newTree, filenameTypes);
-    if(rc <= 0)
-        return rc;
-    
-    lseek(newImage, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA, SEEK_SET);
-    
-    printf("writing pvd\n");fflush(NULL);
-    rc = writeVolDescriptor(newImage, volInfo, pRealRootDrOffset, 
-                            pRootDirSize, creationTime, true);
-    if(rc <= 0)
-        return rc;
-    
-    if(filenameTypes & FNTYPE_JOLIET)
-    {
-        printf("writing svd\n");fflush(NULL);
-        rc = writeVolDescriptor(newImage, volInfo, sRealRootDrOffset, 
-                                sRootDirSize, creationTime, false);
-        if(rc <= 0)
-            return rc;
-    }
-    
-    // delete tree to write
-    
-    return 1;
-}
-
-int writePathTable(int image, DirToWrite* dir, bool isTypeL, int filenameType)
-{
-    // find tree height
-    // for y 1 .. height
-        // wptrid 1, y
-    
-    // wptrid()
-    // you are at level x
-    // write all children at level y
-    
-    // if x == y
-      // write all child dirs
-    // else if x < y
-      // wptrid all child dirs x+1, y
-    // else if x > y
-      // return
-    
-    return 1;
-}
-
 /* field size must be even */
 int writeJolietStringField(int image, char* name, int fieldSize)
 {
@@ -734,14 +706,368 @@ int writeJolietStringField(int image, char* name, int fieldSize)
     return 1;
 }
 
+/* returns path table size (number of bytes not counting the blank) */
+int writePathTable(int image, DirToWrite* tree, bool isTypeL, int filenameType)
+{
+    int treeHeight;
+    int count;
+    int level;
+    int* dirsPerLevel; /* a dynamic array of the number of dirs per level */
+    int numDirsSoFar;
+    off_t origPos;
+    int numBytesWritten;
+    int rc;
+    
+    origPos = lseek(image, 0, SEEK_CUR);
+    
+    treeHeight = countTreeHeight(tree, 1);
+    
+    dirsPerLevel = malloc(sizeof(int) * treeHeight);
+    
+    for(count = 0; count < treeHeight; count++)
+    {
+        dirsPerLevel[count] = countDirsOnLevel(tree, count + 1, 1);
+    }
+    
+    for(level = 1; level <= treeHeight; level++)
+    {
+        if(level == 1)
+        /* numDirsSoFar = parent dir num */
+            numDirsSoFar = 1;
+        else if(level == 2)
+            numDirsSoFar = 1;
+        else
+        {
+            /* ex. when i am on level 4 i want number of dirs on levels 1 + 2 */
+            numDirsSoFar = 0;
+            for(count = 0; count < level - 2; count++)
+            {
+                numDirsSoFar += dirsPerLevel[count];
+            }
+        }
+        
+        rc = writePathTableRecordsOnLevel(image, tree, isTypeL, filenameType, 
+                                          level, 1, &numDirsSoFar);
+        if(rc < 0)
+            return rc;
+    }
+    
+    numBytesWritten = lseek(image, 0, SEEK_CUR) - origPos;
+    
+    /* blank to conclude extent */
+    rc = writeByteBlock(image, 0x00, NBYTES_LOGICAL_BLOCK - numBytesWritten);
+    if(rc < 0)
+        return rc;
+    
+    free(dirsPerLevel);
+
+    return numBytesWritten;
+}
+
+int writePathTableRecordsOnLevel(int image, DirToWrite* dir, bool isTypeL, 
+                                 int filenameType, int targetLevel, int thisLevel,
+                                 int* parentDirNum)
+{
+    int rc;
+    DirToWriteLL* nextDir;
+    
+    unsigned char fileIdLen;
+    unsigned char byte;
+    unsigned exentLocation;
+    unsigned short parentDirId; /* copy of *parentDirNum */
+    
+    if(thisLevel == targetLevel)
+    /* write path table record */
+    {
+        /* LENGTH  of directory identifier */
+        if(targetLevel == 1)
+        /* root */
+            fileIdLen = 1;
+        else
+        {
+            if(filenameType & FNTYPE_JOLIET)
+            {
+                fileIdLen = 2 * strlen(dir->nameJoliet);
+            }
+            else
+            {
+                fileIdLen = strlen(dir->name9660);
+            }
+        }
+        
+        rc = write711(image, &fileIdLen);
+        if(rc < 0)
+            return rc;
+        /* END LENGTH  of directory identifier */
+        
+        /* extended attribute record length */
+        byte = 0;
+        rc = write711(image, &byte);
+        if(rc < 0)
+            return rc;
+        
+        /* LOCATION of extent */
+        if(filenameType & FNTYPE_JOLIET)
+            exentLocation = dir->extentNumber2;
+        else
+            exentLocation = dir->extentNumber;
+        
+        if(isTypeL)
+            rc = write731(image, &exentLocation);
+        else
+            rc = write732(image, &exentLocation);
+        if(rc < 0)
+            return rc;
+        /* END LOCATION of extent */
+        
+        /* PARENT directory number */
+        parentDirId = *parentDirNum;
+        
+        if(isTypeL)
+            rc = write721(image, &parentDirId);
+        else
+            rc = write722(image, &parentDirId);
+        if(rc < 0)
+            return rc;
+        /* END PARENT directory number */
+        
+        /* directory identifier */
+        if(filenameType & FNTYPE_JOLIET)
+            rc = writeJolietStringField(image, dir->nameJoliet, fileIdLen);
+        else
+            rc = write(image, dir->name9660, fileIdLen);
+        if(rc < 0)
+            return rc;
+        
+        /* padding field */
+        if(fileIdLen % 2 != 0)
+        {
+            byte = 0;
+            rc = write711(image, &byte);
+            if(rc < 0)
+                return rc;
+        }
+
+    }
+    else /* if(thisLevel < targetLevel) */
+    {
+        nextDir = dir->directories;
+        while(nextDir != NULL)
+        {
+            if(thisLevel == targetLevel - 2)
+            /* am now going throught the list of dirs where the parent is */
+            {
+                if(targetLevel != 2)
+                /* first and second level have the same parent: 1 */
+                {
+                    (*parentDirNum)++;
+                }
+            }
+            
+            rc = writePathTableRecordsOnLevel(image, &(nextDir->dir), isTypeL,
+                                              filenameType, targetLevel, 
+                                              thisLevel + 1, parentDirNum);
+            if(rc < 0)
+                return rc;
+            
+            nextDir = nextDir->next;
+        }
+    }
+    
+    return 1;
+}
+
+int writeRockER(int image)
+{
+    int rc;
+    unsigned char record[46];
+    
+    /* identification */
+    record[0] = 'E';
+    record[1] = 'R';
+    
+    /* record length */
+    record[2] = 46;
+    
+    /* entry version */
+    record[3] = 1;
+    
+    /* extension identifier length */
+    record[4] = 10;
+    
+    /* extension descriptor length */
+    record[5] = 10;
+    
+    /* extension source length */
+    record[6] = 18;
+    
+    /* extension version */
+    record[7] = 1;
+    
+    /* extension identifier */
+    strncpy(&(record[8]), "IEEE_P1282", 10);
+    
+    /* extension descriptor */
+    strncpy(&(record[18]), "DRAFT_1_12", 10);
+    
+    /* extension source */
+    strncpy(&(record[28]), "ADOPTED_1994_07_08", 18);
+    
+    rc = write(image, record, 46);
+    if(rc != 46)
+        return -1;
+    
+    return 1;
+}
+
+int writeRockNM(int image, char* name)
+{
+    int rc;
+    unsigned char recordStart[5];
+    int nameLen;
+    
+    nameLen = strlen(name);
+    
+    /* identification */
+    recordStart[0] = 'N';
+    recordStart[1] = 'M';
+    
+    /* record length */
+    recordStart[2] = 5 + nameLen;
+    
+    /* entry version */
+    recordStart[3] = 1;
+    
+    /* flags */
+    recordStart[4] = 0;
+    
+    rc = write(image, recordStart, 5);
+    if(rc != 5)
+        return -1;
+    
+    rc = write(image, name, nameLen);
+    if(rc != nameLen)
+        return -1;
+    
+    return 1;
+}
+
+/* the slackware cd has 36 byte PX entries, missing the file serial number
+* so i will do the same */
+int writeRockPX(int image, DirToWrite* dir, bool isADir)
+{
+    int rc;
+    unsigned char record[36];
+    //DirToWriteLL* nextDir;
+    unsigned posixFileLinks;
+    
+    /* identification */
+    record[0] = 'P';
+    record[1] = 'X';
+    
+    /* record length */
+    record[2] = 36;
+    
+    /* entry version */
+    record[3] = 1;
+    
+    /* posix file mode */
+    write733ToByteArray(&(record[4]), dir->posixFileMode);
+    
+    /* POSIX file links */
+    //!! this i think is number of subdirectories + 2 (self and parent)
+    // and 1 for a file
+    // it's probably not used on read-only filesystems
+    // to add it, i will need to pass the number of links in a parent dir
+    // recursively in writeDir(). brrrrr.
+    if(isADir)
+        posixFileLinks = 2;
+    else
+        posixFileLinks = 1;
+    
+    write733ToByteArray(&(record[12]), posixFileLinks);
+    /* END POSIX file links */
+    
+    /* posix file user id, posix file group id */
+    bzero(&(record[20]), 16);
+    
+    rc = write(image, record, 36);
+    if(rc != 36)
+        return -1;
+    
+    return 1;
+}
+
+int writeRockSP(int image)
+{
+    int rc;
+    unsigned char record[7];
+    
+    /* identification */
+    record[0] = 'S';
+    record[1] = 'P';
+    
+    /* record length */
+    record[2] = 7;
+    
+    /* entry version */
+    record[3] = 1;
+    
+    /* check bytes */
+    record[4] = 0xBE;
+    record[5] = 0xEF;
+    
+    /* bytes skipped */
+    record[6] = 0;
+    
+    rc = write(image, record, 7);
+    if(rc != 7)
+        return -1;
+    
+    return 1;
+}
+
+int writeVdsetTerminator(int image)
+{
+    int rc;
+    unsigned char byte;
+    char aString[6];
+    
+    /* volume descriptor type */
+    byte = 255;
+    rc = write711(image, &byte);
+    if(rc != 1)
+        return -1;
+    
+    /* standard identifier */
+    strcpy(aString, "CD001");
+    rc = write(image, &aString, 5);
+    if(rc != 5)
+        return -1;
+    
+    /* volume descriptor version */
+    byte = 1;
+    rc = write711(image, &byte);
+    if(rc != 1)
+        return -1;
+    
+    rc = writeByteBlock(image, 0, 2041);
+    if(rc < 0)
+        return -1;
+    
+    return 1;
+}
+
 /*
 * -has to be called after the files were written so that the 
 *  volume size is recorded properly
 * -rootdr location, size are in bytes
 * -note strings are not terminated on image
 */
-int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
-                       unsigned rootDrSize, time_t creationTime, bool isPrimary)
+int writeVolDescriptor(int image, VolInfo* volInfo, off_t rootDrLocation,
+                       unsigned rootDrSize, off_t lPathTableLoc, 
+                       off_t mPathTableLoc, unsigned pathTableSize, 
+                       time_t creationTime, bool isPrimary)
 {
     int rc;
     int count;
@@ -876,13 +1202,32 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
         return -1;
     
     /* path table size */
-    anUnsigned = 0;
+    anUnsigned = pathTableSize;
     rc = write733(image, &anUnsigned);
     if(rc != 8)
         return -1;
     
-    /*!! 4 path table locations (don't have them yet) */
-    rc = writeByteBlock(image, 0, 16);
+    /* location of occurence of type l path table */
+    anUnsigned = lPathTableLoc / NBYTES_LOGICAL_BLOCK;
+    rc = write731(image, &anUnsigned);
+    if(rc < 0)
+        return -1;
+    
+    /* location of optional occurence of type l path table */
+    anUnsigned = 0;
+    rc = write731(image, &anUnsigned);
+    if(rc < 0)
+        return -1;
+    
+    /* location of occurence of type m path table */
+    anUnsigned = mPathTableLoc / NBYTES_LOGICAL_BLOCK;
+    rc = write732(image, &anUnsigned);
+    if(rc < 0)
+        return -1;
+    
+    /* location of optional occurence of type m path table */
+    anUnsigned = 0;
+    rc = write732(image, &anUnsigned);
     if(rc < 0)
         return -1;
     
@@ -1071,187 +1416,6 @@ int writeVolDescriptor(int image, VolInfo* volInfo, unsigned rootDrLocation,
     
     /* reserved, applications use, reserved */
     rc = writeByteBlock(image, 0, 1166);
-    if(rc < 0)
-        return -1;
-    
-    return 1;
-}
-
-int writeRockER(int image)
-{
-    int rc;
-    unsigned char record[46];
-    
-    /* identification */
-    record[0] = 'E';
-    record[1] = 'R';
-    
-    /* record length */
-    record[2] = 46;
-    
-    /* entry version */
-    record[3] = 1;
-    
-    /* extension identifier length */
-    record[4] = 10;
-    
-    /* extension descriptor length */
-    record[5] = 10;
-    
-    /* extension source length */
-    record[6] = 18;
-    
-    /* extension version */
-    record[7] = 1;
-    
-    /* extension identifier */
-    strncpy(&(record[8]), "IEEE_P1282", 10);
-    
-    /* extension descriptor */
-    strncpy(&(record[18]), "DRAFT_1_12", 10);
-    
-    /* extension source */
-    strncpy(&(record[28]), "ADOPTED_1994_07_08", 18);
-    
-    rc = write(image, record, 46);
-    if(rc != 46)
-        return -1;
-    
-    return 1;
-}
-
-int writeRockNM(int image, char* name)
-{
-    int rc;
-    unsigned char recordStart[5];
-    int nameLen;
-    
-    nameLen = strlen(name);
-    
-    /* identification */
-    recordStart[0] = 'N';
-    recordStart[1] = 'M';
-    
-    /* record length */
-    recordStart[2] = 5 + nameLen;
-    
-    /* entry version */
-    recordStart[3] = 1;
-    
-    /* flags */
-    recordStart[4] = 0;
-    
-    rc = write(image, recordStart, 5);
-    if(rc != 5)
-        return -1;
-    
-    rc = write(image, name, nameLen);
-    if(rc != nameLen)
-        return -1;
-    
-    return 1;
-}
-
-/* the slackware cd has 36 byte PX entries, missing the file serial number
-* so i will do the same */
-int writeRockPX(int image, DirToWrite* dir, bool isADir)
-{
-    int rc;
-    unsigned char record[36];
-    //DirToWriteLL* nextDir;
-    unsigned posixFileLinks;
-    
-    /* identification */
-    record[0] = 'P';
-    record[1] = 'X';
-    
-    /* record length */
-    record[2] = 36;
-    
-    /* entry version */
-    record[3] = 1;
-    
-    /* posix file mode */
-    write733ToByteArray(&(record[4]), dir->posixFileMode);
-    
-    /* POSIX file links */
-    //!! this i think is number of subdirectories + 2 (self and parent)
-    // and 1 for a file
-    // it's probably not used on read-only filesystems
-    // to add it, i will need to pass the number of links in a parent dir
-    // recursively in writeDir(). brrrrr.
-    if(isADir)
-        posixFileLinks = 2;
-    else
-        posixFileLinks = 1;
-    
-    write733ToByteArray(&(record[12]), posixFileLinks);
-    /* END POSIX file links */
-    
-    /* posix file user id, posix file group id */
-    bzero(&(record[20]), 16);
-    
-    rc = write(image, record, 36);
-    if(rc != 36)
-        return -1;
-    
-    return 1;
-}
-
-int writeRockSP(int image)
-{
-    int rc;
-    unsigned char record[7];
-    
-    /* identification */
-    record[0] = 'S';
-    record[1] = 'P';
-    
-    /* record length */
-    record[2] = 7;
-    
-    /* entry version */
-    record[3] = 1;
-    
-    /* check bytes */
-    record[4] = 0xBE;
-    record[5] = 0xEF;
-    
-    /* bytes skipped */
-    record[6] = 0;
-    
-    rc = write(image, record, 7);
-    if(rc != 7)
-        return -1;
-    
-    return 1;
-}
-
-int writeVdsetTerminator(int image)
-{
-    int rc;
-    unsigned char byte;
-    char aString[6];
-    
-    /* volume descriptor type */
-    byte = 255;
-    rc = write711(image, &byte);
-    if(rc != 1)
-        return -1;
-    
-    /* standard identifier */
-    strcpy(aString, "CD001");
-    rc = write(image, &aString, 5);
-    if(rc != 5)
-        return -1;
-    
-    /* volume descriptor version */
-    byte = 1;
-    rc = write711(image, &byte);
-    if(rc != 1)
-        return -1;
-    
-    rc = writeByteBlock(image, 0, 2041);
     if(rc < 0)
         return -1;
     
