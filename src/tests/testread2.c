@@ -209,6 +209,8 @@ int main(int argc, char** argv)
     if(rc < 0)
         oops("failed to write image");
     
+    
+    
     rc = close(newImage);
     if(rc == -1)
         oops("faled to close new image");
@@ -236,12 +238,16 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     off_t mPathTableJolietLoc;
     int pathTableJolietSize;
     
-    printf("mangling\n");fflush(NULL);
-    /* create tree to write */
-    rc = mangleDir(oldTree, &newTree, filenameTypes);
+    rc = mangleDir2(oldTree, &newTree, filenameTypes);
     if(rc <= 0)
         return rc;
-    //showNewDir(&newTree, 0);
+    
+    //~ printf("mangling\n");fflush(NULL);
+    //~ /* create tree to write */
+    //~ rc = mangleDir(oldTree, &newTree, filenameTypes);
+    //~ if(rc <= 0)
+        //~ return rc;
+    //~ //showNewDir(&newTree, 0);
     
     //~ printf("writing blank and terminator\n");fflush(NULL);
     //~ /* system area, always zeroes */

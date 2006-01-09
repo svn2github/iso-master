@@ -8,13 +8,6 @@
 /* length of aaa in aaa~xxxx.bbb */
 #define NCHARS_9660_BASE 3
 
-/* these are the characters we use in the 8.3 hash. Must be 36 chars long */
-static const char *baseChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-#define FNV1_PRIME 0x01000193
-/*the following number is a fnv1 of the string: idra@samba.org 2002 */
-#define FNV1_INIT  0xa6b93095
-
 /*
 * note that some unsigned ints in mangling functions are
 * required to be 32 bits long for the hashing to work
@@ -53,14 +46,17 @@ unsigned hashString(const char *str, unsigned int length)
     unsigned value;
     unsigned i;
     
+    static const unsigned fnv1Prime = 0x01000193;
+    
     /* Set the initial value from the key size. */
-    value = FNV1_INIT;
+    /* fnv1 of the string: idra@samba.org 2002 */
+    value = 0xa6b93095;
     for (i = 0; i < length; i++)
     {
-        value *= (unsigned)FNV1_PRIME;
+        value *= (unsigned)fnv1Prime;
         value ^= (unsigned)(str[i]);
     }
-
+    
     /* note that we force it to a 31 bit hash, to keep within the limits
        of the 36^6 mangle space */
     return value & ~0x80000000;  
@@ -75,6 +71,8 @@ void mangleNameFor9660(char* origName, char* newName, bool isADir)
     int extensionLen;
     unsigned hash;
     unsigned v;
+    /* these are the characters we use in the 8.3 hash. Must be 36 chars long */
+    static const char *baseChars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     /* FIND extension */
     if(isADir)
@@ -190,11 +188,190 @@ void mangleNameFor9660(char* origName, char* newName, bool isADir)
     printf("'%s' -> '%s'\n", origName, newName);
 }
 
+/* filenametypes is all types required in the end */
+int mangleDir2(Dir* origDir, DirToWrite* newDir, int filenameTypes)
+{
+    bool haveCollisions;
+    int numTimesTried;
+    int numCollisions;
+    
+    DirLL* currentOrigDir;
+    DirToWriteLL** currentNewDir;
+    FileLL* currentOrigFile;
+    FileToWriteLL** currentNewFile;
+    
+    DirToWriteLL* currentDir;
+    FileToWriteLL* currentFile;
+    DirToWriteLL* currentDirToCompare;
+    FileToWriteLL* currentFileToCompare;
+    
+    /* MANGLE all names, create new dir/file lists */
+    currentOrigDir = origDir->directories;
+    currentNewDir = &(newDir->directories);
+    while(currentOrigDir != NULL)
+    /* have directories */
+    {
+        *currentNewDir = malloc(sizeof(DirToWriteLL));
+        if(*currentNewDir == NULL)
+            return -1;
+        
+        bzero(*currentNewDir, sizeof(DirToWriteLL));
+        
+        mangleNameFor9660(currentOrigDir->dir.name, (*currentNewDir)->dir.name9660, true);
+        
+        if(filenameTypes | FNTYPE_ROCKRIDGE)
+            strcpy((*currentNewDir)->dir.nameRock, currentOrigDir->dir.name);
+        else
+            (*currentNewDir)->dir.nameRock[0] = '\0';
+        
+        if(filenameTypes | FNTYPE_JOLIET)
+            strcpy((*currentNewDir)->dir.nameJoliet, currentOrigDir->dir.name);
+        else
+            (*currentNewDir)->dir.nameJoliet[0] = '\0';
+        
+        // recursive call
+        
+        currentOrigDir = currentOrigDir->next;
+        
+        currentNewDir = &((*currentNewDir)->next);
+    }
+    
+    currentOrigFile = origDir->files;
+    currentNewFile = &(newDir->files);
+    while(currentOrigFile != NULL)
+    /* have files */
+    {
+        *currentNewFile = malloc(sizeof(FileToWriteLL));
+        if(*currentNewFile == NULL)
+            return -1;
+        
+        bzero(*currentNewFile, sizeof(FileToWriteLL));
+        
+        mangleNameFor9660(currentOrigFile->file.name, (*currentNewFile)->file.name9660, false);
+        
+        if(filenameTypes | FNTYPE_ROCKRIDGE)
+            strcpy((*currentNewFile)->file.nameRock, currentOrigFile->file.name);
+        else
+            (*currentNewFile)->file.nameRock[0] = '\0';
+        
+        if(filenameTypes | FNTYPE_JOLIET)
+            strcpy((*currentNewFile)->file.nameJoliet, currentOrigFile->file.name);
+        else
+            (*currentNewFile)->file.nameJoliet[0] = '\0';
+        
+        currentOrigFile = currentOrigFile->next;
+        
+        currentNewFile = &((*currentNewFile)->next);
+    }
+    /* END MANGLE all names, create new dir/file lists */
+    
+    haveCollisions = true;
+    numTimesTried = 0;
+    while(haveCollisions && numTimesTried < 5)
+    {
+        haveCollisions = false;
+        
+        // for each subdir
+          // look through entire dir list and count collisions
+          // look through entire file list and count collisions
+          // if more then 1, remangle name
+        
+        // for each file
+          // look through entire dir list and count collisions
+          // look through entire file list and count collisions
+          // if more then 1, remangle name
+        
+        currentDir = newDir->directories;
+        while(currentDir != NULL)
+        {
+            numCollisions = 0;
+            
+            currentDirToCompare = newDir->directories;
+            while(currentDirToCompare != NULL)
+            {
+                if(strcmp(currentDir->dir.name9660, 
+                          currentDirToCompare->dir.name9660) == 0)
+                {
+                    numCollisions++;
+                }
+                
+                currentDirToCompare = currentDirToCompare->next;
+            }
+            
+            currentFileToCompare = newDir->files;
+            while(currentFileToCompare != NULL)
+            {
+                if(strcmp(currentDir->dir.name9660, 
+                          currentFileToCompare->file.name9660) == 0)
+                {
+                    numCollisions++;
+                }
+                
+                currentFileToCompare = currentFileToCompare->next;
+            }
+            
+            if(numCollisions != 1)
+            {
+                haveCollisions = true;
+                
+                // remangle currentDirLL->dir.name9660
+            }
+            
+            currentDir = currentDir->next;
+        }
+        
+        currentFile = newDir->files;
+        while(currentFile != NULL)
+        {
+            numCollisions = 0;
+            
+            currentDirToCompare = newDir->directories;
+            while(currentDirToCompare != NULL)
+            {
+                if(strcmp(currentFile->file.name9660, 
+                          currentDirToCompare->dir.name9660) == 0)
+                {
+                    numCollisions++;
+                }
+                
+                currentDirToCompare = currentDirToCompare->next;
+            }
+            
+            currentFileToCompare = newDir->files;
+            while(currentFileToCompare != NULL)
+            {
+                if(strcmp(currentFile->file.name9660, 
+                          currentFileToCompare->file.name9660) == 0)
+                {
+                    numCollisions++;
+                }
+                
+                currentFileToCompare = currentFileToCompare->next;
+            }
+            
+            if(numCollisions != 1)
+            {
+                haveCollisions = true;
+                
+                // remangle currentFileLL->file.name9660
+            }
+            
+            currentFile = currentFile->next;
+        }
+        
+        numTimesTried++;
+    }
+    
+    if(haveCollisions)
+        return -2;
+    
+    return 1;
+}
+
 //!! origDir files and dirs have to be sorted
 int mangleDir(Dir* origDir, DirToWrite* newDir, int fileNameTypes)
 {
-    char newMangleTest[NCHARS_FILE_ID_MAX];
-    
+    //char newMangleTest[NCHARS_FILE_ID_MAX];
     DirLL* nextOrigDir;
     char nextOrigDirName[NCHARS_FILE_ID_MAX]; /* mangled */
     
@@ -267,7 +444,7 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int fileNameTypes)
         
         if(takeDirNext)
         {
-            mangleNameFor9660(nextOrigDir->dir.name, newMangleTest, true);
+            //mangleNameFor9660(nextOrigDir->dir.name, newMangleTest, true);
             //printf("%s\n", newMangleTest);
             if( strcmp(nextOrigDirName, prevOrigName) == 0 )
             {
@@ -327,7 +504,7 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int fileNameTypes)
         else
         /* take file next */
         {
-            mangleNameFor9660(nextOrigFile->file.name, newMangleTest, false);
+            //mangleNameFor9660(nextOrigFile->file.name, newMangleTest, false);
             //printf("%s\n", newMangleTest);
             if( strcmp(nextOrigFileName, prevOrigName) == 0 )
             {
