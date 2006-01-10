@@ -118,6 +118,7 @@ void freeDirToWriteContents(DirToWrite* dir)
     {
         nextFile = currentFile->next;
         
+        //!! pathandname
         free(currentFile);
         
         currentFile = nextFile;

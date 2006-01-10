@@ -168,11 +168,11 @@ int main(int argc, char** argv)
     srcDir.dirs[0] = malloc(strlen("kernels" + 1));
     strcpy(srcDir.dirs[0], "kernels");
     
-    dest = malloc(strlen("/home/andrew/prog/isomaster/src/tests/") + 1);
-    strcpy(dest, "/home/andrew/prog/isomaster/src/tests/");
+    dest = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
+    strcpy(dest, "/home/andrei/prog/isomaster/src/tests/");
     
-    fileToAdd = malloc(strlen("/home/andrew/prog/isomaster/src/tests/read7x.o") + 1);
-    strcpy(fileToAdd, "/home/andrew/prog/isomaster/src/tests/read7x.o");
+    fileToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/bkRead7x.o") + 1);
+    strcpy(fileToAdd, "/home/andrei/prog/isomaster/src/tests/bkRead7x.o");
     
     dirToAdd = malloc(strlen("/etc/") + 1);
     strcpy(dirToAdd, "/etc/");
@@ -191,9 +191,12 @@ int main(int argc, char** argv)
     //if(rc <= 0)
     //    oops("problem extracting dir");
     
-    //rc = addFile(&tree, fileToAdd, &dirPath);
-    //if(rc <= 0)
-    //    oops("problem adding file");
+    //~ rc = addFile(&tree, fileToAdd, &dirPath);
+    //~ if(rc <= 0)
+        //~ oops("problem adding file");
+    //~ rc = addFile(&tree, fileToAdd, &dirPath);
+    //~ if(rc <= 0)
+        //~ oops("problem adding file");
     
     //rc = addDir(&tree, dirToAdd, &dirPath);
     //if(rc <= 0)
@@ -238,113 +241,113 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     off_t mPathTableJolietLoc;
     int pathTableJolietSize;
     
-    rc = mangleDir2(oldTree, &newTree, filenameTypes);
+    printf("mangling\n");fflush(NULL);
+    /* create tree to write */
+    rc = mangleDir(oldTree, &newTree, filenameTypes);
+    if(rc <= 0)
+        return rc;
+    //showNewDir(&newTree, 0);
+    
+    printf("writing blank and terminator\n");fflush(NULL);
+    /* system area, always zeroes */
+    rc = writeByteBlock(newImage, 0, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA);
     if(rc <= 0)
         return rc;
     
-    //~ printf("mangling\n");fflush(NULL);
-    //~ /* create tree to write */
-    //~ rc = mangleDir(oldTree, &newTree, filenameTypes);
-    //~ if(rc <= 0)
-        //~ return rc;
-    //~ //showNewDir(&newTree, 0);
+    /* skip pvd (1 block), write it after files */
+    lseek(newImage, NBYTES_LOGICAL_BLOCK, SEEK_CUR);
     
-    //~ printf("writing blank and terminator\n");fflush(NULL);
-    //~ /* system area, always zeroes */
-    //~ rc = writeByteBlock(newImage, 0, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA);
-    //~ if(rc <= 0)
-        //~ return rc;
+    if(filenameTypes & FNTYPE_JOLIET)
+    /* skip svd (1 block), write it after pvd */
+        lseek(newImage, NBYTES_LOGICAL_BLOCK, SEEK_CUR);
     
-    //~ /* skip pvd (1 block), write it after files */
-    //~ lseek(newImage, NBYTES_LOGICAL_BLOCK, SEEK_CUR);
+    rc = writeVdsetTerminator(newImage);
+    if(rc <= 0)
+        return rc;
     
-    //~ if(filenameTypes & FNTYPE_JOLIET)
-    //~ /* skip svd (1 block), write it after pvd */
-        //~ lseek(newImage, NBYTES_LOGICAL_BLOCK, SEEK_CUR);
+    // sort 9660
     
-    //~ rc = writeVdsetTerminator(newImage);
-    //~ if(rc <= 0)
-        //~ return rc;
+    pRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
     
-    //~ pRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
+    printf("writing primary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
+    /* 9660 and maybe rockridge dir tree */
+    rc = writeDir(newImage, &newTree, 0, 0, 0, creationTime, 
+                  filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE), true);
+    if(rc <= 0)
+        return rc;
     
-    //~ printf("writing primary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
-    //~ /* 9660 and maybe rockridge dir tree */
-    //~ rc = writeDir(newImage, &newTree, 0, 0, 0, creationTime, 
-                  //~ filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE), true);
-    //~ if(rc <= 0)
-        //~ return rc;
+    pRootDirSize = rc;
     
-    //~ pRootDirSize = rc;
-    
-    //~ /* joliet dir tree */
-    //~ if(filenameTypes & FNTYPE_JOLIET)
-    //~ {
-        //~ printf("writing supplementary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
-        //~ sRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
+    /* joliet dir tree */
+    if(filenameTypes & FNTYPE_JOLIET)
+    {
+        // sort joliet 
         
-        //~ rc = writeDir(newImage, &newTree, 0, 0, 0, creationTime, 
-                      //~ FNTYPE_JOLIET, true);
-        //~ if(rc <= 0)
-            //~ return rc;
+        printf("writing supplementary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
+        sRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
         
-        //~ sRootDirSize = rc;
-    //~ }
-    
-    //~ printf("writing 9660 path tables\n");fflush(NULL);
-    
-    //~ lPathTable9660Loc = lseek(newImage, 0, SEEK_CUR);
-    //~ rc = writePathTable(newImage, &newTree, true, filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE));
-    //~ if(rc <= 0)
-        //~ return rc;
-    //~ pathTable9660Size = rc;
-    
-    //~ mPathTable9660Loc = lseek(newImage, 0, SEEK_CUR);
-    //~ rc = writePathTable(newImage, &newTree, false, filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE));
-    //~ if(rc <= 0)
-        //~ return rc;
-    
-    //~ if(filenameTypes & FNTYPE_JOLIET)
-    //~ {
-        //~ printf("writing joliet path tables\n");fflush(NULL);
-        //~ lPathTableJolietLoc = lseek(newImage, 0, SEEK_CUR);
-        //~ rc = writePathTable(newImage, &newTree, true, FNTYPE_JOLIET);
-        //~ if(rc <= 0)
-            //~ return rc;
-        //~ pathTableJolietSize = rc;
+        rc = writeDir(newImage, &newTree, 0, 0, 0, creationTime, 
+                      FNTYPE_JOLIET, true);
+        if(rc <= 0)
+            return rc;
         
-        //~ mPathTableJolietLoc = lseek(newImage, 0, SEEK_CUR);
-        //~ rc = writePathTable(newImage, &newTree, false, FNTYPE_JOLIET);
-        //~ if(rc <= 0)
-            //~ return rc;
-    //~ }
+        sRootDirSize = rc;
+    }
     
-    //~ printf("writing files\n");fflush(NULL);
-    //~ /* all files and offsets/sizes */
-    //~ rc = writeFileContents(oldImage, newImage, &newTree, filenameTypes);
-    //~ if(rc <= 0)
-        //~ return rc;
+    printf("writing 9660 path tables\n");fflush(NULL);
     
-    //~ lseek(newImage, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA, SEEK_SET);
+    lPathTable9660Loc = lseek(newImage, 0, SEEK_CUR);
+    rc = writePathTable(newImage, &newTree, true, filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE));
+    if(rc <= 0)
+        return rc;
+    pathTable9660Size = rc;
     
-    //~ printf("writing pvd\n");fflush(NULL);
-    //~ rc = writeVolDescriptor(newImage, volInfo, pRealRootDrOffset, 
-                            //~ pRootDirSize, lPathTable9660Loc, mPathTable9660Loc, 
-                            //~ pathTable9660Size, creationTime, true);
-    //~ if(rc <= 0)
-        //~ return rc;
+    mPathTable9660Loc = lseek(newImage, 0, SEEK_CUR);
+    rc = writePathTable(newImage, &newTree, false, filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE));
+    if(rc <= 0)
+        return rc;
     
-    //~ if(filenameTypes & FNTYPE_JOLIET)
-    //~ {
-        //~ printf("writing svd\n");fflush(NULL);
-        //~ rc = writeVolDescriptor(newImage, volInfo, sRealRootDrOffset, 
-                                //~ sRootDirSize, lPathTableJolietLoc, mPathTableJolietLoc, 
-                                //~ pathTableJolietSize, creationTime, false);
-        //~ if(rc <= 0)
-            //~ return rc;
-    //~ }
+    if(filenameTypes & FNTYPE_JOLIET)
+    {
+        printf("writing joliet path tables\n");fflush(NULL);
+        lPathTableJolietLoc = lseek(newImage, 0, SEEK_CUR);
+        rc = writePathTable(newImage, &newTree, true, FNTYPE_JOLIET);
+        if(rc <= 0)
+            return rc;
+        pathTableJolietSize = rc;
+        
+        mPathTableJolietLoc = lseek(newImage, 0, SEEK_CUR);
+        rc = writePathTable(newImage, &newTree, false, FNTYPE_JOLIET);
+        if(rc <= 0)
+            return rc;
+    }
     
-    //~ freeDirToWriteContents(&newTree);
+    printf("writing files\n");fflush(NULL);
+    /* all files and offsets/sizes */
+    rc = writeFileContents(oldImage, newImage, &newTree, filenameTypes);
+    if(rc <= 0)
+        return rc;
+    
+    lseek(newImage, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA, SEEK_SET);
+    
+    printf("writing pvd\n");fflush(NULL);
+    rc = writeVolDescriptor(newImage, volInfo, pRealRootDrOffset, 
+                            pRootDirSize, lPathTable9660Loc, mPathTable9660Loc, 
+                            pathTable9660Size, creationTime, true);
+    if(rc <= 0)
+        return rc;
+    
+    if(filenameTypes & FNTYPE_JOLIET)
+    {
+        printf("writing svd\n");fflush(NULL);
+        rc = writeVolDescriptor(newImage, volInfo, sRealRootDrOffset, 
+                                sRootDirSize, lPathTableJolietLoc, mPathTableJolietLoc, 
+                                pathTableJolietSize, creationTime, false);
+        if(rc <= 0)
+            return rc;
+    }
+    
+    freeDirToWriteContents(&newTree);
     
     return 1;
 }
