@@ -264,7 +264,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     
     printf("sorting 9660\n");
     sortDir(&newTree, FNTYPE_9660);
-    showNewDir(&newTree, 0);
+    //showNewDir(&newTree, 0);
     
     pRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
     
@@ -282,7 +282,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     {
         printf("sorting joliet\n");
         sortDir(&newTree, FNTYPE_JOLIET);
-        showNewDir(&newTree, 0);
+        //showNewDir(&newTree, 0);
         
         printf("writing supplementary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
         sRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);

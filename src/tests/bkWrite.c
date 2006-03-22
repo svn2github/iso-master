@@ -186,6 +186,8 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     if(isRoot)
     {
         rc = writeDr(image, &selfDir, recordingTime, true, true, true, filenameTypes);
+        if(rc < 0)
+            return rc;
         
         if(filenameTypes & FNTYPE_JOLIET)
             dir->extentLocationOffset2 = selfDir.extentLocationOffset2;
@@ -195,6 +197,8 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     else
     {
         rc = writeDr(image, &selfDir, recordingTime, true, true, false, filenameTypes);
+        if(rc < 0)
+            return rc;
     }
     if(rc < 0)
         return rc;
@@ -207,7 +211,7 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     nextDir = dir->directories;
     nextFile = dir->files;
     
-    /* write children drs */
+    /* WRITE children drs */
     while( nextDir != NULL || nextFile != NULL )
     /* have a file or directory */
     {
@@ -254,6 +258,7 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
             nextFile = nextFile->next;fflush(NULL);
         }
     }
+    /* END WRITE children drs */
     
     /* write blank to conclude extent */
     numUnusedBytes = NBYTES_LOGICAL_BLOCK - 
@@ -411,6 +416,10 @@ int writeDr(int image, DirToWrite* dir, time_t recordingTime, bool isADir,
     off_t startPos;
     off_t endPos;
     unsigned char lenFileId;
+    unsigned char recordLen;
+    
+    /* look at the end of the function for an explanation */
+    writeDrStartLabel:
     
     startPos = lseek(image, 0, SEEK_CUR);
     
@@ -570,15 +579,38 @@ int writeDr(int image, DirToWrite* dir, time_t recordingTime, bool isADir,
     
     lseek(image, startPos, SEEK_SET);
     
-    byte = endPos - startPos;
-    rc = write711(image, &byte);
+    recordLen = endPos - startPos;
+    rc = write711(image, &recordLen);
     if(rc != 1)
         return rc;
     
     lseek(image, endPos, SEEK_SET);
     /* END RECORD length */
     
-    return byte;
+    /* the goto is good! really!
+    * if, after writing the record we see that the record is in two logical
+    * sectors (that's not allowed by iso9660) we erase the record just
+    * written, write zeroes to the end of the first logical sector
+    * (as required by iso9660) and restart the function, which will write
+    * the same record again but at the beginning of the next logical sector
+    * yeah, so don't complain :) */
+    
+    if(endPos / NBYTES_LOGICAL_BLOCK > startPos / NBYTES_LOGICAL_BLOCK)
+    /* crossed a logical sector boundary while writing the record */
+    {
+        lseek(image, startPos, SEEK_SET);
+        
+        /* overwrite a piece of the record written in this function
+        * (the piece that's in the first sector) with zeroes */
+        rc = writeByteBlock(image, 0x00, recordLen - endPos % NBYTES_LOGICAL_BLOCK);
+        if(rc < 0)
+            return rc;
+        
+        goto writeDrStartLabel;
+    }
+    
+    //!! return 1 instead, to be safe, but first make sure it's not used
+    return recordLen;
 }
 
 int writeFileContents(int oldImage, int newImage, DirToWrite* dir, 
