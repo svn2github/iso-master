@@ -118,7 +118,9 @@ void freeDirToWriteContents(DirToWrite* dir)
     {
         nextFile = currentFile->next;
         
-        //!! pathandname
+        if(!currentFile->file.onImage)
+            free(currentFile->file.pathAndName);
+        
         free(currentFile);
         
         currentFile = nextFile;
@@ -217,11 +219,20 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
             takeDirNext = true;
         else
         {
-            //!! or joliet ordering
-            if( strcmp(nextFile->file.name9660, nextDir->dir.name9660) > 0 )
-                takeDirNext = true;
+            if(filenameTypes & FNTYPE_JOLIET)
+            {
+                if( strcmp(nextFile->file.nameJoliet, nextDir->dir.nameJoliet) > 0 )
+                    takeDirNext = true;
+                else
+                    takeDirNext = false;
+            }
             else
-                takeDirNext = false;
+            {
+                if( strcmp(nextFile->file.name9660, nextDir->dir.name9660) > 0 )
+                    takeDirNext = true;
+                else
+                    takeDirNext = false;
+            }
         }
         
         if(takeDirNext)
@@ -382,7 +393,7 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
         
         nextDir = nextDir->next;
     }
-    /* ALL subdir extent locations and sizes */
+    /* END ALL subdir extent locations and sizes */
     
     lseek(image, endPos, SEEK_SET);
     

@@ -267,7 +267,7 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int filenameTypes)
 
 void mangleNameFor9660(char* origName, char* newName, bool isADir)
 {
-    char *dot_p;
+    char* dot_p;
     int i;
     char base[7]; /* max 6 chars */
     char extension[4]; /* max 3 chars */
@@ -309,9 +309,8 @@ void mangleNameFor9660(char* origName, char* newName, bool isADir)
     
     /* GET base */
     /* the leading characters in the mangled name is taken from
-       the first characters of the name, if they are ascii otherwise
-       '_' is used
-    */
+    *  the first characters of the name, if they are ascii otherwise
+    *  '_' is used */
     for(i = 0; i < NCHARS_9660_BASE && origName[i] != '\0'; i++)
     {
         base[i] = origName[i];

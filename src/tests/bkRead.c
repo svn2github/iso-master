@@ -77,6 +77,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
     off_t origPos;
     char rootTestByte;
     bool isRoot;
+    unsigned char recordableLenFileId; /* to prevent reading too long a name */
     
     rc = read(image, &recordLength, 1);
     if(rc != 1)
@@ -120,6 +121,15 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
         isRoot = false;
     /* END FIND out if root */
     
+    /* the data structures cannot handle filenames longer then NCHARS_FILE_ID_MAX
+    * so in case the image contains an invalid, long filename, trunkate it
+    * rather then corrupt memory */
+    if(lenFileId9660 > NCHARS_FILE_ID_MAX - 1)
+        recordableLenFileId = NCHARS_FILE_ID_MAX - 1;
+    else
+        recordableLenFileId = lenFileId9660;
+    
+    /* READ directory name */
     if(filenameType == FNTYPE_9660)
     {
         if(!isRoot)
@@ -130,14 +140,10 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             if(rc != lenFileId9660)
                 return -1;
             
-            strncpy(dir->name, nameAsOnDisk, lenFileId9660);
+            strncpy(dir->name, nameAsOnDisk, recordableLenFileId);
+            dir->name[recordableLenFileId] = '\0';
             
-            dir->name[lenFileId9660] = '\0';
-            
-            if( strlen(dir->name) > NCHARS_FILE_ID_MAX - 1 )
-                return -2;
-            
-            /* padding field */
+            /* skip padding field if it's there */
             if(lenFileId9660 % 2 == 0)
                 lseek(image, 1, SEEK_CUR);
         }
@@ -150,6 +156,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             char nameInAscii[256];
             int ucsCount, byteCount;
             
+            /* ucs2 byte count must be even */
             if(lenFileId9660 % 2 != 0)
                 return -3;
             
@@ -164,11 +171,8 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             }
             nameInAscii[byteCount] = '\0';
             
-            if( strlen(nameInAscii) > NCHARS_FILE_ID_MAX - 1 )
-            //!! maybe just truncate the name instead
-                return -2;
-            
-            strcpy(dir->name, nameInAscii);
+            strncpy(dir->name, nameInAscii, recordableLenFileId);
+            dir->name[recordableLenFileId] = '\0';
             
             /* padding field */
             if(lenFileId9660 % 2 == 0)
@@ -177,14 +181,14 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
     }
     else if(filenameType == FNTYPE_ROCKRIDGE)
     {
-        /* skip 9660 filename */
-        lseek(image, lenFileId9660, SEEK_CUR);
-        /* skip padding field */
-        if(lenFileId9660 % 2 == 0)
-            lseek(image, 1, SEEK_CUR);
-        
         if(!isRoot)
         {
+            /* skip 9660 filename */
+            lseek(image, lenFileId9660, SEEK_CUR);
+            /* skip padding field */
+            if(lenFileId9660 % 2 == 0)
+                lseek(image, 1, SEEK_CUR);
+            
             rc = readRockridgeFilename(image, dir->name, lenSU);
             if(rc < 0)
                 return rc;
@@ -192,6 +196,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
     }
     else
         return -2;
+    /* END READ directory name */
     
     if(readPosix)
     {
@@ -450,24 +455,6 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
     return recordLength;
 }
 
-//~ unsigned char readNextRecordLen(int image)
-//~ {
-    //~ unsigned char rc;
-    //~ unsigned char length;
-    //~ off_t origPos;
-    
-    //~ origPos = lseek(image, 0, SEEK_CUR);
-    
-    //~ rc = read711(image, &length);
-    //~ if(rc != 1)
-    //~ // !! i don't like this int->char cast
-        //~ return rc;
-    
-    //~ lseek(image, origPos, SEEK_SET);
-    
-    //~ return length;
-//~ }
-
 int readPosixInfo(int image, unsigned* posixFileMode, int lenSU)
 {
     off_t origPos;
@@ -513,11 +500,11 @@ int readRockridgeFilename(int image, char* dest, int lenSU)
 {
     off_t origPos;
     unsigned char suFields[256];
-    char nameAsRead[256];
     int rc;
     int count;
     int lengthAsRead;
     bool foundName;
+    int recordableLenFileId;
     
     origPos = lseek(image, 0, SEEK_CUR);
     
@@ -535,14 +522,16 @@ int readRockridgeFilename(int image, char* dest, int lenSU)
         {
             lengthAsRead = suFields[count + 2] - 5;
             
-            strncpy(nameAsRead, suFields + count + 5, lengthAsRead);
-            
+            /* the data structures cannot handle filenames longer then NCHARS_FILE_ID_MAX
+            * so in case the image contains an invalid, long filename, trunkate it
+            * rather then corrupt memory */
             if(lengthAsRead > NCHARS_FILE_ID_MAX - 1)
-                return -2;
+                recordableLenFileId = NCHARS_FILE_ID_MAX - 1;
+            else
+                recordableLenFileId = lengthAsRead;
             
-            strncpy(dest, nameAsRead, lengthAsRead);
-            
-            dest[lengthAsRead] = '\0';
+            strncpy(dest, suFields + count + 5, recordableLenFileId);
+            dest[recordableLenFileId] = '\0';
             
             foundName = true;
         }
@@ -600,7 +589,7 @@ int readVolInfo(int image, VolInfo* volInfo)
     if(rc != 32)
         return -1;
     volInfo->volId[32] = '\0';
-    //!! strip spaces from the end of this
+    stripSpacesFromEndOfString(volInfo->volId);
     
     lseek(image, 84, SEEK_CUR);
     
@@ -648,16 +637,17 @@ int readVolInfo(int image, VolInfo* volInfo)
     
     lseek(image, 162, SEEK_CUR);
     
-    //!! strip spaces from the end of these two
     rc = read(image, volInfo->publisher, 128);
     if(rc != 128)
         return -1;
     volInfo->publisher[128] = '\0';
+    stripSpacesFromEndOfString(volInfo->publisher);
     
     rc = read(image, volInfo->dataPreparer, 128);
     if(rc != 128)
         return -1;
     volInfo->dataPreparer[128] = '\0';
+    stripSpacesFromEndOfString(volInfo->dataPreparer);
     
     lseek(image, 239, SEEK_CUR);
     
@@ -772,4 +762,14 @@ int skipDR(int image)
     lseek(image, dRLen - 1, SEEK_CUR);
     
     return dRLen;
+}
+
+void stripSpacesFromEndOfString(char* str)
+{
+    int count;
+    
+    for(count = strlen(str) - 1; count >= 0 && str[count] == ' '; count--)
+    {
+        str[count] = '\0';
+    }
 }

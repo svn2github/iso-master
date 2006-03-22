@@ -31,7 +31,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     Dir* destDirInTree;
     DirLL* searchDir;
     bool dirFound;
-    DirLL** lastDir;
+    DirLL* oldHead; /* old head of the directories list */
     struct stat statStruct; /* to get info on the dir */
     
     /* vars to read contents of a dir on fs */
@@ -44,7 +44,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     int newSrcPathLen; /* length of new path (including trailing '/' but not filename) */
     char* newSrcPathAndName; /* both for child dirs and child files */
     
-    if(srcPath[strlen(srcPath - 1)] != '/')
+    if(srcPath[strlen(srcPath) - 1] != '/')
     /* must have trailing slash */
         return -9;
     
@@ -80,11 +80,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     if(strlen(srcDirName) > NCHARS_FILE_ID_MAX - 1)
         return -6;
     
-    /* find last dir in list */
-    //!! if not sorting, might as well append to beginnig of list
-    lastDir = &(destDirInTree->directories);
-    while(*lastDir != NULL)
-        lastDir = &((*lastDir)->next);
+    oldHead = destDirInTree->directories;
     
     /* ADD directory to tree */
     rc = stat(srcPath, &statStruct);
@@ -95,18 +91,18 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     /* not a directory */
         return -5;
     
-    *lastDir = malloc(sizeof(DirLL));
-    if(*lastDir == NULL)
+    destDirInTree->directories = malloc(sizeof(DirLL));
+    if(destDirInTree->directories == NULL)
         return -3;
     
-    (*lastDir)->next = NULL;
+    destDirInTree->directories->next = oldHead;
     
-    strcpy((*lastDir)->dir.name, srcDirName);
+    strcpy(destDirInTree->directories->dir.name, srcDirName);
     
-    (*lastDir)->dir.posixFileMode = statStruct.st_mode;
+    destDirInTree->directories->dir.posixFileMode = statStruct.st_mode;
     
-    (*lastDir)->dir.directories = NULL;
-    (*lastDir)->dir.files = NULL;
+    destDirInTree->directories->dir.directories = NULL;
+    destDirInTree->directories->dir.files = NULL;
     /* END ADD directory to tree */
     
     /* remember length of original */
@@ -196,7 +192,7 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
 {
     int count;
     int rc;
-    FileLL** lastFile;
+    FileLL* oldHead; /* of the files list */
     char filename[NCHARS_FILE_ID_FS_MAX];
     struct stat statStruct;
     
@@ -236,23 +232,16 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     }
     /* END FIND dir to add to */
     
-    /* FIND last pointer in file list */
-    //!! if not sorting, might as well append to beginnig of list
-    lastFile = &(destDirInTree->files);
-    while(*lastFile != NULL)
-    {
-        lastFile = &((*lastFile)->next);
-    }
-    /* END FIND last pointer in file list */
+    oldHead = destDirInTree->files;
     
     /* ADD file */
-    *lastFile = malloc(sizeof(FileLL));
-    if(*lastFile == NULL)
+    destDirInTree->files = malloc(sizeof(FileLL));
+    if(destDirInTree->files == NULL)
         return -2;
     
-    (*lastFile)->next = NULL;
+    destDirInTree->files->next = oldHead;
     
-    strcpy((*lastFile)->file.name, filename);
+    strcpy(destDirInTree->files->file.name, filename);
     
     rc = stat(srcPathAndName, &statStruct);
     if(rc == -1)
@@ -262,16 +251,16 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     /* not a regular file */
         return -5;
     
-    (*lastFile)->file.posixFileMode = statStruct.st_mode;
+    destDirInTree->files->file.posixFileMode = statStruct.st_mode;
     
-    (*lastFile)->file.size = statStruct.st_size;
+    destDirInTree->files->file.size = statStruct.st_size;
     
-    (*lastFile)->file.onImage = false;
+    destDirInTree->files->file.onImage = false;
     
-    (*lastFile)->file.position = 0;
+    destDirInTree->files->file.position = 0;
     
-    (*lastFile)->file.pathAndName = malloc(strlen(srcPathAndName) + 1);
-    strcpy((*lastFile)->file.pathAndName, srcPathAndName);
+    destDirInTree->files->file.pathAndName = malloc(strlen(srcPathAndName) + 1);
+    strcpy(destDirInTree->files->file.pathAndName, srcPathAndName);
     /* END ADD file */
     
     return 1;

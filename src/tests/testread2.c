@@ -15,8 +15,7 @@
 #include "bkExtract.h"
 #include "bkMangle.h"
 #include "bkWrite.h"
-
-#include "vd.h"
+#include "bkSort.h"
 
 void oops(char* msg)
 {
@@ -46,17 +45,17 @@ void showDir(Dir* dir, int level)
     
     fileNode = dir->files;
     
-    while(fileNode != NULL)
-    {
-        for(count = 0; count < level; count++)
-            printf("  ");
-        printf("%s - %d bytes - %o - ", fileNode->file.name, fileNode->file.size, fileNode->file.posixFileMode);
-        if(fileNode->file.onImage)
-            printf("on image @%08X\n", fileNode->file.position);
-        else
-            printf("on disk: \'%s\'\n", fileNode->file.pathAndName);
-        fileNode = fileNode->next;
-    }
+        while(fileNode != NULL)
+        {
+            for(count = 0; count < level; count++)
+                printf("  ");
+            printf("%s - %d bytes - %o - ", fileNode->file.name, fileNode->file.size, fileNode->file.posixFileMode);
+            if(fileNode->file.onImage)
+                printf("on image @%08X\n", fileNode->file.position);
+            else
+                printf("on disk: \'%s\'\n", fileNode->file.pathAndName);
+            fileNode = fileNode->next;
+        }
 }
 
 void showNewDir(DirToWrite* dir, int level)
@@ -145,8 +144,8 @@ int main(int argc, char** argv)
         //printf("(9660) readDir ended with %d\n", rc);
     }
     
-    //printf("vol id: '%s'\n", volInfo.volId);
-    //printf("created: %s\n", ctime(&(volInfo.creationTime)));
+    //~ printf("vol id: '%s'\n", volInfo.volId);
+    //~ printf("created: %s\n", ctime(&(volInfo.creationTime)));
     
     //showDir(&tree, 0);
     
@@ -174,8 +173,8 @@ int main(int argc, char** argv)
     fileToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/bkRead7x.o") + 1);
     strcpy(fileToAdd, "/home/andrei/prog/isomaster/src/tests/bkRead7x.o");
     
-    dirToAdd = malloc(strlen("/etc/") + 1);
-    strcpy(dirToAdd, "/etc/");
+    dirToAdd = malloc(strlen("../../../") + 1);
+    strcpy(dirToAdd, "../../../");
     
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
@@ -198,9 +197,9 @@ int main(int argc, char** argv)
     //~ if(rc <= 0)
         //~ oops("problem adding file");
     
-    //rc = addDir(&tree, dirToAdd, &dirPath);
-    //if(rc <= 0)
-    //    oops("problem adding dir");
+    //~ rc = addDir(&tree, dirToAdd, &dirPath);
+    //~ if(rc <= 0)
+        //~ oops("problem adding dir");
     
     //showDir(&tree, 0);
     
@@ -208,11 +207,9 @@ int main(int argc, char** argv)
     if(image == -1)
         oops("unable to open image for writing");
     
-    rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 /*| FNTYPE_ROCKRIDGE  | FNTYPE_JOLIET*/);
+    rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 /*| FNTYPE_ROCKRIDGE */| FNTYPE_JOLIET);
     if(rc < 0)
         oops("failed to write image");
-    
-    
     
     rc = close(newImage);
     if(rc == -1)
@@ -265,7 +262,9 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     if(rc <= 0)
         return rc;
     
-    // sort 9660
+    printf("sorting 9660\n");
+    sortDir(&newTree, FNTYPE_9660);
+    showNewDir(&newTree, 0);
     
     pRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
     
@@ -281,7 +280,9 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     /* joliet dir tree */
     if(filenameTypes & FNTYPE_JOLIET)
     {
-        // sort joliet 
+        printf("sorting joliet\n");
+        sortDir(&newTree, FNTYPE_JOLIET);
+        showNewDir(&newTree, 0);
         
         printf("writing supplementary directory tree at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
         sRealRootDrOffset = lseek(newImage, 0, SEEK_CUR);
@@ -325,6 +326,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     printf("writing files\n");fflush(NULL);
     /* all files and offsets/sizes */
     rc = writeFileContents(oldImage, newImage, &newTree, filenameTypes);
+    printf("%d\n", rc);
     if(rc <= 0)
         return rc;
     
