@@ -207,7 +207,7 @@ int main(int argc, char** argv)
     if(image == -1)
         oops("unable to open image for writing");
     
-    rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 /*| FNTYPE_ROCKRIDGE | FNTYPE_JOLIET*/);
+    rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 | FNTYPE_ROCKRIDGE /*| FNTYPE_JOLIET*/);
     if(rc < 0)
         oops("failed to write image");
     
@@ -237,6 +237,13 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     off_t lPathTableJolietLoc;
     off_t mPathTableJolietLoc;
     int pathTableJolietSize;
+    
+    /* because mangleDir works on dir's children i need to copy the root manually */
+    bzero(&newTree, sizeof(DirToWrite));
+    newTree.name9660[0] = 0;
+    newTree.nameRock[0] = '\0';
+    newTree.nameJoliet[0] = '\0';
+    newTree.posixFileMode = oldTree->posixFileMode;
     
     printf("mangling\n");fflush(NULL);
     /* create tree to write */
@@ -326,7 +333,6 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     printf("writing files\n");fflush(NULL);
     /* all files and offsets/sizes */
     rc = writeFileContents(oldImage, newImage, &newTree, filenameTypes);
-    printf("%d\n", rc);
     if(rc <= 0)
         return rc;
     

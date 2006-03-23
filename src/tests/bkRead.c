@@ -214,7 +214,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             if(rc != 1)
                 return -1;
             
-            /*go to sys use fields */
+            /* go to sys use fields */
             lseek(image, 33, SEEK_CUR);
             
             readPosixInfo(image, &(dir->posixFileMode), realRootRecordLen - 34);

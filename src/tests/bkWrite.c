@@ -587,7 +587,7 @@ int writeDr(int image, DirToWrite* dir, time_t recordingTime, bool isADir,
             if(rc < 0)
                 return rc;
         }
-        
+        printf("%o - %s\n", dir->posixFileMode, dir->nameRock);
         rc = writeRockPX(image, dir, isADir);
         if(rc < 0)
             return rc;
