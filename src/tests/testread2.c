@@ -203,11 +203,11 @@ int main(int argc, char** argv)
     
     //showDir(&tree, 0);
     
-    newImage = open("out.iso", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    newImage = open("/tmp/out.iso", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if(image == -1)
         oops("unable to open image for writing");
     
-    rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 /*| FNTYPE_ROCKRIDGE */| FNTYPE_JOLIET);
+    rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 /*| FNTYPE_ROCKRIDGE | FNTYPE_JOLIET*/);
     if(rc < 0)
         oops("failed to write image");
     

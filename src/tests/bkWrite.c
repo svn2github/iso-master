@@ -507,7 +507,10 @@ int writeDr(int image, DirToWrite* dir, time_t recordingTime, bool isADir,
         if(filenameTypes & FNTYPE_JOLIET)
             lenFileId = 2 * strlen(dir->nameJoliet);
         else
-            lenFileId = strlen(dir->name9660);
+            if(isADir)
+                lenFileId = strlen(dir->name9660);
+            else
+                lenFileId = strlen(dir->name9660) + 2; /* + ";1" */
     }
     
     rc = write711(image, &lenFileId);
@@ -533,9 +536,25 @@ int writeDr(int image, DirToWrite* dir, time_t recordingTime, bool isADir,
         }
         else
         {
-            rc = write(image, dir->name9660, lenFileId);
-            if(rc != lenFileId)
-                return -1;
+            if(isADir)
+            {
+                /* the name */
+                rc = write(image, dir->name9660, lenFileId);
+                if(rc != lenFileId)
+                    return -1;
+            }
+            else
+            {
+                /* the name */
+                rc = write(image, dir->name9660, lenFileId - 2);
+                if(rc != lenFileId - 2)
+                    return -1;
+                
+                /* and the 9660-required version number */
+                rc = write(image, ";1", 2);
+                if(rc != 2)
+                    return -1;
+            }
         }
     }
     /* END FILE identifier */
@@ -609,8 +628,7 @@ int writeDr(int image, DirToWrite* dir, time_t recordingTime, bool isADir,
         goto writeDrStartLabel;
     }
     
-    //!! return 1 instead, to be safe, but first make sure it's not used
-    return recordLen;
+    return 1;
 }
 
 int writeFileContents(int oldImage, int newImage, DirToWrite* dir, 
