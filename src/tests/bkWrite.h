@@ -30,5 +30,4 @@ int writeVolDescriptor(int image, VolInfo* volInfo, off_t rootDrLocation,
                        off_t mPathTableLoc, unsigned pathTableSize, 
                        time_t creationTime, bool isPrimary);
 
-
 #endif

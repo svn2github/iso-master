@@ -255,7 +255,7 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
             if(rc < 0)
                 return rc;
             
-            nextFile = nextFile->next;fflush(NULL);
+            nextFile = nextFile->next;
         }
     }
     /* END WRITE children drs */
@@ -673,7 +673,8 @@ int writeFileContents(int oldImage, int newImage, DirToWrite* dir,
                 return -2;
         }
         
-        nextFile->file.dataLength = lseek(newImage, 0, SEEK_CUR) - nextFile->file.extentNumber * NBYTES_LOGICAL_BLOCK;
+        nextFile->file.dataLength = lseek(newImage, 0, SEEK_CUR) - 
+                                    nextFile->file.extentNumber * NBYTES_LOGICAL_BLOCK;
         
         /* FILL extent with zeroes */
         numUnusedBytes = NBYTES_LOGICAL_BLOCK - 
@@ -1157,7 +1158,8 @@ int writeVolDescriptor(int image, VolInfo* volInfo, off_t rootDrLocation,
     if(rc != 5)
         return -1;
     
-    /* volume descriptor version (also 1) */
+    /* volume descriptor version (always 1) */
+    byte = 1;
     rc = write711(image, &byte);
     if(rc != 1)
         return -1;
