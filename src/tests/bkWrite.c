@@ -402,7 +402,10 @@ int writeDir(int image, DirToWrite* dir, int parentLbNum, int parentNumBytes,
     
     lseek(image, endPos, SEEK_SET);
     
-    return dir->dataLength;
+    if(filenameTypes & FNTYPE_JOLIET)
+        return dir->dataLength2;
+    else
+        return dir->dataLength;
 }
 
 /* returns length of record written */
@@ -587,7 +590,7 @@ int writeDr(int image, DirToWrite* dir, time_t recordingTime, bool isADir,
             if(rc < 0)
                 return rc;
         }
-        printf("%o - %s\n", dir->posixFileMode, dir->nameRock);
+        
         rc = writeRockPX(image, dir, isADir);
         if(rc < 0)
             return rc;
@@ -838,6 +841,7 @@ int writePathTableRecordsOnLevel(int image, DirToWrite* dir, bool isTypeL,
     unsigned char byte;
     unsigned exentLocation;
     unsigned short parentDirId; /* copy of *parentDirNum */
+    static const char rootId = 0x00;
     
     if(thisLevel == targetLevel)
     /* write path table record */
@@ -894,13 +898,22 @@ int writePathTableRecordsOnLevel(int image, DirToWrite* dir, bool isTypeL,
             return rc;
         /* END PARENT directory number */
         
-        /* directory identifier */
-        if(filenameType & FNTYPE_JOLIET)
-            rc = writeJolietStringField(image, dir->nameJoliet, fileIdLen);
+        /* DIRECTORY identifier */
+        if(targetLevel == 1)
+        /* root */
+        {
+            rc = write(image, &rootId, 1);
+        }
         else
-            rc = write(image, dir->name9660, fileIdLen);
+        {
+            if(filenameType & FNTYPE_JOLIET)
+                rc = writeJolietStringField(image, dir->nameJoliet, fileIdLen);
+            else
+                rc = write(image, dir->name9660, fileIdLen);
+        }
         if(rc < 0)
             return rc;
+        /* END DIRECTORY identifier */
         
         /* padding field */
         if(fileIdLen % 2 != 0)

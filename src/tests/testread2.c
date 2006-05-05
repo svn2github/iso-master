@@ -203,7 +203,7 @@ int main(int argc, char** argv)
     
     //showDir(&tree, 0);
     
-    newImage = open("/tmp/out.iso", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    newImage = open("out.iso", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if(image == -1)
         oops("unable to open image for writing");
     
@@ -252,7 +252,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
         return rc;
     //showNewDir(&newTree, 0);
     
-    printf("writing blank and terminator\n");fflush(NULL);
+    printf("writing blank at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
     /* system area, always zeroes */
     rc = writeByteBlock(newImage, 0, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA);
     if(rc <= 0)
@@ -265,6 +265,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     /* skip svd (1 block), write it after pvd */
         lseek(newImage, NBYTES_LOGICAL_BLOCK, SEEK_CUR);
     
+    printf("writing terminator at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
     rc = writeVdsetTerminator(newImage);
     if(rc <= 0)
         return rc;
@@ -302,22 +303,22 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
         sRootDirSize = rc;
     }
     
-    printf("writing 9660 path tables\n");fflush(NULL);
+    printf("writing 9660 path tables at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
     
     lPathTable9660Loc = lseek(newImage, 0, SEEK_CUR);
-    rc = writePathTable(newImage, &newTree, true, filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE));
+    rc = writePathTable(newImage, &newTree, true, FNTYPE_9660);
     if(rc <= 0)
         return rc;
     pathTable9660Size = rc;
     
     mPathTable9660Loc = lseek(newImage, 0, SEEK_CUR);
-    rc = writePathTable(newImage, &newTree, false, filenameTypes & (FNTYPE_9660 | FNTYPE_ROCKRIDGE));
+    rc = writePathTable(newImage, &newTree, false, FNTYPE_9660);
     if(rc <= 0)
         return rc;
     
     if(filenameTypes & FNTYPE_JOLIET)
     {
-        printf("writing joliet path tables\n");fflush(NULL);
+        printf("writing joliet path tables at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
         lPathTableJolietLoc = lseek(newImage, 0, SEEK_CUR);
         rc = writePathTable(newImage, &newTree, true, FNTYPE_JOLIET);
         if(rc <= 0)
@@ -330,7 +331,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
             return rc;
     }
     
-    printf("writing files\n");fflush(NULL);
+    printf("writing files at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
     /* all files and offsets/sizes */
     rc = writeFileContents(oldImage, newImage, &newTree, filenameTypes);
     if(rc <= 0)
@@ -338,7 +339,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     
     lseek(newImage, NBYTES_LOGICAL_BLOCK * NLS_SYSTEM_AREA, SEEK_SET);
     
-    printf("writing pvd\n");fflush(NULL);
+    printf("writing pvd at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
     rc = writeVolDescriptor(newImage, volInfo, pRealRootDrOffset, 
                             pRootDirSize, lPathTable9660Loc, mPathTable9660Loc, 
                             pathTable9660Size, creationTime, true);
@@ -347,7 +348,7 @@ int writeImage(int oldImage, int newImage, VolInfo* volInfo, Dir* oldTree,
     
     if(filenameTypes & FNTYPE_JOLIET)
     {
-        printf("writing svd\n");fflush(NULL);
+        printf("writing svd at %X\n", (int)lseek(newImage, 0, SEEK_CUR));fflush(NULL);
         rc = writeVolDescriptor(newImage, volInfo, sRealRootDrOffset, 
                                 sRootDirSize, lPathTableJolietLoc, mPathTableJolietLoc, 
                                 pathTableJolietSize, creationTime, false);
