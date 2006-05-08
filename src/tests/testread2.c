@@ -144,37 +144,37 @@ int main(int argc, char** argv)
         //printf("(9660) readDir ended with %d\n", rc);
     }
     
-    //~ printf("vol id: '%s'\n", volInfo.volId);
-    //~ printf("created: %s\n", ctime(&(volInfo.creationTime)));
+    printf("vol id: '%s'\n", volInfo.volId);
+    printf("created: %s\n", ctime(&(volInfo.creationTime)));
     
-    //showDir(&tree, 0);
+    showDir(&tree, 0);
     
-    filePath.path.numDirs = 2;
-    filePath.path.dirs = malloc(sizeof(char*) * filePath.path.numDirs);
-    filePath.path.dirs[0] = malloc(strlen("isolinux") + 1);
-    strcpy(filePath.path.dirs[0], "isolinux");
-    filePath.path.dirs[1] = malloc(strlen("sbootmgr") + 1);
-    strcpy(filePath.path.dirs[1], "sbootmgr");
-    strcpy(filePath.filename, "README.TXT");
+    //~ filePath.path.numDirs = 2;
+    //~ filePath.path.dirs = malloc(sizeof(char*) * filePath.path.numDirs);
+    //~ filePath.path.dirs[0] = malloc(strlen("isolinux") + 1);
+    //~ strcpy(filePath.path.dirs[0], "isolinux");
+    //~ filePath.path.dirs[1] = malloc(strlen("sbootmgr") + 1);
+    //~ strcpy(filePath.path.dirs[1], "sbootmgr");
+    //~ strcpy(filePath.filename, "README.TXT");
     
-    dirPath.numDirs = 1;
-    dirPath.dirs = malloc(sizeof(char*) * dirPath.numDirs);
-    dirPath.dirs[0] = malloc(strlen("isolinux") + 1);
-    strcpy(dirPath.dirs[0], "isolinux");
+    //~ dirPath.numDirs = 1;
+    //~ dirPath.dirs = malloc(sizeof(char*) * dirPath.numDirs);
+    //~ dirPath.dirs[0] = malloc(strlen("isolinux") + 1);
+    //~ strcpy(dirPath.dirs[0], "isolinux");
     
-    srcDir.numDirs = 1;
-    srcDir.dirs = malloc(sizeof(char*) * srcDir.numDirs);
-    srcDir.dirs[0] = malloc(strlen("kernels" + 1));
-    strcpy(srcDir.dirs[0], "kernels");
+    //~ srcDir.numDirs = 1;
+    //~ srcDir.dirs = malloc(sizeof(char*) * srcDir.numDirs);
+    //~ srcDir.dirs[0] = malloc(strlen("kernels" + 1));
+    //~ strcpy(srcDir.dirs[0], "kernels");
     
-    dest = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
-    strcpy(dest, "/home/andrei/prog/isomaster/src/tests/");
+    //~ dest = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
+    //~ strcpy(dest, "/home/andrei/prog/isomaster/src/tests/");
     
-    fileToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/bkRead7x.o") + 1);
-    strcpy(fileToAdd, "/home/andrei/prog/isomaster/src/tests/bkRead7x.o");
+    //~ fileToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/bkRead7x.o") + 1);
+    //~ strcpy(fileToAdd, "/home/andrei/prog/isomaster/src/tests/bkRead7x.o");
     
-    dirToAdd = malloc(strlen("../../../") + 1);
-    strcpy(dirToAdd, "../../../");
+    //~ dirToAdd = malloc(strlen("../../../") + 1);
+    //~ strcpy(dirToAdd, "../../../");
     
     //deleteFile(&tree, &filePath);
     //printf("\n--------------------\n\n");
@@ -203,21 +203,21 @@ int main(int argc, char** argv)
     
     //showDir(&tree, 0);
     
-    newImage = open("out.iso", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    if(image == -1)
-        oops("unable to open image for writing");
+    //~ newImage = open("out.iso", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    //~ if(image == -1)
+        //~ oops("unable to open image for writing");
     
-    rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 /*| FNTYPE_ROCKRIDGE */| FNTYPE_JOLIET);
-    if(rc < 0)
-        oops("failed to write image");
+    //~ rc = writeImage(image, newImage, &volInfo, &tree, time(NULL), FNTYPE_9660 /*| FNTYPE_ROCKRIDGE */| FNTYPE_JOLIET);
+    //~ if(rc < 0)
+        //~ oops("failed to write image");
     
-    rc = close(newImage);
-    if(rc == -1)
-        oops("faled to close new image");
+    //~ rc = close(newImage);
+    //~ if(rc == -1)
+        //~ oops("faled to close new image");
 
-    rc = close(image);
-    if(rc == -1)
-        oops("faled to close image");
+    //~ rc = close(image);
+    //~ if(rc == -1)
+        //~ oops("faled to close image");
     
     return 0;
 }

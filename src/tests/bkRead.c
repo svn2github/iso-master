@@ -559,6 +559,11 @@ int readVolInfo(int image, VolInfo* volInfo)
     unsigned char escapeSequence[3]; /* only interested in a joliet sequence */
     char timeString[17]; /* for creation time */
     
+    /* for checking el torito */
+    char elToritoSig[24];
+    unsigned bootCatalogLocation; /* logical sector number */
+    off_t locationOfNextDescriptor;
+    
     /* vars for checking rockridge */
     unsigned realRootLoc; /* location of the root dr inside root dir */
     unsigned char recordLen; /* length of rood dr */
@@ -596,44 +601,44 @@ int readVolInfo(int image, VolInfo* volInfo)
     /* am now at root dr */
     volInfo->pRootDrOffset = lseek(image, 0, SEEK_CUR);
     
-        /* SEE if rockridge exists */
-        lseek(image, 2, SEEK_CUR);
+    /* SEE if rockridge exists */
+    lseek(image, 2, SEEK_CUR);
+    
+    rc = read733(image, &realRootLoc);
+    if(rc != 8)
+        return -3;
+    realRootLoc *= NBYTES_LOGICAL_BLOCK;
+    
+    lseek(image, realRootLoc, SEEK_SET);
+    
+    rc = read711(image, &recordLen);
+    if(rc != 1)
+        return -1;
+    
+    if(recordLen >= 41)
+    /* a minimum root with SP su field */
+    {
+        /* root dr has filename length of 1 */
+        lseek(image, 33, SEEK_CUR);
         
-        rc = read733(image, &realRootLoc);
-        if(rc != 8)
-            return -3;
-        realRootLoc *= NBYTES_LOGICAL_BLOCK;
+        /* a rockridge root dr has an SP su entry here */
         
-        lseek(image, realRootLoc, SEEK_SET);
-        
-        rc = read711(image, &recordLen);
-        if(rc != 1)
+        rc = read(image, &sPsUentry, 7);
+        if(rc != 7)
             return -1;
         
-        if(recordLen >= 41)
-        /* a minimum root with SP su field */
+        if( sPsUentry[0] == 0x53 && sPsUentry[1] == 0x50 &&
+            sPsUentry[2] == 7 && 
+            sPsUentry[4] == 0xBE && sPsUentry[5] == 0xEF )
+        /* rockridge it is */
         {
-            /* root dr has filename length of 1 */
-            lseek(image, 33, SEEK_CUR);
-            
-            /* a rockridge root dr has an SP su entry here */
-            
-            rc = read(image, &sPsUentry, 7);
-            if(rc != 7)
-                return -1;
-            
-            if( sPsUentry[0] == 0x53 && sPsUentry[1] == 0x50 &&
-                sPsUentry[2] == 7 && 
-                sPsUentry[4] == 0xBE && sPsUentry[5] == 0xEF )
-            /* rockridge it is */
-            {
-                volInfo->filenameTypes |= FNTYPE_ROCKRIDGE;
-            }
+            volInfo->filenameTypes |= FNTYPE_ROCKRIDGE;
         }
-        
-        /* go back to where it was before trying rockridge */
-        lseek(image, volInfo->pRootDrOffset, SEEK_SET);
-        /* END SEE if rockridge exists */
+    }
+    
+    /* go back to where it was before trying rockridge */
+    lseek(image, volInfo->pRootDrOffset, SEEK_SET);
+    /* END SEE if rockridge exists */
     
     lseek(image, 162, SEEK_CUR);
     
@@ -682,16 +687,51 @@ int readVolInfo(int image, VolInfo* volInfo)
     /* END SKIP all extra copies of pvd */
     
     /* TRY read boot record */
+    locationOfNextDescriptor = lseek(image, 0, SEEK_CUR) + 2048;
+    
     rc = read711(image, &vdType);
     if(rc != 1)
         return -1;
     
     if(vdType == VDTYPE_BOOT)
     {
-        lseek(image, 2047, SEEK_CUR);
+        lseek(image, 6, SEEK_CUR);
+        
+        rc = read(image, elToritoSig, 24);
+        if(rc != 24)
+            return -1;
+        
+        if(strcmp(elToritoSig, "EL TORITO SPECIFICATION") == 0)
+        /* el torito confirmed */
+        {
+            lseek(image, 40, SEEK_CUR);
+            
+            rc = read731(image, &bootCatalogLocation);
+            if(rc != 4)
+                return -1;
+            
+            printf("boot catalog @%d\n", bootCatalogLocation);
+            lseek(image, bootCatalogLocation * NBYTES_LOGICAL_BLOCK, SEEK_SET);
+            
+            /* skip validation entry */
+            lseek(image, 32, SEEK_CUR);
+            
+            /* read initial/default entry location */
+            
+            
+            exit(0);
+        }
+        else
+        //!! unknown boot record type
+        {
+            printf("err, boot record not el torito\n");
+            lseek(image, 2018, SEEK_CUR);
+        }
     }
     else
+    /* not boot record */
     {
+        /* go back */
         lseek(image, -1, SEEK_CUR);
     }
     /* END TRY read boot record */

@@ -149,7 +149,7 @@ END boot image
 
 BEGIN 9660 root dir
 #1 (136 su bytes):
-0000 E800 - 0000 E800 - d136 - record len 
+0000 E800 - 0000 E800 - d136 - record len
 0000 E801 - 0000 E81F - whatever
 0000 E820 - 0000 E820 - d1 - len file id
 0000 E821 - 0000 E821 - 0x00 - file id
