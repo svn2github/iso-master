@@ -7,6 +7,7 @@
 #include "bkRead.h"
 #include "bkRead7x.h"
 #include "bkTime.h"
+#include "bkError.h"
 
 /* numbers as recorded on image */
 #define VDTYPE_BOOT 0
@@ -31,7 +32,7 @@ bool dirDrFollows(int image)
     
     rc = read711(image, &fileFlags);
     if(rc != 1)
-        return rc;
+        return -1;
     
     lseek(image, origPos, SEEK_SET);
     
@@ -560,8 +561,8 @@ int readVolInfo(int image, VolInfo* volInfo)
     char timeString[17]; /* for creation time */
     
     /* for checking el torito */
-    char elToritoSig[24];
-    unsigned bootCatalogLocation; /* logical sector number */
+    //~ char elToritoSig[24];
+    //~ unsigned bootCatalogLocation; /* logical sector number */
     off_t locationOfNextDescriptor;
     
     /* vars for checking rockridge */
@@ -695,38 +696,39 @@ int readVolInfo(int image, VolInfo* volInfo)
     
     if(vdType == VDTYPE_BOOT)
     {
-        lseek(image, 6, SEEK_CUR);
+        lseek(image, 2047, SEEK_CUR);
+        //~ lseek(image, 6, SEEK_CUR);
         
-        rc = read(image, elToritoSig, 24);
-        if(rc != 24)
-            return -1;
+        //~ rc = read(image, elToritoSig, 24);
+        //~ if(rc != 24)
+            //~ return -1;
         
-        if(strcmp(elToritoSig, "EL TORITO SPECIFICATION") == 0)
-        /* el torito confirmed */
-        {
-            lseek(image, 40, SEEK_CUR);
+        //~ if(strcmp(elToritoSig, "EL TORITO SPECIFICATION") == 0)
+        //~ /* el torito confirmed */
+        //~ {
+            //~ lseek(image, 40, SEEK_CUR);
             
-            rc = read731(image, &bootCatalogLocation);
-            if(rc != 4)
-                return -1;
+            //~ rc = read731(image, &bootCatalogLocation);
+            //~ if(rc != 4)
+                //~ return -1;
             
-            printf("boot catalog @%d\n", bootCatalogLocation);
-            lseek(image, bootCatalogLocation * NBYTES_LOGICAL_BLOCK, SEEK_SET);
+            //~ printf("boot catalog @%d\n", bootCatalogLocation);
+            //~ lseek(image, bootCatalogLocation * NBYTES_LOGICAL_BLOCK, SEEK_SET);
             
-            /* skip validation entry */
-            lseek(image, 32, SEEK_CUR);
+            //~ /* skip validation entry */
+            //~ lseek(image, 32, SEEK_CUR);
             
-            /* read initial/default entry location */
+            //~ /* read initial/default entry location */
             
             
-            exit(0);
-        }
-        else
-        //!! unknown boot record type
-        {
-            printf("err, boot record not el torito\n");
-            lseek(image, 2018, SEEK_CUR);
-        }
+            //~ exit(0);
+        //~ }
+        //~ else
+        //~ //!! unknown boot record type
+        //~ {
+            //~ printf("err, boot record not el torito\n");
+            //~ lseek(image, 2018, SEEK_CUR);
+        //~ }
     }
     else
     /* not boot record */

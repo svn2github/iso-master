@@ -1,5 +1,5 @@
-testread2: testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o bkMangle.o bkWrite.o bkWrite7x.o bkTime.o bkSort.o
-	cc testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o bkMangle.o bkWrite.o bkWrite7x.o bkTime.o bkSort.o -Wall -o testread2
+testread2: testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o bkMangle.o bkWrite.o bkWrite7x.o bkTime.o bkSort.o bkError.o
+	cc testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o bkMangle.o bkWrite.o bkWrite7x.o bkTime.o bkSort.o bkError.o -Wall -o testread2
 
 clean: 
 	rm *.o testread2
@@ -26,4 +26,5 @@ bkTime.o: bkTime.c bkTime.h bk.h
 	cc bkTime.c -Wall -c
 bkSort.o: bkSort.c bkSort.h bk.h
 	cc bkSort.c -Wall -c
-
+bkError.o: bkError.c bkError.h
+	cc bkError.c -Wall -c

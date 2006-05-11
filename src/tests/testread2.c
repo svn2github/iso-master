@@ -16,6 +16,7 @@
 #include "bkMangle.h"
 #include "bkWrite.h"
 #include "bkSort.h"
+#include "bkError.h"
 
 void oops(char* msg)
 {
@@ -95,24 +96,23 @@ void showNewDir(DirToWrite* dir, int level)
 int main(int argc, char** argv)
 {
     int image;
-    int newImage;
+    //int newImage;
     VolInfo volInfo;
     int rc;
-    
     Dir tree;
-    FilePath filePath;
-    Path srcDir;
-    Path dirPath;
-    char* dest; /* destination directory */
-    char* fileToAdd;
-    char* dirToAdd;
+    //FilePath filePath;
+    //Path srcDir;
+    //Path dirPath;
+    //char* dest; /* destination directory */
+    //char* fileToAdd;
+    //char* dirToAdd;
     //char dirName[256];
     
     /* open image file for reading */
     image = open(argv[1], O_RDONLY);
     if(image == -1)
         oops("unable to open image");
-    
+    outputError(BKERROR_READ_GENERIC);
     rc = readVolInfo(image, &volInfo);
     if(image <= 0)
         oops("failed to read volume info");
@@ -144,10 +144,10 @@ int main(int argc, char** argv)
         //printf("(9660) readDir ended with %d\n", rc);
     }
     
-    printf("vol id: '%s'\n", volInfo.volId);
-    printf("created: %s\n", ctime(&(volInfo.creationTime)));
+    //~ printf("vol id: '%s'\n", volInfo.volId);
+    //~ printf("created: %s\n", ctime(&(volInfo.creationTime)));
     
-    showDir(&tree, 0);
+    //showDir(&tree, 0);
     
     //~ filePath.path.numDirs = 2;
     //~ filePath.path.dirs = malloc(sizeof(char*) * filePath.path.numDirs);
