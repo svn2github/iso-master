@@ -32,7 +32,7 @@ bool dirDrFollows(int image)
     
     rc = read711(image, &fileFlags);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lseek(image, origPos, SEEK_SET);
     
@@ -82,23 +82,23 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
     
     rc = read(image, &recordLength, 1);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lseek(image, 1, SEEK_CUR);
     
     rc = read733(image, &locExtent);
     if(rc != 8)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     rc = read733(image, &lenExtent);
     if(rc != 8)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lseek(image, 14, SEEK_CUR);
     
     rc = read(image, &lenFileId9660, 1);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lenSU = recordLength - 33 - lenFileId9660;
     if(lenFileId9660 % 2 == 0)
@@ -109,7 +109,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
     
     rc = read(image, &rootTestByte, 1);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lseek(image, origPos, SEEK_SET);
     
@@ -139,7 +139,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             
             rc = read(image, nameAsOnDisk, lenFileId9660);
             if(rc != lenFileId9660)
-                return -1;
+                return BKERROR_READ_GENERIC;
             
             strncpy(dir->name, nameAsOnDisk, recordableLenFileId);
             dir->name[recordableLenFileId] = '\0';
@@ -159,11 +159,11 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             
             /* ucs2 byte count must be even */
             if(lenFileId9660 % 2 != 0)
-                return -3;
+                return BKERROR_INVALID_UCS2;
             
             rc = read(image, nameAsOnDisk, lenFileId9660);
             if(rc != lenFileId9660)
-                return -1;
+                return BKERROR_READ_GENERIC;
             
             for(ucsCount = 1, byteCount = 0; ucsCount < lenFileId9660;
                 ucsCount += 2, byteCount += 1)
@@ -196,7 +196,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
         }
     }
     else
-        return -2;
+        return BKERROR_UNKNOWN_FILENAME_TYPE;
     /* END READ directory name */
     
     if(readPosix)
@@ -213,7 +213,7 @@ int readDir(int image, Dir* dir, int filenameType, bool readPosix)
             /* read record length */
             read(image, &realRootRecordLen, 1);
             if(rc != 1)
-                return -1;
+                return BKERROR_READ_GENERIC;
             
             /* go to sys use fields */
             lseek(image, 33, SEEK_CUR);
@@ -280,7 +280,7 @@ int readDirContents(int image, Dir* dir, unsigned size, int filenameType, bool r
                 
                 *nextDir = malloc(sizeof(DirLL));
                 if(*nextDir == NULL)
-                    return -2;
+                    return BKERROR_OUT_OF_MEMORY;
                 
                 recordLength = readDir(image, &((*nextDir)->dir), filenameType, readPosix);
                 if(recordLength < 0)
@@ -298,7 +298,7 @@ int readDirContents(int image, Dir* dir, unsigned size, int filenameType, bool r
                 
                 *nextFile = malloc(sizeof(FileLL));
                 if(*nextFile == NULL)
-                    return -2;
+                    return BKERROR_OUT_OF_MEMORY;
                 
                 recordLength = readFileInfo(image, &((*nextFile)->file), filenameType, readPosix);
                 if(recordLength < 0)
@@ -323,7 +323,7 @@ int readDirContents(int image, Dir* dir, unsigned size, int filenameType, bool r
                 
                 rc = read(image, &testByte, 1);
                 if(rc != 1)
-                    return -1;
+                    return BKERROR_READ_GENERIC;
                 
                 if(testByte != 0)
                 {
@@ -351,23 +351,23 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
     
     rc = read(image, &recordLength, 1);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lseek(image, 1, SEEK_CUR);
     
     rc = read733(image, &locExtent);
     if(rc != 8)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     rc = read733(image, &lenExtent);
     if(rc != 8)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lseek(image, 14, SEEK_CUR);
     
     rc = read(image, &lenFileId9660, 1);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lenSU = recordLength - 33 - lenFileId9660;
     if(lenFileId9660 % 2 == 0)
@@ -379,12 +379,12 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
         
         rc = read(image, nameAsOnDisk, lenFileId9660);
         if(rc != lenFileId9660)
-            return -1;
+            return BKERROR_READ_GENERIC;
         
         removeCrapFromFilename(nameAsOnDisk, lenFileId9660);
         
         if( strlen(nameAsOnDisk) > NCHARS_FILE_ID_MAX - 1 )
-            return -2;
+            return BKERROR_MAX_NAME_LENGTH_EXCEEDED;
         
         strcpy(file->name, nameAsOnDisk);
         
@@ -399,11 +399,11 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
         int ucsCount, byteCount;
         
         if(lenFileId9660 % 2 != 0)
-            return -3;
+            return BKERROR_INVALID_UCS2;
         
         rc = read(image, nameAsOnDisk, lenFileId9660);
         if(rc != lenFileId9660)
-            return -1;
+            return BKERROR_READ_GENERIC;
         
         for(ucsCount = 1, byteCount = 0; ucsCount < lenFileId9660;
             ucsCount += 2, byteCount += 1)
@@ -414,7 +414,7 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
         removeCrapFromFilename(nameInAscii, lenFileId9660 / 2);
         
         if( strlen(nameInAscii) > NCHARS_FILE_ID_MAX - 1 )
-            return -2;
+            return BKERROR_MAX_NAME_LENGTH_EXCEEDED;
         
         strcpy(file->name, nameInAscii);
         
@@ -435,7 +435,7 @@ int readFileInfo(int image, File* file, int filenameType, bool readPosix)
             return rc;
     }
     else
-        return -10;
+        return BKERROR_UNKNOWN_FILENAME_TYPE;
     
     if(readPosix)
     {
@@ -468,7 +468,7 @@ int readPosixInfo(int image, unsigned* posixFileMode, int lenSU)
     
     rc = read(image, suFields, lenSU);
     if(rc != lenSU)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lseek(image, origPos, SEEK_SET);
     
@@ -511,7 +511,7 @@ int readRockridgeFilename(int image, char* dest, int lenSU)
     
     rc = read(image, suFields, lenSU);
     if(rc != lenSU)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     lseek(image, origPos, SEEK_SET);
     
@@ -544,7 +544,7 @@ int readRockridgeFilename(int image, char* dest, int lenSU)
     }
     
     if(!foundName)
-        return -1;
+        return BKERROR_RR_FILENAME_MISSING;
     else
         return 1;
 }
@@ -583,11 +583,11 @@ int readVolInfo(int image, VolInfo* volInfo)
     /* make sure pvd exists */
     rc = read711(image, &vdType);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     /* first descriptor must be primary */
     if(vdType != VDTYPE_PRIMARY)
-        return -2;
+        return BKERROR_VD_NOT_PRIMARY;
     
     lseek(image, 39, SEEK_CUR);
     
@@ -607,14 +607,14 @@ int readVolInfo(int image, VolInfo* volInfo)
     
     rc = read733(image, &realRootLoc);
     if(rc != 8)
-        return -3;
+        return BKERROR_READ_GENERIC;
     realRootLoc *= NBYTES_LOGICAL_BLOCK;
     
     lseek(image, realRootLoc, SEEK_SET);
     
     rc = read711(image, &recordLen);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     if(recordLen >= 41)
     /* a minimum root with SP su field */
@@ -626,7 +626,7 @@ int readVolInfo(int image, VolInfo* volInfo)
         
         rc = read(image, &sPsUentry, 7);
         if(rc != 7)
-            return -1;
+            return BKERROR_READ_GENERIC;
         
         if( sPsUentry[0] == 0x53 && sPsUentry[1] == 0x50 &&
             sPsUentry[2] == 7 && 
@@ -645,13 +645,13 @@ int readVolInfo(int image, VolInfo* volInfo)
     
     rc = read(image, volInfo->publisher, 128);
     if(rc != 128)
-        return -1;
+        return BKERROR_READ_GENERIC;
     volInfo->publisher[128] = '\0';
     stripSpacesFromEndOfString(volInfo->publisher);
     
     rc = read(image, volInfo->dataPreparer, 128);
     if(rc != 128)
-        return -1;
+        return BKERROR_READ_GENERIC;
     volInfo->dataPreparer[128] = '\0';
     stripSpacesFromEndOfString(volInfo->dataPreparer);
     
@@ -659,7 +659,7 @@ int readVolInfo(int image, VolInfo* volInfo)
     
     rc = read(image, timeString, 17);
     if(rc != 17)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     longStringToEpoch(timeString, &(volInfo->creationTime));
     
@@ -673,7 +673,7 @@ int readVolInfo(int image, VolInfo* volInfo)
     {
         rc = read711(image, &vdType);
         if(rc != 1)
-            return -1;
+            return BKERROR_READ_GENERIC;
         
         if(vdType == VDTYPE_PRIMARY)
         {
@@ -692,7 +692,7 @@ int readVolInfo(int image, VolInfo* volInfo)
     
     rc = read711(image, &vdType);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     if(vdType == VDTYPE_BOOT)
     {
@@ -741,7 +741,7 @@ int readVolInfo(int image, VolInfo* volInfo)
     /* TRY read svd */
     rc = read711(image, &vdType);
     if(rc != 1)
-        return -1;
+        return BKERROR_READ_GENERIC;
     
     if(vdType == VDTYPE_SUPPLEMENTARY)
     /* make sure it's joliet (by escape sequence) */
@@ -799,7 +799,7 @@ int skipDR(int image)
     
     rc = read711(image, &dRLen);
     if(rc != 1)
-        return rc;
+        return BKERROR_READ_GENERIC;
     
     lseek(image, dRLen - 1, SEEK_CUR);
     

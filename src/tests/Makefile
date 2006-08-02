@@ -2,7 +2,7 @@ testread2: testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath
 	cc testread2.c bkRead7x.o bkAdd.o bkDelete.o bkExtract.o bkRead.o bkPath.o bkMangle.o bkWrite.o bkWrite7x.o bkTime.o bkSort.o bkError.o -Wall -o testread2
 
 clean: 
-	rm *.o testread2
+	rm -f *.o testread2
 
 bkRead7x.o: bkRead7x.c bkRead7x.h bk.h
 	cc bkRead7x.c -Wall -c

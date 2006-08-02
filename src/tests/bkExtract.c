@@ -8,6 +8,7 @@
 #include "bk.h"
 #include "bkExtract.h"
 #include "bkPath.h"
+#include "bkError.h"
 
 const unsigned posixFileDefaults = 33188; /* octal 100644 */
 const unsigned posixDirDefaults = 16877; /* octal 40711 */
@@ -57,7 +58,7 @@ int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            return -3;
+            return BKERROR_DIR_NOT_FOUND_ON_IMAGE;
     }
     /* END FIND parent dir to know what the contents are */
     
@@ -65,7 +66,7 @@ int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
     /* 1 for '/', 1 for '\0' */
     newDestDir = malloc(strlen(destDir) + strlen( (srcDir->dirs)[srcDir->numDirs - 1] ) + 2);
     if(newDestDir == NULL)
-        return -2;
+        return BKERROR_OUT_OF_MEMORY;
     strcpy(newDestDir, destDir);
     strcat(newDestDir, (srcDir->dirs)[srcDir->numDirs - 1]);
     strcat(newDestDir, "/");
@@ -76,7 +77,7 @@ int extractDir(int image, Dir* tree, Path* srcDir, char* destDir,
         destDirPerms = posixDirDefaults;
     rc = mkdir(newDestDir, destDirPerms);
     if(rc == -1)
-        return -1;
+        return BKERROR_MKDIR_FAILED;
     /* END CREATE destination dir */
     
     /* BEGIN extract each file in directory */
@@ -163,7 +164,7 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            return -10;
+            return BKERROR_DIR_NOT_FOUND_ON_IMAGE;
     }
     
     /* now i have parentDir pointing to the parent directory */
@@ -178,13 +179,13 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
         {
             if(!pointerToIt->file.onImage)
             //!! maybe just make a copy of the file here
-                return -1;
+                return BKERROR_FIXME;
             
             fileFound = true;
             
             destPathAndName = malloc(strlen(destDir) + strlen(pathAndName->filename) + 1);
             if(destPathAndName == NULL)
-                return -2;
+                return BKERROR_OUT_OF_MEMORY;
             strcpy(destPathAndName, destDir);
             strcat(destPathAndName, pathAndName->filename);
             
@@ -196,7 +197,7 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
             
             destFile = open(destPathAndName, O_WRONLY | O_CREAT | O_TRUNC, destFilePerms);
             if(destFile == -1)
-              return -3;
+              return BKERROR_OPEN_WRITE_FAILED;
             free(destPathAndName);
             
             lseek(image, pointerToIt->file.position, SEEK_SET);
@@ -216,14 +217,14 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
             
             rc = read(image, block, sizeLastBlock);
             if(rc != sizeLastBlock)
-                    return -3;
+                    return BKERROR_READ_GENERIC;
             rc = write(destFile, block, sizeLastBlock);
             if(rc != sizeLastBlock)
-                    return -4;
+                    return BKERROR_WRITE_GENERIC;
             
             close(destFile);
             if(destFile == -1)
-              return -5;
+              return BKERROR_EXOTIC;
             /* END WRITE file */
         }
         else
@@ -232,7 +233,7 @@ int extractFile(int image, Dir* tree, FilePath* pathAndName, char* destDir,
         }
     }
     if(!fileFound)
-        return -10;
+        return BKERROR_FILE_NOT_FOUND_ON_IMAGE;
     
     return pointerToIt->file.size;
 }

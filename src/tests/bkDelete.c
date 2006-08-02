@@ -4,6 +4,7 @@
 
 #include "bk.h"
 #include "bkPath.h"
+#include "bkError.h"
 
 int deleteDir(Dir* tree, Path* srcDir)
 {
@@ -48,7 +49,7 @@ int deleteDir(Dir* tree, Path* srcDir)
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            return -10;
+            return BKERROR_DIR_NOT_FOUND_ON_IMAGE;
     }
     /* END FIND dir to know what the contents are */
     
@@ -104,7 +105,7 @@ int deleteDir(Dir* tree, Path* srcDir)
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            return -10;
+            return BKERROR_DIR_NOT_FOUND_ON_IMAGE;
     }
     /* END GET A pointer to the parent dir */
     
@@ -128,7 +129,7 @@ int deleteDir(Dir* tree, Path* srcDir)
     }
     if(!dirFound)
     /* should not happen since i already found this dir above */
-        return -10;
+        return BKERROR_DIR_NOT_FOUND_ON_IMAGE;
     /* END DELETE self */
     
     return 1;
@@ -163,7 +164,7 @@ int deleteFile(Dir* tree, FilePath* pathAndName)
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            return -10;
+            return BKERROR_DIR_NOT_FOUND_ON_IMAGE;
     }
     
     /* now i have parentDir pointing to the parent directory */
@@ -192,7 +193,7 @@ int deleteFile(Dir* tree, FilePath* pathAndName)
         }
     }
     if(!fileFound)
-        return -10;
+        return BKERROR_FILE_NOT_FOUND_ON_IMAGE;
     
     return true;
 }

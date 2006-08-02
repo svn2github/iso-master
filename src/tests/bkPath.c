@@ -3,6 +3,7 @@
 #include <string.h>
 
 #include "bk.h"
+#include "bkError.h"
 
 void freePath(Path* path)
 {
@@ -35,11 +36,11 @@ int getFilenameFromPath(char* srcPathAndName, char* filename)
         }
     }
     if(!found)
-        return -1;
+        return BKERROR_MISFORMED_PATH;
     
     if(indexLastSlash == srcLen - 1)
     /* string ended with '/' */
-        return -2;
+        return BKERROR_MISFORMED_PATH;
     
     /* this loop copies null byte also */
     for(count = indexLastSlash + 1, count2 = 0; count <= srcLen; count++, count2++)
@@ -65,7 +66,7 @@ int getLastDirFromString(char* srcPath, char* dirName)
     
     if(srcPath[srcPathLen - 1] != '/')
     /* does not end with trailing slash, error */
-        return -1;
+        return BKERROR_MISFORMED_PATH;
     
     /* find indeces of last and just before last slashes */
     for(count = 0; count < srcPathLen; count++)
@@ -93,27 +94,27 @@ int makeLongerPath(Path* origPath, char* newDir, Path** newPath)
     
     *newPath  = malloc(sizeof(Path));
     if(*newPath == NULL)
-        return -1;
+        return BKERROR_OUT_OF_MEMORY;
     
     (*newPath)->numDirs = origPath->numDirs + 1;
     
     (*newPath)->dirs = malloc(sizeof(char*) * (*newPath)->numDirs);
     if((*newPath)->dirs == NULL)
-        return -1;
+        return BKERROR_OUT_OF_MEMORY;
     
     /* copy original */
     for(count = 0; count < origPath->numDirs; count++)
     {
         (*newPath)->dirs[count] = malloc(strlen((origPath->dirs)[count]) + 1);
         if((*newPath)->dirs[count] == NULL)
-            return -1;
+            return BKERROR_OUT_OF_MEMORY;
         strcpy((*newPath)->dirs[count], (origPath->dirs)[count]);
     }
     
     /* new dir */
     (*newPath)->dirs[count] = malloc(strlen(newDir) + 1);
     if((*newPath)->dirs[count] == NULL)
-        return -1;
+        return BKERROR_OUT_OF_MEMORY;
     strcpy((*newPath)->dirs[count], newDir);
     
     return 1;

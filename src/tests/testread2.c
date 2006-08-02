@@ -112,7 +112,7 @@ int main(int argc, char** argv)
     image = open(argv[1], O_RDONLY);
     if(image == -1)
         oops("unable to open image");
-    outputError(BKERROR_READ_GENERIC);
+    
     rc = readVolInfo(image, &volInfo);
     if(image <= 0)
         oops("failed to read volume info");
@@ -147,7 +147,7 @@ int main(int argc, char** argv)
     //~ printf("vol id: '%s'\n", volInfo.volId);
     //~ printf("created: %s\n", ctime(&(volInfo.creationTime)));
     
-    //showDir(&tree, 0);
+    //~ showDir(&tree, 0);
     
     //~ filePath.path.numDirs = 2;
     //~ filePath.path.dirs = malloc(sizeof(char*) * filePath.path.numDirs);

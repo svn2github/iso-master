@@ -1,9 +1,10 @@
-#include "bk.h"
-#include "bkMangle.h"
-
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+
+#include "bk.h"
+#include "bkMangle.h"
+#include "bkError.h"
 
 /* length of aaa in aaa~xxxx.bbb */
 #define NCHARS_9660_BASE 3
@@ -81,7 +82,7 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int filenameTypes)
     {
         *currentNewDir = malloc(sizeof(DirToWriteLL));
         if(*currentNewDir == NULL)
-            return -1;
+            return BKERROR_OUT_OF_MEMORY;
         
         bzero(*currentNewDir, sizeof(DirToWriteLL));
         
@@ -115,7 +116,7 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int filenameTypes)
     {
         *currentNewFile = malloc(sizeof(FileToWriteLL));
         if(*currentNewFile == NULL)
-            return -1;
+            return BKERROR_OUT_OF_MEMORY;
         
         bzero(*currentNewFile, sizeof(FileToWriteLL));
         
@@ -143,7 +144,7 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int filenameTypes)
         {
             (*currentNewFile)->file.pathAndName = malloc(strlen(currentOrigFile->file.pathAndName) + 1);
             if( (*currentNewFile)->file.pathAndName == NULL )
-                return -3;
+                return BKERROR_OUT_OF_MEMORY;
             
             strcpy((*currentNewFile)->file.pathAndName, currentOrigFile->file.pathAndName);
         }
@@ -260,7 +261,7 @@ int mangleDir(Dir* origDir, DirToWrite* newDir, int filenameTypes)
     }
     
     if(haveCollisions)
-        return -2;
+        return BKERROR_MANGLE_TOO_MANY_COL;
     
     return 1;
 }

@@ -7,6 +7,7 @@
 #include "bk.h"
 #include "bkPath.h"
 #include "bkAdd.h"
+#include "bkError.h"
 
 /*******************************************************************************
 * addDir()
@@ -67,7 +68,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            return -1;
+            return BKERROR_DIR_NOT_FOUND_ON_IMAGE;
     }
     /* END FIND dir to add to */
     
@@ -78,22 +79,21 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     
     //!! max len on fs
     if(strlen(srcDirName) > NCHARS_FILE_ID_MAX - 1)
-        return -6;
+        return BKERROR_MAX_NAME_LENGTH_EXCEEDED;
     
     oldHead = destDirInTree->directories;
     
     /* ADD directory to tree */
     rc = stat(srcPath, &statStruct);
     if(rc == -1)
-        return -4;
+        return BKERROR_STAT_FAILED;
     
     if( !(statStruct.st_mode & S_IFDIR) )
-    /* not a directory */
-        return -5;
+        return BKERROR_TARGET_NOT_A_DIR;
     
     destDirInTree->directories = malloc(sizeof(DirLL));
     if(destDirInTree->directories == NULL)
-        return -3;
+        return BKERROR_OUT_OF_MEMORY;
     
     destDirInTree->directories->next = oldHead;
     
@@ -111,7 +111,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     /* including the file/dir name and the trailing '/' and the '\0' */
     newSrcPathAndName = malloc(newSrcPathLen + 257);
     if(newSrcPathAndName == NULL)
-        return -3;
+        return BKERROR_OUT_OF_MEMORY;
     
     strcpy(newSrcPathAndName, srcPath);
     
@@ -123,7 +123,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     /* ADD contents of directory */
     srcDir = opendir(srcPath);
     if(srcDir == NULL)
-        return -2;
+        return BKERROR_OPENDIR_FAILED;
     
     /* it may be possible but in any case very unlikely that readdir() will fail
     * if it does, it returns NULL (same as end of dir) */
@@ -137,7 +137,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
             
             rc = stat(newSrcPathAndName, &anEntry);
             if(rc == -1)
-                return -6;
+                return BKERROR_STAT_FAILED;
             
             if(anEntry.st_mode & S_IFDIR)
             /* directory */
@@ -155,7 +155,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
             /* not regular file or directory */
             {
                 //!! i don't know, maybe ignore and move to the next file
-                return -7;
+                return BKERROR_FIXME;
             }
             
         } /* if */
@@ -165,7 +165,7 @@ int addDir(Dir* tree, char* srcPath, Path* destDir)
     rc = closedir(srcDir);
     if(rc != 0)
     /* exotic error */
-        return -8;
+        return BKERROR_EXOTIC;
     /* END ADD contents of directory */
     
     free(newSrcPathAndName);
@@ -207,7 +207,7 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     
     //!! max len on fs
     if(strlen(filename) > NCHARS_FILE_ID_MAX - 1)
-        return -3;
+        return BKERROR_MAX_NAME_LENGTH_EXCEEDED;
     
     /* FIND dir to add to */
     destDirInTree = tree;
@@ -228,7 +228,7 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
                 searchDir = searchDir->next;
         }
         if(!dirFound)
-            return -1;
+            return BKERROR_DIR_NOT_FOUND_ON_IMAGE;
     }
     /* END FIND dir to add to */
     
@@ -237,7 +237,7 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     /* ADD file */
     destDirInTree->files = malloc(sizeof(FileLL));
     if(destDirInTree->files == NULL)
-        return -2;
+        return BKERROR_OUT_OF_MEMORY;
     
     destDirInTree->files->next = oldHead;
     
@@ -245,11 +245,12 @@ int addFile(Dir* tree, char* srcPathAndName, Path* destDir)
     
     rc = stat(srcPathAndName, &statStruct);
     if(rc == -1)
-        return -4;
+        return BKERROR_STAT_FAILED;
     
     if( !(statStruct.st_mode & S_IFREG) )
     /* not a regular file */
-        return -5;
+    //!! i don't know, maybe ignore and move to the next file
+        return BKERROR_FIXME;
     
     destDirInTree->files->file.posixFileMode = statStruct.st_mode;
     
