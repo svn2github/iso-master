@@ -8,15 +8,15 @@
 #include <stdbool.h>
 #include <time.h>
 
-#include "bk.h"
-#include "bkAdd.h"
-#include "bkRead.h"
-#include "bkDelete.h"
-#include "bkExtract.h"
-#include "bkMangle.h"
-#include "bkWrite.h"
-#include "bkSort.h"
-#include "bkError.h"
+#include "bk/bk.h"
+#include "bk/bkAdd.h"
+#include "bk/bkRead.h"
+#include "bk/bkDelete.h"
+#include "bk/bkExtract.h"
+#include "bk/bkMangle.h"
+#include "bk/bkWrite.h"
+#include "bk/bkSort.h"
+#include "bk/bkError.h"
 
 void oops(char* msg)
 {
