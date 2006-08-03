@@ -1,7 +1,7 @@
-testread2: testread2.c bk/bk.a
+testread2: testread2.c lib
 	cc testread2.c bk/bk.a -Wall -o testread2
 
-bk/bk.a: 
+lib: 
 	cd bk && $(MAKE)
 
 clean: 
