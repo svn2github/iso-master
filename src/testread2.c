@@ -147,7 +147,7 @@ int main(int argc, char** argv)
     //~ printf("vol id: '%s'\n", volInfo.volId);
     //~ printf("created: %s\n", ctime(&(volInfo.creationTime)));
     
-    //~ showDir(&tree, 0);
+    showDir(&tree, 0);
     
     //~ filePath.path.numDirs = 2;
     //~ filePath.path.dirs = malloc(sizeof(char*) * filePath.path.numDirs);
