@@ -3,15 +3,17 @@
 #include <stdio.h>
 
 #include "window.h"
+#include "fsbrowser.h"
 
 int main(int argc, char** argv)
 {
     GtkWidget* mainWindow;
     GtkWidget* mainVBox;
     GtkWidget* vpaned;
-    GtkWidget* frame2box;
-    GtkWidget* frame1;
-    GtkWidget* frame2;
+    GtkWidget* topFrameBox;
+    GtkWidget* topFrame;
+    GtkWidget* bottomFrame;
+    GtkWidget* bottomFrameBox;
     GtkWidget* statusBar;
     
     gtk_init(&argc, &argv);
@@ -31,27 +33,33 @@ int main(int argc, char** argv)
     buildMenu(mainVBox);
     buildMainToolbar(mainVBox);
     
-    /* 2 FRAMES for the file browsers */
     vpaned = gtk_vpaned_new();
     gtk_box_pack_start(GTK_BOX(mainVBox), vpaned, TRUE, TRUE, 0);
     gtk_widget_show(vpaned);
     
-    frame1 = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame1), GTK_SHADOW_IN);
-    gtk_paned_pack1(GTK_PANED(vpaned), frame1, TRUE, FALSE);
-    gtk_widget_show(frame1);
+    /* frame for top file browser */
+    topFrame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(topFrame), GTK_SHADOW_IN);
+    gtk_paned_pack1(GTK_PANED(vpaned), topFrame, TRUE, FALSE);
+    gtk_widget_show(topFrame);
     
-    frame2box = gtk_vbox_new(FALSE, 0);
-    gtk_paned_pack2(GTK_PANED(vpaned), frame2box, TRUE, FALSE);
-    gtk_widget_show(frame2box);
+    topFrameBox = gtk_vbox_new(FALSE, 0);
+    gtk_container_add(GTK_CONTAINER(topFrame), topFrameBox);
+    gtk_widget_show(topFrameBox);
     
-    buildMiddleToolbar(frame2box);
+    buildFsBrowser(topFrameBox);
     
-    frame2 = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(frame2), GTK_SHADOW_IN);
-    gtk_box_pack_start(GTK_BOX(frame2box), frame2, TRUE, TRUE, 0);
-    gtk_widget_show(frame2);
-    /* END 2 FRAMES for the file browsers */
+    bottomFrameBox = gtk_vbox_new(FALSE, 0);
+    gtk_paned_pack2(GTK_PANED(vpaned), bottomFrameBox, TRUE, FALSE);
+    gtk_widget_show(bottomFrameBox);
+    
+    buildMiddleToolbar(bottomFrameBox);
+    
+    /* frame for bottom file browser */
+    bottomFrame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(bottomFrame), GTK_SHADOW_IN);
+    gtk_box_pack_start(GTK_BOX(bottomFrameBox), bottomFrame, TRUE, TRUE, 0);
+    gtk_widget_show(bottomFrame);
     
     statusBar = gtk_statusbar_new();
     gtk_widget_show(statusBar);
