@@ -15,10 +15,16 @@ enum
     NUM_COLUMNS
 };
 
-/* set when the fs browser is constructed, deleted on exit */
+/* set when the fs browser is constructed */
 static char* GBLuserHomeDir;
+
+/* the view used for the contents of the fs browser */
+static GtkWidget* GBLfsTreeView;
 /* the list store used for the contents of the fs browser */
 static GtkListStore* GBLfsListStore;
+/* slash-terminated, the dir being displayed in the browser */
+static char* GBLfsCurrentDir = NULL;
+
 /* menu-sized pixbufs of a directory and a file */
 static GdkPixbuf* GBLdirPixbuf;
 static GdkPixbuf* GBLfilePixbuf;
@@ -26,7 +32,6 @@ static GdkPixbuf* GBLfilePixbuf;
 void buildFsBrowser(GtkWidget* boxToPackInto)
 {
     GtkWidget* scrolledWindow;
-    GtkWidget* treeView;
     GtkTreeSelection *selection;
     GtkCellRenderer* renderer;
     GtkTreeViewColumn* column;
@@ -48,14 +53,15 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_widget_show(scrolledWindow);
     
     /* view widget */
-    treeView = gtk_tree_view_new_with_model(GTK_TREE_MODEL(GBLfsListStore));
-    gtk_tree_view_set_search_column(GTK_TREE_VIEW(treeView), COLUMN_FILENAME);
+    GBLfsTreeView = gtk_tree_view_new_with_model(GTK_TREE_MODEL(GBLfsListStore));
+    gtk_tree_view_set_search_column(GTK_TREE_VIEW(GBLfsTreeView), COLUMN_FILENAME);
     g_object_unref(GBLfsListStore); /* destroy model automatically with view */
-    gtk_container_add(GTK_CONTAINER(scrolledWindow), treeView);
-    gtk_widget_show(treeView);
+    gtk_container_add(GTK_CONTAINER(scrolledWindow), GBLfsTreeView);
+    g_signal_connect(GBLfsTreeView, "row-activated", (GCallback)fsRowDblClicked, NULL);
+    gtk_widget_show(GBLfsTreeView);
     
     /* enable multi-line selection */
-    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(treeView));
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
     gtk_tree_selection_set_mode(selection, GTK_SELECTION_MULTIPLE);
     
     /* filename column */
@@ -73,7 +79,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_FILENAME);
     gtk_tree_view_column_set_expand(column, TRUE);
-    gtk_tree_view_append_column(GTK_TREE_VIEW(treeView), column);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), column);
     
     /* size column */
     column = gtk_tree_view_column_new();
@@ -82,7 +88,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_pack_start(column, renderer, FALSE);
     gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_SIZE);
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
-    gtk_tree_view_append_column(GTK_TREE_VIEW(treeView), column);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), column);
     
     /* CREATE pixbuf for directory */
     iconSet = gtk_icon_factory_lookup_default(GTK_STOCK_DIRECTORY);
@@ -94,7 +100,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
         iconSize = iconSizes[0];
         g_free(iconSizes);
         //!! figure out proper size and resisze if necessary, see gtk-demo->stock->create_model()
-        GBLdirPixbuf = gtk_widget_render_icon(treeView, GTK_STOCK_DIRECTORY, iconSize, NULL);
+        GBLdirPixbuf = gtk_widget_render_icon(GBLfsTreeView, GTK_STOCK_DIRECTORY, iconSize, NULL);
     }
     /* END CREATE pixbuf for directory */
     
@@ -108,7 +114,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
         iconSize = iconSizes[0];
         g_free(iconSizes);
         //!! figure out proper size and resisze if necessary, see gtk-demo->stock->create_model()
-        GBLfilePixbuf = gtk_widget_render_icon(treeView, GTK_STOCK_FILE, iconSize, NULL);
+        GBLfilePixbuf = gtk_widget_render_icon(GBLfsTreeView, GTK_STOCK_FILE, iconSize, NULL);
     }
     /* END CREATE pixbuf for file */
     
@@ -120,7 +126,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
         printWarning("failed to getenv(\"HOME\"), using \"/\" as home directory");
         GBLuserHomeDir = (char*)malloc(2);
         if(GBLuserHomeDir == NULL)
-            fatalError("buildFsBrowser(): (char*)malloc(2) failed");
+            fatalError("buildFsBrowser(): malloc(2) failed");
         GBLuserHomeDir[0] = '/';
         GBLuserHomeDir[1] = '\0';
     }
@@ -135,14 +141,14 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
         {
             GBLuserHomeDir = (char*)malloc(pathLen + 1);
             if(GBLuserHomeDir == NULL)
-                fatalError("buildFsBrowser(): (char*)malloc(pathLen + 1) failed");
+                fatalError("buildFsBrowser(): malloc(pathLen + 1) failed");
             strcpy(GBLuserHomeDir, userHomeDir);
         }
         else
         {
             GBLuserHomeDir = (char*)malloc(pathLen + 2);
             if(GBLuserHomeDir == NULL)
-                fatalError("buildFsBrowser(): (char*)malloc(pathLen + 2) failed");
+                fatalError("buildFsBrowser(): malloc(pathLen + 2) failed");
             strcpy(GBLuserHomeDir, userHomeDir);
             strcat(GBLuserHomeDir, "/");
         }
@@ -160,6 +166,7 @@ void changeFsDirectory(char* newDirStr)
     struct stat nextItemInfo;
     GtkTreeIter listIterator;
     int rc;
+    GtkTreeModel* model;
     
     newDir = opendir(newDirStr);
     if(newDir == NULL)
@@ -167,6 +174,11 @@ void changeFsDirectory(char* newDirStr)
         printWarning("changeFsDirectory(): failed to opendir(newDirStr)");
         return;
     }
+    
+    /* for improved performance disconnect the model from tree view before udating it */
+    model = gtk_tree_view_get_model(GTK_TREE_VIEW(GBLfsTreeView));
+    g_object_ref(model);
+    gtk_tree_view_set_model(GTK_TREE_VIEW(GBLfsTreeView), NULL);
     
     gtk_list_store_clear(GBLfsListStore);
     
@@ -220,8 +232,52 @@ void changeFsDirectory(char* newDirStr)
             continue;
         }
         
-        
-        
         free(nextItemPathAndName);
+    
+    } /* while (dir contents) */
+    
+    gtk_tree_view_set_model(GTK_TREE_VIEW(GBLfsTreeView), model);
+    g_object_unref(model);
+    
+    /* set current directory string */
+    if(GBLfsCurrentDir != NULL)
+        free(GBLfsCurrentDir);
+    GBLfsCurrentDir = (char*)malloc(strlen(newDirStr) + 1);
+    if(GBLfsCurrentDir == NULL)
+        fatalError("changeFsDirectory(): malloc(strlen(newDirStr)) failed");
+    strcpy(GBLfsCurrentDir, newDirStr);
+}
+
+void fsRowDblClicked(GtkTreeView* treeview, GtkTreePath* path,
+                     GtkTreeViewColumn* col, gpointer userdata)
+{
+    GtkTreeModel* model;
+    GtkTreeIter iterator;
+    char* name;
+    char* newCurrentDir;
+    
+    model = gtk_tree_view_get_model(treeview);
+    
+    if(gtk_tree_model_get_iter(model, &iterator, path) == FALSE)
+    {
+        printWarning("fsRowDblClicked(): gtk_tree_model_get_iter() failed");
+        return;
     }
+    
+    //!! check whether is directory
+    
+    gtk_tree_model_get(model, &iterator, COLUMN_FILENAME, &name, -1);
+    
+    newCurrentDir = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(name) + 2);
+    if(newCurrentDir == NULL)
+        fatalError("fsRowDblClicked(): malloc(newCurrentDirlen) failed");
+    
+    strcpy(newCurrentDir, GBLfsCurrentDir);
+    strcat(newCurrentDir, name);
+    strcat(newCurrentDir, "/");
+    
+    changeFsDirectory(newCurrentDir);
+    
+    free(newCurrentDir);
+    g_free(name);
 }
