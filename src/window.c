@@ -1,6 +1,7 @@
 #include <gtk/gtk.h>
 
 #include "window.h"
+#include "fsbrowser.h"
 
 void buildMainToolbar(GtkWidget* boxToPackInto)
 {
@@ -22,6 +23,12 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Save", "Save ISO Image", "Private",
                                      icon, NULL/*G_CALLBACK(increaseSelectedSizeCbk)*/,
+                                     NULL);
+    
+    icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_MENU);
+    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                                     "Go back", "Go back up one directory", "Private",
+                                     icon, G_CALLBACK(fsGoUpDirTree),
                                      NULL);
 }
 

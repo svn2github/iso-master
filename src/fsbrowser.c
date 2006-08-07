@@ -3,6 +3,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <stdbool.h>
 
 #include "fsbrowser.h"
 #include "error.h"
@@ -12,7 +13,14 @@ enum
     COLUMN_ICON = 0,
     COLUMN_FILENAME,
     COLUMN_SIZE,
+    COLUMN_HIDDEN_TYPE,
     NUM_COLUMNS
+};
+
+enum
+{
+    FILE_TYPE_REGULAR,
+    FILE_TYPE_DIRECTORY
 };
 
 /* set when the fs browser is constructed */
@@ -43,7 +51,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     
     char* userHomeDir;
     
-    GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING);
+    GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT);
     
     scrolledWindow = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
@@ -57,7 +65,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_set_search_column(GTK_TREE_VIEW(GBLfsTreeView), COLUMN_FILENAME);
     g_object_unref(GBLfsListStore); /* destroy model automatically with view */
     gtk_container_add(GTK_CONTAINER(scrolledWindow), GBLfsTreeView);
-    g_signal_connect(GBLfsTreeView, "row-activated", (GCallback)fsRowDblClicked, NULL);
+    g_signal_connect(GBLfsTreeView, "row-activated", (GCallback)fsRowDblClickCbk, NULL);
     gtk_widget_show(GBLfsTreeView);
     
     /* enable multi-line selection */
@@ -213,6 +221,7 @@ void changeFsDirectory(char* newDirStr)
                                COLUMN_ICON, GBLdirPixbuf,
                                COLUMN_FILENAME, nextItem->d_name, 
                                COLUMN_SIZE, "dir",
+                               COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
                                -1);
         }
         else if(nextItemInfo.st_mode & S_IFREG)
@@ -223,6 +232,7 @@ void changeFsDirectory(char* newDirStr)
                                COLUMN_ICON, GBLfilePixbuf,
                                COLUMN_FILENAME, nextItem->d_name, 
                                COLUMN_SIZE, "file",
+                               COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
                                -1);
         }
         else
@@ -248,13 +258,47 @@ void changeFsDirectory(char* newDirStr)
     strcpy(GBLfsCurrentDir, newDirStr);
 }
 
-void fsRowDblClicked(GtkTreeView* treeview, GtkTreePath* path,
-                     GtkTreeViewColumn* col, gpointer userdata)
+void fsGoUpDirTree(GtkButton *button, gpointer data)
+{
+    int count;
+    bool done;
+    char* newCurrentDir;
+    
+    /* do nothing if already at root */
+    if(GBLfsCurrentDir[0] == '/' && GBLfsCurrentDir[1] == '\0')
+        return;
+    
+    /* need to allocate a new string because changeFsDirectory() uses it 
+    * to copy from after freeing GBLfsCurrentDir */
+    newCurrentDir = (char*)malloc(strlen(GBLfsCurrentDir) + 1);
+    if(newCurrentDir == NULL)
+        fatalError("fsGoUpDirTree(): malloc(strlen(GBLfsCurrentDir) + 1) failed");
+    strcpy(newCurrentDir, GBLfsCurrentDir);
+    
+    /* look for the second last slash */
+    done = false;
+    for(count = strlen(newCurrentDir) - 1; !done; count--)
+    {
+        if(newCurrentDir[count - 1] == '/')
+        /* truncate the string */
+        {
+            newCurrentDir[count] = '\0';
+            changeFsDirectory(newCurrentDir);
+            done = true;
+        }
+    }
+    
+    free(newCurrentDir);
+}
+
+void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
+                      GtkTreeViewColumn* col, gpointer userdata)
 {
     GtkTreeModel* model;
     GtkTreeIter iterator;
     char* name;
     char* newCurrentDir;
+    int fileType;
     
     model = gtk_tree_view_get_model(treeview);
     
@@ -264,20 +308,22 @@ void fsRowDblClicked(GtkTreeView* treeview, GtkTreePath* path,
         return;
     }
     
-    //!! check whether is directory
-    
-    gtk_tree_model_get(model, &iterator, COLUMN_FILENAME, &name, -1);
-    
-    newCurrentDir = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(name) + 2);
-    if(newCurrentDir == NULL)
-        fatalError("fsRowDblClicked(): malloc(newCurrentDirlen) failed");
-    
-    strcpy(newCurrentDir, GBLfsCurrentDir);
-    strcat(newCurrentDir, name);
-    strcat(newCurrentDir, "/");
-    
-    changeFsDirectory(newCurrentDir);
-    
-    free(newCurrentDir);
-    g_free(name);
+    gtk_tree_model_get(model, &iterator, COLUMN_HIDDEN_TYPE, &fileType, -1);
+    if(fileType == FILE_TYPE_DIRECTORY)
+    {
+        gtk_tree_model_get(model, &iterator, COLUMN_FILENAME, &name, -1);
+        
+        newCurrentDir = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(name) + 2);
+        if(newCurrentDir == NULL)
+            fatalError("fsRowDblClicked(): malloc(newCurrentDirlen) failed");
+        
+        strcpy(newCurrentDir, GBLfsCurrentDir);
+        strcat(newCurrentDir, name);
+        strcat(newCurrentDir, "/");
+        
+        changeFsDirectory(newCurrentDir);
+        
+        free(newCurrentDir);
+        g_free(name);
+    }
 }
