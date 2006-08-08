@@ -4,6 +4,11 @@
 
 #include "window.h"
 #include "fsbrowser.h"
+#include "isobrowser.h"
+
+/* menu-sized pixbufs of a directory and a file */
+GdkPixbuf* GBLdirPixbuf;
+GdkPixbuf* GBLfilePixbuf;
 
 int main(int argc, char** argv)
 {
@@ -49,17 +54,19 @@ int main(int argc, char** argv)
     
     buildFsBrowser(topFrameBox);
     
+    /* frame for bottom file browser */
+    bottomFrame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(bottomFrame), GTK_SHADOW_IN);
+    gtk_paned_pack2(GTK_PANED(vpaned), bottomFrame, TRUE, FALSE);
+    gtk_widget_show(bottomFrame);
+    
     bottomFrameBox = gtk_vbox_new(FALSE, 0);
-    gtk_paned_pack2(GTK_PANED(vpaned), bottomFrameBox, TRUE, FALSE);
+    gtk_container_add(GTK_CONTAINER(bottomFrame), bottomFrameBox);
     gtk_widget_show(bottomFrameBox);
     
     buildMiddleToolbar(bottomFrameBox);
     
-    /* frame for bottom file browser */
-    bottomFrame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(bottomFrame), GTK_SHADOW_IN);
-    gtk_box_pack_start(GTK_BOX(bottomFrameBox), bottomFrame, TRUE, TRUE, 0);
-    gtk_widget_show(bottomFrame);
+    buildIsoBrowser(bottomFrameBox);
     
     statusBar = gtk_statusbar_new();
     gtk_widget_show(statusBar);

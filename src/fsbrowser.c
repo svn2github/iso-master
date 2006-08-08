@@ -5,23 +5,9 @@
 #include <sys/stat.h>
 #include <stdbool.h>
 
+#include "browser.h"
 #include "fsbrowser.h"
 #include "error.h"
-
-enum
-{
-    COLUMN_ICON = 0,
-    COLUMN_FILENAME,
-    COLUMN_SIZE,
-    COLUMN_HIDDEN_TYPE,
-    NUM_COLUMNS
-};
-
-enum
-{
-    FILE_TYPE_REGULAR,
-    FILE_TYPE_DIRECTORY
-};
 
 /* set when the fs browser is constructed */
 static char* GBLuserHomeDir;
@@ -34,8 +20,8 @@ static GtkListStore* GBLfsListStore;
 static char* GBLfsCurrentDir = NULL;
 
 /* menu-sized pixbufs of a directory and a file */
-static GdkPixbuf* GBLdirPixbuf;
-static GdkPixbuf* GBLfilePixbuf;
+extern GdkPixbuf* GBLdirPixbuf;
+extern GdkPixbuf* GBLfilePixbuf;
 
 void buildFsBrowser(GtkWidget* boxToPackInto)
 {
@@ -97,7 +83,11 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_SIZE);
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), column);
-    
+        
+    /* set default sort */
+    gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(GBLfsListStore),
+                                         COLUMN_FILENAME, GTK_SORT_ASCENDING);
+
     /* CREATE pixbuf for directory */
     iconSet = gtk_icon_factory_lookup_default(GTK_STOCK_DIRECTORY);
     if(iconSet == NULL)

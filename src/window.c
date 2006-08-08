@@ -2,6 +2,7 @@
 
 #include "window.h"
 #include "fsbrowser.h"
+#include "isobrowser.h"
 
 void buildMainToolbar(GtkWidget* boxToPackInto)
 {
@@ -16,7 +17,7 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     icon = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Open", "Open ISO Image", "Private",
-                                     icon, NULL/*G_CALLBACK(increaseSelectedSizeCbk)*/,
+                                     icon, G_CALLBACK(openIsoCbk),
                                      NULL);
 
     icon = gtk_image_new_from_stock(GTK_STOCK_SAVE, GTK_ICON_SIZE_MENU);
@@ -52,8 +53,8 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuItem), icon);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show(menuItem);
-    //~ g_signal_connect(G_OBJECT(menuItem), "activate",
-                     //~ G_CALLBACK(loadFileCbk), NULL);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(openIsoCbk), NULL);
     
     menuItem = gtk_image_menu_item_new_with_mnemonic("_Save");
     icon = gtk_image_new_from_stock(GTK_STOCK_SAVE, GTK_ICON_SIZE_MENU);
@@ -61,7 +62,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show(menuItem);
     //~ g_signal_connect(G_OBJECT(menuItem), "activate",
-                     //~ G_CALLBACK(saveFileCbk), NULL);
+                     //~ G_CALLBACK(openIsoCallback), NULL);
     
     menuItem = gtk_image_menu_item_new_with_mnemonic("_Quit");
     icon = gtk_image_new_from_stock(GTK_STOCK_QUIT, GTK_ICON_SIZE_MENU);
