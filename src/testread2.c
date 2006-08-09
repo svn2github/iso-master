@@ -46,17 +46,17 @@ void showDir(Dir* dir, int level)
     
     fileNode = dir->files;
     
-        while(fileNode != NULL)
-        {
-            for(count = 0; count < level; count++)
-                printf("  ");
-            printf("%s - %d bytes - %o - ", fileNode->file.name, fileNode->file.size, fileNode->file.posixFileMode);
-            if(fileNode->file.onImage)
-                printf("on image @%08X\n", fileNode->file.position);
-            else
-                printf("on disk: \'%s\'\n", fileNode->file.pathAndName);
-            fileNode = fileNode->next;
-        }
+    while(fileNode != NULL)
+    {
+        for(count = 0; count < level; count++)
+            printf("  ");
+        printf("%s - %d bytes - %o - ", fileNode->file.name, fileNode->file.size, fileNode->file.posixFileMode);
+        if(fileNode->file.onImage)
+            printf("on image @%08X\n", fileNode->file.position);
+        else
+            printf("on disk: \'%s\'\n", fileNode->file.pathAndName);
+        fileNode = fileNode->next;
+    }
 }
 
 void showNewDir(DirToWrite* dir, int level)

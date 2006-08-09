@@ -15,10 +15,12 @@
 static GtkWidget* GBLisoTreeView;
 /* the list store used for the contents of the fs browser */
 static GtkListStore* GBLisoListStore;
-/* slash-terminated, the dir being displayed in the browser */
-static char* GBLisoCurrentDir = NULL;
 /* iso file open()ed for reading */
 static int GBLisoForReading;
+/* directory tree of the iso that's being worked on */
+Dir GBLisoTree;
+/* slash-terminated, the dir being displayed in the iso browser */
+static char* GBLisoCurrentDir = NULL;
 
 /* menu-sized pixbufs of a directory and a file */
 extern GdkPixbuf* GBLdirPixbuf;
@@ -45,7 +47,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_set_search_column(GTK_TREE_VIEW(GBLisoTreeView), COLUMN_FILENAME);
     g_object_unref(GBLisoListStore); /* destroy model automatically with view */
     gtk_container_add(GTK_CONTAINER(scrolledWindow), GBLisoTreeView );
-    //g_signal_connect(GBLisoTreeView , "row-activated", (GCallback)fsRowDblClickCbk, NULL);
+    g_signal_connect(GBLisoTreeView , "row-activated", (GCallback)isoRowDblClickCbk, NULL);
     gtk_widget_show(GBLisoTreeView);
     
     /* enable multi-line selection */
@@ -79,18 +81,156 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), column);
 }
 
+void changeIsoDirectory(char* newDirStr)
+{
+    int rc;
+    Dir* newDir;
+    DirLL* nextDir;
+    FileLL* nextFile;
+    GtkTreeIter listIterator;
+    GtkTreeModel* model;
+    
+    rc = bk_get_dir_from_string(&GBLisoTree, newDirStr, &newDir);
+    if(rc <= 0)
+    {
+        printLibWarning("failed to change directory on image", rc);
+        return;
+    }
+    
+    /* for improved performance disconnect the model from tree view before udating it */
+    model = gtk_tree_view_get_model(GTK_TREE_VIEW(GBLisoTreeView));
+    g_object_ref(model);
+    gtk_tree_view_set_model(GTK_TREE_VIEW(GBLisoTreeView), NULL);
+    
+    gtk_list_store_clear(GBLisoListStore);
+    
+    /* add all directories to the tree */
+    nextDir = newDir->directories;printf("ASD '%s'\n", nextDir->dir.name);fflush(NULL);
+    while(nextDir != NULL)
+    {//printf("appending '%s'\n", nextDir->dir.name);fflush(NULL);
+        gtk_list_store_append(GBLisoListStore, &listIterator);
+        gtk_list_store_set(GBLisoListStore, &listIterator, 
+                           COLUMN_ICON, GBLdirPixbuf,
+                           COLUMN_FILENAME, nextDir->dir.name, 
+                           COLUMN_SIZE, "dir",
+                           COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
+                           -1);
+        
+        nextDir = nextDir->next;
+    }
+    printf("ASD\n");fflush(NULL);
+    /* add all files to the tree */
+    nextFile = newDir->files;
+    while(nextFile != NULL)
+    {//printf("appending '%s'\n", nextFile->file.name);fflush(NULL);
+        gtk_list_store_append(GBLisoListStore, &listIterator);
+        gtk_list_store_set(GBLisoListStore, &listIterator, 
+                           COLUMN_ICON, GBLfilePixbuf,
+                           COLUMN_FILENAME, nextFile->file.name, 
+                           COLUMN_SIZE, "file",
+                           COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
+                           -1);
+        
+        nextFile = nextFile->next;
+    }
+    
+    /* reconnect the model and view now */
+    gtk_tree_view_set_model(GTK_TREE_VIEW(GBLisoTreeView), model);
+    g_object_unref(model);
+        
+    /* set current directory string */
+    if(GBLisoCurrentDir != NULL)
+        free(GBLisoCurrentDir);
+    GBLisoCurrentDir = (char*)malloc(strlen(newDirStr) + 1);
+    if(GBLisoCurrentDir == NULL)
+        fatalError("changeIsoDirectory(): malloc(strlen(newDirStr) + 1) failed");
+    strcpy(GBLisoCurrentDir, newDirStr);
+}
+
+void isoGoUpDirTree(GtkButton *button, gpointer data)
+{
+    int count;
+    bool done;
+    char* newCurrentDir;
+    
+    /* do nothing if already at root */
+    if(GBLisoCurrentDir[0] == '/' && GBLisoCurrentDir[1] == '\0')
+        return;
+    
+    /* need to allocate a new string because changeIsoDirectory() uses it 
+    * to copy from after freeing GBLisoCurrentDir */
+    newCurrentDir = (char*)malloc(strlen(GBLisoCurrentDir) + 1);
+    if(GBLisoCurrentDir == NULL)
+        fatalError("isoGoUpDirTree(): malloc(strlen(GBLisoCurrentDir) + 1) failed");
+    strcpy(newCurrentDir, GBLisoCurrentDir);
+    
+    /* look for the second last slash */
+    done = false;
+    for(count = strlen(newCurrentDir) - 1; !done; count--)
+    {
+        if(newCurrentDir[count - 1] == '/')
+        /* truncate the string */
+        {
+            newCurrentDir[count] = '\0';
+            changeIsoDirectory(newCurrentDir);
+            done = true;
+        }
+    }
+    
+    free(newCurrentDir);
+}
+
+void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
+                       GtkTreeViewColumn* col, gpointer data)
+{
+    GtkTreeModel* model;
+    GtkTreeIter iterator;
+    char* name;
+    char* newCurrentDir;
+    int fileType;
+    
+    model = gtk_tree_view_get_model(treeview);
+    
+    if(gtk_tree_model_get_iter(model, &iterator, path) == FALSE)
+    {
+        printWarning("isoRowDblClicked(): gtk_tree_model_get_iter() failed");
+        return;
+    }
+    
+    gtk_tree_model_get(model, &iterator, COLUMN_HIDDEN_TYPE, &fileType, -1);
+    if(fileType == FILE_TYPE_DIRECTORY)
+    {
+        gtk_tree_model_get(model, &iterator, COLUMN_FILENAME, &name, -1);
+        
+        newCurrentDir = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(name) + 2);
+        if(newCurrentDir == NULL)
+            fatalError("isoRowDblClicked(): malloc(newCurrentDirlen) failed");
+        
+        strcpy(newCurrentDir, GBLisoCurrentDir);
+        strcat(newCurrentDir, name);
+        strcat(newCurrentDir, "/");
+        
+        changeIsoDirectory(newCurrentDir);
+        
+        free(newCurrentDir);
+        g_free(name);
+    }
+}
+
 void openIso(char* filename)
 {
     VolInfo volInfo;
     int rc;
-    Dir tree;
     
     /* open image file for reading */
     GBLisoForReading = open(filename, O_RDONLY);
     if(GBLisoForReading == -1)
+    {
         printWarning("failed to open iso file for reading");
+        return;
+    }
     
-    rc = readVolInfo(GBLisoForReading, &volInfo);
+    rc = bk_read_vol_info(GBLisoForReading, &volInfo);
     if(rc <= 0)
     {
         printLibWarning("failed to read volume info", rc);
@@ -98,22 +238,22 @@ void openIso(char* filename)
     }
     
     /* READ entire directory tree */
-    tree.directories = NULL;
-    tree.files = NULL;
+    GBLisoTree.directories = NULL;
+    GBLisoTree.files = NULL;
     if(volInfo.filenameTypes & FNTYPE_ROCKRIDGE)
     {
         lseek(GBLisoForReading, volInfo.pRootDrOffset, SEEK_SET);
-        rc = readDir(GBLisoForReading, &tree, FNTYPE_ROCKRIDGE, true);
+        rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_ROCKRIDGE, true);
     }
     else if(volInfo.filenameTypes & FNTYPE_JOLIET)
     {
         lseek(GBLisoForReading, volInfo.sRootDrOffset, SEEK_SET);
-        rc = readDir(GBLisoForReading, &tree, FNTYPE_JOLIET, true);
+        rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_JOLIET, true);
     }
     else
     {
         lseek(GBLisoForReading, volInfo.pRootDrOffset, SEEK_SET);
-        rc = readDir(GBLisoForReading, &tree, FNTYPE_9660, true);
+        rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_9660, true);
     }
     if(rc <= 0)
     {
@@ -122,7 +262,7 @@ void openIso(char* filename)
     }  
     /* END READ entire directory tree */
     
-    // change iso directory
+    changeIsoDirectory("/");
 }
 
 void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
@@ -147,4 +287,5 @@ void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     }
     
     gtk_widget_destroy(dialog);
+    //~ openIso("/home/andrei/data/prog/isomaster/src/image.iso");
 }

@@ -16,7 +16,7 @@ static char* GBLuserHomeDir;
 static GtkWidget* GBLfsTreeView;
 /* the list store used for the contents of the fs browser */
 static GtkListStore* GBLfsListStore;
-/* slash-terminated, the dir being displayed in the browser */
+/* slash-terminated, the dir being displayed in the fs browser */
 static char* GBLfsCurrentDir = NULL;
 
 /* menu-sized pixbufs of a directory and a file */
@@ -236,6 +236,7 @@ void changeFsDirectory(char* newDirStr)
     
     } /* while (dir contents) */
     
+    /* reconnect the model and view now */
     gtk_tree_view_set_model(GTK_TREE_VIEW(GBLfsTreeView), model);
     g_object_unref(model);
     
@@ -244,7 +245,7 @@ void changeFsDirectory(char* newDirStr)
         free(GBLfsCurrentDir);
     GBLfsCurrentDir = (char*)malloc(strlen(newDirStr) + 1);
     if(GBLfsCurrentDir == NULL)
-        fatalError("changeFsDirectory(): malloc(strlen(newDirStr)) failed");
+        fatalError("changeFsDirectory(): malloc(strlen(newDirStr) + 1) failed");
     strcpy(GBLfsCurrentDir, newDirStr);
 }
 
@@ -282,7 +283,7 @@ void fsGoUpDirTree(GtkButton *button, gpointer data)
 }
 
 void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
-                      GtkTreeViewColumn* col, gpointer userdata)
+                      GtkTreeViewColumn* col, gpointer data)
 {
     GtkTreeModel* model;
     GtkTreeIter iterator;

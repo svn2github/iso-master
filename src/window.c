@@ -105,9 +105,21 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
     
+    icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_MENU);
+    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                                     "Go back", "Go back up one directory", "Private",
+                                     icon, G_CALLBACK(isoGoUpDirTree),
+                                     NULL);
+    
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Add", "Add to ISO Image", "Private",
+                                     icon, NULL/*G_CALLBACK(increaseSelectedSizeCbk)*/,
+                                     NULL);
+
+    icon = gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_MENU);
+    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                                     "Extract", "Extract from ISO Image", "Private",
                                      icon, NULL/*G_CALLBACK(increaseSelectedSizeCbk)*/,
                                      NULL);
 
