@@ -9,17 +9,13 @@
 #include "fsbrowser.h"
 #include "error.h"
 
+extern GtkWidget* GBLfsTreeView;
+extern GtkListStore* GBLfsListStore;
+extern char* GBLfsCurrentDir;
+
 /* set when the fs browser is constructed */
 static char* GBLuserHomeDir;
 
-/* the view used for the contents of the fs browser */
-static GtkWidget* GBLfsTreeView;
-/* the list store used for the contents of the fs browser */
-static GtkListStore* GBLfsListStore;
-/* slash-terminated, the dir being displayed in the fs browser */
-static char* GBLfsCurrentDir = NULL;
-
-/* menu-sized pixbufs of a directory and a file */
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
 

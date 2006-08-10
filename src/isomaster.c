@@ -6,10 +6,6 @@
 #include "fsbrowser.h"
 #include "isobrowser.h"
 
-/* menu-sized pixbufs of a directory and a file */
-GdkPixbuf* GBLdirPixbuf;
-GdkPixbuf* GBLfilePixbuf;
-
 int main(int argc, char** argv)
 {
     GtkWidget* mainWindow;

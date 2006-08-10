@@ -2,14 +2,17 @@ GTKLIBS = `pkg-config --libs gtk+-2.0`
 GTKFLAGS = `pkg-config --cflags gtk+-2.0`
 GLOBALDEPS = 
 
-isomaster: lib isomaster.o window.o fsbrowser.o isobrowser.o error.o $(GLOBALDEPS)
-	cc isomaster.o window.o fsbrowser.o isobrowser.o error.o bk/bk.a $(GTKFLAGS) $(GTKLIBS) -Wall -g -o isomaster
+isomaster: lib isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o $(GLOBALDEPS)
+	cc isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o bk/bk.a $(GTKLIBS) -Wall -g -o isomaster
 
 isomaster.o: isomaster.c $(GLOBALDEPS) 
 	cc isomaster.c $(GTKFLAGS) -c -g -Wall
 
 window.o: window.c window.h $(GLOBALDEPS)
 	cc window.c $(GTKFLAGS) -c -g -Wall
+
+browser.o: browser.c $(GLOBALDEPS)
+	cc browser.c $(GTKFLAGS) -c -g -Wall
 
 fsbrowser.o: fsbrowser.c fsbrowser.h $(GLOBALDEPS)
 	cc fsbrowser.c $(GTKFLAGS) -c -g -Wall

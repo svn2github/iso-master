@@ -11,51 +11,23 @@
 #include "isobrowser.h"
 #include "error.h"
 
-/* the view used for the contents of the fs browser */
-static GtkWidget* GBLisoTreeView;
-/* the list store used for the contents of the fs browser */
-static GtkListStore* GBLisoListStore;
+extern GtkWidget* GBLisoTreeView;
+extern GtkListStore* GBLisoListStore;
+extern char* GBLisoCurrentDir;
+
 /* iso file open()ed for reading */
 static int GBLisoForReading;
 /* directory tree of the iso that's being worked on */
-Dir GBLisoTree;
-/* slash-terminated, the dir being displayed in the iso browser */
-static char* GBLisoCurrentDir = NULL;
+static Dir GBLisoTree;
 
-/* menu-sized pixbufs of a directory and a file */
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
 
-void showDir(Dir* dir, int level)
+void addToIsoCbk(GtkButton *button, gpointer data)
 {
-    DirLL* dirNode;
-    FileLL* fileNode;
-    int count;
-    
-    dirNode = dir->directories;
-    while(dirNode != NULL)
-    {
-        for(count = 0; count < level; count++)
-            printf("  ");
-        printf("'%s' - %o\n", dirNode->dir.name, dirNode->dir.posixFileMode);
-        
-        showDir(&(dirNode->dir), level + 1);
-        
-        dirNode = dirNode->next;
-    }
-    
-    fileNode = dir->files;
-    while(fileNode != NULL)
-    {
-        for(count = 0; count < level; count++)
-            printf("  ");
-        printf("'%s' - %d bytes - %o - ", fileNode->file.name, fileNode->file.size, fileNode->file.posixFileMode);
-        if(fileNode->file.onImage)
-            printf("on image @%08X\n", fileNode->file.position);
-        else
-            printf("on disk: '%s'\n", fileNode->file.pathAndName);
-        fileNode = fileNode->next;
-    }
+    // for each item selected
+      // if file, add file with string source
+      // if dir, add dir with string source
 }
 
 void buildIsoBrowser(GtkWidget* boxToPackInto)
@@ -179,7 +151,7 @@ void changeIsoDirectory(char* newDirStr)
     strcpy(GBLisoCurrentDir, newDirStr);
 }
 
-void isoGoUpDirTree(GtkButton *button, gpointer data)
+void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
 {
     int count;
     bool done;
@@ -299,25 +271,25 @@ void openIso(char* filename)
 
 void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
-    GtkWidget *dialog;
-    char* filename;
+    //~ GtkWidget *dialog;
+    //~ char* filename;
     
-    dialog = gtk_file_chooser_dialog_new("Open File",
-                                         NULL,
-                                         GTK_FILE_CHOOSER_ACTION_OPEN,
-                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-                                         NULL);
+    //~ dialog = gtk_file_chooser_dialog_new("Open File",
+                                         //~ NULL,
+                                         //~ GTK_FILE_CHOOSER_ACTION_OPEN,
+                                         //~ GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                         //~ GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                         //~ NULL);
     
-    if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
-    {
-        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+    //~ if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
+    //~ {
+        //~ filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
         
-        openIso(filename);
+        //~ openIso(filename);
         
-        g_free(filename);
-    }
+        //~ g_free(filename);
+    //~ }
     
-    gtk_widget_destroy(dialog);
-    //~ openIso("/home/andrei/data/prog/isomaster/src/image.iso");
+    //~ gtk_widget_destroy(dialog);
+    openIso("/home/andrei/data/prog/isomaster/src/image.iso");
 }
