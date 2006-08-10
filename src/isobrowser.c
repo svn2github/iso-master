@@ -15,6 +15,10 @@ extern GtkWidget* GBLisoTreeView;
 extern GtkListStore* GBLisoListStore;
 extern char* GBLisoCurrentDir;
 
+extern GtkWidget* GBLfsTreeView;
+extern GtkListStore* GBLfsListStore;
+extern char* GBLfsCurrentDir;
+
 /* iso file open()ed for reading */
 static int GBLisoForReading;
 /* directory tree of the iso that's being worked on */
@@ -23,11 +27,58 @@ static Dir GBLisoTree;
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
 
+void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                        GtkTreeIter* iterator, gpointer data)
+{
+    int fileType;
+    char* itemName;
+    char* fullItemName; /* with full path */
+    
+    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
+                                        COLUMN_FILENAME, &itemName, -1);
+    
+    if(fileType == FILE_TYPE_DIRECTORY)
+    {
+        fullItemName = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(itemName) + 2);
+        if(fullItemName == NULL)
+            fatalError("addToIsoEachRowCbk(): malloc("
+                       "strlen(GBLfsCurrentDir) + strlen(itemName) + 2) failed");
+        
+        strcpy(fullItemName, GBLfsCurrentDir);
+        strcat(fullItemName, itemName);
+        strcat(fullItemName, "/");
+        
+        printf("want to add dir: '%s'\n", fullItemName);
+        
+        free(fullItemName);
+    }
+    else if(fileType == FILE_TYPE_REGULAR)
+    {
+        fullItemName = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(itemName) + 1);
+        if(fullItemName == NULL)
+            fatalError("addToIsoEachRowCbk(): malloc("
+                       "strlen(GBLfsCurrentDir) + strlen(itemName) + 2) failed");
+        
+        strcpy(fullItemName, GBLfsCurrentDir);
+        strcat(fullItemName, itemName);
+        
+        printf("want to add file: '%s'\n", fullItemName);
+        
+        free(fullItemName);
+    }
+    else
+        printWarning("gui error, adding anything other then files and directories doesn't work");
+    
+    g_free(itemName);
+}
+
 void addToIsoCbk(GtkButton *button, gpointer data)
 {
-    // for each item selected
-      // if file, add file with string source
-      // if dir, add dir with string source
+    GtkTreeSelection* selection;
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
+
+    gtk_tree_selection_selected_foreach(selection, addToIsoEachRowCbk, NULL);
 }
 
 void buildIsoBrowser(GtkWidget* boxToPackInto)
@@ -208,7 +259,8 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
         
         newCurrentDir = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(name) + 2);
         if(newCurrentDir == NULL)
-            fatalError("isoRowDblClicked(): malloc(newCurrentDirlen) failed");
+            fatalError("isoRowDblClicked(): malloc("
+                       "strlen(GBLisoCurrentDir) + strlen(name) + 2) failed");
         
         strcpy(newCurrentDir, GBLisoCurrentDir);
         strcat(newCurrentDir, name);
@@ -291,5 +343,5 @@ void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     //~ }
     
     //~ gtk_widget_destroy(dialog);
-    openIso("/home/andrei/data/prog/isomaster/src/image.iso");
+    openIso("image.iso");
 }
