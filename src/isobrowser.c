@@ -26,6 +26,38 @@ static char* GBLisoCurrentDir = NULL;
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
 
+void showDir(Dir* dir, int level)
+{
+    DirLL* dirNode;
+    FileLL* fileNode;
+    int count;
+    
+    dirNode = dir->directories;
+    while(dirNode != NULL)
+    {
+        for(count = 0; count < level; count++)
+            printf("  ");
+        printf("'%s' - %o\n", dirNode->dir.name, dirNode->dir.posixFileMode);
+        
+        showDir(&(dirNode->dir), level + 1);
+        
+        dirNode = dirNode->next;
+    }
+    
+    fileNode = dir->files;
+    while(fileNode != NULL)
+    {
+        for(count = 0; count < level; count++)
+            printf("  ");
+        printf("'%s' - %d bytes - %o - ", fileNode->file.name, fileNode->file.size, fileNode->file.posixFileMode);
+        if(fileNode->file.onImage)
+            printf("on image @%08X\n", fileNode->file.position);
+        else
+            printf("on disk: '%s'\n", fileNode->file.pathAndName);
+        fileNode = fileNode->next;
+    }
+}
+
 void buildIsoBrowser(GtkWidget* boxToPackInto)
 {
     GtkWidget* scrolledWindow;
@@ -105,9 +137,9 @@ void changeIsoDirectory(char* newDirStr)
     gtk_list_store_clear(GBLisoListStore);
     
     /* add all directories to the tree */
-    nextDir = newDir->directories;printf("ASD '%s'\n", nextDir->dir.name);fflush(NULL);
+    nextDir = newDir->directories;
     while(nextDir != NULL)
-    {//printf("appending '%s'\n", nextDir->dir.name);fflush(NULL);
+    {
         gtk_list_store_append(GBLisoListStore, &listIterator);
         gtk_list_store_set(GBLisoListStore, &listIterator, 
                            COLUMN_ICON, GBLdirPixbuf,
@@ -118,11 +150,11 @@ void changeIsoDirectory(char* newDirStr)
         
         nextDir = nextDir->next;
     }
-    printf("ASD\n");fflush(NULL);
+    
     /* add all files to the tree */
     nextFile = newDir->files;
     while(nextFile != NULL)
-    {//printf("appending '%s'\n", nextFile->file.name);fflush(NULL);
+    {
         gtk_list_store_append(GBLisoListStore, &listIterator);
         gtk_list_store_set(GBLisoListStore, &listIterator, 
                            COLUMN_ICON, GBLfilePixbuf,
@@ -137,7 +169,7 @@ void changeIsoDirectory(char* newDirStr)
     /* reconnect the model and view now */
     gtk_tree_view_set_model(GTK_TREE_VIEW(GBLisoTreeView), model);
     g_object_unref(model);
-        
+    
     /* set current directory string */
     if(GBLisoCurrentDir != NULL)
         free(GBLisoCurrentDir);

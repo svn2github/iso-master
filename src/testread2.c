@@ -113,7 +113,7 @@ int main(int argc, char** argv)
     if(image == -1)
         oops("unable to open image");
     
-    rc = readVolInfo(image, &volInfo);
+    rc = bk_read_vol_info(image, &volInfo);
     if(image <= 0)
         oops("failed to read volume info");
     //~ if(volInfo.filenameTypes & FNTYPE_9660)
