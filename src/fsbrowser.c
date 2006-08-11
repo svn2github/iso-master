@@ -33,7 +33,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     
     char* userHomeDir;
     
-    GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT);
+    GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_UINT);
     
     scrolledWindow = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
@@ -77,6 +77,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_title(column, "Size");
     gtk_tree_view_column_pack_start(column, renderer, FALSE);
     gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_SIZE);
+    gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc, NULL, NULL);
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), column);
         
@@ -206,7 +207,7 @@ void changeFsDirectory(char* newDirStr)
             gtk_list_store_set(GBLfsListStore, &listIterator, 
                                COLUMN_ICON, GBLdirPixbuf,
                                COLUMN_FILENAME, nextItem->d_name, 
-                               COLUMN_SIZE, "dir",
+                               COLUMN_SIZE, 0,
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
                                -1);
         }
@@ -217,7 +218,7 @@ void changeFsDirectory(char* newDirStr)
             gtk_list_store_set(GBLfsListStore, &listIterator, 
                                COLUMN_ICON, GBLfilePixbuf,
                                COLUMN_FILENAME, nextItem->d_name, 
-                               COLUMN_SIZE, "file",
+                               COLUMN_SIZE, nextItemInfo.st_size,
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
                                -1);
         }

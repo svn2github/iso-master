@@ -27,6 +27,15 @@ static Dir GBLisoTree;
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
 
+void addToIsoCbk(GtkButton *button, gpointer data)
+{
+    GtkTreeSelection* selection;
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
+
+    gtk_tree_selection_selected_foreach(selection, addToIsoEachRowCbk, NULL);
+}
+
 void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                         GtkTreeIter* iterator, gpointer data)
 {
@@ -48,7 +57,8 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcat(fullItemName, itemName);
         strcat(fullItemName, "/");
         
-        printf("want to add dir: '%s'\n", fullItemName);
+        printf("tried to add dir '%s' to '%s': %d\n", fullItemName, GBLisoCurrentDir,
+               bk_add_dir(&GBLisoTree, fullItemName, GBLisoCurrentDir));
         
         free(fullItemName);
     }
@@ -72,15 +82,6 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     g_free(itemName);
 }
 
-void addToIsoCbk(GtkButton *button, gpointer data)
-{
-    GtkTreeSelection* selection;
-    
-    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
-
-    gtk_tree_selection_selected_foreach(selection, addToIsoEachRowCbk, NULL);
-}
-
 void buildIsoBrowser(GtkWidget* boxToPackInto)
 {
     GtkWidget* scrolledWindow;
@@ -88,7 +89,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     GtkCellRenderer* renderer;
     GtkTreeViewColumn* column;
     
-    GBLisoListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_UINT);
+    GBLisoListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_UINT);
     
     scrolledWindow = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
@@ -132,6 +133,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_title(column, "Size");
     gtk_tree_view_column_pack_start(column, renderer, FALSE);
     gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_SIZE);
+    gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc, NULL, NULL);
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), column);
 }
@@ -167,7 +169,7 @@ void changeIsoDirectory(char* newDirStr)
         gtk_list_store_set(GBLisoListStore, &listIterator, 
                            COLUMN_ICON, GBLdirPixbuf,
                            COLUMN_FILENAME, nextDir->dir.name, 
-                           COLUMN_SIZE, "dir",
+                           COLUMN_SIZE, 0,
                            COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
                            -1);
         
@@ -182,7 +184,7 @@ void changeIsoDirectory(char* newDirStr)
         gtk_list_store_set(GBLisoListStore, &listIterator, 
                            COLUMN_ICON, GBLfilePixbuf,
                            COLUMN_FILENAME, nextFile->file.name, 
-                           COLUMN_SIZE, "file",
+                           COLUMN_SIZE, nextFile->file.size,
                            COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
                            -1);
         

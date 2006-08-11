@@ -147,7 +147,7 @@ int main(int argc, char** argv)
     //~ printf("vol id: '%s'\n", volInfo.volId);
     //~ printf("created: %s\n", ctime(&(volInfo.creationTime)));
     
-    showDir(&tree, 0);
+    //showDir(&tree, 0);
     
     //~ filePath.path.numDirs = 2;
     //~ filePath.path.dirs = malloc(sizeof(char*) * filePath.path.numDirs);
@@ -170,8 +170,8 @@ int main(int argc, char** argv)
     //~ dest = malloc(strlen("/home/andrei/prog/isomaster/src/tests/") + 1);
     //~ strcpy(dest, "/home/andrei/prog/isomaster/src/tests/");
     
-    //~ fileToAdd = malloc(strlen("/home/andrei/prog/isomaster/src/tests/bkRead7x.o") + 1);
-    //~ strcpy(fileToAdd, "/home/andrei/prog/isomaster/src/tests/bkRead7x.o");
+    //~ fileToAdd = malloc(strlen("/etc/fstab") + 1);
+    //~ strcpy(fileToAdd, "/etc/fstab");
     
     //~ dirToAdd = malloc(strlen("../../../") + 1);
     //~ strcpy(dirToAdd, "../../../");
@@ -190,18 +190,15 @@ int main(int argc, char** argv)
     //if(rc <= 0)
     //    oops("problem extracting dir");
     
-    //~ rc = addFile(&tree, fileToAdd, &dirPath);
-    //~ if(rc <= 0)
-        //~ oops("problem adding file");
-    //~ rc = addFile(&tree, fileToAdd, &dirPath);
-    //~ if(rc <= 0)
-        //~ oops("problem adding file");
+    rc = addFile(&tree, fileToAdd, &dirPath);
+    if(rc <= 0)
+        oops("problem adding file");
     
     //~ rc = addDir(&tree, dirToAdd, &dirPath);
     //~ if(rc <= 0)
         //~ oops("problem adding dir");
     
-    //showDir(&tree, 0);
+    showDir(&tree, 0);
     
     //~ newImage = open("out.iso", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     //~ if(image == -1)

@@ -12,3 +12,7 @@ enum
     FILE_TYPE_REGULAR,
     FILE_TYPE_DIRECTORY
 };
+
+void sizeCellDataFunc(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
+                      GtkTreeModel *model, GtkTreeIter *iter,
+                      gpointer data);
