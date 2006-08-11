@@ -30,10 +30,19 @@ extern GdkPixbuf* GBLfilePixbuf;
 void addToIsoCbk(GtkButton *button, gpointer data)
 {
     GtkTreeSelection* selection;
+    char* isoCurrentDir; /* for changeIsoDirectory() */
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
 
     gtk_tree_selection_selected_foreach(selection, addToIsoEachRowCbk, NULL);
+    
+    isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
+    if(isoCurrentDir == NULL)
+        fatalError("addToIsoCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + 1) failed");
+    strcpy(isoCurrentDir, GBLisoCurrentDir);
+    /* reload iso view */
+    changeIsoDirectory(isoCurrentDir);
 }
 
 void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
@@ -57,8 +66,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcat(fullItemName, itemName);
         strcat(fullItemName, "/");
         
-        printf("tried to add dir '%s' to '%s': %d\n", fullItemName, GBLisoCurrentDir,
-               bk_add_dir(&GBLisoTree, fullItemName, GBLisoCurrentDir));
+        bk_add_dir(&GBLisoTree, fullItemName, GBLisoCurrentDir);
         
         free(fullItemName);
     }

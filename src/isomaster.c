@@ -10,11 +10,10 @@ int main(int argc, char** argv)
 {
     GtkWidget* mainWindow;
     GtkWidget* mainVBox;
-    GtkWidget* vpaned;
-    GtkWidget* topFrameBox;
-    GtkWidget* topFrame;
-    GtkWidget* bottomFrame;
-    GtkWidget* bottomFrameBox;
+    GtkWidget* mainFrame; /* to put a border around the window contents */
+    GtkWidget* vpaned; /* to be able to resize the two file browsers */
+    GtkWidget* topPanedBox; /* to pack the top part of vpaned */
+    GtkWidget* bottomPanedBox; /* to pack the bottom part of vpaned */
     GtkWidget* statusBar;
     
     gtk_init(&argc, &argv);
@@ -34,35 +33,28 @@ int main(int argc, char** argv)
     buildMenu(mainVBox);
     buildMainToolbar(mainVBox);
     
+    mainFrame = gtk_frame_new(NULL);
+    gtk_frame_set_shadow_type(GTK_FRAME(mainFrame), GTK_SHADOW_IN);
+    gtk_box_pack_start(GTK_BOX(mainVBox), mainFrame, TRUE, TRUE, 0);
+    gtk_widget_show(mainFrame);
+    
     vpaned = gtk_vpaned_new();
-    gtk_box_pack_start(GTK_BOX(mainVBox), vpaned, TRUE, TRUE, 0);
+    gtk_container_add(GTK_CONTAINER(mainFrame), vpaned);
     gtk_widget_show(vpaned);
     
-    /* frame for top file browser */
-    topFrame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(topFrame), GTK_SHADOW_IN);
-    gtk_paned_pack1(GTK_PANED(vpaned), topFrame, TRUE, FALSE);
-    gtk_widget_show(topFrame);
+    topPanedBox = gtk_vbox_new(FALSE, 0);
+    gtk_paned_pack1(GTK_PANED(vpaned), topPanedBox, TRUE, FALSE);
+    gtk_widget_show(topPanedBox);
     
-    topFrameBox = gtk_vbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(topFrame), topFrameBox);
-    gtk_widget_show(topFrameBox);
+    buildFsBrowser(topPanedBox);
     
-    buildFsBrowser(topFrameBox);
+    bottomPanedBox = gtk_vbox_new(FALSE, 0);
+    gtk_paned_pack2(GTK_PANED(vpaned), bottomPanedBox, TRUE, FALSE);
+    gtk_widget_show(bottomPanedBox);
     
-    /* frame for bottom file browser */
-    bottomFrame = gtk_frame_new(NULL);
-    gtk_frame_set_shadow_type(GTK_FRAME(bottomFrame), GTK_SHADOW_IN);
-    gtk_paned_pack2(GTK_PANED(vpaned), bottomFrame, TRUE, FALSE);
-    gtk_widget_show(bottomFrame);
+    buildMiddleToolbar(bottomPanedBox);
     
-    bottomFrameBox = gtk_vbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(bottomFrame), bottomFrameBox);
-    gtk_widget_show(bottomFrameBox);
-    
-    buildMiddleToolbar(bottomFrameBox);
-    
-    buildIsoBrowser(bottomFrameBox);
+    buildIsoBrowser(bottomPanedBox);
     
     statusBar = gtk_statusbar_new();
     gtk_widget_show(statusBar);

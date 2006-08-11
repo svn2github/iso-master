@@ -35,8 +35,18 @@ void sizeCellDataFunc(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
     
     if(fileType == FILE_TYPE_DIRECTORY)
         snprintf(buf, sizeof(buf), "dir");
+    else if(sizeInt > 1073741824)
+    /* print gibibytes */
+        snprintf(buf, sizeof(buf), "%.1lf GB", (double)sizeInt / 1073741824);
+    else if(sizeInt > 1048576)
+    /* print mebibytes */
+        snprintf(buf, sizeof(buf), "%.1lf MB", (double)sizeInt / 1048576);
+    else if(sizeInt > 1024)
+    /* print kibibytes */
+        snprintf(buf, sizeof(buf), "%.1lf KB", (double)sizeInt / 1024);
     else
-        snprintf(buf, sizeof(buf), "%.1lfK", (double)sizeInt / 1024);
+    /* print bytes */
+        snprintf(buf, sizeof(buf), "%d B", sizeInt);
     
     g_object_set(renderer, "text", buf, NULL);
 }
