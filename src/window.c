@@ -120,7 +120,7 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Extract", "Extract from ISO Image", "Private",
-                                     icon, NULL/*G_CALLBACK(increaseSelectedSizeCbk)*/,
+                                     icon, G_CALLBACK(extractFromIsoCbk),
                                      NULL);
 
     icon = gtk_image_new_from_stock(GTK_STOCK_DELETE, GTK_ICON_SIZE_MENU);

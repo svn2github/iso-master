@@ -8,6 +8,7 @@
 #include "bk/bk.h"
 #include "bk/bkRead.h"
 #include "browser.h"
+#include "fsbrowser.h"
 #include "isobrowser.h"
 #include "error.h"
 
@@ -33,16 +34,17 @@ void addToIsoCbk(GtkButton *button, gpointer data)
     char* isoCurrentDir; /* for changeIsoDirectory() */
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
-
+    
     gtk_tree_selection_selected_foreach(selection, addToIsoEachRowCbk, NULL);
     
     isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
     if(isoCurrentDir == NULL)
         fatalError("addToIsoCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + 1) failed");
+                   "strlen(GBLisoCurrentDir) + 1) failed");
     strcpy(isoCurrentDir, GBLisoCurrentDir);
     /* reload iso view */
     changeIsoDirectory(isoCurrentDir);
+    free(isoCurrentDir);
 }
 
 void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
@@ -51,6 +53,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     int fileType;
     char* itemName;
     char* fullItemName; /* with full path */
+    int rc;
     
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
                                         COLUMN_FILENAME, &itemName, -1);
@@ -66,7 +69,9 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcat(fullItemName, itemName);
         strcat(fullItemName, "/");
         
-        bk_add_dir(&GBLisoTree, fullItemName, GBLisoCurrentDir);
+        rc = bk_add_dir(&GBLisoTree, fullItemName, GBLisoCurrentDir);
+        if(rc <= 0)
+            printLibWarning("failed to add directory to iso", rc);
         
         free(fullItemName);
     }
@@ -80,7 +85,9 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcpy(fullItemName, GBLfsCurrentDir);
         strcat(fullItemName, itemName);
         
-        printf("want to add file: '%s'\n", fullItemName);
+        rc = bk_add_file(&GBLisoTree, fullItemName, GBLisoCurrentDir);
+        if(rc <= 0)
+            printLibWarning("failed to add file to iso", rc);
         
         free(fullItemName);
     }
@@ -90,6 +97,37 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     g_free(itemName);
 }
 
+void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                              GtkTreeIter* iterator, gpointer data)
+{
+    int fileType;
+    char* itemName;
+    
+    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
+                                        COLUMN_FILENAME, &itemName, -1);
+    
+    printf("want to extract '%s' to '%s'\n", itemName, GBLfsCurrentDir);
+}
+
+void extractFromIsoCbk(GtkButton *button, gpointer data)
+{
+    GtkTreeSelection* selection;
+    char* fsCurrentDir; /* for changeIsoDirectory() */
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
+    
+    fsCurrentDir = malloc(strlen(GBLfsCurrentDir) + 1);
+    if(fsCurrentDir == NULL)
+        fatalError("extractFromIsoCbk(): malloc("
+                   "strlen(GBLfsCurrentDir) + 1) failed");
+    strcpy(fsCurrentDir, GBLfsCurrentDir);
+    /* reload fs view */
+    changeFsDirectory(fsCurrentDir);
+    free(fsCurrentDir);
+}
+
 void buildIsoBrowser(GtkWidget* boxToPackInto)
 {
     GtkWidget* scrolledWindow;
@@ -97,12 +135,17 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     GtkCellRenderer* renderer;
     GtkTreeViewColumn* column;
     
-    GBLisoListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_UINT);
+    GBLisoListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, 
+                                         G_TYPE_STRING, 
+                                         G_TYPE_UINT, 
+                                         G_TYPE_UINT);
     
     scrolledWindow = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
 				   GTK_POLICY_AUTOMATIC,
 				   GTK_POLICY_AUTOMATIC);
+    //~ gtk_scrolled_window_set_shadow_type(GTK_SCROLLED_WINDOW(scrolledWindow), 
+                                        //~ GTK_SHADOW_ETCHED_IN);
     gtk_box_pack_start(GTK_BOX(boxToPackInto), scrolledWindow, TRUE, TRUE, 0);
     gtk_widget_show(scrolledWindow);
     
@@ -110,7 +153,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     GBLisoTreeView = gtk_tree_view_new_with_model(GTK_TREE_MODEL(GBLisoListStore));
     gtk_tree_view_set_search_column(GTK_TREE_VIEW(GBLisoTreeView), COLUMN_FILENAME);
     g_object_unref(GBLisoListStore); /* destroy model automatically with view */
-    gtk_container_add(GTK_CONTAINER(scrolledWindow), GBLisoTreeView );
+    gtk_container_add(GTK_CONTAINER(scrolledWindow), GBLisoTreeView);
     g_signal_connect(GBLisoTreeView , "row-activated", (GCallback)isoRowDblClickCbk, NULL);
     gtk_widget_show(GBLisoTreeView);
     

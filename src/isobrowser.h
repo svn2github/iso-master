@@ -3,6 +3,9 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
 void addToIsoCbk(GtkButton *button, gpointer data);
 void buildIsoBrowser(GtkWidget* boxToPackInto);
 void changeIsoDirectory(char* newDirStr);
+void extractFromIsoCbk(GtkButton *button, gpointer data);
+void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                              GtkTreeIter* iterator, gpointer data);
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data);
 void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
                        GtkTreeViewColumn* col, gpointer data);

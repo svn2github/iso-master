@@ -20,7 +20,7 @@ int main(int argc, char** argv)
     
     /* main window */
     mainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_default_size(GTK_WINDOW(mainWindow), 640, 480);
+    gtk_window_set_default_size(GTK_WINDOW(mainWindow), 600, 600);
     gtk_window_set_title(GTK_WINDOW(mainWindow), "ISO Master");
     gtk_widget_show(mainWindow);
     g_signal_connect(G_OBJECT(mainWindow), "delete_event",
