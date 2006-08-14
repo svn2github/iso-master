@@ -48,7 +48,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     /* FILE menu */
     menu = gtk_menu_new();
     
-    menuItem = gtk_image_menu_item_new_with_mnemonic("_Open");
+    menuItem = gtk_image_menu_item_new_with_mnemonic("_Open ISO");
     icon = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
     gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuItem), icon);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
@@ -56,7 +56,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(openIsoCbk), NULL);
     
-    menuItem = gtk_image_menu_item_new_with_mnemonic("_Save");
+    menuItem = gtk_image_menu_item_new_with_mnemonic("_Save ISO as");
     icon = gtk_image_new_from_stock(GTK_STOCK_SAVE, GTK_ICON_SIZE_MENU);
     gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuItem), icon);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
@@ -126,7 +126,7 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     icon = gtk_image_new_from_stock(GTK_STOCK_DELETE, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Remove", "Remove from ISO Image", "Private",
-                                     icon, NULL/*G_CALLBACK(increaseSelectedSizeCbk)*/,
+                                     icon, G_CALLBACK(deleteFromIsoCbk),
                                      NULL);
 }
 

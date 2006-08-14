@@ -80,7 +80,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         fullItemName = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(itemName) + 1);
         if(fullItemName == NULL)
             fatalError("addToIsoEachRowCbk(): malloc("
-                       "strlen(GBLfsCurrentDir) + strlen(itemName) + 2) failed");
+                       "strlen(GBLfsCurrentDir) + strlen(itemName) + 1) failed");
         
         strcpy(fullItemName, GBLfsCurrentDir);
         strcat(fullItemName, itemName);
@@ -97,16 +97,73 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     g_free(itemName);
 }
 
-void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
-                              GtkTreeIter* iterator, gpointer data)
+void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                             GtkTreeIter* iterator, gpointer data)
 {
     int fileType;
     char* itemName;
+    char* fullItemName; /* with full path */
+    int rc;
     
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
                                         COLUMN_FILENAME, &itemName, -1);
     
-    printf("want to extract '%s' to '%s'\n", itemName, GBLfsCurrentDir);
+    if(fileType == FILE_TYPE_DIRECTORY)
+    {
+        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 2);
+        if(fullItemName == NULL)
+            fatalError("deleteFromIsoEachRowCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 2) failed");
+        
+        strcpy(fullItemName, GBLisoCurrentDir);
+        strcat(fullItemName, itemName);
+        strcat(fullItemName, "/");
+        
+        rc = bk_delete_dir(&GBLisoTree, fullItemName);
+        if(rc <= 0)
+            printLibWarning("failed to delete directory from iso", rc);
+        
+        free(fullItemName);
+    }
+    else if(fileType == FILE_TYPE_REGULAR)
+    {
+        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
+        if(fullItemName == NULL)
+            fatalError("deleteFromIsoEachRowCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed");
+        
+        strcpy(fullItemName, GBLisoCurrentDir);
+        strcat(fullItemName, itemName);
+        
+        rc = bk_delete_file(&GBLisoTree, fullItemName);
+        if(rc <= 0)
+            printLibWarning("failed to delete file from iso", rc);
+        
+        free(fullItemName);
+    }
+    else
+        printWarning("gui error, deleting anything other then files and directories doesn't work");
+    
+    g_free(itemName);
+}
+
+void deleteFromIsoCbk(GtkButton *button, gpointer data)
+{
+    GtkTreeSelection* selection;
+    char* isoCurrentDir; /* for changeIsoDirectory() */
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    gtk_tree_selection_selected_foreach(selection, deleteFromIsoEachRowCbk, NULL);
+    
+    isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
+    if(isoCurrentDir == NULL)
+        fatalError("deleteFromIsoCbk(): malloc("
+                   "strlen(GBLisoCurrentDir) + 1) failed");
+    strcpy(isoCurrentDir, GBLisoCurrentDir);
+    /* reload iso view */
+    changeIsoDirectory(isoCurrentDir);
+    free(isoCurrentDir);
 }
 
 void extractFromIsoCbk(GtkButton *button, gpointer data)
@@ -126,6 +183,57 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     /* reload fs view */
     changeFsDirectory(fsCurrentDir);
     free(fsCurrentDir);
+}
+
+void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                              GtkTreeIter* iterator, gpointer data)
+{
+    int fileType;
+    char* itemName;
+    char* fullItemName; /* with full path */
+    int rc;
+    
+    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
+                                        COLUMN_FILENAME, &itemName, -1);
+    
+    if(fileType == FILE_TYPE_DIRECTORY)
+    {
+        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 2);
+        if(fullItemName == NULL)
+            fatalError("extractFromIsoEachRowCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 2) failed");
+        
+        strcpy(fullItemName, GBLisoCurrentDir);
+        strcat(fullItemName, itemName);
+        strcat(fullItemName, "/");
+        
+        rc = bk_extract_dir(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, true);
+        if(rc <= 0)
+            printLibWarning("extractFromIsoEachRowCbk(): failed to extract "
+                            "directory from iso", rc);
+        
+        free(fullItemName);
+    }
+    else if(fileType == FILE_TYPE_REGULAR)
+    {
+        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
+        if(fullItemName == NULL)
+            fatalError("extractFromIsoEachRowCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed");
+        
+        strcpy(fullItemName, GBLisoCurrentDir);
+        strcat(fullItemName, itemName);
+        
+        rc = bk_extract_file(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, true);
+        if(rc <= 0)
+            printLibWarning("failed to extract file from iso", rc);
+        
+        free(fullItemName);
+    }
+    else
+        printWarning("gui error, extracting anything other then files and directories doesn't work");
+    
+    g_free(itemName);
 }
 
 void buildIsoBrowser(GtkWidget* boxToPackInto)
