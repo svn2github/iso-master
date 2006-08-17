@@ -6,9 +6,10 @@
 #include "fsbrowser.h"
 #include "isobrowser.h"
 
+GtkWidget* GBLmainWindow;
+
 int main(int argc, char** argv)
 {
-    GtkWidget* mainWindow;
     GtkWidget* mainVBox;
     GtkWidget* mainFrame; /* to put a border around the window contents */
     GtkWidget* vpaned; /* to be able to resize the two file browsers */
@@ -19,15 +20,15 @@ int main(int argc, char** argv)
     gtk_init(&argc, &argv);
     
     /* main window */
-    mainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_default_size(GTK_WINDOW(mainWindow), 600, 600);
-    gtk_window_set_title(GTK_WINDOW(mainWindow), "ISO Master");
-    gtk_widget_show(mainWindow);
-    g_signal_connect(G_OBJECT(mainWindow), "delete_event",
+    GBLmainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_default_size(GTK_WINDOW(GBLmainWindow), 600, 600);
+    gtk_window_set_title(GTK_WINDOW(GBLmainWindow), "ISO Master");
+    gtk_widget_show(GBLmainWindow);
+    g_signal_connect(G_OBJECT(GBLmainWindow), "delete_event",
                      G_CALLBACK(closeMainWindowCbk), NULL);
     
     mainVBox = gtk_vbox_new(FALSE, 0);
-    gtk_container_add(GTK_CONTAINER(mainWindow), mainVBox);
+    gtk_container_add(GTK_CONTAINER(GBLmainWindow), mainVBox);
     gtk_widget_show(mainVBox);
     
     buildMenu(mainVBox);

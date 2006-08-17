@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <sys/stat.h>
+#include <time.h>
 
 #include "bk/bk.h"
 #include "bk/bkRead.h"
@@ -11,6 +13,8 @@
 #include "fsbrowser.h"
 #include "isobrowser.h"
 #include "error.h"
+
+extern GtkWidget* GBLmainWindow;
 
 extern GtkWidget* GBLisoTreeView;
 extern GtkListStore* GBLisoListStore;
@@ -22,8 +26,11 @@ extern char* GBLfsCurrentDir;
 
 /* iso file open()ed for reading */
 static int GBLisoForReading;
+static VolInfo GBLvolInfo;
 /* directory tree of the iso that's being worked on */
 static Dir GBLisoTree;
+/* the progress bar from the writing dialog box */
+static GtkWidget* GBLWritingProgressBar;
 
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
@@ -436,7 +443,6 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
 
 void openIso(char* filename)
 {
-    VolInfo volInfo;
     int rc;
     
     /* open image file for reading */
@@ -447,7 +453,7 @@ void openIso(char* filename)
         return;
     }
     
-    rc = bk_read_vol_info(GBLisoForReading, &volInfo);
+    rc = bk_read_vol_info(GBLisoForReading, &GBLvolInfo);
     if(rc <= 0)
     {
         printLibWarning("failed to read volume info", rc);
@@ -457,19 +463,19 @@ void openIso(char* filename)
     /* READ entire directory tree */
     GBLisoTree.directories = NULL;
     GBLisoTree.files = NULL;
-    if(volInfo.filenameTypes & FNTYPE_ROCKRIDGE)
+    if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
     {
-        lseek(GBLisoForReading, volInfo.pRootDrOffset, SEEK_SET);
+        lseek(GBLisoForReading, GBLvolInfo.pRootDrOffset, SEEK_SET);
         rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_ROCKRIDGE, true);
     }
-    else if(volInfo.filenameTypes & FNTYPE_JOLIET)
+    else if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
     {
-        lseek(GBLisoForReading, volInfo.sRootDrOffset, SEEK_SET);
+        lseek(GBLisoForReading, GBLvolInfo.sRootDrOffset, SEEK_SET);
         rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_JOLIET, true);
     }
     else
     {
-        lseek(GBLisoForReading, volInfo.pRootDrOffset, SEEK_SET);
+        lseek(GBLisoForReading, GBLvolInfo.pRootDrOffset, SEEK_SET);
         rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_9660, true);
     }
     if(rc <= 0)
@@ -505,4 +511,81 @@ void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     
     //~ gtk_widget_destroy(dialog);
     openIso("image.iso");
+}
+
+void writingProgressUpdater(void)
+{
+    gtk_progress_bar_pulse(GTK_PROGRESS_BAR(GBLWritingProgressBar)); 
+    
+    /* redraw progress bar */
+    while(gtk_events_pending())
+        gtk_main_iteration();
+}
+
+void saveIso(char* filename)
+{
+    int newImage;
+    int rc;
+    GtkWidget* progressWindow;
+    GtkWidget* okButton;
+    
+    progressWindow = gtk_dialog_new();
+    gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
+    gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
+    gtk_widget_show(progressWindow);
+    g_signal_connect_swapped(progressWindow, "response",
+                             G_CALLBACK(gtk_widget_destroy), progressWindow);
+    
+    GBLWritingProgressBar = gtk_progress_bar_new();
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLWritingProgressBar, TRUE, TRUE, 0);
+    gtk_widget_show(GBLWritingProgressBar);
+    
+    okButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_OK, GTK_RESPONSE_NONE);
+    gtk_widget_set_sensitive(okButton, FALSE);
+    
+    newImage = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    if(newImage == -1)
+    {
+        printWarning("unable to open image for writing");
+        return;
+    }
+    
+    rc = bk_write_image(GBLisoForReading, newImage, &GBLvolInfo, &GBLisoTree, time(NULL), 
+                        FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET, writingProgressUpdater);
+    if(rc < 0)
+        printLibWarning("failed to write image", rc);
+    
+    rc = close(newImage);
+    if(rc == -1)
+        printWarning("faled to close new image");
+    
+    gtk_widget_set_sensitive(okButton, TRUE);
+}
+
+void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
+{
+    GtkWidget *dialog;
+    char* filename;
+    int dialogResponse;
+    
+    dialog = gtk_file_chooser_dialog_new("Save File",
+                                         NULL,
+                                         GTK_FILE_CHOOSER_ACTION_SAVE,
+                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                         GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+                                         NULL);
+    
+    dialogResponse = gtk_dialog_run(GTK_DIALOG(dialog));
+    if(dialogResponse == GTK_RESPONSE_ACCEPT)
+        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+    
+    gtk_widget_destroy(dialog);
+    
+    if(dialogResponse == GTK_RESPONSE_ACCEPT)
+    {
+        saveIso(filename);
+        g_free(filename);
+    }
+    
+    //~ saveIso("out.iso");
 }
