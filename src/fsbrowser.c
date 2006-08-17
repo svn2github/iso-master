@@ -9,6 +9,8 @@
 #include "fsbrowser.h"
 #include "error.h"
 
+extern GtkWidget* GBLmainWindow;
+
 extern GtkWidget* GBLfsTreeView;
 extern GtkListStore* GBLfsListStore;
 extern char* GBLfsCurrentDir;
@@ -162,11 +164,19 @@ void changeFsDirectory(char* newDirStr)
     GtkTreeIter listIterator;
     int rc;
     GtkTreeModel* model;
+    GtkWidget* warningDialog;
     
     newDir = opendir(newDirStr);
     if(newDir == NULL)
     {
-        printWarning("changeFsDirectory(): failed to opendir(newDirStr)");
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to open directory '%s'",
+                                               newDirStr);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
         return;
     }
     
@@ -287,12 +297,20 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
     char* name;
     char* newCurrentDir;
     int fileType;
+    GtkWidget* warningDialog;
     
     model = gtk_tree_view_get_model(treeview);
     
     if(gtk_tree_model_get_iter(model, &iterator, path) == FALSE)
     {
-        printWarning("fsRowDblClicked(): gtk_tree_model_get_iter() failed");
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "GUI Error: 'fsRowDblClicked(): "
+                                               "gtk_tree_model_get_iter() failed'");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
         return;
     }
     

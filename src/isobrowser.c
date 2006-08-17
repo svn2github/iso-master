@@ -61,6 +61,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     char* itemName;
     char* fullItemName; /* with full path */
     int rc;
+    GtkWidget* warningDialog;
     
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
                                         COLUMN_FILENAME, &itemName, -1);
@@ -78,7 +79,16 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         rc = bk_add_dir(&GBLisoTree, fullItemName, GBLisoCurrentDir);
         if(rc <= 0)
-            printLibWarning("failed to add directory to iso", rc);
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to add directory: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
         
         free(fullItemName);
     }
@@ -94,12 +104,30 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         rc = bk_add_file(&GBLisoTree, fullItemName, GBLisoCurrentDir);
         if(rc <= 0)
-            printLibWarning("failed to add file to iso", rc);
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to add file: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
         
         free(fullItemName);
     }
     else
-        printWarning("gui error, adding anything other then files and directories doesn't work");
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "GUI error, adding anything other then "
+                                               "files and directories doesn't work");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+    }
     
     g_free(itemName);
 }
@@ -111,6 +139,7 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     char* itemName;
     char* fullItemName; /* with full path */
     int rc;
+    GtkWidget* warningDialog;
     
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
                                         COLUMN_FILENAME, &itemName, -1);
@@ -128,7 +157,16 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         rc = bk_delete_dir(&GBLisoTree, fullItemName);
         if(rc <= 0)
-            printLibWarning("failed to delete directory from iso", rc);
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to delete directory: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
         
         free(fullItemName);
     }
@@ -144,12 +182,30 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         rc = bk_delete_file(&GBLisoTree, fullItemName);
         if(rc <= 0)
-            printLibWarning("failed to delete file from iso", rc);
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to delete file: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
         
         free(fullItemName);
     }
     else
-        printWarning("gui error, deleting anything other then files and directories doesn't work");
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "GUI error, deleting anything other then "
+                                               "files and directories doesn't work");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+    }
     
     g_free(itemName);
 }
@@ -199,6 +255,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     char* itemName;
     char* fullItemName; /* with full path */
     int rc;
+    GtkWidget* warningDialog;
     
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
                                         COLUMN_FILENAME, &itemName, -1);
@@ -216,8 +273,16 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         rc = bk_extract_dir(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, true);
         if(rc <= 0)
-            printLibWarning("extractFromIsoEachRowCbk(): failed to extract "
-                            "directory from iso", rc);
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to extract directory: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
         
         free(fullItemName);
     }
@@ -233,12 +298,30 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         rc = bk_extract_file(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, true);
         if(rc <= 0)
-            printLibWarning("failed to extract file from iso", rc);
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to extract file: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
         
         free(fullItemName);
     }
     else
-        printWarning("gui error, extracting anything other then files and directories doesn't work");
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "GUI error, extracting anything other then "
+                                               "files and directories doesn't work");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+    }
     
     g_free(itemName);
 }
@@ -312,12 +395,19 @@ void changeIsoDirectory(char* newDirStr)
     FileLL* nextFile;
     GtkTreeIter listIterator;
     GtkTreeModel* model;
+    GtkWidget* warningDialog;
     
     rc = bk_get_dir_from_string(&GBLisoTree, newDirStr, &newDir);
     if(rc <= 0)
     {
-        printLibWarning("failed to change directory on image", rc);
-        return;
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to change directory: '%s'",
+                                               bk_get_error_string(rc));
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
     }
     
     /* for improved performance disconnect the model from tree view before udating it */
@@ -411,12 +501,20 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
     char* name;
     char* newCurrentDir;
     int fileType;
+    GtkWidget* warningDialog;
     
     model = gtk_tree_view_get_model(treeview);
     
     if(gtk_tree_model_get_iter(model, &iterator, path) == FALSE)
     {
-        printWarning("isoRowDblClicked(): gtk_tree_model_get_iter() failed");
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "GUI error: 'isoRowDblClicked(): "
+                                               "gtk_tree_model_get_iter() failed'");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
         return;
     }
     
@@ -444,19 +542,33 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
 void openIso(char* filename)
 {
     int rc;
+    GtkWidget* warningDialog;
     
     /* open image file for reading */
     GBLisoForReading = open(filename, O_RDONLY);
     if(GBLisoForReading == -1)
     {
-        printWarning("failed to open iso file for reading");
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to open iso file for reading");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
         return;
     }
     
     rc = bk_read_vol_info(GBLisoForReading, &GBLvolInfo);
     if(rc <= 0)
     {
-        printLibWarning("failed to read volume info", rc);
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to read volume info: '%s'",
+                                               bk_get_error_string(rc));
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
         return;
     }
     
@@ -480,9 +592,16 @@ void openIso(char* filename)
     }
     if(rc <= 0)
     {
-        printLibWarning("failed to read directory tree", rc);
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to read directory tree: '%s'",
+                                               bk_get_error_string(rc));
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
         return;
-    }  
+    }
     /* END READ entire directory tree */
     
     changeIsoDirectory("/");
@@ -513,13 +632,9 @@ void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     openIso("image.iso");
 }
 
-void writingProgressUpdater(void)
+void writingProgressWindowDestroyedCbk(void)
 {
-    gtk_progress_bar_pulse(GTK_PROGRESS_BAR(GBLWritingProgressBar)); 
-    
-    /* redraw progress bar */
-    while(gtk_events_pending())
-        gtk_main_iteration();
+    GBLWritingProgressBar = NULL;
 }
 
 void saveIso(char* filename)
@@ -527,39 +642,82 @@ void saveIso(char* filename)
     int newImage;
     int rc;
     GtkWidget* progressWindow;
+    GtkWidget* descriptionLabel;
     GtkWidget* okButton;
+    GtkWidget* warningDialog;
     
+    /* dialog window for the progress bar */
     progressWindow = gtk_dialog_new();
     gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
     gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
+    gtk_window_set_title(GTK_WINDOW(progressWindow), "Progress");
     gtk_widget_show(progressWindow);
     g_signal_connect_swapped(progressWindow, "response",
                              G_CALLBACK(gtk_widget_destroy), progressWindow);
+    g_signal_connect_swapped(progressWindow, "destroy",
+                             G_CALLBACK(writingProgressWindowDestroyedCbk), NULL);
     
+    /* just some text */
+    descriptionLabel = gtk_label_new("Please wait while I'm saving the new image to disk...");
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), descriptionLabel, TRUE, TRUE, 0);
+    gtk_widget_show(descriptionLabel);
+    
+    /* the progress bar */
     GBLWritingProgressBar = gtk_progress_bar_new();
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLWritingProgressBar, TRUE, TRUE, 0);
     gtk_widget_show(GBLWritingProgressBar);
     
+    /* button to close the dialog (disabled until writing finished) */
     okButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_OK, GTK_RESPONSE_NONE);
     gtk_widget_set_sensitive(okButton, FALSE);
     
+    /* WRITE */
     newImage = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
     if(newImage == -1)
     {
-        printWarning("unable to open image for writing");
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to open image for writing");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
         return;
     }
     
     rc = bk_write_image(GBLisoForReading, newImage, &GBLvolInfo, &GBLisoTree, time(NULL), 
-                        FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET, writingProgressUpdater);
+                        FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET, writingProgressUpdaterCbk);
     if(rc < 0)
-        printLibWarning("failed to write image", rc);
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to write image: '%s'",
+                                               bk_get_error_string(rc));
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+    }
     
     rc = close(newImage);
     if(rc == -1)
-        printWarning("faled to close new image");
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to close new image");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+    }
+    /* END WRITE */
     
-    gtk_widget_set_sensitive(okButton, TRUE);
+    if(GBLWritingProgressBar != NULL)
+    /* progress window hasn't been destroyed */
+    {
+        gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(GBLWritingProgressBar), 1.0);
+        gtk_widget_set_sensitive(okButton, TRUE);
+    }
 }
 
 void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
@@ -588,4 +746,16 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     }
     
     //~ saveIso("out.iso");
+}
+
+void writingProgressUpdaterCbk(void)
+{
+    if(GBLWritingProgressBar != NULL)
+    {
+        gtk_progress_bar_pulse(GTK_PROGRESS_BAR(GBLWritingProgressBar)); 
+        
+        /* redraw progress bar */
+        while(gtk_events_pending())
+            gtk_main_iteration();
+    }
 }
