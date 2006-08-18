@@ -49,7 +49,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     /* FILE menu */
     menu = gtk_menu_new();
     
-    menuItem = gtk_image_menu_item_new_with_mnemonic("_Open ISO");
+    menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_OPEN, NULL);
     icon = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
     gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuItem), icon);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
@@ -57,7 +57,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(openIsoCbk), NULL);
     
-    menuItem = gtk_image_menu_item_new_with_mnemonic("_Save ISO as");
+    menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_SAVE_AS, NULL);
     icon = gtk_image_new_from_stock(GTK_STOCK_SAVE, GTK_ICON_SIZE_MENU);
     gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuItem), icon);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
@@ -65,7 +65,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(saveIsoCbk), NULL);
     
-    menuItem = gtk_image_menu_item_new_with_mnemonic("_Quit");
+    menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_QUIT, NULL);
     icon = gtk_image_new_from_stock(GTK_STOCK_QUIT, GTK_ICON_SIZE_MENU);
     gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuItem), icon);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
@@ -73,7 +73,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(closeMainWindowCbk), NULL);
     
-    rootMenu = gtk_menu_item_new_with_mnemonic("_File");
+    rootMenu = gtk_menu_item_new_with_mnemonic("_Image");
     gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
     gtk_widget_show(rootMenu);
     
@@ -83,7 +83,8 @@ void buildMenu(GtkWidget* boxToPackInto)
     /* HELP menu */
     menu = gtk_menu_new();
     
-    menuItem = gtk_menu_item_new_with_mnemonic("_About");
+    //menuItem = gtk_menu_item_new_with_mnemonic("_About");
+    menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     //gtk_widget_set_sensitive(menuItem, FALSE);
     gtk_widget_show(menuItem);
