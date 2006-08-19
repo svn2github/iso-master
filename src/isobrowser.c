@@ -44,14 +44,19 @@ void addToIsoCbk(GtkButton *button, gpointer data)
     
     gtk_tree_selection_selected_foreach(selection, addToIsoEachRowCbk, NULL);
     
-    isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
-    if(isoCurrentDir == NULL)
-        fatalError("addToIsoCbk(): malloc("
-                   "strlen(GBLisoCurrentDir) + 1) failed");
-    strcpy(isoCurrentDir, GBLisoCurrentDir);
+    if(gtk_tree_selection_count_selected_rows(selection) > 0)
     /* reload iso view */
-    changeIsoDirectory(isoCurrentDir);
-    free(isoCurrentDir);
+    {
+        isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
+        if(isoCurrentDir == NULL)
+            fatalError("addToIsoCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + 1) failed");
+        strcpy(isoCurrentDir, GBLisoCurrentDir);
+        
+        changeIsoDirectory(isoCurrentDir);
+        
+        free(isoCurrentDir);
+    }
 }
 
 void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
@@ -132,6 +137,31 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     g_free(itemName);
 }
 
+void deleteFromIsoCbk(GtkButton *button, gpointer data)
+{
+    GtkTreeSelection* selection;
+    char* isoCurrentDir; /* for changeIsoDirectory() */
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    gtk_tree_selection_selected_foreach(selection, deleteFromIsoEachRowCbk, NULL);
+    
+    if(gtk_tree_selection_count_selected_rows(selection) > 0)
+    /* reload iso view */
+    {
+        isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
+        if(isoCurrentDir == NULL)
+            fatalError("deleteFromIsoCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + 1) failed");
+        
+        strcpy(isoCurrentDir, GBLisoCurrentDir);
+        
+        changeIsoDirectory(isoCurrentDir);
+        
+        free(isoCurrentDir);
+    }
+}
+
 void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                              GtkTreeIter* iterator, gpointer data)
 {
@@ -210,25 +240,6 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     g_free(itemName);
 }
 
-void deleteFromIsoCbk(GtkButton *button, gpointer data)
-{
-    GtkTreeSelection* selection;
-    char* isoCurrentDir; /* for changeIsoDirectory() */
-    
-    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
-    
-    gtk_tree_selection_selected_foreach(selection, deleteFromIsoEachRowCbk, NULL);
-    
-    isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
-    if(isoCurrentDir == NULL)
-        fatalError("deleteFromIsoCbk(): malloc("
-                   "strlen(GBLisoCurrentDir) + 1) failed");
-    strcpy(isoCurrentDir, GBLisoCurrentDir);
-    /* reload iso view */
-    changeIsoDirectory(isoCurrentDir);
-    free(isoCurrentDir);
-}
-
 void extractFromIsoCbk(GtkButton *button, gpointer data)
 {
     GtkTreeSelection* selection;
@@ -238,14 +249,20 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     
     gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
     
-    fsCurrentDir = malloc(strlen(GBLfsCurrentDir) + 1);
-    if(fsCurrentDir == NULL)
-        fatalError("extractFromIsoCbk(): malloc("
-                   "strlen(GBLfsCurrentDir) + 1) failed");
-    strcpy(fsCurrentDir, GBLfsCurrentDir);
+    if(gtk_tree_selection_count_selected_rows(selection) > 0)
     /* reload fs view */
-    changeFsDirectory(fsCurrentDir);
-    free(fsCurrentDir);
+    {
+        fsCurrentDir = malloc(strlen(GBLfsCurrentDir) + 1);
+        if(fsCurrentDir == NULL)
+            fatalError("extractFromIsoCbk(): malloc("
+                       "strlen(GBLfsCurrentDir) + 1) failed");
+        
+        strcpy(fsCurrentDir, GBLfsCurrentDir);
+        
+        changeFsDirectory(fsCurrentDir);
+        
+        free(fsCurrentDir);
+    }
 }
 
 void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,

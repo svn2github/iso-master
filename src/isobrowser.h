@@ -4,6 +4,8 @@ void addToIsoCbk(GtkButton *button, gpointer data);
 void buildIsoBrowser(GtkWidget* boxToPackInto);
 void changeIsoDirectory(char* newDirStr);
 void deleteFromIsoCbk(GtkButton *button, gpointer data);
+void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                             GtkTreeIter* iterator, gpointer data);
 void extractFromIsoCbk(GtkButton *button, gpointer data);
 void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                               GtkTreeIter* iterator, gpointer data);
