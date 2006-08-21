@@ -243,6 +243,8 @@ void changeFsDirectory(char* newDirStr)
     
     } /* while (dir contents) */
     
+    closedir(newDir);
+    
     /* reconnect the model and view now */
     gtk_tree_view_set_model(GTK_TREE_VIEW(GBLfsTreeView), model);
     g_object_unref(model);

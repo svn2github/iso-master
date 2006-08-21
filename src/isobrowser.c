@@ -25,12 +25,14 @@ extern GtkListStore* GBLfsListStore;
 extern char* GBLfsCurrentDir;
 
 /* iso file open()ed for reading */
-static int GBLisoForReading;
+static int GBLisoForReading = 0;
 static VolInfo GBLvolInfo;
 /* directory tree of the iso that's being worked on */
 static Dir GBLisoTree;
 /* the progress bar from the writing dialog box */
 static GtkWidget* GBLWritingProgressBar;
+/* the progress bar from the extracting dialog box */
+static GtkWidget* GBLextractingProgressBar;
 
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
@@ -129,212 +131,6 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
                                                "GUI error, adding anything other then "
-                                               "files and directories doesn't work");
-        gtk_dialog_run(GTK_DIALOG(warningDialog));
-        gtk_widget_destroy(warningDialog);
-    }
-    
-    g_free(itemName);
-}
-
-void deleteFromIsoCbk(GtkButton *button, gpointer data)
-{
-    GtkTreeSelection* selection;
-    char* isoCurrentDir; /* for changeIsoDirectory() */
-    
-    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
-    
-    gtk_tree_selection_selected_foreach(selection, deleteFromIsoEachRowCbk, NULL);
-    
-    if(gtk_tree_selection_count_selected_rows(selection) > 0)
-    /* reload iso view */
-    {
-        isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
-        if(isoCurrentDir == NULL)
-            fatalError("deleteFromIsoCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + 1) failed");
-        
-        strcpy(isoCurrentDir, GBLisoCurrentDir);
-        
-        changeIsoDirectory(isoCurrentDir);
-        
-        free(isoCurrentDir);
-    }
-}
-
-void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
-                             GtkTreeIter* iterator, gpointer data)
-{
-    int fileType;
-    char* itemName;
-    char* fullItemName; /* with full path */
-    int rc;
-    GtkWidget* warningDialog;
-    
-    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
-                                        COLUMN_FILENAME, &itemName, -1);
-    
-    if(fileType == FILE_TYPE_DIRECTORY)
-    {
-        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 2);
-        if(fullItemName == NULL)
-            fatalError("deleteFromIsoEachRowCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 2) failed");
-        
-        strcpy(fullItemName, GBLisoCurrentDir);
-        strcat(fullItemName, itemName);
-        strcat(fullItemName, "/");
-        
-        rc = bk_delete_dir(&GBLisoTree, fullItemName);
-        if(rc <= 0)
-        {
-            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                   GTK_MESSAGE_ERROR,
-                                                   GTK_BUTTONS_CLOSE,
-                                                   "Failed to delete directory: '%s'",
-                                                   bk_get_error_string(rc));
-            gtk_dialog_run(GTK_DIALOG(warningDialog));
-            gtk_widget_destroy(warningDialog);
-        }
-        
-        free(fullItemName);
-    }
-    else if(fileType == FILE_TYPE_REGULAR)
-    {
-        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
-        if(fullItemName == NULL)
-            fatalError("deleteFromIsoEachRowCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed");
-        
-        strcpy(fullItemName, GBLisoCurrentDir);
-        strcat(fullItemName, itemName);
-        
-        rc = bk_delete_file(&GBLisoTree, fullItemName);
-        if(rc <= 0)
-        {
-            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                   GTK_MESSAGE_ERROR,
-                                                   GTK_BUTTONS_CLOSE,
-                                                   "Failed to delete file: '%s'",
-                                                   bk_get_error_string(rc));
-            gtk_dialog_run(GTK_DIALOG(warningDialog));
-            gtk_widget_destroy(warningDialog);
-        }
-        
-        free(fullItemName);
-    }
-    else
-    {
-        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                               GTK_MESSAGE_ERROR,
-                                               GTK_BUTTONS_CLOSE,
-                                               "GUI error, deleting anything other then "
-                                               "files and directories doesn't work");
-        gtk_dialog_run(GTK_DIALOG(warningDialog));
-        gtk_widget_destroy(warningDialog);
-    }
-    
-    g_free(itemName);
-}
-
-void extractFromIsoCbk(GtkButton *button, gpointer data)
-{
-    GtkTreeSelection* selection;
-    char* fsCurrentDir; /* for changeIsoDirectory() */
-    
-    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
-    
-    gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
-    
-    if(gtk_tree_selection_count_selected_rows(selection) > 0)
-    /* reload fs view */
-    {
-        fsCurrentDir = malloc(strlen(GBLfsCurrentDir) + 1);
-        if(fsCurrentDir == NULL)
-            fatalError("extractFromIsoCbk(): malloc("
-                       "strlen(GBLfsCurrentDir) + 1) failed");
-        
-        strcpy(fsCurrentDir, GBLfsCurrentDir);
-        
-        changeFsDirectory(fsCurrentDir);
-        
-        free(fsCurrentDir);
-    }
-}
-
-void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
-                              GtkTreeIter* iterator, gpointer data)
-{
-    int fileType;
-    char* itemName;
-    char* fullItemName; /* with full path */
-    int rc;
-    GtkWidget* warningDialog;
-    
-    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
-                                        COLUMN_FILENAME, &itemName, -1);
-    
-    if(fileType == FILE_TYPE_DIRECTORY)
-    {
-        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 2);
-        if(fullItemName == NULL)
-            fatalError("extractFromIsoEachRowCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 2) failed");
-        
-        strcpy(fullItemName, GBLisoCurrentDir);
-        strcat(fullItemName, itemName);
-        strcat(fullItemName, "/");
-        
-        rc = bk_extract_dir(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, true);
-        if(rc <= 0)
-        {
-            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                   GTK_MESSAGE_ERROR,
-                                                   GTK_BUTTONS_CLOSE,
-                                                   "Failed to extract directory: '%s'",
-                                                   bk_get_error_string(rc));
-            gtk_dialog_run(GTK_DIALOG(warningDialog));
-            gtk_widget_destroy(warningDialog);
-        }
-        
-        free(fullItemName);
-    }
-    else if(fileType == FILE_TYPE_REGULAR)
-    {
-        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
-        if(fullItemName == NULL)
-            fatalError("extractFromIsoEachRowCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed");
-        
-        strcpy(fullItemName, GBLisoCurrentDir);
-        strcat(fullItemName, itemName);
-        
-        rc = bk_extract_file(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, true);
-        if(rc <= 0)
-        {
-            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                   GTK_MESSAGE_ERROR,
-                                                   GTK_BUTTONS_CLOSE,
-                                                   "Failed to extract file: '%s'",
-                                                   bk_get_error_string(rc));
-            gtk_dialog_run(GTK_DIALOG(warningDialog));
-            gtk_widget_destroy(warningDialog);
-        }
-        
-        free(fullItemName);
-    }
-    else
-    {
-        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                               GTK_MESSAGE_ERROR,
-                                               GTK_BUTTONS_CLOSE,
-                                               "GUI error, extracting anything other then "
                                                "files and directories doesn't work");
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
@@ -477,6 +273,273 @@ void changeIsoDirectory(char* newDirStr)
     strcpy(GBLisoCurrentDir, newDirStr);
 }
 
+void closeIso(void)
+{
+    if(GBLisoForReading == 0)
+    /* nothing to close */
+        return;
+    
+    close(GBLisoForReading);
+    
+    bk_delete_dir_contents(&GBLisoTree);
+    
+    GBLisoTree.directories = NULL;
+    GBLisoTree.files = NULL;
+    
+    changeIsoDirectory("/");
+}
+
+void deleteFromIsoCbk(GtkButton *button, gpointer data)
+{
+    GtkTreeSelection* selection;
+    char* isoCurrentDir; /* for changeIsoDirectory() */
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    gtk_tree_selection_selected_foreach(selection, deleteFromIsoEachRowCbk, NULL);
+    
+    if(gtk_tree_selection_count_selected_rows(selection) > 0)
+    /* reload iso view */
+    {
+        isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
+        if(isoCurrentDir == NULL)
+            fatalError("deleteFromIsoCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + 1) failed");
+        
+        strcpy(isoCurrentDir, GBLisoCurrentDir);
+        
+        changeIsoDirectory(isoCurrentDir);
+        
+        free(isoCurrentDir);
+    }
+}
+
+void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                             GtkTreeIter* iterator, gpointer data)
+{
+    int fileType;
+    char* itemName;
+    char* fullItemName; /* with full path */
+    int rc;
+    GtkWidget* warningDialog;
+    
+    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
+                                        COLUMN_FILENAME, &itemName, -1);
+    
+    if(fileType == FILE_TYPE_DIRECTORY)
+    {
+        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 2);
+        if(fullItemName == NULL)
+            fatalError("deleteFromIsoEachRowCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 2) failed");
+        
+        strcpy(fullItemName, GBLisoCurrentDir);
+        strcat(fullItemName, itemName);
+        strcat(fullItemName, "/");
+        
+        rc = bk_delete_dir(&GBLisoTree, fullItemName);
+        if(rc <= 0)
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to delete directory: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
+        
+        free(fullItemName);
+    }
+    else if(fileType == FILE_TYPE_REGULAR)
+    {
+        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
+        if(fullItemName == NULL)
+            fatalError("deleteFromIsoEachRowCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed");
+        
+        strcpy(fullItemName, GBLisoCurrentDir);
+        strcat(fullItemName, itemName);
+        
+        rc = bk_delete_file(&GBLisoTree, fullItemName);
+        if(rc <= 0)
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to delete file: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
+        
+        free(fullItemName);
+    }
+    else
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "GUI error, deleting anything other then "
+                                               "files and directories doesn't work");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+    }
+    
+    g_free(itemName);
+}
+
+void extractFromIsoCbk(GtkButton *button, gpointer data)
+{
+    GtkTreeSelection* selection;
+    GtkWidget* progressWindow;
+    GtkWidget* descriptionLabel;
+    char* fsCurrentDir; /* for changeIsoDirectory() */
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    if(gtk_tree_selection_count_selected_rows(selection) > 0)
+    /* reload fs view */
+    {
+        /* dialog window for the progress bar */
+        progressWindow = gtk_dialog_new();
+        gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
+        gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
+        gtk_window_set_title(GTK_WINDOW(progressWindow), "Progress");
+        gtk_widget_show(progressWindow);
+        g_signal_connect_swapped(progressWindow, "destroy",
+                                 G_CALLBACK(extractingProgressWindowDestroyedCbk), NULL);
+        
+        /* just some text */
+        descriptionLabel = gtk_label_new("Please wait while I'm extracting the selected files...");
+        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), descriptionLabel, TRUE, TRUE, 0);
+        gtk_widget_show(descriptionLabel);
+        
+        /* the progress bar */
+        GBLextractingProgressBar = gtk_progress_bar_new();
+        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLextractingProgressBar, TRUE, TRUE, 0);
+        gtk_widget_show(GBLextractingProgressBar);
+        
+        gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
+        
+        fsCurrentDir = malloc(strlen(GBLfsCurrentDir) + 1);
+        if(fsCurrentDir == NULL)
+            fatalError("extractFromIsoCbk(): malloc("
+                       "strlen(GBLfsCurrentDir) + 1) failed");
+        
+        strcpy(fsCurrentDir, GBLfsCurrentDir);
+        
+        changeFsDirectory(fsCurrentDir);
+        
+        free(fsCurrentDir);
+    }
+    
+    if(GBLextractingProgressBar != NULL)
+    /* progress window not closed */
+        gtk_widget_destroy(progressWindow);
+    GBLextractingProgressBar = NULL;
+}
+
+void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                              GtkTreeIter* iterator, gpointer data)
+{
+    int fileType;
+    char* itemName;
+    char* fullItemName; /* with full path */
+    int rc;
+    GtkWidget* warningDialog;
+    
+    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
+                                        COLUMN_FILENAME, &itemName, -1);
+    
+    if(fileType == FILE_TYPE_DIRECTORY)
+    {
+        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 2);
+        if(fullItemName == NULL)
+            fatalError("extractFromIsoEachRowCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 2) failed");
+        
+        strcpy(fullItemName, GBLisoCurrentDir);
+        strcat(fullItemName, itemName);
+        strcat(fullItemName, "/");
+        
+        rc = bk_extract_dir(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, 
+                            true, extractingProgressUpdaterCbk);
+        if(rc <= 0)
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to extract directory: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
+        
+        free(fullItemName);
+    }
+    else if(fileType == FILE_TYPE_REGULAR)
+    {
+        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
+        if(fullItemName == NULL)
+            fatalError("extractFromIsoEachRowCbk(): malloc("
+                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed");
+        
+        strcpy(fullItemName, GBLisoCurrentDir);
+        strcat(fullItemName, itemName);
+        
+        rc = bk_extract_file(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, 
+                             true, extractingProgressUpdaterCbk);
+        if(rc <= 0)
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Failed to extract file: '%s'",
+                                                   bk_get_error_string(rc));
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
+        
+        free(fullItemName);
+    }
+    else
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "GUI error, extracting anything other then "
+                                               "files and directories doesn't work");
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+    }
+    
+    g_free(itemName);
+}
+
+void extractingProgressUpdaterCbk(void)
+{
+    if(GBLextractingProgressBar != NULL)
+    {
+        gtk_progress_bar_pulse(GTK_PROGRESS_BAR(GBLextractingProgressBar)); 
+    
+        /* redraw progress bar */
+        while(gtk_events_pending())
+            gtk_main_iteration();
+    }
+}
+
+void extractingProgressWindowDestroyedCbk(void)
+{
+    GBLextractingProgressBar = NULL;
+}
+
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
 {
     int count;
@@ -561,6 +624,8 @@ void openIso(char* filename)
     int rc;
     GtkWidget* warningDialog;
     
+    closeIso();
+    
     /* open image file for reading */
     GBLisoForReading = open(filename, O_RDONLY);
     if(GBLisoForReading == -1)
@@ -600,12 +665,12 @@ void openIso(char* filename)
     else if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
     {
         lseek(GBLisoForReading, GBLvolInfo.sRootDrOffset, SEEK_SET);
-        rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_JOLIET, true);
+        rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_JOLIET, false);
     }
     else
     {
         lseek(GBLisoForReading, GBLvolInfo.pRootDrOffset, SEEK_SET);
-        rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_9660, true);
+        rc = readDir(GBLisoForReading, &GBLisoTree, FNTYPE_9660, false);
     }
     if(rc <= 0)
     {
