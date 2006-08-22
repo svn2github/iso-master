@@ -5,6 +5,9 @@
 #include "isobrowser.h"
 #include "about.h"
 
+/* the label that holds the value of the iso size */
+GtkWidget* GBLisoSizeLbl;
+
 void buildMainToolbar(GtkWidget* boxToPackInto)
 {
     GtkWidget* toolbar;
@@ -104,10 +107,25 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     GtkWidget* toolbar;
     GtkWidget* icon;
     GtkWidget* button;
+    GtkWidget* hBox;
+    GtkWidget* sizeTitleLabel;
+    
+    hBox = gtk_hbox_new(FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(boxToPackInto), hBox, FALSE, FALSE, 0);
+    gtk_widget_show(hBox);
     
     toolbar = gtk_toolbar_new();
-    gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
+    //gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(hBox), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
+    
+    sizeTitleLabel = gtk_label_new("            Estimated ISO Size: ");
+    gtk_box_pack_start(GTK_BOX(hBox), sizeTitleLabel, FALSE, FALSE, 0);
+    gtk_widget_show(sizeTitleLabel);
+    
+    GBLisoSizeLbl = gtk_label_new("");
+    gtk_box_pack_start(GTK_BOX(hBox), GBLisoSizeLbl, FALSE, FALSE, 0);
+    gtk_widget_show(GBLisoSizeLbl);
     
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),

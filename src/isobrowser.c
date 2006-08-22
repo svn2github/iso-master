@@ -15,15 +15,16 @@
 #include "error.h"
 
 extern GtkWidget* GBLmainWindow;
-
 extern GtkWidget* GBLisoTreeView;
 extern GtkListStore* GBLisoListStore;
 extern char* GBLisoCurrentDir;
-
 extern GtkWidget* GBLfsTreeView;
 extern GtkListStore* GBLfsListStore;
 extern char* GBLfsCurrentDir;
+extern GtkWidget* GBLisoSizeLbl;
 
+/* the size of the iso if it were written right now */
+static unsigned GBLisoSize = 0;
 /* iso file open()ed for reading */
 static int GBLisoForReading = 0;
 static VolInfo GBLvolInfo;
@@ -42,6 +43,10 @@ void addToIsoCbk(GtkButton *button, gpointer data)
     GtkTreeSelection* selection;
     char* isoCurrentDir; /* for changeIsoDirectory() */
     
+    if(GBLisoForReading == 0)
+    /* no iso open */
+        return;
+    
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
     
     gtk_tree_selection_selected_foreach(selection, addToIsoEachRowCbk, NULL);
@@ -59,6 +64,15 @@ void addToIsoCbk(GtkButton *button, gpointer data)
         
         free(isoCurrentDir);
     }
+    
+    /* iso size label */
+    char sizeStr[20];
+    GBLisoSize = 35845;
+    //if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
+        GBLisoSize += 2048;
+    GBLisoSize += bk_estimate_iso_size(&GBLisoTree, FNTYPE_9660 | FNTYPE_JOLIET | FNTYPE_ROCKRIDGE);
+    formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
+    gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
 }
 
 void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
@@ -198,6 +212,8 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc, NULL, NULL);
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), column);
+    
+    gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
 }
 
 void changeIsoDirectory(char* newDirStr)
@@ -280,11 +296,17 @@ void closeIso(void)
         return;
     
     close(GBLisoForReading);
+    GBLisoForReading = 0;
     
     bk_delete_dir_contents(&GBLisoTree);
     
     GBLisoTree.directories = NULL;
     GBLisoTree.files = NULL;
+    
+    GBLisoSize = 0;
+    gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), "");
+    
+    gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
     
     changeIsoDirectory("/");
 }
@@ -293,6 +315,10 @@ void deleteFromIsoCbk(GtkButton *button, gpointer data)
 {
     GtkTreeSelection* selection;
     char* isoCurrentDir; /* for changeIsoDirectory() */
+    
+    if(GBLisoForReading == 0)
+    /* no iso open */
+        return;
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
@@ -312,6 +338,15 @@ void deleteFromIsoCbk(GtkButton *button, gpointer data)
         
         free(isoCurrentDir);
     }
+    
+    /* iso size label */
+    char sizeStr[20];
+    GBLisoSize = 35845;
+    //if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
+        GBLisoSize += 2048;
+    GBLisoSize += bk_estimate_iso_size(&GBLisoTree, FNTYPE_9660 | FNTYPE_JOLIET | FNTYPE_ROCKRIDGE);
+    formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
+    gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
 }
 
 void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
@@ -398,6 +433,10 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     GtkWidget* progressWindow;
     GtkWidget* descriptionLabel;
     char* fsCurrentDir; /* for changeIsoDirectory() */
+    
+    if(GBLisoForReading == 0)
+    /* no iso open */
+        return;
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
@@ -630,6 +669,7 @@ void openIso(char* filename)
     GBLisoForReading = open(filename, O_RDONLY);
     if(GBLisoForReading == -1)
     {
+        GBLisoForReading = 0;
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
@@ -651,6 +691,7 @@ void openIso(char* filename)
                                                bk_get_error_string(rc));
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
+        closeIso();
         return;
     }
     
@@ -682,36 +723,48 @@ void openIso(char* filename)
                                                bk_get_error_string(rc));
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
+        closeIso();
         return;
     }
     /* END READ entire directory tree */
+    
+    /* iso size label */
+    char sizeStr[20];
+    GBLisoSize = 35845;
+    //if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
+        GBLisoSize += 2048;
+    GBLisoSize += bk_estimate_iso_size(&GBLisoTree, FNTYPE_9660 | FNTYPE_JOLIET | FNTYPE_ROCKRIDGE);
+    formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
+    gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
+    
+    gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
     
     changeIsoDirectory("/");
 }
 
 void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
-    //~ GtkWidget *dialog;
-    //~ char* filename;
+    GtkWidget *dialog;
+    char* filename;
     
-    //~ dialog = gtk_file_chooser_dialog_new("Open File",
-                                         //~ NULL,
-                                         //~ GTK_FILE_CHOOSER_ACTION_OPEN,
-                                         //~ GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         //~ GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-                                         //~ NULL);
+    dialog = gtk_file_chooser_dialog_new("Open File",
+                                         NULL,
+                                         GTK_FILE_CHOOSER_ACTION_OPEN,
+                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                         GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                         NULL);
     
-    //~ if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
-    //~ {
-        //~ filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+    if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
+    {
+        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
         
-        //~ openIso(filename);
+        openIso(filename);
         
-        //~ g_free(filename);
-    //~ }
+        g_free(filename);
+    }
     
-    //~ gtk_widget_destroy(dialog);
-    openIso("image.iso");
+    gtk_widget_destroy(dialog);
+    //~ openIso("image.iso");
 }
 
 void writingProgressWindowDestroyedCbk(void)
@@ -826,7 +879,7 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
         saveIso(filename);
         g_free(filename);
     }
-    
+    //~ closeIso();
     //~ saveIso("out.iso");
 }
 

@@ -22,31 +22,43 @@ GtkListStore* GBLisoListStore;
 /* slash-terminated, the dir being displayed in the iso browser */
 char* GBLisoCurrentDir = NULL;
 
+void formatSize(unsigned sizeInt, char* sizeStr, int sizeStrLen)
+{
+    if(sizeInt > 1073741824)
+    /* print gibibytes */
+        snprintf(sizeStr, sizeStrLen, "%.1lf GB", (double)sizeInt / 1073741824);
+    else if(sizeInt > 1048576)
+    /* print mebibytes */
+        snprintf(sizeStr, sizeStrLen, "%.1lf MB", (double)sizeInt / 1048576);
+    else if(sizeInt > 1024)
+    /* print kibibytes */
+        snprintf(sizeStr, sizeStrLen, "%.1lf KB", (double)sizeInt / 1024);
+    else
+    /* print bytes */
+        snprintf(sizeStr, sizeStrLen, "%d B", sizeInt);
+    
+    sizeStr[sizeStrLen - 1] = '\0';
+}
+
+/* formats the file size text for displaying */
 void sizeCellDataFunc(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
                       GtkTreeModel *model, GtkTreeIter *iter,
                       gpointer data)
 {
     unsigned sizeInt;
     int fileType;
-    char buf[20];
+    char sizeStr[20];
     
     gtk_tree_model_get(model, iter, COLUMN_SIZE, &sizeInt, 
                                     COLUMN_HIDDEN_TYPE, &fileType, -1);
     
     if(fileType == FILE_TYPE_DIRECTORY)
-        snprintf(buf, sizeof(buf), "dir");
-    else if(sizeInt > 1073741824)
-    /* print gibibytes */
-        snprintf(buf, sizeof(buf), "%.1lf GB", (double)sizeInt / 1073741824);
-    else if(sizeInt > 1048576)
-    /* print mebibytes */
-        snprintf(buf, sizeof(buf), "%.1lf MB", (double)sizeInt / 1048576);
-    else if(sizeInt > 1024)
-    /* print kibibytes */
-        snprintf(buf, sizeof(buf), "%.1lf KB", (double)sizeInt / 1024);
+    {
+        snprintf(sizeStr, sizeof(sizeStr), "dir");
+        sizeStr[sizeof(sizeStr) - 1] = '\0';
+    }
     else
-    /* print bytes */
-        snprintf(buf, sizeof(buf), "%d B", sizeInt);
+        formatSize(sizeInt, sizeStr, sizeof(sizeStr));
     
-    g_object_set(renderer, "text", buf, NULL);
+    g_object_set(renderer, "text", sizeStr, NULL);
 }
