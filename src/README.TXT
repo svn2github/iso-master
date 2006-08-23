@@ -29,6 +29,14 @@ Contact
 -------
 I would love to hear from you, to know how you made use of either ISO Master or bkisofs, or with bug reports, or feature requests. Please use the form at http://littlesvr.ca/misc/contactandrew.php to send me email. Thanks in advance!
 
+Bug Reports
+-----------
+Please help me improve ISO Master by sending me bug reports. The more of the following you can do, the easier it will be for me to fix:
+- be able to reproduce the bug consistently
+- run ISO Master from a terminal window and send me the output (if any) that is printed there
+- if it only happens with one image file, tell me what it is and where i can get it (if it's freely available)
+- it's better to give me too much detail then too little
+
 Credits
 -------
 Most of the filename mangling code: the Samba project, http://us2.samba.org/samba/

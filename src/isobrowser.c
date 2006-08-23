@@ -27,6 +27,9 @@ extern GtkWidget* GBLisoSizeLbl;
 static unsigned GBLisoSize = 0;
 /* iso file open()ed for reading */
 static int GBLisoForReading = 0;
+/* full path and name to the iso opened for reading */
+static char* GBLisoForReadingFullName = NULL;
+/* info about the image being worked on */
 static VolInfo GBLvolInfo;
 /* directory tree of the iso that's being worked on */
 static Dir GBLisoTree;
@@ -299,6 +302,10 @@ void closeIso(void)
     GBLisoForReading = 0;
     
     bk_delete_dir_contents(&GBLisoTree);
+    
+    if(GBLisoForReadingFullName != NULL)
+        free(GBLisoForReadingFullName);
+    GBLisoForReadingFullName = NULL;
     
     GBLisoTree.directories = NULL;
     GBLisoTree.files = NULL;
@@ -743,6 +750,15 @@ void openIso(char* filename)
     formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
     
+    /* record path and name */
+    GBLisoForReadingFullName = (char*)malloc(strlen(filename) + 1);
+    if(GBLisoForReadingFullName == NULL)
+    {
+        closeIso();
+        return;
+    }
+    strcpy(GBLisoForReadingFullName, filename);
+    
     gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
     
     changeIsoDirectory("/");
@@ -866,6 +882,7 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     GtkWidget *dialog;
     char* filename;
     int dialogResponse;
+    GtkWidget* warningDialog;
         
     /* do nothing if no image open */
     if(GBLisoForReading == 0)
@@ -886,10 +903,27 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
     {
+        if(strcmp(filename, GBLisoForReadingFullName) == 0)
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "Cannot overwrite original image, please "
+                                                   "choose a different file to save as");
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+            
+            g_free(filename);
+            
+            return;
+        }
+        
         saveIso(filename);
+        
         g_free(filename);
     }
-    //~ closeIso();
+    
     //~ saveIso("out.iso");
 }
 

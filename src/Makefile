@@ -33,7 +33,7 @@ lib:
 	cd bk && $(MAKE)
 
 clean: 
-	rm -f *.o testread2
+	rm -f *.o isomaster
 	cd bk && $(MAKE) clean
 
 install: isomaster
