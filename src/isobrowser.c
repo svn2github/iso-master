@@ -587,6 +587,10 @@ void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
     bool done;
     char* newCurrentDir;
     
+    /* do nothing if no image open */
+    if(GBLisoForReading == 0)
+        return;
+    
     /* do nothing if already at root */
     if(GBLisoCurrentDir[0] == '/' && GBLisoCurrentDir[1] == '\0')
         return;
@@ -862,6 +866,10 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     GtkWidget *dialog;
     char* filename;
     int dialogResponse;
+        
+    /* do nothing if no image open */
+    if(GBLisoForReading == 0)
+        return;
     
     dialog = gtk_file_chooser_dialog_new("Save File",
                                          NULL,
