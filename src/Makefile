@@ -35,3 +35,9 @@ lib:
 clean: 
 	rm -f *.o testread2
 	cd bk && $(MAKE) clean
+
+install: isomaster
+	cp isomaster /usr/local/bin
+
+uninstall: 
+	rm -f /usr/local/bin/isomaster
