@@ -513,7 +513,8 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   "Failed to extract directory: '%s'",
+                                                   "Failed to extract directory %s: '%s'",
+                                                   itemName,
                                                    bk_get_error_string(rc));
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
@@ -539,7 +540,8 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   "Failed to extract file: '%s'",
+                                                   "Failed to extract file %s: '%s'",
+                                                   itemName,
                                                    bk_get_error_string(rc));
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
