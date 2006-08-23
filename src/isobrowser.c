@@ -513,7 +513,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcat(fullItemName, "/");
         
         rc = bk_extract_dir(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, 
-                            true, extractingProgressUpdaterCbk);
+                            false, extractingProgressUpdaterCbk);
         if(rc <= 0)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -540,7 +540,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcat(fullItemName, itemName);
         
         rc = bk_extract_file(GBLisoForReading, &GBLisoTree, fullItemName, GBLfsCurrentDir, 
-                             true, extractingProgressUpdaterCbk);
+                             false, extractingProgressUpdaterCbk);
         if(rc <= 0)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
