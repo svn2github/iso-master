@@ -13,13 +13,14 @@ make
 
 at the command prompt in the directory where you extracted the archive.
 
-And to install (optional, you can run from the directory where you compiled it):
+And to install (this is optional, you can run from the directory where you compiled it):
 
 su
 [enter root password]
 make install
 
 Or on something like Ubuntu that won't let you su:
+
 sudo make install
 [enter root password]
 
@@ -36,11 +37,6 @@ Please help me improve ISO Master by sending me bug reports. The more of the fol
 - run ISO Master from a terminal window and send me the output (if any) that is printed there
 - if it only happens with one image file, tell me what it is and where i can get it (if it's freely available)
 - it's better to give me too much detail then too little
-
-Credits
--------
-Most of the filename mangling code: the Samba project, http://us2.samba.org/samba/
-Everything else: Andrew Smith, http://littlesvr.ca/misc/contactandrew.php
 
 Licence
 -------

@@ -1,0 +1,14 @@
+Many thanks to all the following people:
+
+Andrew Smith
+http://littlesvr.ca/misc/contactandrew.php
+- author and maintainer
+
+Barb Czegel
+http://cs.senecac.on.ca/~barb.czegel/
+- one of my teachers from Seneca College who has been kind enough to let me 
+  work on ISO Master as my systems project for two semesters
+
+The Samba Project
+http://us2.samba.org/
+- most of the filename mangling code I copied from samba
