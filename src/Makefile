@@ -37,7 +37,10 @@ clean:
 	cd bk && $(MAKE) clean
 
 install: isomaster
-	cp isomaster /usr/local/bin
+	install -d /usr/local/bin/
+	install isomaster /usr/local/bin/
+	install -d /usr/local/share/isomaster/icons/
+	install -m 644 icons/isomaster.svg /usr/local/share/isomaster/icons/
 
 uninstall: 
 	rm -f /usr/local/bin/isomaster

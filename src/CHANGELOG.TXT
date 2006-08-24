@@ -1,6 +1,7 @@
  - 0.2
 ===
 - Default is now to not keep the permissions from rockridge as some cds have directories with no write permissions and that makes them hard to write to.
+- Added cdrom icon as the application icon
 - 
 
 23 Aug 2006 - 0.1

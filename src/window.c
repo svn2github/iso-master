@@ -115,17 +115,8 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     gtk_widget_show(hBox);
     
     toolbar = gtk_toolbar_new();
-    //gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
     gtk_box_pack_start(GTK_BOX(hBox), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
-    
-    sizeTitleLabel = gtk_label_new("            Estimated ISO Size: ");
-    gtk_box_pack_start(GTK_BOX(hBox), sizeTitleLabel, FALSE, FALSE, 0);
-    gtk_widget_show(sizeTitleLabel);
-    
-    GBLisoSizeLbl = gtk_label_new("");
-    gtk_box_pack_start(GTK_BOX(hBox), GBLisoSizeLbl, FALSE, FALSE, 0);
-    gtk_widget_show(GBLisoSizeLbl);
     
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
@@ -147,9 +138,32 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
 
     icon = gtk_image_new_from_stock(GTK_STOCK_DELETE, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     "Remove", "Remove from ISO Image", "Private",
+                                     "Remove", "Delete from ISO Image", "Private",
                                      icon, G_CALLBACK(deleteFromIsoCbk),
                                      NULL);
+    
+    //~ button = gtk_button_new_with_mnemonic("_Add");
+    //~ gtk_box_pack_start(GTK_BOX(hBox), button, FALSE, FALSE, 0);
+    //~ gtk_widget_show(button);
+    //~ g_signal_connect(button, "clicked", G_CALLBACK(addToIsoCbk), NULL);
+    
+    //~ button = gtk_button_new_with_mnemonic("_Extract");
+    //~ gtk_box_pack_start(GTK_BOX(hBox), button, FALSE, FALSE, 0);
+    //~ gtk_widget_show(button);
+    //~ g_signal_connect(button, "clicked", G_CALLBACK(extractFromIsoCbk), NULL);
+    
+    //~ button = gtk_button_new_with_mnemonic("_Delete");
+    //~ gtk_box_pack_start(GTK_BOX(hBox), button, FALSE, FALSE, 0);
+    //~ gtk_widget_show(button);
+    //~ g_signal_connect(button, "clicked", G_CALLBACK(deleteFromIsoCbk), NULL);
+    
+    sizeTitleLabel = gtk_label_new("            Estimated ISO Size: ");
+    gtk_box_pack_start(GTK_BOX(hBox), sizeTitleLabel, FALSE, FALSE, 0);
+    gtk_widget_show(sizeTitleLabel);
+    
+    GBLisoSizeLbl = gtk_label_new("");
+    gtk_box_pack_start(GTK_BOX(hBox), GBLisoSizeLbl, FALSE, FALSE, 0);
+    gtk_widget_show(GBLisoSizeLbl);
 }
 
 gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)

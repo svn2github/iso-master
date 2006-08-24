@@ -10,6 +10,7 @@ GtkWidget* GBLmainWindow;
 
 int main(int argc, char** argv)
 {
+    GdkPixbuf* appIcon;
     GtkWidget* mainVBox;
     GtkWidget* mainFrame; /* to put a border around the window contents */
     GtkWidget* vpaned; /* to be able to resize the two file browsers */
@@ -19,10 +20,13 @@ int main(int argc, char** argv)
     
     gtk_init(&argc, &argv);
     
+    appIcon = gdk_pixbuf_new_from_file("/usr/local/share/isomaster/icons/isomaster.svg", NULL);
+    
     /* main window */
     GBLmainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_default_size(GTK_WINDOW(GBLmainWindow), 600, 600);
     gtk_window_set_title(GTK_WINDOW(GBLmainWindow), "ISO Master");
+    gtk_window_set_icon(GTK_WINDOW(GBLmainWindow), appIcon); /* NULL is ok */
     gtk_widget_show(GBLmainWindow);
     g_signal_connect(G_OBJECT(GBLmainWindow), "delete_event",
                      G_CALLBACK(closeMainWindowCbk), NULL);
