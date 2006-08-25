@@ -37,6 +37,8 @@ static Dir GBLisoTree;
 static GtkWidget* GBLWritingProgressBar;
 /* the progress bar from the extracting dialog box */
 static GtkWidget* GBLextractingProgressBar;
+/* to know whether am working on an image */
+static bool GBLisoPaneActive;
 
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
@@ -46,7 +48,7 @@ void addToIsoCbk(GtkButton *button, gpointer data)
     GtkTreeSelection* selection;
     char* isoCurrentDir; /* for changeIsoDirectory() */
     
-    if(GBLisoForReading == 0)
+    if(!GBLisoPaneActive)
     /* no iso open */
         return;
     
@@ -108,7 +110,8 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   "Failed to add directory: '%s'",
+                                                   "Failed to add directory %s: '%s'",
+                                                   itemName,
                                                    bk_get_error_string(rc));
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
@@ -133,7 +136,8 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   "Failed to add file: '%s'",
+                                                   "Failed to add file %s: '%s'",
+                                                   itemName,
                                                    bk_get_error_string(rc));
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
@@ -294,28 +298,33 @@ void changeIsoDirectory(char* newDirStr)
 
 void closeIso(void)
 {
-    if(GBLisoForReading == 0)
+    if(GBLisoForReading != 0)
     /* nothing to close */
-        return;
+    {
+        close(GBLisoForReading);
+        GBLisoForReading = 0;
+    }
     
-    close(GBLisoForReading);
-    GBLisoForReading = 0;
-    
-    bk_delete_dir_contents(&GBLisoTree);
-    
-    if(GBLisoForReadingFullName != NULL)
-        free(GBLisoForReadingFullName);
-    GBLisoForReadingFullName = NULL;
-    
-    GBLisoTree.directories = NULL;
-    GBLisoTree.files = NULL;
-    
-    GBLisoSize = 0;
-    gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), "");
-    
-    gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
-    
-    changeIsoDirectory("/");
+    if(GBLisoPaneActive)
+    {
+        bk_delete_dir_contents(&GBLisoTree);
+        
+        if(GBLisoForReadingFullName != NULL)
+            free(GBLisoForReadingFullName);
+        GBLisoForReadingFullName = NULL;
+        
+        GBLisoTree.directories = NULL;
+        GBLisoTree.files = NULL;
+        
+        GBLisoSize = 0;
+        gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), "");
+        
+        gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
+        
+        changeIsoDirectory("/");
+        
+        GBLisoPaneActive = false;
+    }
 }
 
 void deleteFromIsoCbk(GtkButton *button, gpointer data)
@@ -323,7 +332,7 @@ void deleteFromIsoCbk(GtkButton *button, gpointer data)
     GtkTreeSelection* selection;
     char* isoCurrentDir; /* for changeIsoDirectory() */
     
-    if(GBLisoForReading == 0)
+    if(!GBLisoPaneActive)
     /* no iso open */
         return;
     
@@ -386,7 +395,8 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   "Failed to delete directory: '%s'",
+                                                   "Failed to delete directory %s: '%s'",
+                                                   itemName,
                                                    bk_get_error_string(rc));
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
@@ -411,7 +421,8 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   "Failed to delete file: '%s'",
+                                                   "Failed to delete file %s: '%s'",
+                                                   itemName,
                                                    bk_get_error_string(rc));
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
@@ -441,7 +452,7 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     GtkWidget* descriptionLabel;
     char* fsCurrentDir; /* for changeIsoDirectory() */
     
-    if(GBLisoForReading == 0)
+    if(!GBLisoPaneActive)
     /* no iso open */
         return;
     
@@ -595,7 +606,7 @@ void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
     char* newCurrentDir;
     
     /* do nothing if no image open */
-    if(GBLisoForReading == 0)
+    if(!GBLisoPaneActive)
         return;
     
     /* do nothing if already at root */
@@ -669,6 +680,41 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
         free(newCurrentDir);
         g_free(name);
     }
+}
+
+void newIsoCbk(GtkMenuItem* menuItem, gpointer data)
+{
+    closeIso();
+    
+    bzero(&GBLvolInfo, sizeof(GBLvolInfo));
+    
+    GBLisoTree.directories = NULL;
+    GBLisoTree.files = NULL;
+    GBLisoTree.name[0] = '\0';
+    GBLisoTree.posixFileMode = 0755;
+    
+    /* iso size label */
+    char sizeStr[20];
+    GBLisoSize = 35845;
+    //if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
+        GBLisoSize += 2048;
+    GBLisoSize += bk_estimate_iso_size(&GBLisoTree, FNTYPE_9660 | FNTYPE_JOLIET | FNTYPE_ROCKRIDGE);
+    formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
+    gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
+    
+    GBLisoForReadingFullName = (char*)malloc(1);
+    if(GBLisoForReadingFullName == NULL)
+    {
+        fatalError("failed to allocate 1 byte for GBLisoForReadingFullName (out of memory?)");
+        return;
+    }
+    GBLisoForReadingFullName[0] = '\0';
+    
+    gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
+    
+    GBLisoPaneActive = true;
+    
+    changeIsoDirectory("/");
 }
 
 void openIso(char* filename)

@@ -44,3 +44,4 @@ install: isomaster
 
 uninstall: 
 	rm -f /usr/local/bin/isomaster
+	rm -rf /usr/local/share/isomaster/

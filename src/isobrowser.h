@@ -15,6 +15,7 @@ void extractingProgressWindowDestroyedCbk(void);
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data);
 void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
                        GtkTreeViewColumn* col, gpointer data);
+void newIsoCbk(GtkMenuItem* menuItem, gpointer data);
 void openIso(char* filename);
 void openIsoCbk(GtkMenuItem* menuItem, gpointer data);
 void writingProgressWindowDestroyedCbk(void);
