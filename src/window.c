@@ -42,7 +42,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     GtkWidget* menuBar;
     GtkWidget* menu;
     GtkWidget* menuItem;
-    GtkWidget* icon;
+    //~ GtkWidget* icon;
     GtkWidget* rootMenu;
     
     menuBar = gtk_menu_bar_new();
