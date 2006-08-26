@@ -2,7 +2,7 @@ GTKLIBS = `pkg-config --libs gtk+-2.0`
 GTKFLAGS = `pkg-config --cflags gtk+-2.0`
 GLOBALDEPS = 
 
-isomaster: lib isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o iniparser $(GLOBALDEPS)
+isomaster: lib iniparser isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o $(GLOBALDEPS)
 	cc isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o bk/bk.a iniparser-2.15/libiniparser.a $(GTKLIBS) -Wall -g -o isomaster
 
 lib: 
