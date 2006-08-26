@@ -4,6 +4,7 @@
 #include "fsbrowser.h"
 #include "isobrowser.h"
 #include "about.h"
+#include "settings.h"
 
 /* the label that holds the value of the iso size */
 GtkWidget* GBLisoSizeLbl;
@@ -170,6 +171,8 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
 
 gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
 {
+    writeSettings();
+    
     printf("Quitting\n");
     
     gtk_main_quit();

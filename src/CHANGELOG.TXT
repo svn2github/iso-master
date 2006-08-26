@@ -1,7 +1,9 @@
  - 0.2
 ===
 - Default is now to not keep the permissions from rockridge as some cds have directories with no write permissions and that makes them hard to write to.
-- Added cdrom icon as the application icon
+- Added application icon, got it from http://tango.freedesktop.org/Tango_Icon_Gallery
+- Added case insensitive *.ISO mask to file open/save dialogs
+- Can now remember window size, pane height and last fs directory visited, all stored in ~/.isomaster, config file parser/writer from http://ndevilla.free.fr/iniparser/
 - 
 
 23 Aug 2006 - 0.1

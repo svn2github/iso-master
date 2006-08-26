@@ -8,15 +8,16 @@
 #include "browser.h"
 #include "fsbrowser.h"
 #include "error.h"
+#include "settings.h"
+
+extern AppSettings GBLappSettings;
+extern char* GBLuserHomeDir;
 
 extern GtkWidget* GBLmainWindow;
 
 extern GtkWidget* GBLfsTreeView;
 extern GtkListStore* GBLfsListStore;
 extern char* GBLfsCurrentDir;
-
-/* set when the fs browser is constructed */
-static char* GBLuserHomeDir;
 
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
@@ -32,8 +33,6 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     GtkIconSize* iconSizes = NULL;
     int numIconSizes;
     GtkIconSize iconSize;
-    
-    char* userHomeDir;
     
     GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_UINT);
     
@@ -115,44 +114,10 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     }
     /* END CREATE pixbuf for file */
     
-    /* STORE the user's home directory */
-    userHomeDir = getenv("HOME");
-    if(userHomeDir == NULL)
-    /* pretend user's home is root */
-    {
-        printWarning("failed to getenv(\"HOME\"), using \"/\" as home directory");
-        GBLuserHomeDir = (char*)malloc(2);
-        if(GBLuserHomeDir == NULL)
-            fatalError("buildFsBrowser(): malloc(2) failed");
-        GBLuserHomeDir[0] = '/';
-        GBLuserHomeDir[1] = '\0';
-    }
+    if(GBLappSettings.fsCurrentDir != NULL)
+        changeFsDirectory(GBLappSettings.fsCurrentDir);
     else
-    {
-        int pathLen;
-        
-        /* need the directory ending with a / (bkisofs rule) */
-        
-        pathLen = strlen(userHomeDir);
-        if(userHomeDir[pathLen] == '/')
-        {
-            GBLuserHomeDir = (char*)malloc(pathLen + 1);
-            if(GBLuserHomeDir == NULL)
-                fatalError("buildFsBrowser(): malloc(pathLen + 1) failed");
-            strcpy(GBLuserHomeDir, userHomeDir);
-        }
-        else
-        {
-            GBLuserHomeDir = (char*)malloc(pathLen + 2);
-            if(GBLuserHomeDir == NULL)
-                fatalError("buildFsBrowser(): malloc(pathLen + 2) failed");
-            strcpy(GBLuserHomeDir, userHomeDir);
-            strcat(GBLuserHomeDir, "/");
-        }
-    }
-    /* END STORE the user's home directory */
-    
-    changeFsDirectory(GBLuserHomeDir);
+        changeFsDirectory(GBLuserHomeDir);
 }
 
 void changeFsDirectory(char* newDirStr)

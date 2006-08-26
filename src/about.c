@@ -29,6 +29,11 @@ GBLauthors[2] = {
 "August 2006\n"
 "- the 'drive-cdrom' icon used as the application icon\n"
 "\n"
+"Nicolas Devillard\n"
+"http://ndevilla.free.fr/iniparser/\n"
+"August 2006\n"
+"- the excellent iniparser, for storing and reading config files\n"
+"\n"
 "",
 NULL};
 

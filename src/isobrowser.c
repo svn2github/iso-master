@@ -816,6 +816,7 @@ void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
     GtkWidget *dialog;
     char* filename;
+    GtkFileFilter* nameFilter;
     
     dialog = gtk_file_chooser_dialog_new("Open File",
                                          NULL,
@@ -823,6 +824,16 @@ void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                          GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
                                          NULL);
+    
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "ISO Images");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
     if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
     {
@@ -931,9 +942,10 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     char* filename;
     int dialogResponse;
     GtkWidget* warningDialog;
-        
+    GtkFileFilter* nameFilter;
+    
     /* do nothing if no image open */
-    if(GBLisoForReading == 0)
+    if(!GBLisoPaneActive)
         return;
     
     dialog = gtk_file_chooser_dialog_new("Save File",
@@ -942,6 +954,16 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                          GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
                                          NULL);
+    
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "ISO Images");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
     dialogResponse = gtk_dialog_run(GTK_DIALOG(dialog));
     if(dialogResponse == GTK_RESPONSE_ACCEPT)

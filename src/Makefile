@@ -2,8 +2,11 @@ GTKLIBS = `pkg-config --libs gtk+-2.0`
 GTKFLAGS = `pkg-config --cflags gtk+-2.0`
 GLOBALDEPS = 
 
-isomaster: lib isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o $(GLOBALDEPS)
-	cc isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o bk/bk.a $(GTKLIBS) -Wall -g -o isomaster
+isomaster: lib isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o iniparser $(GLOBALDEPS)
+	cc isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o bk/bk.a iniparser-2.15/libiniparser.a $(GTKLIBS) -Wall -g -o isomaster
+
+lib: 
+	cd bk && $(MAKE)
 
 isomaster.o: isomaster.c $(GLOBALDEPS) 
 	cc isomaster.c $(GTKFLAGS) -c -g -Wall
@@ -26,15 +29,19 @@ error.o: error.c error.h $(GLOBALDEPS)
 about.o: about.c about.h $(GLOBALDEPS)
 	cc about.c $(GTKFLAGS) -c -g -Wall
 
+settings.o: settings.c settings.h $(GLOBALDEPS)
+	cc settings.c $(GTKFLAGS) -c -g -Wall
+
+iniparser:
+	cd iniparser-2.15 && $(MAKE)
+
 testread2: testread2.c lib
 	cc testread2.c bk/bk.a -Wall -g -o testread2
-
-lib: 
-	cd bk && $(MAKE)
 
 clean: 
 	rm -f *.o isomaster
 	cd bk && $(MAKE) clean
+	cd iniparser-2.15 && $(MAKE) clean
 
 install: isomaster
 	install -d /usr/local/bin/
