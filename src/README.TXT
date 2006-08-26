@@ -35,9 +35,9 @@ Bug Reports
 Please help me improve ISO Master by sending me bug reports. The more of the following you can do, the easier it will be for me to fix:
 - be able to reproduce the bug consistently
 - run ISO Master from a terminal window and send me the output (if any) that is printed there
-- if it only happens with one image file, tell me what it is and where i can get it (if it's freely available)
+- if it only happens with one image file, tell me what it is and, if it's freely available, where i can get it
 - it's better to give me too much detail then too little
 
-Licence
+License
 -------
 Any source code for ISO Master and bkisofs is distributed under the GNU General Public Licence version 2.

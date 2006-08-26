@@ -1,3 +1,9 @@
+/******************************* LICENCE **************************************
+* Any code in this file may be redistributed or modified under the terms of
+* the GNU General Public Licence as published by the Free Software 
+* Foundation; version 2 of the licence.
+****************************** END LICENCE ***********************************/
+
 #include <gtk/gtk.h>
 
 extern GtkWidget* GBLmainWindow;
@@ -14,16 +20,6 @@ GBLauthors[2] = {
 "Summer 2005 - Fall 2006\n"
 "- author and maintainer\n"
 "\n"
-"Barb Czegel\n"
-"http://cs.senecac.on.ca/~barb.czegel/\n"
-"Summer-fall 2005\n"
-"- one of my teachers from Seneca College who has been kind enough to let me work on ISO Master as my systems project for two semesters\n"
-"\n"
-"The Samba Project\n"
-"http://us2.samba.org/\n"
-"December 2005\n"
-"- most of the filename mangling code I copied from samba\n"
-"\n"
 "Tango Desktop Project\n"
 "http://tango.freedesktop.org/Tango_Icon_Gallery\n"
 "August 2006\n"
@@ -33,6 +29,16 @@ GBLauthors[2] = {
 "http://ndevilla.free.fr/iniparser/\n"
 "August 2006\n"
 "- the excellent iniparser, for storing and reading config files\n"
+"\n"
+"The Samba Project\n"
+"http://us2.samba.org/\n"
+"December 2005\n"
+"- most of the filename mangling code I copied from samba\n"
+"\n"
+"Barb Czegel\n"
+"http://cs.senecac.on.ca/~barb.czegel/\n"
+"Summer-fall 2005\n"
+"- one of my teachers from Seneca College who has been kind enough to let me work on ISO Master as my systems project for two semesters\n"
 "\n"
 "",
 NULL};
