@@ -1,0 +1,11 @@
+--- isomaster.c.old	2006-08-27 16:43:36.775580880 +0100
++++ isomaster.c	2006-08-27 16:51:10.374623344 +0100
+@@ -34,7 +34,7 @@ int main(int argc, char** argv)
+     
+     loadSettings();
+     
+-    appIcon = gdk_pixbuf_new_from_file("/usr/local/share/isomaster/icons/isomaster.svg", NULL);
++    appIcon = gdk_pixbuf_new_from_file("/usr/share/icons/isomaster.svg", NULL);
+     
+     /* main window */
+     GBLmainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);

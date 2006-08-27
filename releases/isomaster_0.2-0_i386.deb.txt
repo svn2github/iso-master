@@ -1,0 +1,3 @@
+It should in theory work with any Debian-based distro which includes GTK 2 and uses the same glibc as Ubuntu Dapper. I should imagine it will work with Debian Etch and newer, possibly not with Sarge. Should also work with Ubuntu Breezy and newer.
+
+DJ, http://forums.lugradio.org/viewtopic.php?t=2475
