@@ -1,9 +1,9 @@
 GTKLIBS = `pkg-config --libs gtk+-2.0`
 GTKFLAGS = `pkg-config --cflags gtk+-2.0`
-GLOBALDEPS = 
+GLOBALDEPS = bk/bk.h
 
-isomaster: lib iniparser isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o $(GLOBALDEPS)
-	cc isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o bk/bk.a iniparser-2.15/libiniparser.a $(GTKLIBS) -Wall -g -o isomaster
+isomaster: lib iniparser isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o $(GLOBALDEPS)
+	cc isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o bk/bk.a iniparser-2.15/libiniparser.a $(GTKLIBS) -Wall -g -o isomaster
 
 lib: 
 	cd bk && $(MAKE)
@@ -31,6 +31,9 @@ about.o: about.c about.h $(GLOBALDEPS)
 
 settings.o: settings.c settings.h $(GLOBALDEPS)
 	cc settings.c $(GTKFLAGS) -c -g -Wall
+
+boot.o: boot.c boot.h $(GLOBALDEPS)
+	cc boot.c $(GTKFLAGS) -c -g -Wall
 
 iniparser:
 	cd iniparser-2.15 && $(MAKE)

@@ -57,6 +57,14 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     g_signal_connect(GBLfsTreeView, "row-activated", (GCallback)fsRowDblClickCbk, NULL);
     gtk_widget_show(GBLfsTreeView);
     
+    /* this won't be enabled until gtk allows me to drag a multiple selection */
+    GtkTargetEntry targetEntry;
+    targetEntry.target = "text/plain";
+    targetEntry.flags = 0;
+    targetEntry.info = 0;
+    gtk_tree_view_enable_model_drag_source(GTK_TREE_VIEW(GBLfsTreeView), GDK_BUTTON1_MASK, 
+                                           &targetEntry, 1, GDK_ACTION_COPY);
+    
     /* enable multi-line selection */
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
     gtk_tree_selection_set_mode(selection, GTK_SELECTION_MULTIPLE);
@@ -121,7 +129,23 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     /* END CREATE pixbuf for file */
     
     if(GBLappSettings.fsCurrentDir != NULL)
-        changeFsDirectory(GBLappSettings.fsCurrentDir);
+    {
+        bool oldCurrentDirExists;
+        DIR* openTest;
+        
+        /* make sure this directory still exists and is accessible */
+        openTest = opendir(GBLappSettings.fsCurrentDir);
+        if(openTest != NULL)
+            oldCurrentDirExists = true;
+        else
+            oldCurrentDirExists = false;
+        closedir(openTest);
+        
+        if(oldCurrentDirExists)
+            changeFsDirectory(GBLappSettings.fsCurrentDir);
+        else
+            changeFsDirectory(GBLuserHomeDir);
+    }
     else
         changeFsDirectory(GBLuserHomeDir);
 }
