@@ -51,6 +51,7 @@ install: isomaster
 	install isomaster /usr/local/bin/
 	install -d /usr/local/share/isomaster/icons/
 	install -m 644 icons/isomaster.svg /usr/local/share/isomaster/icons/
+	install -m 644 icons/folder-new.png /usr/local/share/isomaster/icons/
 
 uninstall: 
 	rm -f /usr/local/bin/isomaster

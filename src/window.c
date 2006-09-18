@@ -7,6 +7,7 @@
 #include <gtk/gtk.h>
 
 #include "window.h"
+#include "browser.h"
 #include "fsbrowser.h"
 #include "isobrowser.h"
 #include "about.h"
@@ -16,6 +17,12 @@
 
 /* the label that holds the value of the iso size */
 GtkWidget* GBLisoSizeLbl;
+/* check menu item for 'show hidden files' */
+GtkWidget* GBLshowHiddenMenuItem;
+
+extern AppSettings GBLappSettings;
+extern GtkWidget* GBLnewDirIcon;
+extern GtkWidget* GBLnewDirIcon2;
 
 void buildMainToolbar(GtkWidget* boxToPackInto)
 {
@@ -41,9 +48,13 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     "Go back", "Go back up one directory", "Private",
+                                     "Go back", "Go back up one directory on the filesystem", "Private",
                                      icon, G_CALLBACK(fsGoUpDirTree),
                                      NULL);
+                                     
+    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                                     "New Directory", "Create new directory on the filesystem", "Private",
+                                     GBLnewDirIcon, G_CALLBACK(createDirCbk), (gpointer)1);
 }
 
 void buildMenu(GtkWidget* boxToPackInto)
@@ -92,6 +103,25 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(closeMainWindowCbk), NULL);
     /* END FILE menu */
+    
+    /* VIEW menu */
+    rootMenu = gtk_menu_item_new_with_mnemonic("_View");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
+    gtk_widget_show(rootMenu);
+    
+    menu = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
+    
+    GBLshowHiddenMenuItem = gtk_check_menu_item_new_with_mnemonic("_Show hidden files");
+    if(GBLappSettings.showHiddenFilesFs)
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLshowHiddenMenuItem), TRUE);
+    else
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLshowHiddenMenuItem), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GBLshowHiddenMenuItem);
+    gtk_widget_show(GBLshowHiddenMenuItem);
+    g_signal_connect(G_OBJECT(GBLshowHiddenMenuItem), "activate",
+                     G_CALLBACK(showHiddenCbk), NULL);
+    /* END VIEW menu */
     
     /* BOOT menu */
     rootMenu = gtk_menu_item_new_with_mnemonic("_BootRecord");
@@ -195,9 +225,13 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     "Go back", "Go back up one directory", "Private",
+                                     "Go back", "Go back up one directory on the ISO", "Private",
                                      icon, G_CALLBACK(isoGoUpDirTreeCbk),
                                      NULL);
+    
+    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                                     "New Directory", "Create new directory on the ISO", "Private",
+                                     GBLnewDirIcon2,G_CALLBACK(createDirCbk), (gpointer)0);
     
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),

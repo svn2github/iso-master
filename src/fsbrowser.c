@@ -190,8 +190,8 @@ void changeFsDirectory(char* newDirStr)
         if(strcmp(nextItem->d_name, ".") == 0 || strcmp(nextItem->d_name, "..") == 0)
             continue;
         
+        if(!GBLappSettings.showHiddenFilesFs && nextItem->d_name[0] == '.')
         /* skip hidden files/dirs */
-        if(nextItem->d_name[0] == '.')
             continue;
         
         if(strlen(nextItem->d_name) > 256)
@@ -318,7 +318,7 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
         
         newCurrentDir = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(name) + 2);
         if(newCurrentDir == NULL)
-            fatalError("fsRowDblClicked(): malloc(newCurrentDirlen) failed");
+            fatalError("fsRowDblClicked(): malloc(strlen(GBLfsCurrentDir) + strlen(name) + 2) failed");
         
         strcpy(newCurrentDir, GBLfsCurrentDir);
         strcat(newCurrentDir, name);
@@ -329,4 +329,38 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
         free(newCurrentDir);
         g_free(name);
     }
+}
+
+void refreshFsView(void)
+{
+    char* fsCurrentDir; /* for changeFsDirectory() */
+    
+    fsCurrentDir = malloc(strlen(GBLfsCurrentDir) + 1);
+    if(fsCurrentDir == NULL)
+        fatalError("addToIsoCbk(): malloc("
+                   "strlen(GBLfsCurrentDir) + 1) failed");
+    strcpy(fsCurrentDir, GBLfsCurrentDir);
+    
+    changeFsDirectory(fsCurrentDir);
+    
+    free(fsCurrentDir);
+}
+
+void showHiddenCbk(GtkButton *button, gpointer data)
+{
+    char* currentDirCopy;
+    
+    GBLappSettings.showHiddenFilesFs = !GBLappSettings.showHiddenFilesFs;
+    
+    /* REFRESH fs view */
+    currentDirCopy = (char*)malloc(strlen(GBLfsCurrentDir) + 1);
+    if(currentDirCopy == NULL)
+        fatalError("fsRowDblClicked(): malloc(strlen(GBLfsCurrentDir) + 1) failed");
+    
+    strcpy(currentDirCopy, GBLfsCurrentDir);
+    
+    changeFsDirectory(currentDirCopy);
+    
+    free(currentDirCopy);
+    /* END REFRESH fs view */
 }

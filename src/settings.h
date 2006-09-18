@@ -1,6 +1,7 @@
 #ifndef window_h
 #define window_h
 
+#include <stdbool.h>
 #include "iniparser-2.15/src/iniparser.h"
 
 #define ISOMASTER_DEFAULT_WINDOW_WIDTH 500
@@ -14,6 +15,7 @@ typedef struct
     int windowHeight;
     int topPaneHeight;
     char* fsCurrentDir;
+    bool showHiddenFilesFs;
     
 } AppSettings;
 

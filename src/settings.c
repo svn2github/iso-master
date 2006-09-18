@@ -9,6 +9,7 @@
 #include <sys/stat.h>
 #include <limits.h>
 #include <gtk/gtk.h>
+#include <dirent.h>
 
 #include "settings.h"
 #include "error.h"
@@ -23,46 +24,62 @@ AppSettings GBLappSettings;
 extern GtkWidget* GBLmainWindow;
 extern GtkWidget* GBLbrowserPaned;
 extern char* GBLfsCurrentDir;
+extern GtkWidget* GBLshowHiddenMenuItem;
 
 void findHomeDir(void)
 {
     char* userHomeDir;
+    int pathLen;
     
     userHomeDir = getenv("HOME");
     if(userHomeDir == NULL)
     /* pretend user's home is root */
     {
-        printWarning("failed to getenv(\"HOME\"), using \"/\" as home directory");
+        printWarning("failed to getenv(\"HOME\"), using \"/\" as "
+                     "home directory");
         GBLuserHomeDir = (char*)malloc(2);
         if(GBLuserHomeDir == NULL)
             fatalError("findHomeDir(): malloc(2) failed");
         GBLuserHomeDir[0] = '/';
         GBLuserHomeDir[1] = '\0';
+        return;
+    }
+    
+    /* MAKE sure userHomeDir is a valid directory */
+    DIR* openDirTest;
+    
+    openDirTest = opendir(userHomeDir);
+    if(openDirTest == NULL)
+    {
+        //!!print warning
+        printf("failed to open directory described by $HOME: '%s'\n", 
+                                                            userHomeDir);
+        GBLuserHomeDir = (char*)malloc(2);
+        if(GBLuserHomeDir == NULL)
+            fatalError("findHomeDir(): malloc(pathLen + 1) failed");
+        strcpy(GBLuserHomeDir, "/");
+        return;
+    }
+    
+    closedir(openDirTest);
+    /* END MAKE sure userHomeDir is a valid directory */
+    
+    /* need the directory ending with a / (bkisofs rule) */
+    pathLen = strlen(userHomeDir);
+    if(userHomeDir[pathLen] == '/')
+    {
+        GBLuserHomeDir = (char*)malloc(pathLen + 1);
+        if(GBLuserHomeDir == NULL)
+            fatalError("findHomeDir(): malloc(pathLen + 1) failed");
+        strcpy(GBLuserHomeDir, userHomeDir);
     }
     else
     {
-        int pathLen;
-        
-        /* need the directory ending with a / (bkisofs rule) */
-        
-        //!! need to make sure userHomeDir is a valid directory
-        
-        pathLen = strlen(userHomeDir);
-        if(userHomeDir[pathLen] == '/')
-        {
-            GBLuserHomeDir = (char*)malloc(pathLen + 1);
-            if(GBLuserHomeDir == NULL)
-                fatalError("findHomeDir(): malloc(pathLen + 1) failed");
-            strcpy(GBLuserHomeDir, userHomeDir);
-        }
-        else
-        {
-            GBLuserHomeDir = (char*)malloc(pathLen + 2);
-            if(GBLuserHomeDir == NULL)
-                fatalError("findHomeDir(): malloc(pathLen + 2) failed");
-            strcpy(GBLuserHomeDir, userHomeDir);
-            strcat(GBLuserHomeDir, "/");
-        }
+        GBLuserHomeDir = (char*)malloc(pathLen + 2);
+        if(GBLuserHomeDir == NULL)
+            fatalError("findHomeDir(): malloc(pathLen + 2) failed");
+        strcpy(GBLuserHomeDir, userHomeDir);
+        strcat(GBLuserHomeDir, "/");
     }
 }
 
@@ -98,6 +115,7 @@ void loadSettings(void)
     char* configFileName;
     int width;
     int height;
+    int showHidden;
     
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
     if(configFileName == NULL)
@@ -167,9 +185,19 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.fsCurrentDir = NULL;
     
-    //~ printf("read %dx%d, %d\n", GBLappSettings.windowWidth, 
-                               //~ GBLappSettings.windowHeight, 
-                               //~ GBLappSettings.topPaneHeight);
+    /* read/set show hidden files on filesystem */
+    if(GBLsettingsDictionary != NULL)
+    {
+        showHidden = iniparser_getboolean(GBLsettingsDictionary, 
+                                          "ui:showhiddenfilesfs", INT_MAX);
+        if(showHidden == INT_MAX)
+            GBLappSettings.showHiddenFilesFs = false;
+        else
+            GBLappSettings.showHiddenFilesFs = showHidden;
+    }
+    else
+    /* no config file */
+        GBLappSettings.showHiddenFilesFs = false;
     
     free(configFileName);
 }
@@ -226,6 +254,9 @@ void writeSettings(void)
     iniparser_setstr(GBLsettingsDictionary, "ui:toppaneheight", numberStr);
     
     iniparser_setstr(GBLsettingsDictionary, "ui:fscurrentdir", GBLfsCurrentDir);
+    
+    snprintf(numberStr, 20, "%d", GBLappSettings.showHiddenFilesFs);
+    iniparser_setstr(GBLsettingsDictionary, "ui:showhiddenfilesfs", numberStr);
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }

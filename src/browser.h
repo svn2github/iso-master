@@ -13,6 +13,7 @@ enum
     FILE_TYPE_DIRECTORY
 };
 
+void createDirCbk(GtkButton *button, gpointer onFs);
 void formatSize(unsigned sizeInt, char* sizeStr, int sizeSize);
 void sizeCellDataFunc(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
                       GtkTreeModel *model, GtkTreeIter *iter,

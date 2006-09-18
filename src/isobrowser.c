@@ -14,7 +14,6 @@
 #include <time.h>
 
 #include "bk/bk.h"
-#include "bk/bkRead.h"
 #include "browser.h"
 #include "fsbrowser.h"
 #include "isobrowser.h"
@@ -50,7 +49,6 @@ extern GdkPixbuf* GBLfilePixbuf;
 void addToIsoCbk(GtkButton *button, gpointer data)
 {
     GtkTreeSelection* selection;
-    char* isoCurrentDir; /* for changeIsoDirectory() */
     
     if(!GBLisoPaneActive)
     /* no iso open */
@@ -63,15 +61,7 @@ void addToIsoCbk(GtkButton *button, gpointer data)
     if(gtk_tree_selection_count_selected_rows(selection) > 0)
     /* reload iso view */
     {
-        isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
-        if(isoCurrentDir == NULL)
-            fatalError("addToIsoCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + 1) failed");
-        strcpy(isoCurrentDir, GBLisoCurrentDir);
-        
-        changeIsoDirectory(isoCurrentDir);
-        
-        free(isoCurrentDir);
+        refreshIsoView();
     }
     
     /* iso size label */
@@ -342,7 +332,6 @@ void closeIso(void)
 void deleteFromIsoCbk(GtkButton *button, gpointer data)
 {
     GtkTreeSelection* selection;
-    char* isoCurrentDir; /* for changeIsoDirectory() */
     
     if(!GBLisoPaneActive)
     /* no iso open */
@@ -355,16 +344,7 @@ void deleteFromIsoCbk(GtkButton *button, gpointer data)
     if(gtk_tree_selection_count_selected_rows(selection) > 0)
     /* reload iso view */
     {
-        isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
-        if(isoCurrentDir == NULL)
-            fatalError("deleteFromIsoCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + 1) failed");
-        
-        strcpy(isoCurrentDir, GBLisoCurrentDir);
-        
-        changeIsoDirectory(isoCurrentDir);
-        
-        free(isoCurrentDir);
+        refreshIsoView();
     }
     
     /* iso size label */
@@ -465,7 +445,6 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     GtkTreeSelection* selection;
     GtkWidget* progressWindow;
     GtkWidget* descriptionLabel;
-    char* fsCurrentDir; /* for changeIsoDirectory() */
     
     if(!GBLisoPaneActive)
     /* no iso open */
@@ -497,16 +476,7 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         
         gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
         
-        fsCurrentDir = malloc(strlen(GBLfsCurrentDir) + 1);
-        if(fsCurrentDir == NULL)
-            fatalError("extractFromIsoCbk(): malloc("
-                       "strlen(GBLfsCurrentDir) + 1) failed");
-        
-        strcpy(fsCurrentDir, GBLfsCurrentDir);
-        
-        changeFsDirectory(fsCurrentDir);
-        
-        free(fsCurrentDir);
+        refreshFsView();
     }
     
     if(GBLextractingProgressBar != NULL)
@@ -856,9 +826,19 @@ void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     //~ openIso("image.iso");
 }
 
-void writingProgressWindowDestroyedCbk(void)
+void refreshIsoView(void)
 {
-    GBLWritingProgressBar = NULL;
+    char* isoCurrentDir; /* for changeIsoDirectory() */
+    
+    isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
+    if(isoCurrentDir == NULL)
+        fatalError("addToIsoCbk(): malloc("
+                   "strlen(GBLisoCurrentDir) + 1) failed");
+    strcpy(isoCurrentDir, GBLisoCurrentDir);
+    
+    changeIsoDirectory(isoCurrentDir);
+    
+    free(isoCurrentDir);
 }
 
 void saveIso(char* filename)
@@ -1019,4 +999,9 @@ void writingProgressUpdaterCbk(void)
         while(gtk_events_pending())
             gtk_main_iteration();
     }
+}
+
+void writingProgressWindowDestroyedCbk(void)
+{
+    GBLWritingProgressBar = NULL;
 }

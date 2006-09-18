@@ -18,7 +18,8 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
 void newIsoCbk(GtkMenuItem* menuItem, gpointer data);
 void openIso(char* filename);
 void openIsoCbk(GtkMenuItem* menuItem, gpointer data);
-void writingProgressWindowDestroyedCbk(void);
+void refreshIsoView(void);
 void saveIso(char* filename);
 void saveIsoCbk(GtkWidget *widget, GdkEvent *event);
 void writingProgressUpdaterCbk(void);
+void writingProgressWindowDestroyedCbk(void);
