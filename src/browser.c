@@ -20,6 +20,8 @@
 GdkPixbuf* GBLdirPixbuf;
 GdkPixbuf* GBLfilePixbuf;
 
+/* text box for showing the path and name of the current directory on the fs */
+GtkWidget* GBLfsCurrentDirField;
 /* the view used for the contents of the fs browser */
 GtkWidget* GBLfsTreeView;
 /* the list store used for the contents of the fs browser */
@@ -27,6 +29,8 @@ GtkListStore* GBLfsListStore;
 /* slash-terminated, the dir being displayed in the fs browser */
 char* GBLfsCurrentDir = NULL;
 
+/* text box for showing the path and name of the current directory on the iso */
+GtkWidget* GBLisoCurrentDirField;
 /* the view used for the contents of the fs browser */
 GtkWidget* GBLisoTreeView;
 /* the list store used for the contents of the fs browser */

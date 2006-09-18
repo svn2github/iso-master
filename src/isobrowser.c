@@ -27,6 +27,7 @@ extern GtkWidget* GBLfsTreeView;
 extern GtkListStore* GBLfsListStore;
 extern char* GBLfsCurrentDir;
 extern GtkWidget* GBLisoSizeLbl;
+extern GtkWidget* GBLisoCurrentDirField;
 
 /* info about the image being worked on */
 VolInfo GBLvolInfo;
@@ -227,6 +228,14 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
 }
 
+void buildIsoLocator(GtkWidget* boxToPackInto)
+{
+    GBLisoCurrentDirField = gtk_entry_new();
+    gtk_box_pack_start(GTK_BOX(boxToPackInto), GBLisoCurrentDirField, FALSE, FALSE, 0);
+    gtk_entry_set_editable(GTK_ENTRY(GBLisoCurrentDirField), FALSE);
+    gtk_widget_show(GBLisoCurrentDirField);
+}
+
 void changeIsoDirectory(char* newDirStr)
 {
     int rc;
@@ -299,6 +308,9 @@ void changeIsoDirectory(char* newDirStr)
     if(GBLisoCurrentDir == NULL)
         fatalError("changeIsoDirectory(): malloc(strlen(newDirStr) + 1) failed");
     strcpy(GBLisoCurrentDir, newDirStr);
+    
+    /* update the field with the path and name */
+    gtk_entry_set_text(GTK_ENTRY(GBLisoCurrentDirField), GBLisoCurrentDir);
 }
 
 void closeIso(void)

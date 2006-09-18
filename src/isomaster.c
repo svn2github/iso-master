@@ -71,7 +71,10 @@ int main(int argc, char** argv)
     gtk_widget_show(mainVBox);
     
     buildMenu(mainVBox);
+    
     buildMainToolbar(mainVBox);
+    
+    buildFsLocator(mainVBox);
     
     mainFrame = gtk_frame_new(NULL);
     gtk_frame_set_shadow_type(GTK_FRAME(mainFrame), GTK_SHADOW_IN);
@@ -94,6 +97,8 @@ int main(int argc, char** argv)
     gtk_widget_show(bottomPanedBox);
     
     buildMiddleToolbar(bottomPanedBox);
+    
+    buildIsoLocator(bottomPanedBox);
     
     buildIsoBrowser(bottomPanedBox);
     

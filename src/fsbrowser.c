@@ -21,6 +21,7 @@ extern char* GBLuserHomeDir;
 
 extern GtkWidget* GBLmainWindow;
 
+extern GtkWidget* GBLfsCurrentDirField;
 extern GtkWidget* GBLfsTreeView;
 extern GtkListStore* GBLfsListStore;
 extern char* GBLfsCurrentDir;
@@ -150,6 +151,14 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
         changeFsDirectory(GBLuserHomeDir);
 }
 
+void buildFsLocator(GtkWidget* boxToPackInto)
+{
+    GBLfsCurrentDirField = gtk_entry_new();
+    gtk_box_pack_start(GTK_BOX(boxToPackInto), GBLfsCurrentDirField, FALSE, FALSE, 0);
+    gtk_entry_set_editable(GTK_ENTRY(GBLfsCurrentDirField), FALSE);
+    gtk_widget_show(GBLfsCurrentDirField);
+}
+
 void changeFsDirectory(char* newDirStr)
 {
     DIR* newDir;
@@ -251,6 +260,9 @@ void changeFsDirectory(char* newDirStr)
     if(GBLfsCurrentDir == NULL)
         fatalError("changeFsDirectory(): malloc(strlen(newDirStr) + 1) failed");
     strcpy(GBLfsCurrentDir, newDirStr);
+    
+    /* update the field with the path and name */
+    gtk_entry_set_text(GTK_ENTRY(GBLfsCurrentDirField), GBLfsCurrentDir);
 }
 
 void fsGoUpDirTree(GtkButton *button, gpointer data)
