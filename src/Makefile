@@ -3,43 +3,43 @@ GTKFLAGS = `pkg-config --cflags gtk+-2.0`
 GLOBALDEPS = bk/bk.h
 
 isomaster: lib iniparser isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o $(GLOBALDEPS)
-	cc isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o bk/bk.a iniparser-2.15/libiniparser.a $(GTKLIBS) -Wall -g -o isomaster
+	cc isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o bk/bk.a iniparser-2.15/libiniparser.a $(GTKLIBS) -Wall -o isomaster
 
 lib: 
 	cd bk && $(MAKE)
 
 isomaster.o: isomaster.c $(GLOBALDEPS) 
-	cc isomaster.c $(GTKFLAGS) -c -g -Wall
+	cc isomaster.c $(GTKFLAGS) -c -Wall
 
 window.o: window.c window.h $(GLOBALDEPS)
-	cc window.c $(GTKFLAGS) -c -g -Wall
+	cc window.c $(GTKFLAGS) -c -Wall
 
 browser.o: browser.c $(GLOBALDEPS)
-	cc browser.c $(GTKFLAGS) -c -g -Wall
+	cc browser.c $(GTKFLAGS) -c -Wall
 
 fsbrowser.o: fsbrowser.c fsbrowser.h $(GLOBALDEPS)
-	cc fsbrowser.c $(GTKFLAGS) -c -g -Wall
+	cc fsbrowser.c $(GTKFLAGS) -c -Wall
 
 isobrowser.o: isobrowser.c isobrowser.h $(GLOBALDEPS)
-	cc isobrowser.c $(GTKFLAGS) -c -g -Wall
+	cc isobrowser.c $(GTKFLAGS) -c -Wall
 
 error.o: error.c error.h $(GLOBALDEPS)
-	cc error.c $(GTKFLAGS) -c -g -Wall
+	cc error.c $(GTKFLAGS) -c -Wall
 
 about.o: about.c about.h $(GLOBALDEPS)
-	cc about.c $(GTKFLAGS) -c -g -Wall
+	cc about.c $(GTKFLAGS) -c -Wall
 
 settings.o: settings.c settings.h $(GLOBALDEPS)
-	cc settings.c $(GTKFLAGS) -c -g -Wall
+	cc settings.c $(GTKFLAGS) -c -Wall
 
 boot.o: boot.c boot.h $(GLOBALDEPS)
-	cc boot.c $(GTKFLAGS) -c -g -Wall
+	cc boot.c $(GTKFLAGS) -c -Wall
 
 iniparser:
 	cd iniparser-2.15 && $(MAKE)
 
 testread2: testread2.c lib
-	cc testread2.c bk/bk.a -Wall -g -o testread2
+	cc testread2.c bk/bk.a -Wall -o testread2
 
 clean: 
 	rm -f *.o isomaster
