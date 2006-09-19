@@ -2,13 +2,31 @@ Many thanks to all the following people:
 
 Andrew Smith
 http://littlesvr.ca/misc/contactandrew.php
+Summer 2005 - Fall 2006
 - author and maintainer
 
 Barb Czegel
 http://cs.senecac.on.ca/~barb.czegel/
-- one of my teachers from Seneca College who has been kind enough to let me 
+Summer-fall 2005
+- one of my teachers from Seneca College who has been kind enough to let me
   work on ISO Master as my systems project for two semesters
 
+Nicolas Devillard
+http://ndevilla.free.fr/iniparser/
+August 2006
+- the excellent iniparser, for storing and reading config files
+
 The Samba Project
-http://us2.samba.org/
+http://samba.org/
+December 2005
 - most of the filename mangling code I copied from samba
+
+Steffen Winterfeldt
+September 2006
+- helped me figure out how to work with isolinux boot records
+
+Tango Desktop Project
+http://tango.freedesktop.org/Tango_Icon_Gallery
+August 2006
+- a couple of very nice icons
+

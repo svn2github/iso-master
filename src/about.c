@@ -37,7 +37,6 @@ GBLauthors[2] = {
 "- most of the filename mangling code I copied from samba\n"
 "\n"
 "Steffen Winterfeldt\n"
-"...\n"
 "September 2006\n"
 "- helped me figure out how to work with isolinux boot records\n"
 "\n"

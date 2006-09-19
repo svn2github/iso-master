@@ -2,7 +2,7 @@ Important NOTE: both bkisofs and ISO Master are distributed under
 the version of the license that follows (Version 2, June 1991), not 
 an earlier one and not a later.
 
-  -Andrew Smith
+  - Andrew Smith
 
 --------------------------------------------------------------------
 
