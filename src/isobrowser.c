@@ -225,6 +225,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), column);
     
+    gtk_widget_set_sensitive(GBLisoCurrentDirField, FALSE);
     gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
 }
 
@@ -336,6 +337,7 @@ void closeIso(void)
     GBLisoSize = 0;
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), "");
     
+    gtk_widget_set_sensitive(GBLisoCurrentDirField, FALSE);
     gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
     
     GBLisoPaneActive = false;
@@ -706,6 +708,7 @@ void newIsoCbk(GtkMenuItem* menuItem, gpointer data)
     }
     GBLisoForReadingFullName[0] = '\0';
     
+    gtk_widget_set_sensitive(GBLisoCurrentDirField, TRUE);
     gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
     
     GBLisoPaneActive = true;
@@ -795,6 +798,7 @@ void openIso(char* filename)
     }
     strcpy(GBLisoForReadingFullName, filename);
     
+    gtk_widget_set_sensitive(GBLisoCurrentDirField, TRUE);
     gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
     
     changeIsoDirectory("/");
