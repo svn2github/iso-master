@@ -1,3 +1,14 @@
+19 Sep 2006 - 0.3
+=================
+- Can now read and write no-emulation and floppy-emulation boot records.
+- Fixed bug where deleting the directory last viewed in the filesystem browser would cause strange things to happen.
+- Improved 9660 name mangling to only include the ~xxxx hash in case of conflicts, also significantly increased the number of times to try to remangle a name before giving up.
+- Can now create new directories both on the image and the filesystem.
+- Added fields to show location (path) on the image and the filesystem.
+- Added option to show hidden files on the filesystem.
+- Fixed bug where having a large directory tree would cause a corrupt path table.
+- Other small but technically interesting changes, see svn log r118-r126
+
 26 Aug 2006 - 0.2
 =================
 - Default is now to not keep the permissions from rockridge as some cds have 

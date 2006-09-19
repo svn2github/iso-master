@@ -1,0 +1,1795 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title></title>
+</head>
+<body>
+<div class="header-outer">
+<div class="header" id="cli-container" hidden="true">
+<table class="h-table">
+  <tbody>
+    <tr>
+      <td class="label" localize="output.knownnets">Réseaux connus</td>
+      <td class="value" id="cli-netcount"><br>
+      </td>
+      <td class="label" id="cli-version-container" condition="yellow">ChatZilla
+      <span id="cli-version">error</span></td>
+      <td class="label" localize="output.connnets">Réseaux connectés</td>
+      <td class="value" id="cli-connectcount" localize="none">&lt;aucun&gt;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="header" id="net-container" hidden="true">
+<table class="h-table">
+  <tbody>
+    <tr>
+      <td class="label" id="net-url-l" localize="output.url">URL</td>
+      <td class="value crop-right" id="net-url"> <a id="net-url-anchor"
+ class="chatzilla-link" href="irc://foo/bar">irc://foo/bar</a> </td>
+      <td class="value" id="net-status" condition="red"
+ localize="output.notconn">Non connectés</td>
+      <td class="label" id="net-lag-l" localize="output.lag">Latence</td>
+      <td class="value" id="net-lag" localize="unknown">&lt;inconnu&gt;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="header" id="ch-container">
+<table class="h-table">
+  <tbody>
+    <tr>
+      <td class="label" id="ch-url-l" localize="output.url">URL</td>
+      <td class="value crop-right" id="ch-url"> <a id="ch-url-anchor"
+ class="chatzilla-link" href="irc://irc.freenode.net/libburn">irc://irc.freenode.net/libburn</a>
+      </td>
+      <td class="label" id="ch-modestr-l" localize="output.mode">Mode</td>
+      <td condition="green" class="value" id="ch-modestr"
+ localize="none">+nt</td>
+      <td class="label" id="ch-usercount-l" localize="output.users">Utilisateurs</td>
+      <td condition="green" class="value" id="ch-usercount"
+ localize="none">7, 1@, 0%, 0+</td>
+    </tr>
+    <tr onclick="onTopicNodesClick(event);" style="cursor: default;">
+      <td class="label" id="ch-topicnodes-l" localize="output.topic">Sujet</td>
+      <td class="value" colspan="6"> <span id="ch-topicnodes"
+ localize="none"><span>Libburn is an open-source library for reading,
+mastering and writing optical discs. <span class="chatzilla-teletype">|
+Milestone 0.2.1 - See roadmap |</span> Bug reports and feature requests
+are welcome <span class="chatzilla-teletype">| Please consider
+contributing to the project |</span> <a target="_content"
+ class="chatzilla-link" href="http://libburn.pykix.org/wiki/WikiStart">http://libburn.pykix.<wbr>org/wiki/WikiStart<wbr></a>
+      <span class="chatzilla-teletype">| Discover the art |</span>
+Please test cdrskin new audio powers <span class="chatzilla-teletype">|
+Libisofs has new powers - run /test/iso to test |</span></span></span> <input
+ hidden="true" id="ch-topicinput" style="width: 100%;"
+ onblur="cancelTopicEdit();" onkeypress="onTopicKeypress(event);"> </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="header" id="usr-container" hidden="true">
+<table class="h-table">
+  <tbody>
+    <tr>
+      <td class="label" localize="output.url">URL</td>
+      <td class="value crop-right" width="100%"> <a id="usr-url-anchor"
+ class="chatzilla-link" href="irc://foo/bar">irc://foo/bar</a> </td>
+      <td class="label" id="usr-serverstr-l" localize="output.via">Connecté
+via</td>
+      <td class="value" id="usr-serverstr" localize="none">&lt;aucun&gt;</td>
+    </tr>
+    <tr>
+      <td id="usr-title" colspan="4" localize="none">&lt;aucun&gt;</td>
+    </tr>
+    <tr>
+      <td id="usr-descnodes" colspan="4" localize="none">&lt;aucun&gt;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="header" id="dcc-chat-container" hidden="true">
+<table class="h-table">
+  <tbody>
+    <tr>
+      <td class="label" localize="output.url">URL</td>
+      <td class="value crop-right" width="100%"> <a
+ id="dcc-chat-url-anchor" class="chatzilla-link" href="irc://foo/bar">irc://foo/bar</a>
+      </td>
+      <td class="label" id="dcc-chat-remotestr-l" localize="output.to">Connecté
+à</td>
+      <td class="value" id="dcc-chat-remotestr" localize="none">&lt;aucun&gt;</td>
+    </tr>
+    <tr>
+      <td id="dcc-chat-title" colspan="4" localize="none">&lt;aucun&gt;</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="header" id="dcc-file-container" hidden="true">
+<table class="h-table">
+  <tbody>
+    <tr>
+      <td class="label" localize="output.file">Fichier</td>
+      <td class="value crop-right" id="dcc-file-file" width="100%"><br>
+      </td>
+      <td class="label" localize="output.progress">Progression</td>
+      <td class="value" id="dcc-file-progress" localize="unknown">&lt;inconnu&gt;</td>
+    </tr>
+    <tr>
+      <td colspan="4" class="progress-bg">
+      <table id="dcc-file-progressbar" width="0%">
+        <tbody>
+          <tr>
+            <td class="progress-fg">&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div id="messages-outer">
+<div id="splash">#libburn</div>
+<div id="output">
+<table view-type="IRCChannel" class="msg-table">
+  <tbody>
+    <tr statustext="26.08.2006 15:28, #libburn" view-type="IRCChannel"
+ dest-type="unk" msg-dest="" msg-type="INFO" class="msg">
+      <td time-s="29" time-n="28" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-type"><span>[INFO]</span></td>
+      <td class="msg-data"><span>Canal «&nbsp;<a class="chatzilla-link"
+ href="irc://irc.freenode.net/%23libburn">#libburn<wbr></a>&nbsp;»
+ouvert.</span></td>
+    </tr>
+    <tr msg-user="andrew ME!"
+ statustext="26.08.2006 15:28, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="JOIN" class="msg">
+      <td time-s="30" time-n="28" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-type"><span>--&gt;|</span></td>
+      <td class="msg-data"><span>VOUS (andrew) avez rejoint <a
+ class="chatzilla-link" href="irc://irc.freenode.net/%23libburn">#libburn<wbr></a></span></td>
+    </tr>
+    <tr statustext="26.08.2006 15:28, #libburn" view-type="IRCChannel"
+ dest-type="unk" msg-dest="" msg-type="TOPIC" class="msg">
+      <td time-s="30" time-n="28" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-type"><span>=-=</span></td>
+      <td class="msg-data"><span>Le sujet du canal <a
+ class="chatzilla-link" href="irc://irc.freenode.net/%23libburn">#libburn<wbr></a>
+est «&nbsp;Libburn is an open-source library for reading, mastering and
+writing optical discs. <span class="chatzilla-teletype">| Milestone
+0.2.1 - See roadmap |</span> Bug reports and feature requests are
+welcome <span class="chatzilla-teletype">| Please consider
+contributing to the project |</span> <a target="_content"
+ class="chatzilla-link" href="http://libburn.pykix.org/wiki/WikiStart">http://libburn.pykix.<wbr>org/wiki/WikiStart<wbr></a>
+      <span class="chatzilla-teletype">| Discover the art |</span>
+Please test cdrskin new audio powers <span class="chatzilla-teletype">|
+Libisofs has new powers - run /test/iso to test |</span>&nbsp;»</span></td>
+    </tr>
+    <tr statustext="26.08.2006 15:28, #libburn" view-type="IRCChannel"
+ dest-type="unk" msg-dest="" msg-type="TOPIC" class="msg">
+      <td time-s="30" time-n="28" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-type"><span>=-=</span></td>
+      <td class="msg-data"><span>Le sujet du canal <a
+ class="chatzilla-link" href="irc://irc.freenode.net/%23libburn">#libburn<wbr></a>
+a été soumis par pygi le 24.08.2006 17:14:32<wbr></span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:28, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="36" time-n="28" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>hey andrew</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:28, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="49" time-n="28" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>hello pygi you the one who emailed me?</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:28, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="56" time-n="28" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, yup<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:29, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="19" time-n="29" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>cool. so what can you tell me about
+your project that's not on the webpage?</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:29, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="29" time-n="29" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>who's working on it?</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:29, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="34" time-n="29" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>and why?</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:29, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="55" time-n="29" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, ergh, right, well mostly I am
+working right now on it</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:30, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="10" time-n="30" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>why? so we could have a iso handling
+library for our needs (libburn) and other people needs</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:30, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="46" time-n="30" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>well, i started bkisofs because i
+needed it for iso master, what was your itch?<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:31, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="03" time-n="31" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>libburn, told you<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:32, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="08" time-n="32" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>so we could have proper iso's created
+for libburn usage</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:34, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="03" time-n="34" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>ah
+i see. so mostly your project is about a library for burning cds (which
+is kinda neat now that i think of it) and libisofs is also there
+because... ?</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:35, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="29" time-n="35" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>because we wanted a library for iso
+creation<span type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:35, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="58" time-n="35" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>but libisofs should have as much
+features as it can provide for devs to use it</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:36, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="04" time-n="36" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>even outside the libburn project</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:36, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="33" time-n="36" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>how long have you been working on it?</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:36, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="43" time-n="36" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>Some time<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:36, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="53" time-n="36" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span><span type="face-smile"
+ class="chatzilla-emote-txt">:)</span><span title=":)" type="face-smile"
+ class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:37, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="ACTION" class="msg">
+      <td time-s="06" time-n="37" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>feels like he is on front of a jury<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:37, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="36" time-n="37" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>sorry, i'm used to people readily
+volunteering information on irc<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:37, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="41" time-n="37" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, you interested in the proposal
+I sent you?</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:37, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="53" time-n="37" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>it was rather vague</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:38, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="14" time-n="38" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>i'm trying to find out more about your
+project first</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:38, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="18" time-n="38" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>that's why all the questions</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:38, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="26" time-n="38" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>ah,oki, fire away then<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:39, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="39" time-n="39" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>glancing
+at the files in svn it looks to me like you can handle rockridge and
+joliet (including unicode, which i don't have) can you read and write
+both of these?</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:41, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="12" time-n="41" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>yup</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:41, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="33" time-n="41" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>but no boot records, it seems..</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:41, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="38" time-n="41" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, right, no eltorito<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:41, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="48" time-n="41" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>me neither<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:42, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="09" time-n="42" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>i think the real spec is INT13 but i
+haven't have time to look into it</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:42, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="12" time-n="42" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>I have a clue how to implement basic
+eltorito support tho (without multiple boot entries)</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:42, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="23" time-n="42" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>for the rest, I have to read IBM's spec</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:42, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="39" time-n="42" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>it sucks, there's almost nothing in it<span
+ type="face-sad" class="chatzilla-emote-txt"> :(</span><span title=" :("
+ type="face-sad" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:42, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="57" time-n="42" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>it's supposed to be the official spec<span
+ type="face-tongue" class="chatzilla-emote-txt"> :P</span><span
+ title=" :P" type="face-tongue" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:43, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="59" time-n="43" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>do you have a test app (no ui is fine)
+that i can look at to get an idea about how libisofs works?</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:44, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="18" time-n="44" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>yes, /test/iso</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:44, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="21" time-n="44" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>but it's very basic<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:45, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="39" time-n="45" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>#define SECSIZE 2048 heh, i have one
+of these too. but i seriously doubt different sector sizes are actually
+supported anywhere<span type="face-smile" class="chatzilla-emote-txt">
+:)</span><span title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:47, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="06" time-n="47" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span><span type="face-smile"
+ class="chatzilla-emote-txt">:)</span><span title=":)" type="face-smile"
+ class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 15:51, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="42" time-n="51" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>very pretty. pygi: will you be here
+for a while? i need 15 minutes</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:51, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="49" time-n="51" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, sure</span></td>
+    </tr>
+    <tr mark="even" msg-user="elmom"
+ statustext="26.08.2006 15:55, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="QUIT" class="msg">
+      <td time-s="17" time-n="55" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-type"><span>|&lt;--</span></td>
+      <td class="msg-data"><span>elmom a quitté irc.freenode.net
+(Remote closed the connection)</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 15:55, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="44" time-n="55" time-h="15" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>lorenzo, you around?</span></td>
+    </tr>
+    <tr mark="even" msg-user="elmom"
+ statustext="26.08.2006 16:01, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="JOIN" class="msg">
+      <td time-s="27" time-n="01" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-type"><span>--&gt;|</span></td>
+      <td class="msg-data"><span>elmom (<a class="chatzilla-link"
+ href="mailto:n=elmom@a84-230-91-132.elisa-laajakaista.fi">n=elmom@a84-230-<wbr>91-132.elisa-laajakaista.<wbr>fi<wbr></a>)
+a rejoint <a class="chatzilla-link"
+ href="irc://irc.freenode.net/%23libburn">#libburn<wbr></a></span></td>
+    </tr>
+    <tr mark="odd" msg-user="lorenzo"
+ statustext="26.08.2006 16:03, lorenzo!i=rutnik@cpe-065-190-200-185.nc.res.rr.com"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="59" time-n="03" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a
+ href="irc://irc.freenode.net/lorenzo,isnick" class="chatzilla-link"><span>lorenzo</span></a></td>
+      <td class="msg-data"><span>pygi: I'm here. Just working on ticket
+42.</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:04, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="19" time-n="04" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>lorenzo, oki, no worries</span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:05, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="26" time-n="05" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>What is Thomas' nick?</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:05, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="51" time-n="05" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>elmom, scdbackup</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:05, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="52" time-n="05" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>why ?</span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:08, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="40" time-n="08" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>Then ey doesn't use irc much, since I
+haven't seen em here much.</span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:09, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="17" time-n="09" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>But you can commit, so I don't need em.</span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:11, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="21" time-n="11" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>The
+docs about burn_scan_and_grab doesn't say anything about releasing, but
+since you don't need grabbing if you use it, then you shouldn't have
+read the docs for burn_drive_grab, don't you think?</span></td>
+    </tr>
+    <tr mark="even" msg-user="andrew ME!"
+ statustext="26.08.2006 16:11, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="32" time-n="11" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>pygi, i'm back. have you had a chance
+to look at bkisofs?</span></td>
+    </tr>
+    <tr mark="even" msg-user="andrew ME!"
+ statustext="26.08.2006 16:11, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="35" time-n="11" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>hello elmom </span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:11, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="48" time-n="11" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>hi andrew</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:11, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="54" time-n="11" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, I have looked, yes</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:12, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="33" time-n="12" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>what do you think?</span></td>
+    </tr>
+    <tr mark="even" msg-user="elmom"
+ statustext="26.08.2006 16:12, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="55" time-n="12" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>pygi: would you agree?</span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:13, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="09" time-n="13" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, you lack api docs<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:13, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="14" time-n="13" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>code isn't documented<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:13, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="19" time-n="13" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>otherwise seems clean</span></td>
+    </tr>
+    <tr mark="even" msg-user="andrew ME!"
+ statustext="26.08.2006 16:13, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="41" time-n="13" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>yeah my next task<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:14, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="13" time-n="14" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>elmom, I just saw the ticket<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:14, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="41" time-n="14" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>elmom, btw. diff should be attached,
+not posted in ticket, but you'll learn<span type="face-wink"
+ class="chatzilla-emote-txt"> ;)</span><span title=" ;)"
+ type="face-wink" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:14, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="53" time-n="14" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, would be interesting to see
+merging efforts</span></td>
+    </tr>
+    <tr mark="even" msg-user="Zomb"
+ statustext="26.08.2006 16:15, Zomb!n=eb@x118.rhrk.uni-kl.de"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="06" time-n="15" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/Zomb,isnick"
+ class="chatzilla-link"><span>Zomb</span></a></td>
+      <td class="msg-data"><span>.oO( Fellowship of the ring comes
+together... )</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:15, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="09" time-n="15" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>yes. i'm trying to figure out how a
+merger would work</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:15, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="19" time-n="15" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>Zomb, ?<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:15, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="34" time-n="15" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, do you like the current
+libisofs code &amp; docs?</span></td>
+    </tr>
+    <tr mark="odd" msg-user="Zomb"
+ statustext="26.08.2006 16:15, Zomb!n=eb@x118.rhrk.uni-kl.de"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="53" time-n="15" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/Zomb,isnick"
+ class="chatzilla-link"><span>Zomb</span></a></td>
+      <td class="msg-data"><span>pygi: the next alternative development
+I know about is bugner-cdrtools, let's wait for his author to appear
+here</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:16, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="21" time-n="16" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>Zomb, he'll appear here?</span></td>
+    </tr>
+    <tr mark="odd" msg-user="Zomb"
+ statustext="26.08.2006 16:16, Zomb!n=eb@x118.rhrk.uni-kl.de"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="39" time-n="16" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/Zomb,isnick"
+ class="chatzilla-link"><span>Zomb</span></a></td>
+      <td class="msg-data"><span>no, but it would be funny if he did</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:16, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="54" time-n="16" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>Zomb, oki, url, mails pls?<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="Zomb"
+ statustext="26.08.2006 16:17, Zomb!n=eb@x118.rhrk.uni-kl.de"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="03" time-n="17" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/Zomb,isnick"
+ class="chatzilla-link"><span>Zomb</span></a></td>
+      <td class="msg-data"><span><a target="_content"
+ class="chatzilla-link" href="http://burgner.sourceforge.net">http://burgner.sourc<wbr>eforge.net<wbr></a></span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:17, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="12" time-n="17" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>ah, that!!! I saw that before</span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:17, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="21" time-n="17" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>pygi, it wasn't meant as being
+applied, just read, and that's why I just pasted it.</span></td>
+    </tr>
+    <tr mark="even" msg-user="Zomb"
+ statustext="26.08.2006 16:17, Zomb!n=eb@x118.rhrk.uni-kl.de"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="25" time-n="17" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/Zomb,isnick"
+ class="chatzilla-link"><span>Zomb</span></a></td>
+      <td class="msg-data"><span>looks unmaintained and the code is
+disgusting for my taste, though</span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:17, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="33" time-n="17" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>Zomb, indeed</span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:18, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="21" time-n="18" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, you still heere?<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="elmom"
+ statustext="26.08.2006 16:18, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="41" time-n="18" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>The
+docs about burn_scan_and_grab doesn't say anything about releasing, but
+since you don't need grabbing if you use it, then you shouldn't have <span
+ class="chatzilla-bold">*to*</span> read the docs for burn_drive_grab?
+What do you think, pygi?</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:18, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="57" time-n="18" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>pygi,
+the code is nicer then mine i think. the most significant difference
+seems to be yours tries to follow all specs to the letter while mine is
+just trying to work, in a hurry</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:19, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="33" time-n="19" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>though the hurry turned out to be a
+year<span type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:19, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="37" time-n="19" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew,<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:19, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="56" time-n="19" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>elmom, you should read
+burn_drive_grab, because that is for advanced use</span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:20, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="30" time-n="20" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>But burn_scan_and_grab isn't.</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:20, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="44" time-n="20" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>nop, that is for "simple" use</span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:21, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="21" time-n="21" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>But you have to release the drive if
+you use it.</span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:21, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="35" time-n="21" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>And that isn't documented</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:21, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="44" time-n="21" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, together we could improve the
+library better &amp; faster probably (altought I don't care much about
+faster)</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:21, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="48" time-n="21" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>elmom, ehm<span type="face-confused"
+ class="chatzilla-emote-txt"> :-/</span><span title=" :-/"
+ type="face-confused" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:22, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="28" time-n="22" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>you are right it seems</span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:22, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="40" time-n="22" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>If you can see my point, could commit?</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:22, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="56" time-n="22" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>elmom, tommorow please?<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:23, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="29" time-n="23" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>pygi,
+how do you feel about taking the better parts of libisofs and sticking
+it into bkisofs? i care quite a bit about faster because my time is
+very limited. but i think we should really try to combine our efforts
+somehow.</span></td>
+    </tr>
+    <tr mark="even" msg-user="elmom"
+ statustext="26.08.2006 16:23, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="31" time-n="23" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>Should I send a patch or is it trivial
+enough? And no hurry, of course<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:23, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="47" time-n="23" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>elmom, no patch<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="lorenzo"
+ statustext="26.08.2006 16:24, lorenzo!i=rutnik@cpe-065-190-200-185.nc.res.rr.com"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="04" time-n="24" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a
+ href="irc://irc.freenode.net/lorenzo,isnick" class="chatzilla-link"><span>lorenzo</span></a></td>
+      <td class="msg-data"><span>pygi: Just got the mails about the new
+discussion forum. Nice.</span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:24, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="05" time-n="24" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>Altought I think you should explain
+the thing better in the ticket</span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:24, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="09" time-n="24" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>I'll pinpoint this to thomas<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:24, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="11" time-n="24" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>lorenzo,<span type="face-smile"
+ class="chatzilla-emote-txt"> :)</span><span title=" :)"
+ type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:24, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="24" time-n="24" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>lorenzo, sorry about two mails. I
+forgot about ticket threads<span type="face-sad"
+ class="chatzilla-emote-txt"> :(</span><span title=" :(" type="face-sad"
+ class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:24, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="38" time-n="24" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, I don't feel very good<span
+ type="face-tongue" class="chatzilla-emote-txt"> :P</span><span
+ title=" :P" type="face-tongue" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="lorenzo"
+ statustext="26.08.2006 16:24, lorenzo!i=rutnik@cpe-065-190-200-185.nc.res.rr.com"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="45" time-n="24" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a
+ href="irc://irc.freenode.net/lorenzo,isnick" class="chatzilla-link"><span>lorenzo</span></a></td>
+      <td class="msg-data"><span>Should cut down on mid-air collissions.</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:24, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="56" time-n="24" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>why not?</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:25, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="14" time-n="25" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, just 'cause that is still
+major code duplication and waste of effort</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:25, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="24" time-n="25" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>Zomb, may I give you a task?:)</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:25, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="37" time-n="25" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>so what do you suggest?</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:26, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="06" time-n="26" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, you contribute with several
+important patches for libburn, get commit access, and we work together</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:26, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="20" time-n="26" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>then we port ISOmaster to libisofs</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:26, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="40" time-n="26" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>are you seriously suggesting that i
+drop the code i worked on for a year completely for a project that
+started this summer?</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:27, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="33" time-n="27" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>ehm, why dropping? Don't you think
+that parts of it perhaps might be usable?</span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:27, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="33" time-n="27" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>andrew: It has start long ago<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:28, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="18" time-n="28" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>see icculus.org/burn (or something).</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:28, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="22" time-n="28" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, libisofs has undergone several
+rewrites already, and it's really good, at least API-wise(not so good
+features-wise)</span></td>
+    </tr>
+    <tr mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:28, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="27" time-n="28" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>elmom, ignore icculus please<span
+ type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="elmom"
+ statustext="26.08.2006 16:28, elmom!n=elmom@a84-230-91-132.elisa-laajakaista.fi"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="49" time-n="28" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/elmom,isnick"
+ class="chatzilla-link"><span>elmom</span></a></td>
+      <td class="msg-data"><span>It's history, yes.</span></td>
+    </tr>
+    <tr mark="even" msg-user="andrew ME!"
+ statustext="26.08.2006 16:29, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="00" time-n="29" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>what do you mean by 'good api-wise'?</span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:29, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="11" time-n="29" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, well, nice, small, clean,
+documented api<span type="face-smile" class="chatzilla-emote-txt"> :)</span><span
+ title=" :)" type="face-smile" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="even" msg-user="andrew ME!"
+ statustext="26.08.2006 16:29, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="20" time-n="29" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>where are the docs?</span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:29, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="31" time-n="29" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, <a target="_content"
+ class="chatzilla-link" href="http://libburn-api.pykix.org">http://libburn-api.<wbr>pykix.org<wbr></a></span></td>
+    </tr>
+    <tr mark="even" msg-user="lorenzo"
+ statustext="26.08.2006 16:31, lorenzo!i=rutnik@cpe-065-190-200-185.nc.res.rr.com"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="13" time-n="31" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a
+ href="irc://irc.freenode.net/lorenzo,isnick" class="chatzilla-link"><span>lorenzo</span></a></td>
+      <td class="msg-data"><span>pygi: I can't seem to get past the
+main page of the forum. Do I not have access at this time?</span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:31, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="29" time-n="31" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>lorenzo, right, sorry<span
+ type="face-sad" class="chatzilla-emote-txt"> :(</span><span title=" :("
+ type="face-sad" class="chatzilla-emote"></span></span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:31, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="31" time-n="31" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>just a sec</span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:34, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="35" time-n="34" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>lorenzo, works now?</span></td>
+    </tr>
+    <tr mark="even" msg-user="lorenzo"
+ statustext="26.08.2006 16:34, lorenzo!i=rutnik@cpe-065-190-200-185.nc.res.rr.com"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="ACTION" class="msg">
+      <td time-s="53" time-n="34" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a
+ href="irc://irc.freenode.net/lorenzo,isnick" class="chatzilla-link"><span>lorenzo</span></a></td>
+      <td class="msg-data"><span>looks at the forum</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:36, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="54" time-n="36" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>pygi,
+i've put too much effort into bkisofs to drop it. maybe we should chat
+again in a few months and see if either of us changed his mind?</span></td>
+    </tr>
+    <tr important="true" mark="even" msg-user="pygi"
+ statustext="26.08.2006 16:37, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="24" time-n="37" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, no change of hearts<span
+ type="face-smile" class="chatzilla-emote-txt"> :) </span><span
+ title=" :) " type="face-smile" class="chatzilla-emote"></span>and you
+wouldn't be dropping anything</span></td>
+    </tr>
+    <tr mark="odd" msg-user="andrew ME!"
+ statustext="26.08.2006 16:38, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="09" time-n="38" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>'you
+contribute with several important patches for libburn, get commit
+access, and we work together'. which part of this contains bkisofs?</span></td>
+    </tr>
+    <tr mark="even" msg-user="lorenzo"
+ statustext="26.08.2006 16:38, lorenzo!i=rutnik@cpe-065-190-200-185.nc.res.rr.com"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="16" time-n="38" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a
+ href="irc://irc.freenode.net/lorenzo,isnick" class="chatzilla-link"><span>lorenzo</span></a></td>
+      <td class="msg-data"><span>pygi: Still not working here. I can
+see the list, but can't start a thread or even open the forum itself.</span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:38, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="59" time-n="38" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, well, perhaps some of your
+work on bkisofs might be reused</span></td>
+    </tr>
+    <tr mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:39, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="35" time-n="39" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>lorenzo, what about now?</span></td>
+    </tr>
+    <tr mark="even" msg-user="andrew ME!"
+ statustext="26.08.2006 16:40, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="29" time-n="40" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>no. i think it's stange you are so
+sure about how you'll never change your mind, but whatever.</span></td>
+    </tr>
+    <tr mark="even" msg-user="andrew ME!"
+ statustext="26.08.2006 16:40, andrew!i=1000@dyn216-8-172-81.ADSL.mnsi.net"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="33" time-n="40" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><span>andrew</span></td>
+      <td class="msg-data"><span>have a nice day everyone</span></td>
+    </tr>
+    <tr important="true" mark="odd" msg-user="pygi"
+ statustext="26.08.2006 16:40, pygi!n=pygi@89-172-205-252.adsl.net.t-com.hr"
+ view-type="IRCChannel" dest-type="IRCChannel" msg-dest="#libburn"
+ msg-type="PRIVMSG" class="msg">
+      <td time-s="40" time-n="40" time-h="16" time-d="26" time-m="08"
+ time-y="2006" class="msg-timestamp"><br>
+      </td>
+      <td class="msg-user"><a href="irc://irc.freenode.net/pygi,isnick"
+ class="chatzilla-link"><span>pygi</span></a></td>
+      <td class="msg-data"><span>andrew, ah, bye</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</body>
+</html>
