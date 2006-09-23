@@ -10,6 +10,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 #include <stdbool.h>
+#include <errno.h>
 
 #include "browser.h"
 #include "fsbrowser.h"
@@ -204,7 +205,7 @@ void changeFsDirectory(char* newDirStr)
             continue;
         
         if(strlen(nextItem->d_name) > 256)
-            fatalError("changeFsDirectory(): cannot handle filename longer then 256 chars");
+            fatalError("changeFsDirectory(): cannot handle filename longer than 256 chars");
         
         nextItemPathAndName = (char*)malloc(strlen(newDirStr) + 257);
         strcpy(nextItemPathAndName, newDirStr);
@@ -212,7 +213,11 @@ void changeFsDirectory(char* newDirStr)
         
         rc = stat(nextItemPathAndName, &nextItemInfo);
         if(rc == -1)
+        {
+            extern int errno;
+            fprintf(stderr, "stat(%s) failed with %d\n", nextItemPathAndName, errno);
             fatalError("changeFsDirectory(): stat(newSrcPathAndName, &nextItemInfo) failed");
+        }
         
         if(nextItemInfo.st_mode & S_IFDIR)
         /* directory */
