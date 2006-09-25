@@ -326,8 +326,6 @@ void closeIso(void)
         GBLisoForReading = 0;
     }
     
-    //changeIsoDirectory("/");
-    
     bk_destroy_vol_info(&GBLvolInfo);
     
     if(GBLisoForReadingFullName != NULL)

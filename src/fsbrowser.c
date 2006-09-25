@@ -30,6 +30,8 @@ extern char* GBLfsCurrentDir;
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
 
+extern int errno;
+
 void buildFsBrowser(GtkWidget* boxToPackInto)
 {
     GtkWidget* scrolledWindow;
@@ -183,6 +185,11 @@ void changeFsDirectory(char* newDirStr)
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
+        
+        /* try to change to root instead, unless this is what we tried in the first place */
+        if(strcmp(newDirStr, "/") != 0)
+            changeFsDirectory("/");
+        
         return;
     }
     
@@ -201,23 +208,47 @@ void changeFsDirectory(char* newDirStr)
         if(strcmp(nextItem->d_name, ".") == 0 || strcmp(nextItem->d_name, "..") == 0)
             continue;
         
-        if(!GBLappSettings.showHiddenFilesFs && nextItem->d_name[0] == '.')
+        if(nextItem->d_name[0] == '.' && !GBLappSettings.showHiddenFilesFs)
         /* skip hidden files/dirs */
             continue;
         
         if(strlen(nextItem->d_name) > 256)
-            fatalError("changeFsDirectory(): cannot handle filename longer than 256 chars");
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "changeFsDirectory(): skiping directory entry because "
+                                                   "cannot handle filename longer than 256 chars");
+            gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+            continue;
+        }
         
         nextItemPathAndName = (char*)malloc(strlen(newDirStr) + 257);
+        if(nextItemPathAndName == NULL)
+            fatalError("changeFsDirectory(): malloc(strlen(newDirStr) + 257) failed");
+        
         strcpy(nextItemPathAndName, newDirStr);
         strcat(nextItemPathAndName, nextItem->d_name);
         
         rc = stat(nextItemPathAndName, &nextItemInfo);
         if(rc == -1)
         {
-            extern int errno;
-            fprintf(stderr, "stat(%s) failed with %d\n", nextItemPathAndName, errno);
-            fatalError("changeFsDirectory(): stat(newSrcPathAndName, &nextItemInfo) failed");
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   "changeFsDirectory(): skiping directory entry because "
+                                                   "stat(%s) failed with %d",
+                                                   nextItemPathAndName,
+                                                   errno);
+            gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+            free(nextItemPathAndName);
+            continue;
         }
         
         if(nextItemInfo.st_mode & S_IFDIR)
@@ -242,12 +273,7 @@ void changeFsDirectory(char* newDirStr)
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
                                -1);
         }
-        else
-        /* fancy file, ignore it */
-        {
-            free(nextItemPathAndName);
-            continue;
-        }
+        /* else fancy file, ignore it */
         
         free(nextItemPathAndName);
     
@@ -356,8 +382,7 @@ void refreshFsView(void)
     
     fsCurrentDir = malloc(strlen(GBLfsCurrentDir) + 1);
     if(fsCurrentDir == NULL)
-        fatalError("addToIsoCbk(): malloc("
-                   "strlen(GBLfsCurrentDir) + 1) failed");
+        fatalError("refreshFsView(): malloc(strlen(GBLfsCurrentDir) + 1) failed");
     strcpy(fsCurrentDir, GBLfsCurrentDir);
     
     changeFsDirectory(fsCurrentDir);
@@ -374,7 +399,7 @@ void showHiddenCbk(GtkButton *button, gpointer data)
     /* REFRESH fs view */
     currentDirCopy = (char*)malloc(strlen(GBLfsCurrentDir) + 1);
     if(currentDirCopy == NULL)
-        fatalError("fsRowDblClicked(): malloc(strlen(GBLfsCurrentDir) + 1) failed");
+        fatalError("showHiddenCbk(): malloc(strlen(GBLfsCurrentDir) + 1) failed");
     
     strcpy(currentDirCopy, GBLfsCurrentDir);
     
