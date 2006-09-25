@@ -51,7 +51,6 @@ void findHomeDir(void)
     openDirTest = opendir(userHomeDir);
     if(openDirTest == NULL)
     {
-        //!!print warning
         printf("failed to open directory described by $HOME: '%s'\n", 
                                                             userHomeDir);
         GBLuserHomeDir = (char*)malloc(2);
