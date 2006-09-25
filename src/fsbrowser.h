@@ -1,6 +1,8 @@
+#include <stdbool.h>
+
 void buildFsBrowser(GtkWidget* boxToPackInto);
 void buildFsLocator(GtkWidget* boxToPackInto);
-void changeFsDirectory(char* newDirStr);
+bool changeFsDirectory(char* newDirStr);
 void fsGoUpDirTree(GtkButton *button, gpointer data);
 void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
                       GtkTreeViewColumn* col, gpointer data);

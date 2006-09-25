@@ -175,8 +175,7 @@ void loadSettings(void)
     /* read/set fs browser directory */
     if(GBLsettingsDictionary != NULL)
     {
-        //!! pointer sharing is ok but need to make sure ui:fscurrentdir is a 
-        // valid directory and '/' terminated
+        /* pointer sharing is ok since GBLappSettings.fsCurrentDir is only written from here */
         GBLappSettings.fsCurrentDir = iniparser_getstring(GBLsettingsDictionary, 
                                                           "ui:fscurrentdir", NULL);
     }

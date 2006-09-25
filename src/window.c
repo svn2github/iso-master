@@ -34,7 +34,7 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
     
-    /* to allow for better consistency between fs and iso don't show these*/
+    /* to allow for better consistency between fs and iso don't show these 
     icon = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Open", "Open ISO Image", "Private",
@@ -45,7 +45,7 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Save", "Save ISO Image", "Private",
                                      icon, G_CALLBACK(saveIsoCbk),
-                                     NULL);
+                                     NULL);*/
     
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_MENU);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),

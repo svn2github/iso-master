@@ -134,20 +134,11 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     
     if(GBLappSettings.fsCurrentDir != NULL)
     {
-        bool oldCurrentDirExists;
-        DIR* openTest;
+        bool rc;
         
-        /* make sure this directory still exists and is accessible */
-        openTest = opendir(GBLappSettings.fsCurrentDir);
-        if(openTest != NULL)
-            oldCurrentDirExists = true;
-        else
-            oldCurrentDirExists = false;
-        closedir(openTest);
-        
-        if(oldCurrentDirExists)
-            changeFsDirectory(GBLappSettings.fsCurrentDir);
-        else
+        rc = changeFsDirectory(GBLappSettings.fsCurrentDir);
+        if(rc == false)
+            /* GBLuserHomeDir has just been set and tested a second ago in findHomeDir() */
             changeFsDirectory(GBLuserHomeDir);
     }
     else
@@ -162,7 +153,7 @@ void buildFsLocator(GtkWidget* boxToPackInto)
     gtk_widget_show(GBLfsCurrentDirField);
 }
 
-void changeFsDirectory(char* newDirStr)
+bool changeFsDirectory(char* newDirStr)
 {
     DIR* newDir;
     struct dirent* nextItem; /* for contents of the directory */
@@ -187,11 +178,7 @@ void changeFsDirectory(char* newDirStr)
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
         
-        /* try to change to root instead, unless this is what we tried in the first place */
-        if(strcmp(newDirStr, "/") != 0)
-            changeFsDirectory("/");
-        
-        return;
+        return false;
     }
     
     /* for improved performance disconnect the model from tree view before udating it */
@@ -296,6 +283,8 @@ void changeFsDirectory(char* newDirStr)
     
     /* update the field with the path and name */
     gtk_entry_set_text(GTK_ENTRY(GBLfsCurrentDirField), GBLfsCurrentDir);
+    
+    return true;
 }
 
 void fsGoUpDirTree(GtkButton *button, gpointer data)
@@ -393,19 +382,8 @@ void refreshFsView(void)
 
 void showHiddenCbk(GtkButton *button, gpointer data)
 {
-    char* currentDirCopy;
-    
     GBLappSettings.showHiddenFilesFs = !GBLappSettings.showHiddenFilesFs;
     
-    /* REFRESH fs view */
-    currentDirCopy = (char*)malloc(strlen(GBLfsCurrentDir) + 1);
-    if(currentDirCopy == NULL)
-        fatalError("showHiddenCbk(): malloc(strlen(GBLfsCurrentDir) + 1) failed");
-    
-    strcpy(currentDirCopy, GBLfsCurrentDir);
-    
-    changeFsDirectory(currentDirCopy);
-    
-    free(currentDirCopy);
-    /* END REFRESH fs view */
+    /* refresh fs view */
+    refreshFsView();
 }
