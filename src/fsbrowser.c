@@ -180,6 +180,7 @@ void changeFsDirectory(char* newDirStr)
                                                GTK_BUTTONS_CLOSE,
                                                "Failed to open directory '%s'",
                                                newDirStr);
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
         return;
@@ -323,6 +324,7 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
                                                GTK_BUTTONS_CLOSE,
                                                "GUI Error: 'fsRowDblClicked(): "
                                                "gtk_tree_model_get_iter() failed'");
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
         return;

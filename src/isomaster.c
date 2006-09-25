@@ -39,15 +39,18 @@ int main(int argc, char** argv)
     
     loadSettings();
     
-    appIcon = gdk_pixbuf_new_from_file("/usr/local/share/isomaster/icons/isomaster.svg", NULL);
+    /* ICONPATH is defined in the makefile */
+    appIcon = gdk_pixbuf_new_from_file(ICONPATH"/isomaster.svg", NULL);
     
-    newDirPixbuf = gdk_pixbuf_new_from_file("/usr/local/share/isomaster/icons/folder-new.png", NULL);
+    newDirPixbuf = gdk_pixbuf_new_from_file(ICONPATH"/folder-new.png", NULL);
     if(newDirPixbuf == NULL)
+    /* could not load icon but need one so replace it with 'unknown' from stock  */
     {
         GBLnewDirIcon = gtk_image_new_from_stock(GTK_STOCK_MISSING_IMAGE, GTK_ICON_SIZE_MENU);
         GBLnewDirIcon2 = gtk_image_new_from_stock(GTK_STOCK_MISSING_IMAGE, GTK_ICON_SIZE_MENU);
     }
     else
+    /* resize the icon loaded */
     {
         int menuSize;
         gtk_icon_size_lookup(GTK_ICON_SIZE_MENU, &menuSize, &menuSize);
