@@ -1,5 +1,12 @@
-BINPATH = /usr/local/bin
-ICONPATH = /usr/local/share/isomaster/icons
+ifndef PREFIX
+	PREFIX = /usr/local
+endif
+ifndef BINPATH
+	BINPATH = ${PREFIX}/bin
+endif
+ifndef ICONPATH
+	ICONPATH = ${PREFIX}/share/isomaster/icons
+endif
 
 GTKLIBS = `pkg-config --libs gtk+-2.0`
 GTKFLAGS = `pkg-config --cflags gtk+-2.0`
@@ -50,14 +57,16 @@ clean:
 	cd bk && $(MAKE) clean
 	cd iniparser-2.15 && $(MAKE) clean
 
+# for info about DESTDIR see http://www.gnu.org/prep/standards/html_node/DESTDIR.html
+
 install: isomaster
-	install -d $(BINPATH)
-	install isomaster $(BINPATH)
-	install -d $(ICONPATH)
-	install -m 644 icons/isomaster.svg $(ICONPATH)
-	install -m 644 icons/folder-new.png $(ICONPATH)
+	install -d $(DESTDIR)$(BINPATH)
+	install isomaster $(DESTDIR)$(BINPATH)
+	install -d $(DESTDIR)$(ICONPATH)
+	install -m 644 icons/isomaster.svg $(DESTDIR)$(ICONPATH)
+	install -m 644 icons/folder-new.png $(DESTDIR)$(ICONPATH)
 
 uninstall: 
-	rm -f $(BINPATH)/isomaster
-	rm -f $(ICONPATH)/isomaster.svg
-	rm -f $(ICONPATH)/folder-new.png
+	rm -f $(DESTDIR)$(BINPATH)/isomaster
+	rm -f $(DESTDIR)$(ICONPATH)/isomaster.svg
+	rm -f $(DESTDIR)$(ICONPATH)/folder-new.png
