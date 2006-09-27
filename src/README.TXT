@@ -3,6 +3,10 @@ ISO Master
 http://littlesvr.ca/isomaster/
 An open-source, graphical CD image editor that runs on Linux; and bkisofs, the underlying library used for reading, modifying and writing ISO images.
 
+Prerequisites for Compiling from Source
+---------------------------------------
+You need a C compiler, make and whatever packages required for compiling GTK2 applications. On ubuntu I had to install (using Synaptic): build-essential, libgtk2.0-dev and pkg-config. On Slackware I didn't have to install anything.
+
 Compiling
 ---------
 At this early time bkisofs comes in the same package as ISO Master so it doesn't need to be downloaded/built separately.
@@ -22,7 +26,7 @@ make install
 Or on something like Ubuntu that won't let you su:
 
 sudo make install
-[enter root password]
+[enter user's password]
 
 If you get errors, or even warnings, please do send me the output.
 

@@ -1,3 +1,9 @@
+27 Sep 2006 - 0.4
+=================
+- Fixed a bug that caused a segmentation fault when starting to save the image.
+- Minor improvement to the makefile to facilitate customising.
+- Changed the 'failed to stat' error to a warning, for some reason people were getting it a lot.
+
 19 Sep 2006 - 0.3
 =================
 - Can now read and write no-emulation and floppy-emulation boot records.
