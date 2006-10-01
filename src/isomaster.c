@@ -4,6 +4,15 @@
 * Foundation; version 2 of the licence.
 ****************************** END LICENCE ***********************************/
 
+/******************************************************************************
+* Author:
+* Andrew Smith, http://littlesvr.ca/misc/contactandrew.php
+*
+* Contributors:
+* David Johnson
+* - open an iso file based on command-line parameter
+******************************************************************************/
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
