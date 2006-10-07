@@ -1,0 +1,3 @@
+The package now adds an entry for isomaster to the desktop menu and reports 
+the correct package size when being installed/uninstalled.
+

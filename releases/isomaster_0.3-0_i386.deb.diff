@@ -1,0 +1,14 @@
+--- isomaster.c~	2006-09-20 10:06:59.715183184 +0100
++++ isomaster.c	2006-09-20 10:06:59.715183184 +0100
+@@ -39,9 +39,9 @@ int main(int argc, char** argv)
+     
+     loadSettings();
+     
+-    appIcon = gdk_pixbuf_new_from_file("/usr/local/share/isomaster/icons/isomaster.svg", NULL);
++    appIcon = gdk_pixbuf_new_from_file("/usr/share/icons/isomaster/isomaster.svg", NULL);
+     
+-    newDirPixbuf = gdk_pixbuf_new_from_file("/usr/local/share/isomaster/icons/folder-new.png", NULL);
++    newDirPixbuf = gdk_pixbuf_new_from_file("/usr/share/icons/isomaster/folder-new.png", NULL);
+     if(newDirPixbuf == NULL)
+     {
+         GBLnewDirIcon = gtk_image_new_from_stock(GTK_STOCK_MISSING_IMAGE, GTK_ICON_SIZE_MENU);
