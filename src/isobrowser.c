@@ -45,8 +45,8 @@ bool GBLisoPaneActive;
 int GBLisoForReading = 0;
 /* the size of the iso if it were written right now */
 static unsigned long long GBLisoSize = 0;
-/* full path and name to the iso opened for reading */
-static char* GBLisoForReadingFullName = NULL;
+/* inode number of the iso opened for reading (filename is not reliable) */
+static ino_t GBLisoForReadingInode;
 /* the progress bar from the writing dialog box */
 static GtkWidget* GBLWritingProgressBar;
 /* the progress bar from the extracting dialog box */
@@ -336,9 +336,7 @@ void closeIso(void)
     
     bk_destroy_vol_info(&GBLvolInfo);
     
-    if(GBLisoForReadingFullName != NULL)
-        free(GBLisoForReadingFullName);
-    GBLisoForReadingFullName = NULL;
+    GBLisoForReadingInode = 0;
     
     GBLisoSize = 0;
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), "");
@@ -721,9 +719,7 @@ void newIsoCbk(GtkMenuItem* menuItem, gpointer data)
     formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
     
-    if(GBLisoForReadingFullName != NULL)
-        free(GBLisoForReadingFullName);
-    GBLisoForReadingFullName = NULL;
+    GBLisoForReadingInode = 0;
     
     gtk_widget_set_sensitive(GBLisoCurrentDirField, TRUE);
     gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
@@ -737,6 +733,7 @@ void openIso(char* filename)
 {
     int rc;
     GtkWidget* warningDialog;
+    struct stat statStruct;
     
     closeIso();
     
@@ -807,13 +804,23 @@ void openIso(char* filename)
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
     
     /* record path and name */
-    GBLisoForReadingFullName = (char*)malloc(strlen(filename) + 1);
-    if(GBLisoForReadingFullName == NULL)
+    rc = stat(filename, &statStruct);
+    if(rc == -1)
     {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "stat(%s) failed with %d. Please report a bug.",
+                                               filename,
+                                               rc);
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
         closeIso();
         return;
     }
-    strcpy(GBLisoForReadingFullName, filename);
+    GBLisoForReadingInode = statStruct.st_ino;
     
     gtk_widget_set_sensitive(GBLisoCurrentDirField, TRUE);
     gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
@@ -997,8 +1004,12 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
     {
-        if( GBLisoForReadingFullName != NULL && 
-            strcmp(filename, GBLisoForReadingFullName) == 0 )
+        struct stat statStruct;
+        int rc;
+        
+        rc = stat(filename, &statStruct);
+        if(rc == 0 && statStruct.st_ino == GBLisoForReadingInode)
+        /* stat succeeded and the inode is the same as the image open for reading */
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
