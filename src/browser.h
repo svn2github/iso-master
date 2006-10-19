@@ -14,7 +14,10 @@ enum
 };
 
 void createDirCbk(GtkButton *button, gpointer onFs);
-void formatSize(unsigned sizeInt, char* sizeStr, int sizeSize);
-void sizeCellDataFunc(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
-                      GtkTreeModel *model, GtkTreeIter *iter,
-                      gpointer data);
+void formatSize(unsigned long long sizeInt, char* sizeStr, int sizeStrLen);
+void sizeCellDataFunc32(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
+                        GtkTreeModel *model, GtkTreeIter *iter,
+                        gpointer data);
+void sizeCellDataFunc64(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
+                        GtkTreeModel *model, GtkTreeIter *iter,
+                        gpointer data);

@@ -52,7 +52,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     int numIconSizes;
     GtkIconSize iconSize;
     
-    GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT, G_TYPE_UINT);
+    GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT64, G_TYPE_UINT);
     
     scrolledWindow = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
@@ -70,12 +70,12 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_widget_show(GBLfsTreeView);
     
     /* this won't be enabled until gtk allows me to drag a multiple selection */
-    GtkTargetEntry targetEntry;
-    targetEntry.target = "text/plain";
-    targetEntry.flags = 0;
-    targetEntry.info = 0;
-    gtk_tree_view_enable_model_drag_source(GTK_TREE_VIEW(GBLfsTreeView), GDK_BUTTON1_MASK, 
-                                           &targetEntry, 1, GDK_ACTION_COPY);
+    //~ GtkTargetEntry targetEntry;
+    //~ targetEntry.target = "text/plain";
+    //~ targetEntry.flags = 0;
+    //~ targetEntry.info = 0;
+    //~ gtk_tree_view_enable_model_drag_source(GTK_TREE_VIEW(GBLfsTreeView), GDK_BUTTON1_MASK, 
+                                           //~ &targetEntry, 1, GDK_ACTION_COPY);
     
     /* enable multi-line selection */
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
@@ -104,7 +104,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_title(column, "Size");
     gtk_tree_view_column_pack_start(column, renderer, FALSE);
     gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_SIZE);
-    gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc, NULL, NULL);
+    gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc64, NULL, NULL);
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), column);
         
@@ -146,7 +146,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
         
         rc = changeFsDirectory(GBLappSettings.fsCurrentDir);
         if(rc == false)
-            /* GBLuserHomeDir has just been set and tested a second ago in findHomeDir() */
+            /* GBLuserHomeDir has just been set and tested a moment ago in findHomeDir() */
             changeFsDirectory(GBLuserHomeDir);
     }
     else
@@ -208,6 +208,7 @@ bool changeFsDirectory(char* newDirStr)
         /* skip hidden files/dirs */
             continue;
         
+        /* mind 256 is assumed in the malloc below */
         if(strlen(nextItem->d_name) > 256)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -254,7 +255,7 @@ bool changeFsDirectory(char* newDirStr)
             gtk_list_store_set(GBLfsListStore, &listIterator, 
                                COLUMN_ICON, GBLdirPixbuf,
                                COLUMN_FILENAME, nextItem->d_name, 
-                               COLUMN_SIZE, 0,
+                               COLUMN_SIZE, 0LL,
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
                                -1);
         }

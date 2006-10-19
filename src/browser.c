@@ -143,7 +143,7 @@ void createDirCbk(GtkButton *button, gpointer onFs)
     gtk_widget_destroy(dialog);
 }
 
-void formatSize(unsigned sizeInt, char* sizeStr, int sizeStrLen)
+void formatSize(unsigned long long  sizeInt, char* sizeStr, int sizeStrLen)
 {
     if(sizeInt > 1073741824)
     /* print gibibytes */
@@ -156,17 +156,43 @@ void formatSize(unsigned sizeInt, char* sizeStr, int sizeStrLen)
         snprintf(sizeStr, sizeStrLen, "%.1lf KB", (double)sizeInt / 1024);
     else
     /* print bytes */
-        snprintf(sizeStr, sizeStrLen, "%d B", sizeInt);
+        snprintf(sizeStr, sizeStrLen, "%lld B", sizeInt);
     
     sizeStr[sizeStrLen - 1] = '\0';
 }
 
 /* formats the file size text for displaying */
-void sizeCellDataFunc(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
-                      GtkTreeModel *model, GtkTreeIter *iter,
-                      gpointer data)
+void sizeCellDataFunc32(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
+                        GtkTreeModel *model, GtkTreeIter *iter,
+                        gpointer data)
 {
     unsigned sizeInt;
+    unsigned long long sizeLlInt;
+    int fileType;
+    char sizeStr[20];
+    
+    gtk_tree_model_get(model, iter, COLUMN_SIZE, &sizeInt, 
+                                    COLUMN_HIDDEN_TYPE, &fileType, -1);
+    
+    sizeLlInt = sizeInt;
+    
+    if(fileType == FILE_TYPE_DIRECTORY)
+    {
+        snprintf(sizeStr, sizeof(sizeStr), "dir");
+        sizeStr[sizeof(sizeStr) - 1] = '\0';
+    }
+    else
+        formatSize(sizeLlInt, sizeStr, sizeof(sizeStr));
+    
+    g_object_set(renderer, "text", sizeStr, NULL);
+}
+
+/* formats the file size text for displaying */
+void sizeCellDataFunc64(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
+                        GtkTreeModel *model, GtkTreeIter *iter,
+                        gpointer data)
+{
+    unsigned long long sizeInt;
     int fileType;
     char sizeStr[20];
     

@@ -10,7 +10,7 @@ endif
 
 GTKLIBS = `pkg-config --libs gtk+-2.0`
 GTKFLAGS = `pkg-config --cflags gtk+-2.0`
-GLOBALFLAGS = -Wall -g
+GLOBALFLAGS = -D_FILE_OFFSET_BITS=64 -Wall -g
 GLOBALDEPS = bk/bk.h
 
 isomaster: lib iniparser isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o $(GLOBALDEPS)
@@ -20,31 +20,31 @@ lib:
 	cd bk && $(MAKE)
 
 isomaster.o: isomaster.c $(GLOBALDEPS) 
-	cc isomaster.c -DICONPATH=\"$(ICONPATH)\" $(GTKFLAGS) $(GLOBALFLAGS) -c
+	cc isomaster.c -DICONPATH=\"$(ICONPATH)\" $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 window.o: window.c window.h $(GLOBALDEPS)
-	cc window.c $(GTKFLAGS) $(GLOBALFLAGS) -c
+	cc window.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 browser.o: browser.c $(GLOBALDEPS)
-	cc browser.c $(GTKFLAGS) $(GLOBALFLAGS) -c
+	cc browser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 fsbrowser.o: fsbrowser.c fsbrowser.h $(GLOBALDEPS)
-	cc fsbrowser.c $(GTKFLAGS) $(GLOBALFLAGS) -c
+	cc fsbrowser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 isobrowser.o: isobrowser.c isobrowser.h $(GLOBALDEPS)
-	cc isobrowser.c $(GTKFLAGS) $(GLOBALFLAGS) -c
+	cc isobrowser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 error.o: error.c error.h $(GLOBALDEPS)
-	cc error.c $(GTKFLAGS) $(GLOBALFLAGS) -c
+	cc error.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 about.o: about.c about.h $(GLOBALDEPS)
-	cc about.c $(GTKFLAGS) $(GLOBALFLAGS) -c
+	cc about.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 settings.o: settings.c settings.h $(GLOBALDEPS)
-	cc settings.c $(GTKFLAGS) $(GLOBALFLAGS) -c
+	cc settings.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 boot.o: boot.c boot.h $(GLOBALDEPS)
-	cc boot.c $(GTKFLAGS) $(GLOBALFLAGS) -c
+	cc boot.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 iniparser:
 	cd iniparser-2.15 && $(MAKE)

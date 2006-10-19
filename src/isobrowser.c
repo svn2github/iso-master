@@ -44,7 +44,7 @@ bool GBLisoPaneActive;
 /* iso file open()ed for reading */
 int GBLisoForReading = 0;
 /* the size of the iso if it were written right now */
-static unsigned GBLisoSize = 0;
+static unsigned long long GBLisoSize = 0;
 /* full path and name to the iso opened for reading */
 static char* GBLisoForReadingFullName = NULL;
 /* the progress bar from the writing dialog box */
@@ -175,7 +175,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     
     GBLisoListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, 
                                          G_TYPE_STRING, 
-                                         G_TYPE_UINT, 
+                                         G_TYPE_UINT, /* 64-bit sizes not allowed on an iso */
                                          G_TYPE_UINT);
     
     scrolledWindow = gtk_scrolled_window_new(NULL, NULL);
@@ -229,7 +229,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_title(column, "Size");
     gtk_tree_view_column_pack_start(column, renderer, FALSE);
     gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_SIZE);
-    gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc, NULL, NULL);
+    gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc32, NULL, NULL);
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), column);
     
@@ -612,6 +612,7 @@ void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
     int count;
     bool done;
     char* newCurrentDir;
+    GtkWidget* warningDialog;
     
     /* do nothing if no image open */
     if(!GBLisoPaneActive)
@@ -630,7 +631,7 @@ void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
     
     /* look for the second last slash */
     done = false;
-    for(count = strlen(newCurrentDir) - 1; !done; count--)
+    for(count = strlen(newCurrentDir) - 1; !done && count >= 0; count--)
     {
         if(newCurrentDir[count - 1] == '/')
         /* truncate the string */
@@ -639,6 +640,19 @@ void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
             changeIsoDirectory(newCurrentDir);
             done = true;
         }
+    }
+    
+    if(!done)
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "GUI error, GBLisoCurrentDir is not '/' and has "
+                                               "only one slash, please report bug.");
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
     }
     
     free(newCurrentDir);
@@ -689,6 +703,7 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
         free(newCurrentDir);
         g_free(name);
     }
+    /* else do nothing (not a directory) */
 }
 
 void newIsoCbk(GtkMenuItem* menuItem, gpointer data)
@@ -706,13 +721,9 @@ void newIsoCbk(GtkMenuItem* menuItem, gpointer data)
     formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
     
-    GBLisoForReadingFullName = (char*)malloc(1);
-    if(GBLisoForReadingFullName == NULL)
-    {
-        fatalError("failed to allocate 1 byte for GBLisoForReadingFullName (out of memory?)");
-        return;
-    }
-    GBLisoForReadingFullName[0] = '\0';
+    if(GBLisoForReadingFullName != NULL)
+        free(GBLisoForReadingFullName);
+    GBLisoForReadingFullName = NULL;
     
     gtk_widget_set_sensitive(GBLisoCurrentDirField, TRUE);
     gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
@@ -986,7 +997,8 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
     {
-        if(strcmp(filename, GBLisoForReadingFullName) == 0)
+        if( GBLisoForReadingFullName != NULL && 
+            strcmp(filename, GBLisoForReadingFullName) == 0 )
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
