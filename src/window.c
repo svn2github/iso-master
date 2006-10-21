@@ -71,6 +71,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     GtkWidget* menuBar;
     GtkWidget* menu;
     GtkWidget* menuItem;
+    GtkWidget* separator;
     //~ GtkWidget* icon;
     GtkWidget* rootMenu;
     
@@ -105,6 +106,16 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(saveIsoCbk), NULL);
+    
+    menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PROPERTIES, NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show(menuItem);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(buildImagePropertiesWindow), NULL);
+    
+    separator = gtk_separator_menu_item_new();
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), separator);
+    gtk_widget_show(separator);
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_QUIT, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);

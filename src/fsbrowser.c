@@ -156,8 +156,9 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
 void buildFsLocator(GtkWidget* boxToPackInto)
 {
     GBLfsCurrentDirField = gtk_entry_new();
-    gtk_box_pack_start(GTK_BOX(boxToPackInto), GBLfsCurrentDirField, FALSE, FALSE, 0);
     gtk_entry_set_editable(GTK_ENTRY(GBLfsCurrentDirField), FALSE);
+    //gtk_widget_set_sensitive(GBLfsCurrentDirField, FALSE);
+    gtk_box_pack_start(GTK_BOX(boxToPackInto), GBLfsCurrentDirField, FALSE, FALSE, 0);
     gtk_widget_show(GBLfsCurrentDirField);
 }
 

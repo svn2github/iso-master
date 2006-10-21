@@ -240,8 +240,9 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
 void buildIsoLocator(GtkWidget* boxToPackInto)
 {
     GBLisoCurrentDirField = gtk_entry_new();
-    gtk_box_pack_start(GTK_BOX(boxToPackInto), GBLisoCurrentDirField, FALSE, FALSE, 0);
     gtk_entry_set_editable(GTK_ENTRY(GBLisoCurrentDirField), FALSE);
+    //gtk_widget_set_sensitive(GBLisoCurrentDirField, FALSE);
+    gtk_box_pack_start(GTK_BOX(boxToPackInto), GBLisoCurrentDirField, FALSE, FALSE, 0);
     gtk_widget_show(GBLisoCurrentDirField);
 }
 

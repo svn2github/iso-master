@@ -19,6 +19,7 @@ typedef struct
     
 } AppSettings;
 
+void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event);
 void findHomeDir(void);
 void openConfigFile(char* configFileName);
 void loadSettings(void);
