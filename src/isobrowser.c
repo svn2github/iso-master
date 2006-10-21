@@ -26,6 +26,7 @@
 #include "fsbrowser.h"
 #include "isobrowser.h"
 #include "error.h"
+#include "window.h"
 
 extern GtkWidget* GBLmainWindow;
 extern GtkWidget* GBLisoTreeView;
