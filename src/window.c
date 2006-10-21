@@ -305,3 +305,8 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
     
     return FALSE; /* quit */
 }
+
+void closeWindowCbk(GtkWidget *widget, GdkEvent *event)
+{
+    gtk_dialog_response(GTK_DIALOG(widget), GTK_RESPONSE_REJECT);
+}

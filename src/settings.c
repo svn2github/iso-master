@@ -22,6 +22,7 @@
 #include "bk/bk.h"
 #include "settings.h"
 #include "error.h"
+#include "window.h"
 
 /* used by iniparser */
 dictionary* GBLsettingsDictionary;
@@ -62,8 +63,9 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
                                          GTK_STOCK_CANCEL,
                                          GTK_RESPONSE_REJECT,
                                          NULL);
-    //gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
     //g_signal_connect_swapped(dialog, "response", G_CALLBACK (gtk_widget_destroy), dialog);
+    g_signal_connect(dialog, "close",
+                     G_CALLBACK(closeWindowCbk), NULL);
     gtk_widget_show(dialog);
     
     table = gtk_table_new(1, 2, FALSE);

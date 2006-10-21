@@ -19,6 +19,7 @@
 #include "boot.h"
 #include "browser.h"
 #include "error.h"
+#include "window.h"
 
 extern GtkWidget* GBLmainWindow;
 extern VolInfo GBLvolInfo;
