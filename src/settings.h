@@ -10,12 +10,16 @@
 
 typedef struct
 {
-    /* stuff read from the config file */
+    /* stuff only read from the config file */
     int windowWidth;
     int windowHeight;
     int topPaneHeight;
     char* fsCurrentDir;
+    
+    /* stuff read from the config file that will be written back from here */
     bool showHiddenFilesFs;
+    bool sortDirectoriesFirst;
+    int filenameTypesToWrite;
     
 } AppSettings;
 

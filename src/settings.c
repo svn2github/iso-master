@@ -34,7 +34,6 @@ AppSettings GBLappSettings;
 extern GtkWidget* GBLmainWindow;
 extern GtkWidget* GBLbrowserPaned;
 extern char* GBLfsCurrentDir;
-extern GtkWidget* GBLshowHiddenMenuItem;
 extern bool GBLisoPaneActive;
 extern VolInfo GBLvolInfo;
 
@@ -46,6 +45,9 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     GtkWidget* field;
     GtkWidget* publisherField;
     GtkWidget* volNameField;
+    GtkWidget* hBox;
+    GtkWidget* rockridgeCheck;
+    GtkWidget* jolietCheck;
     static const int fieldLen = 30; /* to display not length of contents */
     time_t timeT;
     char* timeStr;
@@ -75,6 +77,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_widget_show(table);
     
     label = gtk_label_new("Creation time:");
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
     gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, 0, 1);
     gtk_widget_show(label);
     
@@ -90,6 +93,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_widget_show(field);
     
     label = gtk_label_new("Volume name:");
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
     gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, 1, 2);
     gtk_widget_show(label);
     
@@ -100,6 +104,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_widget_show(volNameField);
     
     label = gtk_label_new("Publisher:");
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
     gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, 2, 3);
     gtk_widget_show(label);
     
@@ -108,6 +113,27 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_entry_set_width_chars(GTK_ENTRY(publisherField), fieldLen);
     gtk_table_attach_defaults(GTK_TABLE(table), publisherField, 1, 2, 2, 3);
     gtk_widget_show(publisherField);
+    
+    hBox = gtk_hbox_new(FALSE, 5);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hBox, TRUE, TRUE, 5);
+    gtk_widget_show(hBox);
+    
+    label = gtk_label_new("Filename types (both recommended):");
+    gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
+    gtk_box_pack_start(GTK_BOX(hBox), label, TRUE, TRUE, 0);
+    gtk_widget_show(label);
+    
+    rockridgeCheck = gtk_check_button_new_with_label("RockRidge");
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(rockridgeCheck), 
+                                 GBLappSettings.filenameTypesToWrite & FNTYPE_ROCKRIDGE);
+    gtk_box_pack_start(GTK_BOX(hBox), rockridgeCheck, TRUE, TRUE, 0);
+    gtk_widget_show(rockridgeCheck);
+    
+    jolietCheck = gtk_check_button_new_with_label("Joliet");
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(jolietCheck), 
+                                 GBLappSettings.filenameTypesToWrite & FNTYPE_JOLIET);
+    gtk_box_pack_start(GTK_BOX(hBox), jolietCheck, TRUE, TRUE, 0);
+    gtk_widget_show(jolietCheck);
     
     rc = gtk_dialog_run(GTK_DIALOG(dialog));
     if(rc == GTK_RESPONSE_ACCEPT)
@@ -120,6 +146,16 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
         
         volName = gtk_entry_get_text(GTK_ENTRY(volNameField));
         bk_set_vol_name(&GBLvolInfo, volName);
+        
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(rockridgeCheck)))
+            GBLappSettings.filenameTypesToWrite |= FNTYPE_ROCKRIDGE;
+        else
+            GBLappSettings.filenameTypesToWrite &= ~FNTYPE_ROCKRIDGE;
+        
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(jolietCheck)))
+            GBLappSettings.filenameTypesToWrite |= FNTYPE_JOLIET;
+        else
+            GBLappSettings.filenameTypesToWrite &= ~FNTYPE_JOLIET;
     }
     
     gtk_widget_destroy(dialog);
@@ -214,6 +250,7 @@ void loadSettings(void)
     int width;
     int height;
     int showHidden;
+    int sortDirsFirst;
     
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
     if(configFileName == NULL)
@@ -296,6 +333,20 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.showHiddenFilesFs = false;
     
+    /* read/set sort directories first */
+    if(GBLsettingsDictionary != NULL)
+    {
+        sortDirsFirst = iniparser_getboolean(GBLsettingsDictionary, 
+                                             "ui:sortdirsfirst", INT_MAX);
+        if(sortDirsFirst == INT_MAX)
+            GBLappSettings.sortDirectoriesFirst = true;
+        else
+            GBLappSettings.sortDirectoriesFirst = sortDirsFirst;
+    }
+    else
+    /* no config file */
+        GBLappSettings.showHiddenFilesFs = true;
+    
     free(configFileName);
 }
 
@@ -354,6 +405,9 @@ void writeSettings(void)
     
     snprintf(numberStr, 20, "%d", GBLappSettings.showHiddenFilesFs);
     iniparser_setstr(GBLsettingsDictionary, "ui:showhiddenfilesfs", numberStr);
+    
+    snprintf(numberStr, 20, "%d", GBLappSettings.sortDirectoriesFirst);
+    iniparser_setstr(GBLsettingsDictionary, "ui:sortdirsfirst", numberStr);
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }

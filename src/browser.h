@@ -21,3 +21,5 @@ void sizeCellDataFunc32(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
 void sizeCellDataFunc64(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
                         GtkTreeModel *model, GtkTreeIter *iter,
                         gpointer data);
+gint sortByName(GtkTreeModel *model, GtkTreeIter *a, 
+                GtkTreeIter *b, gpointer userdata);

@@ -98,6 +98,9 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_expand(column, TRUE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), column);
     
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_FILENAME, 
+                                    sortByName, NULL, NULL);
+    
     /* size column */
     column = gtk_tree_view_column_new();
     renderer = gtk_cell_renderer_text_new();
@@ -107,7 +110,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc64, NULL, NULL);
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), column);
-        
+    
     /* set default sort */
     gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(GBLfsListStore),
                                          COLUMN_FILENAME, GTK_SORT_ASCENDING);

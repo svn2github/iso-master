@@ -21,6 +21,7 @@
 #include "isobrowser.h"
 #include "bk/bk.h"
 #include "error.h"
+#include "settings.h"
 
 /* this file has thigs shared by the fs and the iso browser */
 
@@ -49,6 +50,7 @@ char* GBLisoCurrentDir = NULL;
 extern GtkWidget* GBLmainWindow;
 extern VolInfo GBLvolInfo;
 extern bool GBLisoPaneActive;
+extern AppSettings GBLappSettings;
 
 void createDirCbk(GtkButton *button, gpointer onFs)
 {
@@ -208,4 +210,47 @@ void sizeCellDataFunc64(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
         formatSize(sizeInt, sizeStr, sizeof(sizeStr));
     
     g_object_set(renderer, "text", sizeStr, NULL);
+}
+
+gint sortByName(GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer userdata)
+{
+    char* aName;
+    char* bName;
+    
+    gtk_tree_model_get(model, a, COLUMN_FILENAME, &aName, -1);
+    gtk_tree_model_get(model, b, COLUMN_FILENAME, &bName, -1);
+    
+    if(GBLappSettings.sortDirectoriesFirst)
+    /* directories before files */
+    {
+        int aFileType;
+        int bFileType;
+        gint unused;
+        GtkSortType order;
+        
+        gtk_tree_model_get(model, a, COLUMN_HIDDEN_TYPE, &aFileType, -1);
+        gtk_tree_model_get(model, b, COLUMN_HIDDEN_TYPE, &bFileType, -1);
+        
+        /* have to make sure directories come first regardless of sort order, 
+        * that's why all the fancyness below */
+        gtk_tree_sortable_get_sort_column_id(GTK_TREE_SORTABLE(model), &unused, &order);
+        
+        if(aFileType == FILE_TYPE_DIRECTORY && bFileType != FILE_TYPE_DIRECTORY)
+        {
+            if(order == GTK_SORT_ASCENDING)
+                return -1;
+            else
+                return 1;
+        }
+        else if(aFileType != FILE_TYPE_DIRECTORY && bFileType == FILE_TYPE_DIRECTORY)
+        {
+            if(order == GTK_SORT_ASCENDING)
+                return 1;
+            else
+                return -1;
+        }
+    }
+    
+    /* if got this far, do a simple alphabetic sort */
+    return strcmp(aName, bName);
 }

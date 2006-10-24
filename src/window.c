@@ -27,10 +27,13 @@
 GtkWidget* GBLisoSizeLbl;
 /* check menu item for 'show hidden files' */
 GtkWidget* GBLshowHiddenMenuItem;
+/* check menu item for 'sort directories first' */
+GtkWidget* GBLsortDirsFirst;
 
 extern AppSettings GBLappSettings;
 extern GtkWidget* GBLnewDirIcon;
 extern GtkWidget* GBLnewDirIcon2;
+extern bool GBLisoPaneActive;
 
 void buildMainToolbar(GtkWidget* boxToPackInto)
 {
@@ -141,6 +144,16 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(GBLshowHiddenMenuItem);
     g_signal_connect(G_OBJECT(GBLshowHiddenMenuItem), "activate",
                      G_CALLBACK(showHiddenCbk), NULL);
+    
+    GBLsortDirsFirst = gtk_check_menu_item_new_with_mnemonic("_Sort directories first");
+    if(GBLappSettings.sortDirectoriesFirst)
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLsortDirsFirst), TRUE);
+    else
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLsortDirsFirst), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GBLsortDirsFirst);
+    gtk_widget_show(GBLsortDirsFirst);
+    g_signal_connect(G_OBJECT(GBLsortDirsFirst), "activate",
+                     G_CALLBACK(sortDirsFirstCbk), NULL);
     /* END VIEW menu */
     
     /* BOOT menu */
@@ -309,4 +322,13 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
 void closeWindowCbk(GtkWidget *widget, GdkEvent *event)
 {
     gtk_dialog_response(GTK_DIALOG(widget), GTK_RESPONSE_REJECT);
+}
+
+void sortDirsFirstCbk(GtkButton *button, gpointer data)
+{
+    GBLappSettings.sortDirectoriesFirst = !GBLappSettings.sortDirectoriesFirst;
+    
+    refreshFsView();
+    if(GBLisoPaneActive)
+        refreshIsoView();
 }

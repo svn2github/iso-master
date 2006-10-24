@@ -27,6 +27,7 @@
 #include "isobrowser.h"
 #include "error.h"
 #include "window.h"
+#include "settings.h"
 
 extern GtkWidget* GBLmainWindow;
 extern GtkWidget* GBLisoTreeView;
@@ -55,6 +56,7 @@ static GtkWidget* GBLextractingProgressBar;
 
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
+extern AppSettings GBLappSettings;
 
 void addToIsoCbk(GtkButton *button, gpointer data)
 {
@@ -224,6 +226,9 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_expand(column, TRUE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), column);
     
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLisoListStore), COLUMN_FILENAME, 
+                                    sortByName, NULL, NULL);
+    
     /* size column */
     column = gtk_tree_view_column_new();
     renderer = gtk_cell_renderer_text_new();
@@ -234,6 +239,10 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), column);
     
+    /* set default sort */
+    gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(GBLisoListStore),
+                                         COLUMN_FILENAME, GTK_SORT_ASCENDING);
+
     gtk_widget_set_sensitive(GBLisoCurrentDirField, FALSE);
     gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
 }
@@ -712,6 +721,8 @@ void newIsoCbk(GtkMenuItem* menuItem, gpointer data)
     
     bk_init_vol_info(&GBLvolInfo);
     
+    GBLappSettings.filenameTypesToWrite = FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET;
+    
     /* iso size label */
     char sizeStr[20];
     GBLisoSize = 35845;
@@ -740,6 +751,8 @@ void openIso(char* filename)
     closeIso();
     
     bk_init_vol_info(&GBLvolInfo);
+    
+    GBLappSettings.filenameTypesToWrite = FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET;
     
     /* open image file for reading */
     GBLisoForReading = open(filename, O_RDONLY);
@@ -834,38 +847,38 @@ void openIso(char* filename)
 
 void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
-    GtkWidget *dialog;
-    char* filename;
-    GtkFileFilter* nameFilter;
+    //~ GtkWidget *dialog;
+    //~ char* filename;
+    //~ GtkFileFilter* nameFilter;
     
-    dialog = gtk_file_chooser_dialog_new("Open File",
-                                         NULL,
-                                         GTK_FILE_CHOOSER_ACTION_OPEN,
-                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-                                         NULL);
+    //~ dialog = gtk_file_chooser_dialog_new("Open File",
+                                         //~ NULL,
+                                         //~ GTK_FILE_CHOOSER_ACTION_OPEN,
+                                         //~ GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                         //~ GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                         //~ NULL);
     
-    nameFilter = gtk_file_filter_new();
-    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
-    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "ISO Images");
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    //~ nameFilter = gtk_file_filter_new();
+    //~ gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
+    //~ gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "ISO Images");
+    //~ gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    nameFilter = gtk_file_filter_new();
-    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
-    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    //~ nameFilter = gtk_file_filter_new();
+    //~ gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
+    //~ gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
+    //~ gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
-    {
-        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+    //~ if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
+    //~ {
+        //~ filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
         
-        openIso(filename);
+        //~ openIso(filename);
         
-        g_free(filename);
-    }
+        //~ g_free(filename);
+    //~ }
     
-    gtk_widget_destroy(dialog);
-    //~ openIso("image.iso");
+    //~ gtk_widget_destroy(dialog);
+    openIso("image.iso");
 }
 
 void refreshIsoView(void)
@@ -933,7 +946,7 @@ void saveIso(char* filename)
     }
     
     rc = bk_write_image(GBLisoForReading, newImage, &GBLvolInfo, time(NULL), 
-                        FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET, writingProgressUpdaterCbk);
+                        GBLappSettings.filenameTypesToWrite, writingProgressUpdaterCbk);
     if(rc < 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
