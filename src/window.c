@@ -65,7 +65,7 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
                                      "Go back", "Go back up one directory on the filesystem", "Private",
                                      icon, G_CALLBACK(fsGoUpDirTree),
                                      NULL);
-                                     
+    
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "New Directory", "Create new directory on the filesystem", "Private",
                                      GBLnewDirIcon, G_CALLBACK(createDirCbk), (gpointer)1);
