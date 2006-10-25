@@ -13,6 +13,7 @@
 ******************************************************************************/
 
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 
 #include "window.h"
 #include "browser.h"
@@ -30,6 +31,7 @@ GtkWidget* GBLshowHiddenMenuItem;
 /* check menu item for 'sort directories first' */
 GtkWidget* GBLsortDirsFirst;
 
+extern GtkWidget* GBLmainWindow;
 extern AppSettings GBLappSettings;
 extern GtkWidget* GBLnewDirIcon;
 extern GtkWidget* GBLnewDirIcon2;
@@ -77,6 +79,35 @@ void buildMenu(GtkWidget* boxToPackInto)
     GtkWidget* separator;
     //~ GtkWidget* icon;
     GtkWidget* rootMenu;
+    GtkAccelGroup* accelGroup;
+    guint accelKey;
+    GdkModifierType accelModifier;
+    GClosure *closure = NULL;
+    
+    /* KEYBOARD accelerators */
+    accelGroup = gtk_accel_group_new();
+    gtk_window_add_accel_group(GTK_WINDOW(GBLmainWindow), accelGroup);
+    
+    gtk_accelerator_parse("<Control>N", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(newIsoCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    gtk_accel_map_add_entry("<ISOMaster>/Image/New", accelKey, accelModifier);
+    
+    gtk_accelerator_parse("<Control>O", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(openIsoCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    gtk_accel_map_add_entry("<ISOMaster>/Image/Open", accelKey, accelModifier);
+    
+    gtk_accelerator_parse("<Control>S", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(saveIsoCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    gtk_accel_map_add_entry("<ISOMaster>/Image/Save", accelKey, accelModifier);
+    
+    gtk_accelerator_parse("<Control>Q", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(closeMainWindowCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    gtk_accel_map_add_entry("<ISOMaster>/Image/Quit", accelKey, accelModifier);
+    /* END KEYBOARD accelerators */
     
     menuBar = gtk_menu_bar_new();
     gtk_box_pack_start(GTK_BOX(boxToPackInto), menuBar, FALSE, FALSE, 0);
@@ -89,6 +120,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     
     menu = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
+    gtk_menu_set_accel_group(GTK_MENU(menu), accelGroup);
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_NEW, NULL);
     //~ icon = gtk_image_new_from_stock(GTK_STOCK_NEW, GTK_ICON_SIZE_NEW);
@@ -97,18 +129,21 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(newIsoCbk), NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Image/New");
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_OPEN, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(openIsoCbk), NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Image/Open");
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_SAVE_AS, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(saveIsoCbk), NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Image/Save");
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PROPERTIES, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
@@ -125,6 +160,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(closeMainWindowCbk), NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Image/Quit");
     /* END FILE menu */
     
     /* VIEW menu */
@@ -316,7 +352,8 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
     
     gtk_main_quit();
     
-    return FALSE; /* quit */
+    /* the accelerator callback must return true */
+    return TRUE;
 }
 
 void closeWindowCbk(GtkWidget *widget, GdkEvent *event)

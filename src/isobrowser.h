@@ -16,11 +16,11 @@ void extractingProgressWindowDestroyedCbk(void);
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data);
 void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
                        GtkTreeViewColumn* col, gpointer data);
-void newIsoCbk(GtkMenuItem* menuItem, gpointer data);
+gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data);
 void openIso(char* filename);
-void openIsoCbk(GtkMenuItem* menuItem, gpointer data);
+gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data);
 void refreshIsoView(void);
 void saveIso(char* filename);
-void saveIsoCbk(GtkWidget *widget, GdkEvent *event);
+gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event);
 void writingProgressUpdaterCbk(void);
 void writingProgressWindowDestroyedCbk(void);

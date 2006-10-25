@@ -703,7 +703,9 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
     /* else do nothing (not a directory) */
 }
 
-void newIsoCbk(GtkMenuItem* menuItem, gpointer data)
+/* This callback is also used by an accelerator so make sure you don't use 
+* the parameters, since they may not be the menuitem parameters */
+gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
     closeIso();
     
@@ -726,6 +728,9 @@ void newIsoCbk(GtkMenuItem* menuItem, gpointer data)
     GBLisoPaneActive = true;
     
     changeIsoDirectory("/");
+    
+    /* the accelerator callback must return true */
+    return TRUE;
 }
 
 void openIso(char* filename)
@@ -810,7 +815,9 @@ void openIso(char* filename)
     GBLisoPaneActive = true;
 }
 
-void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
+/* This callback is also used by an accelerator so make sure you don't use 
+* the parameters, since they may not be the menuitem parameters */
+gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
     //~ GtkWidget *dialog;
     //~ char* filename;
@@ -844,6 +851,9 @@ void openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     
     //~ gtk_widget_destroy(dialog);
     openIso("image.iso");
+
+    /* the accelerator callback must return true */
+    return TRUE;
 }
 
 void refreshIsoView(void)
@@ -921,7 +931,9 @@ void saveIso(char* filename)
     }
 }
 
-void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
+/* This callback is also used by an accelerator so make sure you don't use 
+* the parameters, since they may not be the menuitem parameters */
+gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
 {
     GtkWidget *dialog;
     char* filename;
@@ -930,7 +942,7 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     
     /* do nothing if no image open */
     if(!GBLisoPaneActive)
-        return;
+        return TRUE;
     
     dialog = gtk_file_chooser_dialog_new("Save File",
                                          NULL,
@@ -963,6 +975,9 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     }
     
     //~ saveIso("out.iso");
+
+    /* the accelerator callback must return true */
+    return TRUE;
 }
 
 void writingProgressUpdaterCbk(void)
