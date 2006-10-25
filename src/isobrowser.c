@@ -863,7 +863,6 @@ void refreshIsoView(void)
 
 void saveIso(char* filename)
 {
-    int newImage;
     int rc;
     GtkWidget* progressWindow;
     GtkWidget* descriptionLabel;
@@ -895,49 +894,24 @@ void saveIso(char* filename)
     okButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_OK, GTK_RESPONSE_NONE);
     gtk_widget_set_sensitive(okButton, FALSE);
     
-    /* WRITE */
-    newImage = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    if(newImage == -1)
-    {
-        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                               GTK_MESSAGE_ERROR,
-                                               GTK_BUTTONS_CLOSE,
-                                               "Failed to open image for writing");
-        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
-        gtk_dialog_run(GTK_DIALOG(warningDialog));
-        gtk_widget_destroy(warningDialog);
-        return;
-    }
-    
-    rc = bk_write_image(GBLvolInfo.imageForReading, newImage, &GBLvolInfo, time(NULL), 
-                        GBLappSettings.filenameTypesToWrite, writingProgressUpdaterCbk);
+    /* write new image */
+    rc = bk_write_image(filename, &GBLvolInfo, time(NULL), GBLappSettings.filenameTypesToWrite, 
+                        writingProgressUpdaterCbk);
     if(rc < 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               "Failed to write image: '%s'",
+                                               "Failed to write image to '%s': '%s'",
+                                               filename,
                                                bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
+        /* enable the ok button so the user can close the progress window */
+        gtk_widget_set_sensitive(okButton, TRUE);
     }
-    
-    rc = close(newImage);
-    if(rc == -1)
-    {
-        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                               GTK_MESSAGE_ERROR,
-                                               GTK_BUTTONS_CLOSE,
-                                               "Failed to close new image");
-        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
-        gtk_dialog_run(GTK_DIALOG(warningDialog));
-        gtk_widget_destroy(warningDialog);
-    }
-    /* END WRITE */
     
     if(GBLWritingProgressBar != NULL)
     /* progress window hasn't been destroyed */
@@ -952,7 +926,6 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     GtkWidget *dialog;
     char* filename;
     int dialogResponse;
-    GtkWidget* warningDialog;
     GtkFileFilter* nameFilter;
     
     /* do nothing if no image open */
@@ -984,28 +957,6 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
     {
-        struct stat statStruct;
-        int rc;
-        
-        rc = stat(filename, &statStruct);
-        if(rc == 0 && statStruct.st_ino == GBLvolInfo.imageForReadingInode)
-        /* stat succeeded and the inode is the same as the image open for reading */
-        {
-            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                   GTK_MESSAGE_ERROR,
-                                                   GTK_BUTTONS_CLOSE,
-                                                   "Cannot overwrite original image, please "
-                                                   "choose a different file to save as");
-            gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
-            gtk_dialog_run(GTK_DIALOG(warningDialog));
-            gtk_widget_destroy(warningDialog);
-            
-            g_free(filename);
-            
-            return;
-        }
-        
         saveIso(filename);
         
         g_free(filename);
