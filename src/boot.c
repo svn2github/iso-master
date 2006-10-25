@@ -24,7 +24,6 @@
 extern GtkWidget* GBLmainWindow;
 extern VolInfo GBLvolInfo;
 extern bool GBLisoPaneActive;
-extern int GBLisoForReading;
 extern GtkWidget* GBLisoTreeView;
 extern char* GBLisoCurrentDir;
 
@@ -144,7 +143,7 @@ void extractBootRecordCbk(GtkButton *button, gpointer data)
     
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
     {
-        rc = bk_extract_boot_record(GBLisoForReading, &GBLvolInfo, filename, 0644);
+        rc = bk_extract_boot_record(&GBLvolInfo, filename, 0644);
         if(rc <= 0)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),

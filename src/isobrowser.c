@@ -43,12 +43,8 @@ extern GtkWidget* GBLisoCurrentDirField;
 VolInfo GBLvolInfo;
 /* to know whether am working on an image */
 bool GBLisoPaneActive;
-/* iso file open()ed for reading */
-int GBLisoForReading = 0;
 /* the size of the iso if it were written right now */
 static unsigned long long GBLisoSize = 0;
-/* inode number of the iso opened for reading (filename is not reliable) */
-static ino_t GBLisoForReadingInode;
 /* the progress bar from the writing dialog box */
 static GtkWidget* GBLWritingProgressBar;
 /* the progress bar from the extracting dialog box */
@@ -339,15 +335,7 @@ void closeIso(void)
     /* no image open or created, nothing to do */
         return;
     
-    if(GBLisoForReading != 0)
-    {
-        close(GBLisoForReading);
-        GBLisoForReading = 0;
-    }
-    
     bk_destroy_vol_info(&GBLvolInfo);
-    
-    GBLisoForReadingInode = 0;
     
     GBLisoSize = 0;
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), "");
@@ -537,7 +525,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcat(fullItemName, itemName);
         strcat(fullItemName, "/");
         
-        rc = bk_extract_dir(GBLisoForReading, &GBLvolInfo, fullItemName, GBLfsCurrentDir, 
+        rc = bk_extract_dir(&GBLvolInfo, fullItemName, GBLfsCurrentDir, 
                             false, extractingProgressUpdaterCbk);
         if(rc <= 0)
         {
@@ -565,7 +553,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcpy(fullItemName, GBLisoCurrentDir);
         strcat(fullItemName, itemName);
         
-        rc = bk_extract_file(GBLisoForReading, &GBLvolInfo, fullItemName, GBLfsCurrentDir, 
+        rc = bk_extract_file(&GBLvolInfo, fullItemName, GBLfsCurrentDir, 
                              false, extractingProgressUpdaterCbk);
         if(rc <= 0)
         {
@@ -732,8 +720,6 @@ void newIsoCbk(GtkMenuItem* menuItem, gpointer data)
     formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
     
-    GBLisoForReadingInode = 0;
-    
     gtk_widget_set_sensitive(GBLisoCurrentDirField, TRUE);
     gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
     
@@ -746,7 +732,6 @@ void openIso(char* filename)
 {
     int rc;
     GtkWidget* warningDialog;
-    struct stat statStruct;
     
     closeIso();
     
@@ -754,23 +739,22 @@ void openIso(char* filename)
     
     GBLappSettings.filenameTypesToWrite = FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET;
     
-    /* open image file for reading */
-    GBLisoForReading = open(filename, O_RDONLY);
-    if(GBLisoForReading == -1)
+    rc = bk_open_image(&GBLvolInfo, filename);
+    if(rc <= 0)
     {
-        GBLisoForReading = 0;
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               "Failed to open iso file for reading");
+                                               "Failed to open iso file for reading: %s",
+                                               bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
         return;
     }
     
-    rc = bk_read_vol_info(GBLisoForReading, &GBLvolInfo);
+    rc = bk_read_vol_info(&GBLvolInfo);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -788,11 +772,11 @@ void openIso(char* filename)
     
     /* READ entire directory tree */
     if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
-        rc = bk_read_dir_tree(GBLisoForReading, &GBLvolInfo, FNTYPE_ROCKRIDGE, true);
+        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_ROCKRIDGE, true);
     else if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
-        rc = bk_read_dir_tree(GBLisoForReading, &GBLvolInfo, FNTYPE_JOLIET, false);
+        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_JOLIET, false);
     else
-        rc = bk_read_dir_tree(GBLisoForReading, &GBLvolInfo, FNTYPE_9660, false);
+        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_9660, false);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -817,25 +801,6 @@ void openIso(char* filename)
     GBLisoSize += bk_estimate_iso_size(&GBLvolInfo, FNTYPE_9660 | FNTYPE_JOLIET | FNTYPE_ROCKRIDGE);
     formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
-    
-    /* record path and name */
-    rc = stat(filename, &statStruct);
-    if(rc == -1)
-    {
-        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                               GTK_MESSAGE_ERROR,
-                                               GTK_BUTTONS_CLOSE,
-                                               "stat(%s) failed with %d. Please report a bug.",
-                                               filename,
-                                               rc);
-        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
-        gtk_dialog_run(GTK_DIALOG(warningDialog));
-        gtk_widget_destroy(warningDialog);
-        closeIso();
-        return;
-    }
-    GBLisoForReadingInode = statStruct.st_ino;
     
     gtk_widget_set_sensitive(GBLisoCurrentDirField, TRUE);
     gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
@@ -945,7 +910,7 @@ void saveIso(char* filename)
         return;
     }
     
-    rc = bk_write_image(GBLisoForReading, newImage, &GBLvolInfo, time(NULL), 
+    rc = bk_write_image(GBLvolInfo.imageForReading, newImage, &GBLvolInfo, time(NULL), 
                         GBLappSettings.filenameTypesToWrite, writingProgressUpdaterCbk);
     if(rc < 0)
     {
@@ -1023,7 +988,7 @@ void saveIsoCbk(GtkWidget *widget, GdkEvent *event)
         int rc;
         
         rc = stat(filename, &statStruct);
-        if(rc == 0 && statStruct.st_ino == GBLisoForReadingInode)
+        if(rc == 0 && statStruct.st_ino == GBLvolInfo.imageForReadingInode)
         /* stat succeeded and the inode is the same as the image open for reading */
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
