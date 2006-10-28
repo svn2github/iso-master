@@ -106,7 +106,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcat(fullItemName, "/");
         
         rc = bk_add_dir(&GBLvolInfo, fullItemName, GBLisoCurrentDir);
-        if(rc <= 0)
+        if(rc <= 0 && rc != BKWARNING_OPER_PARTLY_FAILED)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -133,7 +133,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcat(fullItemName, itemName);
         
         rc = bk_add_file(&GBLvolInfo, fullItemName, GBLisoCurrentDir);
-        if(rc <= 0)
+        if(rc <= 0 && rc != BKWARNING_OPER_PARTLY_FAILED)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -519,7 +519,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 2);
         if(fullItemName == NULL)
             fatalError("extractFromIsoEachRowCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 2) failed");
+                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 2) failed (out of memory?)");
         
         strcpy(fullItemName, GBLisoCurrentDir);
         strcat(fullItemName, itemName);
@@ -527,7 +527,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         rc = bk_extract_dir(&GBLvolInfo, fullItemName, GBLfsCurrentDir, 
                             false, extractingProgressUpdaterCbk);
-        if(rc <= 0)
+        if(rc <= 0 && rc != BKWARNING_OPER_PARTLY_FAILED) /* ignore that warning, already shown to user in the warning callback */
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -710,6 +710,7 @@ gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data)
     closeIso();
     
     bk_init_vol_info(&GBLvolInfo);
+    GBLvolInfo.warningCbk = operationFailed;
     
     GBLappSettings.filenameTypesToWrite = FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET;
     
@@ -741,6 +742,7 @@ void openIso(char* filename)
     closeIso();
     
     bk_init_vol_info(&GBLvolInfo);
+    GBLvolInfo.warningCbk = operationFailed;
     
     GBLappSettings.filenameTypesToWrite = FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET;
     
@@ -854,6 +856,27 @@ gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
 
     /* the accelerator callback must return true */
     return TRUE;
+}
+
+bool operationFailed(const char* msg)
+{
+    GtkWidget* warningDialog;
+    gint response;
+    
+    warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           GTK_MESSAGE_WARNING,
+                                           GTK_BUTTONS_YES_NO,
+                                           "%s\n\nDo you wish to continue?",
+                                           msg);
+    gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+    response = gtk_dialog_run(GTK_DIALOG(warningDialog));
+    gtk_widget_destroy(warningDialog);
+    
+    if(response == GTK_RESPONSE_YES)
+        return true;
+    else
+        return false;
 }
 
 void refreshIsoView(void)

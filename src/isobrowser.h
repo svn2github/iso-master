@@ -19,6 +19,7 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
 gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data);
 void openIso(char* filename);
 gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data);
+bool operationFailed(const char* msg);
 void refreshIsoView(void);
 void saveIso(char* filename);
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event);
