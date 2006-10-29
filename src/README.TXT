@@ -28,7 +28,7 @@ Or on something like Ubuntu that won't let you su:
 sudo make install
 [enter user's password]
 
-If you get errors, or even warnings, please do send me the output.
+If you get errors, or even warnings, please do send me the output so I can fix them.
 
 Contact
 -------
@@ -44,4 +44,4 @@ Please help me improve ISO Master by sending me bug reports. The more of the fol
 
 License
 -------
-Any source code for ISO Master and bkisofs is distributed under the GNU General Public Licence version 2.
+The source code for this version of ISO Master and bkisofs is distributed under the GNU General Public Licence version 2.

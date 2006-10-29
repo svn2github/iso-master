@@ -53,7 +53,11 @@ GBLauthors[2] = {
 "August 2006\n"
 "- a couple of very nice icons\n"
 "\n"
-"",
+"David Johnson\n"
+"http://www.david-web.co.uk/\n"
+"September 2006\n"
+"- a patch to allow associating ISO Master with ISO files in file managers\n"
+,
 NULL};
 
 static const char* 

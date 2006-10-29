@@ -30,3 +30,7 @@ http://tango.freedesktop.org/Tango_Icon_Gallery
 August 2006
 - a couple of very nice icons
 
+David Johnson
+http://www.david-web.co.uk/
+September 2006
+- a patch to allow associating ISO Master with ISO files in file managers

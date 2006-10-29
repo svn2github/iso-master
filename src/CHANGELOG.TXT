@@ -1,3 +1,17 @@
+30 Oct 2006 - 0.5
+=================
+- If only one file in a directory fails to add or extract, added a callback in bk and a dialog window in the GUI to allow the user to ignore that error.
+- Moved some structures away from bk.h (they weren't for public use).
+- Added keyboard shortcuts for new, open, save and quit.
+- Moved the responsibility for opening the iso file (for reading or writing) from the user to bk.
+- Added option (enabled by default) to sort directories first.
+- Added window to allow to set the disk label, publisher and the filename types for the new image.
+- Fixed bug that cause newly created images to have broken permissions (RockRidge) on the root directory.
+- Saving an iso now compares the inode of the new image with the old one rather than the name, so overwriting should not be possible now under any circumstnces.
+- Size is now stored in a 64bit size_t o avoid warnings and errors with the file browser looking at files > 4G.
+- Create new directory window now checks for blank filename, bk now refuses to accept a blank name new directory request.
+- Can now have an iso file as a command-line parameter, so can open iso files in ISO Master using a file manager.
+
 27 Sep 2006 - 0.4
 =================
 - Fixed a bug that caused a segmentation fault when starting to save the image.
