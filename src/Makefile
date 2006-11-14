@@ -11,7 +11,7 @@ endif
 GTKLIBS = `pkg-config --libs gtk+-2.0`
 GTKFLAGS = `pkg-config --cflags gtk+-2.0`
 # the _FILE_OFFSET_BITS=64 is to enable stat() for large files
-GLOBALFLAGS = -D_FILE_OFFSET_BITS=64 -Wall
+GLOBALFLAGS = -D_FILE_OFFSET_BITS=64 -Wall -g
 GLOBALDEPS = bk/bk.h
 
 isomaster: lib iniparser isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o $(GLOBALDEPS)
