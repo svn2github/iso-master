@@ -821,38 +821,39 @@ void openIso(char* filename)
 * the parameters, since they may not be the menuitem parameters */
 gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
-    //~ GtkWidget *dialog;
-    //~ char* filename;
-    //~ GtkFileFilter* nameFilter;
+    GtkWidget *dialog;
+    char* filename;
+    GtkFileFilter* nameFilter;
     
-    //~ dialog = gtk_file_chooser_dialog_new("Open File",
-                                         //~ NULL,
-                                         //~ GTK_FILE_CHOOSER_ACTION_OPEN,
-                                         //~ GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         //~ GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
-                                         //~ NULL);
+    dialog = gtk_file_chooser_dialog_new("Open File",
+                                         NULL,
+                                         GTK_FILE_CHOOSER_ACTION_OPEN,
+                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                         GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
+                                         NULL);
     
-    //~ nameFilter = gtk_file_filter_new();
-    //~ gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
-    //~ gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "ISO Images");
-    //~ gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "ISO Images");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    //~ nameFilter = gtk_file_filter_new();
-    //~ gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
-    //~ gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
-    //~ gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    //~ if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
-    //~ {
-        //~ filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+    if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
+    {
+        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
         
-        //~ openIso(filename);
+        openIso(filename);
         
-        //~ g_free(filename);
-    //~ }
+        g_free(filename);
+    }
     
-    //~ gtk_widget_destroy(dialog);
-    openIso("image.iso");
+    gtk_widget_destroy(dialog);
+    
+    //~ openIso("image.iso");
     
     /* the accelerator callback must return true */
     return TRUE;
@@ -958,46 +959,46 @@ void saveIso(char* filename)
 * the parameters, since they may not be the menuitem parameters */
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
 {
-    //~ GtkWidget *dialog;
-    //~ char* filename;
-    //~ int dialogResponse;
-    //~ GtkFileFilter* nameFilter;
+    GtkWidget *dialog;
+    char* filename;
+    int dialogResponse;
+    GtkFileFilter* nameFilter;
     
-    //~ /* do nothing if no image open */
-    //~ if(!GBLisoPaneActive)
-        //~ return TRUE;
+    /* do nothing if no image open */
+    if(!GBLisoPaneActive)
+        return TRUE;
     
-    //~ dialog = gtk_file_chooser_dialog_new("Save File",
-                                         //~ NULL,
-                                         //~ GTK_FILE_CHOOSER_ACTION_SAVE,
-                                         //~ GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         //~ GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
-                                         //~ NULL);
+    dialog = gtk_file_chooser_dialog_new("Save File",
+                                         NULL,
+                                         GTK_FILE_CHOOSER_ACTION_SAVE,
+                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                         GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+                                         NULL);
     
-    //~ nameFilter = gtk_file_filter_new();
-    //~ gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
-    //~ gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "ISO Images");
-    //~ gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "ISO Images");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    //~ nameFilter = gtk_file_filter_new();
-    //~ gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
-    //~ gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
-    //~ gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    //~ dialogResponse = gtk_dialog_run(GTK_DIALOG(dialog));
-    //~ if(dialogResponse == GTK_RESPONSE_ACCEPT)
-        //~ filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+    dialogResponse = gtk_dialog_run(GTK_DIALOG(dialog));
+    if(dialogResponse == GTK_RESPONSE_ACCEPT)
+        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
     
-    //~ gtk_widget_destroy(dialog);
+    gtk_widget_destroy(dialog);
     
-    //~ if(dialogResponse == GTK_RESPONSE_ACCEPT)
-    //~ {
-        //~ saveIso(filename);
+    if(dialogResponse == GTK_RESPONSE_ACCEPT)
+    {
+        saveIso(filename);
         
-        //~ g_free(filename);
-    //~ }
+        g_free(filename);
+    }
     
-    saveIso("out.iso");
+    //~ saveIso("out.iso");
 
     /* the accelerator callback must return true */
     return TRUE;
