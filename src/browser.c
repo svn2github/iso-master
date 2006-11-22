@@ -171,6 +171,12 @@ void formatSize(unsigned long long  sizeInt, char* sizeStr, int sizeStrLen)
     sizeStr[sizeStrLen - 1] = '\0';
 }
 
+void refreshBothViewsCbk(GtkWidget *widget, GdkEvent *event)
+{
+    refreshFsView();
+    refreshIsoView();
+}
+
 /* formats the file size text for displaying */
 void sizeCellDataFunc32(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
                         GtkTreeModel *model, GtkTreeIter *iter,

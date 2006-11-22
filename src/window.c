@@ -171,6 +171,12 @@ void buildMenu(GtkWidget* boxToPackInto)
     menu = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
     
+    menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_REFRESH, NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show(menuItem);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(refreshBothViewsCbk), NULL);
+    
     GBLshowHiddenMenuItem = gtk_check_menu_item_new_with_mnemonic("_Show hidden files");
     if(GBLappSettings.showHiddenFilesFs)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLshowHiddenMenuItem), TRUE);
