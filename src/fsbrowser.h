@@ -1,5 +1,6 @@
 #include <stdbool.h>
 
+void acceptFsPathCbk(GtkEntry *entry, gpointer user_data);
 void buildFsBrowser(GtkWidget* boxToPackInto);
 void buildFsLocator(GtkWidget* boxToPackInto);
 bool changeFsDirectory(char* newDirStr);

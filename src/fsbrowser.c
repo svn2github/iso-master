@@ -40,6 +40,32 @@ extern GdkPixbuf* GBLfilePixbuf;
 
 extern int errno;
 
+void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
+{
+    const char* newPath;
+    char* newPathTerminated;
+    
+    newPath = gtk_entry_get_text(entry);
+    
+    if(newPath[strlen(newPath)] == '/')
+    {
+        changeFsDirectory((char*)newPath);
+    }
+    else
+    {
+        newPathTerminated = malloc(strlen(newPath) + 2);
+        if(newPathTerminated == NULL)
+            fatalError("newPathTerminated = malloc(strlen(newPath) + 2) failed");
+        
+        strcpy(newPathTerminated, newPath);
+        strcat(newPathTerminated, "/");
+        
+        changeFsDirectory(newPathTerminated);
+        
+        free(newPathTerminated);
+    }
+}
+
 void buildFsBrowser(GtkWidget* boxToPackInto)
 {
     GtkWidget* scrolledWindow;
@@ -159,8 +185,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
 void buildFsLocator(GtkWidget* boxToPackInto)
 {
     GBLfsCurrentDirField = gtk_entry_new();
-    gtk_entry_set_editable(GTK_ENTRY(GBLfsCurrentDirField), FALSE);
-    //gtk_widget_set_sensitive(GBLfsCurrentDirField, FALSE);
+    g_signal_connect(GBLfsCurrentDirField, "activate", (GCallback)acceptFsPathCbk, NULL);
     gtk_box_pack_start(GTK_BOX(boxToPackInto), GBLfsCurrentDirField, FALSE, FALSE, 0);
     gtk_widget_show(GBLfsCurrentDirField);
 }

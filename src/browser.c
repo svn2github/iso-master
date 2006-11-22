@@ -85,7 +85,7 @@ void createDirCbk(GtkButton *button, gpointer onFs)
     gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), textEntry);
     gtk_widget_show(textEntry);
     
-    g_signal_connect(textEntry , "activate", (GCallback)acceptDialogCbk, dialog);
+    g_signal_connect(textEntry, "activate", (GCallback)acceptDialogCbk, dialog);
     
     response = gtk_dialog_run(GTK_DIALOG(dialog));
     
@@ -174,7 +174,8 @@ void formatSize(unsigned long long  sizeInt, char* sizeStr, int sizeStrLen)
 void refreshBothViewsCbk(GtkWidget *widget, GdkEvent *event)
 {
     refreshFsView();
-    refreshIsoView();
+    if(GBLisoPaneActive)
+        refreshIsoView();
 }
 
 /* formats the file size text for displaying */
