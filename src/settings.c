@@ -251,6 +251,7 @@ void loadSettings(void)
     int height;
     int showHidden;
     int sortDirsFirst;
+    char* tempStr;
     
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
     if(configFileName == NULL)
@@ -347,6 +348,44 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.showHiddenFilesFs = true;
     
+    /* read/set last open dir */
+    if(GBLsettingsDictionary != NULL)
+    {
+        tempStr = iniparser_getstring(GBLsettingsDictionary, 
+                                      "ui:lastopendir", NULL);
+        if(tempStr == NULL)
+            GBLappSettings.lastOpenDir = NULL;
+        else
+        {
+            GBLappSettings.lastOpenDir = malloc(strlen(tempStr) +1);
+            if(GBLappSettings.lastOpenDir == NULL)
+                fatalError("GBLappSettings.lastOpenDir = malloc(strlen(tempStr) +1) failed");
+            strcpy(GBLappSettings.lastOpenDir, tempStr);
+        }
+    }
+    else
+    /* no config file */
+        GBLappSettings.lastOpenDir = NULL;
+    
+    /* read/set last open dir */
+    if(GBLsettingsDictionary != NULL)
+    {
+        tempStr = iniparser_getstring(GBLsettingsDictionary, 
+                                      "ui:lastsavedir", NULL);
+        if(tempStr == NULL)
+            GBLappSettings.lastSaveDir = NULL;
+        else
+        {
+            GBLappSettings.lastSaveDir = malloc(strlen(tempStr) +1);
+            if(GBLappSettings.lastSaveDir == NULL)
+                fatalError("GBLappSettings.lastSaveDir = malloc(strlen(tempStr) +1) failed");
+            strcpy(GBLappSettings.lastSaveDir, tempStr);
+        }
+    }
+    else
+    /* no config file */
+        GBLappSettings.lastSaveDir = NULL;
+    
     free(configFileName);
 }
 
@@ -408,6 +447,10 @@ void writeSettings(void)
     
     snprintf(numberStr, 20, "%d", GBLappSettings.sortDirectoriesFirst);
     iniparser_setstr(GBLsettingsDictionary, "ui:sortdirsfirst", numberStr);
+    
+    iniparser_setstr(GBLsettingsDictionary, "ui:lastopendir", GBLappSettings.lastOpenDir);
+    
+    iniparser_setstr(GBLsettingsDictionary, "ui:lastsavedir", GBLappSettings.lastSaveDir);
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }

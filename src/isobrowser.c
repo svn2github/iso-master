@@ -842,6 +842,9 @@ gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
+    if(GBLappSettings.lastOpenDir != NULL)
+        gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastOpenDir);
+    
     if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
     {
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
@@ -850,6 +853,23 @@ gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
         
         g_free(filename);
     }
+    
+    /* RECORD last open dir */
+    char* lastOpenDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
+    
+    if(GBLappSettings.lastOpenDir != NULL && strlen(lastOpenDir) > strlen(GBLappSettings.lastOpenDir))
+    {
+        free(GBLappSettings.lastOpenDir);
+        GBLappSettings.lastOpenDir = NULL;
+    }
+    
+    if(GBLappSettings.lastOpenDir == NULL)
+        GBLappSettings.lastOpenDir = malloc(strlen(lastOpenDir) + 1);
+    
+    strcpy(GBLappSettings.lastOpenDir, lastOpenDir);
+    
+    g_free(lastOpenDir);
+    /* END RECORD last open dir */
     
     gtk_widget_destroy(dialog);
     
@@ -985,9 +1005,29 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
+    if(GBLappSettings.lastSaveDir != NULL)
+        gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastSaveDir);
+    
     dialogResponse = gtk_dialog_run(GTK_DIALOG(dialog));
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+    
+    /* RECORD last save dir */
+    char* lastSaveDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
+    
+    if(GBLappSettings.lastSaveDir != NULL && strlen(lastSaveDir) > strlen(GBLappSettings.lastSaveDir))
+    {
+        free(GBLappSettings.lastSaveDir);
+        GBLappSettings.lastSaveDir = NULL;
+    }
+    
+    if(GBLappSettings.lastSaveDir == NULL)
+        GBLappSettings.lastSaveDir = malloc(strlen(lastSaveDir) + 1);
+    
+    strcpy(GBLappSettings.lastSaveDir, lastSaveDir);
+    
+    g_free(lastSaveDir);
+    /* END RECORD last save dir */
     
     gtk_widget_destroy(dialog);
     
