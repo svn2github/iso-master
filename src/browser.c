@@ -52,6 +52,12 @@ extern VolInfo GBLvolInfo;
 extern bool GBLisoPaneActive;
 extern AppSettings GBLappSettings;
 
+/* connected to the activate signal of a text entry in a dialog */
+void acceptDialogCbk(GtkEntry *entry, GtkDialog* dialog)
+{
+    gtk_dialog_response(dialog, GTK_RESPONSE_ACCEPT);
+}
+
 void createDirCbk(GtkButton *button, gpointer onFs)
 {
     GtkWidget* dialog;
@@ -78,6 +84,8 @@ void createDirCbk(GtkButton *button, gpointer onFs)
     gtk_entry_set_width_chars(GTK_ENTRY(textEntry), 40);
     gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), textEntry);
     gtk_widget_show(textEntry);
+    
+    g_signal_connect(textEntry , "activate", (GCallback)acceptDialogCbk, dialog);
     
     response = gtk_dialog_run(GTK_DIALOG(dialog));
     
