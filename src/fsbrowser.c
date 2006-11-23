@@ -47,7 +47,7 @@ void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
     
     newPath = gtk_entry_get_text(entry);
     
-    if(newPath[strlen(newPath)] == '/')
+    if(newPath[strlen(newPath) - 1] == '/')
     {
         changeFsDirectory((char*)newPath);
     }

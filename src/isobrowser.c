@@ -509,6 +509,7 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
         gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
         gtk_window_set_title(GTK_WINDOW(progressWindow), "Progress");
+        gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
         gtk_widget_show(progressWindow);
         g_signal_connect_swapped(progressWindow, "destroy",
                                  G_CALLBACK(extractingProgressWindowDestroyedCbk), NULL);
@@ -968,6 +969,7 @@ void saveIso(char* filename)
     gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
     gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
     gtk_window_set_title(GTK_WINDOW(progressWindow), "Progress");
+    gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
     gtk_widget_show(progressWindow);
     g_signal_connect_swapped(progressWindow, "response",
                              G_CALLBACK(gtk_widget_destroy), progressWindow);
