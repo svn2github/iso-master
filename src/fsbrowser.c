@@ -93,6 +93,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     g_object_unref(GBLfsListStore); /* destroy model automatically with view */
     gtk_container_add(GTK_CONTAINER(scrolledWindow), GBLfsTreeView);
     g_signal_connect(GBLfsTreeView, "row-activated", (GCallback)fsRowDblClickCbk, NULL);
+    g_signal_connect(GBLfsTreeView, "select-cursor-parent", (GCallback)fsGoUpDirTreeCbk, NULL);
     gtk_widget_show(GBLfsTreeView);
     
     /* this won't be enabled until gtk allows me to drag a multiple selection */
@@ -325,7 +326,8 @@ bool changeFsDirectory(char* newDirStr)
     return true;
 }
 
-void fsGoUpDirTree(GtkButton *button, gpointer data)
+/* this is called from a button and via a treeview event so don't use the parameters */
+void fsGoUpDirTreeCbk(GtkButton *button, gpointer data)
 {
     int count;
     bool done;

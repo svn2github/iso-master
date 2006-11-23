@@ -197,7 +197,8 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_set_search_column(GTK_TREE_VIEW(GBLisoTreeView), COLUMN_FILENAME);
     g_object_unref(GBLisoListStore); /* destroy model automatically with view */
     gtk_container_add(GTK_CONTAINER(scrolledWindow), GBLisoTreeView);
-    g_signal_connect(GBLisoTreeView , "row-activated", (GCallback)isoRowDblClickCbk, NULL);
+    g_signal_connect(GBLisoTreeView, "row-activated", (GCallback)isoRowDblClickCbk, NULL);
+    g_signal_connect(GBLisoTreeView, "select-cursor-parent", (GCallback)isoGoUpDirTreeCbk, NULL);
     gtk_widget_show(GBLisoTreeView);
     
     /* this won't be enabled until gtk allows me to drag a multiple selection */
@@ -635,6 +636,7 @@ void extractingProgressWindowDestroyedCbk(void)
     GBLextractingProgressBar = NULL;
 }
 
+/* this is called from a button and via a treeview event so don't use the parameters */
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
 {
     int count;
