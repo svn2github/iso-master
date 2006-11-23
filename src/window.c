@@ -36,6 +36,7 @@ extern AppSettings GBLappSettings;
 extern GtkWidget* GBLnewDirIcon;
 extern GtkWidget* GBLnewDirIcon2;
 extern bool GBLisoPaneActive;
+extern bool GBLisoChangesProbable;
 
 void buildMainToolbar(GtkWidget* boxToPackInto)
 {
@@ -352,6 +353,9 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
 
 gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
 {
+    if(GBLisoChangesProbable && !confirmCloseIso())
+        return TRUE;
+    
     writeSettings();
     
     printf("Quitting\n");

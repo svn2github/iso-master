@@ -42,7 +42,9 @@ extern GtkWidget* GBLisoCurrentDirField;
 /* info about the image being worked on */
 VolInfo GBLvolInfo;
 /* to know whether am working on an image */
-bool GBLisoPaneActive;
+bool GBLisoPaneActive = false;
+/* to know whether any changes to the image have been requested */
+bool GBLisoChangesProbable = false;
 /* the size of the iso if it were written right now */
 static unsigned long long GBLisoSize = 0;
 /* the progress bar from the writing dialog box */
@@ -119,6 +121,8 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
         }
+        else
+            GBLisoChangesProbable = true;
         
         free(fullItemName);
     }
@@ -146,6 +150,8 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
         }
+        else
+            GBLisoChangesProbable = true;
         
         free(fullItemName);
     }
@@ -346,6 +352,27 @@ void closeIso(void)
     GBLisoPaneActive = false;
 }
 
+bool confirmCloseIso(void)
+{
+    GtkWidget* warningDialog;
+    gint response;
+    
+    warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                           GTK_DIALOG_DESTROY_WITH_PARENT,
+                                           GTK_MESSAGE_QUESTION,
+                                           GTK_BUTTONS_YES_NO,
+                                           "It seems that you have made changes to the ISO but "
+                                           "haven't saved them. Are you sure you want to close it?");
+    gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+    response = gtk_dialog_run(GTK_DIALOG(warningDialog));
+    gtk_widget_destroy(warningDialog);
+    
+    if(response == GTK_RESPONSE_YES)
+        return true;
+    else
+        return false;
+}
+
 void deleteFromIsoCbk(GtkButton *button, gpointer data)
 {
     GtkTreeSelection* selection;
@@ -411,6 +438,8 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
         }
+        else
+            GBLisoChangesProbable = true;
         
         free(fullItemName);
     }
@@ -438,6 +467,8 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
         }
+        else
+            GBLisoChangesProbable = true;
         
         free(fullItemName);
     }
@@ -707,6 +738,9 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
 * the parameters, since they may not be the menuitem parameters */
 gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
+    if(GBLisoChangesProbable && !confirmCloseIso())
+        return TRUE;
+    
     closeIso();
     
     bk_init_vol_info(&GBLvolInfo);
@@ -727,6 +761,8 @@ gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data)
     gtk_widget_set_sensitive(GBLisoTreeView, TRUE);
     
     GBLisoPaneActive = true;
+    
+    GBLisoChangesProbable = false;
     
     changeIsoDirectory("/");
     
@@ -815,6 +851,8 @@ void openIso(char* filename)
     changeIsoDirectory("/");
     
     GBLisoPaneActive = true;
+    
+    GBLisoChangesProbable = false;
 }
 
 /* This callback is also used by an accelerator so make sure you don't use 
@@ -966,6 +1004,8 @@ void saveIso(char* filename)
         /* enable the ok button so the user can close the progress window */
         gtk_widget_set_sensitive(okButton, TRUE);
     }
+    else
+        GBLisoChangesProbable = false;
     
     if(GBLWritingProgressBar != NULL)
     /* progress window hasn't been destroyed */
