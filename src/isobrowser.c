@@ -365,6 +365,7 @@ bool confirmCloseIso(void)
                                            "It seems that you have made changes to the ISO but "
                                            "haven't saved them. Are you sure you want to close it?");
     gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+    gtk_dialog_set_default_response(GTK_DIALOG(warningDialog), GTK_RESPONSE_YES);
     response = gtk_dialog_run(GTK_DIALOG(warningDialog));
     gtk_widget_destroy(warningDialog);
     

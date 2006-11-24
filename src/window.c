@@ -104,6 +104,10 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
     gtk_accel_map_add_entry("<ISOMaster>/Image/Save", accelKey, accelModifier);
     
+    gtk_accelerator_parse("<Control>W", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(closeMainWindowCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    
     gtk_accelerator_parse("<Control>Q", &accelKey, &accelModifier);
     closure = g_cclosure_new(G_CALLBACK(closeMainWindowCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
