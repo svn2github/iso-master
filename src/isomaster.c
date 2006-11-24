@@ -62,7 +62,7 @@ int main(int argc, char** argv)
     /* resize the icon loaded */
     {
         int menuSize;
-        gtk_icon_size_lookup(GTK_ICON_SIZE_MENU, &menuSize, &menuSize);
+        gtk_icon_size_lookup(GTK_ICON_SIZE_LARGE_TOOLBAR, &menuSize, &menuSize);
         newDirPixbuf = gdk_pixbuf_scale_simple(newDirPixbuf, menuSize, menuSize, GDK_INTERP_HYPER);
         GBLnewDirIcon = gtk_image_new_from_pixbuf(newDirPixbuf);
         GBLnewDirIcon2 = gtk_image_new_from_pixbuf(newDirPixbuf);

@@ -48,20 +48,7 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
     
-    /* to allow for better consistency between fs and iso don't show these 
-    icon = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
-    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     "Open", "Open ISO Image", "Private",
-                                     icon, G_CALLBACK(openIsoCbk),
-                                     NULL);
-
-    icon = gtk_image_new_from_stock(GTK_STOCK_SAVE_AS, GTK_ICON_SIZE_MENU);
-    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     "Save", "Save ISO Image", "Private",
-                                     icon, G_CALLBACK(saveIsoCbk),
-                                     NULL);*/
-    
-    icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_MENU);
+    icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Go back", "Go back up one directory on the filesystem", "Private",
                                      icon, G_CALLBACK(fsGoUpDirTreeCbk),
@@ -303,7 +290,7 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     gtk_box_pack_start(GTK_BOX(hBox), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
     
-    icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_MENU);
+    icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Go back", "Go back up one directory on the ISO", "Private",
                                      icon, G_CALLBACK(isoGoUpDirTreeCbk),
@@ -313,40 +300,25 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
                                      "New Directory", "Create new directory on the ISO", "Private",
                                      GBLnewDirIcon2,G_CALLBACK(createDirCbk), (gpointer)0);
     
-    icon = gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_MENU);
+    icon = gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Add", "Add to ISO Image", "Private",
                                      icon, G_CALLBACK(addToIsoCbk),
                                      NULL);
 
-    icon = gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_MENU);
+    icon = gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Extract", "Extract from ISO Image", "Private",
                                      icon, G_CALLBACK(extractFromIsoCbk),
                                      NULL);
 
-    icon = gtk_image_new_from_stock(GTK_STOCK_DELETE, GTK_ICON_SIZE_MENU);
+    icon = gtk_image_new_from_stock(GTK_STOCK_DELETE, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      "Remove", "Delete from ISO Image", "Private",
                                      icon, G_CALLBACK(deleteFromIsoCbk),
                                      NULL);
     
-    //~ button = gtk_button_new_with_mnemonic("_Add");
-    //~ gtk_box_pack_start(GTK_BOX(hBox), button, FALSE, FALSE, 0);
-    //~ gtk_widget_show(button);
-    //~ g_signal_connect(button, "clicked", G_CALLBACK(addToIsoCbk), NULL);
-    
-    //~ button = gtk_button_new_with_mnemonic("_Extract");
-    //~ gtk_box_pack_start(GTK_BOX(hBox), button, FALSE, FALSE, 0);
-    //~ gtk_widget_show(button);
-    //~ g_signal_connect(button, "clicked", G_CALLBACK(extractFromIsoCbk), NULL);
-    
-    //~ button = gtk_button_new_with_mnemonic("_Delete");
-    //~ gtk_box_pack_start(GTK_BOX(hBox), button, FALSE, FALSE, 0);
-    //~ gtk_widget_show(button);
-    //~ g_signal_connect(button, "clicked", G_CALLBACK(deleteFromIsoCbk), NULL);
-    
-    sizeTitleLabel = gtk_label_new("            Estimated ISO Size: ");
+    sizeTitleLabel = gtk_label_new("      Estimated ISO Size: ");
     gtk_box_pack_start(GTK_BOX(hBox), sizeTitleLabel, FALSE, FALSE, 0);
     gtk_widget_show(sizeTitleLabel);
     
