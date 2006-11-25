@@ -49,7 +49,7 @@ int main(int argc, char** argv)
     loadSettings();
     
     /* ICONPATH is defined in the makefile */
-    appIcon = gdk_pixbuf_new_from_file(ICONPATH"/isomaster.svg", NULL);
+    appIcon = gdk_pixbuf_new_from_file(ICONPATH"/isomaster.png", NULL);
     
     newDirPixbuf = gdk_pixbuf_new_from_file(ICONPATH"/folder-new.png", NULL);
     if(newDirPixbuf == NULL)

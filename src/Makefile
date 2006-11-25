@@ -11,7 +11,7 @@ endif
 GTKLIBS = `pkg-config --libs gtk+-2.0`
 GTKFLAGS = `pkg-config --cflags gtk+-2.0`
 # the _FILE_OFFSET_BITS=64 is to enable stat() for large files
-GLOBALFLAGS = -D_FILE_OFFSET_BITS=64 -Wall -g
+GLOBALFLAGS = -D_FILE_OFFSET_BITS=64 -Wall
 GLOBALDEPS = bk/bk.h
 
 isomaster: lib iniparser isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o $(GLOBALDEPS)
@@ -61,10 +61,10 @@ install: isomaster
 	install -d $(DESTDIR)$(BINPATH)
 	install isomaster $(DESTDIR)$(BINPATH)
 	install -d $(DESTDIR)$(ICONPATH)
-	install -m 644 icons/isomaster.svg $(DESTDIR)$(ICONPATH)
+	install -m 644 icons/isomaster.png $(DESTDIR)$(ICONPATH)
 	install -m 644 icons/folder-new.png $(DESTDIR)$(ICONPATH)
 
 uninstall: 
 	rm -f $(DESTDIR)$(BINPATH)/isomaster
-	rm -f $(DESTDIR)$(ICONPATH)/isomaster.svg
+	rm -f $(DESTDIR)$(ICONPATH)/isomaster.png
 	rm -f $(DESTDIR)$(ICONPATH)/folder-new.png
