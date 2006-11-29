@@ -1,3 +1,15 @@
+ - 0.6
+=================
+- Can now read, add, extract and write files with long directory names (up to 255 characters for RockRidge).
+- Enter key now works in 'reate new directory' dialog.
+- Added button to refresh the filesystem and iso view.
+- Am now recording last location of file open/save dialogs.
+- Filesystem address bar is now editable.
+- Added confirmation dialog when closing unsaved image.
+- The backspace key now goes up the directory tree in the selected view.
+- Popup windows no longer have a taskbar entry.
+- Changed toolbar icon size to large
+
 30 Oct 2006 - 0.5
 =================
 - If only one file in a directory fails to add or extract, added a callback in bk and a dialog window in the GUI to allow the user to ignore that error.
