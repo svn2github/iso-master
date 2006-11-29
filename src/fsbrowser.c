@@ -40,6 +40,9 @@ extern GdkPixbuf* GBLfilePixbuf;
 
 extern int errno;
 
+/* the column for the filename in the fs pane */
+static GtkTreeViewColumn* GBLfilenameFsColumn;
+
 void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
 {
     const char* newPath;
@@ -109,21 +112,21 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_tree_selection_set_mode(selection, GTK_SELECTION_MULTIPLE);
     
     /* filename column */
-    column = gtk_tree_view_column_new();
-    gtk_tree_view_column_set_title(column, "Name");
-    gtk_tree_view_column_set_resizable(column, TRUE);
+    GBLfilenameFsColumn = gtk_tree_view_column_new();
+    gtk_tree_view_column_set_title(GBLfilenameFsColumn, "Name");
+    gtk_tree_view_column_set_resizable(GBLfilenameFsColumn, TRUE);
     
     renderer = gtk_cell_renderer_pixbuf_new();
-    gtk_tree_view_column_pack_start(column, renderer, FALSE);
-    gtk_tree_view_column_add_attribute(column, renderer, "pixbuf", COLUMN_ICON);
+    gtk_tree_view_column_pack_start(GBLfilenameFsColumn, renderer, FALSE);
+    gtk_tree_view_column_add_attribute(GBLfilenameFsColumn, renderer, "pixbuf", COLUMN_ICON);
     
     renderer = gtk_cell_renderer_text_new();
-    gtk_tree_view_column_pack_start(column, renderer, TRUE);
-    gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_FILENAME);
+    gtk_tree_view_column_pack_start(GBLfilenameFsColumn, renderer, TRUE);
+    gtk_tree_view_column_add_attribute(GBLfilenameFsColumn, renderer, "text", COLUMN_FILENAME);
     
-    gtk_tree_view_column_set_sort_column_id(column, COLUMN_FILENAME);
-    gtk_tree_view_column_set_expand(column, TRUE);
-    gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), column);
+    gtk_tree_view_column_set_sort_column_id(GBLfilenameFsColumn, COLUMN_FILENAME);
+    gtk_tree_view_column_set_expand(GBLfilenameFsColumn, TRUE);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), GBLfilenameFsColumn);
     
     gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_FILENAME, 
                                     sortByName, NULL, NULL);
@@ -225,6 +228,9 @@ bool changeFsDirectory(char* newDirStr)
     gtk_tree_view_set_model(GTK_TREE_VIEW(GBLfsTreeView), NULL);
     
     gtk_list_store_clear(GBLfsListStore);
+    
+    /* to make sure width of filename column isn't bigger than needed */
+    gtk_tree_view_column_queue_resize(GBLfilenameFsColumn);
     
     /* it may be possible but in any case very unlikely that readdir() will fail
     * if it does, it returns NULL (same as end of dir) */

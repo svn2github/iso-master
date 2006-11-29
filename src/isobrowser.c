@@ -51,6 +51,8 @@ static unsigned long long GBLisoSize = 0;
 static GtkWidget* GBLWritingProgressBar;
 /* the progress bar from the extracting dialog box */
 static GtkWidget* GBLextractingProgressBar;
+/* the column for the filename in the iso pane */
+static GtkTreeViewColumn* GBLfilenameIsoColumn;
 
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
@@ -213,21 +215,21 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_selection_set_mode(selection, GTK_SELECTION_MULTIPLE);
     
     /* filename column */
-    column = gtk_tree_view_column_new();
-    gtk_tree_view_column_set_title(column, "Name");
-    gtk_tree_view_column_set_resizable(column, TRUE);
+    GBLfilenameIsoColumn = gtk_tree_view_column_new();
+    gtk_tree_view_column_set_title(GBLfilenameIsoColumn, "Name");
+    gtk_tree_view_column_set_resizable(GBLfilenameIsoColumn, TRUE);
     
     renderer = gtk_cell_renderer_pixbuf_new();
-    gtk_tree_view_column_pack_start(column, renderer, FALSE);
-    gtk_tree_view_column_add_attribute(column, renderer, "pixbuf", COLUMN_ICON);
+    gtk_tree_view_column_pack_start(GBLfilenameIsoColumn, renderer, FALSE);
+    gtk_tree_view_column_add_attribute(GBLfilenameIsoColumn, renderer, "pixbuf", COLUMN_ICON);
     
     renderer = gtk_cell_renderer_text_new();
-    gtk_tree_view_column_pack_start(column, renderer, TRUE);
-    gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_FILENAME);
+    gtk_tree_view_column_pack_start(GBLfilenameIsoColumn, renderer, TRUE);
+    gtk_tree_view_column_add_attribute(GBLfilenameIsoColumn, renderer, "text", COLUMN_FILENAME);
     
-    gtk_tree_view_column_set_sort_column_id(column, COLUMN_FILENAME);
-    gtk_tree_view_column_set_expand(column, TRUE);
-    gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), column);
+    gtk_tree_view_column_set_sort_column_id(GBLfilenameIsoColumn, COLUMN_FILENAME);
+    gtk_tree_view_column_set_expand(GBLfilenameIsoColumn, TRUE);
+    gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), GBLfilenameIsoColumn);
     
     gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLisoListStore), COLUMN_FILENAME, 
                                     sortByName, NULL, NULL);
@@ -289,6 +291,9 @@ void changeIsoDirectory(char* newDirStr)
     gtk_tree_view_set_model(GTK_TREE_VIEW(GBLisoTreeView), NULL);
     
     gtk_list_store_clear(GBLisoListStore);
+    
+    /* to make sure width of filename column isn't bigger than needed */
+    gtk_tree_view_column_queue_resize(GBLfilenameIsoColumn);
     
     /* add all directories to the tree */
     nextDir = newDir->directories;
