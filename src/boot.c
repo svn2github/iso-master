@@ -20,12 +20,14 @@
 #include "browser.h"
 #include "error.h"
 #include "window.h"
+#include "settings.h"
 
 extern GtkWidget* GBLmainWindow;
 extern VolInfo GBLvolInfo;
 extern bool GBLisoPaneActive;
 extern GtkWidget* GBLisoTreeView;
 extern char* GBLisoCurrentDir;
+extern AppSettings GBLappSettings;
 
 void addBootRecordFromFileCbk(GtkButton *button, gpointer bootRecordType)
 {
@@ -44,9 +46,31 @@ void addBootRecordFromFileCbk(GtkButton *button, gpointer bootRecordType)
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                          GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT,
                                          NULL);
+    
+    if(GBLappSettings.lastBootRecordDir != NULL)
+        gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastBootRecordDir);
+    
     if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
     {
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+        
+        /* RECORD last boot record dir */
+        char* lastBootRecordDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
+        
+        if(GBLappSettings.lastBootRecordDir != NULL && 
+           strlen(lastBootRecordDir) > strlen(GBLappSettings.lastBootRecordDir))
+        {
+            free(GBLappSettings.lastBootRecordDir);
+            GBLappSettings.lastBootRecordDir = NULL;
+        }
+        
+        if(GBLappSettings.lastBootRecordDir == NULL)
+            GBLappSettings.lastBootRecordDir = malloc(strlen(lastBootRecordDir) + 1);
+        
+        strcpy(GBLappSettings.lastBootRecordDir, lastBootRecordDir);
+        
+        g_free(lastBootRecordDir);
+        /* END RECORD last boot record dir */
         
         rc = bk_add_boot_record(&GBLvolInfo, filename, (int)bootRecordType);
         if(rc <= 0)
@@ -135,9 +159,33 @@ void extractBootRecordCbk(GtkButton *button, gpointer data)
                                          GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
                                          NULL);
     
+    if(GBLappSettings.lastBootRecordDir != NULL)
+        gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastBootRecordDir);
+    
     dialogResponse = gtk_dialog_run(GTK_DIALOG(dialog));
+    
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
+    {
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+        
+        /* RECORD last boot record dir */
+        char* lastBootRecordDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
+        
+        if(GBLappSettings.lastBootRecordDir != NULL && 
+           strlen(lastBootRecordDir) > strlen(GBLappSettings.lastBootRecordDir))
+        {
+            free(GBLappSettings.lastBootRecordDir);
+            GBLappSettings.lastBootRecordDir = NULL;
+        }
+        
+        if(GBLappSettings.lastBootRecordDir == NULL)
+            GBLappSettings.lastBootRecordDir = malloc(strlen(lastBootRecordDir) + 1);
+        
+        strcpy(GBLappSettings.lastBootRecordDir, lastBootRecordDir);
+        
+        g_free(lastBootRecordDir);
+        /* END RECORD last boot record dir */
+    }
     
     gtk_widget_destroy(dialog);
     

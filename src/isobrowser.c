@@ -38,6 +38,9 @@ extern GtkListStore* GBLfsListStore;
 extern char* GBLfsCurrentDir;
 extern GtkWidget* GBLisoSizeLbl;
 extern GtkWidget* GBLisoCurrentDirField;
+extern GdkPixbuf* GBLdirPixbuf;
+extern GdkPixbuf* GBLfilePixbuf;
+extern AppSettings GBLappSettings;
 
 /* info about the image being worked on */
 VolInfo GBLvolInfo;
@@ -53,10 +56,6 @@ static GtkWidget* GBLWritingProgressBar;
 static GtkWidget* GBLextractingProgressBar;
 /* the column for the filename in the iso pane */
 static GtkTreeViewColumn* GBLfilenameIsoColumn;
-
-extern GdkPixbuf* GBLdirPixbuf;
-extern GdkPixbuf* GBLfilePixbuf;
-extern AppSettings GBLappSettings;
 
 void addToIsoCbk(GtkButton *button, gpointer data)
 {
@@ -871,6 +870,7 @@ gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     GtkWidget *dialog;
     char* filename;
     GtkFileFilter* nameFilter;
+    int dialogRespose;
     
     dialog = gtk_file_chooser_dialog_new("Open File",
                                          NULL,
@@ -889,36 +889,41 @@ gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    if(GBLappSettings.lastOpenDir != NULL)
-        gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastOpenDir);
+    if(GBLappSettings.lastIsoDir != NULL)
+        gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastIsoDir);
     
-    if(gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_ACCEPT)
+    dialogRespose = gtk_dialog_run(GTK_DIALOG(dialog));
+    
+    if(dialogRespose == GTK_RESPONSE_ACCEPT)
     {
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
         
+        /* RECORD last iso dir */
+        char* lastIsoDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
+        
+        if(GBLappSettings.lastIsoDir != NULL && strlen(lastIsoDir) > strlen(GBLappSettings.lastIsoDir))
+        {
+            free(GBLappSettings.lastIsoDir);
+            GBLappSettings.lastIsoDir = NULL;
+        }
+        
+        if(GBLappSettings.lastIsoDir == NULL)
+            GBLappSettings.lastIsoDir = malloc(strlen(lastIsoDir) + 1);
+        
+        strcpy(GBLappSettings.lastIsoDir, lastIsoDir);
+        
+        g_free(lastIsoDir);
+        /* END RECORD last iso dir */
+    }
+    
+    gtk_widget_destroy(dialog);
+    
+    if(dialogRespose == GTK_RESPONSE_ACCEPT)
+    {
         openIso(filename);
         
         g_free(filename);
     }
-    
-    /* RECORD last open dir */
-    char* lastOpenDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
-    
-    if(GBLappSettings.lastOpenDir != NULL && strlen(lastOpenDir) > strlen(GBLappSettings.lastOpenDir))
-    {
-        free(GBLappSettings.lastOpenDir);
-        GBLappSettings.lastOpenDir = NULL;
-    }
-    
-    if(GBLappSettings.lastOpenDir == NULL)
-        GBLappSettings.lastOpenDir = malloc(strlen(lastOpenDir) + 1);
-    
-    strcpy(GBLappSettings.lastOpenDir, lastOpenDir);
-    
-    g_free(lastOpenDir);
-    /* END RECORD last open dir */
-    
-    gtk_widget_destroy(dialog);
     
     //~ openIso("image.iso");
     
@@ -1055,29 +1060,32 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), "All files");
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    if(GBLappSettings.lastSaveDir != NULL)
-        gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastSaveDir);
+    if(GBLappSettings.lastIsoDir != NULL)
+        gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastIsoDir);
     
     dialogResponse = gtk_dialog_run(GTK_DIALOG(dialog));
+    
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
+    {
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
     
-    /* RECORD last save dir */
-    char* lastSaveDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
-    
-    if(GBLappSettings.lastSaveDir != NULL && strlen(lastSaveDir) > strlen(GBLappSettings.lastSaveDir))
-    {
-        free(GBLappSettings.lastSaveDir);
-        GBLappSettings.lastSaveDir = NULL;
+        /* RECORD last iso dir */
+        char* lastIsoDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
+        
+        if(GBLappSettings.lastIsoDir != NULL && strlen(lastIsoDir) > strlen(GBLappSettings.lastIsoDir))
+        {
+            free(GBLappSettings.lastIsoDir);
+            GBLappSettings.lastIsoDir = NULL;
+        }
+        
+        if(GBLappSettings.lastIsoDir == NULL)
+            GBLappSettings.lastIsoDir = malloc(strlen(lastIsoDir) + 1);
+        
+        strcpy(GBLappSettings.lastIsoDir, lastIsoDir);
+        
+        g_free(lastIsoDir);
+        /* END RECORD iso save dir */
     }
-    
-    if(GBLappSettings.lastSaveDir == NULL)
-        GBLappSettings.lastSaveDir = malloc(strlen(lastSaveDir) + 1);
-    
-    strcpy(GBLappSettings.lastSaveDir, lastSaveDir);
-    
-    g_free(lastSaveDir);
-    /* END RECORD last save dir */
     
     gtk_widget_destroy(dialog);
     

@@ -348,43 +348,43 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.showHiddenFilesFs = true;
     
-    /* read/set last open dir */
+    /* read/set last iso open/save dir */
     if(GBLsettingsDictionary != NULL)
     {
         tempStr = iniparser_getstring(GBLsettingsDictionary, 
-                                      "ui:lastopendir", NULL);
+                                      "ui:lastisodir", NULL);
         if(tempStr == NULL)
-            GBLappSettings.lastOpenDir = NULL;
+            GBLappSettings.lastIsoDir = NULL;
         else
         {
-            GBLappSettings.lastOpenDir = malloc(strlen(tempStr) +1);
-            if(GBLappSettings.lastOpenDir == NULL)
-                fatalError("GBLappSettings.lastOpenDir = malloc(strlen(tempStr) +1) failed");
-            strcpy(GBLappSettings.lastOpenDir, tempStr);
+            GBLappSettings.lastIsoDir = malloc(strlen(tempStr) +1);
+            if(GBLappSettings.lastIsoDir == NULL)
+                fatalError("GBLappSettings.lastIsoDir = malloc(strlen(tempStr) +1) failed");
+            strcpy(GBLappSettings.lastIsoDir, tempStr);
         }
     }
     else
     /* no config file */
-        GBLappSettings.lastOpenDir = NULL;
+        GBLappSettings.lastIsoDir = NULL;
     
-    /* read/set last open dir */
+    /* read/set last boot record dir */
     if(GBLsettingsDictionary != NULL)
     {
         tempStr = iniparser_getstring(GBLsettingsDictionary, 
-                                      "ui:lastsavedir", NULL);
+                                      "ui:lastbootrecorddir", NULL);
         if(tempStr == NULL)
-            GBLappSettings.lastSaveDir = NULL;
+            GBLappSettings.lastBootRecordDir = NULL;
         else
         {
-            GBLappSettings.lastSaveDir = malloc(strlen(tempStr) +1);
-            if(GBLappSettings.lastSaveDir == NULL)
-                fatalError("GBLappSettings.lastSaveDir = malloc(strlen(tempStr) +1) failed");
-            strcpy(GBLappSettings.lastSaveDir, tempStr);
+            GBLappSettings.lastBootRecordDir = malloc(strlen(tempStr) +1);
+            if(GBLappSettings.lastBootRecordDir == NULL)
+                fatalError("GBLappSettings.lastBootRecordDir = malloc(strlen(tempStr) +1) failed");
+            strcpy(GBLappSettings.lastBootRecordDir, tempStr);
         }
     }
     else
     /* no config file */
-        GBLappSettings.lastSaveDir = NULL;
+        GBLappSettings.lastBootRecordDir = NULL;
     
     free(configFileName);
 }
@@ -448,9 +448,11 @@ void writeSettings(void)
     snprintf(numberStr, 20, "%d", GBLappSettings.sortDirectoriesFirst);
     iniparser_setstr(GBLsettingsDictionary, "ui:sortdirsfirst", numberStr);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:lastopendir", GBLappSettings.lastOpenDir);
+    if(GBLappSettings.lastIsoDir != NULL)
+        iniparser_setstr(GBLsettingsDictionary, "ui:lastisodir", GBLappSettings.lastIsoDir);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:lastsavedir", GBLappSettings.lastSaveDir);
+    if(GBLappSettings.lastBootRecordDir != NULL)
+        iniparser_setstr(GBLsettingsDictionary, "ui:lastbootrecorddir", GBLappSettings.lastBootRecordDir);
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }

@@ -20,8 +20,8 @@ typedef struct
     bool showHiddenFilesFs;
     bool sortDirectoriesFirst;
     int filenameTypesToWrite;
-    char* lastOpenDir;
-    char* lastSaveDir;
+    char* lastIsoDir;
+    char* lastBootRecordDir;
     
 } AppSettings;
 
