@@ -16,6 +16,7 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <libintl.h>
 
 #include "window.h"
 #include "fsbrowser.h"
@@ -41,6 +42,10 @@ int main(int argc, char** argv)
     GtkWidget* topPanedBox; /* to pack the top part of GBLbrowserPaned */
     GtkWidget* bottomPanedBox; /* to pack the bottom part of GBLbrowserPaned */
     GtkWidget* statusBar;
+    
+    /* initialize gettext */
+    bindtextdomain("isomaster", LOCALEDIR);
+    textdomain("isomaster");
     
     gtk_init(&argc, &argv);
     
