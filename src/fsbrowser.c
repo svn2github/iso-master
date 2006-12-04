@@ -26,7 +26,7 @@
 #include "error.h"
 #include "settings.h"
 
-#define UTF8(str) g_locale_to_utf8(gettext(str), -1, NULL, NULL, NULL)
+#define _(str) gettext(str)
 
 extern AppSettings GBLappSettings;
 extern char* GBLuserHomeDir;
@@ -116,7 +116,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     
     /* filename column */
     GBLfilenameFsColumn = gtk_tree_view_column_new();
-    gtk_tree_view_column_set_title(GBLfilenameFsColumn, UTF8("Name"));
+    gtk_tree_view_column_set_title(GBLfilenameFsColumn, _("Name"));
     gtk_tree_view_column_set_resizable(GBLfilenameFsColumn, TRUE);
     
     renderer = gtk_cell_renderer_pixbuf_new();
@@ -137,7 +137,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     /* size column */
     column = gtk_tree_view_column_new();
     renderer = gtk_cell_renderer_text_new();
-    gtk_tree_view_column_set_title(column, UTF8("Size"));
+    gtk_tree_view_column_set_title(column, _("Size"));
     gtk_tree_view_column_pack_start(column, renderer, FALSE);
     gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_SIZE);
     gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc64, NULL, NULL);
@@ -215,7 +215,7 @@ bool changeFsDirectory(char* newDirStr)
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               UTF8("Failed to open directory '%s', error %d"),
+                                               _("Failed to open directory '%s', error %d"),
                                                newDirStr,
                                                errno);
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
@@ -254,7 +254,7 @@ bool changeFsDirectory(char* newDirStr)
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   UTF8("Skiping directory entry because "
+                                                   _("Skiping directory entry because "
                                                    "cannot handle filename longer than 256 chars"));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
             gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -276,7 +276,7 @@ bool changeFsDirectory(char* newDirStr)
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   UTF8("Skiping directory entry because "
+                                                   _("Skiping directory entry because "
                                                    "stat(%s) failed with %d"),
                                                    nextItemPathAndName,
                                                    errno);

@@ -25,7 +25,7 @@
 #include "boot.h"
 #include "bk/bk.h"
 
-#define UTF8(str) g_locale_to_utf8(gettext(str), -1, NULL, NULL, NULL)
+#define _(str) gettext(str)
 
 /* the label that holds the value of the iso size */
 GtkWidget* GBLisoSizeLbl;
@@ -53,14 +53,14 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     UTF8("Go back"), 
-                                     UTF8("Go back up one directory on the filesystem"), "Private",
+                                     _("Go back"), 
+                                     _("Go back up one directory on the filesystem"), "Private",
                                      icon, G_CALLBACK(fsGoUpDirTreeCbk),
                                      NULL);
     
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     UTF8("New Directory"), 
-                                     UTF8("Create new directory on the filesystem"), "Private",
+                                     _("New Directory"), 
+                                     _("Create new directory on the filesystem"), "Private",
                                      GBLnewDirIcon, G_CALLBACK(createDirCbk), (gpointer)1);
 }
 
@@ -111,7 +111,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuBar);
     
     /* FILE menu */
-    rootMenu = gtk_menu_item_new_with_mnemonic(UTF8("_Image"));
+    rootMenu = gtk_menu_item_new_with_mnemonic(_("_Image"));
     gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
     gtk_widget_show(rootMenu);
     
@@ -161,7 +161,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     /* END FILE menu */
     
     /* VIEW menu */
-    rootMenu = gtk_menu_item_new_with_mnemonic(UTF8("_View"));
+    rootMenu = gtk_menu_item_new_with_mnemonic(_("_View"));
     gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
     gtk_widget_show(rootMenu);
     
@@ -174,7 +174,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(refreshBothViewsCbk), NULL);
     
-    GBLshowHiddenMenuItem = gtk_check_menu_item_new_with_mnemonic(UTF8("_Show hidden files"));
+    GBLshowHiddenMenuItem = gtk_check_menu_item_new_with_mnemonic(_("_Show hidden files"));
     if(GBLappSettings.showHiddenFilesFs)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLshowHiddenMenuItem), TRUE);
     else
@@ -184,7 +184,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(GBLshowHiddenMenuItem), "activate",
                      G_CALLBACK(showHiddenCbk), NULL);
     
-    GBLsortDirsFirst = gtk_check_menu_item_new_with_mnemonic(UTF8("_Sort directories first"));
+    GBLsortDirsFirst = gtk_check_menu_item_new_with_mnemonic(_("_Sort directories first"));
     if(GBLappSettings.sortDirectoriesFirst)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLsortDirsFirst), TRUE);
     else
@@ -196,7 +196,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     /* END VIEW menu */
     
     /* BOOT menu */
-    rootMenu = gtk_menu_item_new_with_mnemonic(UTF8("_BootRecord"));
+    rootMenu = gtk_menu_item_new_with_mnemonic(_("_BootRecord"));
     gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
     gtk_widget_show(rootMenu);
     
@@ -231,31 +231,31 @@ void buildMenu(GtkWidget* boxToPackInto)
     submenu = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
     
-    menuItem = gtk_menu_item_new_with_label(UTF8("Use selected file on image (no emulation)"));
+    menuItem = gtk_menu_item_new_with_label(_("Use selected file on image (no emulation)"));
     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(setFileAsBootRecordCbk), NULL);
     
-    menuItem = gtk_menu_item_new_with_label(UTF8("From file: no emulation"));
+    menuItem = gtk_menu_item_new_with_label(_("From file: no emulation"));
     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(addBootRecordFromFileCbk), (gpointer)BOOT_MEDIA_NO_EMULATION);
     
-    menuItem = gtk_menu_item_new_with_label(UTF8("From file: 1200KiB floppy"));
+    menuItem = gtk_menu_item_new_with_label(_("From file: 1200KiB floppy"));
     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(addBootRecordFromFileCbk), (gpointer)BOOT_MEDIA_1_2_FLOPPY);
     
-    menuItem = gtk_menu_item_new_with_label(UTF8("From file: 1440KiB floppy"));
+    menuItem = gtk_menu_item_new_with_label(_("From file: 1440KiB floppy"));
     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(addBootRecordFromFileCbk), (gpointer)BOOT_MEDIA_1_44_FLOPPY);
     
-    menuItem = gtk_menu_item_new_with_label(UTF8("From file: 2880KiB floppy"));
+    menuItem = gtk_menu_item_new_with_label(_("From file: 2880KiB floppy"));
     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
@@ -263,7 +263,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     /* END BOOT menu */
     
     /* HELP menu */
-    rootMenu = gtk_menu_item_new_with_mnemonic(UTF8("_Help"));
+    rootMenu = gtk_menu_item_new_with_mnemonic(_("_Help"));
     gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
     gtk_widget_show(rootMenu);
     
@@ -297,35 +297,35 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     UTF8("Go back"), 
-                                     UTF8("Go back up one directory on the ISO"), "Private",
+                                     _("Go back"), 
+                                     _("Go back up one directory on the ISO"), "Private",
                                      icon, G_CALLBACK(isoGoUpDirTreeCbk),
                                      NULL);
     
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     UTF8("New Directory"), 
-                                     UTF8("Create new directory on the ISO"), "Private",
+                                     _("New Directory"), 
+                                     _("Create new directory on the ISO"), "Private",
                                      GBLnewDirIcon2, G_CALLBACK(createDirCbk), (gpointer)0);
     
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     UTF8("Add"), UTF8("Add to the ISO"), "Private",
+                                     _("Add"), _("Add to the ISO"), "Private",
                                      icon, G_CALLBACK(addToIsoCbk),
                                      NULL);
 
     icon = gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     UTF8("Extract"), UTF8("Extract from the ISO"), "Private",
+                                     _("Extract"), _("Extract from the ISO"), "Private",
                                      icon, G_CALLBACK(extractFromIsoCbk),
                                      NULL);
 
     icon = gtk_image_new_from_stock(GTK_STOCK_DELETE, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     UTF8("Remove"), UTF8("Delete from the ISO"), "Private",
+                                     _("Remove"), _("Delete from the ISO"), "Private",
                                      icon, G_CALLBACK(deleteFromIsoCbk),
                                      NULL);
     
-    sizeTitleLabel = gtk_label_new(UTF8("      Estimated ISO Size: "));
+    sizeTitleLabel = gtk_label_new(_("      Estimated ISO Size: "));
     gtk_box_pack_start(GTK_BOX(hBox), sizeTitleLabel, FALSE, FALSE, 0);
     gtk_widget_show(sizeTitleLabel);
     

@@ -45,6 +45,7 @@ int main(int argc, char** argv)
     
     /* initialize gettext */
     bindtextdomain("isomaster", LOCALEDIR);
+    bind_textdomain_codeset("isomaster", "UTF-8"); /* so that gettext() returns UTF-8 strings */
     textdomain("isomaster");
     
     gtk_init(&argc, &argv);

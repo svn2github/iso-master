@@ -24,7 +24,7 @@
 #include "error.h"
 #include "settings.h"
 
-#define UTF8(str) g_locale_to_utf8(gettext(str), -1, NULL, NULL, NULL)
+#define _(str) gettext(str)
 
 /* this file has thigs shared by the fs and the iso browser */
 
@@ -74,7 +74,7 @@ void createDirCbk(GtkButton *button, gpointer onFs)
     /* asked to create dir on iso but no iso is open */
         return;
     
-    dialog = gtk_dialog_new_with_buttons(UTF8("Enter name for new directory"),
+    dialog = gtk_dialog_new_with_buttons(_("Enter name for new directory"),
                                          GTK_WINDOW(GBLmainWindow),
                                          GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_STOCK_OK,
@@ -115,7 +115,7 @@ void createDirCbk(GtkButton *button, gpointer onFs)
                                                        GTK_DIALOG_DESTROY_WITH_PARENT,
                                                        GTK_MESSAGE_ERROR,
                                                        GTK_BUTTONS_CLOSE,
-                                                       UTF8("Failed to create directory %s"),
+                                                       _("Failed to create directory %s"),
                                                        pathAndName);
                 gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
                 gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -138,7 +138,7 @@ void createDirCbk(GtkButton *button, gpointer onFs)
                                                        GTK_DIALOG_DESTROY_WITH_PARENT,
                                                        GTK_MESSAGE_ERROR,
                                                        GTK_BUTTONS_CLOSE,
-                                                       UTF8("Failed to create directory %s: '%s'"),
+                                                       _("Failed to create directory %s: '%s'"),
                                                        newDirName,
                                                        bk_get_error_string(rc));
                 gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);

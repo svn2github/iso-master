@@ -30,7 +30,7 @@
 #include "window.h"
 #include "settings.h"
 
-#define UTF8(str) g_locale_to_utf8(gettext(str), -1, NULL, NULL, NULL)
+#define _(str) gettext(str)
 
 extern GtkWidget* GBLmainWindow;
 extern GtkWidget* GBLisoTreeView;
@@ -147,7 +147,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   UTF8("Failed to add file %s: '%s'"),
+                                                   _("Failed to add file %s: '%s'"),
                                                    itemName,
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
@@ -218,7 +218,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     
     /* filename column */
     GBLfilenameIsoColumn = gtk_tree_view_column_new();
-    gtk_tree_view_column_set_title(GBLfilenameIsoColumn, UTF8("Name"));
+    gtk_tree_view_column_set_title(GBLfilenameIsoColumn, _("Name"));
     gtk_tree_view_column_set_resizable(GBLfilenameIsoColumn, TRUE);
     
     renderer = gtk_cell_renderer_pixbuf_new();
@@ -239,7 +239,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     /* size column */
     column = gtk_tree_view_column_new();
     renderer = gtk_cell_renderer_text_new();
-    gtk_tree_view_column_set_title(column, UTF8("Size"));
+    gtk_tree_view_column_set_title(column, _("Size"));
     gtk_tree_view_column_pack_start(column, renderer, FALSE);
     gtk_tree_view_column_add_attribute(column, renderer, "text", COLUMN_SIZE);
     gtk_tree_view_column_set_cell_data_func(column, renderer, sizeCellDataFunc32, NULL, NULL);
@@ -280,7 +280,7 @@ void changeIsoDirectory(char* newDirStr)
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               UTF8("Failed to change directory: '%s'"),
+                                               _("Failed to change directory: '%s'"),
                                                bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -369,7 +369,7 @@ bool confirmCloseIso(void)
                                            GTK_DIALOG_DESTROY_WITH_PARENT,
                                            GTK_MESSAGE_QUESTION,
                                            GTK_BUTTONS_YES_NO,
-                                           UTF8("It seems that you have made changes to the ISO but "
+                                           _("It seems that you have made changes to the ISO but "
                                            "haven't saved them. Are you sure you want to close it?"));
     gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
     gtk_dialog_set_default_response(GTK_DIALOG(warningDialog), GTK_RESPONSE_YES);
@@ -440,7 +440,7 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   UTF8("Failed to delete directory %s: '%s'"),
+                                                   _("Failed to delete directory %s: '%s'"),
                                                    itemName,
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
@@ -469,7 +469,7 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   UTF8("Failed to delete file %s: '%s'"),
+                                                   _("Failed to delete file %s: '%s'"),
                                                    itemName,
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
@@ -487,7 +487,7 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               UTF8("GUI error, deleting anything other then "
+                                               _("GUI error, deleting anything other then "
                                                "files and directories doesn't work"));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -516,14 +516,14 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         progressWindow = gtk_dialog_new();
         gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
         gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
-        gtk_window_set_title(GTK_WINDOW(progressWindow), UTF8("Progress"));
+        gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
         gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
         gtk_widget_show(progressWindow);
         g_signal_connect_swapped(progressWindow, "destroy",
                                  G_CALLBACK(extractingProgressWindowDestroyedCbk), NULL);
         
         /* just some text */
-        descriptionLabel = gtk_label_new(UTF8("Please wait while I'm extracting the selected files..."));
+        descriptionLabel = gtk_label_new(_("Please wait while I'm extracting the selected files..."));
         gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), descriptionLabel, TRUE, TRUE, 0);
         gtk_widget_show(descriptionLabel);
         
@@ -574,7 +574,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   UTF8("Failed to extract directory %s: '%s'"),
+                                                   _("Failed to extract directory %s: '%s'"),
                                                    itemName,
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
@@ -602,7 +602,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   UTF8("Failed to extract file %s: '%s'"),
+                                                   _("Failed to extract file %s: '%s'"),
                                                    itemName,
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
@@ -800,7 +800,7 @@ void openIso(char* filename)
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               UTF8("Failed to open iso file for reading: '%s'"),
+                                               _("Failed to open iso file for reading: '%s'"),
                                                bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -815,7 +815,7 @@ void openIso(char* filename)
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               UTF8("Failed to read volume info: '%s'"),
+                                               _("Failed to read volume info: '%s'"),
                                                bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -837,7 +837,7 @@ void openIso(char* filename)
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               UTF8("Failed to read directory tree: '%s'"),
+                                               _("Failed to read directory tree: '%s'"),
                                                bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -884,12 +884,12 @@ gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     
     nameFilter = gtk_file_filter_new();
     gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
-    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), UTF8("ISO Images"));
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("ISO Images"));
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
     nameFilter = gtk_file_filter_new();
     gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
-    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), UTF8("All files"));
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("All files"));
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
     if(GBLappSettings.lastIsoDir != NULL)
@@ -943,7 +943,7 @@ bool operationFailed(const char* msg)
                                            GTK_DIALOG_DESTROY_WITH_PARENT,
                                            GTK_MESSAGE_WARNING,
                                            GTK_BUTTONS_YES_NO,
-                                           UTF8("%s\n\nDo you wish to continue?"),
+                                           _("%s\n\nDo you wish to continue?"),
                                            msg);
     gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
     response = gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -982,7 +982,7 @@ void saveIso(char* filename)
     progressWindow = gtk_dialog_new();
     gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
     gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
-    gtk_window_set_title(GTK_WINDOW(progressWindow), UTF8("Progress"));
+    gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
     gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
     gtk_widget_show(progressWindow);
     g_signal_connect_swapped(progressWindow, "response",
@@ -991,7 +991,7 @@ void saveIso(char* filename)
                              G_CALLBACK(writingProgressWindowDestroyedCbk), NULL);
     
     /* just some text */
-    descriptionLabel = gtk_label_new(UTF8("Please wait while I'm saving the new image to disk..."));
+    descriptionLabel = gtk_label_new(_("Please wait while I'm saving the new image to disk..."));
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), descriptionLabel, TRUE, TRUE, 0);
     gtk_widget_show(descriptionLabel);
     
@@ -1013,7 +1013,7 @@ void saveIso(char* filename)
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               UTF8("Failed to write image to '%s': '%s'"),
+                                               _("Failed to write image to '%s': '%s'"),
                                                filename,
                                                bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
@@ -1046,7 +1046,7 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     if(!GBLisoPaneActive)
         return TRUE;
     
-    dialog = gtk_file_chooser_dialog_new(UTF8("Save File"),
+    dialog = gtk_file_chooser_dialog_new(_("Save File"),
                                          NULL,
                                          GTK_FILE_CHOOSER_ACTION_SAVE,
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -1055,12 +1055,12 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     
     nameFilter = gtk_file_filter_new();
     gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
-    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), UTF8("ISO Images"));
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("ISO Images"));
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
     nameFilter = gtk_file_filter_new();
     gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
-    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), UTF8("All files"));
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("All files"));
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
     if(GBLappSettings.lastIsoDir != NULL)
