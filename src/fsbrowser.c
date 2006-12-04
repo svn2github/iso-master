@@ -293,7 +293,9 @@ bool changeFsDirectory(char* newDirStr)
             gtk_list_store_append(GBLfsListStore, &listIterator);
             gtk_list_store_set(GBLfsListStore, &listIterator, 
                                COLUMN_ICON, GBLdirPixbuf,
-                               COLUMN_FILENAME, nextItem->d_name, 
+                               COLUMN_FILENAME, nextItem->d_name,
+                               //COLUMN_FILENAME, g_filename_to_utf8(nextItem->d_name, -1, 0, 0, 0),
+                               //COLUMN_FILENAME, g_locale_to_utf8(nextItem->d_name, -1, 0, 0, 0),
                                COLUMN_SIZE, 0LL,
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
                                -1);
@@ -304,7 +306,9 @@ bool changeFsDirectory(char* newDirStr)
             gtk_list_store_append(GBLfsListStore, &listIterator);
             gtk_list_store_set(GBLfsListStore, &listIterator, 
                                COLUMN_ICON, GBLfilePixbuf,
-                               COLUMN_FILENAME, nextItem->d_name, 
+                               COLUMN_FILENAME, nextItem->d_name,
+                               //COLUMN_FILENAME, g_filename_to_utf8(nextItem->d_name, -1, 0, 0, 0),
+                               //COLUMN_FILENAME, g_locale_to_utf8(nextItem->d_name, -1, 0, 0, 0), 
                                COLUMN_SIZE, nextItemInfo.st_size,
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
                                -1);
