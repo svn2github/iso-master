@@ -123,7 +123,7 @@ int main(int argc, char** argv)
     gtk_widget_show(statusBar);
     gtk_box_pack_start(GTK_BOX(mainVBox), statusBar, FALSE, FALSE, 0);
 
-    if (argv[1] != NULL)
+    if(argv[1] != NULL)
       openIso(argv[1]);
     
     gtk_main();

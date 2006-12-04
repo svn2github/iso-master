@@ -14,6 +14,7 @@
 
 #include <gtk/gtk.h>
 #include <string.h>
+#include <libintl.h>
 
 #include "bk/bk.h"
 #include "boot.h"
@@ -21,6 +22,8 @@
 #include "error.h"
 #include "window.h"
 #include "settings.h"
+
+#define UTF8(str) g_locale_to_utf8(gettext(str), -1, NULL, NULL, NULL)
 
 extern GtkWidget* GBLmainWindow;
 extern VolInfo GBLvolInfo;
@@ -40,7 +43,7 @@ void addBootRecordFromFileCbk(GtkButton *button, gpointer bootRecordType)
     /* no iso open */
         return;
     
-    dialog = gtk_file_chooser_dialog_new("Chose Boot Record File",
+    dialog = gtk_file_chooser_dialog_new(UTF8("Chose Boot Record File"),
                                          NULL,
                                          GTK_FILE_CHOOSER_ACTION_OPEN,
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -79,7 +82,7 @@ void addBootRecordFromFileCbk(GtkButton *button, gpointer bootRecordType)
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   "Failed to add boot record: '%s'",
+                                                   UTF8("Failed to add boot record: '%s'"),
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
             gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -106,7 +109,7 @@ void deleteBootRecordCbk(GtkButton *button, gpointer data)
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
                                         GTK_MESSAGE_ERROR,
                                         GTK_BUTTONS_CLOSE,
-                                        "No boot to delete");
+                                        UTF8("No boot to delete"));
         gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
@@ -120,7 +123,7 @@ void deleteBootRecordCbk(GtkButton *button, gpointer data)
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
                                         GTK_MESSAGE_INFO,
                                         GTK_BUTTONS_CLOSE,
-                                        "Boot record deleted");
+                                        UTF8("Boot record deleted"));
         gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
@@ -145,14 +148,14 @@ void extractBootRecordCbk(GtkButton *button, gpointer data)
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
                                         GTK_MESSAGE_ERROR,
                                         GTK_BUTTONS_CLOSE,
-                                        "No boot record read from original or set on image");
+                                        UTF8("No boot record read from original or set on image"));
         gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
         return;
     }
     
-    dialog = gtk_file_chooser_dialog_new("Save a copy of the boot record",
+    dialog = gtk_file_chooser_dialog_new(UTF8("Save a copy of the boot record"),
                                          NULL,
                                          GTK_FILE_CHOOSER_ACTION_SAVE,
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
@@ -198,7 +201,7 @@ void extractBootRecordCbk(GtkButton *button, gpointer data)
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   "Failed to extract boot record: '%s'",
+                                                   UTF8("Failed to extract boot record: '%s'"),
                                                    bk_get_error_string(rc));
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
@@ -225,8 +228,8 @@ void setFileAsBootRecordCbk(GtkButton *button, gpointer data)
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
                                         GTK_MESSAGE_ERROR,
                                         GTK_BUTTONS_CLOSE,
-                                        "Please select a file in the ISO browser to "
-                                        "use as the boot record");
+                                        UTF8("Please select a file in the ISO browser to "
+                                        "use as the boot record"));
         gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
@@ -239,7 +242,7 @@ void setFileAsBootRecordCbk(GtkButton *button, gpointer data)
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
                                         GTK_MESSAGE_ERROR,
                                         GTK_BUTTONS_CLOSE,
-                                        "Please select no more then one file in the ISO browser");
+                                        UTF8("Please select no more then one file in the ISO browser"));
         gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
@@ -268,8 +271,8 @@ void setFileAsBootRecordRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
                                         GTK_MESSAGE_ERROR,
                                         GTK_BUTTONS_CLOSE,
-                                        "Item selected is not a regular file and cannot"
-                                        " be used as a boot record");
+                                        UTF8("Item selected is not a regular file and cannot"
+                                        " be used as a boot record"));
         gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
@@ -293,7 +296,7 @@ void setFileAsBootRecordRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
                                         GTK_MESSAGE_ERROR,
                                         GTK_BUTTONS_CLOSE,
-                                        "Failed to set %s as boot record: '%s'",
+                                        UTF8("Failed to set %s as boot record: '%s'"),
                                         itemName,
                                         bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
@@ -322,14 +325,14 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
                                         GTK_DIALOG_DESTROY_WITH_PARENT,
                                         GTK_MESSAGE_INFO,
                                         GTK_BUTTONS_CLOSE,
-                                        "No boot record read from original or set on image");
+                                        UTF8("No boot record read from original or set on image"));
         gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
         return;
     }
     
-    dialog = gtk_dialog_new_with_buttons("Boot Record Information",
+    dialog = gtk_dialog_new_with_buttons(UTF8("Boot Record Information"),
                                          GTK_WINDOW(GBLmainWindow),
                                          GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_STOCK_OK,
@@ -344,13 +347,13 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
     gtk_widget_show(vBox);
     
     if(GBLvolInfo.bootMediaType == BOOT_MEDIA_NO_EMULATION)
-        sprintf(str, "Boot record type: No Emulation");
+        sprintf(str, UTF8("Boot record type: No Emulation"));
     else if(GBLvolInfo.bootMediaType == BOOT_MEDIA_1_2_FLOPPY)
-        sprintf(str, "Boot record type: 1200KiB Floppy");
+        sprintf(str, UTF8("Boot record type: 1200KiB Floppy"));
     else if(GBLvolInfo.bootMediaType == BOOT_MEDIA_1_44_FLOPPY)
-        sprintf(str, "Boot record type: 1440KiB Floppy");
+        sprintf(str, UTF8("Boot record type: 1440KiB Floppy"));
     else if(GBLvolInfo.bootMediaType == BOOT_MEDIA_2_88_FLOPPY)
-        sprintf(str, "Boot record type: 2880KiB Floppy");
+        sprintf(str, UTF8("Boot record type: 2880KiB Floppy"));
     else
         sprintf(str, "Boot record type: error");
     label = gtk_label_new(str);
@@ -359,7 +362,7 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
     
     if(GBLvolInfo.bootMediaType == BOOT_MEDIA_NO_EMULATION)
     {
-        snprintf(str, 100, "Size: %d bytes", GBLvolInfo.bootRecordSize);
+        snprintf(str, 100, UTF8("Size: %d bytes"), GBLvolInfo.bootRecordSize);
         label = gtk_label_new(str);
         gtk_box_pack_start(GTK_BOX(vBox), label, TRUE, TRUE, 0);
         gtk_widget_show(label);
@@ -369,25 +372,25 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
     /* get this info from the original file */
     {
         if(GBLvolInfo.bootRecordOnImage->onImage)
-            snprintf(str, 100, "Location: on original image at 0x%X", GBLvolInfo.bootRecordOnImage->position);
+            snprintf(str, 100, UTF8("Location: on original image at 0x%X"), GBLvolInfo.bootRecordOnImage->position);
         else
-            snprintf(str, 100, "Location: to be added from '%s'", GBLvolInfo.bootRecordOnImage->pathAndName);
+            snprintf(str, 100, UTF8("Location: to be added from '%s'"), GBLvolInfo.bootRecordOnImage->pathAndName);
     }
     else
     {
         if(GBLvolInfo.bootRecordIsOnImage)
-            snprintf(str, 100, "Location: on original image at 0x%X", GBLvolInfo.bootRecordOffset);
+            snprintf(str, 100, UTF8("Location: on original image at 0x%X"), GBLvolInfo.bootRecordOffset);
         else
-            snprintf(str, 100, "Location: to be added from '%s'", GBLvolInfo.bootRecordPathAndName);
+            snprintf(str, 100, UTF8("Location: to be added from '%s'"), GBLvolInfo.bootRecordPathAndName);
     }
     label = gtk_label_new(str);
     gtk_box_pack_start(GTK_BOX(vBox), label, TRUE, TRUE, 0);
     gtk_widget_show(label);
     
     if(GBLvolInfo.bootRecordIsVisible)
-        snprintf(str, 100, "Is visible on image as '%s'", GBLvolInfo.bootRecordOnImage->name);
+        snprintf(str, 100, UTF8("Is visible on image as '%s'"), GBLvolInfo.bootRecordOnImage->name);
     else
-        snprintf(str, 100, "Is not visible on image");
+        snprintf(str, 100, UTF8("Is not visible on image"));
     label = gtk_label_new(str);
     gtk_box_pack_start(GTK_BOX(vBox), label, TRUE, TRUE, 0);
     gtk_widget_show(label);

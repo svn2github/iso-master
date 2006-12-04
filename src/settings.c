@@ -18,11 +18,14 @@
 #include <limits.h>
 #include <gtk/gtk.h>
 #include <dirent.h>
+#include <libintl.h>
 
 #include "bk/bk.h"
 #include "settings.h"
 #include "error.h"
 #include "window.h"
+
+#define UTF8(str) g_locale_to_utf8(gettext(str), -1, NULL, NULL, NULL)
 
 /* used by iniparser */
 dictionary* GBLsettingsDictionary;
@@ -57,7 +60,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     if(!GBLisoPaneActive)
         return;
     
-    dialog = gtk_dialog_new_with_buttons("Image Information",
+    dialog = gtk_dialog_new_with_buttons(UTF8("Image Information"),
                                          GTK_WINDOW(GBLmainWindow),
                                          GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_STOCK_OK,
@@ -76,7 +79,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), table, TRUE, TRUE, 0);
     gtk_widget_show(table);
     
-    label = gtk_label_new("Creation time:");
+    label = gtk_label_new(UTF8("Creation time:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
     gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, 0, 1);
     gtk_widget_show(label);
@@ -92,7 +95,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_table_attach_defaults(GTK_TABLE(table), field, 1, 2, 0, 1);
     gtk_widget_show(field);
     
-    label = gtk_label_new("Volume name:");
+    label = gtk_label_new(UTF8("Volume name:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
     gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, 1, 2);
     gtk_widget_show(label);
@@ -103,7 +106,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_table_attach_defaults(GTK_TABLE(table), volNameField, 1, 2, 1, 2);
     gtk_widget_show(volNameField);
     
-    label = gtk_label_new("Publisher:");
+    label = gtk_label_new(UTF8("Publisher:"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
     gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 1, 2, 3);
     gtk_widget_show(label);
@@ -118,7 +121,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hBox, TRUE, TRUE, 5);
     gtk_widget_show(hBox);
     
-    label = gtk_label_new("Filename types (both recommended):");
+    label = gtk_label_new(UTF8("Filename types (both recommended):"));
     gtk_misc_set_alignment(GTK_MISC(label), 0, 0);
     gtk_box_pack_start(GTK_BOX(hBox), label, TRUE, TRUE, 0);
     gtk_widget_show(label);
