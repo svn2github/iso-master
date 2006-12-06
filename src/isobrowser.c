@@ -349,6 +349,8 @@ void closeIso(void)
     /* no image open or created, nothing to do */
         return;
     
+    gtk_list_store_clear(GBLisoListStore);
+    
     bk_destroy_vol_info(&GBLvolInfo);
     
     GBLisoSize = 0;
