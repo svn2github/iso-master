@@ -19,6 +19,7 @@
 #include <gtk/gtk.h>
 #include <dirent.h>
 #include <libintl.h>
+#include <time.h>
 
 #include "bk/bk.h"
 #include "settings.h"
