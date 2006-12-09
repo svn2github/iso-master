@@ -43,7 +43,7 @@ isomaster.o: isomaster.c $(GLOBALDEPS)
 	cc isomaster.c -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 window.o: window.c window.h $(GLOBALDEPS)
-	cc window.c $(GLOBALFLAGS) $(GTKFLAGS) -c
+	cc window.c -DICONPATH=\"$(ICONPATH)\" $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 browser.o: browser.c $(GLOBALDEPS)
 	cc browser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
@@ -79,7 +79,9 @@ install: isomaster
 	install isomaster $(DESTDIR)$(BINPATH)
 	install -d $(DESTDIR)$(ICONPATH)
 	install -m 644 icons/isomaster.png $(DESTDIR)$(ICONPATH)
-	install -m 644 icons/folder-new.png $(DESTDIR)$(ICONPATH)
+	install -m 644 icons/folder-new-tango.png $(DESTDIR)$(ICONPATH)
+	install -m 644 icons/add2-kearone.png $(DESTDIR)$(ICONPATH)
+	install -m 644 icons/extract-kearone.png $(DESTDIR)$(ICONPATH)
 	cd po && $(MAKE) install
 
 uninstall: 

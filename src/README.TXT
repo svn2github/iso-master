@@ -42,6 +42,10 @@ Please help me improve ISO Master by sending me bug reports. The more of the fol
 - if it only happens with one image file, tell me what it is and, if it's freely available, where i can get it
 - it's better to give me too much detail then too little
 
+Credits
+-------
+See CREDITS.TXT for a list of contributors to ISO Master.
+
 License
 -------
 The source code for this version of ISO Master and bkisofs is distributed under the GNU General Public Licence version 2.

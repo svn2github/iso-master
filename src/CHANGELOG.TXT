@@ -1,6 +1,9 @@
  - 0.6
 =================
+- Replaced the Add and Extract icons with the two I got from kearone.
+- Added gettext() support so that can now make use of .po files.
 - Can now read, add, extract and write files with long directory names (up to 255 characters for RockRidge).
+- Am allowing more characters in filenames on the image.
 - Enter key now works in 'reate new directory' dialog.
 - Added button to refresh the filesystem and iso view.
 - Am now recording last location of file open/save dialogs.

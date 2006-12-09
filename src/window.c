@@ -33,11 +33,17 @@ GtkWidget* GBLisoSizeLbl;
 GtkWidget* GBLshowHiddenMenuItem;
 /* check menu item for 'sort directories first' */
 GtkWidget* GBLsortDirsFirst;
+/* icon for 'new directory' for fs browser */
+GtkWidget* GBLnewDirIcon;
+/* icon for 'new directory' for iso browser */
+GtkWidget* GBLnewDirIcon2;
+/* 'add to iso' icon */
+GtkWidget* GBLaddIcon;
+/* 'extract from iso' icon */
+GtkWidget* GBLextractIcon;
 
 extern GtkWidget* GBLmainWindow;
 extern AppSettings GBLappSettings;
-extern GtkWidget* GBLnewDirIcon;
-extern GtkWidget* GBLnewDirIcon2;
 extern bool GBLisoPaneActive;
 extern bool GBLisoChangesProbable;
 
@@ -307,16 +313,14 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
                                      _("Create new directory on the ISO"), "Private",
                                      GBLnewDirIcon2, G_CALLBACK(createDirCbk), (gpointer)0);
     
-    icon = gtk_image_new_from_stock(GTK_STOCK_GO_DOWN, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("Add"), _("Add to the ISO"), "Private",
-                                     icon, G_CALLBACK(addToIsoCbk),
+                                     GBLaddIcon, G_CALLBACK(addToIsoCbk),
                                      NULL);
 
-    icon = gtk_image_new_from_stock(GTK_STOCK_GO_UP, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("Extract"), _("Extract from the ISO"), "Private",
-                                     icon, G_CALLBACK(extractFromIsoCbk),
+                                     GBLextractIcon, G_CALLBACK(extractFromIsoCbk),
                                      NULL);
 
     icon = gtk_image_new_from_stock(GTK_STOCK_DELETE, GTK_ICON_SIZE_LARGE_TOOLBAR);
@@ -352,6 +356,36 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
 void closeWindowCbk(GtkWidget *widget, GdkEvent *event)
 {
     gtk_dialog_response(GTK_DIALOG(widget), GTK_RESPONSE_REJECT);
+}
+
+void loadIcon(GtkWidget** destIcon, const char* srcFile, int size)
+{
+    GdkPixbuf* pixbuf;
+    
+    pixbuf = gdk_pixbuf_new_from_file(srcFile, NULL);
+    if(pixbuf == NULL)
+    /* could not load icon but need one so replace it with 'unknown' from stock  */
+    {
+        *destIcon = gtk_image_new_from_stock(GTK_STOCK_MISSING_IMAGE, GTK_ICON_SIZE_MENU);
+    }
+    else
+    /* resize the icon loaded */
+    {
+        pixbuf = gdk_pixbuf_scale_simple(pixbuf, size, size, GDK_INTERP_HYPER);
+        *destIcon = gtk_image_new_from_pixbuf(pixbuf);
+    }
+}
+
+void loadIcons(void)
+{
+    int size;
+    
+    gtk_icon_size_lookup(GTK_ICON_SIZE_LARGE_TOOLBAR, &size, &size);
+    
+    loadIcon(&GBLnewDirIcon, ICONPATH"/folder-new-tango.png", size);
+    loadIcon(&GBLnewDirIcon2, ICONPATH"/folder-new-tango.png", size);
+    loadIcon(&GBLaddIcon, ICONPATH"/add2-kearone.png", size);
+    loadIcon(&GBLextractIcon, ICONPATH"/extract-kearone.png", size);
 }
 
 void sortDirsFirstCbk(GtkButton *button, gpointer data)

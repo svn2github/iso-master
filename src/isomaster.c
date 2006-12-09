@@ -26,17 +26,12 @@
 GtkWidget* GBLmainWindow;
 /* to be able to resize the two file browsers */
 GtkWidget* GBLbrowserPaned;
-/* icon for 'new directory' for fs browser */
-GtkWidget* GBLnewDirIcon;
-/* icon for 'new directory' for iso browser */
-GtkWidget* GBLnewDirIcon2;
 
 extern AppSettings GBLappSettings;
 
 int main(int argc, char** argv)
 {
     GdkPixbuf* appIcon;
-    GdkPixbuf* newDirPixbuf;
     GtkWidget* mainVBox;
     GtkWidget* mainFrame; /* to put a border around the window contents */
     GtkWidget* topPanedBox; /* to pack the top part of GBLbrowserPaned */
@@ -54,25 +49,10 @@ int main(int argc, char** argv)
     
     loadSettings();
     
-    /* ICONPATH is defined in the makefile */
+    /* the path ICONPATH is defined in the makefile */
     appIcon = gdk_pixbuf_new_from_file(ICONPATH"/isomaster.png", NULL);
     
-    newDirPixbuf = gdk_pixbuf_new_from_file(ICONPATH"/folder-new.png", NULL);
-    if(newDirPixbuf == NULL)
-    /* could not load icon but need one so replace it with 'unknown' from stock  */
-    {
-        GBLnewDirIcon = gtk_image_new_from_stock(GTK_STOCK_MISSING_IMAGE, GTK_ICON_SIZE_MENU);
-        GBLnewDirIcon2 = gtk_image_new_from_stock(GTK_STOCK_MISSING_IMAGE, GTK_ICON_SIZE_MENU);
-    }
-    else
-    /* resize the icon loaded */
-    {
-        int menuSize;
-        gtk_icon_size_lookup(GTK_ICON_SIZE_LARGE_TOOLBAR, &menuSize, &menuSize);
-        newDirPixbuf = gdk_pixbuf_scale_simple(newDirPixbuf, menuSize, menuSize, GDK_INTERP_HYPER);
-        GBLnewDirIcon = gtk_image_new_from_pixbuf(newDirPixbuf);
-        GBLnewDirIcon2 = gtk_image_new_from_pixbuf(newDirPixbuf);
-    }
+    loadIcons();
     
     /* main window */
     GBLmainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);

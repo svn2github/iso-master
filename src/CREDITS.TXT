@@ -25,10 +25,15 @@ Steffen Winterfeldt
 September 2006
 - helped me figure out how to work with isolinux boot records
 
+Roman Hubatsch (kearone)
+http://kearone.deviantart.com/
+December 2006
+- the excellent 'add' and 'extract' icons and the new Isomaster icon
+
 Tango Desktop Project
 http://tango.freedesktop.org/Tango_Icon_Gallery
 August 2006
-- a couple of very nice icons
+- the pretty 'new folder' icon
 
 David Johnson
 http://www.david-web.co.uk/
