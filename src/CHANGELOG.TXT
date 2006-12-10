@@ -1,4 +1,4 @@
- - 0.6
+09 Dec 2006 - 0.6
 =================
 - Replaced the Add and Extract icons with the two I got from kearone.
 - Added gettext() support so that can now make use of .po files.
