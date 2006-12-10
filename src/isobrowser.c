@@ -266,9 +266,9 @@ void buildIsoLocator(GtkWidget* boxToPackInto)
 void changeIsoDirectory(char* newDirStr)
 {
     int rc;
-    Dir* newDir;
-    DirLL* nextDir;
-    FileLL* nextFile;
+    BkDir* newDir;
+    BkDir* nextDir;
+    BkFile* nextFile;
     GtkTreeIter listIterator;
     GtkTreeModel* model;
     GtkWidget* warningDialog;
@@ -304,7 +304,7 @@ void changeIsoDirectory(char* newDirStr)
         gtk_list_store_append(GBLisoListStore, &listIterator);
         gtk_list_store_set(GBLisoListStore, &listIterator, 
                            COLUMN_ICON, GBLdirPixbuf,
-                           COLUMN_FILENAME, nextDir->dir.name, 
+                           COLUMN_FILENAME, nextDir->name, 
                            COLUMN_SIZE, 0,
                            COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
                            -1);
@@ -319,8 +319,8 @@ void changeIsoDirectory(char* newDirStr)
         gtk_list_store_append(GBLisoListStore, &listIterator);
         gtk_list_store_set(GBLisoListStore, &listIterator, 
                            COLUMN_ICON, GBLfilePixbuf,
-                           COLUMN_FILENAME, nextFile->file.name, 
-                           COLUMN_SIZE, nextFile->file.size,
+                           COLUMN_FILENAME, nextFile->name, 
+                           COLUMN_SIZE, nextFile->size,
                            COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
                            -1);
         
