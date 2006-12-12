@@ -342,7 +342,7 @@ msgstr "Имя тома:"
 
 #: ../window.c:199
 msgid "_BootRecord"
-msgstr "_Загрузочная Запись"
+msgstr "_Загрузочная-Запись"
 
 #: ../window.c:266
 msgid "_Help"
