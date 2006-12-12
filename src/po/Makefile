@@ -1,12 +1,15 @@
 # LOCALEDIR is defined in the top-level makefile
 
-MOFILES = bg.mo zh_TW.mo
+MOFILES = bg.mo ru.mo zh_TW.mo
 
 all: $(MOFILES) Makefile
 	
 
 bg.mo: bg.po
 	msgfmt -c -v bg.po -o bg.mo
+
+ru.mo: ru.po
+	msgfmt -c -v ru.po -o ru.mo
 
 zh_TW.mo: zh_TW.po
 	msgfmt -c -v zh_TW.po -o zh_TW.mo
