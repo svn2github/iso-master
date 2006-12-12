@@ -87,5 +87,7 @@ install: isomaster
 uninstall: 
 	rm -f $(DESTDIR)$(BINPATH)/isomaster
 	rm -f $(DESTDIR)$(ICONPATH)/isomaster.png
-	rm -f $(DESTDIR)$(ICONPATH)/folder-new.png
+	install -m 644 icons/folder-new-tango.png $(DESTDIR)$(ICONPATH)
+	install -m 644 icons/add2-kearone.png $(DESTDIR)$(ICONPATH)
+	install -m 644 icons/extract-kearone.png $(DESTDIR)$(ICONPATH)
 	cd po && $(MAKE) uninstall
