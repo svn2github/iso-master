@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2006-12-13 08:33+0300\n"
+"PO-Revision-Date: 2006-12-11 18:29+0300\n"
 "Last-Translator: Antonio_99RUS <scsiman@yandex.ru>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #: ../window.c:328
 msgid "      Estimated ISO Size: "
-msgstr "Ожидаемый размер ISO:"
+msgstr "Ожидаемый размер ISO: "
 
 #: ../isobrowser.c:946
 #, c-format

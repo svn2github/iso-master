@@ -160,13 +160,13 @@ void formatSize(unsigned long long  sizeInt, char* sizeStr, int sizeStrLen)
 {
     if(sizeInt > 1073741824)
     /* print gibibytes */
-        snprintf(sizeStr, sizeStrLen, "%.1lf GB", (double)sizeInt / 1073741824);
+        snprintf(sizeStr, sizeStrLen, "%.1f GB", (double)sizeInt / 1073741824);
     else if(sizeInt > 1048576)
     /* print mebibytes */
-        snprintf(sizeStr, sizeStrLen, "%.1lf MB", (double)sizeInt / 1048576);
+        snprintf(sizeStr, sizeStrLen, "%.1f MB", (double)sizeInt / 1048576);
     else if(sizeInt > 1024)
     /* print kibibytes */
-        snprintf(sizeStr, sizeStrLen, "%.1lf KB", (double)sizeInt / 1024);
+        snprintf(sizeStr, sizeStrLen, "%.1f KB", (double)sizeInt / 1024);
     else
     /* print bytes */
         snprintf(sizeStr, sizeStrLen, "%llu B", sizeInt);
