@@ -4,7 +4,7 @@
 
 # Compiler settings
 CC      = gcc
-CFLAGS  = -O3
+CFLAGS  = -O3 -pedantic -std=c99
 
 # Ar settings to build the library
 AR	    = ar
@@ -41,7 +41,7 @@ libiniparser.a:	$(OBJS)
 	@($(RANLIB) libiniparser.a)
 
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS) libiniparser.a
 
 veryclean:
 	$(RM) $(OBJS) libiniparser.a

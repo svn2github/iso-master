@@ -341,7 +341,7 @@ msgstr "Nom de Volume :"
  
 #: ../window.c:199
 msgid "_BootRecord"
-msgstr "_Zone Amorce"
+msgstr "_ZoneAmorce"
  
 #: ../window.c:266
 msgid "_Help"
