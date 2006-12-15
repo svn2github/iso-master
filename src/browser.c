@@ -169,7 +169,7 @@ void formatSize(unsigned long long  sizeInt, char* sizeStr, int sizeStrLen)
         snprintf(sizeStr, sizeStrLen, "%.1lf KB", (double)sizeInt / 1024);
     else
     /* print bytes */
-        snprintf(sizeStr, sizeStrLen, "%lld B", sizeInt);
+        snprintf(sizeStr, sizeStrLen, "%llu B", sizeInt);
     
     sizeStr[sizeStrLen - 1] = '\0';
 }

@@ -3,19 +3,14 @@
 #
 
 # Compiler settings
-CC      = gcc
 CFLAGS  = -O3 -pedantic -std=c99
 
 # Ar settings to build the library
-AR	    = ar
 ARFLAGS = rcv
 
 # Set RANLIB to ranlib on systems that require it (Sun OS < 4, Mac OSX)
 # RANLIB  = ranlib
 RANLIB = true
-
-RM      = rm -f
-
 
 # Implicit rules
 

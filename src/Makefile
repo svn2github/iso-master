@@ -21,14 +21,23 @@ ifndef LOCALEDIR
 	export LOCALEDIR = ${PREFIX}/share/locale
 endif
 
+# programs used in the Makefiles:
+export CC      = gcc
+export AR      = ar
+export RM      = rm -f
+export INSTALL = install
+
 GTKLIBS = `pkg-config --libs gtk+-2.0`
 GTKFLAGS = `pkg-config --cflags gtk+-2.0`
 # the _FILE_OFFSET_BITS=64 is to enable stat() for large files
 GLOBALFLAGS = -D_FILE_OFFSET_BITS=64 -Wall -pedantic -std=c99
 GLOBALDEPS = bk/bk.h Makefile
 
+# some build systems require an 'all' target
+all: isomaster
+
 isomaster: lib iniparser translations isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o $(GLOBALDEPS)
-	cc isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o bk/bk.a iniparser-2.15/libiniparser.a $(GTKLIBS) $(GLOBALFLAGS) -o isomaster
+	$(CC) isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o bk/bk.a iniparser-2.15/libiniparser.a $(GTKLIBS) $(GLOBALFLAGS) -o isomaster
 
 lib:
 	cd bk && $(MAKE)
@@ -40,54 +49,54 @@ translations:
 	cd po && $(MAKE)
 
 isomaster.o: isomaster.c $(GLOBALDEPS) 
-	cc isomaster.c -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" $(GLOBALFLAGS) $(GTKFLAGS) -c
+	$(CC) isomaster.c -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 window.o: window.c window.h $(GLOBALDEPS)
-	cc window.c -DICONPATH=\"$(ICONPATH)\" $(GLOBALFLAGS) $(GTKFLAGS) -c
+	$(CC) window.c -DICONPATH=\"$(ICONPATH)\" $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 browser.o: browser.c $(GLOBALDEPS)
-	cc browser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
+	$(CC) browser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 fsbrowser.o: fsbrowser.c fsbrowser.h $(GLOBALDEPS)
-	cc fsbrowser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
+	$(CC) fsbrowser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 isobrowser.o: isobrowser.c isobrowser.h $(GLOBALDEPS)
-	cc isobrowser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
+	$(CC) isobrowser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 error.o: error.c error.h $(GLOBALDEPS)
-	cc error.c $(GLOBALFLAGS) $(GTKFLAGS) -c
+	$(CC) error.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 about.o: about.c about.h $(GLOBALDEPS)
-	cc about.c $(GLOBALFLAGS) $(GTKFLAGS) -c
+	$(CC) about.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 settings.o: settings.c settings.h $(GLOBALDEPS)
-	cc settings.c $(GLOBALFLAGS) $(GTKFLAGS) -c
+	$(CC) settings.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 boot.o: boot.c boot.h $(GLOBALDEPS)
-	cc boot.c $(GLOBALFLAGS) $(GTKFLAGS) -c
+	$(CC) boot.c $(GLOBALFLAGS) $(GTKFLAGS) -c
 
 clean: 
-	rm -f *.o isomaster
+	$(RM) *.o isomaster
 	cd bk && $(MAKE) clean
 	cd iniparser-2.15 && $(MAKE) clean
-	cd po && make clean
+	cd po && $(MAKE) clean
 
 # for info about DESTDIR see http://www.gnu.org/prep/standards/html_node/DESTDIR.html
 
 install: isomaster
-	install -d $(DESTDIR)$(BINPATH)
-	install isomaster $(DESTDIR)$(BINPATH)
-	install -d $(DESTDIR)$(ICONPATH)
-	install -m 644 icons/isomaster.png $(DESTDIR)$(ICONPATH)
-	install -m 644 icons/folder-new-tango.png $(DESTDIR)$(ICONPATH)
-	install -m 644 icons/add2-kearone.png $(DESTDIR)$(ICONPATH)
-	install -m 644 icons/extract-kearone.png $(DESTDIR)$(ICONPATH)
+	$(INSTALL) -d $(DESTDIR)$(BINPATH)
+	$(INSTALL) isomaster $(DESTDIR)$(BINPATH)
+	$(INSTALL) -d $(DESTDIR)$(ICONPATH)
+	$(INSTALL) -m 644 icons/isomaster.png $(DESTDIR)$(ICONPATH)
+	$(INSTALL) -m 644 icons/folder-new-tango.png $(DESTDIR)$(ICONPATH)
+	$(INSTALL) -m 644 icons/add2-kearone.png $(DESTDIR)$(ICONPATH)
+	$(INSTALL) -m 644 icons/extract-kearone.png $(DESTDIR)$(ICONPATH)
 	cd po && $(MAKE) install
 
 uninstall: 
-	rm -f $(DESTDIR)$(BINPATH)/isomaster
-	rm -f $(DESTDIR)$(ICONPATH)/isomaster.png
-	rm -f $(DESTDIR)$(ICONPATH)/folder-new-tango.png
-	rm -f $(DESTDIR)$(ICONPATH)/add2-kearone.png
-	rm -f $(DESTDIR)$(ICONPATH)/extract-kearone.png
+	$(RM) -v $(DESTDIR)$(BINPATH)/isomaster
+	$(RM) -v $(DESTDIR)$(ICONPATH)/isomaster.png
+	$(RM) -v $(DESTDIR)$(ICONPATH)/folder-new-tango.png
+	$(RM) -v $(DESTDIR)$(ICONPATH)/add2-kearone.png
+	$(RM) -v $(DESTDIR)$(ICONPATH)/extract-kearone.png
 	cd po && $(MAKE) uninstall

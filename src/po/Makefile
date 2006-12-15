@@ -1,4 +1,5 @@
 # LOCALEDIR is defined in the top-level makefile
+# CC, AR, RM, INSTALL defined in parent makefile
 
 MOFILES = bg.mo de.mo fr.mo pl.mo ru.mo zh_TW.mo
 
@@ -24,15 +25,15 @@ zh_TW.mo: zh_TW.po
 	msgfmt -c -v zh_TW.po -o zh_TW.mo
 
 clean:
-	rm -f *.mo
+	$(RM) *.mo
 
 install: all
 	for NAME in $(MOFILES); do \
-	  install -v -d $(LOCALEDIR)/`basename $$NAME .mo`/LC_MESSAGES; \
-	  install -v -m 644 $$NAME $(LOCALEDIR)/`basename $$NAME .mo`/LC_MESSAGES/isomaster.mo; \
+	  $(INSTALL) -v -d $(LOCALEDIR)/`basename $$NAME .mo`/LC_MESSAGES; \
+	  $(INSTALL) -v -m 644 $$NAME $(LOCALEDIR)/`basename $$NAME .mo`/LC_MESSAGES/isomaster.mo; \
 	done
 
 uninstall:
 	for NAME in $(MOFILES); do \
-	  rm -v -f $(LOCALEDIR)/`basename $$NAME .mo`/LC_MESSAGES/isomaster.mo; \
+	  $(RM) -v $(LOCALEDIR)/`basename $$NAME .mo`/LC_MESSAGES/isomaster.mo; \
 	done
