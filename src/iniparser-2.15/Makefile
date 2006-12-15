@@ -3,7 +3,7 @@
 #
 
 # Compiler settings
-CFLAGS  = -O3 -pedantic -std=c99
+# CFLAGS  = -O3 -pedantic -std=c99
 
 # Ar settings to build the library
 ARFLAGS = rcv

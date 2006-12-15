@@ -5,12 +5,12 @@ endif
 
 # where to install the executable
 ifndef BINPATH
-	BINPATH = ${PREFIX}/bin
+	BINPATH = $(PREFIX)/bin
 endif
 
 # where to install the icons
 ifndef ICONPATH
-	ICONPATH = ${PREFIX}/share/isomaster/icons
+	ICONPATH = $(PREFIX)/share/isomaster/icons
 endif
 
 # Used by gettext and po/Makefile (translations)
@@ -18,7 +18,7 @@ endif
 # variable in po/Makefile. This is safe to do, except obviously
 # you won't a have translated ISO Master.
 ifndef LOCALEDIR
-	export LOCALEDIR = ${PREFIX}/share/locale
+	export LOCALEDIR = $(PREFIX)/share/locale
 endif
 
 # programs used in the Makefiles:
@@ -27,17 +27,22 @@ export AR      = ar
 export RM      = rm -f
 export INSTALL = install
 
-GTKLIBS = `pkg-config --libs gtk+-2.0`
-GTKFLAGS = `pkg-config --cflags gtk+-2.0`
+# -DDEBUG and -g only used during development
+CFLAGS   = -Wall -pedantic -std=c99 `pkg-config --cflags gtk+-2.0` -g -DDEBUG
+
 # the _FILE_OFFSET_BITS=64 is to enable stat() for large files
-GLOBALFLAGS = -D_FILE_OFFSET_BITS=64 -Wall -pedantic -std=c99
-GLOBALDEPS = bk/bk.h Makefile
+CPPFLAGS = -D_FILE_OFFSET_BITS=64
 
-# some build systems require an 'all' target
-all: isomaster
+OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o
 
-isomaster: lib iniparser translations isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o $(GLOBALDEPS)
-	$(CC) isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o bk/bk.a iniparser-2.15/libiniparser.a $(GTKLIBS) $(GLOBALFLAGS) -o isomaster
+all: lib iniparser translations isomaster 
+
+isomaster: $(OBJECTS)
+	$(CC) $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
+
+# static pattern rule
+$(OBJECTS): %.o: %.c bk/bk.h Makefile
+	$(CC) $< $(CFLAGS) $(CPPFLAGS) -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -c -o $@
 
 lib:
 	cd bk && $(MAKE)
@@ -48,38 +53,11 @@ iniparser:
 translations:
 	cd po && $(MAKE)
 
-isomaster.o: isomaster.c $(GLOBALDEPS) 
-	$(CC) isomaster.c -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" $(GLOBALFLAGS) $(GTKFLAGS) -c
-
-window.o: window.c window.h $(GLOBALDEPS)
-	$(CC) window.c -DICONPATH=\"$(ICONPATH)\" $(GLOBALFLAGS) $(GTKFLAGS) -c
-
-browser.o: browser.c $(GLOBALDEPS)
-	$(CC) browser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
-
-fsbrowser.o: fsbrowser.c fsbrowser.h $(GLOBALDEPS)
-	$(CC) fsbrowser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
-
-isobrowser.o: isobrowser.c isobrowser.h $(GLOBALDEPS)
-	$(CC) isobrowser.c $(GLOBALFLAGS) $(GTKFLAGS) -c
-
-error.o: error.c error.h $(GLOBALDEPS)
-	$(CC) error.c $(GLOBALFLAGS) $(GTKFLAGS) -c
-
-about.o: about.c about.h $(GLOBALDEPS)
-	$(CC) about.c $(GLOBALFLAGS) $(GTKFLAGS) -c
-
-settings.o: settings.c settings.h $(GLOBALDEPS)
-	$(CC) settings.c $(GLOBALFLAGS) $(GTKFLAGS) -c
-
-boot.o: boot.c boot.h $(GLOBALDEPS)
-	$(CC) boot.c $(GLOBALFLAGS) $(GTKFLAGS) -c
-
 clean: 
-	$(RM) *.o isomaster
 	cd bk && $(MAKE) clean
 	cd iniparser-2.15 && $(MAKE) clean
 	cd po && $(MAKE) clean
+	$(RM) *.o isomaster
 
 # for info about DESTDIR see http://www.gnu.org/prep/standards/html_node/DESTDIR.html
 
@@ -94,9 +72,9 @@ install: isomaster
 	cd po && $(MAKE) install
 
 uninstall: 
-	$(RM) -v $(DESTDIR)$(BINPATH)/isomaster
-	$(RM) -v $(DESTDIR)$(ICONPATH)/isomaster.png
-	$(RM) -v $(DESTDIR)$(ICONPATH)/folder-new-tango.png
-	$(RM) -v $(DESTDIR)$(ICONPATH)/add2-kearone.png
-	$(RM) -v $(DESTDIR)$(ICONPATH)/extract-kearone.png
+	$(RM) $(DESTDIR)$(BINPATH)/isomaster
+	$(RM) $(DESTDIR)$(ICONPATH)/isomaster.png
+	$(RM) $(DESTDIR)$(ICONPATH)/folder-new-tango.png
+	$(RM) $(DESTDIR)$(ICONPATH)/add2-kearone.png
+	$(RM) $(DESTDIR)$(ICONPATH)/extract-kearone.png
 	cd po && $(MAKE) uninstall
