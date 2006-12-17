@@ -37,7 +37,7 @@ OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.
 
 all: lib iniparser translations isomaster 
 
-isomaster: $(OBJECTS)
+isomaster: $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a
 	$(CC) $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
 
 # static pattern rule
