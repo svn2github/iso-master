@@ -16,14 +16,7 @@
 #include <string.h>
 #include <libintl.h>
 
-#include "bk/bk.h"
-#include "boot.h"
-#include "browser.h"
-#include "error.h"
-#include "window.h"
-#include "settings.h"
-
-#define _(str) gettext(str)
+#include "isomaster.h"
 
 extern GtkWidget* GBLmainWindow;
 extern VolInfo GBLvolInfo;

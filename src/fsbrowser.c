@@ -21,20 +21,7 @@
 #include <errno.h>
 #include <libintl.h>
 
-#include "browser.h"
-#include "fsbrowser.h"
-#include "error.h"
-#include "settings.h"
-
-#define _(str) gettext(str)
-
-/* c99 doesn't define the following (posix file types) */
-#ifndef S_IFDIR
-#define S_IFDIR  0040000
-#endif
-#ifndef S_IFREG
-#define S_IFREG  0100000
-#endif
+#include "isomaster.h"
 
 extern AppSettings GBLappSettings;
 extern char* GBLuserHomeDir;

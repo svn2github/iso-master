@@ -14,12 +14,16 @@ ifndef ICONPATH
 endif
 
 # Used by gettext and po/Makefile (translations)
-# To disable installation of .mo files edit or delete the MOFILES 
-# variable in po/Makefile. This is safe to do, except obviously
-# you won't a have translated ISO Master.
+# To disable installation of some .mo files edit or delete the MOFILES 
+# variable in po/Makefile. This is safe to do.
 ifndef LOCALEDIR
 	export LOCALEDIR = $(PREFIX)/share/locale
 endif
+
+# To disable i18n completely, uncomment the following line 
+# or define WITHOUT_NLS somewhere else.
+# This option is desired in the FreeBSD ports guidelines.
+#WITHOUT_NLS = 1
 
 # programs used in the Makefiles:
 export CC      = gcc
@@ -29,6 +33,9 @@ export INSTALL = install
 
 # -DDEBUG and -g only used during development
 CFLAGS   = -Wall -pedantic -std=c99 `pkg-config --cflags gtk+-2.0` -g -DDEBUG
+ifndef WITHOUT_NLS
+	CFLAGS += -DENABLE_NLS
+endif
 
 # the _FILE_OFFSET_BITS=64 is to enable stat() for large files
 CPPFLAGS = -D_FILE_OFFSET_BITS=64
@@ -51,12 +58,16 @@ iniparser:
 	cd iniparser-2.15 && $(MAKE)
 
 translations:
+ifndef WITHOUT_NLS
 	cd po && $(MAKE)
+endif
 
 clean: 
 	cd bk && $(MAKE) clean
 	cd iniparser-2.15 && $(MAKE) clean
+ifndef WITHOUT_NLS
 	cd po && $(MAKE) clean
+endif
 	$(RM) *.o isomaster
 
 # for info about DESTDIR see http://www.gnu.org/prep/standards/html_node/DESTDIR.html
@@ -69,7 +80,9 @@ install: isomaster
 	$(INSTALL) -m 644 icons/folder-new-tango.png $(DESTDIR)$(ICONPATH)
 	$(INSTALL) -m 644 icons/add2-kearone.png $(DESTDIR)$(ICONPATH)
 	$(INSTALL) -m 644 icons/extract-kearone.png $(DESTDIR)$(ICONPATH)
+ifndef WITHOUT_NLS
 	cd po && $(MAKE) install
+endif
 
 uninstall: 
 	$(RM) $(DESTDIR)$(BINPATH)/isomaster
@@ -77,4 +90,6 @@ uninstall:
 	$(RM) $(DESTDIR)$(ICONPATH)/folder-new-tango.png
 	$(RM) $(DESTDIR)$(ICONPATH)/add2-kearone.png
 	$(RM) $(DESTDIR)$(ICONPATH)/extract-kearone.png
+ifndef WITHOUT_NLS
 	cd po && $(MAKE) uninstall
+endif

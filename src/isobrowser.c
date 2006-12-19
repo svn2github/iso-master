@@ -22,15 +22,7 @@
 #include <time.h>
 #include <libintl.h>
 
-#include "bk/bk.h"
-#include "browser.h"
-#include "fsbrowser.h"
-#include "isobrowser.h"
-#include "error.h"
-#include "window.h"
-#include "settings.h"
-
-#define _(str) gettext(str)
+#include "isomaster.h"
 
 extern GtkWidget* GBLmainWindow;
 extern GtkWidget* GBLisoTreeView;

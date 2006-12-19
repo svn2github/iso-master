@@ -14,6 +14,8 @@
 
 #include <gtk/gtk.h>
 
+#include "isomaster.h"
+
 extern GtkWidget* GBLmainWindow;
 
 static const char* 

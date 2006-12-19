@@ -21,12 +21,7 @@
 #include <libintl.h>
 #include <time.h>
 
-#include "bk/bk.h"
-#include "settings.h"
-#include "error.h"
-#include "window.h"
-
-#define _(str) gettext(str)
+#include "isomaster.h"
 
 /* used by iniparser */
 dictionary* GBLsettingsDictionary;

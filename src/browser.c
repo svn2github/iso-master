@@ -17,14 +17,7 @@
 #include <sys/stat.h>
 #include <libintl.h>
 
-#include "browser.h"
-#include "fsbrowser.h"
-#include "isobrowser.h"
-#include "bk/bk.h"
-#include "error.h"
-#include "settings.h"
-
-#define _(str) gettext(str)
+#include "isomaster.h"
 
 /* this file has thigs shared by the fs and the iso browser */
 

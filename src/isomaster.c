@@ -16,12 +16,11 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <libintl.h>
+#ifdef ENABLE_NLS
+#  include <libintl.h>
+#endif
 
-#include "window.h"
-#include "fsbrowser.h"
-#include "isobrowser.h"
-#include "settings.h"
+#include "isomaster.h"
 
 GtkWidget* GBLmainWindow;
 /* to be able to resize the two file browsers */
@@ -38,10 +37,12 @@ int main(int argc, char** argv)
     GtkWidget* bottomPanedBox; /* to pack the bottom part of GBLbrowserPaned */
     GtkWidget* statusBar;
     
+#ifdef ENABLE_NLS
     /* initialize gettext */
     bindtextdomain("isomaster", LOCALEDIR);
     bind_textdomain_codeset("isomaster", "UTF-8"); /* so that gettext() returns UTF-8 strings */
     textdomain("isomaster");
+#endif
     
     gtk_init(&argc, &argv);
     

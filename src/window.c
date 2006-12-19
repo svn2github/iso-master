@@ -16,16 +16,7 @@
 #include <gdk/gdkkeysyms.h>
 #include <libintl.h>
 
-#include "window.h"
-#include "browser.h"
-#include "fsbrowser.h"
-#include "isobrowser.h"
-#include "about.h"
-#include "settings.h"
-#include "boot.h"
-#include "bk/bk.h"
-
-#define _(str) gettext(str)
+#include "isomaster.h"
 
 /* the label that holds the value of the iso size */
 GtkWidget* GBLisoSizeLbl;
