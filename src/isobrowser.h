@@ -3,6 +3,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
 void addToIsoCbk(GtkButton *button, gpointer data);
 void buildIsoBrowser(GtkWidget* boxToPackInto);
 void buildIsoLocator(GtkWidget* boxToPackInto);
+void cancelOper(GtkDialog* dialog, gint arg1, gpointer user_data);
 void changeIsoDirectory(char* newDirStr);
 void closeIso(void);
 bool confirmCloseIso(void);

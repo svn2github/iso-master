@@ -255,6 +255,12 @@ void buildIsoLocator(GtkWidget* boxToPackInto)
     gtk_widget_show(GBLisoCurrentDirField);
 }
 
+void cancelOper(GtkDialog* dialog, gint arg1, gpointer user_data)
+{
+    printf("cancel\n");fflush(NULL);
+    GBLvolInfo.stopOperation = true;
+}
+
 void changeIsoDirectory(char* newDirStr)
 {
     int rc;
@@ -529,6 +535,7 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         
         /* button to cancel extracting */
         cancelButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_NONE);
+        g_signal_connect(progressWindow, "response", (GCallback)cancelOper, NULL);
         
         gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
         
