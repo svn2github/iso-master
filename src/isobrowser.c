@@ -257,7 +257,6 @@ void buildIsoLocator(GtkWidget* boxToPackInto)
 
 void cancelOper(GtkDialog* dialog, gint arg1, gpointer user_data)
 {
-    printf("cancel\n");fflush(NULL);
     GBLvolInfo.stopOperation = true;
 }
 
