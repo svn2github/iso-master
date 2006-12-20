@@ -496,6 +496,7 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     GtkTreeSelection* selection;
     GtkWidget* progressWindow;
     GtkWidget* descriptionLabel;
+    GtkWidget* cancelButton;
     
     if(!GBLisoPaneActive)
     /* no iso open */
@@ -525,6 +526,9 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         GBLextractingProgressBar = gtk_progress_bar_new();
         gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLextractingProgressBar, TRUE, TRUE, 0);
         gtk_widget_show(GBLextractingProgressBar);
+        
+        /* button to cancel extracting */
+        cancelButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_NONE);
         
         gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
         
