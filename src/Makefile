@@ -32,7 +32,7 @@ export RM      = rm -f
 export INSTALL = install
 
 # -DDEBUG and -g only used during development
-CFLAGS   = -Wall -pedantic -std=c99 `pkg-config --cflags gtk+-2.0` -g -DDEBUG
+CFLAGS   = -Wall -pedantic -std=c99 `pkg-config --cflags gtk+-2.0` -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -g -DDEBUG
 ifndef WITHOUT_NLS
 	CFLAGS += -DENABLE_NLS
 endif
@@ -49,7 +49,7 @@ isomaster: $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a
 
 # static pattern rule
 $(OBJECTS): %.o: %.c bk/bk.h Makefile
-	$(CC) $< $(CFLAGS) $(CPPFLAGS) -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -c -o $@
+	$(CC) $< $(CFLAGS) $(CPPFLAGS) -c -o $@
 
 lib:
 	cd bk && $(MAKE)
