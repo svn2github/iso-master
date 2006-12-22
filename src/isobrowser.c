@@ -264,8 +264,7 @@ void changeIsoDirectory(char* newDirStr)
 {
     int rc;
     BkDir* newDir;
-    BkDir* nextDir;
-    BkFile* nextFile;
+    BkFileBase* child;
     GtkTreeIter listIterator;
     GtkTreeModel* model;
     GtkWidget* warningDialog;
@@ -295,33 +294,32 @@ void changeIsoDirectory(char* newDirStr)
     gtk_tree_view_column_queue_resize(GBLfilenameIsoColumn);
     
     /* add all directories to the tree */
-    nextDir = newDir->directories;
-    while(nextDir != NULL)
+    child = newDir->children;
+    while(child != NULL)
     {
-        gtk_list_store_append(GBLisoListStore, &listIterator);
-        gtk_list_store_set(GBLisoListStore, &listIterator, 
-                           COLUMN_ICON, GBLdirPixbuf,
-                           COLUMN_FILENAME, nextDir->name, 
-                           COLUMN_SIZE, 0,
-                           COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
-                           -1);
+        if(child->posixFileMode & 0040000)
+        /* directory */
+        {
+            gtk_list_store_append(GBLisoListStore, &listIterator);
+            gtk_list_store_set(GBLisoListStore, &listIterator, 
+                               COLUMN_ICON, GBLdirPixbuf,
+                               COLUMN_FILENAME, child->name, 
+                               COLUMN_SIZE, 0,
+                               COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
+                               -1);
+        }
+        else
+        {
+            gtk_list_store_append(GBLisoListStore, &listIterator);
+            gtk_list_store_set(GBLisoListStore, &listIterator, 
+                               COLUMN_ICON, GBLfilePixbuf,
+                               COLUMN_FILENAME, child->name, 
+                               COLUMN_SIZE, ((BkFile*)child)->size,
+                               COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
+                               -1);
+        }
         
-        nextDir = nextDir->next;
-    }
-    
-    /* add all files to the tree */
-    nextFile = newDir->files;
-    while(nextFile != NULL)
-    {
-        gtk_list_store_append(GBLisoListStore, &listIterator);
-        gtk_list_store_set(GBLisoListStore, &listIterator, 
-                           COLUMN_ICON, GBLfilePixbuf,
-                           COLUMN_FILENAME, nextFile->name, 
-                           COLUMN_SIZE, nextFile->size,
-                           COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
-                           -1);
-        
-        nextFile = nextFile->next;
+        child = child->next;
     }
     
     /* reconnect the model and view now */

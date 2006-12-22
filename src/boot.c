@@ -381,7 +381,7 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
     gtk_widget_show(label);
     
     if(GBLvolInfo.bootRecordIsVisible)
-        snprintf(str, 100, _("Is visible on image as '%s'"), GBLvolInfo.bootRecordOnImage->name);
+        snprintf(str, 100, _("Is visible on image as '%s'"), GBLvolInfo.bootRecordOnImage->base.name);
     else
         snprintf(str, 100, _("Is not visible on image"));
     label = gtk_label_new(str);
