@@ -14,7 +14,7 @@ msgstr ""
  
 #: ../window.c:328
 msgid "      Estimated ISO Size: "
-msgstr "Taille Estimée de l'IS: "
+msgstr "Taille Estimée de l'ISO: "
  
 #: ../isobrowser.c:946
 #, c-format
