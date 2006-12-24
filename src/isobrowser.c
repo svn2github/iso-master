@@ -92,37 +92,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
                                         COLUMN_FILENAME, &itemName, -1);
     
-    if(fileType == FILE_TYPE_DIRECTORY)
-    {
-        fullItemName = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(itemName) + 2);
-        if(fullItemName == NULL)
-            fatalError("addToIsoEachRowCbk(): malloc("
-                       "strlen(GBLfsCurrentDir) + strlen(itemName) + 2) failed");
-        
-        strcpy(fullItemName, GBLfsCurrentDir);
-        strcat(fullItemName, itemName);
-        strcat(fullItemName, "/");
-        
-        rc = bk_add_dir(&GBLvolInfo, fullItemName, GBLisoCurrentDir);
-        if(rc <= 0 && rc != BKWARNING_OPER_PARTLY_FAILED)
-        {
-            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                   GTK_MESSAGE_ERROR,
-                                                   GTK_BUTTONS_CLOSE,
-                                                   "Failed to add directory %s: '%s'",
-                                                   itemName,
-                                                   bk_get_error_string(rc));
-            gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
-            gtk_dialog_run(GTK_DIALOG(warningDialog));
-            gtk_widget_destroy(warningDialog);
-        }
-        else
-            GBLisoChangesProbable = true;
-        
-        free(fullItemName);
-    }
-    else if(fileType == FILE_TYPE_REGULAR)
+    if(fileType == FILE_TYPE_DIRECTORY || fileType == FILE_TYPE_REGULAR)
     {
         fullItemName = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(itemName) + 1);
         if(fullItemName == NULL)
@@ -132,22 +102,20 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcpy(fullItemName, GBLfsCurrentDir);
         strcat(fullItemName, itemName);
         
-        rc = bk_add_file(&GBLvolInfo, fullItemName, GBLisoCurrentDir);
+        rc = bk_add(&GBLvolInfo, fullItemName, GBLisoCurrentDir);
         if(rc <= 0 && rc != BKWARNING_OPER_PARTLY_FAILED)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   _("Failed to add file %s: '%s'"),
-                                                   itemName,
+                                                   "Failed to add '%s': '%s'",
+                                                   fullItemName,
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
         }
-        else
-            GBLisoChangesProbable = true;
         
         free(fullItemName);
     }
