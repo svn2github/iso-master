@@ -554,75 +554,31 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
                                         COLUMN_FILENAME, &itemName, -1);
     
-    if(fileType == FILE_TYPE_DIRECTORY)
-    {
-        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 2);
-        if(fullItemName == NULL)
-            fatalError("extractFromIsoEachRowCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 2) failed (out of memory?)");
-        
-        strcpy(fullItemName, GBLisoCurrentDir);
-        strcat(fullItemName, itemName);
-        strcat(fullItemName, "/");
-        
-        rc = bk_extract_dir(&GBLvolInfo, fullItemName, GBLfsCurrentDir, 
-                            false, extractingProgressUpdaterCbk);
-        if(rc <= 0 && rc != BKWARNING_OPER_PARTLY_FAILED) /* ignore that warning, already shown to user in the warning callback */
-        {
-            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                   GTK_MESSAGE_ERROR,
-                                                   GTK_BUTTONS_CLOSE,
-                                                   _("Failed to extract directory %s: '%s'"),
-                                                   itemName,
-                                                   bk_get_error_string(rc));
-            gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
-            gtk_dialog_run(GTK_DIALOG(warningDialog));
-            gtk_widget_destroy(warningDialog);
-        }
-        
-        free(fullItemName);
-    }
-    else if(fileType == FILE_TYPE_REGULAR)
-    {
-        fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
-        if(fullItemName == NULL)
-            fatalError("extractFromIsoEachRowCbk(): malloc("
-                       "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed");
-        
-        strcpy(fullItemName, GBLisoCurrentDir);
-        strcat(fullItemName, itemName);
-        
-        rc = bk_extract_file(&GBLvolInfo, fullItemName, GBLfsCurrentDir, 
-                             false, extractingProgressUpdaterCbk);
-        if(rc <= 0)
-        {
-            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
-                                                   GTK_MESSAGE_ERROR,
-                                                   GTK_BUTTONS_CLOSE,
-                                                   _("Failed to extract file %s: '%s'"),
-                                                   itemName,
-                                                   bk_get_error_string(rc));
-            gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
-            gtk_dialog_run(GTK_DIALOG(warningDialog));
-            gtk_widget_destroy(warningDialog);
-        }
-        
-        free(fullItemName);
-    }
-    else
+    fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
+    if(fullItemName == NULL)
+        fatalError("extractFromIsoEachRowCbk(): malloc("
+                   "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed (out of memory?)");
+    
+    strcpy(fullItemName, GBLisoCurrentDir);
+    strcat(fullItemName, itemName);
+    
+    rc = bk_extract(&GBLvolInfo, fullItemName, GBLfsCurrentDir, 
+                    true, extractingProgressUpdaterCbk);
+    if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               "GUI error, extracting anything other then "
-                                               "files and directories doesn't work");
+                                               _("Failed to extract '%s': '%s'"),
+                                               itemName,
+                                               bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
     }
+    
+    free(fullItemName);
     
     g_free(itemName);
 }
