@@ -227,8 +227,14 @@ bool changeFsDirectory(char* newDirStr)
     
     gtk_list_store_clear(GBLfsListStore);
     
-    /* to make sure width of filename column isn't bigger than needed */
+#if GTK_MINOR_VERSION >= 8
+    /* to make sure width of filename column isn't bigger than needed (need gtk 2.8) */
     gtk_tree_view_column_queue_resize(GBLfilenameFsColumn);
+#endif
+    
+    nextItemPathAndName = (char*)malloc(strlen(newDirStr) + 257);
+    if(nextItemPathAndName == NULL)
+        fatalError("changeFsDirectory(): malloc(strlen(newDirStr) + 257) failed");
     
     /* it may be possible but in any case very unlikely that readdir() will fail
     * if it does, it returns NULL (same as end of dir) */
@@ -256,10 +262,6 @@ bool changeFsDirectory(char* newDirStr)
             gtk_widget_destroy(warningDialog);
             continue;
         }
-        
-        nextItemPathAndName = (char*)malloc(strlen(newDirStr) + 257);
-        if(nextItemPathAndName == NULL)
-            fatalError("changeFsDirectory(): malloc(strlen(newDirStr) + 257) failed");
         
         strcpy(nextItemPathAndName, newDirStr);
         strcat(nextItemPathAndName, nextItem->d_name);
@@ -310,9 +312,9 @@ bool changeFsDirectory(char* newDirStr)
         }
         /* else fancy file, ignore it */
         
-        free(nextItemPathAndName);
-    
     } /* while (dir contents) */
+    
+    free(nextItemPathAndName);
     
     closedir(newDir);
     
@@ -423,7 +425,15 @@ void refreshFsView(void)
         fatalError("refreshFsView(): malloc(strlen(GBLfsCurrentDir) + 1) failed");
     strcpy(fsCurrentDir, GBLfsCurrentDir);
     
+    /* remember scroll position */
+    GdkRectangle visibleRect;
+    gtk_tree_view_get_visible_rect(GTK_TREE_VIEW(GBLfsTreeView), &visibleRect);
+    
     changeFsDirectory(fsCurrentDir);
+    
+    /* need the -1 because if i call this function with the same coordinates that 
+    * the view already has, the position is set to 0. think it's a gtk bug. */
+    gtk_tree_view_scroll_to_point(GTK_TREE_VIEW(GBLfsTreeView), visibleRect.x - 1, visibleRect.y - 1);
     
     free(fsCurrentDir);
 }

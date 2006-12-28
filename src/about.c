@@ -68,6 +68,22 @@ GBLauthors[2] = {
 NULL};
 
 static const char* 
+GBLtranslators = 
+"bg (Bulgarian) - Dessislav Petrov\n"
+"\n"
+"de (German) - Toni Graffy\n"
+"\n"
+"fr (French) - Leif Thande\n"
+"\n"
+"pl (Polish) - Marciej Libuda\n"
+"\n"
+"ru (Russian) - Anton Obidin\n"
+"\n"
+"sq (Albanian) - Besnik Bleta\n"
+"\n"
+"zh_TW (Chineese/Taiwan) - Cheng-Wei Chien\n"
+;
+static const char* 
 GBLcomments = "An application for editing ISO9660 images based on the "
               "bkisofs access library and the GTK2 GUI toolkit.";
 
@@ -321,6 +337,7 @@ void showAboutWindowCbk(GtkMenuItem* menuItem, gpointer data)
     gtk_show_about_dialog(GTK_WINDOW(GBLmainWindow), 
                           "name", GBLprogramName,
                           "authors", GBLauthors,
+                          "translator-credits", GBLtranslators,
                           "comments", GBLcomments,
                           "copyright", GBLcopyright,
                           "license", GBLlicense,

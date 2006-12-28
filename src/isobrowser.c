@@ -258,8 +258,10 @@ void changeIsoDirectory(char* newDirStr)
     
     gtk_list_store_clear(GBLisoListStore);
     
-    /* to make sure width of filename column isn't bigger than needed */
+#if GTK_MINOR_VERSION >= 8
+    /* to make sure width of filename column isn't bigger than needed (need gtk 2.8) */
     gtk_tree_view_column_queue_resize(GBLfilenameIsoColumn);
+#endif
     
     /* add all directories to the tree */
     child = newDir->children;
@@ -513,7 +515,6 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
         gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
         gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
-        gtk_widget_show(progressWindow);
         g_signal_connect_swapped(progressWindow, "destroy",
                                  G_CALLBACK(extractingProgressWindowDestroyedCbk), NULL);
         
@@ -530,6 +531,9 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         /* button to cancel extracting */
         cancelButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_NONE);
         g_signal_connect(progressWindow, "response", (GCallback)cancelOper, NULL);
+        
+        /* if i show it before i add the children, the window ends up being not centered */
+        gtk_widget_show(progressWindow);
         
         gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
         
@@ -916,11 +920,19 @@ void refreshIsoView(void)
     
     isoCurrentDir = malloc(strlen(GBLisoCurrentDir) + 1);
     if(isoCurrentDir == NULL)
-        fatalError("addToIsoCbk(): malloc("
+        fatalError("refreshIsoView(): malloc("
                    "strlen(GBLisoCurrentDir) + 1) failed");
     strcpy(isoCurrentDir, GBLisoCurrentDir);
     
+    /* remember scroll position */
+    GdkRectangle visibleRect;
+    gtk_tree_view_get_visible_rect(GTK_TREE_VIEW(GBLisoTreeView), &visibleRect);
+    
     changeIsoDirectory(isoCurrentDir);
+    
+    /* need the -1 because if i call this function with the same coordinates that 
+    * the view already has, the position is set to 0. think it's a gtk bug. */
+    gtk_tree_view_scroll_to_point(GTK_TREE_VIEW(GBLisoTreeView), visibleRect.x - 1, visibleRect.y - 1);
     
     free(isoCurrentDir);
 }
@@ -939,7 +951,6 @@ void saveIso(char* filename)
     gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
     gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
     gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
-    gtk_widget_show(progressWindow);
     g_signal_connect_swapped(progressWindow, "response",
                              G_CALLBACK(gtk_widget_destroy), progressWindow);
     g_signal_connect_swapped(progressWindow, "destroy",
@@ -958,6 +969,9 @@ void saveIso(char* filename)
     /* button to close the dialog (disabled until writing finished) */
     okButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_OK, GTK_RESPONSE_NONE);
     gtk_widget_set_sensitive(okButton, FALSE);
+    
+    /* if i show it before i add the children, the window ends up being not centered */
+    gtk_widget_show(progressWindow);
     
     /* write new image */
     rc = bk_write_image(filename, &GBLvolInfo, time(NULL), GBLappSettings.filenameTypesToWrite, 
