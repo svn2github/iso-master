@@ -376,7 +376,7 @@ void loadIcons(void)
     loadIcon(&GBLnewDirIcon, ICONPATH"/folder-new-tango.png", size);
     loadIcon(&GBLnewDirIcon2, ICONPATH"/folder-new-tango.png", size);
     loadIcon(&GBLaddIcon, ICONPATH"/add2-kearone.png", size);
-    loadIcon(&GBLextractIcon, ICONPATH"/extract-kearone.png", size);
+    loadIcon(&GBLextractIcon, ICONPATH"/extract2-kearone.png", size);
 }
 
 void sortDirsFirstCbk(GtkButton *button, gpointer data)

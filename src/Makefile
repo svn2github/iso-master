@@ -79,7 +79,7 @@ install: isomaster
 	$(INSTALL) -m 644 icons/isomaster.png $(DESTDIR)$(ICONPATH)
 	$(INSTALL) -m 644 icons/folder-new-tango.png $(DESTDIR)$(ICONPATH)
 	$(INSTALL) -m 644 icons/add2-kearone.png $(DESTDIR)$(ICONPATH)
-	$(INSTALL) -m 644 icons/extract-kearone.png $(DESTDIR)$(ICONPATH)
+	$(INSTALL) -m 644 icons/extract2-kearone.png $(DESTDIR)$(ICONPATH)
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) install
 endif
