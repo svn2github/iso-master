@@ -708,12 +708,29 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
 * the parameters, since they may not be the menuitem parameters */
 gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
+    int rc;
+    GtkWidget* warningDialog;
+    
     if(GBLisoChangesProbable && !confirmCloseIso())
         return TRUE;
     
     closeIso();
     
-    bk_init_vol_info(&GBLvolInfo);
+    rc = bk_init_vol_info(&GBLvolInfo);
+    if(rc <= 0)
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("Failed to initialise bkisofs: '%s'"),
+                                               bk_get_error_string(rc));
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        return TRUE;
+    }
+    
     GBLvolInfo.warningCbk = operationFailed;
     
     GBLappSettings.filenameTypesToWrite = FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET;
@@ -747,7 +764,21 @@ void openIso(char* filename)
     
     closeIso();
     
-    bk_init_vol_info(&GBLvolInfo);
+    rc = bk_init_vol_info(&GBLvolInfo);
+    if(rc <= 0)
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("Failed to initialise bkisofs: '%s'"),
+                                               bk_get_error_string(rc));
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        return;
+    }
+    
     GBLvolInfo.warningCbk = operationFailed;
     
     GBLappSettings.filenameTypesToWrite = FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET;
