@@ -847,6 +847,11 @@ gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
     nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[nN][rR][gG]");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("NRG Images"));
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    
+    nameFilter = gtk_file_filter_new();
     gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
     gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("All files"));
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
