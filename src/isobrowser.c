@@ -51,6 +51,8 @@ static GtkWidget* GBLWritingProgressBar;
 static GtkWidget* GBLextractingProgressBar;
 /* the column for the filename in the iso pane */
 static GtkTreeViewColumn* GBLfilenameIsoColumn;
+/* the window with the progress bar for writing */
+GtkWidget* GBLwritingProgressWindow;
 
 void addToIsoCbk(GtkButton *button, gpointer data)
 {
@@ -225,7 +227,7 @@ void buildIsoLocator(GtkWidget* boxToPackInto)
 
 void cancelOper(GtkDialog* dialog, gint arg1, gpointer user_data)
 {
-    GBLvolInfo.stopOperation = true;
+    bk_cancel_operation(&GBLvolInfo);
 }
 
 void changeIsoDirectory(char* newDirStr)
@@ -976,38 +978,41 @@ void refreshIsoView(void)
 void saveIso(char* filename)
 {
     int rc;
-    GtkWidget* progressWindow;
     GtkWidget* descriptionLabel;
     GtkWidget* okButton;
+    GtkWidget* cancelButton;
     GtkWidget* warningDialog;
     
     /* dialog window for the progress bar */
-    progressWindow = gtk_dialog_new();
-    gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
-    gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
-    gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
-    gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
-    g_signal_connect_swapped(progressWindow, "response",
-                             G_CALLBACK(gtk_widget_destroy), progressWindow);
-    g_signal_connect_swapped(progressWindow, "destroy",
+    GBLwritingProgressWindow = gtk_dialog_new();
+    gtk_dialog_set_has_separator(GTK_DIALOG(GBLwritingProgressWindow), FALSE);
+    gtk_window_set_modal(GTK_WINDOW(GBLwritingProgressWindow), TRUE);
+    gtk_window_set_title(GTK_WINDOW(GBLwritingProgressWindow), _("Progress"));
+    gtk_window_set_transient_for(GTK_WINDOW(GBLwritingProgressWindow), GTK_WINDOW(GBLmainWindow));
+    g_signal_connect_swapped(GBLwritingProgressWindow, "response",
+                             G_CALLBACK(writingProgressResponse), GBLwritingProgressWindow);
+    g_signal_connect_swapped(GBLwritingProgressWindow, "destroy",
                              G_CALLBACK(writingProgressWindowDestroyedCbk), NULL);
     
     /* just some text */
     descriptionLabel = gtk_label_new(_("Please wait while I'm saving the new image to disk..."));
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), descriptionLabel, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(GBLwritingProgressWindow)->vbox), descriptionLabel, TRUE, TRUE, 0);
     gtk_widget_show(descriptionLabel);
     
     /* the progress bar */
     GBLWritingProgressBar = gtk_progress_bar_new();
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLWritingProgressBar, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(GBLwritingProgressWindow)->vbox), GBLWritingProgressBar, TRUE, TRUE, 0);
     gtk_widget_show(GBLWritingProgressBar);
     
     /* button to close the dialog (disabled until writing finished) */
-    okButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_OK, GTK_RESPONSE_NONE);
+    okButton = gtk_dialog_add_button(GTK_DIALOG(GBLwritingProgressWindow), GTK_STOCK_OK, GTK_RESPONSE_OK);
     gtk_widget_set_sensitive(okButton, FALSE);
     
+    /* button to cancel writing */
+    cancelButton = gtk_dialog_add_button(GTK_DIALOG(GBLwritingProgressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+    
     /* if i show it before i add the children, the window ends up being not centered */
-    gtk_widget_show(progressWindow);
+    gtk_widget_show(GBLwritingProgressWindow);
     
     /* write new image */
     rc = bk_write_image(filename, &GBLvolInfo, time(NULL), GBLappSettings.filenameTypesToWrite, 
@@ -1024,8 +1029,6 @@ void saveIso(char* filename)
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
-        /* enable the ok button so the user can close the progress window */
-        gtk_widget_set_sensitive(okButton, TRUE);
     }
     else
         GBLisoChangesProbable = false;
@@ -1035,6 +1038,7 @@ void saveIso(char* filename)
     {
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(GBLWritingProgressBar), 1.0);
         gtk_widget_set_sensitive(okButton, TRUE);
+        gtk_widget_set_sensitive(cancelButton, FALSE);
     }
 }
 
@@ -1076,7 +1080,7 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
     {
         filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
-    
+        
         /* RECORD last iso dir */
         char* lastIsoDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
         
@@ -1110,6 +1114,21 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     return TRUE;
 }
 
+void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data)
+{
+    if(arg1 == GTK_RESPONSE_OK)
+    {
+        printf("ok pressed, want to delete window\n");fflush(NULL);
+        gtk_widget_destroy(GBLwritingProgressWindow);
+    }
+    else
+    {
+        printf("canceling write\n");fflush(NULL);
+        bk_cancel_operation(&GBLvolInfo);
+    }
+    gtk_widget_destroy(GBLwritingProgressWindow);
+}
+
 void writingProgressUpdaterCbk(void)
 {
     if(GBLWritingProgressBar != NULL)
@@ -1124,5 +1143,6 @@ void writingProgressUpdaterCbk(void)
 
 void writingProgressWindowDestroyedCbk(void)
 {
+    GBLwritingProgressWindow = NULL;
     GBLWritingProgressBar = NULL;
 }
