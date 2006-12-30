@@ -1036,6 +1036,8 @@ void saveIso(char* filename)
     if(GBLWritingProgressBar != NULL)
     /* progress window hasn't been destroyed */
     {
+        /* enable the ok button so the user can close the progress window */
+        gtk_widget_set_sensitive(okButton, TRUE);
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(GBLWritingProgressBar), 1.0);
         gtk_widget_set_sensitive(okButton, TRUE);
         gtk_widget_set_sensitive(cancelButton, FALSE);
@@ -1114,18 +1116,12 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     return TRUE;
 }
 
+/* this handles the ok and cancel buttons in the progress window */
 void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data)
 {
-    if(arg1 == GTK_RESPONSE_OK)
-    {
-        printf("ok pressed, want to delete window\n");fflush(NULL);
-        gtk_widget_destroy(GBLwritingProgressWindow);
-    }
-    else
-    {
-        printf("canceling write\n");fflush(NULL);
+    if(arg1 == GTK_RESPONSE_CANCEL)
         bk_cancel_operation(&GBLvolInfo);
-    }
+    
     gtk_widget_destroy(GBLwritingProgressWindow);
 }
 
