@@ -67,7 +67,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     GtkWidget* menu;
     GtkWidget* menuItem;
     GtkWidget* separator;
-    //~ GtkWidget* icon;
+    GtkWidget* icon;
     GtkWidget* rootMenu;
     GtkAccelGroup* accelGroup;
     guint accelKey;
@@ -267,9 +267,16 @@ void buildMenu(GtkWidget* boxToPackInto)
     menu = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
     
+    icon = gtk_image_new_from_stock(GTK_STOCK_HELP, GTK_ICON_SIZE_MENU);
+    menuItem = gtk_image_menu_item_new_with_mnemonic(_("_Overview"));
+    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menuItem), icon);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show(menuItem);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(showHelpOverviewCbk), NULL);
+    
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-    //gtk_widget_set_sensitive(menuItem, FALSE);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(showAboutWindowCbk), NULL);

@@ -1129,7 +1129,7 @@ void writingProgressUpdaterCbk(double percentComplete)
 {
     if(GBLWritingProgressBar != NULL)
     {
-        //gtk_progress_bar_pulse(GTK_PROGRESS_BAR(GBLWritingProgressBar)); 
+        //~ printf("%.2lf%%\n", percentComplete);fflush(NULL);
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(GBLWritingProgressBar), percentComplete / 100);
         
         /* redraw progress bar */
