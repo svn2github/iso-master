@@ -26,5 +26,5 @@ void refreshIsoView(void);
 void saveIso(char* filename);
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event);
 void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data);
-void writingProgressUpdaterCbk(void);
+void writingProgressUpdaterCbk(double percentComplete);
 void writingProgressWindowDestroyedCbk(void);

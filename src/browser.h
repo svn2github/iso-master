@@ -15,7 +15,7 @@ enum
 
 void acceptDialogCbk(GtkEntry *entry, GtkDialog* dialog);
 void createDirCbk(GtkButton *button, gpointer onFs);
-void formatSize(unsigned long long sizeInt, char* sizeStr, int sizeStrLen);
+void formatSize(off_t sizeInt, char* sizeStr, int sizeStrLen);
 void refreshBothViewsCbk(GtkWidget *widget, GdkEvent *event);
 void sizeCellDataFunc32(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
                         GtkTreeModel *model, GtkTreeIter *iter,

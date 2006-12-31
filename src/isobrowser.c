@@ -44,7 +44,7 @@ bool GBLisoPaneActive = false;
 /* to know whether any changes to the image have been requested */
 bool GBLisoChangesProbable = false;
 /* the size of the iso if it were written right now */
-static unsigned long long GBLisoSize = 0;
+static off_t GBLisoSize = 0;
 /* the progress bar from the writing dialog box */
 static GtkWidget* GBLWritingProgressBar;
 /* the progress bar from the extracting dialog box */
@@ -1125,11 +1125,12 @@ void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data)
     gtk_widget_destroy(GBLwritingProgressWindow);
 }
 
-void writingProgressUpdaterCbk(void)
+void writingProgressUpdaterCbk(double percentComplete)
 {
     if(GBLWritingProgressBar != NULL)
     {
-        gtk_progress_bar_pulse(GTK_PROGRESS_BAR(GBLWritingProgressBar)); 
+        //gtk_progress_bar_pulse(GTK_PROGRESS_BAR(GBLWritingProgressBar)); 
+        gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(GBLWritingProgressBar), percentComplete / 100);
         
         /* redraw progress bar */
         while(gtk_events_pending())
