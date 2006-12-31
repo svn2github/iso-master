@@ -333,7 +333,6 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
                                          NULL);
     gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
     g_signal_connect_swapped(dialog, "response", G_CALLBACK (gtk_widget_destroy), dialog);
-    gtk_widget_show(dialog);
     
     vBox = gtk_vbox_new(TRUE, 5);
     gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), vBox);
@@ -387,4 +386,7 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
     label = gtk_label_new(str);
     gtk_box_pack_start(GTK_BOX(vBox), label, TRUE, TRUE, 0);
     gtk_widget_show(label);
+    
+    /* down here so it's centered properly over the main window */
+    gtk_widget_show(dialog);
 }
