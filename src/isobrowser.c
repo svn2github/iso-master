@@ -1029,6 +1029,8 @@ void saveIso(char* filename)
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
+        if(GBLWritingProgressBar != NULL)
+            gtk_widget_destroy(GBLwritingProgressWindow);
     }
     else
         GBLisoChangesProbable = false;
@@ -1037,9 +1039,9 @@ void saveIso(char* filename)
     /* progress window hasn't been destroyed */
     {
         /* enable the ok button so the user can close the progress window */
-        gtk_widget_set_sensitive(okButton, TRUE);
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(GBLWritingProgressBar), 1.0);
         gtk_widget_set_sensitive(okButton, TRUE);
+        gtk_widget_grab_focus(okButton);
         gtk_widget_set_sensitive(cancelButton, FALSE);
     }
 }
