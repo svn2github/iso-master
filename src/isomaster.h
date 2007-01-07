@@ -14,9 +14,16 @@
 #include "about.h"
 
 #ifdef ENABLE_NLS
+#  include <libintl.h>
 #  define _(str) gettext(str)
+#  ifdef gettext_noop
+#    define N_(str) gettext_noop (str)
+#  else
+#    define N_(str) (str)
+#  endif
 #else
-#  define _(str) str
+#  define _(str) (str)
+#  define N_(str) (str)
 #endif
 
 /* c99 doesn't define the following (posix file types) */

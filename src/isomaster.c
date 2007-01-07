@@ -16,9 +16,6 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
-#ifdef ENABLE_NLS
-#  include <libintl.h>
-#endif
 
 #include "isomaster.h"
 

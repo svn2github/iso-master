@@ -62,8 +62,40 @@ GBLauthors[2] = {
 "\n"
 "David Johnson\n"
 "http://www.david-web.co.uk/\n"
-"September 2006\n"
+"September 2006 - December 2006\n"
 "- a patch to allow associating ISO Master with ISO files in file managers\n"
+"- Debian packages of ISO Master, versions 0.1 - 0.6\n"
+"- gave me access to a 32bit ARM box running Debian for testing\n"
+"\n"
+"Ernst W. Winter\n"
+"December 2006\n"
+"- gave me access to an AMD64 box running OpenBSD for testing\n"
+"\n"
+"Marcin Zajaczkowski\n"
+"http://timeoff.wsisiz.edu.pl/\n"
+"- Fedora packages of ISO Master, versions 0.3 - 0.6\n"
+"\n"
+"Toni Graffy\n"
+"Maintainer of many SuSE packages at PackMan\n"
+"- SuSE packages of ISO Master, versions 0.4 - 0.6\n"
+"\n"
+"Marciej Libuda\n"
+"- Arch packages of ISO Master, versions 0.3 - 0.6\n"
+"\n"
+"GuestToo\n"
+"- Puppy packages of ISO Master, versions 0.1, 0.4 - 0.6\n"
+"\n"
+"vktgz\n"
+"http://www.vktgz.homelinux.net/\n"
+"- Gentoo ebuilds of ISO Master, versions 0.4 - 0.6\n"
+"\n"
+"James Bowling\n"
+"http://www.jamesbowling.com/\n"
+"- Slackware packages of ISO Master, versions 0.4 - 0.5\n"
+"\n"
+"Michael Shigorin\n"
+"- Alt package of ISO Master, version 0.5\n"
+"\n"
 ,
 NULL};
 
@@ -98,6 +130,29 @@ GBLlicense =
 "ISO Master and bkisofs are distributed under the GNU General Public Licence\n"
 "version 2, please see LICENCE.TXT for the complete text\n";
 
+static const char*
+GBLhelp = 
+"The ISO Master window is split in 2 parts:\n"
+" - The top file browser shows files and directories on your machine.\n"
+" - The bottom file browser shows files and directories on the ISO image.\n"
+"\n"
+"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
+"ISO file click on 'Image' and 'New'.\n"
+"\n"
+"To add one or more files or directories to the ISO select them in the top\n"
+"file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
+"\n"
+"To extract one or more files or directories from the ISO select them in\n"
+"the bottom file browser and click the 'Extract from ISO' button in the\n"
+"middle toolbar.\n"
+"\n"
+"You can also delete files or directories from the ISO and create new\n"
+"directories both on the ISO and your local filesystem.\n"
+"\n"
+"Once you made all the changes to the new ISO image, click on 'Image' and\n"
+"'Save As'. You cannot overwrite the original ISO.\n"
+;
+
 void showAboutWindowCbk(GtkMenuItem* menuItem, gpointer data)
 {
     gtk_show_about_dialog(GTK_WINDOW(GBLmainWindow), 
@@ -111,15 +166,18 @@ void showAboutWindowCbk(GtkMenuItem* menuItem, gpointer data)
                           NULL);
 }
 
+/* This callback is also used by an accelerator so make sure you don't use 
+* the parameters, since they may not be the menuitem parameters */
 void showHelpOverviewCbk(GtkMenuItem* menuItem, gpointer data)
 {
-    gtk_show_about_dialog(GTK_WINDOW(GBLmainWindow), 
-                          "name", GBLprogramName,
-                          "authors", GBLauthors,
-                          "translator-credits", GBLtranslators,
-                          "comments", GBLcomments,
-                          "copyright", GBLcopyright,
-                          "license", GBLlicense,
-                          "website", GBLwebsite,
-                          NULL);
+    GtkWidget* window;
+    GtkWidget* label;
+    
+    window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(window), _("ISO Master Help"));
+    gtk_widget_show(window);
+    
+    label = gtk_label_new(GBLhelp);
+    gtk_container_add(GTK_CONTAINER(window), label);
+    gtk_widget_show(label);
 }

@@ -111,7 +111,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   "Failed to add '%s': '%s'",
+                                                   _("Failed to add '%s': '%s'"),
                                                    fullItemName,
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
