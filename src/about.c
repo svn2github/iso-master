@@ -19,7 +19,7 @@
 extern GtkWidget* GBLmainWindow;
 
 static const char* 
-GBLprogramName = "ISO Master 0.6";
+GBLprogramName = "ISO Master 0.7";
 
 static const char* 
 GBLauthors[2] = {

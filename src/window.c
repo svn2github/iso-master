@@ -176,7 +176,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(refreshBothViewsCbk), NULL);
     
-    GBLshowHiddenMenuItem = gtk_check_menu_item_new_with_mnemonic(_("_Show hidden files"));
+    GBLshowHiddenMenuItem = gtk_check_menu_item_new_with_mnemonic(_("Show _hidden files"));
     if(GBLappSettings.showHiddenFilesFs)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLshowHiddenMenuItem), TRUE);
     else

@@ -1,3 +1,17 @@
+ - 0.7
+=================
+- Fixed the double warning message when adding directories.
+- Changed bkisofs to make it ready for links and get rid of a lot of duplicate code.
+- Added Bulgarian, Chinese, Russian, German, French, Polish and Albanian translations.
+- Fixed 'bug' that images with a broken root directory identifier would fail to open.
+- Writing and extracting operations can now be canceled.
+- Minor usability improvements.
+- Can now open and read (but not write) .nrg images.
+- Writing progress bar now works in percentage mode instead of activity mode.
+- Images that failed to write fully are now deleted.
+- Added Help/Overview with a brief description of how to use the program.
+- Changed mangling so that winxp CDs would still boot.
+
 09 Dec 2006 - 0.6
 =================
 - Replaced the Add and Extract icons with the two I got from kearone.
