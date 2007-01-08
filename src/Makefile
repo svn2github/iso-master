@@ -21,8 +21,8 @@ ifndef LOCALEDIR
 endif
 
 # where to install the man page
-ifndef MANPATH
-	MANPATH = $(PREFIX)/man/man1
+ifndef MYMANPATH
+	MYMANPATH = $(PREFIX)/man/man1
 endif
 
 # To disable i18n completely, uncomment the following line 
@@ -91,8 +91,8 @@ install: isomaster
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) install
 endif
-	$(INSTALL) -d $(DESTDIR)$(MANPATH)
-	$(INSTALL) -m 644 isomaster.1.gz $(DESTDIR)$(MANPATH)
+	$(INSTALL) -d $(DESTDIR)$(MYMANPATH)
+	$(INSTALL) -m 644 isomaster.1.gz $(DESTDIR)$(MYMANPATH)
 
 uninstall: 
 	$(RM) $(DESTDIR)$(BINPATH)/isomaster
@@ -103,3 +103,4 @@ uninstall:
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) uninstall
 endif
+
