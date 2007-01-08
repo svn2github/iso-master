@@ -39,12 +39,17 @@ David Johnson
 http://www.david-web.co.uk/
 September 2006 - December 2006
 - a patch to allow associating ISO Master with ISO files in file managers
-- Debian packages of ISO Master, versions 0.1 - 0.6
 - gave me access to a 32bit ARM box running Debian for testing
 
 Ernst W. Winter
 December 2006
 - gave me access to an AMD64 box running OpenBSD for testing
+
+Packages:
+
+David Johnson
+http://www.david-web.co.uk/
+- Debian packages of ISO Master, versions 0.1 - 0.6
 
 Marcin Zajaczkowski
 http://timeoff.wsisiz.edu.pl/

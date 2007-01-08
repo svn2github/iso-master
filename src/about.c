@@ -64,12 +64,17 @@ GBLauthors[2] = {
 "http://www.david-web.co.uk/\n"
 "September 2006 - December 2006\n"
 "- a patch to allow associating ISO Master with ISO files in file managers\n"
-"- Debian packages of ISO Master, versions 0.1 - 0.6\n"
 "- gave me access to a 32bit ARM box running Debian for testing\n"
 "\n"
 "Ernst W. Winter\n"
 "December 2006\n"
 "- gave me access to an AMD64 box running OpenBSD for testing\n"
+"\n"
+"Packages:\n"
+"\n"
+"David Johnson\n"
+"http://www.david-web.co.uk/\n"
+"- Debian packages of ISO Master, versions 0.1 - 0.6\n"
 "\n"
 "Marcin Zajaczkowski\n"
 "http://timeoff.wsisiz.edu.pl/\n"
@@ -179,6 +184,7 @@ void showHelpOverviewCbk(GtkMenuItem* menuItem, gpointer data)
     
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), _("ISO Master Help"));
+    gtk_window_set_transient_for(GTK_WINDOW(window), GTK_WINDOW(GBLmainWindow));
     gtk_widget_show(window);
     
     label = gtk_label_new(GBLhelp);
