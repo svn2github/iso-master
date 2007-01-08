@@ -22,7 +22,7 @@ endif
 
 # where to install the man page
 ifndef MANPATH
-	MANPATH = $(PREFIX)/man
+	MANPATH = $(PREFIX)/man/man1
 endif
 
 # To disable i18n completely, uncomment the following line 

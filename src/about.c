@@ -101,20 +101,24 @@ NULL};
 
 static const char* 
 GBLtranslators = 
-"bg (Bulgarian) - Dessislav Petrov\n"
+"Dessislav Petrov\n"
+"- bg (Bulgarian) translation of ISO Master version 0.6\n"
 "\n"
-"de (German) - Toni Graffy\n"
+"Toni Graffy\n"
+"- de (German) translation of ISO Master version 0.6\n"
 "\n"
-"fr (French) - Leif Thande\n"
+"Leif Thande\n"
+"- fr (French) translation of ISO Master version 0.6\n"
 "\n"
-"pl (Polish) - Marciej Libuda\n"
+"Marciej Libuda\n"
+"- pl (Polish) translation of ISO Master version 0.6\n"
 "\n"
-"ru (Russian) - Anton Obidin\n"
+"Anton Obidin\n"
+"- ru (Russian) translation of ISO Master version 0.6\n"
 "\n"
-"sq (Albanian) - Besnik Bleta\n"
-"\n"
-"zh_TW (Chineese/Taiwan) - Cheng-Wei Chien\n"
-;
+"Besnik Bleta\n"
+"- zh_TW (Chineese/Taiwan) translation of ISO Master version 0.6\n";
+
 static const char* 
 GBLcomments = "An application for editing ISO9660 images based on the "
               "bkisofs access library and the GTK2 GUI toolkit.";
