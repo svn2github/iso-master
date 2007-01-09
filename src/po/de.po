@@ -359,7 +359,7 @@ msgstr "_Hilfe"
 
 #: ../window.c:116
 msgid "_Image"
-msgstr "_Abbild"
+msgstr "A_bbild"
 
 #: ../window.c:277
 msgid "_Overview"
@@ -367,7 +367,7 @@ msgstr "_Übersicht"
 
 #: ../window.c:189
 msgid "_Sort directories first"
-msgstr "_Verzeichnisse vor Dateien anordnen"
+msgstr "V_erzeichnisse vor Dateien anordnen"
 
 #: ../window.c:166
 msgid "_View"
