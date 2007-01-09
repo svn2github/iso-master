@@ -374,5 +374,5 @@ msgstr "_Rendit drejtoritë së pari"
 
 #: ../window.c:166
 msgid "_View"
-msgstr "_Parje"
+msgstr "P_arje"
 

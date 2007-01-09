@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-10 18:12-0500\n"
+"POT-Creation-Date: 2007-01-07 18:57-0500\n"
 "PO-Revision-Date: 2006-12-10 18:12-0500\n"
 "Last-Translator: Maciej Libuda <mefju@o2.pl>\n"
 "Language-Team: polish <LL@li.org>\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:328
+#: ../window.c:337
 msgid "      Estimated ISO Size: "
 msgstr "      Szacowany rozmiar ISO: "
 
-#: ../isobrowser.c:946
+#: ../isobrowser.c:943
 #, c-format
 msgid ""
 "%s\n"
@@ -29,336 +29,347 @@ msgstr ""
 "\n"
 "Czy chcesz kontynuować?"
 
-#: ../window.c:312
+#: ../window.c:322
 msgid "Add"
 msgstr "Dodaj"
 
-#: ../window.c:312
+#: ../window.c:322
 msgid "Add to the ISO"
 msgstr "Dodaj do obrazu ISO"
 
-#: ../isobrowser.c:892 ../isobrowser.c:1063
+#: ../isobrowser.c:889 ../isobrowser.c:1076
 msgid "All files"
 msgstr "Wszystkie pliki"
 
-#: ../boot.c:335
+#: ../boot.c:328
 msgid "Boot Record Information"
 msgstr "Informacja o rekordzie startowym"
 
-#: ../boot.c:126
+#: ../boot.c:119
 msgid "Boot record deleted"
 msgstr "Skasowano rekord startowy"
 
-#: ../boot.c:352
+#: ../boot.c:344
 #, c-format
 msgid "Boot record type: 1200KiB Floppy"
 msgstr "Typ rekordu startowego: dyskietka 1200KiB"
 
-#: ../boot.c:354
+#: ../boot.c:346
 #, c-format
 msgid "Boot record type: 1440KiB Floppy"
 msgstr "Typ rekordu startowego: dyskietka 1440KiB"
 
-#: ../boot.c:356
+#: ../boot.c:348
 #, c-format
 msgid "Boot record type: 2880KiB Floppy"
 msgstr "Typ rekordu startowego: dyskietka 2880KiB"
 
-#: ../boot.c:350
+#: ../boot.c:342
 #, c-format
 msgid "Boot record type: No Emulation"
 msgstr "Typ rekordu startowego: bez emulacji"
 
-#: ../boot.c:46
+#: ../boot.c:39
 msgid "Chose Boot Record File"
 msgstr "Wybierz plik z rekordem startowym"
 
-#: ../window.c:307
+#: ../window.c:318
 msgid "Create new directory on the ISO"
 msgstr "Utwórz nowy katalog w obrazie ISO"
 
-#: ../window.c:63
+#: ../window.c:60
 msgid "Create new directory on the filesystem"
 msgstr "Utwórz nowy katalog w systemie plików"
 
-#: ../settings.c:82
+#: ../settings.c:78
 msgid "Creation time:"
 msgstr "Czas utworzenia:"
 
-#: ../window.c:324
+#: ../window.c:333
 msgid "Delete from the ISO"
 msgstr "Usuń z obrazu ISO"
 
-#: ../browser.c:77
+#: ../browser.c:70
 msgid "Enter name for new directory"
 msgstr "Wprowadź nazwę nowego katalogu"
 
-#: ../window.c:318
+#: ../window.c:327
 msgid "Extract"
 msgstr "Wypakuj"
 
-#: ../window.c:318
+#: ../window.c:327
 msgid "Extract from the ISO"
 msgstr "Wypakuj z obrazu ISO"
 
-#: ../boot.c:85
+#: ../isobrowser.c:114
+msgid "Failed to add '%s': '%s'"
+msgstr "Dodanie %s nie powiodło się: '%s'"
+
+#: ../boot.c:78
 #, c-format
 msgid "Failed to add boot record: '%s'"
 msgstr "Dodanie rekordu startowego nie powiodło się: '%s'"
 
-#: ../isobrowser.c:150
-#, c-format
-msgid "Failed to add file %s: '%s'"
-msgstr "Dodanie pliku %s nie powiodło się: '%s'"
-
-#: ../isobrowser.c:283
+#: ../isobrowser.c:249
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr "Zmiana katalogu nie powiodła się: '%s'"
 
-#: ../browser.c:118
+#: ../browser.c:111
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Utworzenie katalogu %s nie powiodło się"
 
-#: ../browser.c:141
+#: ../browser.c:134
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Utworzenie katalogu %s nie powiodło się: '%s'"
 
-#: ../isobrowser.c:443
-#, c-format
-msgid "Failed to delete directory %s: '%s'"
-msgstr "Usunięcie katalogu %s nie powiodło się: '%s'"
+#: ../isobrowser.c:470
+msgid "Failed to delete '%s': '%s'"
+msgstr "Usunięcie %s nie powiodło się: '%s'"
 
-#: ../isobrowser.c:472
-#, c-format
-msgid "Failed to delete file %s: '%s'"
-msgstr "Usunięcie pliku %s nie powiodło się: '%s'"
+#: ../isobrowser.c:579
+msgid "Failed to extract '%s': '%s'"
+msgstr "Pobranie %s nie powiodło się: '%s'"
 
-#: ../boot.c:204
+#: ../boot.c:197
 #, c-format
 msgid "Failed to extract boot record: '%s'"
 msgstr "Pobranie rekordu startowego nie powiodło się: '%s'"
 
-#: ../isobrowser.c:577
-#, c-format
-msgid "Failed to extract directory %s: '%s'"
-msgstr "Pobranie katalogu %s nie powiodło się: '%s'"
+#: ../isobrowser.c:728 ../isobrowser.c:776
+msgid "Failed to initialise bkisofs: '%s'"
+msgstr "Uruchomienie bkisofs nie powiodło się: '%s'"
 
-#: ../isobrowser.c:605
-#, c-format
-msgid "Failed to extract file %s: '%s'"
-msgstr "Pobranie pliku %s nie powiodło się: '%s'"
-
-#: ../fsbrowser.c:218
+#: ../fsbrowser.c:213
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Otwarcie katalogu nie powiodło się '%s', błąd %d"
 
-#: ../isobrowser.c:803
+#: ../isobrowser.c:795
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Odczyt pliku iso nie powiódł się: '%s'"
 
-#: ../isobrowser.c:840
+#: ../isobrowser.c:832
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Odczyt drzewa katalogów nie powiódł się: '%s'"
 
-#: ../isobrowser.c:818
+#: ../isobrowser.c:810
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Odczyt informacji o nośniku nie powiódł się: '%s'"
 
-#: ../boot.c:299
+#: ../boot.c:292
 #, c-format
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Nie udało się ustawić %s jako rekord startowy: '%s'"
 
-#: ../isobrowser.c:1016
+#: ../isobrowser.c:1026
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Zapis obrazu do '%s' nie powiódł się: '%s'"
 
-#: ../settings.c:124
+#: ../settings.c:120
 msgid "Filename types (both recommended):"
 msgstr "Typy nazw plików (zalecane oba)"
 
-#: ../window.c:246
+#: ../window.c:248
 msgid "From file: 1200KiB floppy"
 msgstr "Z pliku: dyskietka 1200KiB"
 
-#: ../window.c:252
+#: ../window.c:254
 msgid "From file: 1440KiB floppy"
 msgstr "Z pliku: dyskietka 1440KiB"
 
-#: ../window.c:258
+#: ../window.c:260
 msgid "From file: 2880KiB floppy"
 msgstr "Z pliku: dyskietka 2880KiB"
 
-#: ../window.c:240
+#: ../window.c:242
 msgid "From file: no emulation"
 msgstr "Z pliku: bez emulacji"
 
-#: ../isobrowser.c:490
+#: ../isobrowser.c:488
 msgid ""
 "GUI error, deleting anything other then files and directories doesn't work"
 msgstr ""
 "Błąd GUI, usunięcie czegokolwiek poza plikami i katalogami nie zadziała"
 
-#: ../window.c:56 ../window.c:300
+#: ../window.c:53 ../window.c:311
 msgid "Go back"
 msgstr "Cofnij"
 
-#: ../window.c:301
+#: ../window.c:312
 msgid "Go back up one directory on the ISO"
 msgstr "Jeden katalog do góry w obrazie ISO "
 
-#: ../window.c:57
+#: ../window.c:54
 msgid "Go back up one directory on the filesystem"
 msgstr "Jeden katalog do góry w systemie plików"
 
-#: ../isobrowser.c:887 ../isobrowser.c:1058
+#: ../isobrowser.c:879 ../isobrowser.c:1071
 msgid "ISO Images"
 msgstr "Obrazy ISO"
 
-#: ../settings.c:63
+#: ../about.c:177
+msgid "ISO Master Help"
+msgstr "Pomoc ISO Master"
+
+#: ../settings.c:59
 msgid "Image Information"
 msgstr "Informacja o obrazie"
 
-#: ../boot.c:393
+#: ../boot.c:385
 #, c-format
 msgid "Is not visible on image"
 msgstr "Nie znaleziono w obrazie"
 
-#: ../boot.c:391
+#: ../boot.c:383
 #, c-format
 msgid "Is visible on image as '%s'"
 msgstr "Znaleziono w obrazie jako '%s'"
 
-#: ../isobrowser.c:372
+#: ../isobrowser.c:341
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
 msgstr ""
-"Wygląda na to, że dokonałeś zmian w obrazie ISO ale nie zapisałeś ich. "
-"Czy na pewno zamknąć?"
+"Wygląda na to, że dokonałeś zmian w obrazie ISO ale nie zapisałeś ich. Czy "
+"na pewno zamknąć?"
 
-#: ../boot.c:274
+#: ../boot.c:267
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Zaznaczony obiekt nie jest plikiem i nie może być użyty jako rekord startowy"
+msgstr ""
+"Zaznaczony obiekt nie jest plikiem i nie może być użyty jako rekord startowy"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:367 ../boot.c:374
 #, c-format
 msgid "Location: on original image at 0x%X"
 msgstr "Położenie: w oryginalnym obrazie na 0x%X"
 
-#: ../boot.c:377 ../boot.c:384
+#: ../boot.c:369 ../boot.c:376
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Położenie: będzie dodane z '%s'"
 
-#: ../fsbrowser.c:119 ../isobrowser.c:221
+#: ../isobrowser.c:884
+msgid "NRG Images"
+msgstr "Obrazy NRG"
+
+#: ../fsbrowser.c:114 ../isobrowser.c:183
 msgid "Name"
 msgstr "Nazwa"
 
-#: ../window.c:62 ../window.c:306
+#: ../window.c:59 ../window.c:317
 msgid "New Directory"
 msgstr "Nowy katalog"
 
-#: ../boot.c:151 ../boot.c:328
+#: ../boot.c:144 ../boot.c:321
 msgid "No boot record read from original or set on image"
 msgstr "Brak odczytu rekordu startowego z oryginału lub obrazu"
 
-#: ../boot.c:112
+#: ../boot.c:105
 msgid "No boot to delete"
 msgstr "Brak rekordu startowego do usunięcia"
 
-#: ../boot.c:231
+#: ../boot.c:224
 msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr "Wybierz plik w przeglądarce obrazu ISO do użycia jako rekord startowy"
 
-#: ../boot.c:245
+#: ../boot.c:238
 msgid "Please select no more then one file in the ISO browser"
 msgstr "Wybierz dokładnie jeden plik w przeglądarce obrazu ISO"
 
-#: ../isobrowser.c:526
+#: ../isobrowser.c:524
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Zaczekaj chwilę, wypakowuję zaznaczone pliki..."
 
-#: ../isobrowser.c:994
+#: ../isobrowser.c:998
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Zaczekaj chwilę, zapisuję nowy obraz"
 
-#: ../isobrowser.c:519 ../isobrowser.c:985
+#: ../isobrowser.c:518 ../isobrowser.c:990
 msgid "Progress"
 msgstr "Postęp"
 
-#: ../settings.c:109
+#: ../settings.c:105
 msgid "Publisher:"
 msgstr "Wydawca:"
 
-#: ../window.c:324
+#: ../window.c:333
 msgid "Remove"
 msgstr "Usuń"
 
-#: ../isobrowser.c:1049
+#: ../isobrowser.c:1062
 msgid "Save File"
 msgstr "Zapisz plik"
 
-#: ../boot.c:158
+#: ../boot.c:151
 msgid "Save a copy of the boot record"
 msgstr "Zapisz kopię rekordu startowego"
 
-#: ../fsbrowser.c:140 ../isobrowser.c:242
+#: ../window.c:179
+msgid "Show _hidden files"
+msgstr "Pokaż _ukryte pliki"
+
+#: ../fsbrowser.c:135 ../isobrowser.c:204
 msgid "Size"
 msgstr "Rozmiar"
 
-#: ../boot.c:365
+#: ../boot.c:357
 #, c-format
 msgid "Size: %d bytes"
 msgstr "Rozmiar: %d bajtów"
 
-#: ../fsbrowser.c:257
+#: ../fsbrowser.c:258
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
-"Pomijam katalog ponieważ nie potrafię obsłużyć nazw plików dłuższych niż 256 znaków"
+"Pomijam katalog ponieważ nie potrafię obsłużyć nazw plików dłuższych niż 256 "
+"znaków"
 
-#: ../fsbrowser.c:279
+#: ../fsbrowser.c:276
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Pomijam katalog ponieważ stat(%s) zakończony niepowodzeniem z %d"
 
-#: ../window.c:234
+#: ../window.c:236
 msgid "Use selected file on image (no emulation)"
 msgstr "Użycie zaznaczonego pliku w obrazie (bez emulacji)"
 
-#: ../settings.c:98
+#: ../settings.c:94
 msgid "Volume name:"
 msgstr "Nazwa nośnika:"
 
-#: ../window.c:199
+#: ../window.c:201
 msgid "_BootRecord"
-msgstr "_RekordStartowy"
+msgstr "_Rekord startowy"
 
-#: ../window.c:266
+#: ../window.c:268
 msgid "_Help"
 msgstr "_Pomoc"
 
-#: ../window.c:114
+#: ../window.c:116
 msgid "_Image"
 msgstr "_Obraz"
 
-#: ../window.c:177
-msgid "_Show hidden files"
-msgstr "Pokaż _ukryte pliki"
+#: ../window.c:277
+msgid "_Overview"
+msgstr "_Przegląd"
 
-#: ../window.c:187
+#: ../window.c:189
 msgid "_Sort directories first"
 msgstr "_Katalogi na początku"
 
-#: ../window.c:164
+#: ../window.c:166
 msgid "_View"
 msgstr "_Widok"
+
+#~ msgid "Failed to delete directory %s: '%s'"
+#~ msgstr "Usunięcie katalogu %s nie powiodło się: '%s'"
+
+#~ msgid "Failed to extract directory %s: '%s'"
+#~ msgstr "Pobranie katalogu %s nie powiodło się: '%s'"
