@@ -364,7 +364,7 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
     /* get this info from the original file */
     {
         if(GBLvolInfo.bootRecordOnImage->onImage)
-            snprintf(str, 100, _("Location: on original image at 0x%X"), GBLvolInfo.bootRecordOnImage->position);
+            snprintf(str, 100, _("Location: on original image at 0x%lld"), GBLvolInfo.bootRecordOnImage->position);
         else
             snprintf(str, 100, _("Location: to be added from '%s'"), GBLvolInfo.bootRecordOnImage->pathAndName);
     }
