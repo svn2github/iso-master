@@ -1,11 +1,14 @@
-# LANGUAGE translation of ISO Master
-# This file is distributed under the same license as the ISO Master package.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ISO Master 0.6\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2006-12-05 19:02-0500\n"
+"POT-Creation-Date: 2007-01-07 18:57-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -13,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:328
+#: ../window.c:337
 msgid "      Estimated ISO Size: "
 msgstr ""
 
-#: ../isobrowser.c:946
+#: ../isobrowser.c:943
 #, c-format
 msgid ""
 "%s\n"
@@ -25,332 +28,339 @@ msgid ""
 "Do you wish to continue?"
 msgstr ""
 
-#: ../window.c:312
+#: ../window.c:322
 msgid "Add"
 msgstr ""
 
-#: ../window.c:312
+#: ../window.c:322
 msgid "Add to the ISO"
 msgstr ""
 
-#: ../isobrowser.c:892 ../isobrowser.c:1063
+#: ../isobrowser.c:889 ../isobrowser.c:1076
 msgid "All files"
 msgstr ""
 
-#: ../boot.c:335
+#: ../boot.c:328
 msgid "Boot Record Information"
 msgstr ""
 
-#: ../boot.c:126
+#: ../boot.c:119
 msgid "Boot record deleted"
 msgstr ""
 
-#: ../boot.c:352
+#: ../boot.c:344
 #, c-format
 msgid "Boot record type: 1200KiB Floppy"
 msgstr ""
 
-#: ../boot.c:354
+#: ../boot.c:346
 #, c-format
 msgid "Boot record type: 1440KiB Floppy"
 msgstr ""
 
-#: ../boot.c:356
+#: ../boot.c:348
 #, c-format
 msgid "Boot record type: 2880KiB Floppy"
 msgstr ""
 
-#: ../boot.c:350
+#: ../boot.c:342
 #, c-format
 msgid "Boot record type: No Emulation"
 msgstr ""
 
-#: ../boot.c:46
+#: ../boot.c:39
 msgid "Chose Boot Record File"
 msgstr ""
 
-#: ../window.c:307
+#: ../window.c:318
 msgid "Create new directory on the ISO"
 msgstr ""
 
-#: ../window.c:63
+#: ../window.c:60
 msgid "Create new directory on the filesystem"
 msgstr ""
 
-#: ../settings.c:82
+#: ../settings.c:78
 msgid "Creation time:"
 msgstr ""
 
-#: ../window.c:324
+#: ../window.c:333
 msgid "Delete from the ISO"
 msgstr ""
 
-#: ../browser.c:77
+#: ../browser.c:70
 msgid "Enter name for new directory"
 msgstr ""
 
-#: ../window.c:318
+#: ../window.c:327
 msgid "Extract"
 msgstr ""
 
-#: ../window.c:318
+#: ../window.c:327
 msgid "Extract from the ISO"
 msgstr ""
 
-#: ../boot.c:85
+#: ../isobrowser.c:114
+#, c-format
+msgid "Failed to add '%s': '%s'"
+msgstr ""
+
+#: ../boot.c:78
 #, c-format
 msgid "Failed to add boot record: '%s'"
 msgstr ""
 
-#: ../isobrowser.c:150
-#, c-format
-msgid "Failed to add file %s: '%s'"
-msgstr ""
-
-#: ../isobrowser.c:283
+#: ../isobrowser.c:249
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr ""
 
-#: ../browser.c:118
+#: ../browser.c:111
 #, c-format
 msgid "Failed to create directory %s"
 msgstr ""
 
-#: ../browser.c:141
+#: ../browser.c:134
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr ""
 
-#: ../isobrowser.c:443
+#: ../isobrowser.c:470
 #, c-format
-msgid "Failed to delete directory %s: '%s'"
+msgid "Failed to delete '%s': '%s'"
 msgstr ""
 
-#: ../isobrowser.c:472
+#: ../isobrowser.c:579
 #, c-format
-msgid "Failed to delete file %s: '%s'"
+msgid "Failed to extract '%s': '%s'"
 msgstr ""
 
-#: ../boot.c:204
+#: ../boot.c:197
 #, c-format
 msgid "Failed to extract boot record: '%s'"
 msgstr ""
 
-#: ../isobrowser.c:577
+#: ../isobrowser.c:728 ../isobrowser.c:776
 #, c-format
-msgid "Failed to extract directory %s: '%s'"
+msgid "Failed to initialise bkisofs: '%s'"
 msgstr ""
 
-#: ../isobrowser.c:605
-#, c-format
-msgid "Failed to extract file %s: '%s'"
-msgstr ""
-
-#: ../fsbrowser.c:218
+#: ../fsbrowser.c:213
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr ""
 
-#: ../isobrowser.c:803
+#: ../isobrowser.c:795
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr ""
 
-#: ../isobrowser.c:840
+#: ../isobrowser.c:832
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr ""
 
-#: ../isobrowser.c:818
+#: ../isobrowser.c:810
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr ""
 
-#: ../boot.c:299
+#: ../boot.c:292
 #, c-format
 msgid "Failed to set %s as boot record: '%s'"
 msgstr ""
 
-#: ../isobrowser.c:1016
+#: ../isobrowser.c:1026
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr ""
 
-#: ../settings.c:124
+#: ../settings.c:120
 msgid "Filename types (both recommended):"
 msgstr ""
 
-#: ../window.c:246
+#: ../window.c:248
 msgid "From file: 1200KiB floppy"
 msgstr ""
 
-#: ../window.c:252
+#: ../window.c:254
 msgid "From file: 1440KiB floppy"
 msgstr ""
 
-#: ../window.c:258
+#: ../window.c:260
 msgid "From file: 2880KiB floppy"
 msgstr ""
 
-#: ../window.c:240
+#: ../window.c:242
 msgid "From file: no emulation"
 msgstr ""
 
-#: ../isobrowser.c:490
+#: ../isobrowser.c:488
 msgid ""
 "GUI error, deleting anything other then files and directories doesn't work"
 msgstr ""
 
-#: ../window.c:56 ../window.c:300
+#: ../window.c:53 ../window.c:311
 msgid "Go back"
 msgstr ""
 
-#: ../window.c:301
+#: ../window.c:312
 msgid "Go back up one directory on the ISO"
 msgstr ""
 
-#: ../window.c:57
+#: ../window.c:54
 msgid "Go back up one directory on the filesystem"
 msgstr ""
 
-#: ../isobrowser.c:887 ../isobrowser.c:1058
+#: ../isobrowser.c:879 ../isobrowser.c:1071
 msgid "ISO Images"
 msgstr ""
 
-#: ../settings.c:63
+#: ../about.c:177
+msgid "ISO Master Help"
+msgstr ""
+
+#: ../settings.c:59
 msgid "Image Information"
 msgstr ""
 
-#: ../boot.c:393
+#: ../boot.c:385
 #, c-format
 msgid "Is not visible on image"
 msgstr ""
 
-#: ../boot.c:391
+#: ../boot.c:383
 #, c-format
 msgid "Is visible on image as '%s'"
 msgstr ""
 
-#: ../isobrowser.c:372
+#: ../isobrowser.c:341
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
 msgstr ""
 
-#: ../boot.c:274
+#: ../boot.c:267
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr ""
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:367 ../boot.c:374
 #, c-format
 msgid "Location: on original image at 0x%X"
 msgstr ""
 
-#: ../boot.c:377 ../boot.c:384
+#: ../boot.c:369 ../boot.c:376
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr ""
 
-#: ../fsbrowser.c:119 ../isobrowser.c:221
+#: ../isobrowser.c:884
+msgid "NRG Images"
+msgstr ""
+
+#: ../fsbrowser.c:114 ../isobrowser.c:183
 msgid "Name"
 msgstr ""
 
-#: ../window.c:62 ../window.c:306
+#: ../window.c:59 ../window.c:317
 msgid "New Directory"
 msgstr ""
 
-#: ../boot.c:151 ../boot.c:328
+#: ../boot.c:144 ../boot.c:321
 msgid "No boot record read from original or set on image"
 msgstr ""
 
-#: ../boot.c:112
+#: ../boot.c:105
 msgid "No boot to delete"
 msgstr ""
 
-#: ../boot.c:231
+#: ../boot.c:224
 msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr ""
 
-#: ../boot.c:245
+#: ../boot.c:238
 msgid "Please select no more then one file in the ISO browser"
 msgstr ""
 
-#: ../isobrowser.c:526
+#: ../isobrowser.c:524
 msgid "Please wait while I'm extracting the selected files..."
 msgstr ""
 
-#: ../isobrowser.c:994
+#: ../isobrowser.c:998
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr ""
 
-#: ../isobrowser.c:519 ../isobrowser.c:985
+#: ../isobrowser.c:518 ../isobrowser.c:990
 msgid "Progress"
 msgstr ""
 
-#: ../settings.c:109
+#: ../settings.c:105
 msgid "Publisher:"
 msgstr ""
 
-#: ../window.c:324
+#: ../window.c:333
 msgid "Remove"
 msgstr ""
 
-#: ../isobrowser.c:1049
+#: ../isobrowser.c:1062
 msgid "Save File"
 msgstr ""
 
-#: ../boot.c:158
+#: ../boot.c:151
 msgid "Save a copy of the boot record"
 msgstr ""
 
-#: ../fsbrowser.c:140 ../isobrowser.c:242
+#: ../window.c:179
+msgid "Show _hidden files"
+msgstr ""
+
+#: ../fsbrowser.c:135 ../isobrowser.c:204
 msgid "Size"
 msgstr ""
 
-#: ../boot.c:365
+#: ../boot.c:357
 #, c-format
 msgid "Size: %d bytes"
 msgstr ""
 
-#: ../fsbrowser.c:257
+#: ../fsbrowser.c:258
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
 
-#: ../fsbrowser.c:279
+#: ../fsbrowser.c:276
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr ""
 
-#: ../window.c:234
+#: ../window.c:236
 msgid "Use selected file on image (no emulation)"
 msgstr ""
 
-#: ../settings.c:98
+#: ../settings.c:94
 msgid "Volume name:"
 msgstr ""
 
-#: ../window.c:199
+#: ../window.c:201
 msgid "_BootRecord"
 msgstr ""
 
-#: ../window.c:266
+#: ../window.c:268
 msgid "_Help"
 msgstr ""
 
-#: ../window.c:114
+#: ../window.c:116
 msgid "_Image"
 msgstr ""
 
-#: ../window.c:177
-msgid "_Show hidden files"
+#: ../window.c:277
+msgid "_Overview"
 msgstr ""
 
-#: ../window.c:187
+#: ../window.c:189
 msgid "_Sort directories first"
 msgstr ""
 
-#: ../window.c:164
+#: ../window.c:166
 msgid "_View"
 msgstr ""
