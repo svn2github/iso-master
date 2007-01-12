@@ -67,7 +67,7 @@ ifndef WITHOUT_NLS
 	cd po && $(MAKE)
 endif
 
-man:
+man: isomaster.1
 	gzip -c isomaster.1 > isomaster.1.gz
 
 clean: 
@@ -80,7 +80,7 @@ endif
 
 # for info about DESTDIR see http://www.gnu.org/prep/standards/html_node/DESTDIR.html
 
-install: isomaster
+install: all
 	$(INSTALL) -d $(DESTDIR)$(BINPATH)
 	$(INSTALL) isomaster $(DESTDIR)$(BINPATH)
 	$(INSTALL) -d $(DESTDIR)$(ICONPATH)
@@ -103,4 +103,3 @@ uninstall:
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) uninstall
 endif
-

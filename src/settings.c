@@ -67,7 +67,6 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     //g_signal_connect_swapped(dialog, "response", G_CALLBACK (gtk_widget_destroy), dialog);
     g_signal_connect(dialog, "close",
                      G_CALLBACK(closeWindowCbk), NULL);
-    gtk_widget_show(dialog);
     
     table = gtk_table_new(1, 2, FALSE);
     gtk_table_set_row_spacings(GTK_TABLE(table), 5);
@@ -133,6 +132,8 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
                                  GBLappSettings.filenameTypesToWrite & FNTYPE_JOLIET);
     gtk_box_pack_start(GTK_BOX(hBox), jolietCheck, TRUE, TRUE, 0);
     gtk_widget_show(jolietCheck);
+    
+    gtk_widget_show(dialog);
     
     rc = gtk_dialog_run(GTK_DIALOG(dialog));
     if(rc == GTK_RESPONSE_ACCEPT)

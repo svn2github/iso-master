@@ -1,7 +1,10 @@
 ISO Master
 ==========
 http://littlesvr.ca/isomaster/
-An open-source, graphical CD image editor that runs on Linux; and bkisofs, the underlying library used for reading, modifying and writing ISO images.
+
+ISO Master is an open-source, easy to use, GUI CD image editor for Linux and BSD. Basically you can use this program to extract files from an ISO, add files to an ISO, and create bootable ISOs - all in a graphical user interface. It can open both ISO and NRG files but can only save as ISO.
+
+It is based on and bkisofs - a library for reading, modifying and writing ISO images.
 
 Prerequisites for Compiling from Source
 ---------------------------------------
@@ -44,7 +47,7 @@ Please help me improve ISO Master by sending me bug reports. The more of the fol
 
 Credits
 -------
-See CREDITS.TXT for a list of contributors to ISO Master.
+See CREDITS.TXT or Help/About/Credits for a list of contributors to ISO Master.
 
 License
 -------

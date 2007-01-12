@@ -1,4 +1,4 @@
- - 0.7
+11 Jan 2006 - 0.7
 =================
 - Fixed the double warning message when adding directories.
 - Changed bkisofs to make it ready for links and get rid of a lot of duplicate code.
@@ -12,6 +12,7 @@
 - Added Help/Overview with a brief description of how to use the program.
 - Changed mangling so that winxp CDs would still boot.
 - Tested on a 64bit machine, confirmed everything works as it should.
+- Now remember the scroll offset for the browsers so adding/extracting/deleting something doesn't cause the browser to scroll to the top.
 
 09 Dec 2006 - 0.6
 =================

@@ -79,19 +79,19 @@ Michael Shigorin
 Translations:
 
 Dessislav Petrov
-- bg (Bulgarian) translation of ISO Master version 0.6
+- bg (Bulgarian) translation of ISO Master versions 0.6 - 0.7
 
 Toni Graffy
-- de (German) translation of ISO Master version 0.6
+- de (German) translation of ISO Master versions 0.6 - 0.7
 
 Leif Thande
 - fr (French) translation of ISO Master version 0.6
 
 Marciej Libuda
-- pl (Polish) translation of ISO Master version 0.6
+- pl (Polish) translation of ISO Master versions 0.6 - 0.7
 
 Anton Obidin
-- ru (Russian) translation of ISO Master version 0.6
+- ru (Russian) translation of ISO Master versions 0.6 - 0.7
 
 Besnik Bleta
 - zh_TW (Chineese/Taiwan) translation of ISO Master version 0.6
