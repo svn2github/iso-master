@@ -1,0 +1,3 @@
+svn export src releases/isomaster-version
+cd releases
+tar cvjf isomaster-version.tar.bz2 isomaster-version/
