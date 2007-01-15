@@ -22,7 +22,7 @@ endif
 
 # where to install the man page
 ifndef MYMANPATH
-	MYMANPATH = $(PREFIX)/man/man1
+	MYMANPATH = $(PREFIX)/share/man/man1
 endif
 
 # To disable i18n completely, uncomment the following line 
@@ -47,9 +47,9 @@ CPPFLAGS = -D_FILE_OFFSET_BITS=64
 
 OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o
 
-all: lib iniparser translations isomaster man
+all: isomaster translations isomaster.1.gz
 
-isomaster: $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a
+isomaster: $(OBJECTS) lib iniparser
 	$(CC) $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
 
 # static pattern rule
@@ -67,7 +67,7 @@ ifndef WITHOUT_NLS
 	cd po && $(MAKE)
 endif
 
-man: isomaster.1
+isomaster.1.gz: isomaster.1
 	gzip -c isomaster.1 > isomaster.1.gz
 
 clean: 
@@ -103,3 +103,4 @@ uninstall:
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) uninstall
 endif
+	$(RM) $(DESTDIR)$(MYMANPATH)/isomaster.1.gz

@@ -1,0 +1,1 @@
+these are suse 10.2 586 and x86_64 packages

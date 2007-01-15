@@ -77,7 +77,7 @@ GBLauthors[2] = {
 "- Debian packages of ISO Master, versions 0.1 - 0.6\n"
 "\n"
 "Marcin Zajaczkowski\n"
-"http://timeoff.wsisiz.edu.pl/\n"
+"http://timeoff.wsisiz.edu.pl/rpms.html\n"
 "- Fedora packages of ISO Master, versions 0.3 - 0.6\n"
 "\n"
 "Toni Graffy\n"
