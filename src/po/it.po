@@ -1,5 +1,9 @@
 # Italian translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
+# A note about the authors: this file was translated by F. Lombardi 
+# and Valerio Guaglianone <valpenguin@gmail.com> at the same time (they didn't
+# know about one another). I chose F. Lombardi's version because i received it
+# a few hours earlier, but Valerio deserves equal credit.
 #
 msgid ""
 msgstr ""
