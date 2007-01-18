@@ -47,7 +47,8 @@ int main(int argc, char** argv)
     
     loadSettings();
     
-    /* the path ICONPATH is defined in the makefile */
+    /* the path ICONPATH is defined in the makefile
+    * if this fails i get NULL which is ok */
     appIcon = gdk_pixbuf_new_from_file(ICONPATH"/isomaster.png", NULL);
     
     loadIcons();

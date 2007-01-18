@@ -24,6 +24,10 @@ GtkWidget* GBLisoSizeLbl;
 GtkWidget* GBLshowHiddenMenuItem;
 /* check menu item for 'sort directories first' */
 GtkWidget* GBLsortDirsFirst;
+/* icon for 'go back' for fs browser */
+GtkWidget* GBLgoBackIcon;
+/* icon for 'go back' for iso browser */
+GtkWidget* GBLgoBackIcon2;
 /* icon for 'new directory' for fs browser */
 GtkWidget* GBLnewDirIcon;
 /* icon for 'new directory' for iso browser */
@@ -32,6 +36,8 @@ GtkWidget* GBLnewDirIcon2;
 GtkWidget* GBLaddIcon;
 /* 'extract from iso' icon */
 GtkWidget* GBLextractIcon;
+/* icon for 'delete' for iso browser */
+GtkWidget* GBLdeleteIcon2;
 
 extern GtkWidget* GBLmainWindow;
 extern AppSettings GBLappSettings;
@@ -41,18 +47,16 @@ extern bool GBLisoChangesProbable;
 void buildMainToolbar(GtkWidget* boxToPackInto)
 {
     GtkWidget* toolbar;
-    GtkWidget* icon;
     GtkWidget* button;
     
     toolbar = gtk_toolbar_new();
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
     
-    icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("Go back"), 
                                      _("Go back up one directory on the filesystem"), "Private",
-                                     icon, G_CALLBACK(fsGoUpDirTreeCbk),
+                                     GBLgoBackIcon, G_CALLBACK(fsGoUpDirTreeCbk),
                                      NULL);
     
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
@@ -293,7 +297,6 @@ void buildMenu(GtkWidget* boxToPackInto)
 void buildMiddleToolbar(GtkWidget* boxToPackInto)
 {
     GtkWidget* toolbar;
-    GtkWidget* icon;
     GtkWidget* button;
     GtkWidget* hBox;
     GtkWidget* sizeTitleLabel;
@@ -306,11 +309,10 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     gtk_box_pack_start(GTK_BOX(hBox), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
     
-    icon = gtk_image_new_from_stock(GTK_STOCK_GO_BACK, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("Go back"), 
                                      _("Go back up one directory on the ISO"), "Private",
-                                     icon, G_CALLBACK(isoGoUpDirTreeCbk),
+                                     GBLgoBackIcon2, G_CALLBACK(isoGoUpDirTreeCbk),
                                      NULL);
     
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
@@ -328,10 +330,9 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
                                      GBLextractIcon, G_CALLBACK(extractFromIsoCbk),
                                      NULL);
 
-    icon = gtk_image_new_from_stock(GTK_STOCK_DELETE, GTK_ICON_SIZE_LARGE_TOOLBAR);
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("Remove"), _("Delete from the ISO"), "Private",
-                                     icon, G_CALLBACK(deleteFromIsoCbk),
+                                     GBLdeleteIcon2, G_CALLBACK(deleteFromIsoCbk),
                                      NULL);
     
     sizeTitleLabel = gtk_label_new(_("      Estimated ISO Size: "));
@@ -371,7 +372,7 @@ void loadIcon(GtkWidget** destIcon, const char* srcFile, int size)
     if(pixbuf == NULL)
     /* could not load icon but need one so replace it with 'unknown' from stock  */
     {
-        *destIcon = gtk_image_new_from_stock(GTK_STOCK_MISSING_IMAGE, GTK_ICON_SIZE_MENU);
+        *destIcon = gtk_image_new_from_stock(GTK_STOCK_MISSING_IMAGE, GTK_ICON_SIZE_LARGE_TOOLBAR);
     }
     else
     /* resize the icon loaded */
@@ -387,10 +388,13 @@ void loadIcons(void)
     
     gtk_icon_size_lookup(GTK_ICON_SIZE_LARGE_TOOLBAR, &size, &size);
     
-    loadIcon(&GBLnewDirIcon, ICONPATH"/folder-new-tango.png", size);
-    loadIcon(&GBLnewDirIcon2, ICONPATH"/folder-new-tango.png", size);
+    loadIcon(&GBLgoBackIcon, ICONPATH"/go-back-kearone.png", size);
+    loadIcon(&GBLgoBackIcon2, ICONPATH"/go-back-kearone.png", size);
+    loadIcon(&GBLnewDirIcon, ICONPATH"/folder-new-kearone.png", size);
+    loadIcon(&GBLnewDirIcon2, ICONPATH"/folder-new-kearone.png", size);
     loadIcon(&GBLaddIcon, ICONPATH"/add2-kearone.png", size);
     loadIcon(&GBLextractIcon, ICONPATH"/extract2-kearone.png", size);
+    loadIcon(&GBLdeleteIcon2, ICONPATH"/delete-kearone.png", size);
 }
 
 void sortDirsFirstCbk(GtkButton *button, gpointer data)

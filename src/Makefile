@@ -1,29 +1,20 @@
-# other paths are relative to this
-ifndef PREFIX
-	PREFIX = /usr/local
-endif
+# Other paths are relative to this.
+PREFIX ?= /usr/local
 
-# where to install the executable
-ifndef BINPATH
-	BINPATH = $(PREFIX)/bin
-endif
+# Where to install the executable.
+BINPATH ?= $(PREFIX)/bin
 
-# where to install the icons
-ifndef ICONPATH
-	ICONPATH = $(PREFIX)/share/isomaster/icons
-endif
+# Where to install the icons.
+# Used by icons/Makefile
+export ICONPATH ?= $(PREFIX)/share/isomaster/icons
 
 # Used by gettext and po/Makefile (translations)
 # To disable installation of some .mo files edit or delete the MOFILES 
 # variable in po/Makefile. This is safe to do.
-ifndef LOCALEDIR
-	export LOCALEDIR = $(PREFIX)/share/locale
-endif
+export LOCALEDIR ?= $(PREFIX)/share/locale
 
 # where to install the man page
-ifndef MYMANPATH
-	MYMANPATH = $(PREFIX)/share/man/man1
-endif
+MYMANPATH ?= $(PREFIX)/share/man/man1
 
 # To disable i18n completely, uncomment the following line 
 # or define WITHOUT_NLS somewhere else.
@@ -31,7 +22,7 @@ endif
 #WITHOUT_NLS = 1
 
 # programs used in the Makefiles:
-export CC      = gcc
+export CC      ?= gcc
 export AR      = ar
 export RM      = rm -f
 export INSTALL = install
@@ -49,7 +40,7 @@ OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.
 
 all: isomaster translations isomaster.1.gz
 
-isomaster: $(OBJECTS) lib iniparser
+isomaster: $(OBJECTS) | lib iniparser
 	$(CC) $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
 
 # static pattern rule
@@ -83,11 +74,7 @@ endif
 install: all
 	$(INSTALL) -d $(DESTDIR)$(BINPATH)
 	$(INSTALL) isomaster $(DESTDIR)$(BINPATH)
-	$(INSTALL) -d $(DESTDIR)$(ICONPATH)
-	$(INSTALL) -m 644 icons/isomaster.png $(DESTDIR)$(ICONPATH)
-	$(INSTALL) -m 644 icons/folder-new-tango.png $(DESTDIR)$(ICONPATH)
-	$(INSTALL) -m 644 icons/add2-kearone.png $(DESTDIR)$(ICONPATH)
-	$(INSTALL) -m 644 icons/extract2-kearone.png $(DESTDIR)$(ICONPATH)
+	cd icons && $(MAKE) install
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) install
 endif
@@ -96,10 +83,7 @@ endif
 
 uninstall: 
 	$(RM) $(DESTDIR)$(BINPATH)/isomaster
-	$(RM) $(DESTDIR)$(ICONPATH)/isomaster.png
-	$(RM) $(DESTDIR)$(ICONPATH)/folder-new-tango.png
-	$(RM) $(DESTDIR)$(ICONPATH)/add2-kearone.png
-	$(RM) $(DESTDIR)$(ICONPATH)/extract-kearone.png
+	cd icons && $(MAKE) uninstall
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) uninstall
 endif

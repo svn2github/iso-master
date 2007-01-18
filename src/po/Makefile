@@ -1,5 +1,4 @@
-# LOCALEDIR is defined in the top-level makefile
-# RM, INSTALL defined in parent makefile
+# LOCALEDIR, RM, INSTALL defined in parent makefile
 
 MOFILES = bg.mo de.mo es.mo fr.mo it.mo pl.mo ru.mo sq.mo zh_TW.mo
 
