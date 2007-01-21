@@ -128,7 +128,7 @@ void extractBootRecordCbk(GtkButton *button, gpointer data)
     GtkWidget* dialog;
     GtkWidget* warningDialog;
     int dialogResponse;
-    char* filename;
+    char* filename = NULL;
     int rc;
     
     if(!GBLisoPaneActive)

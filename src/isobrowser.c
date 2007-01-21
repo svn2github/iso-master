@@ -498,7 +498,7 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
 void extractFromIsoCbk(GtkButton *button, gpointer data)
 {
     GtkTreeSelection* selection;
-    GtkWidget* progressWindow;
+    GtkWidget* progressWindow = NULL;
     GtkWidget* descriptionLabel;
     GtkWidget* cancelButton;
     
@@ -863,7 +863,7 @@ void openIso(char* filename)
 gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
 {
     GtkWidget *dialog;
-    char* filename;
+    char* filename = NULL;
     GtkFileFilter* nameFilter;
     int dialogRespose;
     
@@ -1051,7 +1051,7 @@ void saveIso(char* filename)
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
 {
     GtkWidget *dialog;
-    char* filename;
+    char* filename = NULL;
     int dialogResponse;
     GtkFileFilter* nameFilter;
     

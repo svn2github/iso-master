@@ -28,7 +28,7 @@ export RM      = rm -f
 export INSTALL = install
 
 # -DDEBUG and -g only used during development
-CFLAGS   = -Wall -pedantic -std=c99 `pkg-config --cflags gtk+-2.0` -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\"
+CFLAGS   = -Wall -pedantic -std=c99 -O2 `pkg-config --cflags gtk+-2.0` -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\"
 ifndef WITHOUT_NLS
 	CFLAGS += -DENABLE_NLS
 endif
@@ -40,7 +40,7 @@ OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.
 
 all: isomaster translations isomaster.1.gz
 
-isomaster: $(OBJECTS) | lib iniparser
+isomaster: $(OBJECTS) lib iniparser
 	$(CC) $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
 
 # static pattern rule
@@ -67,7 +67,7 @@ clean:
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) clean
 endif
-	$(RM) *.o isomaster
+	$(RM) *.o isomaster isomaster.1.gz
 
 # for info about DESTDIR see http://www.gnu.org/prep/standards/html_node/DESTDIR.html
 
