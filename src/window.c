@@ -286,11 +286,13 @@ void buildMenu(GtkWidget* boxToPackInto)
                      G_CALLBACK(showHelpOverviewCbk), NULL);
     gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Help/Overview");
     
+#if GTK_MINOR_VERSION >= 6
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_ABOUT, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(showAboutWindowCbk), NULL);
+#endif
     /* END HELP menu */
 }
 

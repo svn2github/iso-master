@@ -164,6 +164,7 @@ GBLhelp =
 
 void showAboutWindowCbk(GtkMenuItem* menuItem, gpointer data)
 {
+#if GTK_MINOR_VERSION >= 6
     gtk_show_about_dialog(GTK_WINDOW(GBLmainWindow), 
                           "name", GBLprogramName,
                           "authors", GBLauthors,
@@ -173,6 +174,7 @@ void showAboutWindowCbk(GtkMenuItem* menuItem, gpointer data)
                           "license", GBLlicense,
                           "website", GBLwebsite,
                           NULL);
+#endif
 }
 
 /* This callback is also used by an accelerator so make sure you don't use 
