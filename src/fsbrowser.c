@@ -74,11 +74,6 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     GtkCellRenderer* renderer;
     GtkTreeViewColumn* column;
     
-    GtkIconSet* iconSet;
-    GtkIconSize* iconSizes = NULL;
-    int numIconSizes;
-    GtkIconSize iconSize;
-    
     GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT64, G_TYPE_UINT);
     
     scrolledWindow = gtk_scrolled_window_new(NULL, NULL);
@@ -142,12 +137,19 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     /* set default sort */
     gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(GBLfsListStore),
                                          COLUMN_FILENAME, GTK_SORT_ASCENDING);
-
+    
+    GBLdirPixbuf = NULL;
+    GBLdirPixbuf = NULL;
+    
+#if GTK_MINOR_VERSION >= 6
+    GtkIconSet* iconSet;
+    GtkIconSize* iconSizes = NULL;
+    int numIconSizes;
+    GtkIconSize iconSize;
+    
     /* CREATE pixbuf for directory */
     iconSet = gtk_icon_factory_lookup_default(GTK_STOCK_DIRECTORY);
-    if(iconSet == NULL)
-        GBLdirPixbuf = NULL;
-    else
+    if(iconSet != NULL)
     {
         gtk_icon_set_get_sizes(iconSet, &iconSizes, &numIconSizes);
         iconSize = iconSizes[0];
@@ -159,9 +161,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     
     /* CREATE pixbuf for file */
     iconSet = gtk_icon_factory_lookup_default(GTK_STOCK_FILE);
-    if(iconSet == NULL)
-        GBLdirPixbuf = NULL;
-    else
+    if(iconSet != NULL)
     {
         gtk_icon_set_get_sizes(iconSet, &iconSizes, &numIconSizes);
         iconSize = iconSizes[0];
@@ -170,6 +170,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
         GBLfilePixbuf = gtk_widget_render_icon(GBLfsTreeView, GTK_STOCK_FILE, iconSize, NULL);
     }
     /* END CREATE pixbuf for file */
+#endif
     
     if(GBLappSettings.fsCurrentDir != NULL)
     {
