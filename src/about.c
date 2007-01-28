@@ -84,7 +84,7 @@ GBLauthors[2] = {
 "Maintainer of many SuSE packages at PackMan\n"
 "- SuSE packages of ISO Master, versions 0.4 - 0.6\n"
 "\n"
-"Marciej Libuda\n"
+"Maciej Libuda\n"
 "- Arch packages of ISO Master, versions 0.3 - 0.6\n"
 "\n"
 "GuestToo\n"

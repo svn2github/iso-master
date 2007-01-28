@@ -102,6 +102,7 @@ msgid "Extract from the ISO"
 msgstr "Wypakuj z obrazu ISO"
 
 #: ../isobrowser.c:114
+#, fuzzy, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Dodanie %s nie powiodło się: '%s'"
 
@@ -126,10 +127,12 @@ msgid "Failed to create directory %s: '%s'"
 msgstr "Utworzenie katalogu %s nie powiodło się: '%s'"
 
 #: ../isobrowser.c:470
+#, fuzzy, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Usunięcie %s nie powiodło się: '%s'"
 
 #: ../isobrowser.c:579
+#, fuzzy, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Pobranie %s nie powiodło się: '%s'"
 
@@ -139,6 +142,7 @@ msgid "Failed to extract boot record: '%s'"
 msgstr "Pobranie rekordu startowego nie powiodło się: '%s'"
 
 #: ../isobrowser.c:728 ../isobrowser.c:776
+#, fuzzy, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Uruchomienie bkisofs nie powiodło się: '%s'"
 
@@ -204,11 +208,11 @@ msgstr "Cofnij"
 
 #: ../window.c:312
 msgid "Go back up one directory on the ISO"
-msgstr "Jeden katalog do góry w obrazie ISO "
+msgstr "Jeden katalog wyżej w obrazie ISO "
 
 #: ../window.c:54
 msgid "Go back up one directory on the filesystem"
-msgstr "Jeden katalog do góry w systemie plików"
+msgstr "Jeden katalog wyżej w systemie plików"
 
 #: ../isobrowser.c:879 ../isobrowser.c:1071
 msgid "ISO Images"
@@ -256,6 +260,7 @@ msgid "Location: to be added from '%s'"
 msgstr "Położenie: będzie dodane z '%s'"
 
 #: ../isobrowser.c:884
+#, fuzzy
 msgid "NRG Images"
 msgstr "Obrazy NRG"
 
@@ -312,6 +317,7 @@ msgid "Save a copy of the boot record"
 msgstr "Zapisz kopię rekordu startowego"
 
 #: ../window.c:179
+#, fuzzy
 msgid "Show _hidden files"
 msgstr "Pokaż _ukryte pliki"
 
@@ -358,7 +364,7 @@ msgstr "_Obraz"
 
 #: ../window.c:277
 msgid "_Overview"
-msgstr "_Przegląd"
+msgstr "_Zawartość"
 
 #: ../window.c:189
 msgid "_Sort directories first"
