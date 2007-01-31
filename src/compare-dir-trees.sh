@@ -11,7 +11,7 @@ fi
 
 #~ echo first $FIRST second $SECOND
 
-for NAME in `cd $FIRST && find`
+for NAME in `cd $FIRST && find -noleaf`
 do
   if [[ $NAME = "." ]]
   then
@@ -20,15 +20,20 @@ do
 
   if [[ -e $FIRST/$NAME ]] && [[ ! -e $SECOND/$NAME ]]
   then
-    echo "$FIRST/$NAME doesn't exist in $SECOND";
-    exit
+    echo -n "$FIRST/$NAME doesn't exist in $SECOND continue? (y/n) "
+    read GOON
+    if [[ $GOON = "n" ]]
+    then
+      exit
+    fi
   fi
   
   if [[ -d $FIRST/$NAME ]] && [[ ! -d $SECOND/$NAME ]]
   then
     echo "$FIRST/$NAME is a directory but $SECOND/$NAME is not"
     exit
-  else
+  elif [[ ! -d $FIRST/$NAME ]] && [[ ! -d $SECOND/$NAME ]]
+  then
     echo -n "Checking $NAME: "
     if [[ `md5sum $FIRST/$NAME | cut -f 1 -d ' '` != `md5sum $SECOND/$NAME | cut -f 1 -d ' '` ]]
     then
@@ -41,6 +46,8 @@ do
     else
       echo "OK."
     fi
+  else
+    echo "Skipped $NAME"
   fi
   
 done
