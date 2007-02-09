@@ -2,7 +2,6 @@
 Name=ISO Master
 GenericName=CD image editor
 Comment=Graphical CD image editor for reading, modifying and writing ISO images
-Icon=/usr/share/isomaster/icons/isomaster.png
 Exec=isomaster
 Encoding=UTF-8
 Terminal=false
