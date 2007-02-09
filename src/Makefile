@@ -41,7 +41,7 @@ CPPFLAGS = -D_FILE_OFFSET_BITS=64
 
 OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o
 
-all: isomaster translations isomaster.1.gz isomaster.desktop
+all: isomaster translations isomaster.desktop
 
 isomaster: $(OBJECTS) lib iniparser
 	$(CC) $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
@@ -60,9 +60,6 @@ translations:
 ifndef WITHOUT_NLS
 	cd po && $(MAKE)
 endif
-
-isomaster.1.gz: isomaster.1
-	gzip -c isomaster.1 > isomaster.1.gz
 
 isomaster.desktop: isomaster.desktop.src
 	cat isomaster.desktop.src > isomaster.desktop
@@ -86,7 +83,7 @@ ifndef WITHOUT_NLS
 	cd po && $(MAKE) install
 endif
 	$(INSTALL) -d $(DESTDIR)$(MYMANPATH)
-	$(INSTALL) -m 644 isomaster.1.gz $(DESTDIR)$(MYMANPATH)
+	$(INSTALL) -m 644 isomaster.1 $(DESTDIR)$(MYMANPATH)
 	$(INSTALL) -m 644 isomaster.desktop $(DESTDIR)$(DESKTOPPATH)
 
 uninstall: 
@@ -95,5 +92,5 @@ uninstall:
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) uninstall
 endif
-	$(RM) $(DESTDIR)$(MYMANPATH)/isomaster.1.gz
+	$(RM) $(DESTDIR)$(MYMANPATH)/isomaster.1
 	$(RM) $(DESTDIR)$(DESKTOPPATH)/isomaster.desktop
