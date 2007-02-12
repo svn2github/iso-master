@@ -9,8 +9,9 @@ enum
 
 enum
 {
-    FILE_TYPE_REGULAR,
-    FILE_TYPE_DIRECTORY
+    FILE_TYPE_REGULAR = 0,
+    FILE_TYPE_DIRECTORY,
+    FILE_TYPE_SYMLINK
 };
 
 void acceptDialogCbk(GtkEntry *entry, GtkDialog* dialog);

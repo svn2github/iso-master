@@ -35,6 +35,7 @@ extern char* GBLfsCurrentDir;
 
 extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
+//~ extern GdkPixbuf* GBLsymlinkPixbuf;
 
 extern int errno;
 
@@ -139,7 +140,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
                                          COLUMN_FILENAME, GTK_SORT_ASCENDING);
     
     GBLdirPixbuf = NULL;
-    GBLdirPixbuf = NULL;
+    GBLfilePixbuf = NULL;
     
 #if GTK_MINOR_VERSION >= 6
     GtkIconSet* iconSet;
@@ -267,7 +268,7 @@ bool changeFsDirectory(char* newDirStr)
         strcpy(nextItemPathAndName, newDirStr);
         strcat(nextItemPathAndName, nextItem->d_name);
         
-        rc = stat(nextItemPathAndName, &nextItemInfo);
+        rc = lstat(nextItemPathAndName, &nextItemInfo);
         if(rc == -1)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -285,7 +286,7 @@ bool changeFsDirectory(char* newDirStr)
             continue;
         }
         
-        if(nextItemInfo.st_mode & S_IFDIR)
+        if(IS_DIR(nextItemInfo.st_mode))
         /* directory */
         {
             gtk_list_store_append(GBLfsListStore, &listIterator);
@@ -298,7 +299,7 @@ bool changeFsDirectory(char* newDirStr)
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_DIRECTORY,
                                -1);
         }
-        else if(nextItemInfo.st_mode & S_IFREG)
+        else if(IS_REG_FILE(nextItemInfo.st_mode))
         /* regular file */
         {
             gtk_list_store_append(GBLfsListStore, &listIterator);
@@ -309,6 +310,17 @@ bool changeFsDirectory(char* newDirStr)
                                //COLUMN_FILENAME, g_locale_to_utf8(nextItem->d_name, -1, 0, 0, 0), 
                                COLUMN_SIZE, nextItemInfo.st_size,
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
+                               -1);
+        }
+        else if(IS_SYMLINK(nextItemInfo.st_mode))
+        /* regular file */
+        {
+            gtk_list_store_append(GBLfsListStore, &listIterator);
+            gtk_list_store_set(GBLfsListStore, &listIterator, 
+                               COLUMN_ICON, GBLfilePixbuf,
+                               COLUMN_FILENAME, nextItem->d_name,
+                               COLUMN_SIZE, 0LL,
+                               COLUMN_HIDDEN_TYPE, FILE_TYPE_SYMLINK,
                                -1);
         }
         /* else fancy file, ignore it */

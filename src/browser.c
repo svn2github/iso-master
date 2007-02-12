@@ -24,6 +24,7 @@
 /* menu-sized pixbufs of a directory and a file */
 GdkPixbuf* GBLdirPixbuf;
 GdkPixbuf* GBLfilePixbuf;
+//~ GdkPixbuf* GBLsymlinkPixbuf;
 
 /* text box for showing the path and name of the current directory on the fs */
 GtkWidget* GBLfsCurrentDirField;
@@ -194,6 +195,11 @@ void sizeCellDataFunc32(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
         snprintf(sizeStr, sizeof(sizeStr), "dir");
         sizeStr[sizeof(sizeStr) - 1] = '\0';
     }
+    else if(fileType == FILE_TYPE_SYMLINK)
+    {
+        snprintf(sizeStr, sizeof(sizeStr), "link");
+        sizeStr[sizeof(sizeStr) - 1] = '\0';
+    }
     else
         formatSize(sizeLlInt, sizeStr, sizeof(sizeStr));
     
@@ -215,6 +221,11 @@ void sizeCellDataFunc64(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
     if(fileType == FILE_TYPE_DIRECTORY)
     {
         snprintf(sizeStr, sizeof(sizeStr), "dir");
+        sizeStr[sizeof(sizeStr) - 1] = '\0';
+    }
+    else if(fileType == FILE_TYPE_SYMLINK)
+    {
+        snprintf(sizeStr, sizeof(sizeStr), "link");
         sizeStr[sizeof(sizeStr) - 1] = '\0';
     }
     else

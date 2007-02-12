@@ -31,7 +31,7 @@ export RM      = rm -f
 export INSTALL = install
 
 # -DDEBUG and -g only used during development
-CFLAGS += -Wall -pedantic -std=c99 `pkg-config --cflags gtk+-2.0` -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\"
+CFLAGS += -Wall -pedantic -std=gnu99 `pkg-config --cflags gtk+-2.0` -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -g -DDEBUG
 ifndef WITHOUT_NLS
 	CFLAGS += -DENABLE_NLS
 endif

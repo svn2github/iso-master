@@ -26,6 +26,7 @@ do
     then
       exit
     fi
+    continue
   fi
   
   if [[ -d $FIRST/$NAME ]] && [[ ! -d $SECOND/$NAME ]]
