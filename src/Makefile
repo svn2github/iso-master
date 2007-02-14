@@ -29,6 +29,8 @@ export CC      ?= gcc
 export AR      = ar
 export RM      = rm -f
 export INSTALL = install
+export CP      = cp
+export ECHO    = echo
 
 # -DDEBUG and -g only used during development
 CFLAGS += -Wall -pedantic -std=gnu99 `pkg-config --cflags gtk+-2.0` -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -g -DDEBUG
@@ -62,8 +64,8 @@ ifndef WITHOUT_NLS
 endif
 
 isomaster.desktop: isomaster.desktop.src
-	cat isomaster.desktop.src > isomaster.desktop
-	echo Icon=$(ICONPATH)/isomaster.png >> isomaster.desktop
+	$(CP) isomaster.desktop.src isomaster.desktop
+	$(ECHO) Icon=$(ICONPATH)/isomaster.png >> isomaster.desktop
 
 clean: 
 	cd bk && $(MAKE) clean
