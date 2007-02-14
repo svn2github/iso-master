@@ -20,7 +20,7 @@ do
 
   if [[ -e $FIRST/$NAME ]] && [[ ! -e $SECOND/$NAME ]]
   then
-    echo -n "$FIRST/$NAME doesn't exist in $SECOND continue? (y/n) "
+    echo -n "$FIRST/$NAME doesn't exist in $SECOND continue? (Y/n) "
     read GOON
     if [[ $GOON = "n" ]]
     then
