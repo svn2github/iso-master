@@ -282,7 +282,6 @@ bool changeFsDirectory(char* newDirStr)
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
-            free(nextItemPathAndName);
             continue;
         }
         
