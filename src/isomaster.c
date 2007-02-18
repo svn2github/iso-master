@@ -11,6 +11,7 @@
 * Contributors:
 * David Johnson
 * - open an iso file based on command-line parameter
+* - print a help message when --help parameter given
 ******************************************************************************/
 
 #include <gtk/gtk.h>
@@ -33,7 +34,17 @@ int main(int argc, char** argv)
     GtkWidget* topPanedBox; /* to pack the top part of GBLbrowserPaned */
     GtkWidget* bottomPanedBox; /* to pack the bottom part of GBLbrowserPaned */
     GtkWidget* statusBar;
-    
+
+    /* if --help passed, return usage help and quit */
+    if (argv[1] != NULL)
+    {
+        if (!strcmp(argv[1], "--help"))
+        {
+            printf("Usage: isomaster [image.iso]\n");
+            return 0;
+        }
+    }
+
 #ifdef ENABLE_NLS
     /* initialize gettext */
     bindtextdomain("isomaster", LOCALEDIR);
