@@ -1,7 +1,5 @@
 # Romanian translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
-# <>, 2007.
-# 
 # 
 msgid ""
 msgstr ""

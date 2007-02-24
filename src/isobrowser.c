@@ -671,7 +671,7 @@ gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data)
     
     closeIso();
     
-    rc = bk_init_vol_info(&GBLvolInfo);
+    rc = bk_init_vol_info(&GBLvolInfo, GBLappSettings.scanForDuplicateFiles);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -719,7 +719,7 @@ void openIso(char* filename)
     
     closeIso();
     
-    rc = bk_init_vol_info(&GBLvolInfo);
+    rc = bk_init_vol_info(&GBLvolInfo, GBLappSettings.scanForDuplicateFiles);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -1065,7 +1065,7 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
         //~ g_free(filename);
     //~ }
     
-    saveIso("out.iso");
+    saveIso("/home/andrei/out.iso");
 
     /* the accelerator callback must return true */
     return TRUE;

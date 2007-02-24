@@ -19,6 +19,8 @@ typedef struct
     /* stuff read from the config file that will also be written back from here */
     bool showHiddenFilesFs;
     bool sortDirectoriesFirst;
+    bool scanForDuplicateFiles;
+    bool followSymLinks;
     int filenameTypesToWrite;
     char* lastIsoDir;
     char* lastBootRecordDir;
@@ -27,8 +29,10 @@ typedef struct
 
 void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event);
 void findHomeDir(void);
+void followSymLinksCbk(GtkButton *button, gpointer data);
 void openConfigFile(char* configFileName);
 void loadSettings(void);
+void scanForDuplicatesCbk(GtkButton *button, gpointer data);
 void writeSettings(void);
 
 #endif

@@ -24,6 +24,10 @@ GtkWidget* GBLisoSizeLbl;
 GtkWidget* GBLshowHiddenMenuItem;
 /* check menu item for 'sort directories first' */
 GtkWidget* GBLsortDirsFirst;
+/* check menu item for 'scan for duplicate files' */
+GtkWidget* GBLscanForDuplicates;
+/* check menu item for 'follow symbolic links' */
+GtkWidget* GBLfollowSymLinks;
 /* icon for 'go back' for fs browser */
 GtkWidget* GBLgoBackIcon;
 /* icon for 'go back' for iso browser */
@@ -77,6 +81,8 @@ void buildMenu(GtkWidget* boxToPackInto)
     guint accelKey;
     GdkModifierType accelModifier;
     GClosure *closure = NULL;
+    GtkWidget* submenu;
+    GtkWidget* rootSubmenu;
     
     /* KEYBOARD accelerators */
     accelGroup = gtk_accel_group_new();
@@ -199,7 +205,67 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(GBLsortDirsFirst);
     g_signal_connect(G_OBJECT(GBLsortDirsFirst), "activate",
                      G_CALLBACK(sortDirsFirstCbk), NULL);
+    
+    menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PROPERTIES, NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show(menuItem);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(refreshBothViewsCbk), NULL);
     /* END VIEW menu */
+    
+    /* ACTION menu */
+    rootMenu = gtk_menu_item_new_with_mnemonic(_("_Action"));
+    gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
+    gtk_widget_show(rootMenu);
+    
+    menu = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
+    
+    menuItem = gtk_menu_item_new_with_mnemonic(_("_Add selected to image"));
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show(menuItem);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(addToIsoCbk), NULL);
+    
+    rootSubmenu = gtk_menu_item_new_with_label("Options for adding");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
+    gtk_widget_show(rootSubmenu);
+    
+    submenu = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
+    
+    GBLscanForDuplicates = gtk_check_menu_item_new_with_mnemonic(_("Scan for duplicate files (slow)"));
+    if(GBLappSettings.scanForDuplicateFiles)
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLscanForDuplicates), TRUE);
+    else
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLscanForDuplicates), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), GBLscanForDuplicates);
+    gtk_widget_show(GBLscanForDuplicates);
+    g_signal_connect(G_OBJECT(GBLscanForDuplicates), "activate",
+                     G_CALLBACK(scanForDuplicatesCbk), NULL);
+    
+    GBLfollowSymLinks = gtk_check_menu_item_new_with_mnemonic(_("Follow symbolic links"));
+    if(GBLappSettings.followSymLinks)
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLfollowSymLinks), TRUE);
+    else
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLfollowSymLinks), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), GBLfollowSymLinks);
+    gtk_widget_show(GBLfollowSymLinks);
+    g_signal_connect(G_OBJECT(GBLfollowSymLinks), "activate",
+                     G_CALLBACK(followSymLinksCbk), NULL);
+    
+    
+    
+    separator = gtk_separator_menu_item_new();
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), separator);
+    gtk_widget_show(separator);
+    
+    menuItem = gtk_menu_item_new_with_mnemonic(_("_Extract selected from image"));
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show(menuItem);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(extractFromIsoCbk), NULL);
+    /* END ACTION menu */
     
     /* BOOT menu */
     rootMenu = gtk_menu_item_new_with_mnemonic(_("_BootRecord"));
@@ -226,9 +292,6 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(deleteBootRecordCbk), NULL);
-    
-    GtkWidget* submenu;
-    GtkWidget* rootSubmenu;
     
     rootSubmenu = gtk_image_menu_item_new_from_stock(GTK_STOCK_ADD, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);

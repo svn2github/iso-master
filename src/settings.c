@@ -217,6 +217,13 @@ void findHomeDir(void)
     }
 }
 
+void followSymLinksCbk(GtkButton *button, gpointer data)
+{
+    GBLappSettings.followSymLinks = !GBLappSettings.followSymLinks;
+    
+    bk_set_follow_symlinks(&GBLvolInfo, GBLappSettings.followSymLinks);
+}
+
 void openConfigFile(char* configFileName)
 {
     GBLsettingsDictionary = iniparser_load(configFileName);
@@ -251,6 +258,8 @@ void loadSettings(void)
     int height;
     int showHidden;
     int sortDirsFirst;
+    int scanForDuplicateFiles;
+    int followSymLinks;
     char* tempStr;
     
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
@@ -346,7 +355,35 @@ void loadSettings(void)
     }
     else
     /* no config file */
-        GBLappSettings.showHiddenFilesFs = true;
+        GBLappSettings.sortDirectoriesFirst = true;
+    
+    /* read/set scan for duplicate files */
+    if(GBLsettingsDictionary != NULL)
+    {
+        scanForDuplicateFiles = iniparser_getboolean(GBLsettingsDictionary, 
+                                                     "ui:scanforduplicatefiles", INT_MAX);
+        if(scanForDuplicateFiles == INT_MAX)
+            GBLappSettings.scanForDuplicateFiles = false;
+        else
+            GBLappSettings.scanForDuplicateFiles = scanForDuplicateFiles;
+    }
+    else
+    /* no config file */
+        GBLappSettings.scanForDuplicateFiles = true;
+    
+    /* read/set follow symbolic links */
+    if(GBLsettingsDictionary != NULL)
+    {
+        followSymLinks = iniparser_getboolean(GBLsettingsDictionary, 
+                                              "ui:followsymlinks", INT_MAX);
+        if(followSymLinks == INT_MAX)
+            GBLappSettings.followSymLinks = false;
+        else
+            GBLappSettings.followSymLinks = followSymLinks;
+    }
+    else
+    /* no config file */
+        GBLappSettings.followSymLinks = true;
     
     /* read/set last iso open/save dir */
     if(GBLsettingsDictionary != NULL)
@@ -387,6 +424,25 @@ void loadSettings(void)
         GBLappSettings.lastBootRecordDir = NULL;
     
     free(configFileName);
+}
+
+void scanForDuplicatesCbk(GtkButton *button, gpointer data)
+{
+    GBLappSettings.scanForDuplicateFiles = !GBLappSettings.scanForDuplicateFiles;
+    
+    if(GBLisoPaneActive)
+    {
+        GtkWidget* warningDialog;
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_WARNING,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("You will have to close and reopen the ISO for"
+                                               " this change to take effect"));
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+    }
 }
 
 void writeSettings(void)
@@ -447,6 +503,12 @@ void writeSettings(void)
     
     snprintf(numberStr, 20, "%d", GBLappSettings.sortDirectoriesFirst);
     iniparser_setstr(GBLsettingsDictionary, "ui:sortdirsfirst", numberStr);
+    
+    snprintf(numberStr, 20, "%d", GBLappSettings.scanForDuplicateFiles);
+    iniparser_setstr(GBLsettingsDictionary, "ui:scanforduplicatefiles", numberStr);
+    
+    snprintf(numberStr, 20, "%d", GBLappSettings.followSymLinks);
+    iniparser_setstr(GBLsettingsDictionary, "ui:followsymlinks", numberStr);
     
     if(GBLappSettings.lastIsoDir != NULL)
         iniparser_setstr(GBLsettingsDictionary, "ui:lastisodir", GBLappSettings.lastIsoDir);
