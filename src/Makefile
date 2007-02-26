@@ -73,7 +73,7 @@ clean:
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) clean
 endif
-	$(RM) *.o isomaster isomaster.1 isomaster.desktop
+	$(RM) *.o isomaster isomaster.desktop
 
 # for info about DESTDIR see http://www.gnu.org/prep/standards/html_node/DESTDIR.html
 
