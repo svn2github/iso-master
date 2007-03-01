@@ -207,60 +207,6 @@ void buildMenu(GtkWidget* boxToPackInto)
                      G_CALLBACK(sortDirsFirstCbk), NULL);
     /* END VIEW menu */
     
-    /* ACTION menu */
-    rootMenu = gtk_menu_item_new_with_mnemonic(_("_Action"));
-    gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
-    gtk_widget_show(rootMenu);
-    
-    menu = gtk_menu_new();
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
-    
-    menuItem = gtk_menu_item_new_with_mnemonic(_("_Add selected to image"));
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-    gtk_widget_show(menuItem);
-    g_signal_connect(G_OBJECT(menuItem), "activate",
-                     G_CALLBACK(addToIsoCbk), NULL);
-    
-    rootSubmenu = gtk_menu_item_new_with_label("Options for adding");
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
-    gtk_widget_show(rootSubmenu);
-    
-    submenu = gtk_menu_new();
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
-    
-    GBLscanForDuplicates = gtk_check_menu_item_new_with_mnemonic(_("Scan for duplicate files (slow)"));
-    if(GBLappSettings.scanForDuplicateFiles)
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLscanForDuplicates), TRUE);
-    else
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLscanForDuplicates), FALSE);
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), GBLscanForDuplicates);
-    gtk_widget_show(GBLscanForDuplicates);
-    g_signal_connect(G_OBJECT(GBLscanForDuplicates), "activate",
-                     G_CALLBACK(scanForDuplicatesCbk), NULL);
-    
-    GBLfollowSymLinks = gtk_check_menu_item_new_with_mnemonic(_("Follow symbolic links"));
-    if(GBLappSettings.followSymLinks)
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLfollowSymLinks), TRUE);
-    else
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLfollowSymLinks), FALSE);
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), GBLfollowSymLinks);
-    gtk_widget_show(GBLfollowSymLinks);
-    g_signal_connect(G_OBJECT(GBLfollowSymLinks), "activate",
-                     G_CALLBACK(followSymLinksCbk), NULL);
-    
-    
-    
-    separator = gtk_separator_menu_item_new();
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), separator);
-    gtk_widget_show(separator);
-    
-    menuItem = gtk_menu_item_new_with_mnemonic(_("_Extract selected from image"));
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-    gtk_widget_show(menuItem);
-    g_signal_connect(G_OBJECT(menuItem), "activate",
-                     G_CALLBACK(extractFromIsoCbk), NULL);
-    /* END ACTION menu */
-    
     /* BOOT menu */
     rootMenu = gtk_menu_item_new_with_mnemonic(_("_BootRecord"));
     gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
@@ -324,6 +270,35 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(addBootRecordFromFileCbk), (gpointer)BOOT_MEDIA_2_88_FLOPPY);
     /* END BOOT menu */
+    
+    /* SETTINGS menu */
+    rootMenu = gtk_menu_item_new_with_mnemonic(_("_Settings"));
+    gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
+    gtk_widget_show(rootMenu);
+    
+    menu = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
+    
+    GBLscanForDuplicates = gtk_check_menu_item_new_with_mnemonic(_("Scan for duplicate files (slow)"));
+    if(GBLappSettings.scanForDuplicateFiles)
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLscanForDuplicates), TRUE);
+    else
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLscanForDuplicates), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GBLscanForDuplicates);
+    gtk_widget_show(GBLscanForDuplicates);
+    g_signal_connect(G_OBJECT(GBLscanForDuplicates), "activate",
+                     G_CALLBACK(scanForDuplicatesCbk), NULL);
+    
+    GBLfollowSymLinks = gtk_check_menu_item_new_with_mnemonic(_("Follow symbolic links"));
+    if(GBLappSettings.followSymLinks)
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLfollowSymLinks), TRUE);
+    else
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLfollowSymLinks), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GBLfollowSymLinks);
+    gtk_widget_show(GBLfollowSymLinks);
+    g_signal_connect(G_OBJECT(GBLfollowSymLinks), "activate",
+                     G_CALLBACK(followSymLinksCbk), NULL);
+    /* END SETTINGS menu */
     
     /* HELP menu */
     rootMenu = gtk_menu_item_new_with_mnemonic(_("_Help"));
