@@ -363,7 +363,7 @@ void loadSettings(void)
         scanForDuplicateFiles = iniparser_getboolean(GBLsettingsDictionary, 
                                                      "ui:scanforduplicatefiles", INT_MAX);
         if(scanForDuplicateFiles == INT_MAX)
-            GBLappSettings.scanForDuplicateFiles = false;
+            GBLappSettings.scanForDuplicateFiles = true;
         else
             GBLappSettings.scanForDuplicateFiles = scanForDuplicateFiles;
     }
@@ -383,7 +383,7 @@ void loadSettings(void)
     }
     else
     /* no config file */
-        GBLappSettings.followSymLinks = true;
+        GBLappSettings.followSymLinks = false;
     
     /* read/set last iso open/save dir */
     if(GBLsettingsDictionary != NULL)
