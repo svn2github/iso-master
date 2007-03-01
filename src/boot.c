@@ -371,7 +371,7 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
     else
     {
         if(GBLvolInfo.bootRecordIsOnImage)
-            snprintf(str, 100, _("Location: on original image at 0x%X"), GBLvolInfo.bootRecordOffset);
+            snprintf(str, 100, _("Location: on original image at 0x%llX"), GBLvolInfo.bootRecordOffset);
         else
             snprintf(str, 100, _("Location: to be added from '%s'"), GBLvolInfo.bootRecordPathAndName);
     }

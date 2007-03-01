@@ -187,9 +187,10 @@ void showHelpOverviewCbk(GtkMenuItem* menuItem, gpointer data)
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), _("ISO Master Help"));
     gtk_window_set_transient_for(GTK_WINDOW(window), GTK_WINDOW(GBLmainWindow));
-    gtk_widget_show(window);
     
     label = gtk_label_new(GBLhelp);
     gtk_container_add(GTK_CONTAINER(window), label);
     gtk_widget_show(label);
+
+    gtk_widget_show(window);
 }

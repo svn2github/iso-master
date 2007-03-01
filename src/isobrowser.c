@@ -1106,7 +1106,7 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
         //~ g_free(filename);
     //~ }
     
-    saveIso("/home/andrew/out.iso");
+    saveIso("/home/andrei/out.iso");
 
     /* the accelerator callback must return true */
     return TRUE;

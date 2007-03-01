@@ -1,20 +1,14 @@
 ui:
 -alt shortcut keys need attention (bulgarian)
--sometimes the help window won't come up in the middle of the main window
 -change file/dir properties (especialy creation date)
 -add save/overwrite #undef-ed by default
 -progress bars for reading and adding
--shownoimageopenmsg
--shownofileselectedmsg (iso/fs)
 
 
 bk:
 -dos doesn't like names to start with underscores
 -add path tables, boot record to size estimate
 -move the 100k buffers to volinfo
--split bk_write_image()
--writeElToritoBootCatalog(), writeElToritoVd() cast return to int, no good
--bootRecordSize?, bootRecordOffset should be off_t
 -when have hard links iso size is messed up
 -written contents /W2KS.DAT from 2k multiboot cd are 0x00
 
