@@ -13,6 +13,7 @@
 ******************************************************************************/
 
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
@@ -192,6 +193,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_container_add(GTK_CONTAINER(scrolledWindow), GBLisoTreeView);
     g_signal_connect(GBLisoTreeView, "row-activated", (GCallback)isoRowDblClickCbk, NULL);
     g_signal_connect(GBLisoTreeView, "select-cursor-parent", (GCallback)isoGoUpDirTreeCbk, NULL);
+    g_signal_connect(GBLisoTreeView, "key-press-event", (GCallback)isoKeyPressedCbk, NULL);
     gtk_widget_show(GBLisoTreeView);
     
     /* this won't be enabled until gtk allows me to drag a multiple selection */
@@ -636,6 +638,18 @@ void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
     }
     
     free(newCurrentDir);
+}
+
+gboolean isoKeyPressedCbk(GtkWidget* widget, GdkEventKey* event, gpointer user_data)
+{
+    if(event->keyval == GDK_Delete)
+    {
+        deleteFromIsoCbk(NULL, NULL);
+        
+        return TRUE;
+    }
+    
+    return FALSE;
 }
 
 void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,

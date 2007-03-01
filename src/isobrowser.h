@@ -16,6 +16,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
 void extractingProgressUpdaterCbk(void);
 void extractingProgressWindowDestroyedCbk(void);
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data);
+gboolean isoKeyPressedCbk(GtkWidget* widget, GdkEventKey* event, gpointer user_data);
 void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
                        GtkTreeViewColumn* col, gpointer data);
 gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data);
