@@ -325,15 +325,10 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
 {
     GtkWidget* toolbar;
     GtkWidget* button;
-    GtkWidget* hBox;
     GtkWidget* sizeTitleLabel;
     
-    hBox = gtk_hbox_new(FALSE, 0);
-    gtk_box_pack_start(GTK_BOX(boxToPackInto), hBox, FALSE, FALSE, 0);
-    gtk_widget_show(hBox);
-    
     toolbar = gtk_toolbar_new();
-    gtk_box_pack_start(GTK_BOX(hBox), toolbar, FALSE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, TRUE, 0);
     gtk_widget_show(toolbar);
     
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
@@ -363,11 +358,13 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
                                      NULL);
     
     sizeTitleLabel = gtk_label_new(_("      Estimated ISO Size: "));
-    gtk_box_pack_start(GTK_BOX(hBox), sizeTitleLabel, FALSE, FALSE, 0);
+    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_CHILD_WIDGET,
+                               sizeTitleLabel, NULL, NULL, NULL, NULL, NULL, NULL);
     gtk_widget_show(sizeTitleLabel);
     
     GBLisoSizeLbl = gtk_label_new("");
-    gtk_box_pack_start(GTK_BOX(hBox), GBLisoSizeLbl, FALSE, FALSE, 0);
+    gtk_toolbar_append_element(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_CHILD_WIDGET,
+                               GBLisoSizeLbl, NULL, NULL, NULL, NULL, NULL, NULL);
     gtk_widget_show(GBLisoSizeLbl);
 }
 
