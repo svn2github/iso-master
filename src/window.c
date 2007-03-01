@@ -205,12 +205,6 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(GBLsortDirsFirst);
     g_signal_connect(G_OBJECT(GBLsortDirsFirst), "activate",
                      G_CALLBACK(sortDirsFirstCbk), NULL);
-    
-    menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PROPERTIES, NULL);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-    gtk_widget_show(menuItem);
-    g_signal_connect(G_OBJECT(menuItem), "activate",
-                     G_CALLBACK(refreshBothViewsCbk), NULL);
     /* END VIEW menu */
     
     /* ACTION menu */
