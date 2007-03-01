@@ -20,14 +20,6 @@
 
 /* the label that holds the value of the iso size */
 GtkWidget* GBLisoSizeLbl;
-/* check menu item for 'show hidden files' */
-GtkWidget* GBLshowHiddenMenuItem;
-/* check menu item for 'sort directories first' */
-GtkWidget* GBLsortDirsFirst;
-/* check menu item for 'scan for duplicate files' */
-GtkWidget* GBLscanForDuplicates;
-/* check menu item for 'follow symbolic links' */
-GtkWidget* GBLfollowSymLinks;
 /* icon for 'go back' for fs browser */
 GtkWidget* GBLgoBackIcon;
 /* icon for 'go back' for iso browser */
@@ -76,6 +68,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     GtkWidget* menuItem;
     GtkWidget* separator;
     GtkWidget* icon;
+    GtkWidget* checkbox;
     GtkWidget* rootMenu;
     GtkAccelGroup* accelGroup;
     guint accelKey;
@@ -186,24 +179,24 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(refreshBothViewsCbk), NULL);
     
-    GBLshowHiddenMenuItem = gtk_check_menu_item_new_with_mnemonic(_("Show _hidden files"));
+    checkbox = gtk_check_menu_item_new_with_mnemonic(_("Show _hidden files"));
     if(GBLappSettings.showHiddenFilesFs)
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLshowHiddenMenuItem), TRUE);
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
     else
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLshowHiddenMenuItem), FALSE);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GBLshowHiddenMenuItem);
-    gtk_widget_show(GBLshowHiddenMenuItem);
-    g_signal_connect(G_OBJECT(GBLshowHiddenMenuItem), "activate",
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), checkbox);
+    gtk_widget_show(checkbox);
+    g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(showHiddenCbk), NULL);
     
-    GBLsortDirsFirst = gtk_check_menu_item_new_with_mnemonic(_("_Sort directories first"));
+    checkbox = gtk_check_menu_item_new_with_mnemonic(_("_Sort directories first"));
     if(GBLappSettings.sortDirectoriesFirst)
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLsortDirsFirst), TRUE);
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
     else
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLsortDirsFirst), FALSE);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GBLsortDirsFirst);
-    gtk_widget_show(GBLsortDirsFirst);
-    g_signal_connect(G_OBJECT(GBLsortDirsFirst), "activate",
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), checkbox);
+    gtk_widget_show(checkbox);
+    g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(sortDirsFirstCbk), NULL);
     /* END VIEW menu */
     
@@ -279,24 +272,24 @@ void buildMenu(GtkWidget* boxToPackInto)
     menu = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
     
-    GBLscanForDuplicates = gtk_check_menu_item_new_with_mnemonic(_("Scan for duplicate files (slow)"));
+    checkbox = gtk_check_menu_item_new_with_mnemonic(_("Scan for duplicate files (slow)"));
     if(GBLappSettings.scanForDuplicateFiles)
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLscanForDuplicates), TRUE);
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
     else
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLscanForDuplicates), FALSE);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GBLscanForDuplicates);
-    gtk_widget_show(GBLscanForDuplicates);
-    g_signal_connect(G_OBJECT(GBLscanForDuplicates), "activate",
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), checkbox);
+    gtk_widget_show(checkbox);
+    g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(scanForDuplicatesCbk), NULL);
     
-    GBLfollowSymLinks = gtk_check_menu_item_new_with_mnemonic(_("Follow symbolic links"));
+    checkbox = gtk_check_menu_item_new_with_mnemonic(_("Follow symbolic links"));
     if(GBLappSettings.followSymLinks)
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLfollowSymLinks), TRUE);
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
     else
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(GBLfollowSymLinks), FALSE);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), GBLfollowSymLinks);
-    gtk_widget_show(GBLfollowSymLinks);
-    g_signal_connect(G_OBJECT(GBLfollowSymLinks), "activate",
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), checkbox);
+    gtk_widget_show(checkbox);
+    g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(followSymLinksCbk), NULL);
     /* END SETTINGS menu */
     
