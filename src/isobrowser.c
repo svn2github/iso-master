@@ -54,6 +54,32 @@ static GtkTreeViewColumn* GBLfilenameIsoColumn;
 /* the window with the progress bar for writing */
 GtkWidget* GBLwritingProgressWindow;
 
+void acceptIsoPathCbk(GtkEntry *entry, gpointer user_data)
+{
+    const char* newPath;
+    char* newPathTerminated;
+    
+    newPath = gtk_entry_get_text(entry);
+    
+    if(newPath[strlen(newPath) - 1] == '/')
+    {
+        changeIsoDirectory((char*)newPath);
+    }
+    else
+    {
+        newPathTerminated = malloc(strlen(newPath) + 2);
+        if(newPathTerminated == NULL)
+            fatalError("newPathTerminated = malloc(strlen(newPath) + 2) failed");
+        
+        strcpy(newPathTerminated, newPath);
+        strcat(newPathTerminated, "/");
+        
+        changeIsoDirectory(newPathTerminated);
+        
+        free(newPathTerminated);
+    }
+}
+
 void addToIsoCbk(GtkButton *button, gpointer data)
 {
     GtkTreeSelection* selection;
@@ -220,8 +246,8 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
 void buildIsoLocator(GtkWidget* boxToPackInto)
 {
     GBLisoCurrentDirField = gtk_entry_new();
-    gtk_entry_set_editable(GTK_ENTRY(GBLisoCurrentDirField), FALSE);
-    //gtk_widget_set_sensitive(GBLisoCurrentDirField, FALSE);
+    //gtk_entry_set_editable(GTK_ENTRY(GBLisoCurrentDirField), FALSE);
+    g_signal_connect(GBLisoCurrentDirField, "activate", (GCallback)acceptIsoPathCbk, NULL);
     gtk_box_pack_start(GTK_BOX(boxToPackInto), GBLisoCurrentDirField, FALSE, FALSE, 0);
     gtk_widget_show(GBLisoCurrentDirField);
 }
@@ -252,6 +278,7 @@ void changeIsoDirectory(char* newDirStr)
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
+        return;
     }
     
     /* for improved performance disconnect the model from tree view before udating it */
