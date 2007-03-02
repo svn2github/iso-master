@@ -838,6 +838,7 @@ void openIso(char* filename)
     GBLisoSize = 35845;
     //if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
         GBLisoSize += 2048;
+    
     GBLisoSize += bk_estimate_iso_size(&GBLvolInfo, FNTYPE_9660 | FNTYPE_JOLIET | FNTYPE_ROCKRIDGE);
     formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
@@ -1107,7 +1108,7 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     //~ }
     
     saveIso("/home/andrei/out.iso");
-
+    
     /* the accelerator callback must return true */
     return TRUE;
 }

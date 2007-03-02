@@ -10,7 +10,7 @@ bk:
 -add path tables, boot record to size estimate
 -move the 100k buffers to volinfo
 -when have hard links iso size is messed up
--written contents /W2KS.DAT from 2k multiboot cd are 0x00
+-if a the file a hard link is pointing to is deleted will things break?
 
 
 c99 compatibility issues:
