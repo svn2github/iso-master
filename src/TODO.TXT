@@ -2,14 +2,14 @@ ui:
 -alt shortcut keys need attention (bulgarian)
 -change file/dir properties (especialy creation date)
 -add save/overwrite #undef-ed by default
--progress bars for reading and adding
+-make writing progress window not closeable
+-make reading and adding cancelable
 
 
 bk:
 -dos doesn't like names to start with underscores
 -add path tables, boot record to size estimate
 -move the 100k buffers to volinfo
--when have hard links iso size is messed up
 -if a the file a hard link is pointing to is deleted will things break?
 
 

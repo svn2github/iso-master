@@ -49,11 +49,30 @@ static off_t GBLisoSize = 0;
 /* the progress bar from the writing dialog box */
 static GtkWidget* GBLWritingProgressBar;
 /* the progress bar from the extracting dialog box */
-static GtkWidget* GBLextractingProgressBar;
+static GtkWidget* GBLactivityProgressBar;
 /* the column for the filename in the iso pane */
 static GtkTreeViewColumn* GBLfilenameIsoColumn;
 /* the window with the progress bar for writing */
 GtkWidget* GBLwritingProgressWindow;
+
+void activityProgressUpdaterCbk(void)
+{
+    if(GBLactivityProgressBar != NULL)
+    {
+        gtk_progress_bar_pulse(GTK_PROGRESS_BAR(GBLactivityProgressBar)); 
+    
+        /* redraw progress bar */
+        while(gtk_events_pending())
+            gtk_main_iteration();
+    }
+}
+
+gboolean activityProgressWindowDestroyCbk(GtkWidget* widget, GdkEvent* event,
+                                          gpointer user_data)
+{
+    /* don't allow closing */
+    return TRUE;
+}
 
 void acceptIsoPathCbk(GtkEntry *entry, gpointer user_data)
 {
@@ -91,7 +110,43 @@ void addToIsoCbk(GtkButton *button, gpointer data)
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
     
+    /* CREATE and show progress bar */
+    GtkWidget* progressWindow;
+    GtkWidget* label;
+    
+    /* dialog window for the progress bar */
+    progressWindow = gtk_dialog_new();
+    gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
+    gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
+    gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
+    gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
+    g_signal_connect_swapped(progressWindow, "delete-event",
+                             G_CALLBACK(activityProgressWindowDestroyCbk), NULL);
+    
+    label = gtk_label_new(_("Please wait while I'm adding the selected items..."));
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), label, TRUE, TRUE, 0);
+    gtk_widget_show(label);
+    
+    if(GBLappSettings.scanForDuplicateFiles)
+    {
+        label = gtk_label_new(_("(scanning for duplicate files)"));
+        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), label, TRUE, TRUE, 0);
+        gtk_widget_show(label);
+    }
+    
+    /* the progress bar */
+    GBLactivityProgressBar = gtk_progress_bar_new();
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLactivityProgressBar, TRUE, TRUE, 0);
+    gtk_widget_show(GBLactivityProgressBar);
+    
+    /* if i show it before i add the children, the window ends up being not centered */
+    gtk_widget_show(progressWindow);
+    /* END CREATE and show progress bar */
+    
     gtk_tree_selection_selected_foreach(selection, addToIsoEachRowCbk, NULL);
+    
+    gtk_widget_destroy(progressWindow);
+    GBLactivityProgressBar = NULL;
     
     if(gtk_tree_selection_count_selected_rows(selection) > 0)
     /* reload iso view */
@@ -132,7 +187,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
         strcpy(fullItemName, GBLfsCurrentDir);
         strcat(fullItemName, itemName);
         
-        rc = bk_add(&GBLvolInfo, fullItemName, GBLisoCurrentDir);
+        rc = bk_add(&GBLvolInfo, fullItemName, GBLisoCurrentDir, activityProgressUpdaterCbk);
         if(rc <= 0 && rc != BKWARNING_OPER_PARTLY_FAILED)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -499,8 +554,9 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
         gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
         gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
-        g_signal_connect_swapped(progressWindow, "destroy",
-                                 G_CALLBACK(extractingProgressWindowDestroyedCbk), NULL);
+        g_signal_connect_swapped(progressWindow, "delete-event",
+                                 G_CALLBACK(activityProgressWindowDestroyCbk), NULL);
+    
         
         /* just some text */
         descriptionLabel = gtk_label_new(_("Please wait while I'm extracting the selected files..."));
@@ -508,9 +564,9 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         gtk_widget_show(descriptionLabel);
         
         /* the progress bar */
-        GBLextractingProgressBar = gtk_progress_bar_new();
-        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLextractingProgressBar, TRUE, TRUE, 0);
-        gtk_widget_show(GBLextractingProgressBar);
+        GBLactivityProgressBar = gtk_progress_bar_new();
+        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLactivityProgressBar, TRUE, TRUE, 0);
+        gtk_widget_show(GBLactivityProgressBar);
         
         /* button to cancel extracting */
         cancelButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_NONE);
@@ -524,10 +580,8 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         refreshFsView();
     }
     
-    if(GBLextractingProgressBar != NULL)
-    /* progress window not closed */
-        gtk_widget_destroy(progressWindow);
-    GBLextractingProgressBar = NULL;
+    gtk_widget_destroy(progressWindow);
+    GBLactivityProgressBar = NULL;
 }
 
 void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
@@ -551,7 +605,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     strcat(fullItemName, itemName);
     
     rc = bk_extract(&GBLvolInfo, fullItemName, GBLfsCurrentDir, 
-                    true, extractingProgressUpdaterCbk);
+                    true, activityProgressUpdaterCbk);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -569,23 +623,6 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     free(fullItemName);
     
     g_free(itemName);
-}
-
-void extractingProgressUpdaterCbk(void)
-{
-    if(GBLextractingProgressBar != NULL)
-    {
-        gtk_progress_bar_pulse(GTK_PROGRESS_BAR(GBLextractingProgressBar)); 
-    
-        /* redraw progress bar */
-        while(gtk_events_pending())
-            gtk_main_iteration();
-    }
-}
-
-void extractingProgressWindowDestroyedCbk(void)
-{
-    GBLextractingProgressBar = NULL;
 }
 
 /* this is called from a button and via a treeview event so don't use the parameters */
@@ -810,13 +847,47 @@ void openIso(char* filename)
         return;
     }
     
+    /* CREATE and show progress bar */
+    GtkWidget* progressWindow;
+    GtkWidget* label;
+    
+    /* dialog window for the progress bar */
+    progressWindow = gtk_dialog_new();
+    gtk_dialog_set_has_separator(GTK_DIALOG(progressWindow), FALSE);
+    gtk_window_set_modal(GTK_WINDOW(progressWindow), TRUE);
+    gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
+    gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
+    g_signal_connect_swapped(progressWindow, "delete-event",
+                             G_CALLBACK(activityProgressWindowDestroyCbk), NULL);
+    
+    
+    label = gtk_label_new(_("Please wait while I'm reading the image..."));
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), label, TRUE, TRUE, 0);
+    gtk_widget_show(label);
+    
+    if(GBLappSettings.scanForDuplicateFiles)
+    {
+        label = gtk_label_new(_("(scanning for duplicate files)"));
+        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), label, TRUE, TRUE, 0);
+        gtk_widget_show(label);
+    }
+    
+    /* the progress bar */
+    GBLactivityProgressBar = gtk_progress_bar_new();
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLactivityProgressBar, TRUE, TRUE, 0);
+    gtk_widget_show(GBLactivityProgressBar);
+    
+    /* if i show it before i add the children, the window ends up being not centered */
+    gtk_widget_show(progressWindow);
+    /* END CREATE and show progress bar */
+    
     /* READ entire directory tree */
     if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
-        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_ROCKRIDGE, true);
+        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_ROCKRIDGE, true, activityProgressUpdaterCbk);
     else if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
-        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_JOLIET, false);
+        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_JOLIET, false, activityProgressUpdaterCbk);
     else
-        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_9660, false);
+        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_9660, false, activityProgressUpdaterCbk);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -832,6 +903,9 @@ void openIso(char* filename)
         return;
     }
     /* END READ entire directory tree */
+    
+    gtk_widget_destroy(progressWindow);
+    GBLactivityProgressBar = NULL;
     
     /* iso size label */
     char sizeStr[20];
