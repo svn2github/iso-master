@@ -9,7 +9,6 @@ bk:
 -add path tables, boot record to size estimate
 -move the 100k buffers to volinfo
 -if a the file a hard link is pointing to is deleted will things break?
--fix how often progress updater is called when extracting
 
 
 c99 compatibility issues:
