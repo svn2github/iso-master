@@ -1,12 +1,12 @@
 void activityProgressUpdaterCbk(void);
-gboolean activityProgressWindowDestroyCbk(GtkWidget* widget, GdkEvent* event,
-                                          gpointer user_data);
+gboolean activityProgressWindowDeleteCbk(GtkWidget* widget, GdkEvent* event,
+                                         gpointer user_data);
 void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                         GtkTreeIter* iterator, gpointer data);
 void addToIsoCbk(GtkButton *button, gpointer data);
 void buildIsoBrowser(GtkWidget* boxToPackInto);
 void buildIsoLocator(GtkWidget* boxToPackInto);
-void cancelOper(GtkDialog* dialog, gint arg1, gpointer user_data);
+void cancelOperation(GtkDialog* dialog, gint arg1, gpointer user_data);
 void changeIsoDirectory(char* newDirStr);
 void closeIso(void);
 bool confirmCloseIso(void);
@@ -29,4 +29,6 @@ void saveIso(char* filename);
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event);
 void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data);
 void writingProgressUpdaterCbk(double percentComplete);
+gboolean writingProgressWindowDeleteCbk(GtkWidget* widget, GdkEvent* event,
+                                        gpointer user_data);
 void writingProgressWindowDestroyedCbk(void);

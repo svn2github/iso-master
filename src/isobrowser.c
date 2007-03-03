@@ -67,7 +67,7 @@ void activityProgressUpdaterCbk(void)
     }
 }
 
-gboolean activityProgressWindowDestroyCbk(GtkWidget* widget, GdkEvent* event,
+gboolean activityProgressWindowDeleteCbk(GtkWidget* widget, GdkEvent* event,
                                           gpointer user_data)
 {
     /* don't allow closing */
@@ -121,7 +121,9 @@ void addToIsoCbk(GtkButton *button, gpointer data)
     gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
     gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
     g_signal_connect_swapped(progressWindow, "delete-event",
-                             G_CALLBACK(activityProgressWindowDestroyCbk), NULL);
+                             G_CALLBACK(activityProgressWindowDeleteCbk), NULL);
+    g_signal_connect_swapped(progressWindow, "response", 
+                             G_CALLBACK(cancelOperation), NULL);
     
     label = gtk_label_new(_("Please wait while I'm adding the selected items..."));
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), label, TRUE, TRUE, 0);
@@ -138,6 +140,9 @@ void addToIsoCbk(GtkButton *button, gpointer data)
     GBLactivityProgressBar = gtk_progress_bar_new();
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLactivityProgressBar, TRUE, TRUE, 0);
     gtk_widget_show(GBLactivityProgressBar);
+    
+    /* button to cancel adding */
+    gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
     
     /* if i show it before i add the children, the window ends up being not centered */
     gtk_widget_show(progressWindow);
@@ -309,7 +314,7 @@ void buildIsoLocator(GtkWidget* boxToPackInto)
     gtk_widget_show(GBLisoCurrentDirField);
 }
 
-void cancelOper(GtkDialog* dialog, gint arg1, gpointer user_data)
+void cancelOperation(GtkDialog* dialog, gint arg1, gpointer user_data)
 {
     bk_cancel_operation(&GBLvolInfo);
 }
@@ -555,8 +560,9 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
         gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
         g_signal_connect_swapped(progressWindow, "delete-event",
-                                 G_CALLBACK(activityProgressWindowDestroyCbk), NULL);
-    
+                                 G_CALLBACK(activityProgressWindowDeleteCbk), NULL);
+        g_signal_connect_swapped(progressWindow, "response", 
+                                 G_CALLBACK(cancelOperation), NULL);
         
         /* just some text */
         descriptionLabel = gtk_label_new(_("Please wait while I'm extracting the selected files..."));
@@ -570,7 +576,6 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         
         /* button to cancel extracting */
         cancelButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_NONE);
-        g_signal_connect(progressWindow, "response", (GCallback)cancelOper, NULL);
         
         /* if i show it before i add the children, the window ends up being not centered */
         gtk_widget_show(progressWindow);
@@ -858,8 +863,9 @@ void openIso(char* filename)
     gtk_window_set_title(GTK_WINDOW(progressWindow), _("Progress"));
     gtk_window_set_transient_for(GTK_WINDOW(progressWindow), GTK_WINDOW(GBLmainWindow));
     g_signal_connect_swapped(progressWindow, "delete-event",
-                             G_CALLBACK(activityProgressWindowDestroyCbk), NULL);
-    
+                             G_CALLBACK(activityProgressWindowDeleteCbk), NULL);
+    g_signal_connect_swapped(progressWindow, "response", 
+                             G_CALLBACK(cancelOperation), NULL);
     
     label = gtk_label_new(_("Please wait while I'm reading the image..."));
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), label, TRUE, TRUE, 0);
@@ -876,6 +882,9 @@ void openIso(char* filename)
     GBLactivityProgressBar = gtk_progress_bar_new();
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(progressWindow)->vbox), GBLactivityProgressBar, TRUE, TRUE, 0);
     gtk_widget_show(GBLactivityProgressBar);
+    
+    /* button to cancel adding */
+    gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
     
     /* if i show it before i add the children, the window ends up being not centered */
     gtk_widget_show(progressWindow);
@@ -899,13 +908,17 @@ void openIso(char* filename)
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
-        closeIso();
-        return;
     }
     /* END READ entire directory tree */
     
     gtk_widget_destroy(progressWindow);
     GBLactivityProgressBar = NULL;
+    
+    if(rc <= 0)
+    {
+        closeIso();
+        return;
+    }
     
     /* iso size label */
     char sizeStr[20];
@@ -1058,6 +1071,8 @@ void saveIso(char* filename)
     gtk_window_set_modal(GTK_WINDOW(GBLwritingProgressWindow), TRUE);
     gtk_window_set_title(GTK_WINDOW(GBLwritingProgressWindow), _("Progress"));
     gtk_window_set_transient_for(GTK_WINDOW(GBLwritingProgressWindow), GTK_WINDOW(GBLmainWindow));
+    g_signal_connect_swapped(GBLwritingProgressWindow, "delete-event",
+                             G_CALLBACK(writingProgressWindowDeleteCbk), NULL);
     g_signal_connect_swapped(GBLwritingProgressWindow, "response",
                              G_CALLBACK(writingProgressResponse), GBLwritingProgressWindow);
     g_signal_connect_swapped(GBLwritingProgressWindow, "destroy",
@@ -1192,21 +1207,27 @@ void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data)
 {
     if(arg1 == GTK_RESPONSE_CANCEL)
         bk_cancel_operation(&GBLvolInfo);
-    
-    gtk_widget_destroy(GBLwritingProgressWindow);
+    else if(arg1 == GTK_RESPONSE_OK)
+        gtk_widget_destroy(GBLwritingProgressWindow);
 }
 
 void writingProgressUpdaterCbk(double percentComplete)
 {
     if(GBLWritingProgressBar != NULL)
     {
-        //~ printf("%.2lf%%\n", percentComplete);fflush(NULL);
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(GBLWritingProgressBar), percentComplete / 100);
         
         /* redraw progress bar */
         while(gtk_events_pending())
             gtk_main_iteration();
     }
+}
+
+gboolean writingProgressWindowDeleteCbk(GtkWidget* widget, GdkEvent* event,
+                                        gpointer user_data)
+{
+    /* don't allow closing */
+    return TRUE;
 }
 
 void writingProgressWindowDestroyedCbk(void)
