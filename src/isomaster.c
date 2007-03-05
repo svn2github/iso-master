@@ -38,7 +38,7 @@ int main(int argc, char** argv)
     /* if --help passed, return usage help and quit */
     if (argv[1] != NULL)
     {
-        if (!strcmp(argv[1], "--help"))
+        if(strcmp(argv[1], "--help") == 0)
         {
             printf("Usage: isomaster [image.iso]\n");
             return 0;

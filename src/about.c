@@ -19,7 +19,7 @@
 extern GtkWidget* GBLmainWindow;
 
 static const char* 
-GBLprogramName = "ISO Master 0.7";
+GBLprogramName = "ISO Master 0.8";
 
 static const char* 
 GBLauthors[2] = {
@@ -44,7 +44,7 @@ GBLauthors[2] = {
 "The Samba Project\n"
 "http://samba.org/\n"
 "December 2005\n"
-"- most of the filename mangling code I copied from samba\n"
+"- most of the filename mangling code I copied from Samba\n"
 "\n"
 "Steffen Winterfeldt\n"
 "September 2006\n"
@@ -52,54 +52,57 @@ GBLauthors[2] = {
 "\n"
 "Roman Hubatsch (kearone)\n"
 "http://kearone.deviantart.com/\n"
-"December 2006\n"
-"- the excellent 'add' and 'extract' icons and the new Isomaster icon\n"
-"\n"
-"Tango Desktop Project\n"
-"http://tango.freedesktop.org/Tango_Icon_Gallery\n"
-"August 2006\n"
-"- the pretty 'new folder' icon\n"
+"December 2006 - January 2007\n"
+"- the excellent 'add', 'extract' icons and the new ISO Master icon\n"
+"- equally excellent 'go back', 'new folder' and 'delete' icons\n"
 "\n"
 "David Johnson\n"
 "http://www.david-web.co.uk/\n"
-"September 2006 - December 2006\n"
+"September 2006 - February 2007\n"
 "- a patch to allow associating ISO Master with ISO files in file managers\n"
+"- a patch to give ISO Master the --help command line parameter\n"
 "- gave me access to a 32bit ARM box running Debian for testing\n"
+"- gave me access to a big endian SuperSPARC II box running Debian for testing\n"
 "\n"
 "Ernst W. Winter\n"
 "December 2006\n"
 "- gave me access to an AMD64 box running OpenBSD for testing\n"
 "\n"
+"Tango Desktop Project\n"
+"http://tango.freedesktop.org/Tango_Icon_Gallery\n"
+"August 2006\n"
+"- the pretty 'new folder' icon (replaced with kearone's version in 0.8)\n"
+"\n"
 "Packages:\n"
 "\n"
 "David Johnson\n"
 "http://www.david-web.co.uk/\n"
-"- Debian packages of ISO Master, versions 0.1 - 0.6\n"
+"- Debian packages of ISO Master, versions 0.1 - 0.7\n"
 "\n"
 "Marcin Zajaczkowski\n"
 "http://timeoff.wsisiz.edu.pl/rpms.html\n"
-"- Fedora packages of ISO Master, versions 0.3 - 0.6\n"
+"- Fedora packages of ISO Master, versions 0.3 - 0.7\n"
 "\n"
 "Toni Graffy\n"
 "Maintainer of many SuSE packages at PackMan\n"
-"- SuSE packages of ISO Master, versions 0.4 - 0.6\n"
+"- SuSE packages of ISO Master, versions 0.4 - 0.7\n"
 "\n"
 "Maciej Libuda\n"
-"- Arch packages of ISO Master, versions 0.3 - 0.6\n"
+"- Arch packages of ISO Master, versions 0.3 - 0.7\n"
 "\n"
 "GuestToo\n"
-"- Puppy packages of ISO Master, versions 0.1, 0.4 - 0.6\n"
+"- Puppy packages of ISO Master, versions 0.1, 0.4 - 0.7\n"
 "\n"
 "vktgz\n"
 "http://www.vktgz.homelinux.net/\n"
-"- Gentoo ebuilds of ISO Master, versions 0.4 - 0.6\n"
+"- Gentoo ebuilds of ISO Master, versions 0.4 - 0.7\n"
 "\n"
 "James Bowling\n"
 "http://www.jamesbowling.com/\n"
 "- Slackware packages of ISO Master, versions 0.4 - 0.5\n"
 "\n"
 "Michael Shigorin\n"
-"- Alt package of ISO Master, version 0.5\n"
+"- Alt package of ISO Master, versions 0.5, 0.7\n"
 "\n"
 ,
 NULL};
@@ -112,14 +115,40 @@ GBLtranslators =
 "Toni Graffy\n"
 "- de (German) translation of ISO Master versions 0.6 - 0.7\n"
 "\n"
+"Juan García-Murga Monago\n"
+"- es (Spanish) translation of ISO Master version 0.7\n"
+"\n"
 "Leif Thande\n"
 "- fr (French) translation of ISO Master version 0.6\n"
+"\n"
+"F. Lombardi\n"
+"- it (Italian) translation of ISO Master version 0.7\n"
+"\n"
+"Valerio Guaglianone\n"
+"- it (Italian) translation of ISO Master version 0.7\n"
+"  Not used because unfortunately it was made at the same time as \n"
+"  F. Lombardi's translation. Thanks anyway!\n"
+"\n"
+"Stephen Brandt\n"
+"- nl (Dutch) translation of ISO Master version 0.7\n"
 "\n"
 "Marciej Libuda\n"
 "- pl (Polish) translation of ISO Master versions 0.6 - 0.7\n"
 "\n"
+"Bogdan Radulescu\n"
+"- ro (Romanian) translation of ISO Master version 0.7\n"
+"\n"
 "Anton Obidin\n"
 "- ru (Russian) translation of ISO Master versions 0.6 - 0.7\n"
+"\n"
+"Jozef Riha\n"
+"- sk (Slovak) translation of ISO Master version 0.7\n"
+"\n"
+"Besnik Bleta\n"
+"- sq (Albanian) translation of ISO Master version 0.7\n"
+"\n"
+"Sun Minchao\n"
+"- zh_CN (Simplified Chineese) translation of ISO Master version 0.7\n"
 "\n"
 "Besnik Bleta\n"
 "- zh_TW (Chineese/Taiwan) translation of ISO Master version 0.6\n";
@@ -129,7 +158,7 @@ GBLcomments = "An application for editing ISO9660 images based on the "
               "bkisofs access library and the GTK2 GUI toolkit.";
 
 static const char* 
-GBLcopyright = "Copyright 2005-2006 Andrew Smith";
+GBLcopyright = "Copyright 2005-2007 Andrew Smith";
 
 static const char* 
 GBLwebsite = "http://littlesvr.ca/isomaster/";
@@ -141,6 +170,7 @@ GBLlicense =
 
 static const char*
 GBLhelp = 
+N_(
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
 " - The bottom file browser shows files and directories on the ISO image.\n"
@@ -160,7 +190,7 @@ GBLhelp =
 "\n"
 "Once you made all the changes to the new ISO image, click on 'Image' and\n"
 "'Save As'. You cannot overwrite the original ISO.\n"
-;
+);
 
 void showAboutWindowCbk(GtkMenuItem* menuItem, gpointer data)
 {
@@ -188,7 +218,7 @@ void showHelpOverviewCbk(GtkMenuItem* menuItem, gpointer data)
     gtk_window_set_title(GTK_WINDOW(window), _("ISO Master Help"));
     gtk_window_set_transient_for(GTK_WINDOW(window), GTK_WINDOW(GBLmainWindow));
     
-    label = gtk_label_new(GBLhelp);
+    label = gtk_label_new(_(GBLhelp));
     gtk_container_add(GTK_CONTAINER(window), label);
     gtk_widget_show(label);
 

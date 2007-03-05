@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-07 18:57-0500\n"
+"POT-Creation-Date: 2007-03-04 20:33-0500\n"
 "PO-Revision-Date: 2007-01-08 21:56+0800\n"
 "Last-Translator: Cheng-Wei Chien <e.cwchien@gmail.com>\n"
 "Language-Team: Cheng-Wei Chien <e.cwchien@gmail.com>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Generator: Pootle 0.10.1\n"
 
-#: ../window.c:337
+#: ../window.c:360
 msgid "      Estimated ISO Size: "
 msgstr "      預估 ISO 檔大小："
 
-#: ../isobrowser.c:943
+#: ../isobrowser.c:1025
 #, c-format
 msgid ""
 "%s\n"
@@ -32,15 +32,19 @@ msgstr ""
 "\n"
 "您確定要繼續？"
 
-#: ../window.c:322
+#: ../isobrowser.c:134 ../isobrowser.c:876
+msgid "(scanning for duplicate files)"
+msgstr ""
+
+#: ../window.c:346
 msgid "Add"
 msgstr "新增"
 
-#: ../window.c:322
+#: ../window.c:346
 msgid "Add to the ISO"
 msgstr "新增至此 ISO 檔"
 
-#: ../isobrowser.c:889 ../isobrowser.c:1076
+#: ../isobrowser.c:971
 msgid "All files"
 msgstr "新增檔案"
 
@@ -76,7 +80,7 @@ msgstr "開機紀錄型別：不模擬"
 msgid "Chose Boot Record File"
 msgstr "請選擇開機紀錄檔"
 
-#: ../window.c:318
+#: ../window.c:342
 msgid "Create new directory on the ISO"
 msgstr "在 ISO 中建立新目錄"
 
@@ -84,27 +88,27 @@ msgstr "在 ISO 中建立新目錄"
 msgid "Create new directory on the filesystem"
 msgstr "在本機建立新目錄"
 
-#: ../settings.c:78
+#: ../settings.c:77
 msgid "Creation time:"
 msgstr "建立需時："
 
-#: ../window.c:333
+#: ../window.c:356
 msgid "Delete from the ISO"
 msgstr "自 ISO 檔刪除"
 
-#: ../browser.c:70
+#: ../browser.c:71
 msgid "Enter name for new directory"
 msgstr "請為新目錄命名"
 
-#: ../window.c:327
+#: ../window.c:351
 msgid "Extract"
 msgstr "解壓縮"
 
-#: ../window.c:327
+#: ../window.c:351
 msgid "Extract from the ISO"
 msgstr "自 ISO 檔解壓縮"
 
-#: ../isobrowser.c:114
+#: ../isobrowser.c:202
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "無法新增 '%s'：'%s'"
@@ -114,27 +118,27 @@ msgstr "無法新增 '%s'：'%s'"
 msgid "Failed to add boot record: '%s'"
 msgstr "無法新增開機紀錄：'%s'"
 
-#: ../isobrowser.c:249
+#: ../isobrowser.c:338
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr "無法切換目錄：'%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "無法新增目錄 %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "無法新增目錄 %s：'%s'"
 
-#: ../isobrowser.c:470
+#: ../isobrowser.c:512
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "無法刪除 '%s'：'%s'"
 
-#: ../isobrowser.c:579
+#: ../isobrowser.c:620
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "無法解壓縮 '%s'：'%s'"
@@ -144,27 +148,27 @@ msgstr "無法解壓縮 '%s'：'%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "無法解壓縮開機紀錄：'%s'"
 
-#: ../isobrowser.c:728 ../isobrowser.c:776
+#: ../isobrowser.c:764 ../isobrowser.c:812
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "無法初始化 bkisofs：'%s'"
 
-#: ../fsbrowser.c:213
+#: ../fsbrowser.c:215
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "無法開啟目錄 '%s'，錯誤 %d"
 
-#: ../isobrowser.c:795
+#: ../isobrowser.c:831
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "無法開啟 ISO 檔：'%s'"
 
-#: ../isobrowser.c:832
+#: ../isobrowser.c:906
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "無法讀取樹狀目錄：'%s'"
 
-#: ../isobrowser.c:810
+#: ../isobrowser.c:846
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "無法讀取光碟片資訊：'%s'"
@@ -174,14 +178,18 @@ msgstr "無法讀取光碟片資訊：'%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "無法將 %s 設為開機紀錄：'%s'"
 
-#: ../isobrowser.c:1026
+#: ../isobrowser.c:1111
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "無法寫入映像檔至 '%s'：'%s'"
 
-#: ../settings.c:120
+#: ../settings.c:119
 msgid "Filename types (both recommended):"
 msgstr "檔名及副檔名（建議都輸入）："
+
+#: ../window.c:285
+msgid "Follow symbolic links"
+msgstr ""
 
 #: ../window.c:248
 msgid "From file: 1200KiB floppy"
@@ -199,16 +207,16 @@ msgstr "從檔案：2880 KB 軟碟片"
 msgid "From file: no emulation"
 msgstr "從檔案：不模擬"
 
-#: ../isobrowser.c:488
+#: ../isobrowser.c:530
 msgid ""
 "GUI error, deleting anything other then files and directories doesn't work"
 msgstr "圖形介面錯誤，正在排除無法運作的檔案和目錄"
 
-#: ../window.c:53 ../window.c:311
+#: ../window.c:53 ../window.c:335
 msgid "Go back"
 msgstr "返回"
 
-#: ../window.c:312
+#: ../window.c:336
 msgid "Go back up one directory on the ISO"
 msgstr "ISO 檔中返回上一層目錄"
 
@@ -216,11 +224,11 @@ msgstr "ISO 檔中返回上一層目錄"
 msgid "Go back up one directory on the filesystem"
 msgstr "本機中返回上一層目錄"
 
-#: ../isobrowser.c:879 ../isobrowser.c:1071
+#: ../isobrowser.c:961
 msgid "ISO Images"
 msgstr "ISO 映像檔"
 
-#: ../about.c:177
+#: ../about.c:218
 msgid "ISO Master Help"
 msgstr "ISO Master 說明"
 
@@ -238,7 +246,7 @@ msgstr "在映像檔中不顯示"
 msgid "Is visible on image as '%s'"
 msgstr "在映像檔中顯示為 '%s'"
 
-#: ../isobrowser.c:341
+#: ../isobrowser.c:441
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
@@ -249,8 +257,8 @@ msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr "選取的項目並非正規檔案且不能作為開機紀錄"
 
 #: ../boot.c:367 ../boot.c:374
-#, c-format
-msgid "Location: on original image at 0x%X"
+#, fuzzy, c-format
+msgid "Location: on original image at 0x%llX"
 msgstr "位置：於原映像檔的 0x%X"
 
 #: ../boot.c:369 ../boot.c:376
@@ -258,15 +266,15 @@ msgstr "位置：於原映像檔的 0x%X"
 msgid "Location: to be added from '%s'"
 msgstr "位置：自 '%s' 新增"
 
-#: ../isobrowser.c:884
+#: ../isobrowser.c:966
 msgid "NRG Images"
 msgstr "NRG 映像檔"
 
-#: ../fsbrowser.c:114 ../isobrowser.c:183
+#: ../fsbrowser.c:110 ../isobrowser.c:272
 msgid "Name"
 msgstr "檔名"
 
-#: ../window.c:59 ../window.c:317
+#: ../window.c:59 ../window.c:341
 msgid "New Directory"
 msgstr "新增目錄"
 
@@ -286,39 +294,50 @@ msgstr "請自 ISO 檔瀏覽器中選擇一個檔案作為開機紀錄"
 msgid "Please select no more then one file in the ISO browser"
 msgstr "請自 ISO 檔瀏覽器中最多選擇一個檔案"
 
-#: ../isobrowser.c:524
+#: ../isobrowser.c:128
+#, fuzzy
+msgid "Please wait while I'm adding the selected items..."
+msgstr "正在解壓縮選取的檔案，請稍候…"
+
+#: ../isobrowser.c:568
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "正在解壓縮選取的檔案，請稍候…"
 
-#: ../isobrowser.c:998
+#: ../isobrowser.c:870
+#, fuzzy
+msgid "Please wait while I'm reading the image..."
+msgstr "正在儲存新的映像檔至硬碟中，請稍候…"
+
+#: ../isobrowser.c:1083
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "正在儲存新的映像檔至硬碟中，請稍候…"
 
-#: ../isobrowser.c:518 ../isobrowser.c:990
+#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:863
+#: ../isobrowser.c:1073
 msgid "Progress"
 msgstr "進度"
 
-#: ../settings.c:105
+#: ../settings.c:104
 msgid "Publisher:"
 msgstr "發佈者："
 
-#: ../window.c:333
+#: ../window.c:356
 msgid "Remove"
 msgstr "移除"
-
-#: ../isobrowser.c:1062
-msgid "Save File"
-msgstr "存檔"
 
 #: ../boot.c:151
 msgid "Save a copy of the boot record"
 msgstr "複製一份開機紀錄"
 
-#: ../window.c:179
+#: ../window.c:275
+msgid "Scan for duplicate files (slow)"
+msgstr ""
+
+#: ../window.c:182
 msgid "Show _hidden files"
 msgstr "顯示隱藏檔 (_h)"
 
-#: ../fsbrowser.c:135 ../isobrowser.c:204
+#: ../fsbrowser.c:131 ../isobrowser.c:293
 msgid "Size"
 msgstr "檔案大小"
 
@@ -327,47 +346,82 @@ msgstr "檔案大小"
 msgid "Size: %d bytes"
 msgstr "檔案大小：%d 位元組"
 
-#: ../fsbrowser.c:258
+#: ../fsbrowser.c:260
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr "無法處理超過 256 個字元的長檔名，故略過目錄項目"
 
-#: ../fsbrowser.c:276
+#: ../fsbrowser.c:278
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "狀態（%s）錯誤代號 %d，故略過目錄項目"
+
+#: ../about.c:174
+msgid ""
+"The ISO Master window is split in 2 parts:\n"
+" - The top file browser shows files and directories on your machine.\n"
+" - The bottom file browser shows files and directories on the ISO image.\n"
+"\n"
+"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
+"ISO file click on 'Image' and 'New'.\n"
+"\n"
+"To add one or more files or directories to the ISO select them in the top\n"
+"file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
+"\n"
+"To extract one or more files or directories from the ISO select them in\n"
+"the bottom file browser and click the 'Extract from ISO' button in the\n"
+"middle toolbar.\n"
+"\n"
+"You can also delete files or directories from the ISO and create new\n"
+"directories both on the ISO and your local filesystem.\n"
+"\n"
+"Once you made all the changes to the new ISO image, click on 'Image' and\n"
+"'Save As'. You cannot overwrite the original ISO.\n"
+msgstr ""
 
 #: ../window.c:236
 msgid "Use selected file on image (no emulation)"
 msgstr "使用映像檔中選取的檔案（不模擬）"
 
-#: ../settings.c:94
+#: ../settings.c:93
 msgid "Volume name:"
 msgstr "光碟片名稱："
 
-#: ../window.c:201
+#: ../settings.c:440
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
+msgstr ""
+
+#: ../window.c:204
 msgid "_BootRecord"
 msgstr "開機紀錄 (_B)"
 
-#: ../window.c:268
+#: ../window.c:297
 msgid "_Help"
 msgstr "說明 (_H)"
 
-#: ../window.c:116
+#: ../window.c:119
 msgid "_Image"
 msgstr "映像檔 (_I)"
 
-#: ../window.c:277
+#: ../window.c:306
 msgid "_Overview"
 msgstr "總覽 (_O)"
 
-#: ../window.c:189
+#: ../window.c:268
+msgid "_Settings"
+msgstr ""
+
+#: ../window.c:192
 msgid "_Sort directories first"
 msgstr "先列出目錄 (_S)"
 
-#: ../window.c:166
+#: ../window.c:169
 msgid "_View"
 msgstr "檢視 (_V)"
+
+#~ msgid "Save File"
+#~ msgstr "存檔"
 
 #~ msgid "Failed to add file %s: '%s'"
 #~ msgstr "無法新增檔案 %s：'%s'"

@@ -1025,6 +1025,7 @@ bool operationFailed(const char* msg)
                                            _("%s\n\nDo you wish to continue?"),
                                            msg);
     gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+    gtk_dialog_set_default_response(GTK_DIALOG(warningDialog), GTK_RESPONSE_YES);
     response = gtk_dialog_run(GTK_DIALOG(warningDialog));
     gtk_widget_destroy(warningDialog);
     

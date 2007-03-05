@@ -8,7 +8,6 @@ bk:
 -dos doesn't like names to start with underscores
 -add path tables, boot record to size estimate
 -move the 100k buffers to volinfo
--if a the file a hard link is pointing to is deleted will things break?
 
 
 c99 compatibility issues:
@@ -28,6 +27,8 @@ tests to run before a release:
  - from scratch
  - starting with an existing no emulation bootable disk
 - delete config file, make sure it still works
+- add a bunch of files to an iso, delete all the files, add some more, save
+
 
 to package a release:
 - update the version number in the about box

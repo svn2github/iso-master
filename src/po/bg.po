@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-01-07 18:57-0500\n"
+"POT-Creation-Date: 2007-03-04 20:33-0500\n"
 "PO-Revision-Date: 2007-01-11 18:24-0500\n"
 "Last-Translator: Dessislav Petrov <DesislavPetrov@gmail.com>\n"
 "Language-Team: Dessislav Petrov <DesislavPetrov@gmail.com>\n"
@@ -13,11 +13,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:337
+#: ../window.c:360
 msgid "      Estimated ISO Size: "
 msgstr "Размер на изображението: "
 
-#: ../isobrowser.c:943
+#: ../isobrowser.c:1025
 #, c-format
 msgid ""
 "%s\n"
@@ -28,16 +28,19 @@ msgstr ""
 "\n"
 "Продължение?"
 
-#: ../window.c:322
+#: ../isobrowser.c:134 ../isobrowser.c:876
+msgid "(scanning for duplicate files)"
+msgstr ""
+
+#: ../window.c:346
 msgid "Add"
 msgstr "Добави"
 
-#: ../window.c:322
+#: ../window.c:346
 msgid "Add to the ISO"
 msgstr "Добави към изображението"
 
-#: ../isobrowser.c:889
-#: ../isobrowser.c:1076
+#: ../isobrowser.c:971
 msgid "All files"
 msgstr "Всички файлове"
 
@@ -73,7 +76,7 @@ msgstr "Боот-Запис вид: Липсва"
 msgid "Chose Boot Record File"
 msgstr "Избери Боот-Запис файл"
 
-#: ../window.c:318
+#: ../window.c:342
 msgid "Create new directory on the ISO"
 msgstr "Създай нова папка в изображението"
 
@@ -81,27 +84,27 @@ msgstr "Създай нова папка в изображението"
 msgid "Create new directory on the filesystem"
 msgstr "Създай нова папка на хард-диска"
 
-#: ../settings.c:78
+#: ../settings.c:77
 msgid "Creation time:"
 msgstr "Време на създаване:"
 
-#: ../window.c:333
+#: ../window.c:356
 msgid "Delete from the ISO"
 msgstr "Изтрий от изображението"
 
-#: ../browser.c:70
+#: ../browser.c:71
 msgid "Enter name for new directory"
 msgstr "Въвдеи име за новата папка"
 
-#: ../window.c:327
+#: ../window.c:351
 msgid "Extract"
 msgstr "Извлечи"
 
-#: ../window.c:327
+#: ../window.c:351
 msgid "Extract from the ISO"
 msgstr "Извлечи от изображението"
 
-#: ../isobrowser.c:114
+#: ../isobrowser.c:202
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Грешка при добавянето %s: '%s'"
@@ -111,27 +114,27 @@ msgstr "Грешка при добавянето %s: '%s'"
 msgid "Failed to add boot record: '%s'"
 msgstr "Грешка при добавянето на боот-запис: '%s'"
 
-#: ../isobrowser.c:249
+#: ../isobrowser.c:338
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr "Грешка при смяна на папката: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Грешка при създаване на директорията %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Грешка при създаване на директорията %s: '%s'"
 
-#: ../isobrowser.c:470
+#: ../isobrowser.c:512
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Грешка при изтриване %s: '%s'"
 
-#: ../isobrowser.c:579
+#: ../isobrowser.c:620
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Грешка при извличане %s: '%s'"
@@ -141,28 +144,27 @@ msgstr "Грешка при извличане %s: '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Грешка при извличането на Боот-Записа: '%s'"
 
-#: ../isobrowser.c:728
-#: ../isobrowser.c:776
+#: ../isobrowser.c:764 ../isobrowser.c:812
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr ""
 
-#: ../fsbrowser.c:213
+#: ../fsbrowser.c:215
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Грешка при отваряне на папката '%s', грешка %d"
 
-#: ../isobrowser.c:795
+#: ../isobrowser.c:831
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Грешка при опит за четене на изображението: '%s'"
 
-#: ../isobrowser.c:832
+#: ../isobrowser.c:906
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Грешка при прочитане на под папките: '%s'"
 
-#: ../isobrowser.c:810
+#: ../isobrowser.c:846
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Грешка при четенето на етикета: '%s'"
@@ -172,14 +174,18 @@ msgstr "Грешка при четенето на етикета: '%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Грешка при поставянето на %s като Боот-Запис: '%s'"
 
-#: ../isobrowser.c:1026
+#: ../isobrowser.c:1111
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Грешка при записването на изображение в '%s': '%s'"
 
-#: ../settings.c:120
+#: ../settings.c:119
 msgid "Filename types (both recommended):"
 msgstr "Видове файл (заедно е препоръчително):"
+
+#: ../window.c:285
+msgid "Follow symbolic links"
+msgstr ""
 
 #: ../window.c:248
 msgid "From file: 1200KiB floppy"
@@ -197,16 +203,16 @@ msgstr "От файл: 2880кб Флопи"
 msgid "From file: no emulation"
 msgstr "Файл от: Липсва"
 
-#: ../isobrowser.c:488
-msgid "GUI error, deleting anything other then files and directories doesn't work"
+#: ../isobrowser.c:530
+msgid ""
+"GUI error, deleting anything other then files and directories doesn't work"
 msgstr "Грешка - изтриването на всичко освен папки и файлове не функционира!"
 
-#: ../window.c:53
-#: ../window.c:311
+#: ../window.c:53 ../window.c:335
 msgid "Go back"
 msgstr "Върни се"
 
-#: ../window.c:312
+#: ../window.c:336
 msgid "Go back up one directory on the ISO"
 msgstr "Върни една папка назад в исото"
 
@@ -214,12 +220,11 @@ msgstr "Върни една папка назад в исото"
 msgid "Go back up one directory on the filesystem"
 msgstr "Върни една папка назад върху харда"
 
-#: ../isobrowser.c:879
-#: ../isobrowser.c:1071
+#: ../isobrowser.c:961
 msgid "ISO Images"
 msgstr "ISO изображения"
 
-#: ../about.c:177
+#: ../about.c:218
 msgid "ISO Master Help"
 msgstr "Помощ"
 
@@ -237,42 +242,38 @@ msgstr "Невидимо в изображението"
 msgid "Is visible on image as '%s'"
 msgstr "Видимо в изображението като '%s'"
 
-#: ../isobrowser.c:341
-msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+#: ../isobrowser.c:441
+msgid ""
+"It seems that you have made changes to the ISO but haven't saved them. Are "
+"you sure you want to close it?"
 msgstr "Да бъдат ли запаметени промени в изображението?"
 
 #: ../boot.c:267
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr "Файлът не може да бъде използван за Боот-Запис"
 
-#: ../boot.c:367
-#: ../boot.c:374
-#, c-format
-msgid "Location: on original image at 0x%X"
-msgstr "Местонахлождение: в оригиналото изображение 0x%X"
+#: ../boot.c:367 ../boot.c:374
+msgid "Location: on original image at 0x%llX"
+msgstr "Местонахлождение: в оригиllналото изображение 0x%X"
 
-#: ../boot.c:369
-#: ../boot.c:376
+#: ../boot.c:369 ../boot.c:376
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Местонахлождение: за да бъдат добавени от '%s'"
 
-#: ../isobrowser.c:884
+#: ../isobrowser.c:966
 msgid "NRG Images"
 msgstr "NRG изображения"
 
-#: ../fsbrowser.c:114
-#: ../isobrowser.c:183
+#: ../fsbrowser.c:110 ../isobrowser.c:272
 msgid "Name"
 msgstr "Име"
 
-#: ../window.c:59
-#: ../window.c:317
+#: ../window.c:59 ../window.c:341
 msgid "New Directory"
 msgstr "Нова папка"
 
-#: ../boot.c:144
-#: ../boot.c:321
+#: ../boot.c:144 ../boot.c:321
 msgid "No boot record read from original or set on image"
 msgstr "Боот-Записът не може да бъде намерен"
 
@@ -288,41 +289,50 @@ msgstr "Изберете файл от браузера, за да бъде пр
 msgid "Please select no more then one file in the ISO browser"
 msgstr "Изберете само един файл"
 
-#: ../isobrowser.c:524
+#: ../isobrowser.c:128
+#, fuzzy
+msgid "Please wait while I'm adding the selected items..."
+msgstr "Моля изчакайте..."
+
+#: ../isobrowser.c:568
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Моля изчакайте..."
 
-#: ../isobrowser.c:998
+#: ../isobrowser.c:870
+#, fuzzy
+msgid "Please wait while I'm reading the image..."
+msgstr "Моля изчакайте..."
+
+#: ../isobrowser.c:1083
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Моля изчакайте..."
 
-#: ../isobrowser.c:518
-#: ../isobrowser.c:990
+#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:863
+#: ../isobrowser.c:1073
 msgid "Progress"
 msgstr "Прогрес"
 
-#: ../settings.c:105
+#: ../settings.c:104
 msgid "Publisher:"
 msgstr "Издател:"
 
-#: ../window.c:333
+#: ../window.c:356
 msgid "Remove"
 msgstr "Премахни"
-
-#: ../isobrowser.c:1062
-msgid "Save File"
-msgstr "Запиши файла"
 
 #: ../boot.c:151
 msgid "Save a copy of the boot record"
 msgstr "Запази копие на Боот-Записа"
 
-#: ../window.c:179
+#: ../window.c:275
+msgid "Scan for duplicate files (slow)"
+msgstr ""
+
+#: ../window.c:182
 msgid "Show _hidden files"
 msgstr "_Показвай скритите файлове"
 
-#: ../fsbrowser.c:135
-#: ../isobrowser.c:204
+#: ../fsbrowser.c:131 ../isobrowser.c:293
 msgid "Size"
 msgstr "Размер"
 
@@ -331,49 +341,87 @@ msgstr "Размер"
 msgid "Size: %d bytes"
 msgstr "Размер: %d байта"
 
-#: ../fsbrowser.c:258
-msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Пропуснато е въвеждането от директорията, защото е по-дълго от 256 символа"
+#: ../fsbrowser.c:260
+msgid ""
+"Skiping directory entry because cannot handle filename longer than 256 chars"
+msgstr ""
+"Пропуснато е въвеждането от директорията, защото е по-дълго от 256 символа"
 
-#: ../fsbrowser.c:276
+#: ../fsbrowser.c:278
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
-msgstr "Пропуснато е въвеждането от директорията, защото статистиката(%s) пречи на %d"
+msgstr ""
+"Пропуснато е въвеждането от директорията, защото статистиката(%s) пречи на %d"
+
+#: ../about.c:174
+msgid ""
+"The ISO Master window is split in 2 parts:\n"
+" - The top file browser shows files and directories on your machine.\n"
+" - The bottom file browser shows files and directories on the ISO image.\n"
+"\n"
+"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
+"ISO file click on 'Image' and 'New'.\n"
+"\n"
+"To add one or more files or directories to the ISO select them in the top\n"
+"file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
+"\n"
+"To extract one or more files or directories from the ISO select them in\n"
+"the bottom file browser and click the 'Extract from ISO' button in the\n"
+"middle toolbar.\n"
+"\n"
+"You can also delete files or directories from the ISO and create new\n"
+"directories both on the ISO and your local filesystem.\n"
+"\n"
+"Once you made all the changes to the new ISO image, click on 'Image' and\n"
+"'Save As'. You cannot overwrite the original ISO.\n"
+msgstr ""
 
 #: ../window.c:236
 msgid "Use selected file on image (no emulation)"
 msgstr "Изполвай избраният файл в изображението (при липса)"
 
-#: ../settings.c:94
+#: ../settings.c:93
 msgid "Volume name:"
 msgstr "Етикет:"
 
-#: ../window.c:201
+#: ../settings.c:440
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
+msgstr ""
+
+#: ../window.c:204
 msgid "_BootRecord"
 msgstr "_Боот-Запис"
 
-#: ../window.c:268
+#: ../window.c:297
 msgid "_Help"
 msgstr "_Помощ"
 
-#: ../window.c:116
+#: ../window.c:119
 msgid "_Image"
 msgstr "_Изображение"
 
-#: ../window.c:277
+#: ../window.c:306
 msgid "_Overview"
 msgstr "_Преглед"
 
-#: ../window.c:189
+#: ../window.c:268
+msgid "_Settings"
+msgstr ""
+
+#: ../window.c:192
 msgid "_Sort directories first"
 msgstr "_Показвай първо папките"
 
-#: ../window.c:166
+#: ../window.c:169
 msgid "_View"
 msgstr "_Изглед"
 
+#~ msgid "Save File"
+#~ msgstr "Запиши файла"
+
 #~ msgid "Failed to delete directory %s: '%s'"
 #~ msgstr "Грешка при изтриване на директорията %s: '%s'"
+
 #~ msgid "Failed to extract directory %s: '%s'"
 #~ msgstr "Грешка при извличане от папката %s: '%s'"
-
