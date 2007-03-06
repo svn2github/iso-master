@@ -1135,69 +1135,69 @@ void saveIso(char* filename)
 * the parameters, since they may not be the menuitem parameters */
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
 {
-    //~ GtkWidget *dialog;
-    //~ char* filename = NULL;
-    //~ int dialogResponse;
-    //~ GtkFileFilter* nameFilter;
+    GtkWidget *dialog;
+    char* filename = NULL;
+    int dialogResponse;
+    GtkFileFilter* nameFilter;
     
-    //~ /* do nothing if no image open */
-    //~ if(!GBLisoPaneActive)
-        //~ return TRUE;
+    /* do nothing if no image open */
+    if(!GBLisoPaneActive)
+        return TRUE;
     
-    //~ dialog = gtk_file_chooser_dialog_new(_("Save File"),
-                                         //~ NULL,
-                                         //~ GTK_FILE_CHOOSER_ACTION_SAVE,
-                                         //~ GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-                                         //~ GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
-                                         //~ NULL);
+    dialog = gtk_file_chooser_dialog_new(_("Save File"),
+                                         NULL,
+                                         GTK_FILE_CHOOSER_ACTION_SAVE,
+                                         GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                         GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
+                                         NULL);
     
-    //~ nameFilter = gtk_file_filter_new();
-    //~ gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
-    //~ gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("ISO Images"));
-    //~ gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("ISO Images"));
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    //~ nameFilter = gtk_file_filter_new();
-    //~ gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
-    //~ gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("All files"));
-    //~ gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    nameFilter = gtk_file_filter_new();
+    gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
+    gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("All files"));
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
     
-    //~ if(GBLappSettings.lastIsoDir != NULL)
-        //~ gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastIsoDir);
+    if(GBLappSettings.lastIsoDir != NULL)
+        gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastIsoDir);
     
-    //~ dialogResponse = gtk_dialog_run(GTK_DIALOG(dialog));
+    dialogResponse = gtk_dialog_run(GTK_DIALOG(dialog));
     
-    //~ if(dialogResponse == GTK_RESPONSE_ACCEPT)
-    //~ {
-        //~ filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
+    if(dialogResponse == GTK_RESPONSE_ACCEPT)
+    {
+        filename = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(dialog));
         
-        //~ /* RECORD last iso dir */
-        //~ char* lastIsoDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
+        /* RECORD last iso dir */
+        char* lastIsoDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
         
-        //~ if(GBLappSettings.lastIsoDir != NULL && strlen(lastIsoDir) > strlen(GBLappSettings.lastIsoDir))
-        //~ {
-            //~ free(GBLappSettings.lastIsoDir);
-            //~ GBLappSettings.lastIsoDir = NULL;
-        //~ }
+        if(GBLappSettings.lastIsoDir != NULL && strlen(lastIsoDir) > strlen(GBLappSettings.lastIsoDir))
+        {
+            free(GBLappSettings.lastIsoDir);
+            GBLappSettings.lastIsoDir = NULL;
+        }
         
-        //~ if(GBLappSettings.lastIsoDir == NULL)
-            //~ GBLappSettings.lastIsoDir = malloc(strlen(lastIsoDir) + 1);
+        if(GBLappSettings.lastIsoDir == NULL)
+            GBLappSettings.lastIsoDir = malloc(strlen(lastIsoDir) + 1);
         
-        //~ strcpy(GBLappSettings.lastIsoDir, lastIsoDir);
+        strcpy(GBLappSettings.lastIsoDir, lastIsoDir);
         
-        //~ g_free(lastIsoDir);
-        //~ /* END RECORD iso save dir */
-    //~ }
+        g_free(lastIsoDir);
+        /* END RECORD iso save dir */
+    }
     
-    //~ gtk_widget_destroy(dialog);
+    gtk_widget_destroy(dialog);
     
-    //~ if(dialogResponse == GTK_RESPONSE_ACCEPT)
-    //~ {
-        //~ saveIso(filename);
+    if(dialogResponse == GTK_RESPONSE_ACCEPT)
+    {
+        saveIso(filename);
         
-        //~ g_free(filename);
-    //~ }
+        g_free(filename);
+    }
     
-    saveIso("/home/andrei/out.iso");
+    //~ saveIso("/home/andrei/out.iso");
     
     /* the accelerator callback must return true */
     return TRUE;
