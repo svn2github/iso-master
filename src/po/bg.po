@@ -292,7 +292,7 @@ msgstr "Изберете само един файл"
 #: ../isobrowser.c:128
 #, fuzzy
 msgid "Please wait while I'm adding the selected items..."
-msgstr "Моля изчакайте..."
+msgstr ""
 
 #: ../isobrowser.c:568
 msgid "Please wait while I'm extracting the selected files..."
@@ -301,7 +301,7 @@ msgstr "Моля изчакайте..."
 #: ../isobrowser.c:870
 #, fuzzy
 msgid "Please wait while I'm reading the image..."
-msgstr "Моля изчакайте..."
+msgstr ""
 
 #: ../isobrowser.c:1083
 msgid "Please wait while I'm saving the new image to disk..."
