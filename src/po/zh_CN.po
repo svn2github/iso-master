@@ -255,7 +255,7 @@ msgstr "说选项非常规文件且不能被用作引导记录"
 
 #: ../boot.c:367
 #: ../boot.c:374
-#, fuzzy, c-format
+#, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "位置：于原始映像文件的 0x%llX"
 
