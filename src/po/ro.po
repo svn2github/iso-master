@@ -1,17 +1,18 @@
 # Romanian translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
 # 
+# 
 msgid ""
 msgstr ""
-"Project-Id-Version: ISO Master 0.7\n"
+"Project-Id-Version: ISO Master 0.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-04 20:33-0500\n"
-"PO-Revision-Date: 2007-02-17 10:23+0200\n"
+"PO-Revision-Date: 2007-03-06 22:16+0200\n"
 "Last-Translator: Bogdan Radulescu <bogdan@nimblex.net>\n"
-"Language-Team: Romanian\n"
+"Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../window.c:360
 msgid "      Estimated ISO Size: "
@@ -30,7 +31,7 @@ msgstr ""
 
 #: ../isobrowser.c:134 ../isobrowser.c:876
 msgid "(scanning for duplicate files)"
-msgstr ""
+msgstr "(scanez fiºiere duplicate)"
 
 #: ../window.c:346
 msgid "Add"
@@ -185,7 +186,7 @@ msgstr "Tipurile fiºierelor (recomandat ambele)"
 
 #: ../window.c:285
 msgid "Follow symbolic links"
-msgstr ""
+msgstr "Urmareºte legãturile simbolice"
 
 #: ../window.c:248
 msgid "From file: 1200KiB floppy"
@@ -259,9 +260,9 @@ msgstr ""
 "record"
 
 #: ../boot.c:367 ../boot.c:374
-#, fuzzy, c-format
+#, c-format
 msgid "Location: on original image at 0x%llX"
-msgstr "Locaþie: pe imaginea originalã la 0x%X"
+msgstr "Locaþie: pe imaginea originalã la 0x%llX"
 
 #: ../boot.c:369 ../boot.c:376
 #, c-format
@@ -297,18 +298,16 @@ msgid "Please select no more then one file in the ISO browser"
 msgstr "Te rog sã nu selectezi mai mult de un fiºier"
 
 #: ../isobrowser.c:128
-#, fuzzy
 msgid "Please wait while I'm adding the selected items..."
-msgstr "Te rog sã aºtepþi cât extrag fiºierele selectate..."
+msgstr "Te rog sã aºtepþi cât adaug fiºierele selectate..."
 
 #: ../isobrowser.c:568
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Te rog sã aºtepþi cât extrag fiºierele selectate..."
 
 #: ../isobrowser.c:870
-#, fuzzy
 msgid "Please wait while I'm reading the image..."
-msgstr "Te rog sã aºtepþi cât salvez noua imagine pe disc..."
+msgstr "Te rog sã aºtepþi cât citesc imaginea..."
 
 #: ../isobrowser.c:1083
 msgid "Please wait while I'm saving the new image to disk..."
@@ -333,7 +332,7 @@ msgstr "Salveazã o copie la boot record"
 
 #: ../window.c:275
 msgid "Scan for duplicate files (slow)"
-msgstr ""
+msgstr "Scanez fiºiere duplicate (lent)"
 
 #: ../window.c:182
 msgid "Show _hidden files"
@@ -382,6 +381,24 @@ msgid ""
 "Once you made all the changes to the new ISO image, click on 'Image' and\n"
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
+"Fereastra ISO Master este împãrtitã în douã:\n"
+" - Partea de sus aratã fiºierele ºi directoarele de pe calculatorul tãu.\n"
+" - Partea de jos aratã fiºierele ºi directoarele de pe imaginea ISO.\n"
+"\n"
+"Pentru a deschide un fiºier ISO existent daþi click pe 'Imagine' ºi 'Deschide'.\n"
+"Pentru a crea un nou fiºier ISO daþi click pe 'Imagine' ºi pe 'Nou'\n"
+"\n"
+"Pentru a adãuga unul sau mai multe fiºiere ºi directoare pe ISO selectaþi-le\n"
+"în partea de sus ºi daþi click pe butonul 'Adaugã la ISO' din barã\n"
+"\n"
+"Pentru a extrage unul sau mai multe fiºiere ºi directoare din ISO selectaþi-le\n"
+"în partea de jos ºi daþi click pe butonul 'Extrage din ISO' din barã\n"
+"\n"
+"De asemenea puteþi ºterge fiºiere ºi directoare din ISO ºi crea noi \n"
+"fiºiere ºi directoare atat pe ISO cat ºi pe calculatorul dumneavoastrã.\n"
+"\n"
+"Odatã ce aþi fãcut toate modificãrile pe noua imagine ISO daþi click\n"
+"pe 'Imagine' si pe 'Salveaza ca'.Nu puteþi rescrie imaginea originalã.\n"
 
 #: ../window.c:236
 msgid "Use selected file on image (no emulation)"
@@ -394,7 +411,7 @@ msgstr "Numele volumului:"
 #: ../settings.c:440
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
-msgstr ""
+msgstr "Va trebui sã închizi ºi sã redeschizi ISO pentru ca aceste modificãri sã aibã efect"
 
 #: ../window.c:204
 msgid "_BootRecord"
@@ -414,7 +431,7 @@ msgstr "_Ansamblu"
 
 #: ../window.c:268
 msgid "_Settings"
-msgstr ""
+msgstr "_Setãri"
 
 #: ../window.c:192
 msgid "_Sort directories first"
@@ -425,4 +442,4 @@ msgid "_View"
 msgstr "_Vizualizeazã"
 
 #~ msgid "Save File"
-#~ msgstr "Salveazã fisier"
+#~ msgstr "SalveazÄƒ fisier"
