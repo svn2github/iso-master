@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-04 20:33-0500\n"
-"PO-Revision-Date: 2007-03-07 02:15+0100\n"
+"PO-Revision-Date: 2007-03-07 17:04+0100\n"
 "Last-Translator: Sun Minchao <sunminchao@gmx.de>\n"
 "Language-Team:  <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -257,7 +257,7 @@ msgstr "说选项非常规文件且不能被用作引导记录"
 #: ../boot.c:374
 #, fuzzy, c-format
 msgid "Location: on original image at 0x%llX"
-msgstr "位置：于原始映像文件的 0x%X"
+msgstr "位置：于原始映像文件的 0x%llX"
 
 #: ../boot.c:369
 #: ../boot.c:376
@@ -297,18 +297,16 @@ msgid "Please select no more then one file in the ISO browser"
 msgstr "请在 ISO 浏览器中至多选择一个文件"
 
 #: ../isobrowser.c:128
-#, fuzzy
 msgid "Please wait while I'm adding the selected items..."
-msgstr "正在提取所选文件，请稍候..."
+msgstr "正在添加所选项，请稍候..."
 
 #: ../isobrowser.c:568
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "正在提取所选文件，请稍候..."
 
 #: ../isobrowser.c:870
-#, fuzzy
 msgid "Please wait while I'm reading the image..."
-msgstr "正在保存新映像至磁盘，请稍候..."
+msgstr "正在读取映像，请稍候..."
 
 #: ../isobrowser.c:1083
 msgid "Please wait while I'm saving the new image to disk..."
