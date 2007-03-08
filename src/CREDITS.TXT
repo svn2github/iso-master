@@ -95,3 +95,8 @@ Anton Obidin
 
 Besnik Bleta
 - zh_TW (Chineese/Taiwan) translation of ISO Master version 0.6
+
+Bug reporters:
+
+They are too many to list, thanks to everyone who emailed me about bugs
+or with other suggestions for improving ISO Master.
