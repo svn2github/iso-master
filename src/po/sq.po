@@ -263,9 +263,9 @@ msgstr ""
 "regjistrim nisjeje"
 
 #: ../boot.c:367 ../boot.c:374
-#, fuzzy, c-format
+#, c-format
 msgid "Location: on original image at 0x%llX"
-msgstr "Vendi: te pamja origjinale on original image te 0x%X"
+msgstr "Vendi: te pamja origjinale on original image te 0x%llX"
 
 #: ../boot.c:369 ../boot.c:376
 #, c-format
