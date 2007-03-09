@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-03-04 20:33-0500\n"
-"PO-Revision-Date: 2007-03-09 02:12+0100\n"
+"PO-Revision-Date: 2007-03-09 17:05+0100\n"
 "Last-Translator: Stephen Brandt <stephen@stephenbrandt.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -355,7 +355,7 @@ msgstr "Map wordt overgeslagen omdat bestandsnamen langer dan 256 karakters niet
 #: ../fsbrowser.c:278
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
-msgstr ""
+msgstr "Map wordt overgeslagen omdat er een programmafout is opgetreden in 'stat(%s)' met waarde %d"
 
 #: ../about.c:174
 msgid ""
@@ -399,7 +399,7 @@ msgstr ""
 "\n"
 "Wanneer u alle gewenste aanpassingen aan uw nieuwe ISO image voltooid heeft\n"
 "klikt u op 'Image' en vervolgens 'Opslaan als'. U kunt de originele ISO niet\n"
-"overschrijven\n"
+"overschrijven.\n"
 
 #: ../window.c:236
 msgid "Use selected file on image (no emulation)"
