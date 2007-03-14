@@ -1,4 +1,4 @@
-void activityProgressUpdaterCbk(void);
+void activityProgressUpdaterCbk(VolInfo* volInfo);
 gboolean activityProgressWindowDeleteCbk(GtkWidget* widget, GdkEvent* event,
                                          gpointer user_data);
 void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
@@ -28,7 +28,7 @@ void refreshIsoView(void);
 void saveIso(char* filename);
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event);
 void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data);
-void writingProgressUpdaterCbk(double percentComplete);
+void writingProgressUpdaterCbk(VolInfo* volInfo, double percentComplete);
 gboolean writingProgressWindowDeleteCbk(GtkWidget* widget, GdkEvent* event,
                                         gpointer user_data);
 void writingProgressWindowDestroyedCbk(void);

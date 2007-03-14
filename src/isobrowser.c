@@ -55,7 +55,7 @@ static GtkTreeViewColumn* GBLfilenameIsoColumn;
 /* the window with the progress bar for writing */
 GtkWidget* GBLwritingProgressWindow;
 
-void activityProgressUpdaterCbk(void)
+void activityProgressUpdaterCbk(VolInfo* volInfo)
 {
     if(GBLactivityProgressBar != NULL)
     {
@@ -1212,7 +1212,7 @@ void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data)
         gtk_widget_destroy(GBLwritingProgressWindow);
 }
 
-void writingProgressUpdaterCbk(double percentComplete)
+void writingProgressUpdaterCbk(VolInfo* volInfo, double percentComplete)
 {
     if(GBLWritingProgressBar != NULL)
     {
