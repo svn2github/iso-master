@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 20:33-0500\n"
+"POT-Creation-Date: 2007-03-16 21:15-0400\n"
 "PO-Revision-Date: 2007-01-17 01:39+0100\n"
 "Last-Translator: Jozef Riha <jose1711@gmail.com\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -41,7 +41,7 @@ msgstr "Pridať"
 msgid "Add to the ISO"
 msgstr "Pridať do ISO"
 
-#: ../isobrowser.c:971
+#: ../isobrowser.c:971 ../isobrowser.c:1161
 msgid "All files"
 msgstr "Všetky súbory"
 
@@ -221,11 +221,11 @@ msgstr "Prejsť o jeden adresár vyššie v ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Prejsť o jeden adresár vyššie v súborovom systéme"
 
-#: ../isobrowser.c:961
+#: ../isobrowser.c:961 ../isobrowser.c:1156
 msgid "ISO Images"
 msgstr "ISO obrazy"
 
-#: ../about.c:218
+#: ../about.c:227
 msgid "ISO Master Help"
 msgstr "ISO Master pomocník"
 
@@ -326,6 +326,10 @@ msgstr "Vydávateľ:"
 msgid "Remove"
 msgstr "Odstrániť"
 
+#: ../isobrowser.c:1147
+msgid "Save File"
+msgstr "Uložiť súbor"
+
 #: ../boot.c:151
 msgid "Save a copy of the boot record"
 msgstr "Uložiť kópiu Boot Recordu"
@@ -359,7 +363,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Preskakujem adresárovú položku, pretože stat(%s) skončilo s chybou %d"
 
-#: ../about.c:174
+#: ../about.c:183
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -422,6 +426,3 @@ msgstr "Radiť _adresáre ako prvé"
 #: ../window.c:169
 msgid "_View"
 msgstr "Po_hľad"
-
-#~ msgid "Save File"
-#~ msgstr "Uložiť súbor"

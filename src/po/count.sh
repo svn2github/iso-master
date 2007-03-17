@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export LANG=en_CA
+
 for NAME in *.po
 do
   echo $NAME

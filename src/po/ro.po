@@ -6,13 +6,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 20:33-0500\n"
+"POT-Creation-Date: 2007-03-16 21:15-0400\n"
 "PO-Revision-Date: 2007-03-06 22:16+0200\n"
 "Last-Translator: Bogdan Radulescu <bogdan@nimblex.net>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
 #: ../window.c:360
 msgid "      Estimated ISO Size: "
@@ -41,7 +41,7 @@ msgstr "Adaugã"
 msgid "Add to the ISO"
 msgstr "Adaugã la ISO"
 
-#: ../isobrowser.c:971
+#: ../isobrowser.c:971 ../isobrowser.c:1161
 msgid "All files"
 msgstr "Toate fiºierele"
 
@@ -223,11 +223,11 @@ msgstr "Du-te un director în sus pe ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Du-te un director în sus pe sistemul de fiºiere"
 
-#: ../isobrowser.c:961
+#: ../isobrowser.c:961 ../isobrowser.c:1156
 msgid "ISO Images"
 msgstr "Imagini ISO"
 
-#: ../about.c:218
+#: ../about.c:227
 msgid "ISO Master Help"
 msgstr "ISO Master Ajutor"
 
@@ -326,6 +326,10 @@ msgstr "Editor:"
 msgid "Remove"
 msgstr "ªterge"
 
+#: ../isobrowser.c:1147
+msgid "Save File"
+msgstr "SalveazÄƒ fisier"
+
 #: ../boot.c:151
 msgid "Save a copy of the boot record"
 msgstr "Salveazã o copie la boot record"
@@ -359,7 +363,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Exclud aceastã intrare pentru cã stat(%s) a eºuat cu %d"
 
-#: ../about.c:174
+#: ../about.c:183
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -385,13 +389,16 @@ msgstr ""
 " - Partea de sus aratã fiºierele ºi directoarele de pe calculatorul tãu.\n"
 " - Partea de jos aratã fiºierele ºi directoarele de pe imaginea ISO.\n"
 "\n"
-"Pentru a deschide un fiºier ISO existent daþi click pe 'Imagine' ºi 'Deschide'.\n"
+"Pentru a deschide un fiºier ISO existent daþi click pe 'Imagine' ºi "
+"'Deschide'.\n"
 "Pentru a crea un nou fiºier ISO daþi click pe 'Imagine' ºi pe 'Nou'\n"
 "\n"
-"Pentru a adãuga unul sau mai multe fiºiere ºi directoare pe ISO selectaþi-le\n"
+"Pentru a adãuga unul sau mai multe fiºiere ºi directoare pe ISO selectaþi-"
+"le\n"
 "în partea de sus ºi daþi click pe butonul 'Adaugã la ISO' din barã\n"
 "\n"
-"Pentru a extrage unul sau mai multe fiºiere ºi directoare din ISO selectaþi-le\n"
+"Pentru a extrage unul sau mai multe fiºiere ºi directoare din ISO selectaþi-"
+"le\n"
 "în partea de jos ºi daþi click pe butonul 'Extrage din ISO' din barã\n"
 "\n"
 "De asemenea puteþi ºterge fiºiere ºi directoare din ISO ºi crea noi \n"
@@ -411,7 +418,9 @@ msgstr "Numele volumului:"
 #: ../settings.c:440
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
-msgstr "Va trebui sã închizi ºi sã redeschizi ISO pentru ca aceste modificãri sã aibã efect"
+msgstr ""
+"Va trebui sã închizi ºi sã redeschizi ISO pentru ca aceste modificãri sã "
+"aibã efect"
 
 #: ../window.c:204
 msgid "_BootRecord"
@@ -440,6 +449,3 @@ msgstr "_Sorteazã directoarele primele"
 #: ../window.c:169
 msgid "_View"
 msgstr "_Vizualizeazã"
-
-#~ msgid "Save File"
-#~ msgstr "SalveazÄƒ fisier"

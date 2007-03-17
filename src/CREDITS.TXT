@@ -19,7 +19,7 @@ August 2006
 The Samba Project
 http://samba.org/
 December 2005
-- most of the filename mangling code I copied from samba
+- most of the filename mangling code I copied from Samba
 
 Steffen Winterfeldt
 September 2006
@@ -27,76 +27,109 @@ September 2006
 
 Roman Hubatsch (kearone)
 http://kearone.deviantart.com/
-December 2006
-- the excellent 'add' and 'extract' icons and the new Isomaster icon
-
-Tango Desktop Project
-http://tango.freedesktop.org/Tango_Icon_Gallery
-August 2006
-- the pretty 'new folder' icon
+December 2006 - January 2007
+- the excellent 'add', 'extract' icons and the new ISO Master icon
+- equally excellent 'go back', 'new folder' and 'delete' icons
 
 David Johnson
 http://www.david-web.co.uk/
-September 2006 - December 2006
+September 2006 - February 2007
 - a patch to allow associating ISO Master with ISO files in file managers
+- a patch to give ISO Master the --help command line parameter
 - gave me access to a 32bit ARM box running Debian for testing
+- gave me access to a big endian SuperSPARC II box running Debian for testing
 
 Ernst W. Winter
 December 2006
 - gave me access to an AMD64 box running OpenBSD for testing
 
+Tango Desktop Project
+http://tango.freedesktop.org/Tango_Icon_Gallery
+August 2006
+- the pretty 'new folder' icon (replaced with kearone's version in 0.8)
+
 Packages:
 
 David Johnson
 http://www.david-web.co.uk/
-- Debian packages of ISO Master, versions 0.1 - 0.6
+- Debian packages of ISO Master, versions 0.1 - 0.7
 
 Marcin Zajaczkowski
-http://timeoff.wsisiz.edu.pl/
-- Fedora packages of ISO Master, versions 0.3 - 0.6
+http://timeoff.wsisiz.edu.pl/rpms.html
+- Fedora packages of ISO Master, versions 0.3 - 0.7
 
 Toni Graffy
 Maintainer of many SuSE packages at PackMan
-- SuSE packages of ISO Master, versions 0.4 - 0.6
+- SuSE packages of ISO Master, versions 0.4 - 0.7
 
-Marciej Libuda
-- Arch packages of ISO Master, versions 0.3 - 0.6
+Maciej Libuda
+- Arch packages of ISO Master, versions 0.3 - 0.7
 
 GuestToo
-- Puppy packages of ISO Master, versions 0.1, 0.4 - 0.6
+- Puppy packages of ISO Master, versions 0.1, 0.4 - 0.7
 
 vktgz
 http://www.vktgz.homelinux.net/
-- Gentoo ebuilds of ISO Master, versions 0.4 - 0.6
+- Gentoo ebuilds of ISO Master, versions 0.4 - 0.7
 
 James Bowling
 http://www.jamesbowling.com/
 - Slackware packages of ISO Master, versions 0.4 - 0.5
 
 Michael Shigorin
-- Alt package of ISO Master, version 0.5
+- Alt package of ISO Master, versions 0.5, 0.7
 
 Translations:
 
 Dessislav Petrov
-- bg (Bulgarian) translation of ISO Master versions 0.6 - 0.7
+- bg (Bulgarian) translation of ISO Master versions 0.6 - 0.8
 
 Toni Graffy
-- de (German) translation of ISO Master versions 0.6 - 0.7
+- de (German) translation of ISO Master versions 0.6 - 0.8
+
+Juan García-Murga Monago
+- es (Spanish) translation of ISO Master version 0.7 - 0.8
 
 Leif Thande
 - fr (French) translation of ISO Master version 0.6
 
+Andrew Smith
+- fr (French) translation of ISO Master version 0.7
+
+Bruno Bord
+- fr (French) translation of ISO Master version 0.8
+
+F. Lombardi
+- it (Italian) translation of ISO Master version 0.7 - 0.8
+
+Valerio Guaglianone
+- it (Italian) translation of ISO Master version 0.7
+  Not used because unfortunately it was made at the same time as 
+  F. Lombardi's translation. Thanks anyway!
+
+Stephen Brandt
+- nl (Dutch) translation of ISO Master version 0.7 - 0.8
+
 Marciej Libuda
-- pl (Polish) translation of ISO Master versions 0.6 - 0.7
+- pl (Polish) translation of ISO Master versions 0.6 - 0.8
+
+Joao de Ferro
+- pt (Portuguese) translation of ISO Master version 0.8
+
+Bogdan Radulescu
+- ro (Romanian) translation of ISO Master version 0.7 - 0.8
 
 Anton Obidin
-- ru (Russian) translation of ISO Master versions 0.6 - 0.7
+- ru (Russian) translation of ISO Master versions 0.6 - 0.8
+
+Jozef Riha
+- sk (Slovak) translation of ISO Master version 0.7
 
 Besnik Bleta
-- zh_TW (Chineese/Taiwan) translation of ISO Master version 0.6
+- sq (Albanian) translation of ISO Master version 0.7
 
-Bug reporters:
+Sun Minchao
+- zh_CN (Simplified Chineese) translation of ISO Master version 0.7 - 0.8
 
-They are too many to list, thanks to everyone who emailed me about bugs
-or with other suggestions for improving ISO Master.
+Besnik Bleta
+- zh_TW (Chineese/Taiwan) translation of ISO Master version 0.6 - 0.8

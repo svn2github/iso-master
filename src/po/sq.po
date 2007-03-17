@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 20:33-0500\n"
+"POT-Creation-Date: 2007-03-16 21:15-0400\n"
 "PO-Revision-Date: 2007-01-08 10:48+0200\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: Albanian <translation-team-sq@lists.sourceforge.net>\n"
@@ -44,7 +44,7 @@ msgstr "Shto"
 msgid "Add to the ISO"
 msgstr "Shtoje te ISO"
 
-#: ../isobrowser.c:971
+#: ../isobrowser.c:971 ../isobrowser.c:1161
 msgid "All files"
 msgstr "Tërë kartelat "
 
@@ -226,11 +226,11 @@ msgstr "Shko sipër te ISO një drejtori"
 msgid "Go back up one directory on the filesystem"
 msgstr "Shko sipër te sistem kartelash një drejtori"
 
-#: ../isobrowser.c:961
+#: ../isobrowser.c:961 ../isobrowser.c:1156
 msgid "ISO Images"
 msgstr "Pamje ISO"
 
-#: ../about.c:218
+#: ../about.c:227
 msgid "ISO Master Help"
 msgstr "Ndihmë për ISO Master"
 
@@ -336,6 +336,10 @@ msgstr "Botues:"
 msgid "Remove"
 msgstr "Hiq"
 
+#: ../isobrowser.c:1147
+msgid "Save File"
+msgstr "Ruaj Kartelën"
+
 #: ../boot.c:151
 msgid "Save a copy of the boot record"
 msgstr "Ruaj një kopje të regjistrimit të nisjes"
@@ -369,7 +373,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Po e anashkaloj këtë zë drejtorie pasi stat(%s) dështoi me %d"
 
-#: ../about.c:174
+#: ../about.c:183
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -432,6 +436,3 @@ msgstr "_Rendit drejtoritë së pari"
 #: ../window.c:169
 msgid "_View"
 msgstr "P_arje"
-
-#~ msgid "Save File"
-#~ msgstr "Ruaj Kartelën"

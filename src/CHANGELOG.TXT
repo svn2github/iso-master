@@ -1,15 +1,15 @@
- - 0.8
+17 Mar 2007 - 0.8
 =================
 - Added 3 more icons by kearone for a consistent look.
 - Tested on big-endian machine, confirmed everything works as it should.
 - Fixed allignment problem on some strange CPUs.
-- Added Spanish, Italian, Slovak, Simplified Chineese, Romanian, Dutch translations.
+- Added Spanish, Italian, Slovak, Simplified Chineese, Romanian, Dutch, Portuguese translations.
 - Added isomaster.desktop file (used as a shortcut in desktop environments).
 - Added support for symbolic links (both on the ISO and the filesystem).
 - Added support for duplicate files (a.k.a. hard links).
 - Several usability improvements.
 
-11 Jan 2006 - 0.7
+11 Jan 2007 - 0.7
 =================
 - Fixed the double warning message when adding directories.
 - Changed bkisofs to make it ready for links and get rid of a lot of duplicate code.

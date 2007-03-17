@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 20:33-0500\n"
+"POT-Creation-Date: 2007-03-16 21:15-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Add to the ISO"
 msgstr ""
 
-#: ../isobrowser.c:971
+#: ../isobrowser.c:971 ../isobrowser.c:1161
 msgid "All files"
 msgstr ""
 
@@ -220,11 +220,11 @@ msgstr ""
 msgid "Go back up one directory on the filesystem"
 msgstr ""
 
-#: ../isobrowser.c:961
+#: ../isobrowser.c:961 ../isobrowser.c:1156
 msgid "ISO Images"
 msgstr ""
 
-#: ../about.c:218
+#: ../about.c:227
 msgid "ISO Master Help"
 msgstr ""
 
@@ -319,6 +319,10 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
+#: ../isobrowser.c:1147
+msgid "Save File"
+msgstr ""
+
 #: ../boot.c:151
 msgid "Save a copy of the boot record"
 msgstr ""
@@ -350,7 +354,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr ""
 
-#: ../about.c:174
+#: ../about.c:183
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

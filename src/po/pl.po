@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-04 20:33-0500\n"
+"POT-Creation-Date: 2007-03-16 21:15-0400\n"
 "PO-Revision-Date: 2007-03-09 17:04-0500\n"
 "Last-Translator: Maciej Libuda <mefju@o2.pl>\n"
 "Language-Team: polish <LL@li.org>\n"
@@ -29,8 +29,7 @@ msgstr ""
 "\n"
 "Czy chcesz kontynuować?"
 
-#: ../isobrowser.c:134
-#: ../isobrowser.c:876
+#: ../isobrowser.c:134 ../isobrowser.c:876
 msgid "(scanning for duplicate files)"
 msgstr "(skanowanie w poszukiwaniu duplikatów)"
 
@@ -42,7 +41,7 @@ msgstr "Dodaj"
 msgid "Add to the ISO"
 msgstr "Dodaj do obrazu ISO"
 
-#: ../isobrowser.c:971
+#: ../isobrowser.c:971 ../isobrowser.c:1161
 msgid "All files"
 msgstr "Wszystkie pliki"
 
@@ -146,8 +145,7 @@ msgstr "Pobranie %s nie powiodło się: '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Pobranie rekordu startowego nie powiodło się: '%s'"
 
-#: ../isobrowser.c:764
-#: ../isobrowser.c:812
+#: ../isobrowser.c:764 ../isobrowser.c:812
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Uruchomienie bkisofs nie powiodło się: '%s'"
@@ -207,11 +205,12 @@ msgid "From file: no emulation"
 msgstr "Z pliku: bez emulacji"
 
 #: ../isobrowser.c:530
-msgid "GUI error, deleting anything other then files and directories doesn't work"
-msgstr "Błąd GUI, usunięcie czegokolwiek poza plikami i katalogami nie zadziała"
+msgid ""
+"GUI error, deleting anything other then files and directories doesn't work"
+msgstr ""
+"Błąd GUI, usunięcie czegokolwiek poza plikami i katalogami nie zadziała"
 
-#: ../window.c:53
-#: ../window.c:335
+#: ../window.c:53 ../window.c:335
 msgid "Go back"
 msgstr "Cofnij"
 
@@ -223,11 +222,11 @@ msgstr "Jeden katalog wyżej w obrazie ISO "
 msgid "Go back up one directory on the filesystem"
 msgstr "Jeden katalog wyżej w systemie plików"
 
-#: ../isobrowser.c:961
+#: ../isobrowser.c:961 ../isobrowser.c:1156
 msgid "ISO Images"
 msgstr "Obrazy ISO"
 
-#: ../about.c:218
+#: ../about.c:227
 msgid "ISO Master Help"
 msgstr "Pomoc ISO Master"
 
@@ -246,21 +245,24 @@ msgid "Is visible on image as '%s'"
 msgstr "Znaleziono w obrazie jako '%s'"
 
 #: ../isobrowser.c:441
-msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
-msgstr "Wygląda na to, że dokonałeś zmian w obrazie ISO ale nie zapisałeś ich. Czy na pewno zamknąć?"
+msgid ""
+"It seems that you have made changes to the ISO but haven't saved them. Are "
+"you sure you want to close it?"
+msgstr ""
+"Wygląda na to, że dokonałeś zmian w obrazie ISO ale nie zapisałeś ich. Czy "
+"na pewno zamknąć?"
 
 #: ../boot.c:267
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Zaznaczony obiekt nie jest plikiem i nie może być użyty jako rekord startowy"
+msgstr ""
+"Zaznaczony obiekt nie jest plikiem i nie może być użyty jako rekord startowy"
 
-#: ../boot.c:367
-#: ../boot.c:374
+#: ../boot.c:367 ../boot.c:374
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Położenie: w oryginalnym obrazie na 0x%llX"
 
-#: ../boot.c:369
-#: ../boot.c:376
+#: ../boot.c:369 ../boot.c:376
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Położenie: będzie dodane z '%s'"
@@ -269,18 +271,15 @@ msgstr "Położenie: będzie dodane z '%s'"
 msgid "NRG Images"
 msgstr "Obrazy NRG"
 
-#: ../fsbrowser.c:110
-#: ../isobrowser.c:272
+#: ../fsbrowser.c:110 ../isobrowser.c:272
 msgid "Name"
 msgstr "Nazwa"
 
-#: ../window.c:59
-#: ../window.c:341
+#: ../window.c:59 ../window.c:341
 msgid "New Directory"
 msgstr "Nowy katalog"
 
-#: ../boot.c:144
-#: ../boot.c:321
+#: ../boot.c:144 ../boot.c:321
 msgid "No boot record read from original or set on image"
 msgstr "Brak odczytu rekordu startowego z oryginału lub obrazu"
 
@@ -312,9 +311,7 @@ msgstr "Zaczekaj chwilę, odczytuję plik obrazu"
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Zaczekaj chwilę, zapisuję nowy obraz"
 
-#: ../isobrowser.c:121
-#: ../isobrowser.c:560
-#: ../isobrowser.c:863
+#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:863
 #: ../isobrowser.c:1073
 msgid "Progress"
 msgstr "Postęp"
@@ -326,6 +323,10 @@ msgstr "Wydawca:"
 #: ../window.c:356
 msgid "Remove"
 msgstr "Usuń"
+
+#: ../isobrowser.c:1147
+msgid "Save File"
+msgstr "Zapisz plik"
 
 #: ../boot.c:151
 msgid "Save a copy of the boot record"
@@ -339,8 +340,7 @@ msgstr "Szukaj duplikatów plików (wolne)"
 msgid "Show _hidden files"
 msgstr "Pokaż _ukryte pliki"
 
-#: ../fsbrowser.c:131
-#: ../isobrowser.c:293
+#: ../fsbrowser.c:131 ../isobrowser.c:293
 msgid "Size"
 msgstr "Rozmiar"
 
@@ -350,15 +350,18 @@ msgid "Size: %d bytes"
 msgstr "Rozmiar: %d bajtów"
 
 #: ../fsbrowser.c:260
-msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Pomijam katalog ponieważ nie potrafię obsłużyć nazw plików dłuższych niż 256 znaków"
+msgid ""
+"Skiping directory entry because cannot handle filename longer than 256 chars"
+msgstr ""
+"Pomijam katalog ponieważ nie potrafię obsłużyć nazw plików dłuższych niż 256 "
+"znaków"
 
 #: ../fsbrowser.c:278
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Pomijam katalog ponieważ stat(%s) zakończony niepowodzeniem z %d"
 
-#: ../about.c:174
+#: ../about.c:183
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -412,7 +415,8 @@ msgid "Volume name:"
 msgstr "Nazwa nośnika:"
 
 #: ../settings.c:440
-msgid "You will have to close and reopen the ISO for this change to take effect"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
 msgstr "Musisz ponownie wczytać obraz ISO aby zmiana odniosła skutek"
 
 #: ../window.c:204
@@ -443,10 +447,8 @@ msgstr "_Katalogi na początku"
 msgid "_View"
 msgstr "_Widok"
 
-#~ msgid "Save File"
-#~ msgstr "Zapisz plik"
 #~ msgid "Failed to delete directory %s: '%s'"
 #~ msgstr "Usunięcie katalogu %s nie powiodło się: '%s'"
+
 #~ msgid "Failed to extract directory %s: '%s'"
 #~ msgstr "Pobranie katalogu %s nie powiodło się: '%s'"
-
