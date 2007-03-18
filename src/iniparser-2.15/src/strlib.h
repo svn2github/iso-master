@@ -107,6 +107,6 @@ char * strcrop(char * s);
 char * strstrip(char * s) ;
 
 /* this one's not declared when compiled with -pedantic -std=c99: */
-char *strdup(const char *s);
+//char *strdup(const char *s);
 
 #endif

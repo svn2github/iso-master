@@ -242,6 +242,6 @@ void dictionary_setdouble(dictionary * d, char * key, double val);
 void dictionary_dump(dictionary * d, FILE * out);
 
 /* this one's not declared when compiled with -pedantic -std=c99: */
-char *strdup(const char *s);
+//char *strdup(const char *s);
 
 #endif

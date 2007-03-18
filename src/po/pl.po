@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-16 21:15-0400\n"
+"POT-Creation-Date: 2007-03-18 13:42-0400\n"
 "PO-Revision-Date: 2007-03-09 17:04-0500\n"
 "Last-Translator: Maciej Libuda <mefju@o2.pl>\n"
 "Language-Team: polish <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      Szacowany rozmiar ISO: "
 
-#: ../isobrowser.c:1025
+#: ../isobrowser.c:1026
 #, c-format
 msgid ""
 "%s\n"
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "Czy chcesz kontynuować?"
 
-#: ../isobrowser.c:134 ../isobrowser.c:876
+#: ../isobrowser.c:134 ../isobrowser.c:877
 msgid "(scanning for duplicate files)"
 msgstr "(skanowanie w poszukiwaniu duplikatów)"
 
@@ -41,7 +41,7 @@ msgstr "Dodaj"
 msgid "Add to the ISO"
 msgstr "Dodaj do obrazu ISO"
 
-#: ../isobrowser.c:971 ../isobrowser.c:1161
+#: ../isobrowser.c:972 ../isobrowser.c:1162
 msgid "All files"
 msgstr "Wszystkie pliki"
 
@@ -135,7 +135,7 @@ msgstr "Utworzenie katalogu %s nie powiodło się: '%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "Usunięcie %s nie powiodło się: '%s'"
 
-#: ../isobrowser.c:620
+#: ../isobrowser.c:621
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Pobranie %s nie powiodło się: '%s'"
@@ -145,7 +145,7 @@ msgstr "Pobranie %s nie powiodło się: '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Pobranie rekordu startowego nie powiodło się: '%s'"
 
-#: ../isobrowser.c:764 ../isobrowser.c:812
+#: ../isobrowser.c:765 ../isobrowser.c:813
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Uruchomienie bkisofs nie powiodło się: '%s'"
@@ -155,17 +155,17 @@ msgstr "Uruchomienie bkisofs nie powiodło się: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Otwarcie katalogu nie powiodło się '%s', błąd %d"
 
-#: ../isobrowser.c:831
+#: ../isobrowser.c:832
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Odczyt pliku iso nie powiódł się: '%s'"
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:907
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Odczyt drzewa katalogów nie powiódł się: '%s'"
 
-#: ../isobrowser.c:846
+#: ../isobrowser.c:847
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Odczyt informacji o nośniku nie powiódł się: '%s'"
@@ -175,7 +175,7 @@ msgstr "Odczyt informacji o nośniku nie powiódł się: '%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Nie udało się ustawić %s jako rekord startowy: '%s'"
 
-#: ../isobrowser.c:1111
+#: ../isobrowser.c:1112
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Zapis obrazu do '%s' nie powiódł się: '%s'"
@@ -222,7 +222,7 @@ msgstr "Jeden katalog wyżej w obrazie ISO "
 msgid "Go back up one directory on the filesystem"
 msgstr "Jeden katalog wyżej w systemie plików"
 
-#: ../isobrowser.c:961 ../isobrowser.c:1156
+#: ../isobrowser.c:962 ../isobrowser.c:1157
 msgid "ISO Images"
 msgstr "Obrazy ISO"
 
@@ -267,7 +267,7 @@ msgstr "Położenie: w oryginalnym obrazie na 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Położenie: będzie dodane z '%s'"
 
-#: ../isobrowser.c:966
+#: ../isobrowser.c:967
 msgid "NRG Images"
 msgstr "Obrazy NRG"
 
@@ -303,16 +303,16 @@ msgstr "Zaczekaj chwilę, dodaję zaznaczone elementy..."
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Zaczekaj chwilę, wypakowuję zaznaczone pliki..."
 
-#: ../isobrowser.c:870
+#: ../isobrowser.c:871
 msgid "Please wait while I'm reading the image..."
 msgstr "Zaczekaj chwilę, odczytuję plik obrazu"
 
-#: ../isobrowser.c:1083
+#: ../isobrowser.c:1084
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Zaczekaj chwilę, zapisuję nowy obraz"
 
-#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:863
-#: ../isobrowser.c:1073
+#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:864
+#: ../isobrowser.c:1074
 msgid "Progress"
 msgstr "Postęp"
 
@@ -324,7 +324,7 @@ msgstr "Wydawca:"
 msgid "Remove"
 msgstr "Usuń"
 
-#: ../isobrowser.c:1147
+#: ../isobrowser.c:1148
 msgid "Save File"
 msgstr "Zapisz plik"
 

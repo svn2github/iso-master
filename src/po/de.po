@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-16 21:15-0400\n"
+"POT-Creation-Date: 2007-03-18 13:42-0400\n"
 "PO-Revision-Date: 2007-03-09 16:58-0500\n"
 "Last-Translator: Toni <toni@links2linux.de>\n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      Ungefähre Abbildgröße"
 
-#: ../isobrowser.c:1025
+#: ../isobrowser.c:1026
 #, c-format
 msgid ""
 "%s\n"
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "Wollen Sie fortfahren?"
 
-#: ../isobrowser.c:134 ../isobrowser.c:876
+#: ../isobrowser.c:134 ../isobrowser.c:877
 msgid "(scanning for duplicate files)"
 msgstr "(suche nach doppelten Dateien)"
 
@@ -41,7 +41,7 @@ msgstr "Hinzufügen"
 msgid "Add to the ISO"
 msgstr "Zum Abbild hinzufügen "
 
-#: ../isobrowser.c:971 ../isobrowser.c:1161
+#: ../isobrowser.c:972 ../isobrowser.c:1162
 msgid "All files"
 msgstr "Alle Dateien"
 
@@ -135,7 +135,7 @@ msgstr "Konnte Verzeichnis %s nicht erstellen: %s"
 msgid "Failed to delete '%s': '%s'"
 msgstr "Konnte »%s«: %s nicht löschen."
 
-#: ../isobrowser.c:620
+#: ../isobrowser.c:621
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Die Datei %s:%s  kann nicht entpackt werden."
@@ -145,7 +145,7 @@ msgstr "Die Datei %s:%s  kann nicht entpackt werden."
 msgid "Failed to extract boot record: '%s'"
 msgstr "Fehler beim Entpacken des 'boot record': %s"
 
-#: ../isobrowser.c:764 ../isobrowser.c:812
+#: ../isobrowser.c:765 ../isobrowser.c:813
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Initialisieren von bkisofs fehlgeschlagen '%s'"
@@ -155,17 +155,17 @@ msgstr "Initialisieren von bkisofs fehlgeschlagen '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Fehler beim Öffnen des Verzeichnisses %s, Fehler: %d"
 
-#: ../isobrowser.c:831
+#: ../isobrowser.c:832
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Fehler beim Lesen der Abbilddatei: %s"
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:907
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Konnte Verzeichnis %s nicht lesen"
 
-#: ../isobrowser.c:846
+#: ../isobrowser.c:847
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Fehler beim Lesen der Datenträgerinformation: %s"
@@ -175,7 +175,7 @@ msgstr "Fehler beim Lesen der Datenträgerinformation: %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Die Datei %s kann nicht als 'boot record' verwendet werden: %s"
 
-#: ../isobrowser.c:1111
+#: ../isobrowser.c:1112
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Schreiben des Abbilds fehlgeschlagen (%s %s)"
@@ -221,7 +221,7 @@ msgstr "Zum übergeordneten Verzeichnis auf dem Abbild"
 msgid "Go back up one directory on the filesystem"
 msgstr "Zum übergeordneten Verzeichnis wechseln"
 
-#: ../isobrowser.c:961 ../isobrowser.c:1156
+#: ../isobrowser.c:962 ../isobrowser.c:1157
 msgid "ISO Images"
 msgstr "ISO Abbilder:"
 
@@ -263,7 +263,7 @@ msgstr "Location: auf Original Abbild bei 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Location: wird hinzugefügt von '%s'"
 
-#: ../isobrowser.c:966
+#: ../isobrowser.c:967
 msgid "NRG Images"
 msgstr "NRG Abbilder:"
 
@@ -301,16 +301,16 @@ msgstr "Bitte warten, ausgewählte Dateien werden hinzugefügt..."
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Bitte warten, ausgewählte Dateien werden entpackt ..."
 
-#: ../isobrowser.c:870
+#: ../isobrowser.c:871
 msgid "Please wait while I'm reading the image..."
 msgstr "Bitte warten, Abbild wird geschrieben ..."
 
-#: ../isobrowser.c:1083
+#: ../isobrowser.c:1084
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Bitte warten, Abbild wird geschrieben ..."
 
-#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:863
-#: ../isobrowser.c:1073
+#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:864
+#: ../isobrowser.c:1074
 msgid "Progress"
 msgstr "Fortschritt"
 
@@ -322,7 +322,7 @@ msgstr "Veröffentlicher:"
 msgid "Remove"
 msgstr "Entferne"
 
-#: ../isobrowser.c:1147
+#: ../isobrowser.c:1148
 msgid "Save File"
 msgstr "Datei speichern"
 

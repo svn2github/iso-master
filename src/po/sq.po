@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-16 21:15-0400\n"
+"POT-Creation-Date: 2007-03-18 13:42-0400\n"
 "PO-Revision-Date: 2007-01-08 10:48+0200\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: Albanian <translation-team-sq@lists.sourceforge.net>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      Madhësi e Parashikuar për ISO-n: "
 
-#: ../isobrowser.c:1025
+#: ../isobrowser.c:1026
 #, c-format
 msgid ""
 "%s\n"
@@ -32,7 +32,7 @@ msgstr ""
 "\n"
 "Dëshironi të vazhdohet?"
 
-#: ../isobrowser.c:134 ../isobrowser.c:876
+#: ../isobrowser.c:134 ../isobrowser.c:877
 msgid "(scanning for duplicate files)"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgstr "Shto"
 msgid "Add to the ISO"
 msgstr "Shtoje te ISO"
 
-#: ../isobrowser.c:971 ../isobrowser.c:1161
+#: ../isobrowser.c:972 ../isobrowser.c:1162
 msgid "All files"
 msgstr "Tërë kartelat "
 
@@ -138,7 +138,7 @@ msgstr "Dështova në krijimin e drejtorisë %s: '%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "Dështova në fshirjen e '%s': '%s'"
 
-#: ../isobrowser.c:620
+#: ../isobrowser.c:621
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Dështova në përftimin e '%s': '%s'"
@@ -148,7 +148,7 @@ msgstr "Dështova në përftimin e '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Dështova në përftimin e regjistrimit të nisjes: '%s'"
 
-#: ../isobrowser.c:764 ../isobrowser.c:812
+#: ../isobrowser.c:765 ../isobrowser.c:813
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Dështova në gatitjen e bkisofs-it: '%s'"
@@ -158,17 +158,17 @@ msgstr "Dështova në gatitjen e bkisofs-it: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Dështova në hapjen e drejtorisë '%s', gabim %d"
 
-#: ../isobrowser.c:831
+#: ../isobrowser.c:832
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Dështova në hapjen e kartelës iso për lexim: '%s'"
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:907
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Dështova në leximin e pemës së drejtorisë: '%s'"
 
-#: ../isobrowser.c:846
+#: ../isobrowser.c:847
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Dështova në leximin e të dhënave të vëllimit: '%s'"
@@ -178,7 +178,7 @@ msgstr "Dështova në leximin e të dhënave të vëllimit: '%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Dështova në caktimin e %s si regjistrim nisjeje: '%s'"
 
-#: ../isobrowser.c:1111
+#: ../isobrowser.c:1112
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Dështova në shkrimin e pamjes te '%s': '%s'"
@@ -226,7 +226,7 @@ msgstr "Shko sipër te ISO një drejtori"
 msgid "Go back up one directory on the filesystem"
 msgstr "Shko sipër te sistem kartelash një drejtori"
 
-#: ../isobrowser.c:961 ../isobrowser.c:1156
+#: ../isobrowser.c:962 ../isobrowser.c:1157
 msgid "ISO Images"
 msgstr "Pamje ISO"
 
@@ -272,7 +272,7 @@ msgstr "Vendi: te pamja origjinale on original image te 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Vend: për shtesë prej '%s'"
 
-#: ../isobrowser.c:966
+#: ../isobrowser.c:967
 msgid "NRG Images"
 msgstr "Pamje NRG"
 
@@ -314,17 +314,17 @@ msgid "Please wait while I'm extracting the selected files..."
 msgstr ""
 "Ju lutem prisni ndërkohë që jam duke përftuar kartelat e përzgjedhura..."
 
-#: ../isobrowser.c:870
+#: ../isobrowser.c:871
 #, fuzzy
 msgid "Please wait while I'm reading the image..."
 msgstr "Ju lutem prisni ndërkohë që jam duke ruajtur pamjen e re në disk..."
 
-#: ../isobrowser.c:1083
+#: ../isobrowser.c:1084
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Ju lutem prisni ndërkohë që jam duke ruajtur pamjen e re në disk..."
 
-#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:863
-#: ../isobrowser.c:1073
+#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:864
+#: ../isobrowser.c:1074
 msgid "Progress"
 msgstr " Përparim"
 
@@ -336,7 +336,7 @@ msgstr "Botues:"
 msgid "Remove"
 msgstr "Hiq"
 
-#: ../isobrowser.c:1147
+#: ../isobrowser.c:1148
 msgid "Save File"
 msgstr "Ruaj Kartelën"
 

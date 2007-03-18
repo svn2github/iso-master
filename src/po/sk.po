@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-16 21:15-0400\n"
+"POT-Creation-Date: 2007-03-18 13:42-0400\n"
 "PO-Revision-Date: 2007-01-17 01:39+0100\n"
 "Last-Translator: Jozef Riha <jose1711@gmail.com\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      Odhadovaná veľkosť ISO: "
 
-#: ../isobrowser.c:1025
+#: ../isobrowser.c:1026
 #, c-format
 msgid ""
 "%s\n"
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "Prajete si pokračovať?"
 
-#: ../isobrowser.c:134 ../isobrowser.c:876
+#: ../isobrowser.c:134 ../isobrowser.c:877
 msgid "(scanning for duplicate files)"
 msgstr ""
 
@@ -41,7 +41,7 @@ msgstr "Pridať"
 msgid "Add to the ISO"
 msgstr "Pridať do ISO"
 
-#: ../isobrowser.c:971 ../isobrowser.c:1161
+#: ../isobrowser.c:972 ../isobrowser.c:1162
 msgid "All files"
 msgstr "Všetky súbory"
 
@@ -135,7 +135,7 @@ msgstr "Zlyhalo vytváranie adresára %s: '%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "Chyba pri mazaní '%s': '%s'"
 
-#: ../isobrowser.c:620
+#: ../isobrowser.c:621
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Chyba pri extrahovaní '%s': '%s'"
@@ -145,7 +145,7 @@ msgstr "Chyba pri extrahovaní '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Chyba pri extrahovaní Boot Recordu: '%s'"
 
-#: ../isobrowser.c:764 ../isobrowser.c:812
+#: ../isobrowser.c:765 ../isobrowser.c:813
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Zlyhala inicializácia bkisofs: '%s'"
@@ -155,17 +155,17 @@ msgstr "Zlyhala inicializácia bkisofs: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Zlyhalo otváranie adresára '%s', chyba %d"
 
-#: ../isobrowser.c:831
+#: ../isobrowser.c:832
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Zlyhalo otváranie iso súboru na čítanie: '%s'"
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:907
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Nepodarilo sa prečítať adresárový strom: '%s'"
 
-#: ../isobrowser.c:846
+#: ../isobrowser.c:847
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Nepodarilo sa prečítať informácie o zväzku: '%s'"
@@ -175,7 +175,7 @@ msgstr "Nepodarilo sa prečítať informácie o zväzku: '%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Nepodarilo sa nastaviť %s ako Boot Record: '%s'"
 
-#: ../isobrowser.c:1111
+#: ../isobrowser.c:1112
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Nepodarilo sa zapísať obraz do '%s': '%s'"
@@ -221,7 +221,7 @@ msgstr "Prejsť o jeden adresár vyššie v ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Prejsť o jeden adresár vyššie v súborovom systéme"
 
-#: ../isobrowser.c:961 ../isobrowser.c:1156
+#: ../isobrowser.c:962 ../isobrowser.c:1157
 msgid "ISO Images"
 msgstr "ISO obrazy"
 
@@ -266,7 +266,7 @@ msgstr "Umiestnenie: v pôvodnom súbore na 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Umiestnenie: bude pridané z '%s'"
 
-#: ../isobrowser.c:966
+#: ../isobrowser.c:967
 msgid "NRG Images"
 msgstr "NRG súbory"
 
@@ -304,17 +304,17 @@ msgstr "Prosím čakajte kým extrahujem vybrané súbory..."
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Prosím čakajte kým extrahujem vybrané súbory..."
 
-#: ../isobrowser.c:870
+#: ../isobrowser.c:871
 #, fuzzy
 msgid "Please wait while I'm reading the image..."
 msgstr "Prosím čakajte kým ukladám nový obraz na disk..."
 
-#: ../isobrowser.c:1083
+#: ../isobrowser.c:1084
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Prosím čakajte kým ukladám nový obraz na disk..."
 
-#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:863
-#: ../isobrowser.c:1073
+#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:864
+#: ../isobrowser.c:1074
 msgid "Progress"
 msgstr "Priebeh"
 
@@ -326,7 +326,7 @@ msgstr "Vydávateľ:"
 msgid "Remove"
 msgstr "Odstrániť"
 
-#: ../isobrowser.c:1147
+#: ../isobrowser.c:1148
 msgid "Save File"
 msgstr "Uložiť súbor"
 

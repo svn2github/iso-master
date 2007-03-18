@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-16 21:15-0400\n"
+"POT-Creation-Date: 2007-03-18 13:42-0400\n"
 "PO-Revision-Date: 2007-03-07 23:54+0800\n"
 "Last-Translator: Cheng-Wei Chien <e.cwchien@gmail.com>\n"
 "Language-Team: Cheng-Wei Chien <e.cwchien@gmail.com>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      預估映像檔大小："
 
-#: ../isobrowser.c:1025
+#: ../isobrowser.c:1026
 #, c-format
 msgid ""
 "%s\n"
@@ -32,7 +32,7 @@ msgstr ""
 "\n"
 "您確定要繼續？"
 
-#: ../isobrowser.c:134 ../isobrowser.c:876
+#: ../isobrowser.c:134 ../isobrowser.c:877
 msgid "(scanning for duplicate files)"
 msgstr "（正在搜尋重複的檔案）"
 
@@ -44,7 +44,7 @@ msgstr "新增"
 msgid "Add to the ISO"
 msgstr "新增到映像檔"
 
-#: ../isobrowser.c:971 ../isobrowser.c:1161
+#: ../isobrowser.c:972 ../isobrowser.c:1162
 msgid "All files"
 msgstr "全選"
 
@@ -138,7 +138,7 @@ msgstr "無法新增目錄 %s：'%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "無法刪除 '%s'：'%s'"
 
-#: ../isobrowser.c:620
+#: ../isobrowser.c:621
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "無法解壓縮 '%s'：'%s'"
@@ -148,7 +148,7 @@ msgstr "無法解壓縮 '%s'：'%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "無法解壓縮開機紀錄：'%s'"
 
-#: ../isobrowser.c:764 ../isobrowser.c:812
+#: ../isobrowser.c:765 ../isobrowser.c:813
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "無法初始化 bkisofs：'%s'"
@@ -158,17 +158,17 @@ msgstr "無法初始化 bkisofs：'%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "無法開啟目錄 '%s'，錯誤 %d"
 
-#: ../isobrowser.c:831
+#: ../isobrowser.c:832
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "無法開啟映像檔：'%s'"
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:907
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "無法讀取樹狀目錄：'%s'"
 
-#: ../isobrowser.c:846
+#: ../isobrowser.c:847
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "無法讀取光碟片資訊：'%s'"
@@ -178,7 +178,7 @@ msgstr "無法讀取光碟片資訊：'%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "無法將 %s 設為開機紀錄：'%s'"
 
-#: ../isobrowser.c:1111
+#: ../isobrowser.c:1112
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "無法寫入映像檔至 '%s'：'%s'"
@@ -224,7 +224,7 @@ msgstr "映像檔中返回上一層目錄"
 msgid "Go back up one directory on the filesystem"
 msgstr "本機中返回上一層目錄"
 
-#: ../isobrowser.c:961 ../isobrowser.c:1156
+#: ../isobrowser.c:962 ../isobrowser.c:1157
 msgid "ISO Images"
 msgstr "ISO 映像檔"
 
@@ -266,7 +266,7 @@ msgstr "位置：於原映像檔的 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "位置：自 '%s' 新增"
 
-#: ../isobrowser.c:966
+#: ../isobrowser.c:967
 msgid "NRG Images"
 msgstr "NRG 映像檔"
 
@@ -302,16 +302,16 @@ msgstr "正在新增選取的檔案，請稍候…"
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "正在解壓縮選取的檔案，請稍候…"
 
-#: ../isobrowser.c:870
+#: ../isobrowser.c:871
 msgid "Please wait while I'm reading the image..."
 msgstr "正在讀取映像檔，請稍候…"
 
-#: ../isobrowser.c:1083
+#: ../isobrowser.c:1084
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "正在儲存新的映像檔至硬碟中，請稍候…"
 
-#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:863
-#: ../isobrowser.c:1073
+#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:864
+#: ../isobrowser.c:1074
 msgid "Progress"
 msgstr "進度"
 
@@ -323,7 +323,7 @@ msgstr "發佈者："
 msgid "Remove"
 msgstr "移除"
 
-#: ../isobrowser.c:1147
+#: ../isobrowser.c:1148
 msgid "Save File"
 msgstr "存檔"
 

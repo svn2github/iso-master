@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-16 21:15-0400\n"
+"POT-Creation-Date: 2007-03-18 13:42-0400\n"
 "PO-Revision-Date: 2007-03-09 17:02-0500\n"
 "Last-Translator: Stephen Brandt <stephen@stephenbrandt.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      Geschatte ISO grootte: "
 
-#: ../isobrowser.c:1025
+#: ../isobrowser.c:1026
 #, c-format
 msgid ""
 "%s\n"
@@ -28,7 +28,7 @@ msgstr ""
 "\n"
 "Wilt u doorgaan?"
 
-#: ../isobrowser.c:134 ../isobrowser.c:876
+#: ../isobrowser.c:134 ../isobrowser.c:877
 msgid "(scanning for duplicate files)"
 msgstr "(bezig met het zoeken naar dubbele bestanden)"
 
@@ -40,7 +40,7 @@ msgstr "Toevoegen"
 msgid "Add to the ISO"
 msgstr "Toevoegen aan de ISO"
 
-#: ../isobrowser.c:971 ../isobrowser.c:1161
+#: ../isobrowser.c:972 ../isobrowser.c:1162
 msgid "All files"
 msgstr "Alle bestanden"
 
@@ -134,7 +134,7 @@ msgstr "Het aanmaken van de map '%s' is mislukt: '%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "Het verwijderen van '%s' is mislukt: '%s'"
 
-#: ../isobrowser.c:620
+#: ../isobrowser.c:621
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr " '%s' kon niet worden uitgepakt: '%s'"
@@ -144,7 +144,7 @@ msgstr " '%s' kon niet worden uitgepakt: '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Het uitpakken van het boot record is mislukt: '%s'"
 
-#: ../isobrowser.c:764 ../isobrowser.c:812
+#: ../isobrowser.c:765 ../isobrowser.c:813
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Het opstarten van bkisofs is mislukt: '%s'"
@@ -154,17 +154,17 @@ msgstr "Het opstarten van bkisofs is mislukt: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Het openen van de map '%s' is mislukt, fout %d"
 
-#: ../isobrowser.c:831
+#: ../isobrowser.c:832
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Het openen van het in te lezen ISO bestand is mislukt: '%s'"
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:907
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Het inlezen van de mapstructuur is mislukt: '%s'"
 
-#: ../isobrowser.c:846
+#: ../isobrowser.c:847
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Het inlezen van de volume info is mislukt: '%s'"
@@ -174,7 +174,7 @@ msgstr "Het inlezen van de volume info is mislukt: '%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Het instellen van '%s' als boot record is mislukt: '%s'"
 
-#: ../isobrowser.c:1111
+#: ../isobrowser.c:1112
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Het wegschrijven van het image naar '%s' is mislukt: '%s'"
@@ -220,7 +220,7 @@ msgstr "Eén map omhoog op de ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Eén map omhoog om het bestandssysteem"
 
-#: ../isobrowser.c:961 ../isobrowser.c:1156
+#: ../isobrowser.c:962 ../isobrowser.c:1157
 msgid "ISO Images"
 msgstr "ISO images"
 
@@ -264,7 +264,7 @@ msgstr "Lokatie: op origineel image bij 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Lokatie: zal worden toegevoegd vanuit '%s'"
 
-#: ../isobrowser.c:966
+#: ../isobrowser.c:967
 msgid "NRG Images"
 msgstr "NRG images"
 
@@ -301,16 +301,16 @@ msgstr "De geselecteerde items worden toegevoegd..."
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "De geselecteerde bestanden worden uitgepakt..."
 
-#: ../isobrowser.c:870
+#: ../isobrowser.c:871
 msgid "Please wait while I'm reading the image..."
 msgstr "Het image wordt gelezen..."
 
-#: ../isobrowser.c:1083
+#: ../isobrowser.c:1084
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Het nieuwe image wordt op de schijf opgeslagen..."
 
-#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:863
-#: ../isobrowser.c:1073
+#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:864
+#: ../isobrowser.c:1074
 msgid "Progress"
 msgstr "Voortgang"
 
@@ -322,7 +322,7 @@ msgstr "Uitgever:"
 msgid "Remove"
 msgstr "Verwijderen"
 
-#: ../isobrowser.c:1147
+#: ../isobrowser.c:1148
 msgid "Save File"
 msgstr "Bestand opslaan"
 

@@ -583,9 +583,10 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
         
         refreshFsView();
+        
+        gtk_widget_destroy(progressWindow);
     }
     
-    gtk_widget_destroy(progressWindow);
     GBLactivityProgressBar = NULL;
 }
 

@@ -86,6 +86,7 @@ ifndef WITHOUT_NLS
 endif
 	$(INSTALL) -d $(DESTDIR)$(MYMANPATH)
 	$(INSTALL) -m 644 isomaster.1 $(DESTDIR)$(MYMANPATH)
+	$(INSTALL) -d $(DESTDIR)$(DESKTOPPATH)
 	$(INSTALL) -m 644 isomaster.desktop $(DESTDIR)$(DESKTOPPATH)
 
 uninstall: 
