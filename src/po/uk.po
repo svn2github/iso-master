@@ -1,0 +1,452 @@
+# Ukrainian translation of ISO Master
+# This file is distributed under the same license as the ISO Master package.
+msgid ""
+msgstr ""
+"Project-Id-Version: isomaster\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-18 13:42-0400\n"
+"PO-Revision-Date: 2007-04-07 18:27-0500\n"
+"Last-Translator: Serhey Kusyumoff\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+
+#: ../window.c:360
+msgid "      Estimated ISO Size: "
+msgstr " Очикуваний розмір ISO: "
+
+#: ../isobrowser.c:1026
+#, c-format
+msgid ""
+"%s\n"
+"\n"
+"Do you wish to continue?"
+msgstr ""
+"%s\n"
+"\n"
+"Бажаєте продовжити?"
+
+#: ../isobrowser.c:134
+#: ../isobrowser.c:877
+msgid "(scanning for duplicate files)"
+msgstr "(пошук дубльованих файлів)"
+
+#: ../window.c:346
+msgid "Add"
+msgstr "Додати"
+
+#: ../window.c:346
+msgid "Add to the ISO"
+msgstr "Додати до ISO"
+
+#: ../isobrowser.c:972
+#: ../isobrowser.c:1162
+msgid "All files"
+msgstr "Всі файли"
+
+#: ../boot.c:328
+msgid "Boot Record Information"
+msgstr "Інформація про завантажувальний запис"
+
+#: ../boot.c:119
+msgid "Boot record deleted"
+msgstr "Завантажувальний запис видалено"
+
+#: ../boot.c:344
+#, c-format
+msgid "Boot record type: 1200KiB Floppy"
+msgstr "Тип завантажувального запису: 1200KiB флоппі"
+
+#: ../boot.c:346
+#, c-format
+msgid "Boot record type: 1440KiB Floppy"
+msgstr "Тип завантажувального запису: 1440KiB флоппі"
+
+#: ../boot.c:348
+#, c-format
+msgid "Boot record type: 2880KiB Floppy"
+msgstr "Тип завантажувального запису: 2880KiB Флоппі"
+
+#: ../boot.c:342
+#, c-format
+msgid "Boot record type: No Emulation"
+msgstr "Тип завантажувального записуи: Без емуляції"
+
+#: ../boot.c:39
+msgid "Chose Boot Record File"
+msgstr "Обрати файл завантажувального запису"
+
+#: ../window.c:342
+msgid "Create new directory on the ISO"
+msgstr "Створити новий каталог в ISO"
+
+#: ../window.c:60
+msgid "Create new directory on the filesystem"
+msgstr "Створити новий каталог на диску"
+
+#: ../settings.c:77
+msgid "Creation time:"
+msgstr "Час створення:"
+
+#: ../window.c:356
+msgid "Delete from the ISO"
+msgstr "Видалити з ISO"
+
+#: ../browser.c:71
+msgid "Enter name for new directory"
+msgstr "Оберіть назву нового каталогу"
+
+#: ../window.c:351
+msgid "Extract"
+msgstr "Зберегти на диск"
+
+#: ../window.c:351
+msgid "Extract from the ISO"
+msgstr "Зберегти з ISO"
+
+#: ../isobrowser.c:202
+#, c-format
+msgid "Failed to add '%s': '%s'"
+msgstr "Не вдалося додати %s: '%s'"
+
+#: ../boot.c:78
+#, c-format
+msgid "Failed to add boot record: '%s'"
+msgstr "Не вдалосья додати завантажувальний запис: '%s'"
+
+#: ../isobrowser.c:338
+#, c-format
+msgid "Failed to change directory: '%s'"
+msgstr "Не вдалося змінити каталог: '%s'"
+
+#: ../browser.c:112
+#, c-format
+msgid "Failed to create directory %s"
+msgstr "Не вдалося створити каталог %s"
+
+#: ../browser.c:135
+#, c-format
+msgid "Failed to create directory %s: '%s'"
+msgstr "Не вдалося сстворити каталог %s: '%s'"
+
+#: ../isobrowser.c:512
+#, c-format
+msgid "Failed to delete '%s': '%s'"
+msgstr "Не вдалося видалити %s: '%s'"
+
+#: ../isobrowser.c:621
+#, c-format
+msgid "Failed to extract '%s': '%s'"
+msgstr "Не вдалося зберегти на диск %s: '%s'"
+
+#: ../boot.c:197
+#, c-format
+msgid "Failed to extract boot record: '%s'"
+msgstr "Не вдалося зберегти на диск завантажувальний запис: '%s'"
+
+#: ../isobrowser.c:765
+#: ../isobrowser.c:813
+#, c-format
+msgid "Failed to initialise bkisofs: '%s'"
+msgstr "Не вдалося ініціалізувати bkisofs: '%s'"
+
+#: ../fsbrowser.c:215
+#, c-format
+msgid "Failed to open directory '%s', error %d"
+msgstr "Не вдалося відкрити каталог '%s', ошибка %d"
+
+#: ../isobrowser.c:832
+#, c-format
+msgid "Failed to open iso file for reading: '%s'"
+msgstr "Не вдалося відкрити ISO файл для зчитування: '%s'"
+
+#: ../isobrowser.c:907
+#, c-format
+msgid "Failed to read directory tree: '%s'"
+msgstr "Не вдалося зчитати дерево каталогів: '%s'"
+
+#: ../isobrowser.c:847
+#, c-format
+msgid "Failed to read volume info: '%s'"
+msgstr "Не вдалося зчитати інформацію тому: '%s'"
+
+#: ../boot.c:292
+#, c-format
+msgid "Failed to set %s as boot record: '%s'"
+msgstr "Не вдалося встановити %s вякості завантажувального запису: '%s'"
+
+#: ../isobrowser.c:1112
+#, c-format
+msgid "Failed to write image to '%s': '%s'"
+msgstr "Не вдалося записати образ в '%s': '%s'"
+
+#: ../settings.c:119
+msgid "Filename types (both recommended):"
+msgstr "Типи назв файлів (обидва рекомендовано):"
+
+#: ../window.c:285
+msgid "Follow symbolic links"
+msgstr "Розіменовувати сімлінки"
+
+#: ../window.c:248
+msgid "From file: 1200KiB floppy"
+msgstr "Файл джерела: 1200KiB флоппі"
+
+#: ../window.c:254
+msgid "From file: 1440KiB floppy"
+msgstr "Файл джерела: 1440KiB флоппі"
+
+#: ../window.c:260
+msgid "From file: 2880KiB floppy"
+msgstr "Файл джерела: 2880KiB флоппі"
+
+#: ../window.c:242
+msgid "From file: no emulation"
+msgstr "Файл джерела: без емуляції"
+
+#: ../isobrowser.c:530
+msgid "GUI error, deleting anything other then files and directories doesn't work"
+msgstr "Помилка інтерфейсу, видаляти можна лише файли та каталоги"
+
+#: ../window.c:53
+#: ../window.c:335
+msgid "Go back"
+msgstr "Повернутися назад"
+
+#: ../window.c:336
+msgid "Go back up one directory on the ISO"
+msgstr "Повернутися на каталог вгору на ISO"
+
+#: ../window.c:54
+msgid "Go back up one directory on the filesystem"
+msgstr "Повернутися на каталог вверх на диску"
+
+#: ../isobrowser.c:962
+#: ../isobrowser.c:1157
+msgid "ISO Images"
+msgstr "ISO образи"
+
+#: ../about.c:227
+msgid "ISO Master Help"
+msgstr "Довідка по ISO Master"
+
+#: ../settings.c:59
+msgid "Image Information"
+msgstr "Інформація про образ"
+
+#: ../boot.c:385
+#, c-format
+msgid "Is not visible on image"
+msgstr "Невидимий на образі"
+
+#: ../boot.c:383
+#, c-format
+msgid "Is visible on image as '%s'"
+msgstr "Видимий на образі як '%s'"
+
+#: ../isobrowser.c:441
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgstr "Ви внесли зміни до ISO образу, та не зберегли їх. Ви впевнені, що бажаєте закрити його?"
+
+#: ../boot.c:267
+msgid "Item selected is not a regular file and cannot be used as a boot record"
+msgstr "Обраний елемент не є звичним файлом та не може бути використаний як завантажувальний запис"
+
+#: ../boot.c:367
+#: ../boot.c:374
+#, c-format
+msgid "Location: on original image at 0x%llX"
+msgstr "Розташування: на оригінальному образі по зміщенню 0x%llX"
+
+#: ../boot.c:369
+#: ../boot.c:376
+#, c-format
+msgid "Location: to be added from '%s'"
+msgstr "Розташування: буде додано з '%s'"
+
+#: ../isobrowser.c:967
+msgid "NRG Images"
+msgstr "Образи Nero"
+
+#: ../fsbrowser.c:110
+#: ../isobrowser.c:272
+msgid "Name"
+msgstr "Назва"
+
+#: ../window.c:59
+#: ../window.c:341
+msgid "New Directory"
+msgstr "Новий каталог"
+
+#: ../boot.c:144
+#: ../boot.c:321
+msgid "No boot record read from original or set on image"
+msgstr "Звантажувальний запис з оригіналу не прочитано або не встановлено до образу"
+
+#: ../boot.c:105
+msgid "No boot to delete"
+msgstr "Завантажувальний запис до видалення відсутній"
+
+#: ../boot.c:224
+msgid "Please select a file in the ISO browser to use as the boot record"
+msgstr "Оберіть файл в ISO-оглядачі для використання як завантажувальний запис"
+
+#: ../boot.c:238
+msgid "Please select no more then one file in the ISO browser"
+msgstr "В ISO-оглядачі обирайте не більше одного файлу"
+
+#: ../isobrowser.c:128
+msgid "Please wait while I'm adding the selected items..."
+msgstr "Зачекайте, додаються обрані файли..."
+
+#: ../isobrowser.c:568
+msgid "Please wait while I'm extracting the selected files..."
+msgstr "Зачекайте, зберігаються обрані файли..."
+
+#: ../isobrowser.c:871
+msgid "Please wait while I'm reading the image..."
+msgstr "Зачекайте, зчитується образ..."
+
+#: ../isobrowser.c:1084
+msgid "Please wait while I'm saving the new image to disk..."
+msgstr "Зачекайте, зберігається новий образ..."
+
+#: ../isobrowser.c:121
+#: ../isobrowser.c:560
+#: ../isobrowser.c:864
+#: ../isobrowser.c:1074
+msgid "Progress"
+msgstr "Виконано"
+
+#: ../settings.c:104
+msgid "Publisher:"
+msgstr "Видавець:"
+
+#: ../window.c:356
+msgid "Remove"
+msgstr "Видалити"
+
+#: ../isobrowser.c:1148
+msgid "Save File"
+msgstr "Зберегти файл"
+
+#: ../boot.c:151
+msgid "Save a copy of the boot record"
+msgstr "Зберегти копію завантажувального запису"
+
+#: ../window.c:275
+msgid "Scan for duplicate files (slow)"
+msgstr "Пошук дубльованих файлів (повільний)"
+
+#: ../window.c:182
+msgid "Show _hidden files"
+msgstr "_Показати приховані файли"
+
+#: ../fsbrowser.c:131
+#: ../isobrowser.c:293
+msgid "Size"
+msgstr "Розмір"
+
+#: ../boot.c:357
+#, c-format
+msgid "Size: %d bytes"
+msgstr "Размір: %d байт(а)"
+
+#: ../fsbrowser.c:260
+msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
+msgstr "Каталог пропущено, тому що і'мя файлу не може перевищувати 256 символів"
+
+#: ../fsbrowser.c:278
+#, c-format
+msgid "Skiping directory entry because stat(%s) failed with %d"
+msgstr "Каталог пропущено, тому що stat(%s) повернуло код помилки %d"
+
+#: ../about.c:183
+msgid ""
+"The ISO Master window is split in 2 parts:\n"
+" - The top file browser shows files and directories on your machine.\n"
+" - The bottom file browser shows files and directories on the ISO image.\n"
+"\n"
+"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
+"ISO file click on 'Image' and 'New'.\n"
+"\n"
+"To add one or more files or directories to the ISO select them in the top\n"
+"file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
+"\n"
+"To extract one or more files or directories from the ISO select them in\n"
+"the bottom file browser and click the 'Extract from ISO' button in the\n"
+"middle toolbar.\n"
+"\n"
+"You can also delete files or directories from the ISO and create new\n"
+"directories both on the ISO and your local filesystem.\n"
+"\n"
+"Once you made all the changes to the new ISO image, click on 'Image' and\n"
+"'Save As'. You cannot overwrite the original ISO.\n"
+msgstr ""
+"Вікно ISO Master поділено на дві частини:\n"
+" - Верхня відображає файли та каталоги на вашому диску.\n"
+" - Нижня відображає файли та каталоги в ISO-образі.\n"
+"\n"
+"Щоби відкрити існуючий образ (ISO файл), нажміть 'Образ' та\n"
+"'Відкрити'. Щоби створити новий образ, нажмітье 'Образ' та 'Новий'.\n"
+"\n"
+"Щоби додати один чи декілька файлів/каталогів до образу,\n"
+"оберіть їх в верхньому вікні та натисніть кнопку 'Додати до образу'.\n"
+"\n"
+"Щоби зберегти один чи декілька файлів/каталогів з образу на диск,\n"
+"оберіть їх в нижньому віні та натисніть кнопку 'Зберегти на диск'.\n"
+"\n"
+"Ви можете видаляти файли та каталоги з образу, а також створювати\n"
+"каталоги як в образі, так і на диску.\n"
+"\n"
+"Після внесення всих змін до нового образу, натисніть 'Образ' та\n"
+"'Зберегит як'. Вихідний образ перезаписати неможливо.\n"
+
+#: ../window.c:236
+msgid "Use selected file on image (no emulation)"
+msgstr "Використовувати обраний файл в образі (без емуляції)"
+
+#: ../settings.c:93
+msgid "Volume name:"
+msgstr "Назва тому:"
+
+#: ../settings.c:440
+msgid "You will have to close and reopen the ISO for this change to take effect"
+msgstr "Для того, щобзміни вступили в силу, необхідно закрити та зновь відкрити образ"
+
+#: ../window.c:204
+msgid "_BootRecord"
+msgstr "_Завантажувальний Запис"
+
+#: ../window.c:297
+msgid "_Help"
+msgstr "_Довідка"
+
+#: ../window.c:119
+msgid "_Image"
+msgstr "_Образ"
+
+#: ../window.c:306
+msgid "_Overview"
+msgstr "О_гляд"
+
+#: ../window.c:268
+msgid "_Settings"
+msgstr "_Налаштування"
+
+#: ../window.c:192
+msgid "_Sort directories first"
+msgstr "_Каталоги - перші, файли наступні"
+
+#: ../window.c:169
+msgid "_View"
+msgstr "_Вид"
+
+#~ msgid "Failed to delete directory %s: '%s'"
+#~ msgstr "Не удалось удалить каталог %s: '%s'"
+#~ msgid "Failed to extract directory %s: '%s'"
+#~ msgstr "Не удалось извлечь каталог %s: '%s'"
+
