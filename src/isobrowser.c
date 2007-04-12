@@ -1140,6 +1140,8 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     char* filename = NULL;
     int dialogResponse;
     GtkFileFilter* nameFilter;
+    GtkWidget* addExtensionCheckbox;
+    bool askedToAddExtension;
     
     /* do nothing if no image open */
     if(!GBLisoPaneActive)
@@ -1161,6 +1163,11 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*");
     gtk_file_filter_set_name(GTK_FILE_FILTER(nameFilter), _("All files"));
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER(dialog), GTK_FILE_FILTER(nameFilter));
+    
+    addExtensionCheckbox = gtk_check_button_new_with_label(_("Add extension automatically"));
+    gtk_file_chooser_set_extra_widget(GTK_FILE_CHOOSER(dialog), addExtensionCheckbox);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(addExtensionCheckbox), TRUE);
+    gtk_widget_show(addExtensionCheckbox);
     
     if(GBLappSettings.lastIsoDir != NULL)
         gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(dialog), GBLappSettings.lastIsoDir);
@@ -1187,15 +1194,29 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
         
         g_free(lastIsoDir);
         /* END RECORD iso save dir */
+        
+        askedToAddExtension = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(addExtensionCheckbox));
     }
     
     gtk_widget_destroy(dialog);
     
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
     {
-        saveIso(filename);
+        char* nameWithExtension;
         
+        nameWithExtension = malloc(strlen(filename) + 5);
+        if(nameWithExtension == NULL)
+            fatalError("saveIsoCbk(): malloc(strlen(filename) + 5) failed");
+        
+        strcpy(nameWithExtension, filename);
         g_free(filename);
+        
+        if(askedToAddExtension)
+            strcat(nameWithExtension, ".iso");
+        
+        saveIso(nameWithExtension);
+        
+        free(nameWithExtension);
     }
     
     //~ saveIso("/home/andrei/out.iso");
