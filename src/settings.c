@@ -261,6 +261,7 @@ void loadSettings(void)
     int scanForDuplicateFiles;
     int followSymLinks;
     char* tempStr;
+    int appendExtension;
     
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
     if(configFileName == NULL)
@@ -423,6 +424,20 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.lastBootRecordDir = NULL;
     
+    /* read/set show hidden files on filesystem */
+    if(GBLsettingsDictionary != NULL)
+    {
+        appendExtension = iniparser_getboolean(GBLsettingsDictionary, 
+                                              "ui:appendextension", INT_MAX);
+        if(showHidden == INT_MAX)
+            GBLappSettings.appendExtension = true;
+        else
+            GBLappSettings.appendExtension = appendExtension;
+    }
+    else
+    /* no config file */
+        GBLappSettings.appendExtension = true;
+    
     free(configFileName);
 }
 
@@ -515,6 +530,9 @@ void writeSettings(void)
     
     if(GBLappSettings.lastBootRecordDir != NULL)
         iniparser_setstr(GBLsettingsDictionary, "ui:lastbootrecorddir", GBLappSettings.lastBootRecordDir);
+    
+    snprintf(numberStr, 20, "%d", GBLappSettings.appendExtension);
+    iniparser_setstr(GBLsettingsDictionary, "ui:appendextension", numberStr);
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }

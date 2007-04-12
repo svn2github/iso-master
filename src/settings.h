@@ -23,6 +23,7 @@ typedef struct
     bool followSymLinks;
     int filenameTypesToWrite;
     char* lastIsoDir;
+    bool appendExtension;
     char* lastBootRecordDir;
     
 } AppSettings;

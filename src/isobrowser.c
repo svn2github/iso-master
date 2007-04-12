@@ -1166,7 +1166,10 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     
     addExtensionCheckbox = gtk_check_button_new_with_label(_("Add extension automatically"));
     gtk_file_chooser_set_extra_widget(GTK_FILE_CHOOSER(dialog), addExtensionCheckbox);
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(addExtensionCheckbox), TRUE);
+    if(GBLappSettings.appendExtension)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(addExtensionCheckbox), TRUE);
+    else
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(addExtensionCheckbox), FALSE);
     gtk_widget_show(addExtensionCheckbox);
     
     if(GBLappSettings.lastIsoDir != NULL)
@@ -1212,7 +1215,12 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
         g_free(filename);
         
         if(askedToAddExtension)
+        {
             strcat(nameWithExtension, ".iso");
+            GBLappSettings.appendExtension = true;
+        }
+        else
+            GBLappSettings.appendExtension = false;
         
         saveIso(nameWithExtension);
         
