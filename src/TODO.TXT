@@ -1,6 +1,10 @@
 ui:
 -alt shortcut keys need attention (bulgarian)
 -change file/dir properties (especialy creation date)
+ -change permission
+ -rename
+ -change created/modified dates
+ -make sure 'properties' doesn't come up when nothing selected
 -add save/overwrite #undef-ed by default
 -the enter key doesn't work in the save dialog
 
@@ -9,6 +13,8 @@ bk:
 -dos doesn't like names to start with underscores
 -add path tables, boot record to size estimate
 -move the 100k buffers to volinfo
+ -copybyteblock
+
 
 
 c99 compatibility issues:

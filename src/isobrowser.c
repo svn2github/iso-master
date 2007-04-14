@@ -254,6 +254,7 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     g_signal_connect(GBLisoTreeView, "row-activated", (GCallback)isoRowDblClickCbk, NULL);
     g_signal_connect(GBLisoTreeView, "select-cursor-parent", (GCallback)isoGoUpDirTreeCbk, NULL);
     g_signal_connect(GBLisoTreeView, "key-press-event", (GCallback)isoKeyPressedCbk, NULL);
+    //~ g_signal_connect(GBLisoTreeView, "button-press-event", (GCallback)isoButtonPressedCbk, NULL);
     gtk_widget_show(GBLisoTreeView);
     
     /* this won't be enabled until gtk allows me to drag a multiple selection */
@@ -630,6 +631,41 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     g_free(itemName);
 }
+
+//~ gboolean isoButtonPressedCbk(GtkWidget* widget, GdkEventButton* event, gpointer user_data)
+//~ {
+    //~ if(event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
+    //~ {
+        //~ showIsoContextMenu(widget, event, user_data);
+    //~ }
+    
+    //~ return FALSE;
+//~ }
+
+//~ void showItemPropertiesWindow(GtkWidget *widget, GdkEvent *event)
+//~ {
+    //~ exit(1);
+//~ }
+
+//~ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event, gpointer user_data)
+//~ {
+    //~ GtkWidget* menu;
+    //~ GtkWidget* menuItem;
+    
+    //~ menu = gtk_menu_new();
+    
+    //~ menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PROPERTIES, NULL);
+    //~ g_signal_connect(menuItem, "activate", 
+                     //~ (GCallback)showItemPropertiesWindow, NULL);
+    //~ gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    //~ gtk_widget_show_all(menu);
+
+    //~ /*!! event can be NULL here when called from view_onPopupMenu;
+    //~ *  gdk_event_get_time() accepts a NULL argument */
+    //~ gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
+                   //~ (event != NULL) ? event->button : 0,
+                   //~ gdk_event_get_time((GdkEvent*)event));
+//~ }
 
 /* this is called from a button and via a treeview event so don't use the parameters */
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
