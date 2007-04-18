@@ -1190,6 +1190,8 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
                                          GTK_STOCK_SAVE, GTK_RESPONSE_ACCEPT,
                                          NULL);
+    // gtk problem? enter doesn't work
+    //g_signal_connect(dialog, "key-press-event", (GCallback), NULL);
     
     nameFilter = gtk_file_filter_new();
     gtk_file_filter_add_pattern(GTK_FILE_FILTER(nameFilter), "*.[iI][sS][oO]");

@@ -18,6 +18,8 @@
 
 extern GtkWidget* GBLmainWindow;
 
+#if GTK_MINOR_VERSION >= 6
+
 static const char* 
 GBLprogramName = "ISO Master 0.8";
 
@@ -171,6 +173,8 @@ GBLcopyright = "Copyright 2005-2007 Andrew Smith";
 
 static const char* 
 GBLwebsite = "http://littlesvr.ca/isomaster/";
+
+#endif /* GTK_MINOR_VERSION >= 6 */
 
 static const char* 
 GBLlicense = 

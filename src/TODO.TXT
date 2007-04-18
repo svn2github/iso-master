@@ -12,9 +12,7 @@ ui:
 bk:
 -dos doesn't like names to start with underscores
 -add path tables, boot record to size estimate
--move the 100k buffers to volinfo
- -copybyteblock
-
+-maybe move maybeUpdateProgress() to copyByteBlock
 
 
 c99 compatibility issues:
