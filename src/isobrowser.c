@@ -22,6 +22,7 @@
 #include <sys/stat.h>
 #include <time.h>
 #include <libintl.h>
+#include <regex.h>
 
 #include "isomaster.h"
 
@@ -1252,7 +1253,20 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
         
         if(askedToAddExtension)
         {
-            strcat(nameWithExtension, ".iso");
+            regex_t extensionRegex;
+            
+            regcomp(&extensionRegex, ".*\\.[iI][sS][oO]$", 0);
+            
+            if(regexec(&extensionRegex, nameWithExtension, 0, NULL, 0) != 0)
+            /* doesn't already end with .iso */
+            {
+                printf("no match\n");
+                strcat(nameWithExtension, ".iso");
+            }
+            else
+                printf("match\n");
+            
+            
             GBLappSettings.appendExtension = true;
         }
         else
