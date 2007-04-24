@@ -24,6 +24,7 @@ extern bool GBLisoPaneActive;
 extern GtkWidget* GBLisoTreeView;
 extern char* GBLisoCurrentDir;
 extern AppSettings GBLappSettings;
+extern bool GBLisoChangesProbable;
 
 void addBootRecordFromFileCbk(GtkButton *button, gpointer bootRecordType)
 {
@@ -81,6 +82,8 @@ void addBootRecordFromFileCbk(GtkButton *button, gpointer bootRecordType)
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
         }
+        else
+            GBLisoChangesProbable = true;
         
         g_free(filename);
     }
@@ -120,6 +123,8 @@ void deleteBootRecordCbk(GtkButton *button, gpointer data)
         gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
+        
+        GBLisoChangesProbable = true;
     }
 }
 
@@ -243,7 +248,6 @@ void setFileAsBootRecordCbk(GtkButton *button, gpointer data)
     }
     
     gtk_tree_selection_selected_foreach(selection, setFileAsBootRecordRowCbk, NULL);
-    
 }
 
 void setFileAsBootRecordRowCbk(GtkTreeModel* model, GtkTreePath* path,
@@ -296,6 +300,8 @@ void setFileAsBootRecordRowCbk(GtkTreeModel* model, GtkTreePath* path,
         gtk_dialog_run(GTK_DIALOG(dialog));
         gtk_widget_destroy(dialog);
     }
+    else
+        GBLisoChangesProbable = true;
     
     g_free(itemName);
 }

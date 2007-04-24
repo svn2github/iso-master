@@ -207,6 +207,8 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
             gtk_dialog_run(GTK_DIALOG(warningDialog));
             gtk_widget_destroy(warningDialog);
         }
+        else
+            GBLisoChangesProbable = true;
         
         free(fullItemName);
     }
@@ -255,6 +257,8 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     g_signal_connect(GBLisoTreeView, "row-activated", (GCallback)isoRowDblClickCbk, NULL);
     g_signal_connect(GBLisoTreeView, "select-cursor-parent", (GCallback)isoGoUpDirTreeCbk, NULL);
     g_signal_connect(GBLisoTreeView, "key-press-event", (GCallback)isoKeyPressedCbk, NULL);
+    /* The problem with this is that i get a popup menu before the row is selected.
+    * if i do a connect_after the handler never gets called. So no right-click menu. */
     //~ g_signal_connect(GBLisoTreeView, "button-press-event", (GCallback)isoButtonPressedCbk, NULL);
     gtk_widget_show(GBLisoTreeView);
     
@@ -279,6 +283,8 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_add_attribute(GBLfilenameIsoColumn, renderer, "pixbuf", COLUMN_ICON);
     
     renderer = gtk_cell_renderer_text_new();
+    /* this would fuck up usability beyond what my patience can handle */
+    //~ g_object_set(renderer, "editable", TRUE, NULL);
     gtk_tree_view_column_pack_start(GBLfilenameIsoColumn, renderer, TRUE);
     gtk_tree_view_column_add_attribute(GBLfilenameIsoColumn, renderer, "text", COLUMN_FILENAME);
     
@@ -553,7 +559,6 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
     if(gtk_tree_selection_count_selected_rows(selection) > 0)
-    /* reload fs view */
     {
         /* dialog window for the progress bar */
         progressWindow = gtk_dialog_new();
@@ -635,37 +640,50 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
 
 //~ gboolean isoButtonPressedCbk(GtkWidget* widget, GdkEventButton* event, gpointer user_data)
 //~ {
+    //~ if(!GBLisoPaneActive)
+    //~ /* no iso open */
+        //~ return FALSE;
+    
     //~ if(event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
     //~ {
-        //~ showIsoContextMenu(widget, event, user_data);
+        //~ showIsoContextMenu(widget, event);
     //~ }
     
     //~ return FALSE;
 //~ }
 
-//~ void showItemPropertiesWindow(GtkWidget *widget, GdkEvent *event)
-//~ {
-    //~ exit(1);
-//~ }
-
-//~ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event, gpointer user_data)
+//~ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
 //~ {
     //~ GtkWidget* menu;
     //~ GtkWidget* menuItem;
+    //~ GtkTreeSelection* selection;
+    //~ gint numSelectedRows;
+    
+    //~ selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    //~ numSelectedRows = gtk_tree_selection_count_selected_rows(selection);
+    //~ if(numSelectedRows == 0)
+        //~ return;
     
     //~ menu = gtk_menu_new();
     
-    //~ menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PROPERTIES, NULL);
+    //~ if(numSelectedRows == 1)
+    //~ {
+        //~ menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
+        //~ g_signal_connect(menuItem, "activate", 
+                         //~ (GCallback)NULL, NULL);
+        //~ gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+        //~ gtk_widget_show_all(menu);
+    //~ }
+    
+    //~ menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
     //~ g_signal_connect(menuItem, "activate", 
-                     //~ (GCallback)showItemPropertiesWindow, NULL);
+                     //~ (GCallback)NULL, NULL);
     //~ gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     //~ gtk_widget_show_all(menu);
-
-    //~ /*!! event can be NULL here when called from view_onPopupMenu;
-    //~ *  gdk_event_get_time() accepts a NULL argument */
+    
     //~ gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
-                   //~ (event != NULL) ? event->button : 0,
-                   //~ gdk_event_get_time((GdkEvent*)event));
+                   //~ event->button, gdk_event_get_time((GdkEvent*)event));
 //~ }
 
 /* this is called from a button and via a treeview event so don't use the parameters */
@@ -725,6 +743,12 @@ gboolean isoKeyPressedCbk(GtkWidget* widget, GdkEventKey* event, gpointer user_d
     if(event->keyval == GDK_Delete)
     {
         deleteFromIsoCbk(NULL, NULL);
+        
+        return TRUE;
+    }
+    else if(event->keyval == GDK_F2)
+    {
+        renameSelected();
         
         return TRUE;
     }
@@ -1094,6 +1118,97 @@ void refreshIsoView(void)
     gtk_tree_view_scroll_to_point(GTK_TREE_VIEW(GBLisoTreeView), visibleRect.x - 1, visibleRect.y - 1);
     
     free(isoCurrentDir);
+}
+
+void renameSelected(void)
+{
+    GtkTreeSelection* selection;
+    
+    /* do nothing if no image open */
+    if(!GBLisoPaneActive)
+        return;
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    if(gtk_tree_selection_count_selected_rows(selection) != 1)
+        return;
+    
+    /* there's just one row selected but this is the easiest way to do it */
+    gtk_tree_selection_selected_foreach(selection, renameSelectedCbk, NULL);
+    
+    /* can't put this in the callback because gtk complains */
+    refreshIsoView();
+}
+
+void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
+                           GtkTreeIter* iterator, gpointer data)
+{
+    GtkWidget* dialog;
+    GtkWidget* label;
+    GtkWidget* nameField;
+    int rc;
+    char* itemName;
+    char* fullItemName;
+    GtkWidget* warningDialog;
+    
+    gtk_tree_model_get(model, iterator, COLUMN_FILENAME, &itemName, -1);
+    
+    fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
+    if(fullItemName == NULL)
+        fatalError("extractFromIsoEachRowCbk(): malloc("
+                   "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed (out of memory?)");
+    
+    strcpy(fullItemName, GBLisoCurrentDir);
+    strcat(fullItemName, itemName);
+    
+    dialog = gtk_dialog_new_with_buttons(_("Image Information"),
+                                         GTK_WINDOW(GBLmainWindow),
+                                         GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_STOCK_OK,
+                                         GTK_RESPONSE_ACCEPT,
+                                         GTK_STOCK_CANCEL,
+                                         GTK_RESPONSE_REJECT,
+                                         NULL);
+    g_signal_connect(dialog, "close",
+                     G_CALLBACK(closeWindowCbk), NULL);
+    
+    label = gtk_label_new(_("Enter a new name:"));
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label, TRUE, TRUE, 0);
+    gtk_widget_show(label);
+    
+    nameField = gtk_entry_new_with_max_length(NCHARS_FILE_ID_MAX_STORE);
+    gtk_entry_set_text(GTK_ENTRY(nameField), itemName);
+    gtk_entry_set_width_chars(GTK_ENTRY(nameField), 32);
+    g_signal_connect(nameField, "activate", (GCallback)acceptDialogCbk, dialog);
+    
+    gtk_widget_show(nameField);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), nameField, TRUE, TRUE, 0);
+    gtk_widget_show(dialog);
+    
+    rc = gtk_dialog_run(GTK_DIALOG(dialog));
+    if(rc == GTK_RESPONSE_ACCEPT)
+    {
+        rc = bk_rename(&GBLvolInfo, fullItemName, gtk_entry_get_text(GTK_ENTRY(nameField)));
+        if(rc < 0)
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   _("Failed to rename '%s': %s"),
+                                                   itemName,
+                                                   bk_get_error_string(rc));
+            gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
+        else
+            GBLisoChangesProbable = true;
+    }
+    
+    gtk_widget_destroy(dialog);
+    
+    g_free(itemName);
 }
 
 void saveIso(char* filename)

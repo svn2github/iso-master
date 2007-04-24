@@ -1,18 +1,20 @@
 ui:
 -alt shortcut keys need attention (bulgarian)
 -change file/dir properties (especialy creation date)
- -change permission
+ -change permission, change permission for all selected
  -rename
- -change created/modified dates
  -make sure 'properties' doesn't come up when nothing selected
+-edit file
 -add save/overwrite #undef-ed by default
 -the enter key doesn't work in the save dialog
+-escape key for boot record properties
 
 
 bk:
 -dos doesn't like names to start with underscores
 -add path tables, boot record to size estimate
 -maybe move maybeUpdateProgress() to copyByteBlock
+-change created/modified dates
 
 
 c99 compatibility issues:

@@ -35,6 +35,7 @@ extern GtkWidget* GBLbrowserPaned;
 extern char* GBLfsCurrentDir;
 extern bool GBLisoPaneActive;
 extern VolInfo GBLvolInfo;
+extern bool GBLisoChangesProbable;
 
 void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
 {
@@ -98,6 +99,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     volNameField = gtk_entry_new_with_max_length(32);
     gtk_entry_set_text(GTK_ENTRY(volNameField), bk_get_volume_name(&GBLvolInfo));
     gtk_entry_set_width_chars(GTK_ENTRY(volNameField), fieldLen);
+    g_signal_connect(volNameField, "activate", (GCallback)acceptDialogCbk, dialog);
     gtk_table_attach_defaults(GTK_TABLE(table), volNameField, 1, 2, 1, 2);
     gtk_widget_show(volNameField);
     
@@ -109,6 +111,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     publisherField = gtk_entry_new_with_max_length(128);
     gtk_entry_set_text(GTK_ENTRY(publisherField), bk_get_publisher(&GBLvolInfo));
     gtk_entry_set_width_chars(GTK_ENTRY(publisherField), fieldLen);
+    g_signal_connect(publisherField, "activate", (GCallback)acceptDialogCbk, dialog);
     gtk_table_attach_defaults(GTK_TABLE(table), publisherField, 1, 2, 2, 3);
     gtk_widget_show(publisherField);
     
@@ -156,6 +159,8 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
             GBLappSettings.filenameTypesToWrite |= FNTYPE_JOLIET;
         else
             GBLappSettings.filenameTypesToWrite &= ~FNTYPE_JOLIET;
+        
+        GBLisoChangesProbable = true;
     }
     
     gtk_widget_destroy(dialog);
