@@ -8,6 +8,7 @@ ui:
 -add save/overwrite #undef-ed by default
 -the enter key doesn't work in the save dialog
 -escape key for boot record properties
+-some dialog boxes could stay up after failure for a second try (e.g. rename)
 
 
 bk:
