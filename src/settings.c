@@ -65,9 +65,7 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
                                          GTK_STOCK_CANCEL,
                                          GTK_RESPONSE_REJECT,
                                          NULL);
-    //g_signal_connect_swapped(dialog, "response", G_CALLBACK (gtk_widget_destroy), dialog);
-    g_signal_connect(dialog, "close",
-                     G_CALLBACK(closeWindowCbk), NULL);
+    g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
     
     table = gtk_table_new(1, 2, FALSE);
     gtk_table_set_row_spacings(GTK_TABLE(table), 5);

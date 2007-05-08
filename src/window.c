@@ -383,11 +383,6 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
     return TRUE;
 }
 
-void closeWindowCbk(GtkWidget *widget, GdkEvent *event)
-{
-    gtk_dialog_response(GTK_DIALOG(widget), GTK_RESPONSE_REJECT);
-}
-
 void loadIcon(GtkWidget** destIcon, const char* srcFile, int size)
 {
     GdkPixbuf* pixbuf;
@@ -419,6 +414,11 @@ void loadIcons(void)
     loadIcon(&GBLaddIcon, ICONPATH"/add2-kearone.png", size);
     loadIcon(&GBLextractIcon, ICONPATH"/extract2-kearone.png", size);
     loadIcon(&GBLdeleteIcon2, ICONPATH"/delete-kearone.png", size);
+}
+
+void rejectDialogCbk(GtkWidget *widget, GdkEvent *event)
+{
+    gtk_dialog_response(GTK_DIALOG(widget), GTK_RESPONSE_REJECT);
 }
 
 void sortDirsFirstCbk(GtkButton *button, gpointer data)

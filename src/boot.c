@@ -337,8 +337,8 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
                                          GTK_STOCK_OK,
                                          GTK_RESPONSE_NONE,
                                          NULL);
-    gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
-    g_signal_connect_swapped(dialog, "response", G_CALLBACK (gtk_widget_destroy), dialog);
+    //gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
+    g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
     
     vBox = gtk_vbox_new(TRUE, 5);
     gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), vBox);
@@ -394,5 +394,7 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
     gtk_widget_show(label);
     
     /* down here so it's centered properly over the main window */
-    gtk_widget_show(dialog);
+    //gtk_widget_show(dialog);
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
 }

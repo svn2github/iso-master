@@ -1169,8 +1169,7 @@ void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
                                          GTK_STOCK_CANCEL,
                                          GTK_RESPONSE_REJECT,
                                          NULL);
-    g_signal_connect(dialog, "close",
-                     G_CALLBACK(closeWindowCbk), NULL);
+    g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
     
     label = gtk_label_new(_("Enter a new name:"));
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label, TRUE, TRUE, 0);

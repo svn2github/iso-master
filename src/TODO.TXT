@@ -7,14 +7,13 @@ ui:
 -edit file
 -add save/overwrite #undef-ed by default
 -the enter key doesn't work in the save dialog
--escape key for boot record properties
 -some dialog boxes could stay up after failure for a second try (e.g. rename)
+-escape key doesn't work in help window
 
 
 bk:
 -dos doesn't like names to start with underscores
 -add path tables, boot record to size estimate
--maybe move maybeUpdateProgress() to copyByteBlock
 -change created/modified dates
 
 
