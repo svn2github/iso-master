@@ -21,7 +21,7 @@ extern GtkWidget* GBLmainWindow;
 #if GTK_MINOR_VERSION >= 6
 
 static const char* 
-GBLprogramName = "ISO Master 0.8";
+GBLprogramName = "ISO Master 1.0rc1";
 
 static const char* 
 GBLauthors[2] = {
