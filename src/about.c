@@ -13,6 +13,7 @@
 ******************************************************************************/
 
 #include <gtk/gtk.h>
+#include <gdk/gdkkeysyms.h>
 
 #include "isomaster.h"
 
@@ -205,6 +206,18 @@ N_(
 "'Save As'. You cannot overwrite the original ISO.\n"
 );
 
+gboolean helpKeyPressCbk(GtkWidget* widget, GdkEventKey* event, gpointer user_data)
+{
+    if(event->keyval == GDK_Escape)
+    {
+        gtk_widget_destroy(widget);
+        
+        return TRUE;
+    }
+    
+    return FALSE;
+}
+
 void showAboutWindowCbk(GtkMenuItem* menuItem, gpointer data)
 {
 #if GTK_MINOR_VERSION >= 6
@@ -230,6 +243,7 @@ void showHelpOverviewCbk(GtkMenuItem* menuItem, gpointer data)
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), _("ISO Master Help"));
     gtk_window_set_transient_for(GTK_WINDOW(window), GTK_WINDOW(GBLmainWindow));
+    g_signal_connect(window, "key-press-event", helpKeyPressCbk, NULL);
     
     label = gtk_label_new(_(GBLhelp));
     gtk_container_add(GTK_CONTAINER(window), label);
