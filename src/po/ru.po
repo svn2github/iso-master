@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-03-18 13:42-0400\n"
+"POT-Creation-Date: 2007-05-24 17:46-0400\n"
 "PO-Revision-Date: 2007-03-07 09:06+0300\n"
 "Last-Translator: Antonio_99RUS <scsiman@yandex.ru>\n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr " Ожидаемый размер ISO: "
 
-#: ../isobrowser.c:1026
+#: ../isobrowser.c:1087
 #, c-format
 msgid ""
 "%s\n"
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "Вы хотите продолжить?"
 
-#: ../isobrowser.c:134 ../isobrowser.c:877
+#: ../isobrowser.c:135 ../isobrowser.c:938
 msgid "(scanning for duplicate files)"
 msgstr "(поиск дублированных файлов)"
 
@@ -37,43 +37,47 @@ msgstr "(поиск дублированных файлов)"
 msgid "Add"
 msgstr "Добавить"
 
+#: ../isobrowser.c:1320
+msgid "Add extension automatically"
+msgstr ""
+
 #: ../window.c:346
 msgid "Add to the ISO"
 msgstr "Добавить в ISO"
 
-#: ../isobrowser.c:972 ../isobrowser.c:1162
+#: ../isobrowser.c:1033 ../isobrowser.c:1317
 msgid "All files"
 msgstr "Все файлы"
 
-#: ../boot.c:328
+#: ../boot.c:334
 msgid "Boot Record Information"
 msgstr "Информация о загрузочной записи"
 
-#: ../boot.c:119
+#: ../boot.c:122
 msgid "Boot record deleted"
 msgstr "Загрузочная запись удалена"
 
-#: ../boot.c:344
+#: ../boot.c:350
 #, c-format
 msgid "Boot record type: 1200KiB Floppy"
 msgstr "Тип загрузочной записи: 1200KiB флоппи"
 
-#: ../boot.c:346
+#: ../boot.c:352
 #, c-format
 msgid "Boot record type: 1440KiB Floppy"
 msgstr "Тип загрузочной записи: 1440KiB флоппи"
 
-#: ../boot.c:348
+#: ../boot.c:354
 #, c-format
 msgid "Boot record type: 2880KiB Floppy"
 msgstr "Тип загрузочной записи: 2880KiB флоппи"
 
-#: ../boot.c:342
+#: ../boot.c:348
 #, c-format
 msgid "Boot record type: No Emulation"
 msgstr "Тип загрузочной записи: без эмуляции"
 
-#: ../boot.c:39
+#: ../boot.c:40
 msgid "Chose Boot Record File"
 msgstr "Выбрать файл загрузочной записи"
 
@@ -85,13 +89,17 @@ msgstr "Создать новый каталог в ISO"
 msgid "Create new directory on the filesystem"
 msgstr "Создать новый каталог вне образа"
 
-#: ../settings.c:77
+#: ../settings.c:76
 msgid "Creation time:"
 msgstr "Время создания:"
 
 #: ../window.c:356
 msgid "Delete from the ISO"
 msgstr "Удалить из ISO"
+
+#: ../isobrowser.c:1174
+msgid "Enter a new name:"
+msgstr ""
 
 #: ../browser.c:71
 msgid "Enter name for new directory"
@@ -105,47 +113,47 @@ msgstr "Извлечь"
 msgid "Extract from the ISO"
 msgstr "Извлечь из ISO"
 
-#: ../isobrowser.c:202
+#: ../isobrowser.c:203
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Не удалось добавить %s: '%s'"
 
-#: ../boot.c:78
+#: ../boot.c:79
 #, c-format
 msgid "Failed to add boot record: '%s'"
 msgstr "Не удалось добавить загрузочную запись: '%s'"
 
-#: ../isobrowser.c:338
+#: ../isobrowser.c:346
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr "Не удалось сменить каталог: '%s'"
 
-#: ../browser.c:112
+#: ../browser.c:111
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Не удалось создать каталог %s"
 
-#: ../browser.c:135
+#: ../browser.c:134
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Не удалось создать каталог %s: '%s'"
 
-#: ../isobrowser.c:512
+#: ../isobrowser.c:520
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Не удалось удалить %s: '%s'"
 
-#: ../isobrowser.c:621
+#: ../isobrowser.c:628
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Не удалось извлечь %s: '%s'"
 
-#: ../boot.c:197
+#: ../boot.c:202
 #, c-format
 msgid "Failed to extract boot record: '%s'"
 msgstr "Не удалось извлечь загрузочную запись: '%s'"
 
-#: ../isobrowser.c:765 ../isobrowser.c:813
+#: ../isobrowser.c:826 ../isobrowser.c:874
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Не удалось инициализировать bkisofs: '%s'"
@@ -155,32 +163,37 @@ msgstr "Не удалось инициализировать bkisofs: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Не удалось открыть каталог '%s', ошибка %d"
 
-#: ../isobrowser.c:832
+#: ../isobrowser.c:893
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Не удалось открыть ISO файл для чтения: '%s'"
 
-#: ../isobrowser.c:907
+#: ../isobrowser.c:968
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Не удалось прочитать дерево каталогов: '%s'"
 
-#: ../isobrowser.c:847
+#: ../isobrowser.c:908
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Не удалось прочитать информацию тома: '%s'"
 
-#: ../boot.c:292
+#: ../isobrowser.c:1197
+#, c-format
+msgid "Failed to rename '%s': %s"
+msgstr ""
+
+#: ../boot.c:296
 #, c-format
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Не удалось установить %s в качестве загрузочной записи: '%s'"
 
-#: ../isobrowser.c:1112
+#: ../isobrowser.c:1263
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Не удалось записать образ в '%s': '%s'"
 
-#: ../settings.c:119
+#: ../settings.c:120
 msgid "Filename types (both recommended):"
 msgstr "Типы имён файлов (рекомендуются оба):"
 
@@ -204,7 +217,7 @@ msgstr "Файл источника: 2880KiB флоппи"
 msgid "From file: no emulation"
 msgstr "Файл источника: без эмуляции"
 
-#: ../isobrowser.c:530
+#: ../isobrowser.c:538
 msgid ""
 "GUI error, deleting anything other then files and directories doesn't work"
 msgstr "Ошибка, удалять можно только файлы и каталоги"
@@ -221,29 +234,29 @@ msgstr "Вернуться на каталог вверх на ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Вернуться на каталог вверх вне образа"
 
-#: ../isobrowser.c:962 ../isobrowser.c:1157
+#: ../isobrowser.c:1023 ../isobrowser.c:1312
 msgid "ISO Images"
 msgstr "ISO образы"
 
-#: ../about.c:227
+#: ../about.c:244
 msgid "ISO Master Help"
 msgstr "Справка по ISO Master"
 
-#: ../settings.c:59
+#: ../isobrowser.c:1164 ../settings.c:60
 msgid "Image Information"
 msgstr "Информация об образе"
 
-#: ../boot.c:385
+#: ../boot.c:391
 #, c-format
 msgid "Is not visible on image"
 msgstr "Невидим на образе"
 
-#: ../boot.c:383
+#: ../boot.c:389
 #, c-format
 msgid "Is visible on image as '%s'"
 msgstr "Видим на образе как '%s'"
 
-#: ../isobrowser.c:441
+#: ../isobrowser.c:449
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
@@ -251,27 +264,27 @@ msgstr ""
 "Вы внесли изменения в ISO образ, но не сохранили их. Вы уверены, что хотите "
 "закрыть его?"
 
-#: ../boot.c:267
+#: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr ""
 "Выбранное нечто не есть обычный файл и не может быть использовано как "
 "загрузочная запись"
 
-#: ../boot.c:367 ../boot.c:374
+#: ../boot.c:373 ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Местоположение: на оригинальном образе по смещению 0x%llX"
 
-#: ../boot.c:369 ../boot.c:376
+#: ../boot.c:375 ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Местоположение: будет добавлено из '%s'"
 
-#: ../isobrowser.c:967
+#: ../isobrowser.c:1028
 msgid "NRG Images"
 msgstr "Образы Nero"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:272
+#: ../fsbrowser.c:110 ../isobrowser.c:278
 msgid "Name"
 msgstr "Имя"
 
@@ -279,43 +292,43 @@ msgstr "Имя"
 msgid "New Directory"
 msgstr "Новый каталог"
 
-#: ../boot.c:144 ../boot.c:321
+#: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr ""
 "Загрузочная запись с оригинала не прочитана либо не установлена на образ"
 
-#: ../boot.c:105
+#: ../boot.c:108
 msgid "No boot to delete"
 msgstr "Отсутствует загрузочная запись для удаления"
 
-#: ../boot.c:224
+#: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr ""
 "Выберите файл в ISO-обозревателе для использования в качестве загрузочной "
 "записи"
 
-#: ../boot.c:238
+#: ../boot.c:243
 msgid "Please select no more then one file in the ISO browser"
 msgstr "Выберите не более одного файла в ISO-обозревателе"
 
-#: ../isobrowser.c:128
+#: ../isobrowser.c:129
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Подождите, добавляются выбранные файлы..."
 
-#: ../isobrowser.c:568
+#: ../isobrowser.c:575
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Подождите, извлекаются выбранные файлы..."
 
-#: ../isobrowser.c:871
+#: ../isobrowser.c:932
 msgid "Please wait while I'm reading the image..."
 msgstr "Подождите, читается образ..."
 
-#: ../isobrowser.c:1084
+#: ../isobrowser.c:1235
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Подождите, сохраняется новый образ..."
 
-#: ../isobrowser.c:121 ../isobrowser.c:560 ../isobrowser.c:864
-#: ../isobrowser.c:1074
+#: ../isobrowser.c:122 ../isobrowser.c:567 ../isobrowser.c:925
+#: ../isobrowser.c:1225
 msgid "Progress"
 msgstr "Выполнено"
 
@@ -327,11 +340,11 @@ msgstr "Издатель:"
 msgid "Remove"
 msgstr "Удалить"
 
-#: ../isobrowser.c:1148
+#: ../isobrowser.c:1301
 msgid "Save File"
 msgstr "Сохранить файл"
 
-#: ../boot.c:151
+#: ../boot.c:156
 msgid "Save a copy of the boot record"
 msgstr "Сохранить копию загрузочной записи"
 
@@ -343,11 +356,11 @@ msgstr "Поиск дублированных файлов (медленный)"
 msgid "Show _hidden files"
 msgstr "_Показать скрытые файлы"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:293
+#: ../fsbrowser.c:131 ../isobrowser.c:301
 msgid "Size"
 msgstr "Размер"
 
-#: ../boot.c:357
+#: ../boot.c:363
 #, c-format
 msgid "Size: %d bytes"
 msgstr "Размер: %d байт(а)"
@@ -363,7 +376,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Пропускаем каталог, поскольку stat(%s) вернуло код ошибки %d"
 
-#: ../about.c:183
+#: ../about.c:188
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -408,11 +421,11 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "Использовать выбранный файл в образе (без эмуляции)"
 
-#: ../settings.c:93
+#: ../settings.c:92
 msgid "Volume name:"
 msgstr "Имя тома:"
 
-#: ../settings.c:440
+#: ../settings.c:458
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
