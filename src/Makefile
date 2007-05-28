@@ -24,6 +24,10 @@ DESKTOPPATH ?= $(PREFIX)/share/applications
 # This option is desired in the FreeBSD ports guidelines.
 #WITHOUT_NLS = 1
 
+# This enables overwriting the original iso,
+# don't uncomment it unless you are willing to risk losing data.
+#CFLAGS += -DENABLE_SAVE_OVERWRITE
+
 # programs used in the Makefiles:
 export CC      ?= gcc
 export AR      = ar

@@ -55,6 +55,9 @@ static GtkWidget* GBLactivityProgressBar;
 static GtkTreeViewColumn* GBLfilenameIsoColumn;
 /* the window with the progress bar for writing */
 GtkWidget* GBLwritingProgressWindow;
+#ifdef ENABLE_SAVE_OVERWRITE
+static char* openIsoPathAndName = NULL;
+#endif
 
 void activityProgressUpdaterCbk(VolInfo* volInfo)
 {
@@ -435,6 +438,14 @@ void closeIso(void)
     gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
     
     GBLisoPaneActive = false;
+    
+#ifdef ENABLE_SAVE_OVERWRITE
+    if(openIsoPathAndName != NULL)
+    {
+        free(openIsoPathAndName);
+        openIsoPathAndName = NULL;
+    }
+#endif
 }
 
 bool confirmCloseIso(void)
@@ -982,6 +993,11 @@ void openIso(char* filename)
         return;
     }
     
+#ifdef ENABLE_SAVE_OVERWRITE
+    openIsoPathAndName = malloc(strlen(filename) + 1);
+    strcpy(openIsoPathAndName, filename);
+#endif
+    
     /* iso size label */
     char sizeStr[20];
     GBLisoSize = 35845;
@@ -1398,6 +1414,62 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     /* the accelerator callback must return true */
     return TRUE;
 }
+
+#ifdef ENABLE_SAVE_OVERWRITE
+#define TEMPFILENAME "/tmp/isomaster-temp.iso"
+gboolean saveOverwriteIsoCbk(GtkWidget *widget, GdkEvent *event)
+{
+    int sourceFile;
+    int destFile;
+    int numBytesRead;
+    char line[1024];
+    GtkWidget* warningDialog;
+    
+    saveIso(TEMPFILENAME);
+    
+    printf("moving %s to %s\n", TEMPFILENAME, openIsoPathAndName);
+    
+    sourceFile = open(TEMPFILENAME, O_RDONLY);
+    if(sourceFile == -1)
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to open %s for reading",
+                                               TEMPFILENAME);
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        if(GBLWritingProgressBar != NULL)
+            gtk_widget_destroy(GBLwritingProgressWindow);
+    }
+    
+    destFile = open(openIsoPathAndName, O_WRONLY | O_CREAT);
+    if(destFile == -1)
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               "Failed to open %s for writing",
+                                               openIsoPathAndName);
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        if(GBLWritingProgressBar != NULL)
+            gtk_widget_destroy(GBLwritingProgressWindow);
+    }
+    
+    while((numBytesRead = read(sourceFile, line, sizeof(line))) > 0)
+      write(destFile, line, numBytesRead);
+    
+    close(sourceFile);
+    close(destFile);
+    
+    return FALSE;
+}
+#endif
 
 /* this handles the ok and cancel buttons in the progress window */
 void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data)
