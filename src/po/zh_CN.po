@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-05-24 17:46-0400\n"
-"PO-Revision-Date: 2007-03-08 05:49+0100\n"
+"PO-Revision-Date: 2007-05-25 11:37+0100\n"
 "Last-Translator: Sun Minchao <sunminchao@gmx.de>\n"
 "Language-Team:  <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,8 @@ msgstr ""
 "\n"
 "是否继续？"
 
-#: ../isobrowser.c:135 ../isobrowser.c:938
+#: ../isobrowser.c:135
+#: ../isobrowser.c:938
 msgid "(scanning for duplicate files)"
 msgstr "（正在扫描重复文件）"
 
@@ -39,13 +40,14 @@ msgstr "添加"
 
 #: ../isobrowser.c:1320
 msgid "Add extension automatically"
-msgstr ""
+msgstr "自动添加扩展"
 
 #: ../window.c:346
 msgid "Add to the ISO"
 msgstr "添加到 ISO"
 
-#: ../isobrowser.c:1033 ../isobrowser.c:1317
+#: ../isobrowser.c:1033
+#: ../isobrowser.c:1317
 msgid "All files"
 msgstr "所有文件"
 
@@ -99,7 +101,7 @@ msgstr "从 ISO 中删除"
 
 #: ../isobrowser.c:1174
 msgid "Enter a new name:"
-msgstr ""
+msgstr "输入一个新名称："
 
 #: ../browser.c:71
 msgid "Enter name for new directory"
@@ -153,7 +155,8 @@ msgstr "无法提取 '%s'：'%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "无法提取引导记录：'%s'"
 
-#: ../isobrowser.c:826 ../isobrowser.c:874
+#: ../isobrowser.c:826
+#: ../isobrowser.c:874
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "无法初始化 bkisofs：'%s'"
@@ -181,7 +184,7 @@ msgstr "无法读取卷信息：'%s'"
 #: ../isobrowser.c:1197
 #, c-format
 msgid "Failed to rename '%s': %s"
-msgstr ""
+msgstr "无法重命名 '%s'：'%s'"
 
 #: ../boot.c:296
 #, c-format
@@ -218,11 +221,11 @@ msgid "From file: no emulation"
 msgstr "从文件：不模拟"
 
 #: ../isobrowser.c:538
-msgid ""
-"GUI error, deleting anything other then files and directories doesn't work"
+msgid "GUI error, deleting anything other then files and directories doesn't work"
 msgstr "GUI 错误，正在删除错误的文件与目录"
 
-#: ../window.c:53 ../window.c:335
+#: ../window.c:53
+#: ../window.c:335
 msgid "Go back"
 msgstr "返回"
 
@@ -234,7 +237,8 @@ msgstr "在 ISO 中返回上一级目录"
 msgid "Go back up one directory on the filesystem"
 msgstr "在文件系统中返回上一级目录"
 
-#: ../isobrowser.c:1023 ../isobrowser.c:1312
+#: ../isobrowser.c:1023
+#: ../isobrowser.c:1312
 msgid "ISO Images"
 msgstr "ISO 映像文件"
 
@@ -242,7 +246,8 @@ msgstr "ISO 映像文件"
 msgid "ISO Master Help"
 msgstr "ISO Master 帮助"
 
-#: ../isobrowser.c:1164 ../settings.c:60
+#: ../isobrowser.c:1164
+#: ../settings.c:60
 msgid "Image Information"
 msgstr "映像文件信息"
 
@@ -257,21 +262,21 @@ msgid "Is visible on image as '%s'"
 msgstr "在映像文件中显示为 '%s'"
 
 #: ../isobrowser.c:449
-msgid ""
-"It seems that you have made changes to the ISO but haven't saved them. Are "
-"you sure you want to close it?"
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
 msgstr "您似乎更改了 ISO 文件但没有保存，您确定要关闭它？"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr "所选项非常规文件且不能被用作引导记录"
 
-#: ../boot.c:373 ../boot.c:380
+#: ../boot.c:373
+#: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "位置：于原始映像文件的 0x%llX"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:375
+#: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "位置：添加自 '%s'"
@@ -280,15 +285,18 @@ msgstr "位置：添加自 '%s'"
 msgid "NRG Images"
 msgstr "NGR 映像文件"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:278
+#: ../fsbrowser.c:110
+#: ../isobrowser.c:278
 msgid "Name"
 msgstr "名称"
 
-#: ../window.c:59 ../window.c:341
+#: ../window.c:59
+#: ../window.c:341
 msgid "New Directory"
 msgstr "新目录"
 
-#: ../boot.c:149 ../boot.c:327
+#: ../boot.c:149
+#: ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "未读取原始引导记录或在映像文件中指定"
 
@@ -320,7 +328,9 @@ msgstr "正在读取映像，请稍候..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "正在保存新映像至磁盘，请稍候..."
 
-#: ../isobrowser.c:122 ../isobrowser.c:567 ../isobrowser.c:925
+#: ../isobrowser.c:122
+#: ../isobrowser.c:567
+#: ../isobrowser.c:925
 #: ../isobrowser.c:1225
 msgid "Progress"
 msgstr "进度"
@@ -349,7 +359,8 @@ msgstr "扫描重复文件（慢）"
 msgid "Show _hidden files"
 msgstr "显示隐藏文件(_h)"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:301
+#: ../fsbrowser.c:131
+#: ../isobrowser.c:301
 msgid "Size"
 msgstr "大小"
 
@@ -359,8 +370,7 @@ msgid "Size: %d bytes"
 msgstr "大小：%d bytes"
 
 #: ../fsbrowser.c:260
-msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
+msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr "无法处理超过 256 个字符的长文件名，略过目录项"
 
 #: ../fsbrowser.c:278
@@ -417,8 +427,7 @@ msgid "Volume name:"
 msgstr "卷名称："
 
 #: ../settings.c:458
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
+msgid "You will have to close and reopen the ISO for this change to take effect"
 msgstr "必须重启 ISO Master 以使改变生效"
 
 #: ../window.c:204
@@ -448,3 +457,4 @@ msgstr "排序目录(_S)"
 #: ../window.c:169
 msgid "_View"
 msgstr "查看(_V)"
+
