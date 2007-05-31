@@ -23,7 +23,7 @@
 <title>Function Reference</title>
 <para>asd</para>
 <sect1>
-<title>Setup and Shutdown</title>
+<title>Setup</title>
 <para></para>
 <sect2>
 <title><function>bk_init_vol_info()</function></title>
@@ -32,6 +32,173 @@
 <funcdef>int <function>bk_init_vol_info</function></funcdef>
 <paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
 <paramdef>bool <parameter>scanForDuplicateFiles</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+</sect1>
+<sect1>
+<title>Reading</title>
+<para></para>
+<sect2>
+<title><function>bk_open_image()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_open_image</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>filename</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_read_vol_info()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_read_vol_info</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_read_dir_tree()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_read_dir_tree</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>int <parameter>filenameType</parameter></paramdef>
+<paramdef>bool <parameter>keepPosixPermissions</parameter></paramdef>
+<paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*)</paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+</sect1>
+<sect1>
+<title>Adding</title>
+<para></para>
+<sect2>
+<title><function>bk_add()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_add</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>srcPathAndName</parameter></paramdef>
+<paramdef>const char* <parameter>destPathStr</parameter></paramdef>
+<paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*)</paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_create_dir()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_create_dir</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>destPathStr</parameter></paramdef>
+<paramdef>const char* <parameter>newDirName</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_add_boot_record()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_add_boot_record</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>srcPathAndName</parameter></paramdef>
+<paramdef>int <parameter>bootMediaType</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+</sect1>
+<sect1>
+<title>Extracting</title>
+<para></para>
+<sect2>
+<title><function>bk_extract()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_extract</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>srcPathAndName</parameter></paramdef>
+<paramdef>const char* <parameter>destDir</parameter></paramdef>
+<paramdef>bool <parameter>keepPermissions</parameter></paramdef>
+<paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*)</paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_extract_boot_record()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_extract_boot_record</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>destPathAndName</parameter></paramdef>
+<paramdef>unsigned <parameter>destFilePerms</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+</sect1>
+<sect1>
+<title>Deleting</title>
+<para></para>
+<sect2>
+<title><function>bk_delete()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_delete</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>pathAndName</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_delete_boot_record()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>void <function>bk_delete_boot_record</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+</sect1>
+
+<sect1>
+<title>Writing</title>
+<para></para>
+<sect2>
+<title><function>bk_write_image()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_write_image</function></funcdef>
+<paramdef>const char* <parameter>newImagePathAndName</parameter></paramdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>time_t <parameter>creationTime</parameter></paramdef>
+<paramdef>int <parameter>filenameTypes</parameter></paramdef>
+<paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*, double)</paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+</sect1>
+<sect1>
+<title>Cleanup</title>
+<para></para>
+<sect2>
+<title><function>bk_destroy_vol_info()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>void <function>bk_destroy_vol_info</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
 <para>asd</para>
