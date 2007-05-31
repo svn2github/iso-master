@@ -1,0 +1,123 @@
+<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+]>
+<book>
+
+<bookinfo>
+<date>30 May 2007</date>
+<title>bkisofs Usage and Reference Manual</title>
+<author>
+<firstname>Andrew</firstname>
+<surname>Smith</surname>
+</author>
+</bookinfo>
+<toc></toc>
+
+<chapter>
+<title>bkisofs Overview</title>
+<para>bkisofs (I will often call it simply 'bk') is a simple and stable library for reading and writing ISO9660 files. It can also read NRG files, but not write them. It has support for the Joliet, RockRidge, and EL Torito extensions.</para>
+<para>Currently bk is used as the backbone of ISO Master - a graphical editor for ISO files, but I encourage you to add ISO support to your application if it is appropriate. Being a library, bk is much easier to use from your application then mkisofs.</para>
+<para>Feel free to contact me !!address?? with questions, I will do all I can to help you get going.</para>
+<para>The only header file you need to include in your program is <filename class='headerfile'>bk.h</filename>. That has the definitions for all the public functions and the file/directory/volume structures you will have to work with. Do yourself a favour and don't use any other header files from the library - I will do my best to keep <filename class='headerfile'>bk.h</filename> consistent between versions but won't even bother trying with any other files.</para>
+</chapter>
+<chapter>
+<title>Function Reference</title>
+<para>asd</para>
+<sect1>
+<title>Setup and Shutdown</title>
+<para></para>
+<sect2>
+<title><function>bk_init_vol_info()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_init_vol_info</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>bool <parameter>scanForDuplicateFiles</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+</sect1>
+</chapter>
+<chapter>
+<title>Data Structures</title>
+<para>This section describes the data structures used by bkisofs to store information about the ISO, directories and files. You shouldn't need to understand anything about <classname>VolInfo</classname> because all its members are accessible using getters and setters. You do need to understand how to read <classname>BkDir</classname>, <classname>BkFile</classname>, and <classname>BkSymLink</classname> because even though bk creates them and fills them in you will have to read their members yourself.</para>
+<sect1>
+<title><classname>BkFileBase</classname></title>
+<para></para>
+</sect1>
+<sect1>
+<title><classname>BkDir</classname></title>
+<para></para>
+</sect1>
+<sect1>
+<title><classname>BkFile</classname></title>
+<para></para>
+</sect1>
+<sect1>
+<title><classname>BkSymLink</classname></title>
+<para></para>
+</sect1>
+<sect1>
+<title>Inheritance</title>
+<para>Directories, files, and symbolic links, though certainly different, have something in common - they all have a name and possibly a set of permissions. To save a lot of code duplication bk has a simple inheritance tree: <classname>BkDir</classname>, <classname>BkFile</classname>, and <classname>BkSymLink</classname> all inherit from <classname>BkFileBase</classname>.</para>
+<para>This is relevant for you when, for example, you look at the contents of a directory and want to figure out whether an item is a directory, so you could give it a special icon.</para>
+<para>You can cast one type from another. It is always safe to cast down (to <classname>BkFileBase</classname>) but it is only sometimes safe to cast up (e.g. to <classname>BkDir</classname>). The next subsection explains how to detect the type of a <classname>BkFileBase</classname> and the section after that explains how to convert from one type to another.</para>
+</sect1>
+<sect1>
+<title>Detecting the type of a <classname>BkFileBase</classname></title>
+<para></para>
+<sect2>
+<title><function>IS_DIR()</function></title>
+<para></para>
+</sect2>
+<sect2>
+<title><function>IS_REG_FILE()</function></title>
+<para></para>
+</sect2>
+<sect2>
+<title><function>IS_SYMLINK()</function></title>
+<para></para>
+</sect2>
+</sect1>
+<sect1>
+<title>Casting</title>
+<para></para>
+<sect2>
+<title><function>BK_DIR_PTR()</function></title>
+<para></para>
+</sect2>
+<sect2>
+<title><function>BK_FILE_PTR()</function></title>
+<para></para>
+</sect2>
+<sect2>
+<title><function>BK_SYMLINK_PTR()</function></title>
+<para></para>
+</sect2>
+<sect2>
+<title><function>BK_BASE_PTR()</function></title>
+<para></para>
+</sect2>
+</sect1>
+</chapter>
+<chapter>
+<title></title>
+<para></para>
+<sect1>
+<title></title>
+<para></para>
+</sect1>
+</chapter>
+
+<!--
+<chapter>
+<title></title>
+<para></para>
+<sect1>
+<title></title>
+<para></para>
+</sect1>
+</chapter>
+-->
+
+</book>

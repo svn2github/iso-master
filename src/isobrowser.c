@@ -387,7 +387,7 @@ void changeIsoDirectory(char* newDirStr)
             gtk_list_store_set(GBLisoListStore, &listIterator, 
                                COLUMN_ICON, GBLfilePixbuf,
                                COLUMN_FILENAME, child->name, 
-                               COLUMN_SIZE, ((BkFile*)child)->size,
+                               COLUMN_SIZE, (BK_FILE_PTR(child))->size,
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
                                -1);
         }
