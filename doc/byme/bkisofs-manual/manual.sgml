@@ -18,10 +18,22 @@
 <para>Currently bk is used as the backbone of ISO Master - a graphical editor for ISO files, but I encourage you to add ISO support to your application if it is appropriate. Being a library, bk is much easier to use from your application then mkisofs.</para>
 <para>Feel free to contact me !!address?? with questions, I will do all I can to help you get going.</para>
 <para>The only header file you need to include in your program is <filename class='headerfile'>bk.h</filename>. That has the definitions for all the public functions and the file/directory/volume structures you will have to work with. Do yourself a favour and don't use any other header files from the library - I will do my best to keep <filename class='headerfile'>bk.h</filename> consistent between versions but won't even bother trying with any other files.</para>
+<sect1>
+<title>Return Codes</title>
+<para>asd</para>
+</sect1>
+<sect1>
+<title>Constants</title>
+<para>asd</para>
+</sect1>
+<sect1>
+<title>Missing Features</title>
+<para>joliet unicode</para>
+</sect1>
 </chapter>
 <chapter>
 <title>Function Reference</title>
-<para>asd</para>
+<para>In this chapter I describe the available bk functions. They are presented in such an order that you can read the chapter sequencially and make use of each function as you go, in the end having full ISO read/write support. You don't have to make use of all the functions of course. For example if bootable ISOs aren't interesting to you - you can sefely ignore the boot functions.</para>
 <sect1>
 <title>Setup</title>
 <para></para>
@@ -34,7 +46,7 @@
 <paramdef>bool <parameter>scanForDuplicateFiles</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>This is the first function you need to call - whether you're reading an ISO or creating one from scratch. The first parameter (<parameter>volInfo</parameter>) is the address of a variable of type <classname>VolInfo</classname> which you declare somewhere in your program. It is safe to use bk to work on more than one ISO at the same time, since all the functions take a <classname>VolInfo*</classname> as a parameter, so you would have one <classname>VolInfo</classname> per ISO.</para>
 </sect2>
 </sect1>
 <sect1>
@@ -49,7 +61,8 @@
 <paramdef>const char* <parameter>filename</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>This basically just opens the ISO file for reading. The parameter <parameter>filename</parameter> can have any string in it that would work with the C function <function>open()</function>, i.e. it can have a full or relative or no path plus the name of the file.</para>
+<para>Call <function>bk_open_image()</function> after <function>bk_init_vol_info()</function> and before <function>bk_read_vol_info()</function>.</para>
 </sect2>
 <sect2>
 <title><function>bk_read_vol_info()</function></title>
@@ -59,7 +72,8 @@
 <paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>This reads information about the ISO: things like the volume name, creation time and the types of directory trees available (ISO9660, Rockrdge, Joliet). Also some boot record information is read (complete boot record info is not guaranteed until after the directory tree is read).</para>
+<para>Important to know is that <function>bk_estimate_iso_size()</function> will not work at this point, you must read the directory tree first.</para>
 </sect2>
 <sect2>
 <title><function>bk_read_dir_tree()</function></title>
@@ -72,7 +86,15 @@
 <paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*)</paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>This function reads a set of entire directory trees (all the directories and files) from the ISO. bk is capable of reading ISO9660, RockRidge, and Joliet filenames so you can ask to read any of those. You have to decide which one you want based on the available types in <classname>VolInfo</classname>.<classname>filenameTypes</classname>. I recommend that you choose RockRidge over Joliet and Joliet over ISO9660. To illustrate, here's an example:<para>
+
+if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
+        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_ROCKRIDGE, true, activityProgressUpdaterCbk);
+    else if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
+        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_JOLIET, false, activityProgressUpdaterCbk);
+    else
+        rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_9660, false, activityProgressUpdaterCbk);
+
 </sect2>
 </sect1>
 <sect1>
@@ -204,6 +226,143 @@
 <para>asd</para>
 </sect2>
 </sect1>
+<sect1>
+<title>Getters</title>
+<para></para>
+<sect2>
+<title><function>bk_estimate_iso_size()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>off_t <function>bk_estimate_iso_size</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>int <parameter>filenameTypes</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_get_creation_time()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>time_t <function>bk_get_creation_time</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_get_publisher()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>const char* <function>bk_get_publisher</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_get_volume_name()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>const char* <function>bk_get_volume_name</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_get_error_string()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>const char* <function>bk_get_publisher</function></funcdef>
+<paramdef>int <parameter>errorId</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_get_dir_from_string()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_get_dir_from_string</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>pathStr</parameter></paramdef>
+<paramdef>BkDir** <parameter>dirFoundPtr</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+</sect1>
+<sect1>
+<title>Setters</title>
+<para></para>
+<sect2>
+<title><function>bk_rename()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_rename</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>srcPathAndName</parameter></paramdef>
+<paramdef>const char* <parameter>newName</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_cancel_operation()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>void <function>bk_cancel_operation</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_set_vol_name()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>void <function>bk_set_vol_name</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>volName</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_set_publisher()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>void <function>bk_set_publisher</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>publisher</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_set_follow_symlinks()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>void <function>bk_set_follow_symlinks</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>bool <parameter>doFollow</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+<sect2>
+<title><function>bk_set_boot_file()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_set_boot_file</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>srcPathAndName</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>asd</para>
+</sect2>
+</sect1>
 </chapter>
 <chapter>
 <title>Data Structures</title>
@@ -228,7 +387,7 @@
 <title>Inheritance</title>
 <para>Directories, files, and symbolic links, though certainly different, have something in common - they all have a name and possibly a set of permissions. To save a lot of code duplication bk has a simple inheritance tree: <classname>BkDir</classname>, <classname>BkFile</classname>, and <classname>BkSymLink</classname> all inherit from <classname>BkFileBase</classname>.</para>
 <para>This is relevant for you when, for example, you look at the contents of a directory and want to figure out whether an item is a directory, so you could give it a special icon.</para>
-<para>You can cast one type from another. It is always safe to cast down (to <classname>BkFileBase</classname>) but it is only sometimes safe to cast up (e.g. to <classname>BkDir</classname>). The next subsection explains how to detect the type of a <classname>BkFileBase</classname> and the section after that explains how to convert from one type to another.</para>
+<para>You can cast one type from another. It is always safe to cast down (to <classname>BkFileBase</classname>) but it is only sometimes safe to cast up (e.g. to <classname>BkDir</classname>). The next section explains how to detect the type of a <classname>BkFileBase</classname> and the section after that explains how to convert from one type to another.</para>
 </sect1>
 <sect1>
 <title>Detecting the type of a <classname>BkFileBase</classname></title>
