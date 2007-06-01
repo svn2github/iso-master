@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-05-24 17:46-0400\n"
+"POT-Creation-Date: 2007-06-01 13:54-0400\n"
 "PO-Revision-Date: 2007-03-06 22:16+0200\n"
 "Last-Translator: Bogdan Radulescu <bogdan@nimblex.net>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:360
+#: ../window.c:368
 msgid "      Estimated ISO Size: "
 msgstr "      Dimensiunea ISO Estimatã: "
 
-#: ../isobrowser.c:1087
+#: ../isobrowser.c:1103
 #, c-format
 msgid ""
 "%s\n"
@@ -29,23 +29,23 @@ msgstr ""
 "\n"
 "Doreºti sã continui?"
 
-#: ../isobrowser.c:135 ../isobrowser.c:938
+#: ../isobrowser.c:138 ../isobrowser.c:949
 msgid "(scanning for duplicate files)"
 msgstr "(scanez fiºiere duplicate)"
 
-#: ../window.c:346
+#: ../window.c:354
 msgid "Add"
 msgstr "Adaugã"
 
-#: ../isobrowser.c:1320
+#: ../isobrowser.c:1336
 msgid "Add extension automatically"
 msgstr ""
 
-#: ../window.c:346
+#: ../window.c:354
 msgid "Add to the ISO"
 msgstr "Adaugã la ISO"
 
-#: ../isobrowser.c:1033 ../isobrowser.c:1317
+#: ../isobrowser.c:1049 ../isobrowser.c:1333
 msgid "All files"
 msgstr "Toate fiºierele"
 
@@ -81,7 +81,7 @@ msgstr "Tip boot record: Fãrã emulare"
 msgid "Chose Boot Record File"
 msgstr "Alege fiºierul boot record"
 
-#: ../window.c:342
+#: ../window.c:350
 msgid "Create new directory on the ISO"
 msgstr "Creazã un nou director pe ISO"
 
@@ -93,11 +93,11 @@ msgstr "Creazã un nou director în sistemul de fiºiere"
 msgid "Creation time:"
 msgstr "Momentul creãrii:"
 
-#: ../window.c:356
+#: ../window.c:364
 msgid "Delete from the ISO"
 msgstr "ªterge din ISO"
 
-#: ../isobrowser.c:1174
+#: ../isobrowser.c:1190
 msgid "Enter a new name:"
 msgstr ""
 
@@ -105,15 +105,15 @@ msgstr ""
 msgid "Enter name for new directory"
 msgstr "Introdu numele noului director"
 
-#: ../window.c:351
+#: ../window.c:359
 msgid "Extract"
 msgstr "Extrage"
 
-#: ../window.c:351
+#: ../window.c:359
 msgid "Extract from the ISO"
 msgstr "Extrage din ISO"
 
-#: ../isobrowser.c:203
+#: ../isobrowser.c:206
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Nu pot sã adaug '%s': '%s'"
@@ -123,7 +123,7 @@ msgstr "Nu pot sã adaug '%s': '%s'"
 msgid "Failed to add boot record: '%s'"
 msgstr "Nu pot sã adaug boot record: '%s'"
 
-#: ../isobrowser.c:346
+#: ../isobrowser.c:349
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr "Nu pot sã schimb director: '%s'"
@@ -138,12 +138,12 @@ msgstr "Nu pot sã creez director %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Nu pot sã creez director %s: '%s'"
 
-#: ../isobrowser.c:520
+#: ../isobrowser.c:531
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Nu pot sã ºterg '%s': '%s'"
 
-#: ../isobrowser.c:628
+#: ../isobrowser.c:639
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Nu pot sã extrag '%s': '%s'"
@@ -153,7 +153,7 @@ msgstr "Nu pot sã extrag '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Nu pot sã extrag boot record: ''%s"
 
-#: ../isobrowser.c:826 ../isobrowser.c:874
+#: ../isobrowser.c:837 ../isobrowser.c:885
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Nu pot sã initiez bkisofs: '%s'"
@@ -163,22 +163,22 @@ msgstr "Nu pot sã initiez bkisofs: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Nu pot sã deschid directorul '%s', eroare %d"
 
-#: ../isobrowser.c:893
+#: ../isobrowser.c:904
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Nu pot sã deschid fiºierul iso pentru a citii: '%s'"
 
-#: ../isobrowser.c:968
+#: ../isobrowser.c:979
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Nu pot sã accesez directoarele: '%s'"
 
-#: ../isobrowser.c:908
+#: ../isobrowser.c:919
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Nu pot sã citesc informaþia volumului: '%s'"
 
-#: ../isobrowser.c:1197
+#: ../isobrowser.c:1213
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr ""
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Nu pot sã setez %s ca boot record: '%s'"
 
-#: ../isobrowser.c:1263
+#: ../isobrowser.c:1279
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Nu pot sã scriu imaginea pe '%s': '%s'"
@@ -197,38 +197,38 @@ msgstr "Nu pot sã scriu imaginea pe '%s': '%s'"
 msgid "Filename types (both recommended):"
 msgstr "Tipurile fiºierelor (recomandat ambele)"
 
-#: ../window.c:285
+#: ../window.c:293
 msgid "Follow symbolic links"
 msgstr "Urmareºte legãturile simbolice"
 
-#: ../window.c:248
+#: ../window.c:256
 msgid "From file: 1200KiB floppy"
 msgstr "Din fiºier: 1200KiB floppy"
 
-#: ../window.c:254
+#: ../window.c:262
 msgid "From file: 1440KiB floppy"
 msgstr "Din fiºier: 1440KiB floppy"
 
-#: ../window.c:260
+#: ../window.c:268
 msgid "From file: 2880KiB floppy"
 msgstr "Din fiºier: 2880KiB floppy"
 
-#: ../window.c:242
+#: ../window.c:250
 msgid "From file: no emulation"
 msgstr "Din fiºier: fãrã emulare"
 
-#: ../isobrowser.c:538
+#: ../isobrowser.c:549
 msgid ""
 "GUI error, deleting anything other then files and directories doesn't work"
 msgstr ""
 "Eroare de interfaþã; ºterg orice altceva în afarã de fiºierele ºi "
 "directoarele care nu funcþioneazã"
 
-#: ../window.c:53 ../window.c:335
+#: ../window.c:53 ../window.c:343
 msgid "Go back"
 msgstr "Înapoi"
 
-#: ../window.c:336
+#: ../window.c:344
 msgid "Go back up one directory on the ISO"
 msgstr "Du-te un director în sus pe ISO"
 
@@ -236,15 +236,15 @@ msgstr "Du-te un director în sus pe ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Du-te un director în sus pe sistemul de fiºiere"
 
-#: ../isobrowser.c:1023 ../isobrowser.c:1312
+#: ../isobrowser.c:1039 ../isobrowser.c:1328
 msgid "ISO Images"
 msgstr "Imagini ISO"
 
-#: ../about.c:244
+#: ../about.c:254
 msgid "ISO Master Help"
 msgstr "ISO Master Ajutor"
 
-#: ../isobrowser.c:1164 ../settings.c:60
+#: ../isobrowser.c:1180 ../settings.c:60
 msgid "Image Information"
 msgstr "Informaþii imagine"
 
@@ -258,7 +258,7 @@ msgstr "Nu este vizibil în imagine"
 msgid "Is visible on image as '%s'"
 msgstr "Este vizibil în imagine ca '%s'"
 
-#: ../isobrowser.c:449
+#: ../isobrowser.c:460
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
@@ -282,15 +282,15 @@ msgstr "Locaþie: pe imaginea originalã la 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Locaþie:pentru a fi adãugatã din '%s'"
 
-#: ../isobrowser.c:1028
+#: ../isobrowser.c:1044
 msgid "NRG Images"
 msgstr "Imagini NRG"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:278
+#: ../fsbrowser.c:110 ../isobrowser.c:281
 msgid "Name"
 msgstr "Nume"
 
-#: ../window.c:59 ../window.c:341
+#: ../window.c:59 ../window.c:349
 msgid "New Directory"
 msgstr "Director Nou"
 
@@ -310,24 +310,24 @@ msgstr "Te rog selecteazã un fiºier pentru a-l folosii ca boot record"
 msgid "Please select no more then one file in the ISO browser"
 msgstr "Te rog sã nu selectezi mai mult de un fiºier"
 
-#: ../isobrowser.c:129
+#: ../isobrowser.c:132
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Te rog sã aºtepþi cât adaug fiºierele selectate..."
 
-#: ../isobrowser.c:575
+#: ../isobrowser.c:586
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Te rog sã aºtepþi cât extrag fiºierele selectate..."
 
-#: ../isobrowser.c:932
+#: ../isobrowser.c:943
 msgid "Please wait while I'm reading the image..."
 msgstr "Te rog sã aºtepþi cât citesc imaginea..."
 
-#: ../isobrowser.c:1235
+#: ../isobrowser.c:1251
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Te rog sã aºtepþi cât salvez noua imagine pe disc..."
 
-#: ../isobrowser.c:122 ../isobrowser.c:567 ../isobrowser.c:925
-#: ../isobrowser.c:1225
+#: ../isobrowser.c:125 ../isobrowser.c:578 ../isobrowser.c:936
+#: ../isobrowser.c:1241
 msgid "Progress"
 msgstr "Progres"
 
@@ -335,11 +335,11 @@ msgstr "Progres"
 msgid "Publisher:"
 msgstr "Editor:"
 
-#: ../window.c:356
+#: ../window.c:364
 msgid "Remove"
 msgstr "ªterge"
 
-#: ../isobrowser.c:1301
+#: ../isobrowser.c:1317
 msgid "Save File"
 msgstr "SalveazÄƒ fisier"
 
@@ -347,15 +347,15 @@ msgstr "SalveazÄƒ fisier"
 msgid "Save a copy of the boot record"
 msgstr "Salveazã o copie la boot record"
 
-#: ../window.c:275
+#: ../window.c:283
 msgid "Scan for duplicate files (slow)"
 msgstr "Scanez fiºiere duplicate (lent)"
 
-#: ../window.c:182
+#: ../window.c:190
 msgid "Show _hidden files"
 msgstr "Arata fisierele _ascunse"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:301
+#: ../fsbrowser.c:131 ../isobrowser.c:304
 msgid "Size"
 msgstr "Mãrime"
 
@@ -376,7 +376,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Exclud aceastã intrare pentru cã stat(%s) a eºuat cu %d"
 
-#: ../about.c:188
+#: ../about.c:198
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -420,7 +420,7 @@ msgstr ""
 "Odatã ce aþi fãcut toate modificãrile pe noua imagine ISO daþi click\n"
 "pe 'Imagine' si pe 'Salveaza ca'.Nu puteþi rescrie imaginea originalã.\n"
 
-#: ../window.c:236
+#: ../window.c:244
 msgid "Use selected file on image (no emulation)"
 msgstr "Foloseºte fiºierul selectat pe imagine (fãrã emulare)"
 
@@ -435,11 +435,11 @@ msgstr ""
 "Va trebui sã închizi ºi sã redeschizi ISO pentru ca aceste modificãri sã "
 "aibã efect"
 
-#: ../window.c:204
+#: ../window.c:212
 msgid "_BootRecord"
 msgstr "_BootRecord"
 
-#: ../window.c:297
+#: ../window.c:305
 msgid "_Help"
 msgstr "_Ajutor"
 
@@ -447,18 +447,18 @@ msgstr "_Ajutor"
 msgid "_Image"
 msgstr "_Imagine"
 
-#: ../window.c:306
+#: ../window.c:314
 msgid "_Overview"
 msgstr "_Ansamblu"
 
-#: ../window.c:268
+#: ../window.c:276
 msgid "_Settings"
 msgstr "_Setãri"
 
-#: ../window.c:192
+#: ../window.c:200
 msgid "_Sort directories first"
 msgstr "_Sorteazã directoarele primele"
 
-#: ../window.c:169
+#: ../window.c:177
 msgid "_View"
 msgstr "_Vizualizeazã"

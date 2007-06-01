@@ -1,3 +1,15 @@
+01 Jun 2007 - 1.0
+=================
+- Fixed bug where extract button generated gtk error when no rows selected.
+- Creating or adding "." and ".." no longer allowed.
+- Added Ukrainian translation.
+- Added checkbox to append an extension to a saved filename automatically.
+- Now less memory/CPU is used when saving an image.
+- Can now compile on distros with older GTK versions.
+- Can now rename files and directories on the iso.
+- Small usability improvements.
+- Fixed bug where a saved image with symbolic links would end up with corrupted files.
+
 17 Mar 2007 - 0.8
 =================
 - Added 3 more icons by kearone for a consistent look.
@@ -86,4 +98,3 @@
 23 Aug 2006 - 0.1
 =================
 - First public release
-
