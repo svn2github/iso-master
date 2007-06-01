@@ -1,4 +1,5 @@
-<!doctype book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
 ]>
 <book>
 
@@ -86,15 +87,17 @@
 <paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*)</paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>This function reads a set of entire directory trees (all the directories and files) from the ISO. bk is capable of reading ISO9660, RockRidge, and Joliet filenames so you can ask to read any of those. You have to decide which one you want based on the available types in <classname>VolInfo</classname>.<classname>filenameTypes</classname>. I recommend that you choose RockRidge over Joliet and Joliet over ISO9660. To illustrate, here's an example:<para>
-
+<para>This function reads a set of entire directory trees (all the directories and files) from the ISO. bk is capable of reading ISO9660, RockRidge, and Joliet filenames so you can ask to read any of those. You have to decide which one you want based on the available types in <classname>VolInfo</classname>.<classname>filenameTypes</classname>. I recommend that you choose RockRidge over Joliet and Joliet over ISO9660. To illustrate, here's an example:</para>
+<programlisting>
+<![CDATA[
 if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
         rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_ROCKRIDGE, true, activityProgressUpdaterCbk);
     else if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
         rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_JOLIET, false, activityProgressUpdaterCbk);
     else
         rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_9660, false, activityProgressUpdaterCbk);
-
+]]>
+</programlisting>
 </sect2>
 </sect1>
 <sect1>
