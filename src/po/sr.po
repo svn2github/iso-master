@@ -1,6 +1,7 @@
 # Serbian translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
 # Danijel Muharemovic <majstor_dane@inbox.com>, 2007.
+# To test try sr_CS@Latn or sr_CS@latin
 msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
