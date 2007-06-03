@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-05-29 21:18-0000\n"
 "Last-Translator: Juan García-Murga Monago <marakaid@gmail.com>\n"
 "Language-Team: \n"
@@ -128,12 +128,12 @@ msgstr "Fallo al añadir registro de arranque: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Fallo al cambiar directorio: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Fallo al crear directorio %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Fallo al crear directorio %s: '%s'"
@@ -239,7 +239,7 @@ msgstr "Ir atrás un directorio en el sistema de archivos"
 msgid "ISO Images"
 msgstr "Imágenes ISO"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "Ayuda de ISO Master"
 
@@ -379,7 +379,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Saltando entrada de directorio porque stat(%s) falló con %d"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

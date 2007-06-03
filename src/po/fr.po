@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-05-25 09:14+0100\n"
 "Last-Translator: Bruno Bord <bruno@comedia-production.com>\n"
 "Language-Team: \n"
@@ -130,12 +130,12 @@ msgstr "Échec de l'ajout de la zone amorce: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Changement de dossier impossible : '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Impossible de créer le dossier %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Impossible de créer le dossier %s: '%s'"
@@ -242,7 +242,7 @@ msgstr "Remonter d'un dossier sur le système de fichier"
 msgid "ISO Images"
 msgstr "Images ISO"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "Aide ISO Master"
 
@@ -376,7 +376,7 @@ msgstr "Dossier ignoré car le nom du fichier excède 256 caractères"
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Dossier ignoré car stat(%s) a échoué avec %d"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-05-26 14:54+0100\n"
 "Last-Translator: Stephen Brandt <stephen@stephenbrandt.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
@@ -127,12 +127,12 @@ msgstr "Het toevoegen van het boot record is mislukt: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Het veranderen van de map is mislukt: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Het aanmaken van de map '%s' is mislukt"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Het aanmaken van de map '%s' is mislukt: '%s'"
@@ -237,7 +237,7 @@ msgstr "Eén map omhoog om het bestandssysteem"
 msgid "ISO Images"
 msgstr "ISO images"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "Uitleg over ISO Master"
 
@@ -374,7 +374,7 @@ msgstr ""
 "Map wordt overgeslagen omdat er een programmafout is opgetreden in 'stat(%"
 "s)' met waarde %d"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

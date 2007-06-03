@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-06-01 14:20-0500\n"
 "Last-Translator: Dessislav Petrov <DesislavPetrov@gmail.com>\n"
 "Language-Team: Dessislav Petrov <DesislavPetrov@gmail.com>\n"
@@ -28,8 +28,7 @@ msgstr ""
 "\n"
 "Продължение?"
 
-#: ../isobrowser.c:138
-#: ../isobrowser.c:949
+#: ../isobrowser.c:138 ../isobrowser.c:949
 msgid "(scanning for duplicate files)"
 msgstr "Проверка за дублиращи се файлове"
 
@@ -45,8 +44,7 @@ msgstr "Добави асоциация на файла автоматично"
 msgid "Add to the ISO"
 msgstr "Добави към изображението"
 
-#: ../isobrowser.c:1049
-#: ../isobrowser.c:1333
+#: ../isobrowser.c:1049 ../isobrowser.c:1333
 msgid "All files"
 msgstr "Всички файлове"
 
@@ -129,12 +127,12 @@ msgstr "Грешка при добавянето на боот-запис: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Грешка при смяна на папката: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Грешка при създаване на директорията %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Грешка при създаване на директорията %s: '%s'"
@@ -154,8 +152,7 @@ msgstr "Грешка при извличане %s: '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Грешка при извличането на Боот-Записа: '%s'"
 
-#: ../isobrowser.c:837
-#: ../isobrowser.c:885
+#: ../isobrowser.c:837 ../isobrowser.c:885
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Грешка: '%s'"
@@ -220,11 +217,11 @@ msgid "From file: no emulation"
 msgstr "Файл от: Липсва"
 
 #: ../isobrowser.c:549
-msgid "GUI error, deleting anything other then files and directories doesn't work"
+msgid ""
+"GUI error, deleting anything other then files and directories doesn't work"
 msgstr "Грешка - изтриването на всичко освен папки и файлове не функционира!"
 
-#: ../window.c:53
-#: ../window.c:343
+#: ../window.c:53 ../window.c:343
 msgid "Go back"
 msgstr "Върни се"
 
@@ -236,17 +233,15 @@ msgstr "Върни една папка назад в исото"
 msgid "Go back up one directory on the filesystem"
 msgstr "Върни една папка назад върху харда"
 
-#: ../isobrowser.c:1039
-#: ../isobrowser.c:1328
+#: ../isobrowser.c:1039 ../isobrowser.c:1328
 msgid "ISO Images"
 msgstr "ISO изображения"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "Помощ"
 
-#: ../isobrowser.c:1180
-#: ../settings.c:60
+#: ../isobrowser.c:1180 ../settings.c:60
 msgid "Image Information"
 msgstr "Информация за изображението"
 
@@ -261,21 +256,21 @@ msgid "Is visible on image as '%s'"
 msgstr "Видимо в изображението като '%s'"
 
 #: ../isobrowser.c:460
-msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgid ""
+"It seems that you have made changes to the ISO but haven't saved them. Are "
+"you sure you want to close it?"
 msgstr "Да бъдат ли запаметени промени в изображението?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr "Файлът не може да бъде използван за Боот-Запис"
 
-#: ../boot.c:373
-#: ../boot.c:380
+#: ../boot.c:373 ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Местонахлождение: в оригиналното изображение 0x%llX"
 
-#: ../boot.c:375
-#: ../boot.c:382
+#: ../boot.c:375 ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Местонахлождение: за да бъдат добавени от '%s'"
@@ -284,18 +279,15 @@ msgstr "Местонахлождение: за да бъдат добавени 
 msgid "NRG Images"
 msgstr "NRG изображения"
 
-#: ../fsbrowser.c:110
-#: ../isobrowser.c:281
+#: ../fsbrowser.c:110 ../isobrowser.c:281
 msgid "Name"
 msgstr "Име"
 
-#: ../window.c:59
-#: ../window.c:349
+#: ../window.c:59 ../window.c:349
 msgid "New Directory"
 msgstr "Нова папка"
 
-#: ../boot.c:149
-#: ../boot.c:327
+#: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "Боот-Записът не може да бъде намерен"
 
@@ -327,9 +319,7 @@ msgstr "Моля изчакайте..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Моля изчакайте..."
 
-#: ../isobrowser.c:125
-#: ../isobrowser.c:578
-#: ../isobrowser.c:936
+#: ../isobrowser.c:125 ../isobrowser.c:578 ../isobrowser.c:936
 #: ../isobrowser.c:1241
 msgid "Progress"
 msgstr "Прогрес"
@@ -358,8 +348,7 @@ msgstr "Провери за доблиращи се файлове"
 msgid "Show _hidden files"
 msgstr "Показвай _скритите файлове"
 
-#: ../fsbrowser.c:131
-#: ../isobrowser.c:304
+#: ../fsbrowser.c:131 ../isobrowser.c:304
 msgid "Size"
 msgstr "Размер"
 
@@ -369,15 +358,18 @@ msgid "Size: %d bytes"
 msgstr "Размер: %d байта"
 
 #: ../fsbrowser.c:260
-msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Пропуснато е въвеждането от директорията, защото е по-дълго от 256 символа"
+msgid ""
+"Skiping directory entry because cannot handle filename longer than 256 chars"
+msgstr ""
+"Пропуснато е въвеждането от директорията, защото е по-дълго от 256 символа"
 
 #: ../fsbrowser.c:278
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
-msgstr "Пропуснато е въвеждането от директорията, защото статистиката(%s) пречи на %d"
+msgstr ""
+"Пропуснато е въвеждането от директорията, защото статистиката(%s) пречи на %d"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -434,7 +426,8 @@ msgid "Volume name:"
 msgstr "Етикет:"
 
 #: ../settings.c:458
-msgid "You will have to close and reopen the ISO for this change to take effect"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
 msgstr "Рестартирайте програмата, за да бъдат актуализирани промените"
 
 #: ../window.c:212
@@ -467,6 +460,6 @@ msgstr "_Изглед"
 
 #~ msgid "Failed to delete directory %s: '%s'"
 #~ msgstr "Грешка при изтриване на директорията %s: '%s'"
+
 #~ msgid "Failed to extract directory %s: '%s'"
 #~ msgstr "Грешка при извличане от папката %s: '%s'"
-

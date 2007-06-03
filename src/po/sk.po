@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-05-25 10:33+0200\n"
 "Last-Translator: Jozef Riha <jose1711@gmail.com\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -128,12 +128,12 @@ msgstr "Zlyhalo pridávanie Boot Recordu: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Nepodarilo sa prepnúť do adresára: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Zlyhalo vytváranie adresára %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Zlyhalo vytváranie adresára %s: '%s'"
@@ -238,7 +238,7 @@ msgstr "Prejsť o jeden adresár vyššie v súborovom systéme"
 msgid "ISO Images"
 msgstr "ISO obrazy"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "ISO Master pomocník"
 
@@ -374,7 +374,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Preskakujem adresárovú položku, pretože stat(%s) skončilo s chybou %d"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

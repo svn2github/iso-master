@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-05-25 11:37+0100\n"
 "Last-Translator: Sun Minchao <sunminchao@gmx.de>\n"
 "Language-Team:  <zh@li.org>\n"
@@ -128,12 +128,12 @@ msgstr "无法添加引导记录：'%s' "
 msgid "Failed to change directory: '%s'"
 msgstr "无法改变目录：'%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "无法创建目录：'%s'"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "无法创建目录 %s：'%s'"
@@ -238,7 +238,7 @@ msgstr "在文件系统中返回上一级目录"
 msgid "ISO Images"
 msgstr "ISO 映像文件"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "ISO Master 帮助"
 
@@ -368,7 +368,7 @@ msgstr "无法处理超过 256 个字符的长文件名，略过目录项"
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "状态（%s）错误：%d，略过目录项"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

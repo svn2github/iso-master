@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:17-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-06-03 02:13-0500\n"
 "Last-Translator: Danijel Muharemovic <majstor_dane@inbox.com>\n"
 "Language-Team: \n"
@@ -127,12 +127,12 @@ msgstr "Neuspešno dodavanje BOOT fajla: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Neuspešno menjanje direktorijuma: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Neuspešno kreiranje direktorijuma %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Neuspešno kreiranje direktorijuma %s: '%s'"
@@ -238,7 +238,7 @@ msgstr "Povratak u nadređeni direktorijum u fajlsistemu"
 msgid "ISO Images"
 msgstr "ISO imidži"
 
-#: ../about.c:244
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "ISO Master Pomoć"
 
@@ -373,7 +373,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Poništavam unos direktorijuma zbog statusa(%s) neuspelo sa %d"
 
-#: ../about.c:188
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-05-25 20:16+0800\n"
 "Last-Translator: Cheng-Wei Chien <e.cwchien@gmail.com>\n"
 "Language-Team: Cheng-Wei Chien <e.cwchien@gmail.com>\n"
@@ -131,12 +131,12 @@ msgstr "無法新增開機紀錄：'%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "無法切換目錄：'%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "無法新增目錄 %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "無法新增目錄 %s：'%s'"
@@ -241,7 +241,7 @@ msgstr "本機中返回上一層目錄"
 msgid "ISO Images"
 msgstr "ISO 映像檔"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "ISO Master 說明"
 
@@ -371,7 +371,7 @@ msgstr "無法處理超過 256 個字元的長檔名，故略過目錄項目"
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "狀態（%s）錯誤代號 %d，故略過目錄項目"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

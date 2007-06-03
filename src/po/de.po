@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-05-26 14:54+0100\n"
 "Last-Translator: Toni <toni@links2linux.de>\n"
 "Language-Team: \n"
@@ -128,12 +128,12 @@ msgstr "Fehler beim Hinzufügen des 'boot record': '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Kann nicht in Verzeichnis %s wechseln"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Konnte Verzeichnis %s nicht erstellen"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Konnte Verzeichnis %s nicht erstellen: %s"
@@ -238,7 +238,7 @@ msgstr "Zum übergeordneten Verzeichnis wechseln"
 msgid "ISO Images"
 msgstr "ISO Abbilder:"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "ISO Master Hilfe"
 
@@ -370,7 +370,7 @@ msgstr "Überspringe das Verzeichnis, da Dateinamen länger als 256 Zeichen"
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Überspringe Verzeichnis %s, Fehler: %d"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

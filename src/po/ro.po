@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-03-06 22:16+0200\n"
 "Last-Translator: Bogdan Radulescu <bogdan@nimblex.net>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -128,12 +128,12 @@ msgstr "Nu pot sã adaug boot record: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Nu pot sã schimb director: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Nu pot sã creez director %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Nu pot sã creez director %s: '%s'"
@@ -240,7 +240,7 @@ msgstr "Du-te un director în sus pe sistemul de fiºiere"
 msgid "ISO Images"
 msgstr "Imagini ISO"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "ISO Master Ajutor"
 
@@ -376,7 +376,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Exclud aceastã intrare pentru cã stat(%s) a eºuat cu %d"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

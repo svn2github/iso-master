@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-05-25 11:12+0200\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: Albanian <translation-team-sq@lists.sourceforge.net>\n"
@@ -131,12 +131,12 @@ msgstr "Dështova në shtim regjistrimi nisjeje: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Dështova në ndryshimin e drejtorisë: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Dështova në krijimin e drejtorisë %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Dështova në krijimin e drejtorisë %s: '%s'"
@@ -243,7 +243,7 @@ msgstr "Shko sipër te sistem kartelash një drejtori"
 msgid "ISO Images"
 msgstr "Pamje ISO"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "Ndihmë për ISO Master"
 
@@ -383,7 +383,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Po e anashkaloj këtë zë drejtorie pasi stat(%s) dështoi me %d"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

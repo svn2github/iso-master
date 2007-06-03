@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-01 13:54-0400\n"
+"POT-Creation-Date: 2007-06-03 11:58-0400\n"
 "PO-Revision-Date: 2007-03-09 17:04-0500\n"
 "Last-Translator: Maciej Libuda <maciej.libuda@gmail.com>\n"
 "Language-Team: polish <LL@li.org>\n"
@@ -128,12 +128,12 @@ msgstr "Dodanie rekordu startowego nie powiodło się: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Zmiana katalogu nie powiodła się: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Utworzenie katalogu %s nie powiodło się"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Utworzenie katalogu %s nie powiodło się: '%s'"
@@ -239,7 +239,7 @@ msgstr "Jeden katalog wyżej w systemie plików"
 msgid "ISO Images"
 msgstr "Obrazy ISO"
 
-#: ../about.c:254
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "Pomoc ISO Master"
 
@@ -374,7 +374,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Pomijam katalog ponieważ stat(%s) zakończony niepowodzeniem z %d"
 
-#: ../about.c:198
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
