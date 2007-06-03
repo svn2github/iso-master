@@ -438,7 +438,7 @@ msgstr "_BOOTfajl"
 
 #: ../window.c:305
 msgid "_Help"
-msgstr "_Pomoć"
+msgstr "Po_moć"
 
 #: ../window.c:119
 msgid "_Image"
