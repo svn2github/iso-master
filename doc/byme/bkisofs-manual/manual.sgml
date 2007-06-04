@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE book PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
 ]>
 <book>
@@ -88,16 +87,14 @@
 </funcprototype>
 </funcsynopsis>
 <para>This function reads a set of entire directory trees (all the directories and files) from the ISO. bk is capable of reading ISO9660, RockRidge, and Joliet filenames so you can ask to read any of those. You have to decide which one you want based on the available types in <classname>VolInfo</classname>.<classname>filenameTypes</classname>. I recommend that you choose RockRidge over Joliet and Joliet over ISO9660. To illustrate, here's an example:</para>
-<programlisting>
-<![CDATA[
-if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
+<programlisting><![CDATA[
+    if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
         rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_ROCKRIDGE, true, activityProgressUpdaterCbk);
     else if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
         rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_JOLIET, false, activityProgressUpdaterCbk);
     else
         rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_9660, false, activityProgressUpdaterCbk);
-]]>
-</programlisting>
+]]></programlisting>
 </sect2>
 </sect1>
 <sect1>
@@ -114,7 +111,8 @@ if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
 <paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*)</paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>Add the file or the directory <parameter>srcPathAndName</parameter> to <parameter>destPathStr</parameter>. The destination is a full path, relative to the root of the ISO. For example, to add <literal>/etc/fstab</literal> to the (existing) <literal>KNOPPIX</literal> directory on the ISO, pass <literal>/KNOPPIX/</literal> as the <parameter>destPathStr</parameter>.</para>
+<para><parameter>progressFunction</parameter> is a pointer to a function that takes a <classname>VolInfo*</classname> as a parameter and returns <classname>void</classname>. bk will call this function every 1 second or so. You can pass in NULL if you like but in that case control won't be returned to your code until <function>bk_add()</function> is finished doing what it has to do so you can't update a progress bar or cancel adding.</para>
 </sect2>
 <sect2>
 <title><function>bk_create_dir()</function></title>
@@ -126,7 +124,7 @@ if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
 <paramdef>const char* <parameter>newDirName</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>Create the directory <parameter>newDirName</parameter> in the directory <parameter>destPathStr</parameter> on the ISO.</para>
 </sect2>
 <sect2>
 <title><function>bk_add_boot_record()</function></title>
@@ -138,7 +136,8 @@ if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
 <paramdef>int <parameter>bootMediaType</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>Set the boot record for the ISO to be a file from the regular filesystem. This file will end up being a hidden file on the ISO. The parameter <parameter>srcPathAndName</parameter> has to be a string (with or without the path) pointing to a file that is an image of a boot record, e.g. <literal>/home/andrew/dosboot.raw</literal>. These images are created using various tools. ISO Master can extract the bootable image from CDs. It's a complex topic and I must assume you understand what a boot record is.</para>
+<para>The <parameter>bootMediaType</parameter> parameter is one of the constants described in the 'Constants' section of this manual. For floppy emulation boot record types the size of the file pointed to by <parameter>srcPathAndName</parameter> must match the size assumed by <parameter>bootMediaType</parameter>.</para>
 </sect2>
 </sect1>
 <sect1>
@@ -156,7 +155,11 @@ if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
 <paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*)</paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>This function will extract the file or directory <parameter>srcPathAndName</parameter> on the ISO to the directory <parameter>destDir</parameter> on the regular filesystem.</para>
+<para>If the ISO has the RockRidge extension and you passed <literal>FNTYPE_ROCKRIDGE</literal> to <function>bk_read_dir_tree()</function>, and you pass true for <parameter>keepPermissions</parameter> then the files and directories extracted to the filesystem will have the same permissions as they did on the ISO.</para>
+<para>Note that you cannot extract <literal>/</literal></para>
+<para>Also note that there is no way to make bk overwrite files on the filesystem.</para>
+<para><parameter>progressFunction</parameter> is a pointer to a function that takes a <classname>VolInfo*</classname> as a parameter and returns <classname>void</classname>. bk will call this function every 1 second or so. You can pass in NULL if you like but in that case control won't be returned to your code until <function>bk_extract()</function> is finished doing what it has to do so you can't update a progress bar or cancel extracting.</para>
 </sect2>
 <sect2>
 <title><function>bk_extract_boot_record()</function></title>
@@ -168,7 +171,7 @@ if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
 <paramdef>unsigned <parameter>destFilePerms</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>Extracts the boot record from the ISO to the file <parameter>destPathAndName</parameter>. The <parameter>destFilePerms</parameter> parameters is permission to be set for the resulting file.</para>
 </sect2>
 </sect1>
 <sect1>
@@ -183,7 +186,9 @@ if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
 <paramdef>const char* <parameter>pathAndName</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>Deletes the file or directory from the ISO, and frees all the memory associated with those items. If <parameter>pathAndName</parameter> points to a directory, all the contents of the directory are also deleted.</para>
+<para>I'm sure I already mentioned somewhere in the manual that the original ISO isn't modified. But I'll reinforce that now - <function>bk_delete()</function> will delete from the representation of the ISO in memory, not from the ISO itself. When you write the new ISO, the deleted files won't be there.</para>
+<para>Files and directories added to the ISO can also be deleted the same way (from the representation of the new ISO in memory, not from the filesystem).</para>
 </sect2>
 <sect2>
 <title><function>bk_delete_boot_record()</function></title>
@@ -193,10 +198,9 @@ if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
 <paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>Deletes the boot record from the ISO. See the notes from <function>bk_delete()</function> about how none of the original data is deleted.</para>
 </sect2>
 </sect1>
-
 <sect1>
 <title>Writing</title>
 <para></para>
@@ -212,7 +216,10 @@ if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
 <paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*, double)</paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>asd</para>
+<para>Writes the ISO to <parameter>newImagePathAndName</parameter>.</para>
+<para>If you don't care about the <parameter>creationTime</parameter> recorded on the new ISO (this is different from the creation time of the ISO file as recorded by the normal filesystem) just use <literal>time(NULL)</literal> for the parameter, so the current time will be stored as the creation time on the new ISO.</para>
+<para>The <parameter>filenameTypes</parameter> parameter is different from the one used when reading the directory tree (it doesn't have to be the same). This one tells bk which filename types will be used on the new image. It is recommended that you use all of them: <literal>FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET</literal>. Notice that to specify more than one type you | them together.</para>
+<para><parameter>progressFunction</parameter> is a pointer to a function that takes a <classname>VolInfo*</classname> and a <classname>double</classname> as parameters and returns <classname>void</classname>. bk will call this function every 1 second or so and the double will have a number between 0 and 100, which is a good approximation of how much has been written already. You can pass in NULL if you like but in that case control won't be returned to your code until <function>bk_write_image()</function> is finished doing what it has to do so you can't update a progress bar or cancel writing.</para>
 </sect2>
 </sect1>
 <sect1>
