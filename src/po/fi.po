@@ -1,7 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 1.0\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-04 19:41-0400\n"
 "PO-Revision-Date: 2007-06-04 03:12+0200\n"
 "Last-Translator: Eero Salokannel <eero.salokannel@gmail.com>\n"
 "Language-Team: \n"
@@ -25,8 +26,7 @@ msgstr ""
 "\n"
 "Haluatko jatkaa?"
 
-#: ../isobrowser.c:138
-#: ../isobrowser.c:949
+#: ../isobrowser.c:138 ../isobrowser.c:949
 msgid "(scanning for duplicate files)"
 msgstr "(etsitään duplikaatteja)"
 
@@ -42,8 +42,7 @@ msgstr "Lisää tiedostopääte automaattisesti"
 msgid "Add to the ISO"
 msgstr "Lisää levykuvaan"
 
-#: ../isobrowser.c:1049
-#: ../isobrowser.c:1333
+#: ../isobrowser.c:1049 ../isobrowser.c:1333
 msgid "All files"
 msgstr "Kaikki tiedostot"
 
@@ -126,12 +125,12 @@ msgstr "Käynnistyslohkon lisääminen ei onnistunut: '%s'"
 msgid "Failed to change directory: '%s'"
 msgstr "Hakemiston vaihtaminen ei onnistunut: '%s'"
 
-#: ../browser.c:111
+#: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
 msgstr "Hakemiston luominen ei onnistunut %s"
 
-#: ../browser.c:134
+#: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
 msgstr "Hakemiston luominen ei onnistunut %s: '%s'"
@@ -151,8 +150,7 @@ msgstr "Purkaminen ei onnistunut '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Käynnistyslohkon purkaminen ei onnistunut: '%s'"
 
-#: ../isobrowser.c:837
-#: ../isobrowser.c:885
+#: ../isobrowser.c:837 ../isobrowser.c:885
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "bkisofs:n käyttöönotto epäonnistui: '%s'"
@@ -217,11 +215,12 @@ msgid "From file: no emulation"
 msgstr "Tiedostosta:  ei emulointia"
 
 #: ../isobrowser.c:549
-msgid "GUI error, deleting anything other then files and directories doesn't work"
-msgstr "GUI virhe, ainoastaan tiedostojen ja hakemistojen poistaminen on mahdollista"
+msgid ""
+"GUI error, deleting anything other then files and directories doesn't work"
+msgstr ""
+"GUI virhe, ainoastaan tiedostojen ja hakemistojen poistaminen on mahdollista"
 
-#: ../window.c:53
-#: ../window.c:343
+#: ../window.c:53 ../window.c:343
 msgid "Go back"
 msgstr "Takaisin"
 
@@ -233,17 +232,15 @@ msgstr "Avaa yläkansio levykuvassa"
 msgid "Go back up one directory on the filesystem"
 msgstr "Avaa yläkansio tiedostojärjestelmässä"
 
-#: ../isobrowser.c:1039
-#: ../isobrowser.c:1328
+#: ../isobrowser.c:1039 ../isobrowser.c:1328
 msgid "ISO Images"
 msgstr "ISO tiedostot"
 
-#: ../about.c:244
+#: ../about.c:260
 msgid "ISO Master Help"
 msgstr "ISO Master ohje"
 
-#: ../isobrowser.c:1180
-#: ../settings.c:60
+#: ../isobrowser.c:1180 ../settings.c:60
 msgid "Image Information"
 msgstr "Levykuvan tiedot"
 
@@ -258,21 +255,24 @@ msgid "Is visible on image as '%s'"
 msgstr "Näkyy levykuvalla nimellä '%s'"
 
 #: ../isobrowser.c:460
-msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
-msgstr "Olet tehnyt muutoksia levykuvaan. Haluatko varmasti sulkea ohjelman tallentamatta muutoksia?"
+msgid ""
+"It seems that you have made changes to the ISO but haven't saved them. Are "
+"you sure you want to close it?"
+msgstr ""
+"Olet tehnyt muutoksia levykuvaan. Haluatko varmasti sulkea ohjelman "
+"tallentamatta muutoksia?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Kohde ei ole tavallinen tiedosto, eikä sitä voida käyttää käynnistyslohkona"
+msgstr ""
+"Kohde ei ole tavallinen tiedosto, eikä sitä voida käyttää käynnistyslohkona"
 
-#: ../boot.c:373
-#: ../boot.c:380
+#: ../boot.c:373 ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Sijainti: alkuperäisellä levykuvalla 0x%llX"
 
-#: ../boot.c:375
-#: ../boot.c:382
+#: ../boot.c:375 ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Sijainti: lisätään täältä: '%s'"
@@ -281,18 +281,15 @@ msgstr "Sijainti: lisätään täältä: '%s'"
 msgid "NRG Images"
 msgstr "NRG tiedostot"
 
-#: ../fsbrowser.c:110
-#: ../isobrowser.c:281
+#: ../fsbrowser.c:110 ../isobrowser.c:281
 msgid "Name"
 msgstr "Nimi"
 
-#: ../window.c:59
-#: ../window.c:349
+#: ../window.c:59 ../window.c:349
 msgid "New Directory"
 msgstr "Uusi hakemisto"
 
-#: ../boot.c:149
-#: ../boot.c:327
+#: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "Ei käynnistyslohkoa"
 
@@ -324,9 +321,7 @@ msgstr "Luetaan levykuvaa, odota hetki..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Tallennetaan levykuvaa levylle, odota hetki..."
 
-#: ../isobrowser.c:125
-#: ../isobrowser.c:578
-#: ../isobrowser.c:936
+#: ../isobrowser.c:125 ../isobrowser.c:578 ../isobrowser.c:936
 #: ../isobrowser.c:1241
 msgid "Progress"
 msgstr "Edistyminen"
@@ -355,8 +350,7 @@ msgstr "Etsi duplikaatit (hidas)"
 msgid "Show _hidden files"
 msgstr "Näytä _piilotiedostot"
 
-#: ../fsbrowser.c:131
-#: ../isobrowser.c:304
+#: ../fsbrowser.c:131 ../isobrowser.c:304
 msgid "Size"
 msgstr "Koko"
 
@@ -366,7 +360,8 @@ msgid "Size: %d bytes"
 msgstr "Koko %d tavua"
 
 #: ../fsbrowser.c:260
-msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
+msgid ""
+"Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr "Ohitetaan kohde, liian pitkä tiedostonimi (yli 256 merkkiä)"
 
 #: ../fsbrowser.c:278
@@ -374,7 +369,7 @@ msgstr "Ohitetaan kohde, liian pitkä tiedostonimi (yli 256 merkkiä)"
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Ohitetaan kohde, koska stat(%s) failed with %d"
 
-#: ../about.c:188
+#: ../about.c:204
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -414,7 +409,8 @@ msgstr ""
 "Voit myös poistaa tiedostoja tai hakemistoja levykuvasta ja luoda uusia\n"
 "hakemistoja sekä levykuvaan että tiedostojärjestelmään.\n"
 "\n"
-"Kun olet tehnyt kaikki haluamasi muutokset levykuvaan, valitse 'Levykuva' ->\n"
+"Kun olet tehnyt kaikki haluamasi muutokset levykuvaan, valitse 'Levykuva' -"
+">\n"
 "'Tallenna nimellä'. Et voi tallentaa alkuperäisen levykuvan päälle.\n"
 
 #: ../window.c:244
@@ -426,8 +422,10 @@ msgid "Volume name:"
 msgstr "Tallenteen nimi:"
 
 #: ../settings.c:458
-msgid "You will have to close and reopen the ISO for this change to take effect"
-msgstr "Sinun täytyy sulkea ja avata levykuva uudelleen, jotta muutos tulisi voimaan"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
+msgstr ""
+"Sinun täytyy sulkea ja avata levykuva uudelleen, jotta muutos tulisi voimaan"
 
 #: ../window.c:212
 msgid "_BootRecord"
@@ -456,4 +454,3 @@ msgstr "_Lajittele hakemistot alkuun"
 #: ../window.c:177
 msgid "_View"
 msgstr "_Näytä"
-
