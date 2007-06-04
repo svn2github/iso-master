@@ -1,0 +1,464 @@
+# Norwegian Bokmal translation of ISO Master
+# This file is distributed under the same license as the ISO Master package.
+#
+# Robert Gronning <slimg@iggu.org>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: nb\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-06-01 13:17-0400\n"
+"PO-Revision-Date: 2007-06-03 20:11-0500\n"
+"Last-Translator: Robert Gronning <slimg@iggu.org>\n"
+"Language-Team:  <oversettelse@ubuntu.no>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../window.c:368
+msgid "      Estimated ISO Size: "
+msgstr "      Beregnet ISO-størrelse: "
+
+#: ../isobrowser.c:1103
+#, c-format
+msgid ""
+"%s\n"
+"\n"
+"Do you wish to continue?"
+msgstr ""
+"%s\n"
+"\n"
+"Vil du fortsette?"
+
+#: ../isobrowser.c:138
+#: ../isobrowser.c:949
+msgid "(scanning for duplicate files)"
+msgstr "(Søker etter duplikatfiler)"
+
+#: ../window.c:354
+msgid "Add"
+msgstr "Legg til"
+
+#: ../isobrowser.c:1336
+msgid "Add extension automatically"
+msgstr "Legg til utviding automatisk"
+
+#: ../window.c:354
+msgid "Add to the ISO"
+msgstr "Legg til i ISO"
+
+#: ../isobrowser.c:1049
+#: ../isobrowser.c:1333
+msgid "All files"
+msgstr "Alle filer"
+
+#: ../boot.c:334
+msgid "Boot Record Information"
+msgstr "Oppstartssektorinformasjon"
+
+#: ../boot.c:122
+msgid "Boot record deleted"
+msgstr "Oppstartssektor er slettet"
+
+#: ../boot.c:350
+#, c-format
+msgid "Boot record type: 1200KiB Floppy"
+msgstr "Oppstartssektortype: 1200KiB Diskett"
+
+#: ../boot.c:352
+#, c-format
+msgid "Boot record type: 1440KiB Floppy"
+msgstr "Oppstartssektortype: 1440KiB Diskett"
+
+#: ../boot.c:354
+#, c-format
+msgid "Boot record type: 2880KiB Floppy"
+msgstr "Oppstartssektortype: 2880KiB Diskett"
+
+#: ../boot.c:348
+#, c-format
+msgid "Boot record type: No Emulation"
+msgstr "Oppstartssektortype: Ingen etterligning"
+
+#: ../boot.c:40
+msgid "Chose Boot Record File"
+msgstr "Velg oppstartssektorfil"
+
+#: ../window.c:350
+msgid "Create new directory on the ISO"
+msgstr "Opprett ny mappe på ISO"
+
+#: ../window.c:60
+msgid "Create new directory on the filesystem"
+msgstr "Opprett ny mappe på filsystemet"
+
+#: ../settings.c:76
+msgid "Creation time:"
+msgstr "Opprettingstidspunkt:"
+
+#: ../window.c:364
+msgid "Delete from the ISO"
+msgstr "Slett fra ISO"
+
+#: ../isobrowser.c:1190
+msgid "Enter a new name:"
+msgstr "Skriv inn nytt navn:"
+
+#: ../browser.c:71
+msgid "Enter name for new directory"
+msgstr "Skriv navn på ny mappe"
+
+#: ../window.c:359
+msgid "Extract"
+msgstr "Pakk ut"
+
+#: ../window.c:359
+msgid "Extract from the ISO"
+msgstr "Pakk ut fra ISO"
+
+#: ../isobrowser.c:206
+#, c-format
+msgid "Failed to add '%s': '%s'"
+msgstr "Kunne ikke legge til «%s»: «%s»"
+
+#: ../boot.c:79
+#, c-format
+msgid "Failed to add boot record: '%s'"
+msgstr "Kunne ikke legge til oppstartssektor: «%s»"
+
+#: ../isobrowser.c:349
+#, c-format
+msgid "Failed to change directory: '%s'"
+msgstr "Kunne ikke skifte mappe: «%s»"
+
+#: ../browser.c:111
+#, c-format
+msgid "Failed to create directory %s"
+msgstr "Kunne ikke opprette mappe %s"
+
+#: ../browser.c:134
+#, c-format
+msgid "Failed to create directory %s: '%s'"
+msgstr "Kunne ikke opprette mappe %s: «%s»"
+
+#: ../isobrowser.c:531
+#, c-format
+msgid "Failed to delete '%s': '%s'"
+msgstr "Kunne ikke slette «%s»: «%s»"
+
+#: ../isobrowser.c:639
+#, c-format
+msgid "Failed to extract '%s': '%s'"
+msgstr "Kunne ikke pakke ut «%s»: «%s»"
+
+#: ../boot.c:202
+#, c-format
+msgid "Failed to extract boot record: '%s'"
+msgstr "Kunne ikke pakke ut oppstartssektor: «%s»"
+
+#: ../isobrowser.c:837
+#: ../isobrowser.c:885
+#, c-format
+msgid "Failed to initialise bkisofs: '%s'"
+msgstr "Kunne ikke starte bkisofs: «%s»"
+
+#: ../fsbrowser.c:215
+#, c-format
+msgid "Failed to open directory '%s', error %d"
+msgstr "Kunne ikke åpne mappen «%s», feil %d"
+
+#: ../isobrowser.c:904
+#, c-format
+msgid "Failed to open iso file for reading: '%s'"
+msgstr "Kunne ikke lese ISO-filen: «%s»"
+
+#: ../isobrowser.c:979
+#, c-format
+msgid "Failed to read directory tree: '%s'"
+msgstr "Kunne ikke lese mappestrukturen: «%s»"
+
+#: ../isobrowser.c:919
+#, c-format
+msgid "Failed to read volume info: '%s'"
+msgstr "Kunne ikke lese voluminformasjon: «%s»"
+
+#: ../isobrowser.c:1213
+#, c-format
+msgid "Failed to rename '%s': %s"
+msgstr "Kunne ikke endre navn på «%s»: %s"
+
+#: ../boot.c:296
+#, c-format
+msgid "Failed to set %s as boot record: '%s'"
+msgstr "Kunne ikke sette %s som oppstartssektor: «%s»"
+
+#: ../isobrowser.c:1279
+#, c-format
+msgid "Failed to write image to '%s': '%s'"
+msgstr "Kunne ikke skrive avtrykket til «%s»: «%s»"
+
+#: ../settings.c:120
+msgid "Filename types (both recommended):"
+msgstr "Filnavntyper (begge anbefales):"
+
+#: ../window.c:293
+msgid "Follow symbolic links"
+msgstr "Følg symbolske lenker"
+
+#: ../window.c:256
+msgid "From file: 1200KiB floppy"
+msgstr "Fra fil: 1200KiB diskett"
+
+#: ../window.c:262
+msgid "From file: 1440KiB floppy"
+msgstr "Fra fil: 1440KiB diskett"
+
+#: ../window.c:268
+msgid "From file: 2880KiB floppy"
+msgstr "Fra fil: 2880KiB diskett"
+
+#: ../window.c:250
+msgid "From file: no emulation"
+msgstr "Fra fil: ingen etterligning"
+
+#: ../isobrowser.c:549
+msgid "GUI error, deleting anything other then files and directories doesn't work"
+msgstr "GUI feil, det fungerer ikke å slette noe annet enn filer og mapper"
+
+#: ../window.c:53
+#: ../window.c:343
+msgid "Go back"
+msgstr "Gå tilbake"
+
+#: ../window.c:344
+msgid "Go back up one directory on the ISO"
+msgstr "Gå tilbake opp en mappe på ISO"
+
+#: ../window.c:54
+msgid "Go back up one directory on the filesystem"
+msgstr "Gå tilbake opp en mappe på filsystemet"
+
+#: ../isobrowser.c:1039
+#: ../isobrowser.c:1328
+msgid "ISO Images"
+msgstr "ISO-avtrykk"
+
+#: ../about.c:244
+msgid "ISO Master Help"
+msgstr "Hjelp"
+
+#: ../isobrowser.c:1180
+#: ../settings.c:60
+msgid "Image Information"
+msgstr "Avtrykkinformasjon"
+
+#: ../boot.c:391
+#, c-format
+msgid "Is not visible on image"
+msgstr "Er ikke synlig på avtrykket"
+
+#: ../boot.c:389
+#, c-format
+msgid "Is visible on image as '%s'"
+msgstr "Er synlig på avtrykket som «%s»"
+
+#: ../isobrowser.c:460
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgstr "Du har gjort endringer på ISO-filen uten å lagre.Er du sikker på du vil lukke den?"
+
+#: ../boot.c:271
+msgid "Item selected is not a regular file and cannot be used as a boot record"
+msgstr "Valgt enhet er ikke en ordinær fil eller kan ikke brukes som oppstartssektor"
+
+#: ../boot.c:373
+#: ../boot.c:380
+#, c-format
+msgid "Location: on original image at 0x%llX"
+msgstr "Sted: på det originale avtrykket ved 0x%llX"
+
+#: ../boot.c:375
+#: ../boot.c:382
+#, c-format
+msgid "Location: to be added from '%s'"
+msgstr "Sted: vil bli lagt til fra «%s»"
+
+#: ../isobrowser.c:1044
+msgid "NRG Images"
+msgstr "NRG-avtrykk"
+
+#: ../fsbrowser.c:110
+#: ../isobrowser.c:281
+msgid "Name"
+msgstr "Navn"
+
+#: ../window.c:59
+#: ../window.c:349
+msgid "New Directory"
+msgstr "Ny mappe"
+
+#: ../boot.c:149
+#: ../boot.c:327
+msgid "No boot record read from original or set on image"
+msgstr "Ingen oppstartssektor ble lest fra originalen eller lagret på avtrykket"
+
+#: ../boot.c:108
+msgid "No boot to delete"
+msgstr "Ingen oppstartssektor å slette"
+
+#: ../boot.c:229
+msgid "Please select a file in the ISO browser to use as the boot record"
+msgstr "Velg en fil i ISO-utforskeren til å bruke som oppstartssektor"
+
+#: ../boot.c:243
+msgid "Please select no more then one file in the ISO browser"
+msgstr "Ikke velg mer enn en fil i ISO-utforskeren"
+
+#: ../isobrowser.c:132
+msgid "Please wait while I'm adding the selected items..."
+msgstr "Vennligst vent mens valgte enheter blir lagt til..."
+
+#: ../isobrowser.c:586
+msgid "Please wait while I'm extracting the selected files..."
+msgstr "Vennligst vent mens valgte filer blir pakket ut..."
+
+#: ../isobrowser.c:943
+msgid "Please wait while I'm reading the image..."
+msgstr "Vennligst vent mens avtrykket blir lest..."
+
+#: ../isobrowser.c:1251
+msgid "Please wait while I'm saving the new image to disk..."
+msgstr "Vennligst vent mens det nye avtrykket blir lagret til disk..."
+
+#: ../isobrowser.c:125
+#: ../isobrowser.c:578
+#: ../isobrowser.c:936
+#: ../isobrowser.c:1241
+msgid "Progress"
+msgstr "Forløp"
+
+#: ../settings.c:104
+msgid "Publisher:"
+msgstr "Utgiver:"
+
+#: ../window.c:364
+msgid "Remove"
+msgstr "Fjern"
+
+#: ../isobrowser.c:1317
+msgid "Save File"
+msgstr "Lagre fil"
+
+#: ../boot.c:156
+msgid "Save a copy of the boot record"
+msgstr "Lagre en kopi av oppstartssektor"
+
+#: ../window.c:283
+msgid "Scan for duplicate files (slow)"
+msgstr "Søk etter duplikatfiler (treg)"
+
+#: ../window.c:190
+msgid "Show _hidden files"
+msgstr "Vis _skjulte filer"
+
+#: ../fsbrowser.c:131
+#: ../isobrowser.c:304
+msgid "Size"
+msgstr "Størrelse"
+
+#: ../boot.c:363
+#, c-format
+msgid "Size: %d bytes"
+msgstr "Størrelse: %d byte"
+
+#: ../fsbrowser.c:260
+msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
+msgstr "Hopper over mappe fordi filnavn lengre enn 256 tegn ikke kan håndteres"
+
+#: ../fsbrowser.c:278
+#, c-format
+msgid "Skiping directory entry because stat(%s) failed with %d"
+msgstr "Hopper over mappe fordi stat(%s) feilet med %d"
+
+#: ../about.c:188
+msgid ""
+"The ISO Master window is split in 2 parts:\n"
+" - The top file browser shows files and directories on your machine.\n"
+" - The bottom file browser shows files and directories on the ISO image.\n"
+"\n"
+"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
+"ISO file click on 'Image' and 'New'.\n"
+"\n"
+"To add one or more files or directories to the ISO select them in the top\n"
+"file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
+"\n"
+"To extract one or more files or directories from the ISO select them in\n"
+"the bottom file browser and click the 'Extract from ISO' button in the\n"
+"middle toolbar.\n"
+"\n"
+"You can also delete files or directories from the ISO and create new\n"
+"directories both on the ISO and your local filesystem.\n"
+"\n"
+"Once you made all the changes to the new ISO image, click on 'Image' and\n"
+"'Save As'. You cannot overwrite the original ISO.\n"
+msgstr ""
+"ISO Master vinduet er delt i to deler:\n"
+" - Den øverste fil utforskeren viser filer og mapper på din datamaskin.\n"
+" - Den underste fil utforskeren viser filer og mapper på ISO-avtrykket.\n"
+"\n"
+"Trykk på «Åpne» for å åpne en eksisterende ISO-fil, for å opprette en\n"
+"ny ISO-fil klikk på «Avtrykk» og «Ny».\n"
+"\n"
+"Velg filer eller mapper i det øverste fil utforskeren og trykk på «Legg til\n"
+"i ISO' knappen i den midtre verktøylinjen for å legge dem til i\n"
+"ISO-avtrykket.\n"
+"\n"
+"Velg filer eller mapper i den nederste fil utforskeren og trykk på\n"
+"«Pakk ut fra ISO» knappen i den midtre verktøylinjen for å pakke ut\n"
+"filer fra ISO.\n"
+"\n"
+"Du kan også slette filer og mapper fra ISO-filen og opprette nye\n"
+"mapper både på ISO-filen og det lokale filsystemet.\n"
+"\n"
+"Når du har utført alle endringene til det nye ISO-avtrykket, trykk på\n"
+"«Avtrykk» og «Lagre som», Du kan ikke overskrive det originale\n"
+"ISO-filen.\n"
+
+#: ../window.c:244
+msgid "Use selected file on image (no emulation)"
+msgstr "Bruk valgt fil på avtrykket (ingen etterligning)"
+
+#: ../settings.c:92
+msgid "Volume name:"
+msgstr "Volum navn:"
+
+#: ../settings.c:458
+msgid "You will have to close and reopen the ISO for this change to take effect"
+msgstr "Du må lukke og åpne ISO-filen igjen for at endringene skal bli synlige"
+
+#: ../window.c:212
+msgid "_BootRecord"
+msgstr "O_ppstartssektor"
+
+#: ../window.c:305
+msgid "_Help"
+msgstr "_Hjelp"
+
+#: ../window.c:119
+msgid "_Image"
+msgstr "_Avtrykk"
+
+#: ../window.c:314
+msgid "_Overview"
+msgstr "_Oversikt"
+
+#: ../window.c:276
+msgid "_Settings"
+msgstr "_Innstillinger"
+
+#: ../window.c:200
+msgid "_Sort directories first"
+msgstr "Sorter _mapper først"
+
+#: ../window.c:177
+msgid "_View"
+msgstr "_Vis"
+
