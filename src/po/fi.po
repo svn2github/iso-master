@@ -1,3 +1,6 @@
+# Finnish translation of ISO Master
+# This file is distributed under the same license as the ISO Master package.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 1.0\n"
