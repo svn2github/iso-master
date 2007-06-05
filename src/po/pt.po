@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-04 19:41-0400\n"
-"PO-Revision-Date: 2007-03-28 17:46-0500\n"
-"Last-Translator: Joao de Ferro <joaodeferro@aeiou.pt>\n"
+"POT-Creation-Date: 2007-06-05 18:01-0400\n"
+"PO-Revision-Date: 2007-06-05 21:38+0100\n"
+"Last-Translator: João de Ferro <joaodeferro@gmail.com>\n"
 "Language-Team: pt <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -40,7 +40,7 @@ msgstr "Adicionar"
 
 #: ../isobrowser.c:1336
 msgid "Add extension automatically"
-msgstr ""
+msgstr "Adicionar extensão automaticamente"
 
 #: ../window.c:354
 msgid "Add to the ISO"
@@ -80,7 +80,7 @@ msgstr "Disco de Arranque: Sem Emulação"
 
 #: ../boot.c:40
 msgid "Chose Boot Record File"
-msgstr ""
+msgstr "Escolher Ficheiro de Disco de Arranque"
 
 #: ../window.c:350
 msgid "Create new directory on the ISO"
@@ -100,7 +100,7 @@ msgstr "Apagar da ISO"
 
 #: ../isobrowser.c:1190
 msgid "Enter a new name:"
-msgstr ""
+msgstr "Escrever um novo nome:"
 
 #: ../browser.c:71
 msgid "Enter name for new directory"
@@ -182,7 +182,7 @@ msgstr "Falhou leitura de informação de volume: '%s'"
 #: ../isobrowser.c:1213
 #, c-format
 msgid "Failed to rename '%s': %s"
-msgstr ""
+msgstr "Falhou renomear '%s': %s"
 
 #: ../boot.c:296
 #, c-format
