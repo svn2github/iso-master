@@ -1,22 +1,21 @@
 # Romanian translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
-# 
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-05 18:01-0400\n"
-"PO-Revision-Date: 2007-03-06 22:16+0200\n"
+"POT-Creation-Date: 2007-06-07 14:21-0400\n"
+"PO-Revision-Date: 2007-06-07 14:18-0500\n"
 "Last-Translator: Bogdan Radulescu <bogdan@nimblex.net>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../window.c:368
 msgid "      Estimated ISO Size: "
-msgstr "      Dimensiunea ISO Estimatã: "
+msgstr "      Dimensiunea ISO EstimatÄƒ: "
 
 #: ../isobrowser.c:1103
 #, c-format
@@ -27,35 +26,35 @@ msgid ""
 msgstr ""
 "%s\n"
 "\n"
-"Doreºti sã continui?"
+"DoreÅŸti sÄƒ continui?"
 
 #: ../isobrowser.c:138 ../isobrowser.c:949
 msgid "(scanning for duplicate files)"
-msgstr "(scanez fiºiere duplicate)"
+msgstr "(scanez fiÅŸiere duplicate)"
 
 #: ../window.c:354
 msgid "Add"
-msgstr "Adaugã"
+msgstr "AdaugÄƒ"
 
 #: ../isobrowser.c:1336
 msgid "Add extension automatically"
-msgstr ""
+msgstr "AdaugÄƒ extensie automat"
 
 #: ../window.c:354
 msgid "Add to the ISO"
-msgstr "Adaugã la ISO"
+msgstr "AdaugÄƒ la ISO"
 
 #: ../isobrowser.c:1049 ../isobrowser.c:1333
 msgid "All files"
-msgstr "Toate fiºierele"
+msgstr "Toate fiÅŸierele"
 
 #: ../boot.c:334
 msgid "Boot Record Information"
-msgstr "Informaþii Boot Record"
+msgstr "InformaÅ£ii Boot Record"
 
 #: ../boot.c:122
 msgid "Boot record deleted"
-msgstr "Boot record ºters"
+msgstr "Boot record ÅŸters"
 
 #: ../boot.c:350
 #, c-format
@@ -75,31 +74,31 @@ msgstr "Tip boot record: 2880KiB Floppy"
 #: ../boot.c:348
 #, c-format
 msgid "Boot record type: No Emulation"
-msgstr "Tip boot record: Fãrã emulare"
+msgstr "Tip boot record: FÄƒrÄƒ emulare"
 
 #: ../boot.c:40
 msgid "Chose Boot Record File"
-msgstr "Alege fiºierul boot record"
+msgstr "Alege fiÅŸierul boot record"
 
 #: ../window.c:350
 msgid "Create new directory on the ISO"
-msgstr "Creazã un nou director pe ISO"
+msgstr "CreazÄƒ un nou director pe ISO"
 
 #: ../window.c:60
 msgid "Create new directory on the filesystem"
-msgstr "Creazã un nou director în sistemul de fiºiere"
+msgstr "CreazÄƒ un nou director Ã®n sistemul de fiÅŸiere"
 
 #: ../settings.c:76
 msgid "Creation time:"
-msgstr "Momentul creãrii:"
+msgstr "Momentul creÄƒrii:"
 
 #: ../window.c:364
 msgid "Delete from the ISO"
-msgstr "ªterge din ISO"
+msgstr "Åžterge din ISO"
 
 #: ../isobrowser.c:1190
 msgid "Enter a new name:"
-msgstr ""
+msgstr "Introduce un nou nume:"
 
 #: ../browser.c:71
 msgid "Enter name for new directory"
@@ -116,125 +115,125 @@ msgstr "Extrage din ISO"
 #: ../isobrowser.c:206
 #, c-format
 msgid "Failed to add '%s': '%s'"
-msgstr "Nu pot sã adaug '%s': '%s'"
+msgstr "Nu pot sÄƒ adaug '%s': '%s'"
 
 #: ../boot.c:79
 #, c-format
 msgid "Failed to add boot record: '%s'"
-msgstr "Nu pot sã adaug boot record: '%s'"
+msgstr "Nu pot sÄƒ adaug boot record: '%s'"
 
 #: ../isobrowser.c:349
 #, c-format
 msgid "Failed to change directory: '%s'"
-msgstr "Nu pot sã schimb director: '%s'"
+msgstr "Nu pot sÄƒ schimb director: '%s'"
 
 #: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
-msgstr "Nu pot sã creez director %s"
+msgstr "Nu pot sÄƒ creez director %s"
 
 #: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
-msgstr "Nu pot sã creez director %s: '%s'"
+msgstr "Nu pot sÄƒ creez director %s: '%s'"
 
 #: ../isobrowser.c:531
 #, c-format
 msgid "Failed to delete '%s': '%s'"
-msgstr "Nu pot sã ºterg '%s': '%s'"
+msgstr "Nu pot sÄƒ ÅŸterg '%s': '%s'"
 
 #: ../isobrowser.c:639
 #, c-format
 msgid "Failed to extract '%s': '%s'"
-msgstr "Nu pot sã extrag '%s': '%s'"
+msgstr "Nu pot sÄƒ extrag '%s': '%s'"
 
 #: ../boot.c:202
 #, c-format
 msgid "Failed to extract boot record: '%s'"
-msgstr "Nu pot sã extrag boot record: ''%s"
+msgstr "Nu pot sÄƒ extrag boot record: ''%s"
 
 #: ../isobrowser.c:837 ../isobrowser.c:885
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
-msgstr "Nu pot sã initiez bkisofs: '%s'"
+msgstr "Nu pot sÄƒ initiez bkisofs: '%s'"
 
 #: ../fsbrowser.c:215
 #, c-format
 msgid "Failed to open directory '%s', error %d"
-msgstr "Nu pot sã deschid directorul '%s', eroare %d"
+msgstr "Nu pot sÄƒ deschid directorul '%s', eroare %d"
 
 #: ../isobrowser.c:904
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
-msgstr "Nu pot sã deschid fiºierul iso pentru a citii: '%s'"
+msgstr "Nu pot sÄƒ deschid fiÅŸierul iso pentru a citii: '%s'"
 
 #: ../isobrowser.c:979
 #, c-format
 msgid "Failed to read directory tree: '%s'"
-msgstr "Nu pot sã accesez directoarele: '%s'"
+msgstr "Nu pot sÄƒ accesez directoarele: '%s'"
 
 #: ../isobrowser.c:919
 #, c-format
 msgid "Failed to read volume info: '%s'"
-msgstr "Nu pot sã citesc informaþia volumului: '%s'"
+msgstr "Nu pot sÄƒ citesc informaÅ£ia volumului: '%s'"
 
 #: ../isobrowser.c:1213
 #, c-format
 msgid "Failed to rename '%s': %s"
-msgstr ""
+msgstr "Redenumire esuatÄƒ '%s': %s"
 
 #: ../boot.c:296
 #, c-format
 msgid "Failed to set %s as boot record: '%s'"
-msgstr "Nu pot sã setez %s ca boot record: '%s'"
+msgstr "Nu pot sÄƒ setez %s ca boot record: '%s'"
 
 #: ../isobrowser.c:1279
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
-msgstr "Nu pot sã scriu imaginea pe '%s': '%s'"
+msgstr "Nu pot sÄƒ scriu imaginea pe '%s': '%s'"
 
 #: ../settings.c:120
 msgid "Filename types (both recommended):"
-msgstr "Tipurile fiºierelor (recomandat ambele)"
+msgstr "Tipurile fiÅŸierelor (recomandat ambele)"
 
 #: ../window.c:293
 msgid "Follow symbolic links"
-msgstr "Urmareºte legãturile simbolice"
+msgstr "UrmareÅŸte legÄƒturile simbolice"
 
 #: ../window.c:256
 msgid "From file: 1200KiB floppy"
-msgstr "Din fiºier: 1200KiB floppy"
+msgstr "Din fiÅŸier: 1200KiB floppy"
 
 #: ../window.c:262
 msgid "From file: 1440KiB floppy"
-msgstr "Din fiºier: 1440KiB floppy"
+msgstr "Din fiÅŸier: 1440KiB floppy"
 
 #: ../window.c:268
 msgid "From file: 2880KiB floppy"
-msgstr "Din fiºier: 2880KiB floppy"
+msgstr "Din fiÅŸier: 2880KiB floppy"
 
 #: ../window.c:250
 msgid "From file: no emulation"
-msgstr "Din fiºier: fãrã emulare"
+msgstr "Din fiÅŸier: fÄƒrÄƒ emulare"
 
 #: ../isobrowser.c:549
 msgid ""
 "GUI error, deleting anything other then files and directories doesn't work"
 msgstr ""
-"Eroare de interfaþã; ºterg orice altceva în afarã de fiºierele ºi "
-"directoarele care nu funcþioneazã"
+"Eroare de interfaÅ£Äƒ; ÅŸterg orice altceva Ã®n afarÄƒ de fiÅŸierele ÅŸi "
+"directoarele care nu funcÅ£ioneazÄƒ"
 
 #: ../window.c:53 ../window.c:343
 msgid "Go back"
-msgstr "Înapoi"
+msgstr "ÃŽnapoi"
 
 #: ../window.c:344
 msgid "Go back up one directory on the ISO"
-msgstr "Du-te un director în sus pe ISO"
+msgstr "Du-te un director Ã®n sus pe ISO"
 
 #: ../window.c:54
 msgid "Go back up one directory on the filesystem"
-msgstr "Du-te un director în sus pe sistemul de fiºiere"
+msgstr "Du-te un director Ã®n sus pe sistemul de fiÅŸiere"
 
 #: ../isobrowser.c:1039 ../isobrowser.c:1328
 msgid "ISO Images"
@@ -246,41 +245,41 @@ msgstr "ISO Master Ajutor"
 
 #: ../isobrowser.c:1180 ../settings.c:60
 msgid "Image Information"
-msgstr "Informaþii imagine"
+msgstr "InformaÅ£ii imagine"
 
 #: ../boot.c:391
 #, c-format
 msgid "Is not visible on image"
-msgstr "Nu este vizibil în imagine"
+msgstr "Nu este vizibil Ã®n imagine"
 
 #: ../boot.c:389
 #, c-format
 msgid "Is visible on image as '%s'"
-msgstr "Este vizibil în imagine ca '%s'"
+msgstr "Este vizibil Ã®n imagine ca '%s'"
 
 #: ../isobrowser.c:460
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
 msgstr ""
-"Se pare ca ai fãcut modificãri la ISO dar nu le-ai salvat. Eºti sigur cã "
-"vrei sã îl închizi?"
+"Se pare ca ai fÄƒcut modificÄƒri la ISO dar nu le-ai salvat. EÅŸti sigur cÄƒ "
+"vrei sÄƒ Ã®l Ã®nchizi?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr ""
-"Ce aþi selectat nu este un fiºier obiºnuit ºi nu poate fi folosit ca boot "
+"Ce aÅ£i selectat nu este un fiÅŸier obiÅŸnuit ÅŸi nu poate fi folosit ca boot "
 "record"
 
 #: ../boot.c:373 ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
-msgstr "Locaþie: pe imaginea originalã la 0x%llX"
+msgstr "LocaÅ£ie: pe imaginea originalÄƒ la 0x%llX"
 
 #: ../boot.c:375 ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
-msgstr "Locaþie:pentru a fi adãugatã din '%s'"
+msgstr "LocaÅ£ie:pentru a fi adÄƒugatÄƒ din '%s'"
 
 #: ../isobrowser.c:1044
 msgid "NRG Images"
@@ -296,35 +295,35 @@ msgstr "Director Nou"
 
 #: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr "Nu am gãsit nici un boot record pe original sau nu este prezent"
+msgstr "Nu am gÄƒsit nici un boot record pe original sau nu este prezent"
 
 #: ../boot.c:108
 msgid "No boot to delete"
-msgstr "Nici un boot de ºters"
+msgstr "Nici un boot de ÅŸters"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr "Te rog selecteazã un fiºier pentru a-l folosii ca boot record"
+msgstr "Te rog selecteazÄƒ un fiÅŸier pentru a-l folosii ca boot record"
 
 #: ../boot.c:243
 msgid "Please select no more then one file in the ISO browser"
-msgstr "Te rog sã nu selectezi mai mult de un fiºier"
+msgstr "Te rog sÄƒ nu selectezi mai mult de un fiÅŸier"
 
 #: ../isobrowser.c:132
 msgid "Please wait while I'm adding the selected items..."
-msgstr "Te rog sã aºtepþi cât adaug fiºierele selectate..."
+msgstr "Te rog sÄƒ aÅŸtepÅ£i cÃ¢t adaug fiÅŸierele selectate..."
 
 #: ../isobrowser.c:586
 msgid "Please wait while I'm extracting the selected files..."
-msgstr "Te rog sã aºtepþi cât extrag fiºierele selectate..."
+msgstr "Te rog sÄƒ aÅŸtepÅ£i cÃ¢t extrag fiÅŸierele selectate..."
 
 #: ../isobrowser.c:943
 msgid "Please wait while I'm reading the image..."
-msgstr "Te rog sã aºtepþi cât citesc imaginea..."
+msgstr "Te rog sÄƒ aÅŸtepÅ£i cÃ¢t citesc imaginea..."
 
 #: ../isobrowser.c:1251
 msgid "Please wait while I'm saving the new image to disk..."
-msgstr "Te rog sã aºtepþi cât salvez noua imagine pe disc..."
+msgstr "Te rog sÄƒ aÅŸtepÅ£i cÃ¢t salvez noua imagine pe disc..."
 
 #: ../isobrowser.c:125 ../isobrowser.c:578 ../isobrowser.c:936
 #: ../isobrowser.c:1241
@@ -337,19 +336,19 @@ msgstr "Editor:"
 
 #: ../window.c:364
 msgid "Remove"
-msgstr "ªterge"
+msgstr "Åžterge"
 
 #: ../isobrowser.c:1317
 msgid "Save File"
-msgstr "SalveazÄƒ fisier"
+msgstr "SalveazÃ„Âƒ fisier"
 
 #: ../boot.c:156
 msgid "Save a copy of the boot record"
-msgstr "Salveazã o copie la boot record"
+msgstr "SalveazÄƒ o copie la boot record"
 
 #: ../window.c:283
 msgid "Scan for duplicate files (slow)"
-msgstr "Scanez fiºiere duplicate (lent)"
+msgstr "Scanez fiÅŸiere duplicate (lent)"
 
 #: ../window.c:190
 msgid "Show _hidden files"
@@ -357,24 +356,24 @@ msgstr "Arata fisierele _ascunse"
 
 #: ../fsbrowser.c:131 ../isobrowser.c:304
 msgid "Size"
-msgstr "Mãrime"
+msgstr "MÄƒrime"
 
 #: ../boot.c:363
 #, c-format
 msgid "Size: %d bytes"
-msgstr "Mãrime: %d bytes"
+msgstr "MÄƒrime: %d bytes"
 
 #: ../fsbrowser.c:260
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
-"Exclud aceastã intrare pentru cã nu pot lucra cu fiºiere mai lungi de 256 de "
+"Exclud aceastÄƒ intrare pentru cÄƒ nu pot lucra cu fiÅŸiere mai lungi de 256 de "
 "caractere"
 
 #: ../fsbrowser.c:278
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
-msgstr "Exclud aceastã intrare pentru cã stat(%s) a eºuat cu %d"
+msgstr "Exclud aceastÄƒ intrare pentru cÄƒ stat(%s) a eÅŸuat cu %d"
 
 #: ../about.c:204
 msgid ""
@@ -398,31 +397,31 @@ msgid ""
 "Once you made all the changes to the new ISO image, click on 'Image' and\n"
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
-"Fereastra ISO Master este împãrtitã în douã:\n"
-" - Partea de sus aratã fiºierele ºi directoarele de pe calculatorul tãu.\n"
-" - Partea de jos aratã fiºierele ºi directoarele de pe imaginea ISO.\n"
+"Fereastra ISO Master este Ã®mpÄƒrtitÄƒ Ã®n douÄƒ:\n"
+" - Partea de sus aratÄƒ fiÅŸierele ÅŸi directoarele de pe calculatorul tÄƒu.\n"
+" - Partea de jos aratÄƒ fiÅŸierele ÅŸi directoarele de pe imaginea ISO.\n"
 "\n"
-"Pentru a deschide un fiºier ISO existent daþi click pe 'Imagine' ºi "
+"Pentru a deschide un fiÅŸier ISO existent daÅ£i click pe 'Imagine' ÅŸi "
 "'Deschide'.\n"
-"Pentru a crea un nou fiºier ISO daþi click pe 'Imagine' ºi pe 'Nou'\n"
+"Pentru a crea un nou fiÅŸier ISO daÅ£i click pe 'Imagine' ÅŸi pe 'Nou'\n"
 "\n"
-"Pentru a adãuga unul sau mai multe fiºiere ºi directoare pe ISO selectaþi-"
+"Pentru a adÄƒuga unul sau mai multe fiÅŸiere ÅŸi directoare pe ISO selectaÅ£i-"
 "le\n"
-"în partea de sus ºi daþi click pe butonul 'Adaugã la ISO' din barã\n"
+"Ã®n partea de sus ÅŸi daÅ£i click pe butonul 'AdaugÄƒ la ISO' din barÄƒ\n"
 "\n"
-"Pentru a extrage unul sau mai multe fiºiere ºi directoare din ISO selectaþi-"
+"Pentru a extrage unul sau mai multe fiÅŸiere ÅŸi directoare din ISO selectaÅ£i-"
 "le\n"
-"în partea de jos ºi daþi click pe butonul 'Extrage din ISO' din barã\n"
+"Ã®n partea de jos ÅŸi daÅ£i click pe butonul 'Extrage din ISO' din barÄƒ\n"
 "\n"
-"De asemenea puteþi ºterge fiºiere ºi directoare din ISO ºi crea noi \n"
-"fiºiere ºi directoare atat pe ISO cat ºi pe calculatorul dumneavoastrã.\n"
+"De asemenea puteÅ£i ÅŸterge fiÅŸiere ÅŸi directoare din ISO ÅŸi crea noi \n"
+"fiÅŸiere ÅŸi directoare atat pe ISO cat ÅŸi pe calculatorul dumneavoastrÄƒ.\n"
 "\n"
-"Odatã ce aþi fãcut toate modificãrile pe noua imagine ISO daþi click\n"
-"pe 'Imagine' si pe 'Salveaza ca'.Nu puteþi rescrie imaginea originalã.\n"
+"OdatÄƒ ce aÅ£i fÄƒcut toate modificÄƒrile pe noua imagine ISO daÅ£i click\n"
+"pe 'Imagine' si pe 'Salveaza ca'.Nu puteÅ£i rescrie imaginea originalÄƒ.\n"
 
 #: ../window.c:244
 msgid "Use selected file on image (no emulation)"
-msgstr "Foloseºte fiºierul selectat pe imagine (fãrã emulare)"
+msgstr "FoloseÅŸte fiÅŸierul selectat pe imagine (fÄƒrÄƒ emulare)"
 
 #: ../settings.c:92
 msgid "Volume name:"
@@ -432,8 +431,8 @@ msgstr "Numele volumului:"
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
-"Va trebui sã închizi ºi sã redeschizi ISO pentru ca aceste modificãri sã "
-"aibã efect"
+"Va trebui sÄƒ Ã®nchizi ÅŸi sÄƒ redeschizi ISO pentru ca aceste modificÄƒri sÄƒ "
+"aibÄƒ efect"
 
 #: ../window.c:212
 msgid "_BootRecord"
@@ -453,12 +452,12 @@ msgstr "_Ansamblu"
 
 #: ../window.c:276
 msgid "_Settings"
-msgstr "_Setãri"
+msgstr "_SetÄƒri"
 
 #: ../window.c:200
 msgid "_Sort directories first"
-msgstr "_Sorteazã directoarele primele"
+msgstr "_SorteazÄƒ directoarele primele"
 
 #: ../window.c:177
 msgid "_View"
-msgstr "_Vizualizeazã"
+msgstr "_VizualizeazÄƒ"
