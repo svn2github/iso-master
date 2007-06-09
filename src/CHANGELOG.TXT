@@ -2,13 +2,13 @@
 =================
 - Fixed bug where extract button generated gtk error when no rows selected.
 - Creating or adding "." and ".." no longer allowed.
-- Added Ukrainian translation.
+- Added Ukrainian, Serbian, Croation, Catalan, Swedish, Norwegian (Bokmal and Nynorsk), Finnish, Czech, and Greek translations.
 - Added checkbox to append an extension to a saved filename automatically.
 - Now less memory/CPU is used when saving an image.
 - Can now compile on distros with older GTK versions.
 - Can now rename files and directories on the iso.
 - Small usability improvements.
-- Fixed bug where a saved image with symbolic links would end up with corrupted files.
+- Fixed bug where a saved image with symbolic links would end up having some corrupted files.
 
 17 Mar 2007 - 0.8
 =================

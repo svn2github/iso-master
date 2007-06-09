@@ -102,11 +102,20 @@ Translations:
 Dessislav Petrov
 - bg (Bulgarian) translation of ISO Master versions 0.6 - 1.0
 
+Rafael Carreras
+- ca (Catalan) translation of ISO Master version 1.0
+
 Toni Graffy
 - de (German) translation of ISO Master versions 0.6 - 1.0
 
+Mike Kranidis
+- el (Greek) translation of ISO Master version 1.0
+
 Juan Garcia-Murga Monago
 - es (Spanish) translation of ISO Master version 0.7 - 1.0
+
+Eero Salokannel
+- fi (Finnish) translation of ISO Master version 1.0
 
 Leif Thande
 - fr (French) translation of ISO Master version 0.6
@@ -123,17 +132,26 @@ F. Lombardi
 Valerio Guaglianone
 - it (Italian) translation of ISO Master version 0.7
 
+Ante Karamatic
+ - hr (Croatian) translation of ISO Master version 1.0
+
+Robert Groenning
+- nb (Norwegian Bokmal) translation of ISO Master version 1.0
+
 Stephen Brandt
 - nl (Dutch) translation of ISO Master version 0.7 - 1.0
+
+Robert Groenning
+- nn (Norwegian Nynorsk) translation of ISO Master version 1.0
 
 Marciej Libuda
 - pl (Polish) translation of ISO Master versions 0.6 - 1.0
 
 Joao de Ferro
-- pt (Portuguese) translation of ISO Master version 0.8
+- pt (Portuguese) translation of ISO Master version 0.8, 1.0
 
 Bogdan Radulescu
-- ro (Romanian) translation of ISO Master version 0.7 - 0.8
+- ro (Romanian) translation of ISO Master version 0.7 - 0.8, 1.0
 
 Anton Obidin
 - ru (Russian) translation of ISO Master versions 0.6 - 1.0
@@ -142,7 +160,13 @@ Jozef Riha
 - sk (Slovak) translation of ISO Master version 1.0
 
 Besnik Bleta
-- sq (Albanian) translation of ISO Master version 1.0
+- sq (Albanian) translation of ISO Master versions 0.8 - 1.0
+
+Danijel Muharemovic
+- sr (Serbian) translation of ISO Master version 1.0
+
+Daniel Nylander
+- sv (Swedish) translation of ISO Master version 1.0
 
 Sun Minchao
 - zh_CN (Simplified Chineese) translation of ISO Master version 0.7 - 1.0
