@@ -1,6 +1,6 @@
 # LOCALEDIR, RM, INSTALL defined in parent makefile
 
-MOFILES = bg.mo ca.mo cs.mo de.mo el.mo es.mo fi.mo fr.mo hr.mo it.mo nb.mo nl.mo nn.mo pl.mo pt.mo ro.mo ru.mo sk.mo sr@latin.mo sr@Latn.mo sq.mo sv.mo uk.mo zh_CN.mo zh_TW.mo
+MOFILES = bg.mo ca.mo cs.mo de.mo el.mo es.mo fi.mo fr.mo hr.mo it.mo nb.mo nl.mo nn.mo pl.mo pt.mo ro.mo ru.mo sk.mo sq.mo sr.mo sr@latin.mo sr@Latn.mo sv.mo uk.mo zh_CN.mo zh_TW.mo
 
 all: $(MOFILES) Makefile
 	

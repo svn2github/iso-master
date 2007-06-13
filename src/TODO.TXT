@@ -15,6 +15,13 @@ bk:
 -dos doesn't like names to start with underscores
 -add path tables, boot record to size estimate
 -change created/modified dates
+-check characters are valid in bk_set*()
+-make sure is_warning is publicly accessible
+-need a bk_set_warning_foo()
+-if appropriate, add a BK_PERMISSIONS()
+
+manual:
+-how to get permissions without file type?
 
 
 c99 compatibility issues:

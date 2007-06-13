@@ -16,7 +16,7 @@
 <title>bkisofs Overview</title>
 <para>bkisofs (I will often call it simply 'bk') is a simple and stable library for reading and writing ISO9660 files. It can also read NRG files, but not write them. It has support for the Joliet, RockRidge, and EL Torito extensions.</para>
 <para>Currently bk is used as the backbone of ISO Master - a graphical editor for ISO files, but I encourage you to add ISO support to your application if it is appropriate. Being a library, bk is much easier to use from your application then mkisofs.</para>
-<para>Feel free to contact me !!address?? with questions, I will do all I can to help you get going.</para>
+<para>Feel free to contact me using <ulink url="http://littlesvr.ca/misc/contactandrew.php">this form</ulink> with questions, I will do all I can to help you get going.</para>
 <para>The only header file you need to include in your program is <filename class='headerfile'>bk.h</filename>. That has the definitions for all the public functions and the file/directory/volume structures you will have to work with. Do yourself a favour and don't use any other header files from the library - I will do my best to keep <filename class='headerfile'>bk.h</filename> consistent between versions but won't even bother trying with any other files.</para>
 <sect1>
 <title>Return Codes</title>
@@ -44,7 +44,7 @@ void add(char* fullItemName)
 <title>FNTYPE_*</title>
 <para>The constants <literal>FNTYPE_9660</literal>, <literal>FNTYPE_ROCKRIDGE</literal> and <literal>FNTYPE_JOLIET</literal> are used to tell bk what type of ISO extensions to use.</para>
 <para>Some bk functions take only one of these, some can take a combination. If a combination is desired you can bitwise or them together. For example to have all three of them: <literal>FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET</literal></para>
-<para>In case you don't already know: ISO9660 filenames are limited to 8.3 length and really are only still used for backwards compatibility, they is required for any written ISO. RockRidge is an extension alowing for longer filenames, permissions, and special files (of the special files only symbolic links are supported). Any Linux/Unix can read RockRidge extensions, but none of the Windowses as far as I know. Joliet is the Microsoft specification for extending ISO9660 - it supports longer filenames and also unicode (UCS2) characters. bk does not support unicode filenames for now.</para>
+<para>In case you don't already know: ISO9660 filenames are limited to 8.3 length and really are only still used for backwards compatibility, but they are required for any written ISO. RockRidge is an extension alowing for longer filenames, permissions, and special files (of the special files only symbolic links are supported in bk). Any Linux/Unix can read RockRidge extensions, but none of the Windowses as far as I know. Joliet is the Microsoft specification for extending ISO9660 - it supports longer filenames and also unicode (UCS2) characters. bk does not support unicode filenames for now.</para>
 </sect2>
 <sect2>
 <title>NCHARS_FILE_ID_MAX_STORE</title>
@@ -55,7 +55,7 @@ void add(char* fullItemName)
 <title>NCHARS_SYMLINK_TARGET_MAX</title>
 <para>You probably won't need to use this one but I included it in the manual so you're aware of the limitation.</para>
 <para>Symbolic links have a string target. You can see this target when you do <literal>ls</literal>. For example here <literal>mylink -> ../../realfile</literal> the target of the link <literal>mylink</literal> is <literal>../../realfile</literal></para>
-<para>The maximum length of a symbolic link's target is different on different platforms. In bk it is currently set to 250+1. If bk was set to not follow symbolic links, adding one with a target longer than NCHARS_SYMLINK_TARGET_MAX-1 won't work.</para>
+<para>The maximum length of a symbolic link's target is different on different platforms. In bk it is currently set to 250+1. If bk is set to not follow symbolic links, adding one with a target longer than NCHARS_SYMLINK_TARGET_MAX-1 won't work.</para>
 </sect2>
 <sect2>
 <title>BOOT_MEDIA_*</title>
@@ -125,14 +125,15 @@ void add(char* fullItemName)
 </funcprototype>
 </funcsynopsis>
 <para>This function reads a set of entire directory trees (all the directories and files) from the ISO. bk is capable of reading ISO9660, RockRidge, and Joliet filenames so you can ask to read any of those. You have to decide which one you want based on the available types in <classname>VolInfo</classname>.<classname>filenameTypes</classname>. I recommend that you choose RockRidge over Joliet and Joliet over ISO9660. To illustrate, here's an example:</para>
-<programlisting><![CDATA[
+<para><programlisting><![CDATA[
     if(GBLvolInfo.filenameTypes & FNTYPE_ROCKRIDGE)
         rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_ROCKRIDGE, true, activityProgressUpdaterCbk);
     else if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
         rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_JOLIET, false, activityProgressUpdaterCbk);
     else
         rc = bk_read_dir_tree(&GBLvolInfo, FNTYPE_9660, false, activityProgressUpdaterCbk);
-]]></programlisting>
+]]></programlisting></para>
+<para><parameter>progressFunction</parameter> is a pointer to a function that takes a <classname>VolInfo*</classname> as a parameter and returns <classname>void</classname>. bk will call this function every 1 second or so. You can pass in NULL if you like but in that case control won't be returned to your code until <function>bk_add()</function> is finished doing what it has to do so you can't update a progress bar or cancel adding.</para>
 </sect2>
 </sect1>
 <sect1>
@@ -310,6 +311,7 @@ void add(char* fullItemName)
 </funcsynopsis>
 <para>Returns a pointer to a NULL-terminated string with the name of the publisher - either read from an ISO or perhaps set by you using <function>bk_set_publisher()</function>.</para>
 <para>Do not modify or free this string. Make a copy if you need more than read-only access.</para>
+<para>The maximum length of the publisher string is 128+1 bytes.</para>
 </sect2>
 <sect2>
 <title><function>bk_get_volume_name()</function></title>
@@ -321,17 +323,19 @@ void add(char* fullItemName)
 </funcsynopsis>
 <para>Returns a pointer to a NULL-terminated string with the name of the volume - either read from an ISO or perhaps set by you using <function>bk_set_vol_name()</function>.</para>
 <para>Do not modify or free this string. Make a copy if you need more than read-only access.</para>
+<para>The maximum length of the volume name string is 32+1 bytes.</para>
 </sect2>
 <sect2>
 <title><function>bk_get_error_string()</function></title>
 <funcsynopsis>
 <funcprototype>
-<funcdef>const char* <function>bk_get_publisher</function></funcdef>
+<funcdef>const char* <function>bk_get_error_string</function></funcdef>
 <paramdef>int <parameter>errorId</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
 <para>Any bk function that fails returns a negative <classname>int</classname>. That number is an error code, and to get the meaning of it pass it to <function>bk_get_dir_from_string()</function>. It will return a string with an error message.</para>
 <para>The error string won't have the details about what exactly bk tried to do that failed. For example one error is <literal>Failed to open file on the filesystem for writing</literal>. This does not tell you what file bk tried to open or why it failed. But still, it's better than giving -1012 to the user as an explanation for failure.</para>
+<para>Do not modify or free this string. Make a copy if you need more than read-only access.</para>
 </sect2>
 <sect2>
 <title><function>bk_get_dir_from_string()</function></title>
@@ -371,7 +375,7 @@ void add(char* fullItemName)
 <paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>When one of the bk functions that takes a callback function pointer as a parameter calls the callback, that's the only opportunity you get to cancel the operation.</para>
+<para>When one of the bk functions that takes a callback function pointer as a parameter calls the callback (wrap your mind around that), inside the callback is the only opportunity you get to cancel the operation.</para>
 <para>The effect is not necessarily immediate, bk will stop what it's doing as soon as it can.</para>
 </sect2>
 <sect2>
@@ -473,11 +477,23 @@ typedef struct BkFile
     
 } BkFile;
 ]]></programlisting></para>
-<para><literal>size</literal> </para>
+<para><literal>size</literal> is the exact size of the file, whether it is from an original ISO or to be added from the filesystem.</para>
+<para><literal>onImage</literal> is true if the file contents are on the original ISO. It's false if the file is to be added from the regular filesystem.</para>
+<para><literal>position</literal> and <literal>pathAndName</literal> are unlikely to be interesting to you, but you can read them if you like - they record how exactly to access the file for reading. They are set in the reading or adding function.</para>
+<para><literal>location</literal> is definitely not interesting to you, it's used internally to work with hard links.</para>
 </sect1>
 <sect1>
 <title><classname>BkSymLink</classname></title>
-<para></para>
+<para><programlisting><![CDATA[
+typedef struct BkSymLink
+{
+    BkFileBase base; /* intended to be accessed using a cast */
+    
+    char target[NCHARS_SYMLINK_TARGET_MAX];
+    
+} BkSymLink;
+]]></programlisting></para>
+<para>Besides the <classname>BkFileBase</classname> all a symbolic link has is a target (a string - what it's pointing to). You may want to display this for the user to see.</para>
 </sect1>
 <sect1>
 <title>Inheritance</title>
@@ -487,34 +503,84 @@ typedef struct BkFile
 </sect1>
 <sect1>
 <title>Detecting the type of a <classname>BkFileBase</classname></title>
-<para></para>
+<para>A <classname>BkFileBase</classname> has a member named <literal>posixFileMode</literal>. This member can be passed to one of the macros in this section to figure out whether it's a directory, a regular file, or a symbolic link. Examples are given to illustrate how to use the macros.</para>
 <sect2>
 <title><function>IS_DIR()</function></title>
-<para></para>
+<para><programlisting><![CDATA[
+    if(IS_DIR(base->posixFileMode))
+    {
+        /* base is a directory, and can be cast to one */
+    }
+]]></programlisting></para>
 </sect2>
 <sect2>
 <title><function>IS_REG_FILE()</function></title>
-<para></para>
+<para><programlisting><![CDATA[
+    if(IS_REG_FILE(base->posixFileMode))
+    {
+        /* base is a regular file, and can be cast to one */
+    }
+]]></programlisting></para>
 </sect2>
 <sect2>
 <title><function>IS_SYMLINK()</function></title>
-<para></para>
+<para><programlisting><![CDATA[
+    if(IS_SYMLINK(base->posixFileMode))
+    {
+        /* base is a symbolic link, and can be cast to one */
+    }
+]]></programlisting></para>
 </sect2>
 </sect1>
 <sect1>
 <title>Casting</title>
-<para></para>
+<para>You can cast any <classname>BkFileBase</classname> to a more elaborate structure. First you use the macros from the previous section to find out what type the <classname>BkFileBase</classname> is and then you use the macros in this section to cast them.</para>
 <sect2>
 <title><function>BK_DIR_PTR()</function></title>
-<para></para>
+<para><programlisting><![CDATA[
+void printName(BkFileBase* base)
+{
+    if(IS_DIR(base->posixFileMode))
+    {
+        /* print name of the directory */
+        printf("directory %s\n", base->name);
+        
+        /* print all the directory's children */
+        BkFileBase* child = BK_DIR_PTR(base)->children;
+        while(child != NULL)
+        {
+            printName(child);
+            child = child->next;
+        }
+    }
+}
+]]></programlisting></para>
 </sect2>
 <sect2>
 <title><function>BK_FILE_PTR()</function></title>
-<para></para>
+<para><programlisting><![CDATA[
+void printName(BkFileBase* base)
+{
+    if(IS_REG_FILE(base->posixFileMode))
+    {
+        /* print name and size of the file */
+        printf("regular file %s, size %u\n", base->name, BK_FILE_PTR(base)->size);
+    }
+}
+]]></programlisting></para>
 </sect2>
 <sect2>
 <title><function>BK_SYMLINK_PTR()</function></title>
-<para></para>
+<para><programlisting><![CDATA[
+void printName(BkFileBase* base)
+{
+    if(IS_SYMLINK(base->posixFileMode))
+    {
+        /* print name and target of the symbolic link */
+        printf("symbolic link %s -> %s\n", base->name, BK_SYMLINK_PTR(base)->target);
+    }
+}
+]]></programlisting></para>
 </sect2>
 <sect2>
 <title><function>BK_BASE_PTR()</function></title>
@@ -523,14 +589,10 @@ typedef struct BkFile
 </sect1>
 </chapter>
 <chapter>
-<title></title>
-<para></para>
-<sect1>
-<title></title>
-<para></para>
-</sect1>
+<title>Example</title>
+<para>This section gives a small example for using bkisofs. All it does is open an ISO and print its contents.</para>
+<para>asd</para>
 </chapter>
-
 <!--
 <chapter>
 <title></title>
