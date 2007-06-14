@@ -3,7 +3,7 @@
 <book>
 
 <bookinfo>
-<date>30 May 2007</date>
+<date>14 June 2007</date>
 <title>bkisofs Usage and Reference Manual</title>
 <author>
 <firstname>Andrew</firstname>
@@ -14,10 +14,14 @@
 
 <chapter>
 <title>bkisofs Overview</title>
-<para>bkisofs (I will often call it simply 'bk') is a simple and stable library for reading and writing ISO9660 files. It can also read NRG files, but not write them. It has support for the Joliet, RockRidge, and EL Torito extensions.</para>
+<para>bkisofs (I will often call it simply 'bk') is a simple and stable library for reading and writing ISO9660 files. It can also read NRG files, but not write them. It has support for the Joliet, RockRidge, and EL Torito extensions. It has been tested (with positive results) on many Linux versions and on some BSD versions.</para>
 <para>Currently bk is used as the backbone of ISO Master - a graphical editor for ISO files, but I encourage you to add ISO support to your application if it is appropriate. Being a library, bk is much easier to use from your application then mkisofs.</para>
-<para>Feel free to contact me using <ulink url="http://littlesvr.ca/misc/contactandrew.php">this form</ulink> with questions, I will do all I can to help you get going.</para>
+<para>Feel free to contact me using <ulink url="http://littlesvr.ca/misc/contactandrew.php">this form</ulink> with questions, I will do all I can to help you get going. Also any suggestions about improving this manual (or the library itself) are welcome.</para>
 <para>The only header file you need to include in your program is <filename class='headerfile'>bk.h</filename>. That has the definitions for all the public functions and the file/directory/volume structures you will have to work with. Do yourself a favour and don't use any other header files from the library - I will do my best to keep <filename class='headerfile'>bk.h</filename> consistent between versions but won't even bother trying with any other files.</para>
+<sect1>
+<title>Getting bkisofs</title>
+<para>The library is currently only distributed with ISO Master, it's under the <literal>bk</literal> directory. You can download a stable release of ISO Master (so a stable version of bkisofs) or if you're interested you can get the most recent version from subversion using the following command: <literal>svn co svn://littlesvr.ca/prog/isomaster/src/bk bkisofs</literal></para>
+</sect1>
 <sect1>
 <title>Return Codes</title>
 <para>Every bk function that can fail returns an int. If the function is successful in doing what it was supposed to do it returns a number greater than 0. If it fails it returns a number less than or equal to 0.</para>
@@ -66,6 +70,7 @@ void add(char* fullItemName)
 </sect1>
 <sect1>
 <title>Missing Features</title>
+<para>This is the only section of the manual that's still not complete, I promise :)</para>
 <para>joliet unicode</para>
 </sect1>
 </chapter>
@@ -537,6 +542,7 @@ typedef struct BkSymLink
 <para>You can cast any <classname>BkFileBase</classname> to a more elaborate structure. First you use the macros from the previous section to find out what type the <classname>BkFileBase</classname> is and then you use the macros in this section to cast them.</para>
 <sect2>
 <title><function>BK_DIR_PTR()</function></title>
+<para>Use this macro when you have a <classname>BkFileBase*</classname> that you're sure (having checked with <function>IS_DIR()</function>) is a directory.</para>
 <para><programlisting><![CDATA[
 void printName(BkFileBase* base)
 {
@@ -558,6 +564,7 @@ void printName(BkFileBase* base)
 </sect2>
 <sect2>
 <title><function>BK_FILE_PTR()</function></title>
+<para>Use this macro when you have a <classname>BkFileBase*</classname> that you're sure (having checked with <function>IS_REG_FILE()</function>) is a regular file.</para>
 <para><programlisting><![CDATA[
 void printName(BkFileBase* base)
 {
@@ -571,6 +578,7 @@ void printName(BkFileBase* base)
 </sect2>
 <sect2>
 <title><function>BK_SYMLINK_PTR()</function></title>
+<para>Use this macro when you have a <classname>BkFileBase*</classname> that you're sure (having checked with <function>IS_SYMLINK()</function>) is a symbolic link.</para>
 <para><programlisting><![CDATA[
 void printName(BkFileBase* base)
 {
@@ -584,14 +592,154 @@ void printName(BkFileBase* base)
 </sect2>
 <sect2>
 <title><function>BK_BASE_PTR()</function></title>
-<para></para>
+<para>Sometimes you may have a <classname>BkDir*</classname> or a <classname>BkFile*</classname> or a <classname>BkSymLink*</classname> and would like to use the <classname>BkFileBase*</classname> part of it. That's what this macro is for.</para>
+<para><programlisting><![CDATA[
+void printDirName(BkDir* dir)
+{
+    printf("%s\n", BK_FILE_BASE(dir)->name);
+}
+]]></programlisting></para>
 </sect2>
 </sect1>
 </chapter>
 <chapter>
 <title>Example</title>
-<para>This section gives a small example for using bkisofs. All it does is open an ISO and print its contents.</para>
-<para>asd</para>
+<para>This section gives a small example for using bkisofs. All it does is open an ISO, add a file to it, print the contents, and save the modified ISO. It's working code so feel free to use it to experiment.</para>
+
+<para><programlisting><![CDATA[
+/******************************************************************************
+* example.c
+* Example for using bkisofs
+* Author: Andrew Smith
+* Compile with: cc example.c bk.a -o example
+* */
+
+#include <stdio.h>
+#include <time.h>
+
+/* need to include bk.h for access to bkisofs functions and structures */
+#include "bk.h"
+
+void addProgressUpdaterCbk(VolInfo* volInfo);
+void fatalError(const char* message);
+void printNameAndContents(BkFileBase* item, int numSpaces);
+void readProgressUpdaterCbk(VolInfo* volInfo);
+void writeProgressUpdaterCbk(VolInfo* volInfo, double percentComplete);
+
+int main( int argv, char** argc)
+{
+    /* A variable of type VolInfo stores information about an image */
+    VolInfo volInfo;
+    /* bk functions return ints that need to be checked to see whether
+    * the functions were successful or not */
+    int rc;
+    
+    if(argv != 2)
+        fatalError("Usage: example myfile.iso");
+    
+    /* initialise volInfo, set it up to scan for duplicate files */
+    rc = bk_init_vol_info(&volInfo, true);
+    if(rc <= 0)
+        fatalError(bk_get_error_string(rc));
+    
+    /* open the iso file (supplied as argument 1) */
+    rc = bk_open_image(&volInfo, argc[1]);
+    if(rc <= 0)
+        fatalError(bk_get_error_string(rc));
+    
+    /* read information about the volume (required before reading directory tree) */
+    rc = bk_read_vol_info(&volInfo);
+    if(rc <= 0)
+        fatalError(bk_get_error_string(rc));
+    
+    /* read the directory tree */
+    if(volInfo.filenameTypes & FNTYPE_ROCKRIDGE)
+        rc = bk_read_dir_tree(&volInfo, FNTYPE_ROCKRIDGE, true, readProgressUpdaterCbk);
+    else if(volInfo.filenameTypes & FNTYPE_JOLIET)
+        rc = bk_read_dir_tree(&volInfo, FNTYPE_JOLIET, false, readProgressUpdaterCbk);
+    else
+        rc = bk_read_dir_tree(&volInfo, FNTYPE_9660, false, readProgressUpdaterCbk);
+    if(rc <= 0)
+        fatalError(bk_get_error_string(rc));
+    
+    /* add the file /etc/fstab to the root of the image */
+    rc = bk_add(&volInfo, "/etc/fstab", "/", addProgressUpdaterCbk);
+    if(rc <= 0)
+        fatalError(bk_get_error_string(rc));
+    
+    /* print the entire directory tree */
+    printNameAndContents(BK_BASE_PTR( &(volInfo.dirTree) ), 0);
+    
+    /* save the new ISO as /tmp/example.iso */
+    /* note that bkisofs will print some stuff to stdout when writing an ISO */
+    rc = bk_write_image("/tmp/example.iso", &volInfo, time(NULL),
+                        FNTYPE_9660 | FNTYPE_ROCKRIDGE | FNTYPE_JOLIET,
+                        writeProgressUpdaterCbk);
+    
+    /* we're finished with this ISO, so clean up */
+    bk_destroy_vol_info(&volInfo);
+    
+    return 0;
+}
+
+/* you can use this to update a progress bar or something */
+void addProgressUpdaterCbk(VolInfo* volInfo)
+{
+    printf("Add progress updater\n");
+}
+
+void fatalError(const char* message)
+{
+    printf("Fatal error: %s\n", message);
+    exit(1);
+}
+
+void printNameAndContents(BkFileBase* base, int numSpaces)
+{
+    int count;
+    
+    /* print the spaces (indentation, for prettyness) */
+    for(count = 0; count < numSpaces; count++)
+        printf(" ");
+    
+    if(IS_DIR(base->posixFileMode))
+    {
+        /* print name of the directory */
+        printf("%s (directory)\n", base->name);
+        
+        /* print all the directory's children */
+        BkFileBase* child = BK_DIR_PTR(base)->children;
+        while(child != NULL)
+        {
+            printNameAndContents(child, numSpaces + 2);
+            child = child->next;
+        }
+    }
+    else if(IS_REG_FILE(base->posixFileMode))
+    {
+        /* print name and size of the file */
+        printf("%s (regular file), size %u\n", base->name, BK_FILE_PTR(base)->size);
+    }
+    else if(IS_SYMLINK(base->posixFileMode))
+    {
+        /* print name and target of the symbolic link */
+        printf("%s -> %s (symbolic link)\n", base->name, BK_SYMLINK_PTR(base)->target);
+    }
+}
+
+/* you can use this to update a progress bar or something */
+void readProgressUpdaterCbk(VolInfo* volInfo)
+{
+    printf("Read progress updater\n");
+}
+
+/* you can use this to update a progress bar or something */
+void writeProgressUpdaterCbk(VolInfo* volInfo, double percentComplete)
+{
+    printf("Write progress updater: ~%.2lf%% complete\n", percentComplete);
+}
+]]></programlisting></para>
+
 </chapter>
 <!--
 <chapter>
