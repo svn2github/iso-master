@@ -37,7 +37,7 @@ export CP      = cp
 export ECHO    = echo
 
 # -DDEBUG and -g only used during development
-CFLAGS += -Wall -pedantic -std=gnu99 `pkg-config --cflags gtk+-2.0` -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\"
+CFLAGS += -Wall -pedantic -std=gnu99 `pkg-config --cflags gtk+-2.0` -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEBUG
 ifndef WITHOUT_NLS
 	CFLAGS += -DENABLE_NLS
 endif

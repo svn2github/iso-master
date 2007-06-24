@@ -19,8 +19,6 @@ bk:
 -make sure is_warning is publicly accessible
 -need a bk_set_warning_foo()
 -if appropriate, add a BK_PERMISSIONS()
--why is it remangling stuff from the 6.2, F7 disks if i didn't add any files?
--looks like length is not initialised for sym links
 
 manual:
 -how to get permissions without file type?
