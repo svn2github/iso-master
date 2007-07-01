@@ -9,6 +9,7 @@ ui:
 -some dialog boxes could stay up after failure for a second try (e.g. rename)
 -isobrowser.c:1213 add filename tried to rename to
 -add F2 rename to help window
+-write sort columns/directions to settings file
 
 
 bk:
@@ -19,6 +20,7 @@ bk:
 -make sure is_warning is publicly accessible
 -need a bk_set_warning_foo()
 -if appropriate, add a BK_PERMISSIONS()
+
 
 manual:
 -how to get permissions without file type?

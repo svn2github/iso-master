@@ -236,12 +236,6 @@ void sizeCellDataFunc64(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
 
 gint sortByName(GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer userdata)
 {
-    char* aName;
-    char* bName;
-    
-    gtk_tree_model_get(model, a, COLUMN_FILENAME, &aName, -1);
-    gtk_tree_model_get(model, b, COLUMN_FILENAME, &bName, -1);
-    
     if(GBLappSettings.sortDirectoriesFirst)
     /* directories before files */
     {
@@ -273,6 +267,68 @@ gint sortByName(GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer us
         }
     }
     
-    /* if got this far, do a simple alphabetic sort */
-    return strcmp(aName, bName);
+    char* aName;
+    char* bName;
+    gint toReturn;
+    
+    gtk_tree_model_get(model, a, COLUMN_FILENAME, &aName, -1);
+    gtk_tree_model_get(model, b, COLUMN_FILENAME, &bName, -1);
+    
+    toReturn = strcmp(aName, bName);
+    
+    g_free(aName);
+    g_free(bName);
+    
+    return toReturn;
+}
+
+gint sortBySize(GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer userdata)
+{
+    if(GBLappSettings.sortDirectoriesFirst)
+    /* directories before files */
+    {
+        int aFileType;
+        int bFileType;
+        gint unused;
+        GtkSortType order;
+        
+        gtk_tree_model_get(model, a, COLUMN_HIDDEN_TYPE, &aFileType, -1);
+        gtk_tree_model_get(model, b, COLUMN_HIDDEN_TYPE, &bFileType, -1);
+        
+        /* have to make sure directories come first regardless of sort order, 
+        * that's why all the fancyness below */
+        gtk_tree_sortable_get_sort_column_id(GTK_TREE_SORTABLE(model), &unused, &order);
+        
+        if(aFileType == FILE_TYPE_DIRECTORY && bFileType != FILE_TYPE_DIRECTORY)
+        {
+            if(order == GTK_SORT_ASCENDING)
+                return -1;
+            else
+                return 1;
+        }
+        else if(aFileType != FILE_TYPE_DIRECTORY && bFileType == FILE_TYPE_DIRECTORY)
+        {
+            if(order == GTK_SORT_ASCENDING)
+                return 1;
+            else
+                return -1;
+        }
+    }
+    
+    guint64 aSize;
+    guint64 bSize;
+    
+    gtk_tree_model_get(model, a, COLUMN_SIZE, &aSize, -1);
+    gtk_tree_model_get(model, b, COLUMN_SIZE, &bSize, -1);
+    
+    if(aSize < bSize)
+        return -1;
+    else
+        return 1;
+}
+
+/* this function exists to deal with the gtk stupidity that sorting can't be disabled */
+gint sortVoid(GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer userdata)
+{
+    return 0;
 }

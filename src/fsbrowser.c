@@ -135,6 +135,9 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLfsTreeView), column);
     
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_SIZE, 
+                                    sortBySize, NULL, NULL);
+    
     /* set default sort */
     gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(GBLfsListStore),
                                          COLUMN_FILENAME, GTK_SORT_ASCENDING);
@@ -227,6 +230,12 @@ bool changeFsDirectory(char* newDirStr)
     g_object_ref(model);
     gtk_tree_view_set_model(GTK_TREE_VIEW(GBLfsTreeView), NULL);
     
+    /* this is the only way to disable sorting (for a huge performance boost) */
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_FILENAME, 
+                                    sortVoid, NULL, NULL);
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_SIZE, 
+                                    sortVoid, NULL, NULL);
+    
     gtk_list_store_clear(GBLfsListStore);
     
 #if GTK_MINOR_VERSION >= 8
@@ -240,7 +249,7 @@ bool changeFsDirectory(char* newDirStr)
     
     /* it may be possible but in any case very unlikely that readdir() will fail
     * if it does, it returns NULL (same as end of dir) */
-    while( (nextItem = readdir(newDir)) != NULL)
+    while( (nextItem = readdir(newDir)) != NULL )
     {
         /* skip current and parent directory */
         if(strcmp(nextItem->d_name, ".") == 0 || strcmp(nextItem->d_name, "..") == 0)
@@ -334,6 +343,12 @@ bool changeFsDirectory(char* newDirStr)
     gtk_tree_view_set_model(GTK_TREE_VIEW(GBLfsTreeView), model);
     g_object_unref(model);
     
+    /* reenable sorting */
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_FILENAME, 
+                                    sortByName, NULL, NULL);
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_SIZE, 
+                                    sortBySize, NULL, NULL);
+    
     /* set current directory string */
     if(GBLfsCurrentDir != NULL)
         free(GBLfsCurrentDir);
@@ -342,7 +357,7 @@ bool changeFsDirectory(char* newDirStr)
         fatalError("changeFsDirectory(): malloc(strlen(newDirStr) + 1) failed");
     strcpy(GBLfsCurrentDir, newDirStr);
     
-    /* update the field with the path and name */
+    /* update the location field with the path and name */
     gtk_entry_set_text(GTK_ENTRY(GBLfsCurrentDirField), GBLfsCurrentDir);
     
     return true;

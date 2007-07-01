@@ -26,3 +26,7 @@ void sizeCellDataFunc64(GtkTreeViewColumn *col, GtkCellRenderer *renderer,
                         gpointer data);
 gint sortByName(GtkTreeModel *model, GtkTreeIter *a, 
                 GtkTreeIter *b, gpointer userdata);
+gint sortBySize(GtkTreeModel *model, GtkTreeIter *a, 
+                GtkTreeIter *b, gpointer userdata);
+gint sortVoid(GtkTreeModel *model, GtkTreeIter *a, 
+              GtkTreeIter *b, gpointer userdata);

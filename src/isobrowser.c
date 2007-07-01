@@ -308,6 +308,9 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     gtk_tree_view_column_set_sort_column_id(column, COLUMN_SIZE);
     gtk_tree_view_append_column(GTK_TREE_VIEW(GBLisoTreeView), column);
     
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLisoListStore), COLUMN_SIZE, 
+                                    sortBySize, NULL, NULL);
+    
     /* set default sort */
     gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(GBLisoListStore),
                                          COLUMN_FILENAME, GTK_SORT_ASCENDING);
@@ -359,6 +362,12 @@ void changeIsoDirectory(char* newDirStr)
     g_object_ref(model);
     gtk_tree_view_set_model(GTK_TREE_VIEW(GBLisoTreeView), NULL);
     
+    /* this is the only way to disable sorting (for a huge performance boost) */
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_FILENAME, 
+                                    sortVoid, NULL, NULL);
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_SIZE, 
+                                    sortVoid, NULL, NULL);
+    
     gtk_list_store_clear(GBLisoListStore);
     
 #if GTK_MINOR_VERSION >= 8
@@ -408,6 +417,12 @@ void changeIsoDirectory(char* newDirStr)
     /* reconnect the model and view now */
     gtk_tree_view_set_model(GTK_TREE_VIEW(GBLisoTreeView), model);
     g_object_unref(model);
+    
+    /* reenable sorting */
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_FILENAME, 
+                                    sortByName, NULL, NULL);
+    gtk_tree_sortable_set_sort_func(GTK_TREE_SORTABLE(GBLfsListStore), COLUMN_SIZE, 
+                                    sortBySize, NULL, NULL);
     
     /* set current directory string */
     if(GBLisoCurrentDir != NULL)
