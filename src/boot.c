@@ -37,7 +37,7 @@ void addBootRecordFromFileCbk(GtkButton *button, gpointer bootRecordType)
     /* no iso open */
         return;
     
-    dialog = gtk_file_chooser_dialog_new(_("Chose Boot Record File"),
+    dialog = gtk_file_chooser_dialog_new(_("Choose Boot Record File"),
                                          NULL,
                                          GTK_FILE_CHOOSER_ACTION_OPEN,
                                          GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,

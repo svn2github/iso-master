@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master Unknown\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-06-07 14:21-0400\n"
+"POT-Creation-Date: 2007-07-06 02:34-0400\n"
 "PO-Revision-Date: 2007-06-03 17:10-0500\n"
 "Last-Translator: Josep Sanchez Mesegue <papapep@gmail.com>\n"
 "Language-Team: Catala\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr " Mida estimada de la imatge ISO:"
 
-#: ../isobrowser.c:1103
+#: ../isobrowser.c:1118
 #, c-format
 msgid ""
 "%s\n"
@@ -30,7 +30,7 @@ msgstr ""
 "\n"
 "Voleu continuar?"
 
-#: ../isobrowser.c:138 ../isobrowser.c:949
+#: ../isobrowser.c:138 ../isobrowser.c:964
 msgid "(scanning for duplicate files)"
 msgstr "(Cercant fitxers duplicats)"
 
@@ -38,7 +38,7 @@ msgstr "(Cercant fitxers duplicats)"
 msgid "Add"
 msgstr "Afegeix"
 
-#: ../isobrowser.c:1336
+#: ../isobrowser.c:1351
 msgid "Add extension automatically"
 msgstr "Afegeix l'extensió automàticament"
 
@@ -46,7 +46,7 @@ msgstr "Afegeix l'extensió automàticament"
 msgid "Add to the ISO"
 msgstr "Afegeix a la ISO"
 
-#: ../isobrowser.c:1049 ../isobrowser.c:1333
+#: ../isobrowser.c:1064 ../isobrowser.c:1348
 msgid "All files"
 msgstr "Tots els fitxers"
 
@@ -79,7 +79,7 @@ msgid "Boot record type: No Emulation"
 msgstr "Tipus de registre d'arrencada: Sense emulació"
 
 #: ../boot.c:40
-msgid "Chose Boot Record File"
+msgid "Choose Boot Record File"
 msgstr "Fitxer de registre d'arrencada seleccionat"
 
 #: ../window.c:350
@@ -98,7 +98,7 @@ msgstr "Hora de la creació:"
 msgid "Delete from the ISO"
 msgstr "Esborra de la ISO"
 
-#: ../isobrowser.c:1190
+#: ../isobrowser.c:1205
 msgid "Enter a new name:"
 msgstr "Introduïu un nou nom:"
 
@@ -124,7 +124,7 @@ msgstr "Error afegint '%s': '%s'"
 msgid "Failed to add boot record: '%s'"
 msgstr "Error afegint el registre d'arrencada: '%s'"
 
-#: ../isobrowser.c:349
+#: ../isobrowser.c:352
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr "Error canviant de directori: '%s'"
@@ -139,12 +139,12 @@ msgstr "Error creant el directori %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Error creant el directori %s: '%s'"
 
-#: ../isobrowser.c:531
+#: ../isobrowser.c:546
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Error esborrant '%s': '%s'"
 
-#: ../isobrowser.c:639
+#: ../isobrowser.c:654
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Error extraient '%s': '%s'"
@@ -154,32 +154,32 @@ msgstr "Error extraient '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Error extraient el registre d'arrencada: '%s'"
 
-#: ../isobrowser.c:837 ../isobrowser.c:885
+#: ../isobrowser.c:852 ../isobrowser.c:900
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Error inicialitzant bkisofs: '%s'"
 
-#: ../fsbrowser.c:215
+#: ../fsbrowser.c:218
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Error obrint el directori '%s', error %d"
 
-#: ../isobrowser.c:904
+#: ../isobrowser.c:919
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Error obrint el fitxer ISO per a lectura: '%s'"
 
-#: ../isobrowser.c:979
+#: ../isobrowser.c:994
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Error llegint l'arbre del directori: '%s'"
 
-#: ../isobrowser.c:919
+#: ../isobrowser.c:934
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Error llegint la informació del volum: '%s'"
 
-#: ../isobrowser.c:1213
+#: ../isobrowser.c:1228
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Error reanomenant '%s': '%s'"
@@ -189,7 +189,7 @@ msgstr "Error reanomenant '%s': '%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Error fixant %s com a registre d'arrencada: '%s'"
 
-#: ../isobrowser.c:1279
+#: ../isobrowser.c:1294
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Error desant la imatge a '%s': '%s'"
@@ -218,9 +218,9 @@ msgstr "De fitxer: disquet de 2880 KB"
 msgid "From file: no emulation"
 msgstr "Des de fitxer: sense emulació"
 
-#: ../isobrowser.c:549
+#: ../isobrowser.c:564
 msgid ""
-"GUI error, deleting anything other then files and directories doesn't work"
+"GUI error, deleting anything other than files and directories doesn't work"
 msgstr ""
 "Error d'interfície gràfica, esborrar altra cosa que fitxers i directoris no "
 "funciona"
@@ -237,15 +237,15 @@ msgstr "Puja un directori a la ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Puja un directori del sistema de fitxers"
 
-#: ../isobrowser.c:1039 ../isobrowser.c:1328
+#: ../isobrowser.c:1054 ../isobrowser.c:1343
 msgid "ISO Images"
 msgstr "Imatges ISO"
 
-#: ../about.c:260
+#: ../about.c:287
 msgid "ISO Master Help"
 msgstr "Ajuda d'ISO Master"
 
-#: ../isobrowser.c:1180 ../settings.c:60
+#: ../isobrowser.c:1195 ../settings.c:60
 msgid "Image Information"
 msgstr "Informació de la imatge"
 
@@ -259,7 +259,7 @@ msgstr "No es veu a la imatge"
 msgid "Is visible on image as '%s'"
 msgstr "Es veu a la imatge com a '%s'"
 
-#: ../isobrowser.c:460
+#: ../isobrowser.c:475
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
@@ -283,7 +283,7 @@ msgstr "Ubicació: a la imatge original es troba a 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Ubicació: afegeix-lo de '%s'"
 
-#: ../isobrowser.c:1044
+#: ../isobrowser.c:1059
 msgid "NRG Images"
 msgstr "Imatges NRG"
 
@@ -318,20 +318,20 @@ msgstr "Si us plau, no seleccioneu més d'un fitxer al navegador d'ISO"
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Si us plau, espereu mentre afegeixo els objectes seleccionats..."
 
-#: ../isobrowser.c:586
+#: ../isobrowser.c:601
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Si us plau, espereu mentre extrec els fitxers seleccionats..."
 
-#: ../isobrowser.c:943
+#: ../isobrowser.c:958
 msgid "Please wait while I'm reading the image..."
 msgstr "Si us plau, espereu mentre llegeixo la imatge..."
 
-#: ../isobrowser.c:1251
+#: ../isobrowser.c:1266
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Si us plau, espereu mentre deso la nova imatge al disc..."
 
-#: ../isobrowser.c:125 ../isobrowser.c:578 ../isobrowser.c:936
-#: ../isobrowser.c:1241
+#: ../isobrowser.c:125 ../isobrowser.c:593 ../isobrowser.c:951
+#: ../isobrowser.c:1256
 msgid "Progress"
 msgstr "Progrés"
 
@@ -343,7 +343,7 @@ msgstr "Creador:"
 msgid "Remove"
 msgstr "Esborra"
 
-#: ../isobrowser.c:1317
+#: ../isobrowser.c:1332
 msgid "Save File"
 msgstr "Desa el fitxer"
 
@@ -368,19 +368,19 @@ msgstr "Mida"
 msgid "Size: %d bytes"
 msgstr "Mida: %d bytes"
 
-#: ../fsbrowser.c:260
+#: ../fsbrowser.c:269
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
 "S'omet l'entrada de directori perquè no es poden gestionar noms de fitxer "
 "més grans de 256 caràcters"
 
-#: ../fsbrowser.c:278
+#: ../fsbrowser.c:287
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "S'omet el directori perquè l'estat (%s) ha fallat amb %d"
 
-#: ../about.c:204
+#: ../about.c:231
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

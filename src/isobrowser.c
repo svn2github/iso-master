@@ -221,7 +221,7 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               "GUI error, adding anything other then "
+                                               "GUI error, adding anything other than "
                                                "files and directories doesn't work");
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -561,7 +561,7 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               _("GUI error, deleting anything other then "
+                                               _("GUI error, deleting anything other than "
                                                "files and directories doesn't work"));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
