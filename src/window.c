@@ -105,6 +105,11 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
     gtk_accel_map_add_entry("<ISOMaster>/Image/Quit", accelKey, accelModifier);
     
+    gtk_accelerator_parse("F5", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(refreshBothViewsCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    gtk_accel_map_add_entry("<ISOMaster>/View/Refresh", accelKey, accelModifier);
+    
     gtk_accelerator_parse("F1", &accelKey, &accelModifier);
     closure = g_cclosure_new(G_CALLBACK(showHelpOverviewCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);

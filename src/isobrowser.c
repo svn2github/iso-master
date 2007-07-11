@@ -704,40 +704,6 @@ gboolean isoButtonReleasedCbk(GtkWidget* isoView, GdkEventButton* event, gpointe
     return FALSE;
 }
 
-void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
-{
-    GtkWidget* menu;
-    GtkWidget* menuItem;
-    GtkTreeSelection* selection;
-    gint numSelectedRows;
-    
-    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
-    
-    numSelectedRows = gtk_tree_selection_count_selected_rows(selection);
-    if(numSelectedRows == 0)
-        return;
-    
-    menu = gtk_menu_new();
-    
-    if(numSelectedRows == 1)
-    {
-        menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
-        g_signal_connect(menuItem, "activate", 
-                         (GCallback)renameSelectedClickCbk, NULL);
-        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-        gtk_widget_show_all(menu);
-    }
-    
-    menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
-    //g_signal_connect(menuItem, "activate", 
-    //                 (GCallback)NULL, NULL);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-    gtk_widget_show_all(menu);
-    
-    gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
-                   event->button, gdk_event_get_time((GdkEvent*)event));
-}
-
 /* this is called from a button and via a treeview event so don't use the parameters */
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
 {
@@ -1517,6 +1483,44 @@ gboolean saveOverwriteIsoCbk(GtkWidget *widget, GdkEvent *event)
     return FALSE;
 }
 #endif
+
+void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
+{
+    GtkWidget* menu;
+    GtkWidget* menuItem;
+    GtkTreeSelection* selection;
+    gint numSelectedRows;
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    numSelectedRows = gtk_tree_selection_count_selected_rows(selection);
+    if(numSelectedRows == 0)
+        return;
+    
+    menu = gtk_menu_new();
+    
+    if(numSelectedRows == 1)
+    {
+        menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
+        g_signal_connect(menuItem, "activate", 
+                         (GCallback)renameSelectedClickCbk, NULL);
+        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+        gtk_widget_show_all(menu);
+    }
+    
+    menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
+    //g_signal_connect(menuItem, "activate", 
+    //                 (GCallback)NULL, NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show_all(menu);
+    
+    // extract
+    
+    // delete
+    
+    gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
+                   event->button, gdk_event_get_time((GdkEvent*)event));
+}
 
 /* this handles the ok and cancel buttons in the progress window */
 void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data)
