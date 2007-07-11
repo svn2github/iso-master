@@ -2,7 +2,6 @@ ui:
 -alt shortcut keys need attention (bulgarian)
 -change file/dir properties (especialy creation date)
  -change permission, change permission for all selected
- -rename
  -make sure 'properties' doesn't come up when nothing selected
 -edit file
 -the enter key doesn't work in the save dialog

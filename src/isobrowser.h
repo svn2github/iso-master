@@ -16,7 +16,8 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
 void extractFromIsoCbk(GtkButton *button, gpointer data);
 void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                               GtkTreeIter* iterator, gpointer data);
-//~ gboolean isoButtonPressedCbk(GtkWidget* widget, GdkEventButton* event, gpointer user_data);
+gboolean isoButtonPressedCbk(GtkWidget* isoView, GdkEventButton* event, gpointer user_data);
+gboolean isoButtonReleasedCbk(GtkWidget* isoView, GdkEventButton* event, gpointer user_data);
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data);
 gboolean isoKeyPressedCbk(GtkWidget* widget, GdkEventKey* event, gpointer user_data);
 void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
@@ -29,12 +30,13 @@ void refreshIsoView(void);
 void renameSelected(void);
 void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
                            GtkTreeIter* iterator, gpointer data);
+void renameSelectedClickCbk(GtkMenuItem *menuitem, gpointer data);
 void saveIso(char* filename);
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event);
 #ifdef ENABLE_SAVE_OVERWRITE
 gboolean saveOverwriteIsoCbk(GtkWidget *widget, GdkEvent *event);
 #endif
-//~ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event);
+void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event);
 void writingProgressResponse(GtkDialog* dialog, gint arg1, gpointer user_data);
 void writingProgressUpdaterCbk(VolInfo* volInfo, double percentComplete);
 gboolean writingProgressWindowDeleteCbk(GtkWidget* widget, GdkEvent* event,

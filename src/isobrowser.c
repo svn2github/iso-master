@@ -262,7 +262,8 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     g_signal_connect(GBLisoTreeView, "key-press-event", (GCallback)isoKeyPressedCbk, NULL);
     /* The problem with this is that i get a popup menu before the row is selected.
     * if i do a connect_after the handler never gets called. So no right-click menu. */
-    //~ g_signal_connect(GBLisoTreeView, "button-press-event", (GCallback)isoButtonPressedCbk, NULL);
+    g_signal_connect(GBLisoTreeView, "button-press-event", (GCallback)isoButtonPressedCbk, NULL);
+    g_signal_connect(GBLisoTreeView, "button-release-event", (GCallback)isoButtonReleasedCbk, NULL);
     gtk_widget_show(GBLisoTreeView);
     
     /* this won't be enabled until gtk allows me to drag a multiple selection */
@@ -664,53 +665,78 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     g_free(itemName);
 }
 
-//~ gboolean isoButtonPressedCbk(GtkWidget* widget, GdkEventButton* event, gpointer user_data)
-//~ {
-    //~ if(!GBLisoPaneActive)
-    //~ /* no iso open */
-        //~ return FALSE;
+/******************************************************************************
+* isoButtonPressedCbk()
+* Make sure that a right-click on the view doesn't send the signal to the
+* widget. If it did, a selection of multiple rows would be lost.
+* I have a feeling someone did this shit in GTK just to piss on users */
+gboolean isoButtonPressedCbk(GtkWidget* isoView, GdkEventButton* event, gpointer user_data)
+{
+    if(!GBLisoPaneActive)
+    /* no iso open */
+        return FALSE;
     
-    //~ if(event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
-    //~ {
-        //~ showIsoContextMenu(widget, event);
-    //~ }
+    if(event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
+    {
+        /* Stop event propagation */
+        /* Would be nice if I could only stop event propagation if click was on
+        * the selection, I have to look into how that may be done, if at all */
+        return TRUE;
+    }
     
-    //~ return FALSE;
-//~ }
+    return FALSE;
+}
 
-//~ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
-//~ {
-    //~ GtkWidget* menu;
-    //~ GtkWidget* menuItem;
-    //~ GtkTreeSelection* selection;
-    //~ gint numSelectedRows;
+/******************************************************************************
+* isoButtonReleasedCbk()
+* Show context menu if releasing the right mouse button */
+gboolean isoButtonReleasedCbk(GtkWidget* isoView, GdkEventButton* event, gpointer user_data)
+{
+    if(!GBLisoPaneActive)
+    /* no iso open */
+        return FALSE;
     
-    //~ selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    if(event->type == GDK_BUTTON_RELEASE &&  event->button == 3)
+    {
+        showIsoContextMenu(isoView, event);
+    }
     
-    //~ numSelectedRows = gtk_tree_selection_count_selected_rows(selection);
-    //~ if(numSelectedRows == 0)
-        //~ return;
+    return FALSE;
+}
+
+void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
+{
+    GtkWidget* menu;
+    GtkWidget* menuItem;
+    GtkTreeSelection* selection;
+    gint numSelectedRows;
     
-    //~ menu = gtk_menu_new();
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
-    //~ if(numSelectedRows == 1)
-    //~ {
-        //~ menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
-        //~ g_signal_connect(menuItem, "activate", 
-                         //~ (GCallback)NULL, NULL);
-        //~ gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-        //~ gtk_widget_show_all(menu);
-    //~ }
+    numSelectedRows = gtk_tree_selection_count_selected_rows(selection);
+    if(numSelectedRows == 0)
+        return;
     
-    //~ menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
-    //~ g_signal_connect(menuItem, "activate", 
-                     //~ (GCallback)NULL, NULL);
-    //~ gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-    //~ gtk_widget_show_all(menu);
+    menu = gtk_menu_new();
     
-    //~ gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
-                   //~ event->button, gdk_event_get_time((GdkEvent*)event));
-//~ }
+    if(numSelectedRows == 1)
+    {
+        menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
+        g_signal_connect(menuItem, "activate", 
+                         (GCallback)renameSelectedClickCbk, NULL);
+        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+        gtk_widget_show_all(menu);
+    }
+    
+    menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
+    //g_signal_connect(menuItem, "activate", 
+    //                 (GCallback)NULL, NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show_all(menu);
+    
+    gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
+                   event->button, gdk_event_get_time((GdkEvent*)event));
+}
 
 /* this is called from a button and via a treeview event so don't use the parameters */
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data)
@@ -1172,7 +1198,7 @@ void renameSelected(void)
 }
 
 void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
-                           GtkTreeIter* iterator, gpointer data)
+                       GtkTreeIter* iterator, gpointer data)
 {
     GtkWidget* dialog;
     GtkWidget* label;
@@ -1239,6 +1265,12 @@ void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
     gtk_widget_destroy(dialog);
     
     g_free(itemName);
+}
+
+void renameSelectedClickCbk(GtkMenuItem *menuitem, gpointer data)
+{
+    /* because I'm lazy just call this one, it will work */
+    renameSelected();
 }
 
 void saveIso(char* filename)
