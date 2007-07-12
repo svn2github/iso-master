@@ -1572,13 +1572,26 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
         exit(1);
     }
     
+    /* delete the file from the iso */
     deleteSelectedFromIso();
     
-    // add from tmp
-    
+    /* add the file back fom tmp */
+    rc = bk_add(&GBLvolInfo, filePathAndName, GBLisoCurrentDir, activityProgressUpdaterCbk);
+    if(rc <= 0)
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("Failed to add '%s': '%s'"),
+                                               fullItemName,
+                                               bk_get_error_string(rc));
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+    }
     
     // add to global list of files created (to delete after writing)
-    
     
     g_free(itemName);
 }
