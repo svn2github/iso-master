@@ -441,6 +441,58 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.appendExtension = true;
     
+    /* read/set text editor */
+    if(GBLsettingsDictionary != NULL)
+    {
+        tempStr = iniparser_getstring(GBLsettingsDictionary, 
+                                      "ui:texteditor", NULL);
+        if(tempStr == NULL)
+        {
+            //!! put this in the makefile
+            #define DEFAULT_TEXT_EDITOR "scite"
+            GBLappSettings.textEditor = malloc(strlen(DEFAULT_TEXT_EDITOR) + 1);
+            if(GBLappSettings.textEditor == NULL)
+                fatalError("GBLappSettings.textEditor = malloc(strlen(DEFAULT_TEXT_EDITOR) +1) failed");
+            strcpy(GBLappSettings.textEditor, DEFAULT_TEXT_EDITOR);
+        }
+        else
+        {
+            GBLappSettings.textEditor = malloc(strlen(tempStr) +1);
+            if(GBLappSettings.textEditor == NULL)
+                fatalError("GBLappSettings.lastBootRecordDir = malloc(strlen(tempStr) +1) failed");
+            strcpy(GBLappSettings.textEditor, tempStr);
+        }
+    }
+    else
+    /* no config file */
+        GBLappSettings.textEditor = NULL;
+    
+    /* read/set temporary directory */
+    if(GBLsettingsDictionary != NULL)
+    {
+        tempStr = iniparser_getstring(GBLsettingsDictionary, 
+                                      "ui:tempdir", NULL);
+        if(tempStr == NULL)
+        {
+            //!! put this in the makefile
+            #define DEFAULT_TEMP_DIR "/tmp"
+            GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) + 1);
+            if(GBLappSettings.tempDir == NULL)
+                fatalError("GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) +1) failed");
+            strcpy(GBLappSettings.tempDir, DEFAULT_TEMP_DIR);
+        }
+        else
+        {
+            GBLappSettings.tempDir = malloc(strlen(tempStr) +1);
+            if(GBLappSettings.tempDir == NULL)
+                fatalError("GBLappSettings.lastBootRecordDir = malloc(strlen(tempStr) +1) failed");
+            strcpy(GBLappSettings.tempDir, tempStr);
+        }
+    }
+    else
+    /* no config file */
+        GBLappSettings.tempDir = NULL;
+    
     free(configFileName);
 }
 

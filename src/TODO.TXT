@@ -8,6 +8,8 @@ ui:
 -isobrowser.c:1213 add filename tried to rename to
 -add F2 rename to help window
 -write sort columns/directions to settings file
+-f5 doesn't show in the menu for refresh
+-log bug 'file size not updated after editing a file'
 
 
 bk:
@@ -46,6 +48,7 @@ tests to run before a release:
 
 to package a release:
 - update the version number in the about box
+- update version in man page
 - remove -g and -DDEBUG from Makefile and bk/Makefile
 - update changelog.txt
 - update credits and credits.txt

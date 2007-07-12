@@ -10,12 +10,18 @@ void cancelOperation(GtkDialog* dialog, gint arg1, gpointer user_data);
 void changeIsoDirectory(char* newDirStr);
 void closeIso(void);
 bool confirmCloseIso(void);
+void deleteSelectedFromIso(void);
 void deleteFromIsoCbk(GtkButton *button, gpointer data);
 void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                              GtkTreeIter* iterator, gpointer data);
+void editSelected(void);
+void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
+                       GtkTreeIter* iterator, gpointer data);
+void editSelectedClickCbk(GtkMenuItem *menuitem, gpointer data);
 void extractFromIsoCbk(GtkButton *button, gpointer data);
 void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                               GtkTreeIter* iterator, gpointer data);
+bool extractSelected(char* destDir);
 gboolean isoButtonPressedCbk(GtkWidget* isoView, GdkEventButton* event, gpointer user_data);
 gboolean isoButtonReleasedCbk(GtkWidget* isoView, GdkEventButton* event, gpointer user_data);
 void isoGoUpDirTreeCbk(GtkButton *button, gpointer data);

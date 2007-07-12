@@ -338,7 +338,7 @@ void add(char* fullItemName)
 <paramdef>int <parameter>errorId</parameter></paramdef>
 </funcprototype>
 </funcsynopsis>
-<para>Any bk function that fails returns a negative <classname>int</classname>. That number is an error code, and to get the meaning of it pass it to <function>bk_get_dir_from_string()</function>. It will return a string with an error message.</para>
+<para>Any bk function that fails returns a negative <classname>int</classname>. That number is an error code, and to get the meaning of it pass it to <function>bk_get_error_string()</function>. It will return a string with an error message.</para>
 <para>The error string won't have the details about what exactly bk tried to do that failed. For example one error is <literal>Failed to open file on the filesystem for writing</literal>. This does not tell you what file bk tried to open or why it failed. But still, it's better than giving -1012 to the user as an explanation for failure.</para>
 <para>Do not modify or free this string. Make a copy if you need more than read-only access.</para>
 </sect2>

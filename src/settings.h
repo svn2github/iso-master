@@ -25,6 +25,8 @@ typedef struct
     char* lastIsoDir;
     bool appendExtension;
     char* lastBootRecordDir;
+    char* textEditor;
+    char* tempDir;
     
 } AppSettings;
 

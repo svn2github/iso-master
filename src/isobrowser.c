@@ -23,6 +23,7 @@
 #include <time.h>
 #include <libintl.h>
 #include <regex.h>
+#include <errno.h>
 
 #include "isomaster.h"
 
@@ -55,6 +56,8 @@ static GtkWidget* GBLactivityProgressBar;
 static GtkTreeViewColumn* GBLfilenameIsoColumn;
 /* the window with the progress bar for writing */
 GtkWidget* GBLwritingProgressWindow;
+/* to use for extracting */
+static bool GBLextractingFailed;
 #ifdef ENABLE_SAVE_OVERWRITE
 static char* openIsoPathAndName = NULL;
 #endif
@@ -486,7 +489,7 @@ bool confirmCloseIso(void)
         return false;
 }
 
-void deleteFromIsoCbk(GtkButton *button, gpointer data)
+void deleteSelectedFromIso(void)
 {
     GtkTreeSelection* selection;
     
@@ -512,6 +515,11 @@ void deleteFromIsoCbk(GtkButton *button, gpointer data)
     GBLisoSize += bk_estimate_iso_size(&GBLvolInfo, FNTYPE_9660 | FNTYPE_JOLIET | FNTYPE_ROCKRIDGE);
     formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), sizeStr);
+}
+
+void deleteFromIsoCbk(GtkButton *button, gpointer data)
+{
+    deleteSelectedFromIso();
 }
 
 void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
@@ -574,6 +582,55 @@ void deleteFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
 
 void extractFromIsoCbk(GtkButton *button, gpointer data)
 {
+    extractSelected(GBLfsCurrentDir);
+}
+
+void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                              GtkTreeIter* iterator, gpointer destDir)
+{
+    int fileType;
+    char* itemName;
+    char* fullItemName; /* with full path */
+    int rc;
+    GtkWidget* warningDialog;
+    
+    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
+                                        COLUMN_FILENAME, &itemName, -1);
+    
+    fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
+    if(fullItemName == NULL)
+        fatalError("extractFromIsoEachRowCbk(): malloc("
+                   "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed (out of memory?)");
+    
+    strcpy(fullItemName, GBLisoCurrentDir);
+    strcat(fullItemName, itemName);
+    
+    rc = bk_extract(&GBLvolInfo, fullItemName, destDir, 
+                    true, activityProgressUpdaterCbk);
+    if(rc <= 0)
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("Failed to extract '%s': '%s'"),
+                                               itemName,
+                                               bk_get_error_string(rc));
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        
+        GBLextractingFailed = true;
+    }
+    
+    free(fullItemName);
+    
+    g_free(itemName);
+}
+
+/* returns true if extracting succeeded, false otherwise */
+bool extractSelected(char* destDir)
+{
     GtkTreeSelection* selection;
     GtkWidget* progressWindow = NULL;
     GtkWidget* descriptionLabel;
@@ -581,7 +638,7 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     
     if(!GBLisoPaneActive)
     /* no iso open */
-        return;
+        return false;
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
@@ -614,7 +671,9 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         /* if i show it before i add the children, the window ends up being not centered */
         gtk_widget_show(progressWindow);
         
-        gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
+        GBLextractingFailed = false;
+        
+        gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, destDir);
         
         refreshFsView();
         
@@ -622,47 +681,11 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     }
     
     GBLactivityProgressBar = NULL;
-}
-
-void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
-                              GtkTreeIter* iterator, gpointer data)
-{
-    int fileType;
-    char* itemName;
-    char* fullItemName; /* with full path */
-    int rc;
-    GtkWidget* warningDialog;
     
-    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
-                                        COLUMN_FILENAME, &itemName, -1);
-    
-    fullItemName = (char*)malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
-    if(fullItemName == NULL)
-        fatalError("extractFromIsoEachRowCbk(): malloc("
-                   "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed (out of memory?)");
-    
-    strcpy(fullItemName, GBLisoCurrentDir);
-    strcat(fullItemName, itemName);
-    
-    rc = bk_extract(&GBLvolInfo, fullItemName, GBLfsCurrentDir, 
-                    true, activityProgressUpdaterCbk);
-    if(rc <= 0)
-    {
-        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
-                                               GTK_DIALOG_DESTROY_WITH_PARENT,
-                                               GTK_MESSAGE_ERROR,
-                                               GTK_BUTTONS_CLOSE,
-                                               _("Failed to extract '%s': '%s'"),
-                                               itemName,
-                                               bk_get_error_string(rc));
-        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
-        gtk_dialog_run(GTK_DIALOG(warningDialog));
-        gtk_widget_destroy(warningDialog);
-    }
-    
-    free(fullItemName);
-    
-    g_free(itemName);
+    if(GBLextractingFailed)
+        return false;
+    else
+        return true;
 }
 
 /******************************************************************************
@@ -1484,6 +1507,87 @@ gboolean saveOverwriteIsoCbk(GtkWidget *widget, GdkEvent *event)
 }
 #endif
 
+void editSelected(void)
+{
+    GtkTreeSelection* selection;
+    
+    /* do nothing if no image open */
+    if(!GBLisoPaneActive)
+        return;
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    if(gtk_tree_selection_count_selected_rows(selection) != 1)
+        return;
+    
+    /* there's just one row selected but this is the easiest way to do it */
+    gtk_tree_selection_selected_foreach(selection, editSelectedCbk, NULL);
+    
+    /* can't put this in the callback because gtk complains */
+    refreshIsoView();
+}
+
+void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
+                       GtkTreeIter* iterator, gpointer data)
+{
+    int fileType;
+    char* itemName;
+    bool extractedOk;
+    char* filePathAndName;
+    
+    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, -1);
+    
+    if(fileType != FILE_TYPE_REGULAR)
+    {
+        printf("can only edit regular files (need dialog here)\n");
+        return;
+    }
+    
+    gtk_tree_model_get(model, iterator, COLUMN_FILENAME, &itemName, -1);
+    
+    extractedOk = extractSelected(GBLappSettings.tempDir);
+    if(!extractedOk)
+    {
+        printf("failed to extract (need dialog here)\n");
+        return;
+    }
+    
+    /* create full path and name for the extracted file */
+    filePathAndName = malloc(strlen(GBLappSettings.tempDir) + strlen(itemName) + 2);
+    if(filePathAndName == NULL)
+        fatalError("malloc(strlen(GBLappSettings.tempDir) + strlen(itemName) + 2) failed");
+    strcpy(filePathAndName, GBLappSettings.tempDir);
+    strcat(filePathAndName, "/"); /* doesn't hurt even if not needed */
+    strcat(filePathAndName, itemName);
+    
+    printf("%s\n", filePathAndName);fflush(NULL);
+    
+    /* start the editor */
+    if(!fork())
+    {
+        execlp(GBLappSettings.textEditor, "editor", filePathAndName, NULL);
+        
+        printf("execl(%s, %s) failed with %d\n", GBLappSettings.textEditor, filePathAndName, errno);
+        
+        exit(1);
+    }
+    
+    deleteSelectedFromIso();
+    
+    // add from tmp
+    
+    
+    // add to global list of files created (to delete after writing)
+    
+    
+    g_free(itemName);
+}
+
+void editSelectedClickCbk(GtkMenuItem *menuitem, gpointer data)
+{
+    editSelected();
+}
+
 void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
 {
     GtkWidget* menu;
@@ -1506,6 +1610,12 @@ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
                          (GCallback)renameSelectedClickCbk, NULL);
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
         gtk_widget_show_all(menu);
+        
+        menuItem = gtk_image_menu_item_new_with_label(_("Edit"));
+        g_signal_connect(menuItem, "activate", 
+                         (GCallback)editSelectedClickCbk, NULL);
+        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+        gtk_widget_show_all(menu);
     }
     
     menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
@@ -1513,6 +1623,8 @@ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
     //                 (GCallback)NULL, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show_all(menu);
+    
+    
     
     // extract
     

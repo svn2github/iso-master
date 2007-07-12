@@ -191,6 +191,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(refreshBothViewsCbk), NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/View/Refresh");
     
     checkbox = gtk_check_menu_item_new_with_mnemonic(_("Show _hidden files"));
     if(GBLappSettings.showHiddenFilesFs)
@@ -304,6 +305,33 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(checkbox);
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(followSymLinksCbk), NULL);
+    
+    rootSubmenu = gtk_menu_item_new_with_label(_("Text editor"));
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
+    gtk_widget_show(rootSubmenu);
+    
+    submenu = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
+    
+    menuItem = gtk_menu_item_new_with_label(GBLappSettings.textEditor);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
+    gtk_widget_show(menuItem);
+    //~ g_signal_connect(G_OBJECT(menuItem), "activate",
+                     //~ G_CALLBACK(changeTextEditorCbk), NULL);
+    
+    rootSubmenu = gtk_menu_item_new_with_label(_("Temporary directory"));
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
+    gtk_widget_show(rootSubmenu);
+    
+    submenu = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
+    
+    menuItem = gtk_menu_item_new_with_label(GBLappSettings.tempDir);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
+    gtk_widget_show(menuItem);
+    //~ g_signal_connect(G_OBJECT(menuItem), "activate",
+                     //~ G_CALLBACK(changeTextEditorCbk), NULL);
+    
     /* END SETTINGS menu */
     
     /* HELP menu */
