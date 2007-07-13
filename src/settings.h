@@ -8,6 +8,10 @@
 #define ISOMASTER_DEFAULT_WINDOW_HEIGHT 550
 #define ISOMASTER_DEFAULT_TOPPANE_HEIGHT 200
 
+/* not putting this in the makefile because i really can't think of a
+* distro that doesn't have a writeable /tmp directory */
+#define DEFAULT_TEMP_DIR "/tmp"
+
 typedef struct
 {
     /* stuff only read from the config file */

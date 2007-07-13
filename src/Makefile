@@ -19,6 +19,12 @@ MYMANPATH ?= $(PREFIX)/share/man/man1
 # Where to install the .desktop file
 DESKTOPPATH ?= $(PREFIX)/share/applications
 
+# A graphical text editor that's going to be used by default to edit text
+# files. The user can change it in the settings, but please try to set it
+# to and editor that's most likely to be present on a default install on
+# your distribution.
+DEFAULT_TEXT_EDITOR = mousepad
+
 # To disable i18n completely, uncomment the following line 
 # or define WITHOUT_NLS somewhere else.
 # This option is desired in the FreeBSD ports guidelines.
@@ -37,15 +43,17 @@ export CP      = cp
 export ECHO    = echo
 
 # -DDEBUG and -g only used during development
-CFLAGS += -Wall -pedantic -std=gnu99 `pkg-config --cflags gtk+-2.0` -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEBUG
+CFLAGS += -Wall -pedantic -std=gnu99 `pkg-config --cflags gtk+-2.0` -DDEBUG
 ifndef WITHOUT_NLS
 	CFLAGS += -DENABLE_NLS
 endif
 
-# the _FILE_OFFSET_BITS=64 is to enable stat() for large files
-CPPFLAGS = -D_FILE_OFFSET_BITS=64
+CPPFLAGS +=  -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEFAULT_TEXT_EDITOR=\"$(DEFAULT_TEXT_EDITOR)\"
 
-OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o
+# the _FILE_OFFSET_BITS=64 is to enable stat() for large files
+CPPFLAGS += -D_FILE_OFFSET_BITS=64
+
+OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o editfile.o
 
 all: isomaster translations isomaster.desktop
 

@@ -242,7 +242,7 @@ void changeTempDirCbk(GtkButton *button, gpointer data)
         
         newDir = gtk_entry_get_text(GTK_ENTRY(textField));
         
-        free(GBLappSettings.textEditor);
+        free(GBLappSettings.tempDir);
         GBLappSettings.tempDir = malloc(strlen(newDir) + 1);
         if(GBLappSettings.tempDir == NULL)
             fatalError("GBLappSettings.tempDir = malloc(strlen(newEditor) + 1) failed");
@@ -538,8 +538,6 @@ void loadSettings(void)
                                       "ui:texteditor", NULL);
         if(tempStr == NULL)
         {
-            //!! put this in the makefile
-            #define DEFAULT_TEXT_EDITOR "mousepad"
             GBLappSettings.textEditor = malloc(strlen(DEFAULT_TEXT_EDITOR) + 1);
             if(GBLappSettings.textEditor == NULL)
                 fatalError("GBLappSettings.textEditor = malloc(strlen(DEFAULT_TEXT_EDITOR) +1) failed");
@@ -564,8 +562,6 @@ void loadSettings(void)
                                       "ui:tempdir", NULL);
         if(tempStr == NULL)
         {
-            //!! put this in the makefile
-            #define DEFAULT_TEMP_DIR "/tmp"
             GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) + 1);
             if(GBLappSettings.tempDir == NULL)
                 fatalError("GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) +1) failed");
@@ -678,6 +674,10 @@ void writeSettings(void)
     
     snprintf(numberStr, 20, "%d", GBLappSettings.appendExtension);
     iniparser_setstr(GBLsettingsDictionary, "ui:appendextension", numberStr);
+    
+    iniparser_setstr(GBLsettingsDictionary, "ui:texteditor", GBLappSettings.textEditor);
+    
+    iniparser_setstr(GBLsettingsDictionary, "ui:tempdir", GBLappSettings.tempDir);
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }
