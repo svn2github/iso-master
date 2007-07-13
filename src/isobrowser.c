@@ -1207,7 +1207,7 @@ void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
     strcpy(fullItemName, GBLisoCurrentDir);
     strcat(fullItemName, itemName);
     
-    dialog = gtk_dialog_new_with_buttons(_("Image Information"),
+    dialog = gtk_dialog_new_with_buttons(_("Enter a new name:"),
                                          GTK_WINDOW(GBLmainWindow),
                                          GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_STOCK_OK,
@@ -1217,17 +1217,13 @@ void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
                                          NULL);
     g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
     
-    label = gtk_label_new(_("Enter a new name:"));
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), label, TRUE, TRUE, 0);
-    gtk_widget_show(label);
-    
     nameField = gtk_entry_new_with_max_length(NCHARS_FILE_ID_MAX_STORE);
     gtk_entry_set_text(GTK_ENTRY(nameField), itemName);
     gtk_entry_set_width_chars(GTK_ENTRY(nameField), 32);
     g_signal_connect(nameField, "activate", (GCallback)acceptDialogCbk, dialog);
-    
     gtk_widget_show(nameField);
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), nameField, TRUE, TRUE, 0);
+    
     gtk_widget_show(dialog);
     
     rc = gtk_dialog_run(GTK_DIALOG(dialog));
@@ -1528,12 +1524,15 @@ void editSelected(void)
 }
 
 void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
-                       GtkTreeIter* iterator, gpointer data)
+                     GtkTreeIter* iterator, gpointer data)
 {
     int fileType;
     char* itemName;
     bool extractedOk;
-    char* filePathAndName;
+    char* pathAndNameOnFs; /* to extract to and add from */
+    char* pathAndNameOnIso; /* to delete from iso */
+    int rc;
+    GtkWidget* warningDialog;
     
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, -1);
     
@@ -1545,6 +1544,7 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
     
     gtk_tree_model_get(model, iterator, COLUMN_FILENAME, &itemName, -1);
     
+    /* extract the file to the temporary directory */
     extractedOk = extractSelected(GBLappSettings.tempDir);
     if(!extractedOk)
     {
@@ -1553,30 +1553,60 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
     }
     
     /* create full path and name for the extracted file */
-    filePathAndName = malloc(strlen(GBLappSettings.tempDir) + strlen(itemName) + 2);
-    if(filePathAndName == NULL)
+    pathAndNameOnFs = malloc(strlen(GBLappSettings.tempDir) + strlen(itemName) + 2);
+    if(pathAndNameOnFs == NULL)
         fatalError("malloc(strlen(GBLappSettings.tempDir) + strlen(itemName) + 2) failed");
-    strcpy(filePathAndName, GBLappSettings.tempDir);
-    strcat(filePathAndName, "/"); /* doesn't hurt even if not needed */
-    strcat(filePathAndName, itemName);
+    strcpy(pathAndNameOnFs, GBLappSettings.tempDir);
+    strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
+    strcat(pathAndNameOnFs, itemName);
     
-    printf("%s\n", filePathAndName);fflush(NULL);
+    printf("%s\n", pathAndNameOnFs);fflush(NULL);
+    
+    /* create full path and name for the file on the iso */
+    //!! make it an isomaster-random string
+    pathAndNameOnIso = malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
+    if(pathAndNameOnIso == NULL)
+        fatalError("malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed");
+    strcpy(pathAndNameOnIso, GBLisoCurrentDir);
+    strcat(pathAndNameOnIso, itemName);
+    
+    printf("%s, %s\n", pathAndNameOnFs, pathAndNameOnIso);fflush(NULL);
     
     /* start the editor */
     if(!fork())
     {
-        execlp(GBLappSettings.textEditor, "editor", filePathAndName, NULL);
+        execlp(GBLappSettings.textEditor, "editor", pathAndNameOnFs, NULL);
         
-        printf("execl(%s, %s) failed with %d\n", GBLappSettings.textEditor, filePathAndName, errno);
+        printf("execl(%s, %s) failed with %d\n", GBLappSettings.textEditor, pathAndNameOnFs, errno);
         
         exit(1);
     }
     
     /* delete the file from the iso */
-    deleteSelectedFromIso();
+    rc = bk_delete(&GBLvolInfo, pathAndNameOnIso);
+    if(rc <= 0)
+    {
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("Failed to delete '%s': '%s'"),
+                                               pathAndNameOnIso,
+                                               bk_get_error_string(rc));
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        
+        g_free(itemName);
+        free(pathAndNameOnFs);
+        free(pathAndNameOnIso);
+        return;
+    }
+    
+    GBLisoChangesProbable = true;
     
     /* add the file back fom tmp */
-    rc = bk_add(&GBLvolInfo, filePathAndName, GBLisoCurrentDir, activityProgressUpdaterCbk);
+    rc = bk_add(&GBLvolInfo, pathAndNameOnFs, GBLisoCurrentDir, activityProgressUpdaterCbk);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -1584,7 +1614,7 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
                                                _("Failed to add '%s': '%s'"),
-                                               fullItemName,
+                                               pathAndNameOnFs,
                                                bk_get_error_string(rc));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -1594,6 +1624,8 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
     // add to global list of files created (to delete after writing)
     
     g_free(itemName);
+    free(pathAndNameOnFs);
+    free(pathAndNameOnIso);
 }
 
 void editSelectedClickCbk(GtkMenuItem *menuitem, gpointer data)

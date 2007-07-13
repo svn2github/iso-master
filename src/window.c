@@ -34,6 +34,10 @@ GtkWidget* GBLaddIcon;
 GtkWidget* GBLextractIcon;
 /* icon for 'delete' for iso browser */
 GtkWidget* GBLdeleteIcon2;
+/* text field for the text editor setting */
+GtkWidget* GBLtextEditorFld;
+/* text field for the temp directory setting */
+GtkWidget* GBLtempDirFld;
 
 extern GtkWidget* GBLmainWindow;
 extern AppSettings GBLappSettings;
@@ -306,32 +310,57 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(followSymLinksCbk), NULL);
     
+#if GTK_MINOR_VERSION >= 6
+    icon = gtk_image_new_from_stock(GTK_STOCK_EDIT, GTK_ICON_SIZE_MENU);
+    rootSubmenu = gtk_image_menu_item_new_with_label(_("Text editor"));
+    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(rootSubmenu), icon);
+#else
     rootSubmenu = gtk_menu_item_new_with_label(_("Text editor"));
+#endif
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
     gtk_widget_show(rootSubmenu);
     
     submenu = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
     
-    menuItem = gtk_menu_item_new_with_label(GBLappSettings.textEditor);
+    menuItem = gtk_menu_item_new();
     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
-    //~ g_signal_connect(G_OBJECT(menuItem), "activate",
-                     //~ G_CALLBACK(changeTextEditorCbk), NULL);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(changeTextEditorCbk), NULL);
     
+    GBLtextEditorFld = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(GBLtextEditorFld), GBLappSettings.textEditor);
+    gtk_editable_set_editable(GTK_EDITABLE(GBLtextEditorFld), FALSE);
+    gtk_entry_set_width_chars(GTK_ENTRY(GBLtextEditorFld), 30);
+    gtk_container_add(GTK_CONTAINER(menuItem), GBLtextEditorFld);
+    gtk_widget_show(GBLtextEditorFld);
+    
+#if GTK_MINOR_VERSION >= 6
+    icon = gtk_image_new_from_stock(GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU);
+    rootSubmenu = gtk_image_menu_item_new_with_label(_("Temporary directory"));
+    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(rootSubmenu), icon);
+#else
     rootSubmenu = gtk_menu_item_new_with_label(_("Temporary directory"));
+#endif
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
     gtk_widget_show(rootSubmenu);
     
     submenu = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
     
-    menuItem = gtk_menu_item_new_with_label(GBLappSettings.tempDir);
+    menuItem = gtk_menu_item_new();
     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
-    //~ g_signal_connect(G_OBJECT(menuItem), "activate",
-                     //~ G_CALLBACK(changeTextEditorCbk), NULL);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(changeTempDirCbk), NULL);
     
+    GBLtempDirFld = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(GBLtempDirFld), GBLappSettings.tempDir);
+    gtk_editable_set_editable(GTK_EDITABLE(GBLtempDirFld), FALSE);
+    gtk_entry_set_width_chars(GTK_ENTRY(GBLtempDirFld), 30);
+    gtk_container_add(GTK_CONTAINER(menuItem), GBLtempDirFld);
+    gtk_widget_show(GBLtempDirFld);
     /* END SETTINGS menu */
     
     /* HELP menu */
