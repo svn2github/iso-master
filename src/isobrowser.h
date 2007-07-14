@@ -32,7 +32,7 @@ void refreshIsoView(void);
 void renameSelected(void);
 void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
                            GtkTreeIter* iterator, gpointer data);
-void renameSelectedClickCbk(GtkMenuItem *menuitem, gpointer data);
+void renameSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data);
 void saveIso(char* filename);
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event);
 #ifdef ENABLE_SAVE_OVERWRITE

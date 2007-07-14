@@ -15,34 +15,27 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <libintl.h>
+#include <errno.h>
 
 #include "isomaster.h"
 
-void editSelected(void)
-{
-    GtkTreeSelection* selection;
-    
-    /* do nothing if no image open */
-    if(!GBLisoPaneActive)
-        return;
-    
-    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
-    
-    if(gtk_tree_selection_count_selected_rows(selection) != 1)
-        return;
-    
-    /* there's just one row selected but this is the easiest way to do it */
-    gtk_tree_selection_selected_foreach(selection, editSelectedCbk, NULL);
-    
-    /* can't put this in the callback because gtk complains */
-    refreshIsoView();
-}
+#define MAX_RANDOM_BASE_NAME_LEN 26
+#define RANDOM_ENDING_NAME_LEN 6
 
-void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
-                     GtkTreeIter* iterator, gpointer data)
+extern bool GBLisoPaneActive;
+extern GtkWidget* GBLisoTreeView;
+extern AppSettings GBLappSettings;
+extern char* GBLisoCurrentDir;
+extern VolInfo GBLvolInfo;
+extern GtkWidget* GBLmainWindow;
+extern bool GBLisoChangesProbable;
+
+void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                        GtkTreeIter* iterator, gpointer data)
 {
     int fileType;
     char* itemName;
+    char* randomizedItemName;
     char* pathAndNameOnFs; /* to extract to and add from */
     char* pathAndNameOnIso; /* to delete from iso */
     int rc;
@@ -58,34 +51,30 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
     
     gtk_tree_model_get(model, iterator, COLUMN_FILENAME, &itemName, -1);
     
-    /* create full path and name for the extracted file */
-    pathAndNameOnFs = malloc(strlen(GBLappSettings.tempDir) + strlen(itemName) + 2);
-    if(pathAndNameOnFs == NULL)
-        fatalError("malloc(strlen(GBLappSettings.tempDir) + strlen(itemName) + 2) failed");
-    strcpy(pathAndNameOnFs, GBLappSettings.tempDir);
-    strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
-    strcat(pathAndNameOnFs, itemName);
-    
-    printf("%s\n", pathAndNameOnFs);fflush(NULL);
-    
     //!! don't want this if it's on fs already
     /* create full path and name for the file on the iso */
-    //!! make it an isomaster-random string
     pathAndNameOnIso = malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
     if(pathAndNameOnIso == NULL)
         fatalError("malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed");
     strcpy(pathAndNameOnIso, GBLisoCurrentDir);
     strcat(pathAndNameOnIso, itemName);
     
-    printf("%s, %s\n", pathAndNameOnFs, pathAndNameOnIso);fflush(NULL);
+    /* create full path and name for the extracted file */
+    randomizedItemName = makeRandomFilename(itemName);
+    pathAndNameOnFs = malloc(strlen(GBLappSettings.tempDir) + strlen(randomizedItemName) + 2);
+    if(pathAndNameOnFs == NULL)
+        fatalError("malloc(strlen(GBLappSettings.tempDir) + strlen(randomizedItemName) + 2) failed");
+    strcpy(pathAndNameOnFs, GBLappSettings.tempDir);
+    strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
+    strcat(pathAndNameOnFs, randomizedItemName);
     
     /* disable warnings, so user isn't confused with 'continue' buttons */
     bool(*savedWarningCbk)(const char*) = GBLvolInfo.warningCbk;
     GBLvolInfo.warningCbk = NULL;
     
     /* extract the file to the temporary directory */
-    rc = bk_extract(&GBLvolInfo, pathAndNameOnIso, GBLappSettings.tempDir, 
-                    true, activityProgressUpdaterCbk);
+    rc = bk_extract_as(&GBLvolInfo, pathAndNameOnIso, GBLappSettings.tempDir, 
+                       randomizedItemName, true, activityProgressUpdaterCbk);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -100,6 +89,7 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
         gtk_widget_destroy(warningDialog);
         
         g_free(itemName);
+        free(randomizedItemName);
         free(pathAndNameOnFs);
         free(pathAndNameOnIso);
         GBLvolInfo.warningCbk = savedWarningCbk;
@@ -132,6 +122,7 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
         gtk_widget_destroy(warningDialog);
         
         g_free(itemName);
+        free(randomizedItemName);
         free(pathAndNameOnFs);
         free(pathAndNameOnIso);
         GBLvolInfo.warningCbk = savedWarningCbk;
@@ -141,7 +132,8 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
     GBLisoChangesProbable = true;
     
     /* add the file back fom tmp */
-    rc = bk_add(&GBLvolInfo, pathAndNameOnFs, GBLisoCurrentDir, activityProgressUpdaterCbk);
+    rc = bk_add_as(&GBLvolInfo, pathAndNameOnFs, GBLisoCurrentDir, itemName, 
+                   activityProgressUpdaterCbk);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -156,15 +148,80 @@ void editSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
         gtk_widget_destroy(warningDialog);
     }
     
-    // add to global list of files created (to delete after writing)
+    //!! add to global list of files created (to delete after writing)
     
     g_free(itemName);
+    free(randomizedItemName);
     free(pathAndNameOnFs);
     free(pathAndNameOnIso);
     GBLvolInfo.warningCbk = savedWarningCbk;
 }
 
-void editSelectedClickCbk(GtkMenuItem *menuitem, gpointer data)
+void editSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data)
 {
-    editSelected();
+    GtkTreeSelection* selection;
+    
+    /* do nothing if no image open */
+    if(!GBLisoPaneActive)
+        return;
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    if(gtk_tree_selection_count_selected_rows(selection) != 1)
+        return;
+    
+    /* there's just one row selected but this is the easiest way to do it */
+    gtk_tree_selection_selected_foreach(selection, editSelectedRowCbk, NULL);
+    
+    /* can't put this in the callback because gtk complains */
+    refreshIsoView();
+}
+
+/* caller must free the string returned */
+char* makeRandomFilename(const char* sourceName)
+{
+    int sourceNameLen;
+    char* newName;
+    char ending[RANDOM_ENDING_NAME_LEN];
+    int numRandomCharsFilled;
+    
+    if(strlen(sourceName) > MAX_RANDOM_BASE_NAME_LEN)
+        sourceNameLen = MAX_RANDOM_BASE_NAME_LEN;
+    else
+        sourceNameLen = strlen(sourceName);
+    
+    newName = malloc(sourceNameLen + RANDOM_ENDING_NAME_LEN + 2);
+    if(newName == NULL)
+        fatalError("newName = malloc(sourceNameLen + RANDOM_ENDING_NAME_LEN + 2) failed\n");
+    
+    srandom((int)time(NULL));
+    
+    numRandomCharsFilled = 0;
+    while(numRandomCharsFilled < RANDOM_ENDING_NAME_LEN)
+    {
+        char oneRandomChar;
+        bool gotGoodChar;
+        
+        gotGoodChar = false;
+        while(!gotGoodChar)
+        {
+            oneRandomChar = random();
+            if(64 < oneRandomChar && oneRandomChar < 91)
+            {
+                gotGoodChar = true;
+            }
+        }
+        
+        ending[numRandomCharsFilled] = oneRandomChar;
+        
+        numRandomCharsFilled++;
+    }
+    
+    strncpy(newName, sourceName, sourceNameLen);
+    newName[sourceNameLen] = '\0';
+    strcat(newName, "-");
+    strncat(newName, ending, RANDOM_ENDING_NAME_LEN);
+    newName[sourceNameLen + 1 + RANDOM_ENDING_NAME_LEN] = '\0';
+    
+    return newName;
 }

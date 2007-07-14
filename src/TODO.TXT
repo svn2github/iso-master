@@ -20,6 +20,7 @@ bk:
 -make sure is_warning is publicly accessible
 -need a bk_set_warning_foo()
 -if appropriate, add a BK_PERMISSIONS()
+-using access() to check whether a file exists is no good, target of a dead symlink will get overwritten
 
 
 manual:

@@ -620,7 +620,7 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         /* if i show it before i add the children, the window ends up being not centered */
         gtk_widget_show(progressWindow);
         
-        gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, GBLisoCurrentDir);
+        gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
         
         refreshFsView();
         
@@ -631,7 +631,7 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
 }
 
 void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
-                              GtkTreeIter* iterator, gpointer destDir)
+                              GtkTreeIter* iterator, gpointer data)
 {
     int fileType;
     char* itemName;
@@ -650,7 +650,7 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     strcpy(fullItemName, GBLisoCurrentDir);
     strcat(fullItemName, itemName);
     
-    rc = bk_extract(&GBLvolInfo, fullItemName, destDir, 
+    rc = bk_extract(&GBLvolInfo, fullItemName, GBLfsCurrentDir, 
                     true, activityProgressUpdaterCbk);
     if(rc <= 0)
     {
@@ -1234,7 +1234,7 @@ void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
     g_free(itemName);
 }
 
-void renameSelectedClickCbk(GtkMenuItem *menuitem, gpointer data)
+void renameSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data)
 {
     /* because I'm lazy just call this one, it will work */
     renameSelected();
@@ -1504,13 +1504,13 @@ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
     {
         menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
         g_signal_connect(menuItem, "activate", 
-                         (GCallback)renameSelectedClickCbk, NULL);
+                         (GCallback)renameSelectedBtnCbk, NULL);
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
         gtk_widget_show_all(menu);
         
         menuItem = gtk_image_menu_item_new_with_label(_("Edit"));
         g_signal_connect(menuItem, "activate", 
-                         (GCallback)editSelectedClickCbk, NULL);
+                         (GCallback)editSelectedBtnCbk, NULL);
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
         gtk_widget_show_all(menu);
     }
