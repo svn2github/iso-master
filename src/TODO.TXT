@@ -24,6 +24,7 @@ bk:
 
 
 manual:
+-add_as() and extract_as()
 -how to get permissions without file type?
 
 
