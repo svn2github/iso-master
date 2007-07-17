@@ -10,6 +10,7 @@ ui:
 -write sort columns/directions to settings file
 -f5 doesn't show in the menu for refresh
 -log bug 'file size not updated after editing a file'
+-drop-down list to select track - can do multitrack
 
 
 bk:
