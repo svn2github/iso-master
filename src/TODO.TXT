@@ -11,6 +11,7 @@ ui:
 -f5 doesn't show in the menu for refresh
 -log bug 'file size not updated after editing a file'
 -drop-down list to select track - can do multitrack
+-red button should be quit in dialog, but still the default
 
 
 bk:
@@ -47,6 +48,7 @@ tests to run before a release:
  - starting with an existing no emulation bootable disk
 - delete config file, make sure it still works
 - add a bunch of files to an iso, delete all the files, add some more, save
+- edit some text and binary files, make sure they extract and write properly
 
 
 to package a release:

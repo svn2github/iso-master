@@ -20,7 +20,10 @@
 #include "isomaster.h"
 
 #define MAX_RANDOM_BASE_NAME_LEN 26
-#define RANDOM_ENDING_NAME_LEN 6
+#define RANDOM_STR_NAME_LEN 6
+
+/* files that I created in the temp dir for editing */
+TempFileCreated* GBLtempFilesList = NULL;
 
 extern bool GBLisoPaneActive;
 extern GtkWidget* GBLisoTreeView;
@@ -29,6 +32,44 @@ extern char* GBLisoCurrentDir;
 extern VolInfo GBLvolInfo;
 extern GtkWidget* GBLmainWindow;
 extern bool GBLisoChangesProbable;
+
+/******************************************************************************
+* addToTempFilesList()
+* Appends a node to the front of the list.
+* */
+void addToTempFilesList(const char* pathAndName)
+{
+    TempFileCreated* newNode;
+    
+    newNode = malloc(sizeof(TempFileCreated));
+    if(newNode == NULL)
+        fatalError("newNode = malloc(sizeof(TempFileCreated)) failed\n");
+    
+    newNode->pathAndName = malloc(strlen(pathAndName) + 1);
+    if(newNode == NULL)
+        fatalError("newNode.pathAndName = malloc(strlen(pathAndName) + 1) failed\n");
+    
+    strcpy(newNode->pathAndName, pathAndName);
+    
+    newNode->next = GBLtempFilesList;
+    
+    GBLtempFilesList = newNode;
+}
+
+void destroyTempFilesList(void)
+{
+    TempFileCreated* next;
+    
+    while(GBLtempFilesList != NULL)
+    {
+        next = GBLtempFilesList->next;
+        printf("deleting %s\n", GBLtempFilesList->pathAndName);
+        free(GBLtempFilesList->pathAndName);
+        free(GBLtempFilesList);
+        
+        GBLtempFilesList = next;
+    }
+}
 
 void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
                         GtkTreeIter* iterator, gpointer data)
@@ -51,7 +92,6 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     gtk_tree_model_get(model, iterator, COLUMN_FILENAME, &itemName, -1);
     
-    //!! don't want this if it's on fs already
     /* create full path and name for the file on the iso */
     pathAndNameOnIso = malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
     if(pathAndNameOnIso == NULL)
@@ -74,7 +114,7 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     /* extract the file to the temporary directory */
     rc = bk_extract_as(&GBLvolInfo, pathAndNameOnIso, GBLappSettings.tempDir, 
-                       randomizedItemName, true, activityProgressUpdaterCbk);
+                       randomizedItemName, false, activityProgressUpdaterCbk);
     if(rc <= 0)
     {
         warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -95,6 +135,8 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         GBLvolInfo.warningCbk = savedWarningCbk;
         return;
     }
+    
+    addToTempFilesList(pathAndNameOnFs);
     
     /* start the editor */
     if(!fork())
@@ -148,8 +190,6 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         gtk_widget_destroy(warningDialog);
     }
     
-    //!! add to global list of files created (to delete after writing)
-    
     g_free(itemName);
     free(randomizedItemName);
     free(pathAndNameOnFs);
@@ -182,7 +222,7 @@ char* makeRandomFilename(const char* sourceName)
 {
     int sourceNameLen;
     char* newName;
-    char ending[RANDOM_ENDING_NAME_LEN];
+    char randomStr[RANDOM_STR_NAME_LEN];
     int numRandomCharsFilled;
     
     if(strlen(sourceName) > MAX_RANDOM_BASE_NAME_LEN)
@@ -190,14 +230,14 @@ char* makeRandomFilename(const char* sourceName)
     else
         sourceNameLen = strlen(sourceName);
     
-    newName = malloc(sourceNameLen + RANDOM_ENDING_NAME_LEN + 2);
+    newName = malloc(sourceNameLen + RANDOM_STR_NAME_LEN + 2);
     if(newName == NULL)
-        fatalError("newName = malloc(sourceNameLen + RANDOM_ENDING_NAME_LEN + 2) failed\n");
+        fatalError("newName = malloc(sourceNameLen + RANDOM_STR_NAME_LEN + 2) failed\n");
     
     srandom((int)time(NULL));
     
     numRandomCharsFilled = 0;
-    while(numRandomCharsFilled < RANDOM_ENDING_NAME_LEN)
+    while(numRandomCharsFilled < RANDOM_STR_NAME_LEN)
     {
         char oneRandomChar;
         bool gotGoodChar;
@@ -212,16 +252,16 @@ char* makeRandomFilename(const char* sourceName)
             }
         }
         
-        ending[numRandomCharsFilled] = oneRandomChar;
+        randomStr[numRandomCharsFilled] = oneRandomChar;
         
         numRandomCharsFilled++;
     }
     
-    strncpy(newName, sourceName, sourceNameLen);
-    newName[sourceNameLen] = '\0';
+    strncpy(newName, randomStr, RANDOM_STR_NAME_LEN);
+    newName[RANDOM_STR_NAME_LEN] = '\0';
     strcat(newName, "-");
-    strncat(newName, ending, RANDOM_ENDING_NAME_LEN);
-    newName[sourceNameLen + 1 + RANDOM_ENDING_NAME_LEN] = '\0';
+    strncat(newName, sourceName, sourceNameLen);
+    newName[RANDOM_STR_NAME_LEN + sourceNameLen + 1] = '\0';
     
     return newName;
 }

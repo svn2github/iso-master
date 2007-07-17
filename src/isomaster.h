@@ -35,4 +35,16 @@
 #  define S_IFREG  0100000
 #endif
 
+/******************************************************************************
+* FileCreated
+* Linked list node, each having the path and name of a temporary file that 
+* ISO Master created (for example while editing a file). */
+typedef struct TempFileCreated
+{
+    char* pathAndName;
+    
+    struct TempFileCreated* next;
+    
+} TempFileCreated;
+
 #endif

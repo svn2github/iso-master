@@ -1,3 +1,5 @@
+void addToTempFilesList(const char* pathAndName);
+void destroyTempFilesList(void);
 void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
                         GtkTreeIter* iterator, gpointer data);
 void editSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data);
