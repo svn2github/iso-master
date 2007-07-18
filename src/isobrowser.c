@@ -770,12 +770,6 @@ gboolean isoKeyPressedCbk(GtkWidget* widget, GdkEventKey* event, gpointer user_d
         
         return TRUE;
     }
-    else if(event->keyval == GDK_F2)
-    {
-        renameSelected();
-        
-        return TRUE;
-    }
     
     return FALSE;
 }
@@ -1491,6 +1485,7 @@ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
     GtkWidget* menuItem;
     GtkTreeSelection* selection;
     gint numSelectedRows;
+    GtkAccelGroup* accelGroup;
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
@@ -1498,25 +1493,33 @@ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
     if(numSelectedRows == 0)
         return;
     
+    /* have this here just so that the shortcut keys show in the context menu */
+    accelGroup = gtk_accel_group_new();
+    gtk_window_add_accel_group(GTK_WINDOW(GBLmainWindow), accelGroup);
+    
     menu = gtk_menu_new();
+    gtk_menu_set_accel_group(GTK_MENU(menu), accelGroup);
     
     if(numSelectedRows == 1)
     {
         menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
         g_signal_connect(menuItem, "activate", 
                          (GCallback)renameSelectedBtnCbk, NULL);
-        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-        gtk_widget_show_all(menu);
-        
-        menuItem = gtk_image_menu_item_new_with_label(_("Edit"));
-        g_signal_connect(menuItem, "activate", 
-                         (GCallback)editSelectedBtnCbk, NULL);
+        gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/Rename");
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
         gtk_widget_show_all(menu);
         
         menuItem = gtk_image_menu_item_new_with_label(_("View"));
         g_signal_connect(menuItem, "activate", 
                          (GCallback)viewSelectedBtnCbk, NULL);
+        gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/View");
+        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+        gtk_widget_show_all(menu);
+        
+        menuItem = gtk_image_menu_item_new_with_label(_("Edit"));
+        g_signal_connect(menuItem, "activate", 
+                         (GCallback)editSelectedBtnCbk, NULL);
+        gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/Edit");
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
         gtk_widget_show_all(menu);
     }

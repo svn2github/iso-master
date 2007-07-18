@@ -120,6 +120,22 @@ void buildMenu(GtkWidget* boxToPackInto)
     closure = g_cclosure_new(G_CALLBACK(showHelpOverviewCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
     gtk_accel_map_add_entry("<ISOMaster>/Help/Overview", accelKey, accelModifier);
+    
+    gtk_accelerator_parse("F2", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(renameSelectedBtnCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    gtk_accel_map_add_entry("<ISOMaster>/Contextmenu/Rename", accelKey, accelModifier);
+    
+    gtk_accelerator_parse("F3", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(viewSelectedBtnCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    gtk_accel_map_add_entry("<ISOMaster>/Contextmenu/View", accelKey, accelModifier);
+    
+    gtk_accelerator_parse("F4", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(editSelectedBtnCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    gtk_accel_map_add_entry("<ISOMaster>/Contextmenu/Edit", accelKey, accelModifier);
+    
     /* END KEYBOARD accelerators */
     
     menuBar = gtk_menu_bar_new();
@@ -191,6 +207,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     
     menu = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
+    gtk_menu_set_accel_group(GTK_MENU(menu), accelGroup);
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_REFRESH, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
