@@ -34,8 +34,10 @@ GtkWidget* GBLaddIcon;
 GtkWidget* GBLextractIcon;
 /* icon for 'delete' for iso browser */
 GtkWidget* GBLdeleteIcon2;
-/* text field for the text editor setting */
-GtkWidget* GBLtextEditorFld;
+/* text field for the editor setting */
+GtkWidget* GBLeditorFld;
+/* text field for the viewer setting */
+GtkWidget* GBLviewerFld;
 /* text field for the temp directory setting */
 GtkWidget* GBLtempDirFld;
 
@@ -327,14 +329,40 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
-                     G_CALLBACK(changeTextEditorCbk), NULL);
+                     G_CALLBACK(changeEditorCbk), NULL);
     
-    GBLtextEditorFld = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(GBLtextEditorFld), GBLappSettings.textEditor);
-    gtk_editable_set_editable(GTK_EDITABLE(GBLtextEditorFld), FALSE);
-    gtk_entry_set_width_chars(GTK_ENTRY(GBLtextEditorFld), 30);
-    gtk_container_add(GTK_CONTAINER(menuItem), GBLtextEditorFld);
-    gtk_widget_show(GBLtextEditorFld);
+    GBLeditorFld = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(GBLeditorFld), GBLappSettings.editor);
+    gtk_editable_set_editable(GTK_EDITABLE(GBLeditorFld), FALSE);
+    gtk_entry_set_width_chars(GTK_ENTRY(GBLeditorFld), 30);
+    gtk_container_add(GTK_CONTAINER(menuItem), GBLeditorFld);
+    gtk_widget_show(GBLeditorFld);
+    
+#if GTK_MINOR_VERSION >= 6
+    icon = gtk_image_new_from_stock(GTK_STOCK_EDIT, GTK_ICON_SIZE_MENU);
+    rootSubmenu = gtk_image_menu_item_new_with_label(_("Viewer"));
+    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(rootSubmenu), icon);
+#else
+    rootSubmenu = gtk_menu_item_new_with_label(_("Viewer"));
+#endif
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
+    gtk_widget_show(rootSubmenu);
+    
+    submenu = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
+    
+    menuItem = gtk_menu_item_new();
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
+    gtk_widget_show(menuItem);
+    g_signal_connect(G_OBJECT(menuItem), "activate",
+                     G_CALLBACK(changeViewerCbk), NULL);
+    
+    GBLviewerFld = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(GBLviewerFld), GBLappSettings.viewer);
+    gtk_editable_set_editable(GTK_EDITABLE(GBLviewerFld), FALSE);
+    gtk_entry_set_width_chars(GTK_ENTRY(GBLviewerFld), 30);
+    gtk_container_add(GTK_CONTAINER(menuItem), GBLviewerFld);
+    gtk_widget_show(GBLviewerFld);
     
 #if GTK_MINOR_VERSION >= 6
     icon = gtk_image_new_from_stock(GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU);
@@ -361,33 +389,6 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_entry_set_width_chars(GTK_ENTRY(GBLtempDirFld), 30);
     gtk_container_add(GTK_CONTAINER(menuItem), GBLtempDirFld);
     gtk_widget_show(GBLtempDirFld);
-    
-#if GTK_MINOR_VERSION >= 6
-    icon = gtk_image_new_from_stock(GTK_STOCK_EDIT, GTK_ICON_SIZE_MENU);
-    rootSubmenu = gtk_image_menu_item_new_with_label(_("Viewer"));
-    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(rootSubmenu), icon);
-#else
-    rootSubmenu = gtk_menu_item_new_with_label(_("Editor"));
-#endif
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
-    gtk_widget_show(rootSubmenu);
-    
-    submenu = gtk_menu_new();
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
-    
-    menuItem = gtk_menu_item_new();
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
-    gtk_widget_show(menuItem);
-    //~ g_signal_connect(G_OBJECT(menuItem), "activate",
-                     //~ G_CALLBACK(changeTextEditorCbk), NULL);
-    
-    //~ GBLtextEditorFld = gtk_entry_new();
-    //~ gtk_entry_set_text(GTK_ENTRY(GBLtextEditorFld), GBLappSettings.textEditor);
-    //~ gtk_editable_set_editable(GTK_EDITABLE(GBLtextEditorFld), FALSE);
-    //~ gtk_entry_set_width_chars(GTK_ENTRY(GBLtextEditorFld), 30);
-    //~ gtk_container_add(GTK_CONTAINER(menuItem), GBLtextEditorFld);
-    //~ gtk_widget_show(GBLtextEditorFld);
-    
     /* END SETTINGS menu */
     
     /* HELP menu */
@@ -472,10 +473,9 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
     
     writeSettings();
     
-    //destroyTempFilesList();
+    destroyTempFilesList();
     
     printf("Quitting\n");
-    
     gtk_main_quit();
     
     /* the accelerator callback must return true */

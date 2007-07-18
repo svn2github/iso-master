@@ -29,14 +29,16 @@ typedef struct
     char* lastIsoDir;
     bool appendExtension;
     char* lastBootRecordDir;
-    char* textEditor;
+    char* editor;
+    char* viewer;
     char* tempDir;
     
 } AppSettings;
 
 void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event);
-void changeTextEditorCbk(GtkButton *button, gpointer data);
+void changeEditorCbk(GtkButton *button, gpointer data);
 void changeTempDirCbk(GtkButton *button, gpointer data);
+void changeViewerCbk(GtkButton *button, gpointer data);
 void findHomeDir(void);
 void followSymLinksCbk(GtkButton *button, gpointer data);
 void openConfigFile(char* configFileName);

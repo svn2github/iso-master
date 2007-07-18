@@ -1513,6 +1513,12 @@ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
                          (GCallback)editSelectedBtnCbk, NULL);
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
         gtk_widget_show_all(menu);
+        
+        menuItem = gtk_image_menu_item_new_with_label(_("View"));
+        g_signal_connect(menuItem, "activate", 
+                         (GCallback)viewSelectedBtnCbk, NULL);
+        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+        gtk_widget_show_all(menu);
     }
     
     menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));

@@ -19,11 +19,14 @@ MYMANPATH ?= $(PREFIX)/share/man/man1
 # Where to install the .desktop file
 DESKTOPPATH ?= $(PREFIX)/share/applications
 
-# A graphical text editor that's going to be used by default to edit text
-# files. The user can change it in the settings, but please try to set it
-# to and editor that's most likely to be present on a default install on
-# your distribution.
-DEFAULT_TEXT_EDITOR = mousepad
+# The default editor for files from the image. Users can change this. I
+# recommend you set it to a graphical text editor that is likely to be 
+# installed by default on your distribution.
+DEFAULT_EDITOR = mousepad
+
+# The default viewer for files from the image. I recommend you make it 
+# a web browser because it can display the widest range of files.
+DEFAULT_VIEWER = firefox
 
 # To disable i18n completely, uncomment the following line 
 # or define WITHOUT_NLS somewhere else.
@@ -48,7 +51,7 @@ ifndef WITHOUT_NLS
 	CFLAGS += -DENABLE_NLS
 endif
 
-CPPFLAGS +=  -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEFAULT_TEXT_EDITOR=\"$(DEFAULT_TEXT_EDITOR)\"
+CPPFLAGS +=  -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEFAULT_EDITOR=\"$(DEFAULT_EDITOR)\" -DDEFAULT_VIEWER=\"$(DEFAULT_VIEWER)\"
 
 # the _FILE_OFFSET_BITS=64 is to enable stat() for large files
 CPPFLAGS += -D_FILE_OFFSET_BITS=64

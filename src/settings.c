@@ -36,7 +36,8 @@ extern char* GBLfsCurrentDir;
 extern bool GBLisoPaneActive;
 extern VolInfo GBLvolInfo;
 extern bool GBLisoChangesProbable;
-extern GtkWidget* GBLtextEditorFld;
+extern GtkWidget* GBLeditorFld;
+extern GtkWidget* GBLviewerFld;
 extern GtkWidget* GBLtempDirFld;
 
 void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
@@ -166,13 +167,13 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_widget_destroy(dialog);
 }
 
-void changeTextEditorCbk(GtkButton *button, gpointer data)
+void changeEditorCbk(GtkButton *button, gpointer data)
 {
     GtkWidget* dialog;
     GtkWidget* textField;
     int rc;
     
-    dialog = gtk_dialog_new_with_buttons(_("Text editor"),
+    dialog = gtk_dialog_new_with_buttons(_("Editor"),
                                          GTK_WINDOW(GBLmainWindow),
                                          GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_STOCK_OK,
@@ -183,7 +184,7 @@ void changeTextEditorCbk(GtkButton *button, gpointer data)
     g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
     
     textField = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(textField), GBLappSettings.textEditor);
+    gtk_entry_set_text(GTK_ENTRY(textField), GBLappSettings.editor);
     gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
     g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
     gtk_widget_show(textField);
@@ -198,13 +199,13 @@ void changeTextEditorCbk(GtkButton *button, gpointer data)
         
         newEditor = gtk_entry_get_text(GTK_ENTRY(textField));
         
-        free(GBLappSettings.textEditor);
-        GBLappSettings.textEditor = malloc(strlen(newEditor) + 1);
-        if(GBLappSettings.textEditor == NULL)
-            fatalError("GBLappSettings.textEditor = malloc(strlen(newEditor) + 1) failed");
-        strcpy(GBLappSettings.textEditor, newEditor);
+        free(GBLappSettings.editor);
+        GBLappSettings.editor = malloc(strlen(newEditor) + 1);
+        if(GBLappSettings.editor == NULL)
+            fatalError("GBLappSettings.editor = malloc(strlen(newEditor) + 1) failed");
+        strcpy(GBLappSettings.editor, newEditor);
         
-        gtk_entry_set_text(GTK_ENTRY(GBLtextEditorFld), GBLappSettings.textEditor);
+        gtk_entry_set_text(GTK_ENTRY(GBLeditorFld), GBLappSettings.editor);
     }
     
     gtk_widget_destroy(dialog);
@@ -249,6 +250,50 @@ void changeTempDirCbk(GtkButton *button, gpointer data)
         strcpy(GBLappSettings.tempDir, newDir);
         
         gtk_entry_set_text(GTK_ENTRY(GBLtempDirFld), GBLappSettings.tempDir);
+    }
+    
+    gtk_widget_destroy(dialog);
+}
+
+void changeViewerCbk(GtkButton *button, gpointer data)
+{
+    GtkWidget* dialog;
+    GtkWidget* textField;
+    int rc;
+    
+    dialog = gtk_dialog_new_with_buttons(_("Viewer"),
+                                         GTK_WINDOW(GBLmainWindow),
+                                         GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_STOCK_OK,
+                                         GTK_RESPONSE_ACCEPT,
+                                         GTK_STOCK_CANCEL,
+                                         GTK_RESPONSE_REJECT,
+                                         NULL);
+    g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
+    
+    textField = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(textField), GBLappSettings.viewer);
+    gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
+    g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
+    gtk_widget_show(textField);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), textField, TRUE, TRUE, 0);
+    
+    gtk_widget_show(dialog);
+    
+    rc = gtk_dialog_run(GTK_DIALOG(dialog));
+    if(rc == GTK_RESPONSE_ACCEPT)
+    {
+        const gchar* newViewer;
+        
+        newViewer = gtk_entry_get_text(GTK_ENTRY(textField));
+        
+        free(GBLappSettings.viewer);
+        GBLappSettings.viewer = malloc(strlen(newViewer) + 1);
+        if(GBLappSettings.viewer == NULL)
+            fatalError("GBLappSettings.viewer = malloc(strlen(newViewer) + 1) failed");
+        strcpy(GBLappSettings.viewer, newViewer);
+        
+        gtk_entry_set_text(GTK_ENTRY(GBLviewerFld), GBLappSettings.viewer);
     }
     
     gtk_widget_destroy(dialog);
@@ -531,29 +576,53 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.appendExtension = true;
     
-    /* read/set text editor */
+    /* read/set editor */
     if(GBLsettingsDictionary != NULL)
     {
         tempStr = iniparser_getstring(GBLsettingsDictionary, 
-                                      "ui:texteditor", NULL);
+                                      "ui:editor", NULL);
         if(tempStr == NULL)
         {
-            GBLappSettings.textEditor = malloc(strlen(DEFAULT_TEXT_EDITOR) + 1);
-            if(GBLappSettings.textEditor == NULL)
-                fatalError("GBLappSettings.textEditor = malloc(strlen(DEFAULT_TEXT_EDITOR) +1) failed");
-            strcpy(GBLappSettings.textEditor, DEFAULT_TEXT_EDITOR);
+            GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) + 1);
+            if(GBLappSettings.editor == NULL)
+                fatalError("GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) +1) failed");
+            strcpy(GBLappSettings.editor, DEFAULT_EDITOR);
         }
         else
         {
-            GBLappSettings.textEditor = malloc(strlen(tempStr) +1);
-            if(GBLappSettings.textEditor == NULL)
-                fatalError("GBLappSettings.lastBootRecordDir = malloc(strlen(tempStr) +1) failed");
-            strcpy(GBLappSettings.textEditor, tempStr);
+            GBLappSettings.editor = malloc(strlen(tempStr) +1);
+            if(GBLappSettings.editor == NULL)
+                fatalError("GBLappSettings.editor = malloc(strlen(tempStr) +1) failed");
+            strcpy(GBLappSettings.editor, tempStr);
         }
     }
     else
     /* no config file */
-        GBLappSettings.textEditor = NULL;
+        GBLappSettings.editor = NULL;
+    
+    /* read/set viewer */
+    if(GBLsettingsDictionary != NULL)
+    {
+        tempStr = iniparser_getstring(GBLsettingsDictionary, 
+                                      "ui:viewer", NULL);
+        if(tempStr == NULL)
+        {
+            GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) + 1);
+            if(GBLappSettings.viewer == NULL)
+                fatalError("GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) +1) failed");
+            strcpy(GBLappSettings.viewer, DEFAULT_VIEWER);
+        }
+        else
+        {
+            GBLappSettings.viewer = malloc(strlen(tempStr) +1);
+            if(GBLappSettings.viewer == NULL)
+                fatalError("GBLappSettings.viewer = malloc(strlen(tempStr) +1) failed");
+            strcpy(GBLappSettings.viewer, tempStr);
+        }
+    }
+    else
+    /* no config file */
+        GBLappSettings.viewer = NULL;
     
     /* read/set temporary directory */
     if(GBLsettingsDictionary != NULL)
@@ -675,7 +744,9 @@ void writeSettings(void)
     snprintf(numberStr, 20, "%d", GBLappSettings.appendExtension);
     iniparser_setstr(GBLsettingsDictionary, "ui:appendextension", numberStr);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:texteditor", GBLappSettings.textEditor);
+    iniparser_setstr(GBLsettingsDictionary, "ui:editor", GBLappSettings.editor);
+    
+    iniparser_setstr(GBLsettingsDictionary, "ui:viewer", GBLappSettings.viewer);
     
     iniparser_setstr(GBLsettingsDictionary, "ui:tempdir", GBLappSettings.tempDir);
     

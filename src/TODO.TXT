@@ -12,6 +12,9 @@ ui:
 -log bug 'file size not updated after editing a file'
 -drop-down list to select track - can do multitrack
 -red button should be quit in dialog, but still the default
+-what if editor/viewer is empty string in conf file? will free crash?
+-canceling writing when writing a big file doesn't work
+-f3view, f4edit
 
 
 bk:
