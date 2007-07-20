@@ -1,18 +1,13 @@
 ui:
--alt shortcut keys need attention (bulgarian)
--change file/dir properties
- -change permission, change permission for all selected
- -maybe creation date, but i don't know
--edit file
+-drop-down list to select track - can do multitrack
+-maybe creation date, but i don't know
+-change permission, change permission for all selected
 -some dialog boxes could stay up after failure for a second try (e.g. rename)
 -isobrowser.c:1213 add filename tried to rename to
--add F2 rename to help window
+-add 'select in iso and right-click -> more options' to help window
 -write sort columns/directions to settings file
 -log bug 'file size not updated after editing a file'
--drop-down list to select track - can do multitrack
--red button should be quit in dialog, but still the default
--canceling writing when writing a big file doesn't work
--f3view, f4edit
+-red button should be quit in dialog, but still the default. close+goback?
 
 
 bk:
