@@ -4,8 +4,8 @@ ui:
 -change permission, change permission for all selected
 -some dialog boxes could stay up after failure for a second try (e.g. rename)
 -isobrowser.c:1213 add filename tried to rename to
--add 'select in iso and right-click -> more options' to help window
 -write sort columns/directions to settings file
+-add 'select in iso and right-click -> more options' to help window
 -log bug 'file size not updated after editing a file'
 
 
