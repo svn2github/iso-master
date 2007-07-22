@@ -438,6 +438,36 @@ void changeIsoDirectory(char* newDirStr)
     gtk_entry_set_text(GTK_ENTRY(GBLisoCurrentDirField), GBLisoCurrentDir);
 }
 
+void changPermissionsBtnCbk(GtkMenuItem *menuitem, gpointer data)
+{
+    GtkTreeSelection* selection;
+    
+    /* do nothing if no image open */
+    if(!GBLisoPaneActive)
+        return;
+    
+    
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    gtk_tree_selection_selected_foreach(selection, changPermissionsRowCbk, NULL);
+}
+
+void changPermissionsRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                            GtkTreeIter* iterator, gpointer data)
+{
+    //int rc;
+    char* itemName;
+    //GtkWidget* warningDialog;
+    
+    gtk_tree_model_get(model, iterator, COLUMN_FILENAME, &itemName, -1);
+    
+    printf("chmod %s\n", itemName);
+    
+    g_free(itemName);
+}
+
+
 void closeIso(void)
 {
     if(!GBLisoPaneActive)
@@ -1161,14 +1191,14 @@ void renameSelected(void)
         return;
     
     /* there's just one row selected but this is the easiest way to do it */
-    gtk_tree_selection_selected_foreach(selection, renameSelectedCbk, NULL);
+    gtk_tree_selection_selected_foreach(selection, renameSelectedRowCbk, NULL);
     
     /* can't put this in the callback because gtk complains */
     refreshIsoView();
 }
 
-void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
-                       GtkTreeIter* iterator, gpointer data)
+void renameSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                          GtkTreeIter* iterator, gpointer data)
 {
     GtkWidget* dialog;
     GtkWidget* nameField;
@@ -1216,8 +1246,9 @@ void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   _("Failed to rename '%s': %s"),
+                                                   _("Failed to rename '%s' to '%s': %s"),
                                                    itemName,
+                                                   gtk_entry_get_text(GTK_ENTRY(nameField)),
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
             gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -1512,33 +1543,27 @@ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
         gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/Rename");
         gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
         gtk_widget_show_all(menu);
-        
-        menuItem = gtk_image_menu_item_new_with_label(_("View"));
-        g_signal_connect(menuItem, "activate", 
-                         (GCallback)viewSelectedBtnCbk, NULL);
-        gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/View");
-        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-        gtk_widget_show_all(menu);
-        
-        menuItem = gtk_image_menu_item_new_with_label(_("Edit"));
-        g_signal_connect(menuItem, "activate", 
-                         (GCallback)editSelectedBtnCbk, NULL);
-        gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/Edit");
-        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-        gtk_widget_show_all(menu);
     }
     
-    menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
-    //g_signal_connect(menuItem, "activate", 
-    //                 (GCallback)NULL, NULL);
+    menuItem = gtk_image_menu_item_new_with_label(_("View"));
+    g_signal_connect(menuItem, "activate", 
+                     (GCallback)viewSelectedBtnCbk, NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/View");
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show_all(menu);
     
+    menuItem = gtk_image_menu_item_new_with_label(_("Edit"));
+    g_signal_connect(menuItem, "activate", 
+                     (GCallback)editSelectedBtnCbk, NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/Edit");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show_all(menu);
     
-    
-    // extract
-    
-    // delete
+    menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
+    g_signal_connect(menuItem, "activate", 
+                     (GCallback)changPermissionsBtnCbk, NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show_all(menu);
     
     gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
                    event->button, gdk_event_get_time((GdkEvent*)event));

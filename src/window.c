@@ -490,7 +490,7 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
     
     writeSettings();
     
-    destroyTempFilesList();
+    deleteTempFiles();
     
     printf("Quitting\n");
     gtk_main_quit();

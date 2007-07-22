@@ -8,6 +8,9 @@ void buildIsoBrowser(GtkWidget* boxToPackInto);
 void buildIsoLocator(GtkWidget* boxToPackInto);
 void cancelOperation(GtkDialog* dialog, gint arg1, gpointer user_data);
 void changeIsoDirectory(char* newDirStr);
+void changPermissionsBtnCbk(GtkMenuItem *menuitem, gpointer data);
+void changPermissionsRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                            GtkTreeIter* iterator, gpointer data);
 void closeIso(void);
 bool confirmCloseIso(void);
 void deleteSelectedFromIso(void);
@@ -30,8 +33,8 @@ gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data);
 bool operationFailed(const char* msg);
 void refreshIsoView(void);
 void renameSelected(void);
-void renameSelectedCbk(GtkTreeModel* model, GtkTreePath* path,
-                           GtkTreeIter* iterator, gpointer data);
+void renameSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                          GtkTreeIter* iterator, gpointer data);
 void renameSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data);
 void saveIso(char* filename);
 gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event);

@@ -1,10 +1,10 @@
 ui:
 -drop-down list to select track - can do multitrack
--maybe creation date, but i don't know
--change permission, change permission for all selected
+-maybe change creation date, but i don't know
 -some dialog boxes could stay up after failure for a second try (e.g. rename)
--isobrowser.c:1213 add filename tried to rename to
+-change permission, change permission for all selected
 -write sort columns/directions to settings file
+-show exec failed warnings from editor.c
 -add 'select in iso and right-click -> more options' to help window
 -log bug 'file size not updated after editing a file'
 

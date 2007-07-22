@@ -56,7 +56,7 @@ void addToTempFilesList(const char* pathAndName)
     GBLtempFilesList = newNode;
 }
 
-void destroyTempFilesList(void)
+void deleteTempFiles(void)
 {
     TempFileCreated* next;
     
@@ -83,9 +83,6 @@ void editSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data)
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
-    if(gtk_tree_selection_count_selected_rows(selection) != 1)
-        return;
-    
     /* there's just one row selected but this is the easiest way to do it */
     gtk_tree_selection_selected_foreach(selection, editSelectedRowCbk, NULL);
     
@@ -104,15 +101,24 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     int rc;
     GtkWidget* warningDialog;
     
-    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, -1);
+    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType,
+                                        COLUMN_FILENAME, &itemName, -1);
     
     if(fileType != FILE_TYPE_REGULAR)
     {
-        printf("can only edit regular files (!!need dialog here)\n");
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("'%s' is not a regular file"),
+                                               itemName);
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        
+        g_free(itemName);
         return;
     }
-    
-    gtk_tree_model_get(model, iterator, COLUMN_FILENAME, &itemName, -1);
     
     /* create full path and name for the file on the iso */
     pathAndNameOnIso = malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
@@ -165,7 +171,8 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     {
         execlp(GBLappSettings.editor, "editor", pathAndNameOnFs, NULL);
         
-        printf("!!execl(%s, %s) failed with %d\n", GBLappSettings.editor, pathAndNameOnFs, errno);
+        printf("Failed to execute %s, error %d\n", GBLappSettings.editor, errno);
+        printf("!! need to send a signal to iso master here to show a dialog\n");
         
         exit(1);
     }
@@ -236,8 +243,6 @@ char* makeRandomFilename(const char* sourceName)
     if(newName == NULL)
         fatalError("newName = malloc(sourceNameLen + RANDOM_STR_NAME_LEN + 2) failed\n");
     
-    srandom((int)time(NULL));
-    
     numRandomCharsFilled = 0;
     while(numRandomCharsFilled < RANDOM_STR_NAME_LEN)
     {
@@ -278,9 +283,6 @@ void viewSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data)
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
-    if(gtk_tree_selection_count_selected_rows(selection) != 1)
-        return;
-    
     /* there's just one row selected but this is the easiest way to do it */
     gtk_tree_selection_selected_foreach(selection, viewSelectedRowCbk, NULL);
 }
@@ -298,13 +300,24 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, -1);
     
+    
+    gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType,
+                                        COLUMN_FILENAME, &itemName, -1);
     if(fileType != FILE_TYPE_REGULAR)
     {
-        printf("can only view regular files (!!need dialog here)\n");
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("'%s' is not a regular file"),
+                                               itemName);
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        
+        g_free(itemName);
         return;
     }
-    
-    gtk_tree_model_get(model, iterator, COLUMN_FILENAME, &itemName, -1);
     
     /* create full path and name for the file on the iso */
     pathAndNameOnIso = malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
@@ -357,7 +370,8 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     {
         execlp(GBLappSettings.viewer, "viewer", pathAndNameOnFs, NULL);
         
-        printf("!!execl(%s, %s) failed with %d\n", GBLappSettings.editor, pathAndNameOnFs, errno);
+        printf("Failed to execute %s, error %d\n", GBLappSettings.viewer, errno);
+        printf("!! need to send a signal to iso master here to show a dialog\n");
         
         exit(1);
     }

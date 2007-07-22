@@ -117,6 +117,8 @@ int main(int argc, char** argv)
     if(argv[1] != NULL)
       openIso(argv[1]);
     
+    srandom((int)time(NULL));
+    
     gtk_main();
     
     return 0;
