@@ -65,7 +65,8 @@ isomaster: $(OBJECTS) lib iniparser
 
 # static pattern rule
 $(OBJECTS): %.o: %.c bk/bk.h Makefile
-	$(CC) $< $(CFLAGS) $(CPPFLAGS) -c -o $@
+	@echo 'Compiling' $<
+	@$(CC) $< $(CFLAGS) $(CPPFLAGS) -c -o $@
 
 lib:
 	cd bk && $(MAKE)
