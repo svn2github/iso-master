@@ -421,7 +421,7 @@ int iniparser_find_entry(
  */
 /*--------------------------------------------------------------------------*/
 
-int iniparser_setstr(dictionary * ini, char * entry, char * val)
+int iniparser_setstr(dictionary * ini, const char * entry, const char * val)
 {
     dictionary_set(ini, strlwc(entry), val);
     return 0 ;

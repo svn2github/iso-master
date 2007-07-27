@@ -236,7 +236,7 @@ int iniparser_getboolean(dictionary * d, const char * key, int notfound);
  */
 /*--------------------------------------------------------------------------*/
 
-int iniparser_setstr(dictionary * ini, char * entry, char * val);
+int iniparser_setstr(dictionary * ini, const char * entry, const char * val);
 
 /*-------------------------------------------------------------------------*/
 /**

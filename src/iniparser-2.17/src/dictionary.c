@@ -76,7 +76,7 @@ static void * mem_double(void * ptr, int size)
  */
 /*--------------------------------------------------------------------------*/
 
-unsigned dictionary_hash(char * key)
+unsigned dictionary_hash(const char * key)
 {
 	int			len ;
 	unsigned	hash ;
@@ -287,7 +287,7 @@ double dictionary_getdouble(dictionary * d, char * key, double def)
  */
 /*--------------------------------------------------------------------------*/
 
-void dictionary_set(dictionary * d, char * key, char * val)
+void dictionary_set(dictionary * d, const char * key, const char * val)
 {
 	int			i ;
 	unsigned	hash ;
