@@ -1,56 +1,40 @@
 
 /*-------------------------------------------------------------------------*/
 /**
-   @file    iniparser.c
+   @file    iniparser.h
    @author  N. Devillard
    @date    Mar 2000
-   @version $Revision: 2.15 $
+   @version $Revision: 1.23 $
    @brief   Parser for ini files.
 */
 /*--------------------------------------------------------------------------*/
 
 /*
-    $Id: iniparser.c,v 2.15 2006-06-27 19:12:29 ndevilla Exp $
-    $Author: ndevilla $
-    $Date: 2006-06-27 19:12:29 $
-    $Revision: 2.15 $
+	$Id: iniparser.h,v 1.23 2006-09-27 11:03:35 ndevilla Exp $
+	$Author: ndevilla $
+	$Date: 2006-09-27 11:03:35 $
+	$Revision: 1.23 $
 */
 
-/*---------------------------------------------------------------------------
-                                Includes
- ---------------------------------------------------------------------------*/
-
-#include "iniparser.h"
-#include "strlib.h"
-
-#define ASCIILINESZ         1024
-#define INI_INVALID_KEY     ((char*)-1)
+#ifndef _INIPARSER_H_
+#define _INIPARSER_H_
 
 /*---------------------------------------------------------------------------
-                        Private to this module
+   								Includes
  ---------------------------------------------------------------------------*/
 
-/* Private: add an entry to the dictionary */
-static void iniparser_add_entry(
-    dictionary * d,
-    char * sec,
-    char * key,
-    char * val)
-{
-    char longkey[2*ASCIILINESZ+1];
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-    /* Make a key as section:keyword */
-    if (key!=NULL) {
-        sprintf(longkey, "%s:%s", sec, key);
-    } else {
-        strcpy(longkey, sec);
-    }
+/*
+ * The following #include is necessary on many Unixes but not Linux.
+ * It is not needed for Windows platforms.
+ * Uncomment it if needed.
+ */
+/* #include <unistd.h> */
 
-    /* Add (key,val) to dictionary */
-    dictionary_set(d, longkey, val);
-    return ;
-}
-
+#include "dictionary.h"
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -71,22 +55,7 @@ static void iniparser_add_entry(
  */
 /*--------------------------------------------------------------------------*/
 
-int iniparser_getnsec(dictionary * d)
-{
-    int i ;
-    int nsec ;
-
-    if (d==NULL) return -1 ;
-    nsec=0 ;
-    for (i=0 ; i<d->size ; i++) {
-        if (d->key[i]==NULL)
-            continue ;
-        if (strchr(d->key[i], ':')==NULL) {
-            nsec ++ ;
-        }
-    }
-    return nsec ;
-}
+int iniparser_getnsec(dictionary * d);
 
 
 /*-------------------------------------------------------------------------*/
@@ -104,28 +73,22 @@ int iniparser_getnsec(dictionary * d)
  */
 /*--------------------------------------------------------------------------*/
 
-char * iniparser_getsecname(dictionary * d, int n)
-{
-    int i ;
-    int foundsec ;
+char * iniparser_getsecname(dictionary * d, int n);
 
-    if (d==NULL || n<0) return NULL ;
-    foundsec=0 ;
-    for (i=0 ; i<d->size ; i++) {
-        if (d->key[i]==NULL)
-            continue ;
-        if (strchr(d->key[i], ':')==NULL) {
-            foundsec++ ;
-            if (foundsec>n)
-                break ;
-        }
-    }
-    if (foundsec<=n) {
-        return NULL ;
-    }
-    return d->key[i] ;
-}
 
+/*-------------------------------------------------------------------------*/
+/**
+  @brief    Save a dictionary to a loadable ini file
+  @param    d   Dictionary to dump
+  @param    f   Opened file pointer to dump to
+  @return   void
+
+  This function dumps a given dictionary into a loadable ini file.
+  It is Ok to specify @c stderr or @c stdout as output files.
+ */
+/*--------------------------------------------------------------------------*/
+
+void iniparser_dump_ini(dictionary * d, FILE * f);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -140,81 +103,11 @@ char * iniparser_getsecname(dictionary * d, int n)
   purposes mostly.
  */
 /*--------------------------------------------------------------------------*/
-void iniparser_dump(dictionary * d, FILE * f)
-{
-    int     i ;
-
-    if (d==NULL || f==NULL) return ;
-    for (i=0 ; i<d->size ; i++) {
-        if (d->key[i]==NULL)
-            continue ;
-        if (d->val[i]!=NULL) {
-            fprintf(f, "[%s]=[%s]\n", d->key[i], d->val[i]);
-        } else {
-            fprintf(f, "[%s]=UNDEF\n", d->key[i]);
-        }
-    }
-    return ;
-}
+void iniparser_dump(dictionary * d, FILE * f);
 
 /*-------------------------------------------------------------------------*/
 /**
-  @brief    Save a dictionary to a loadable ini file
-  @param    d   Dictionary to dump
-  @param    f   Opened file pointer to dump to
-  @return   void
-
-  This function dumps a given dictionary into a loadable ini file.
-  It is Ok to specify @c stderr or @c stdout as output files.
- */
-/*--------------------------------------------------------------------------*/
-
-void iniparser_dump_ini(dictionary * d, FILE * f)
-{
-    int     i, j ;
-    char    keym[ASCIILINESZ+1];
-    int     nsec ;
-    char *  secname ;
-    int     seclen ;
-
-    if (d==NULL || f==NULL) return ;
-
-    nsec = iniparser_getnsec(d);
-    if (nsec<1) {
-        /* No section in file: dump all keys as they are */
-        for (i=0 ; i<d->size ; i++) {
-            if (d->key[i]==NULL)
-                continue ;
-            fprintf(f, "%s = %s\n", d->key[i], d->val[i]);
-        }
-        return ;
-    }
-    for (i=0 ; i<nsec ; i++) {
-        secname = iniparser_getsecname(d, i) ;
-        seclen  = (int)strlen(secname);
-        fprintf(f, "\n[%s]\n", secname);
-        sprintf(keym, "%s:", secname);
-        for (j=0 ; j<d->size ; j++) {
-            if (d->key[j]==NULL)
-                continue ;
-            if (!strncmp(d->key[j], keym, seclen+1)) {
-                fprintf(f,
-                        "%-30s = %s\n",
-                        d->key[j]+seclen+1,
-                        d->val[j] ? d->val[j] : "");
-            }
-        }
-    }
-    fprintf(f, "\n");
-    return ;
-}
-
-
-
-
-/*-------------------------------------------------------------------------*/
-/**
-  @brief	Get the string associated to a key, return NULL if not found
+  @brief    Get the string associated to a key, return NULL if not found
   @param    d   Dictionary to search
   @param    key Key string to look for
   @return   pointer to statically allocated character string, or NULL.
@@ -225,15 +118,12 @@ void iniparser_dump_ini(dictionary * d, FILE * f)
   The returned char pointer is pointing to a string allocated in
   the dictionary, do not free or modify it.
 
-  This function is only provided for backwards compatibility with 
+  This function is only provided for backwards compatibility with
   previous versions of iniparser. It is recommended to use
   iniparser_getstring() instead.
  */
 /*--------------------------------------------------------------------------*/
-char * iniparser_getstr(dictionary * d, char * key)
-{
-    return iniparser_getstring(d, key, NULL);
-}
+char * iniparser_getstr(dictionary * d, const char * key);
 
 
 /*-------------------------------------------------------------------------*/
@@ -251,21 +141,7 @@ char * iniparser_getstr(dictionary * d, char * key)
   the dictionary, do not free or modify it.
  */
 /*--------------------------------------------------------------------------*/
-char * iniparser_getstring(dictionary * d, char * key, char * def)
-{
-    char * lc_key ;
-    char * sval ;
-
-    if (d==NULL || key==NULL)
-        return def ;
-
-    lc_key = strdup(strlwc(key));
-    sval = dictionary_get(d, lc_key, def);
-    free(lc_key);
-    return sval ;
-}
-
-
+char * iniparser_getstring(dictionary * d, const char * key, char * def);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -283,9 +159,9 @@ char * iniparser_getstring(dictionary * d, char * key, char * def)
   so decimal, octal (starting with 0) and hexadecimal (starting with 0x)
   are supported. Examples:
 
-  "42"      ->  42
-  "042"     ->  34 (octal -> decimal)
-  "0x42"    ->  66 (hexa  -> decimal)
+  - "42"      ->  42
+  - "042"     ->  34 (octal -> decimal)
+  - "0x42"    ->  66 (hexa  -> decimal)
 
   Warning: the conversion may overflow in various ways. Conversion is
   totally outsourced to strtol(), see the associated man page for overflow
@@ -294,15 +170,7 @@ char * iniparser_getstring(dictionary * d, char * key, char * def)
   Credits: Thanks to A. Becker for suggesting strtol()
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_getint(dictionary * d, char * key, int notfound)
-{
-    char    *   str ;
-
-    str = iniparser_getstring(d, key, INI_INVALID_KEY);
-    if (str==INI_INVALID_KEY) return notfound ;
-    return (int)strtol(str, NULL, 0);
-}
-
+int iniparser_getint(dictionary * d, const char * key, int notfound);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -317,16 +185,7 @@ int iniparser_getint(dictionary * d, char * key, int notfound)
   the notfound value is returned.
  */
 /*--------------------------------------------------------------------------*/
-double iniparser_getdouble(dictionary * d, char * key, double notfound)
-{
-    char    *   str ;
-
-    str = iniparser_getstring(d, key, INI_INVALID_KEY);
-    if (str==INI_INVALID_KEY) return notfound ;
-    return atof(str);
-}
-
-
+double iniparser_getdouble(dictionary * d, char * key, double notfound);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -360,49 +219,7 @@ double iniparser_getdouble(dictionary * d, char * key, double notfound)
   necessarily have to be 0 or 1.
  */
 /*--------------------------------------------------------------------------*/
-int iniparser_getboolean(dictionary * d, char * key, int notfound)
-{
-    char    *   c ;
-    int         ret ;
-
-    c = iniparser_getstring(d, key, INI_INVALID_KEY);
-    if (c==INI_INVALID_KEY) return notfound ;
-    if (c[0]=='y' || c[0]=='Y' || c[0]=='1' || c[0]=='t' || c[0]=='T') {
-        ret = 1 ;
-    } else if (c[0]=='n' || c[0]=='N' || c[0]=='0' || c[0]=='f' || c[0]=='F') {
-        ret = 0 ;
-    } else {
-        ret = notfound ;
-    }
-    return ret;
-}
-
-
-/*-------------------------------------------------------------------------*/
-/**
-  @brief    Finds out if a given entry exists in a dictionary
-  @param    ini     Dictionary to search
-  @param    entry   Name of the entry to look for
-  @return   integer 1 if entry exists, 0 otherwise
-
-  Finds out if a given entry exists in the dictionary. Since sections
-  are stored as keys with NULL associated values, this is the only way
-  of querying for the presence of sections in a dictionary.
- */
-/*--------------------------------------------------------------------------*/
-
-int iniparser_find_entry(
-    dictionary  *   ini,
-    char        *   entry
-)
-{
-    int found=0 ;
-    if (iniparser_getstring(ini, entry, INI_INVALID_KEY)!=INI_INVALID_KEY) {
-        found = 1 ;
-    }
-    return found ;
-}
-
+int iniparser_getboolean(dictionary * d, const char * key, int notfound);
 
 
 /*-------------------------------------------------------------------------*/
@@ -419,11 +236,7 @@ int iniparser_find_entry(
  */
 /*--------------------------------------------------------------------------*/
 
-int iniparser_setstr(dictionary * ini, char * entry, char * val)
-{
-    dictionary_set(ini, strlwc(entry), val);
-    return 0 ;
-}
+int iniparser_setstr(dictionary * ini, char * entry, char * val);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -435,11 +248,21 @@ int iniparser_setstr(dictionary * ini, char * entry, char * val)
   If the given entry can be found, it is deleted from the dictionary.
  */
 /*--------------------------------------------------------------------------*/
-void iniparser_unset(dictionary * ini, char * entry)
-{
-    dictionary_unset(ini, strlwc(entry));
-}
+void iniparser_unset(dictionary * ini, char * entry);
 
+/*-------------------------------------------------------------------------*/
+/**
+  @brief    Finds out if a given entry exists in a dictionary
+  @param    ini     Dictionary to search
+  @param    entry   Name of the entry to look for
+  @return   integer 1 if entry exists, 0 otherwise
+
+  Finds out if a given entry exists in the dictionary. Since sections
+  are stored as keys with NULL associated values, this is the only way
+  of querying for the presence of sections in a dictionary.
+ */
+/*--------------------------------------------------------------------------*/
+int iniparser_find_entry(dictionary * ini, char * entry) ;
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -455,61 +278,7 @@ void iniparser_unset(dictionary * ini, char * entry)
   The returned dictionary must be freed using iniparser_freedict().
  */
 /*--------------------------------------------------------------------------*/
-
-dictionary * iniparser_load(char * ininame)
-{
-    dictionary  *   d ;
-    char        lin[ASCIILINESZ+1];
-    char        sec[ASCIILINESZ+1];
-    char        key[ASCIILINESZ+1];
-    char        val[ASCIILINESZ+1];
-    char    *   where ;
-    FILE    *   ini ;
-    int         lineno ;
-
-    if ((ini=fopen(ininame, "r"))==NULL) {
-        return NULL ;
-    }
-
-    sec[0]=0;
-
-    /*
-     * Initialize a new dictionary entry
-     */
-    d = dictionary_new(0);
-    lineno = 0 ;
-    while (fgets(lin, ASCIILINESZ, ini)!=NULL) {
-        lineno++ ;
-        where = strskp(lin); /* Skip leading spaces */
-        if (*where==';' || *where=='#' || *where==0)
-            continue ; /* Comment lines */
-        else {
-            if (sscanf(where, "[%[^]]", sec)==1) {
-                /* Valid section name */
-                strcpy(sec, strlwc(sec));
-                iniparser_add_entry(d, sec, NULL, NULL);
-            } else if (sscanf (where, "%[^=] = \"%[^\"]\"", key, val) == 2
-                   ||  sscanf (where, "%[^=] = '%[^\']'",   key, val) == 2
-                   ||  sscanf (where, "%[^=] = %[^;#]",     key, val) == 2) {
-                strcpy(key, strlwc(strcrop(key)));
-                /*
-                 * sscanf cannot handle "" or '' as empty value,
-                 * this is done here
-                 */
-                if (!strcmp(val, "\"\"") || !strcmp(val, "''")) {
-                    val[0] = (char)0;
-                } else {
-                    strcpy(val, strcrop(val));
-                }
-                iniparser_add_entry(d, sec, key, val);
-            }
-        }
-    }
-    fclose(ini);
-    return d ;
-}
-
-
+dictionary * iniparser_load(const char * ininame);
 
 /*-------------------------------------------------------------------------*/
 /**
@@ -522,10 +291,6 @@ dictionary * iniparser_load(char * ininame)
   gets out of the current context.
  */
 /*--------------------------------------------------------------------------*/
+void iniparser_freedict(dictionary * d);
 
-void iniparser_freedict(dictionary * d)
-{
-    dictionary_del(d);
-}
-
-/* vim: set ts=4 et sw=4 tw=75 */
+#endif

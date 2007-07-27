@@ -2,7 +2,7 @@
 #define window_h
 
 #include <stdbool.h>
-#include "iniparser-2.15/src/iniparser.h"
+#include "iniparser-2.17/src/iniparser.h"
 
 #define ISOMASTER_DEFAULT_WINDOW_WIDTH 500
 #define ISOMASTER_DEFAULT_WINDOW_HEIGHT 550

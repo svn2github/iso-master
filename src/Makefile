@@ -61,7 +61,7 @@ OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.
 all: isomaster translations isomaster.desktop
 
 isomaster: $(OBJECTS) lib iniparser
-	$(CC) $(OBJECTS) bk/bk.a iniparser-2.15/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
+	$(CC) $(OBJECTS) bk/bk.a iniparser-2.17/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
 
 # static pattern rule
 $(OBJECTS): %.o: %.c bk/bk.h Makefile
@@ -71,7 +71,7 @@ lib:
 	cd bk && $(MAKE)
 
 iniparser:
-	cd iniparser-2.15 && $(MAKE)
+	cd iniparser-2.17 && $(MAKE)
 
 translations:
 ifndef WITHOUT_NLS
@@ -84,7 +84,7 @@ isomaster.desktop: isomaster.desktop.src
 
 clean: 
 	cd bk && $(MAKE) clean
-	cd iniparser-2.15 && $(MAKE) clean
+	cd iniparser-2.17 && $(MAKE) clean
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) clean
 endif
