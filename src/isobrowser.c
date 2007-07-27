@@ -335,7 +335,7 @@ void cancelOperation(GtkDialog* dialog, gint arg1, gpointer user_data)
     bk_cancel_operation(&GBLvolInfo);
 }
 
-void changeIsoDirectory(char* newDirStr)
+void changeIsoDirectory(const char* newDirStr)
 {
     int rc;
     BkDir* newDir;

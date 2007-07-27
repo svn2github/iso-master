@@ -18,13 +18,13 @@
 
 #include "isomaster.h"
 
-void fatalError(char* msg)
+void fatalError(const char* msg)
 {
     fprintf(stderr, "ISO Master fatal error: %s\n", msg);
     exit(1);
 }
 
-void printWarning(char* msg)
+void printWarning(const char* msg)
 {
     fprintf(stderr, "ISO Master warning: %s\n", msg);
 }

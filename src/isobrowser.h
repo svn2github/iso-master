@@ -7,7 +7,7 @@ void addToIsoCbk(GtkButton *button, gpointer data);
 void buildIsoBrowser(GtkWidget* boxToPackInto);
 void buildIsoLocator(GtkWidget* boxToPackInto);
 void cancelOperation(GtkDialog* dialog, gint arg1, gpointer user_data);
-void changeIsoDirectory(char* newDirStr);
+void changeIsoDirectory(const char* newDirStr);
 void changPermissionsBtnCbk(GtkMenuItem *menuitem, gpointer data);
 void changPermissionsRowCbk(GtkTreeModel* model, GtkTreePath* path,
                             GtkTreeIter* iterator, gpointer data);

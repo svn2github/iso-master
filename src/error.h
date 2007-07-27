@@ -1,2 +1,2 @@
-void fatalError(char* msg);
-void printWarning(char* msg);
+void fatalError(const char* msg);
+void printWarning(const char* msg);
