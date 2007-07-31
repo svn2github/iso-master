@@ -140,7 +140,8 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     
     /* set default sort */
     gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(GBLfsListStore),
-                                         COLUMN_FILENAME, GTK_SORT_ASCENDING);
+                                         GBLappSettings.fsSortColumnId, 
+                                         GBLappSettings.fsSortDirection);
     
     GBLdirPixbuf = NULL;
     GBLfilePixbuf = NULL;

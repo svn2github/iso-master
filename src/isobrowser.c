@@ -315,7 +315,8 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     
     /* set default sort */
     gtk_tree_sortable_set_sort_column_id(GTK_TREE_SORTABLE(GBLisoListStore),
-                                         COLUMN_FILENAME, GTK_SORT_ASCENDING);
+                                         GBLappSettings.isoSortColumnId, 
+                                         GBLappSettings.isoSortDirection);
 
     gtk_widget_set_sensitive(GBLisoCurrentDirField, FALSE);
     gtk_widget_set_sensitive(GBLisoTreeView, FALSE);

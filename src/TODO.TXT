@@ -4,7 +4,7 @@ ui:
 -show exec failed warnings from editor.c
 -add 'select in iso and right-click -> more options' to help window
 -log bug 'file size not updated after editing a file'
-
+-should really make all the stuff in AppSettings only used to initialise. remove extern gblappsettings from everywhere but window.c. At least check to make sure there is no redundancy (no accessible gtk variables hold the same data as vars in appsettings).
 
 bk:
 -dos doesn't like names to start with underscores

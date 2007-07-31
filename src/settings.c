@@ -39,6 +39,8 @@ extern bool GBLisoChangesProbable;
 extern GtkWidget* GBLeditorFld;
 extern GtkWidget* GBLviewerFld;
 extern GtkWidget* GBLtempDirFld;
+extern GtkListStore* GBLfsListStore;
+extern GtkListStore* GBLisoListStore;
 
 void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
 {
@@ -212,7 +214,7 @@ void changeEditorCbk(GtkButton *button, gpointer data)
     g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
     
     textField = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(textField), GBLappSettings.editor);
+    gtk_entry_set_text(GTK_ENTRY(textField), gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)));
     gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
     g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
     gtk_widget_show(textField);
@@ -227,13 +229,7 @@ void changeEditorCbk(GtkButton *button, gpointer data)
         
         newEditor = gtk_entry_get_text(GTK_ENTRY(textField));
         
-        free(GBLappSettings.editor);
-        GBLappSettings.editor = malloc(strlen(newEditor) + 1);
-        if(GBLappSettings.editor == NULL)
-            fatalError("GBLappSettings.editor = malloc(strlen(newEditor) + 1) failed");
-        strcpy(GBLappSettings.editor, newEditor);
-        
-        gtk_entry_set_text(GTK_ENTRY(GBLeditorFld), GBLappSettings.editor);
+        gtk_entry_set_text(GTK_ENTRY(GBLeditorFld), newEditor);
     }
     
     gtk_widget_destroy(dialog);
@@ -256,7 +252,7 @@ void changeTempDirCbk(GtkButton *button, gpointer data)
     g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
     
     textField = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(textField), GBLappSettings.tempDir);
+    gtk_entry_set_text(GTK_ENTRY(textField), gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
     gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
     g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
     gtk_widget_show(textField);
@@ -271,13 +267,7 @@ void changeTempDirCbk(GtkButton *button, gpointer data)
         
         newDir = gtk_entry_get_text(GTK_ENTRY(textField));
         
-        free(GBLappSettings.tempDir);
-        GBLappSettings.tempDir = malloc(strlen(newDir) + 1);
-        if(GBLappSettings.tempDir == NULL)
-            fatalError("GBLappSettings.tempDir = malloc(strlen(newEditor) + 1) failed");
-        strcpy(GBLappSettings.tempDir, newDir);
-        
-        gtk_entry_set_text(GTK_ENTRY(GBLtempDirFld), GBLappSettings.tempDir);
+        gtk_entry_set_text(GTK_ENTRY(GBLtempDirFld), newDir);
     }
     
     gtk_widget_destroy(dialog);
@@ -300,7 +290,7 @@ void changeViewerCbk(GtkButton *button, gpointer data)
     g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
     
     textField = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(textField), GBLappSettings.viewer);
+    gtk_entry_set_text(GTK_ENTRY(textField), gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)));
     gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
     g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
     gtk_widget_show(textField);
@@ -315,13 +305,7 @@ void changeViewerCbk(GtkButton *button, gpointer data)
         
         newViewer = gtk_entry_get_text(GTK_ENTRY(textField));
         
-        free(GBLappSettings.viewer);
-        GBLappSettings.viewer = malloc(strlen(newViewer) + 1);
-        if(GBLappSettings.viewer == NULL)
-            fatalError("GBLappSettings.viewer = malloc(strlen(newViewer) + 1) failed");
-        strcpy(GBLappSettings.viewer, newViewer);
-        
-        gtk_entry_set_text(GTK_ENTRY(GBLviewerFld), GBLappSettings.viewer);
+        gtk_entry_set_text(GTK_ENTRY(GBLviewerFld), newViewer);
     }
     
     gtk_widget_destroy(dialog);
@@ -618,15 +602,18 @@ void loadSettings(void)
         }
         else
         {
-            GBLappSettings.editor = malloc(strlen(tempStr) +1);
-            if(GBLappSettings.editor == NULL)
-                fatalError("GBLappSettings.editor = malloc(strlen(tempStr) +1) failed");
-            strcpy(GBLappSettings.editor, tempStr);
+            /* pointer sharing is ok since GBLappSettings.editor is only written from here */
+            GBLappSettings.editor = tempStr;
         }
     }
     else
     /* no config file */
-        GBLappSettings.editor = NULL;
+    {
+        GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) + 1);
+        if(GBLappSettings.editor == NULL)
+            fatalError("GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) +1) failed");
+        strcpy(GBLappSettings.editor, DEFAULT_EDITOR);
+    }
     
     /* read/set viewer */
     if(GBLsettingsDictionary != NULL)
@@ -642,15 +629,18 @@ void loadSettings(void)
         }
         else
         {
-            GBLappSettings.viewer = malloc(strlen(tempStr) +1);
-            if(GBLappSettings.viewer == NULL)
-                fatalError("GBLappSettings.viewer = malloc(strlen(tempStr) +1) failed");
-            strcpy(GBLappSettings.viewer, tempStr);
+            /* pointer sharing is ok since GBLappSettings.viewer is only written from here */
+            GBLappSettings.viewer = tempStr;
         }
     }
     else
     /* no config file */
-        GBLappSettings.viewer = NULL;
+    {
+        GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) + 1);
+        if(GBLappSettings.viewer == NULL)
+            fatalError("GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) +1) failed");
+        strcpy(GBLappSettings.viewer, DEFAULT_VIEWER);
+    }
     
     /* read/set temporary directory */
     if(GBLsettingsDictionary != NULL)
@@ -666,15 +656,66 @@ void loadSettings(void)
         }
         else
         {
-            GBLappSettings.tempDir = malloc(strlen(tempStr) +1);
-            if(GBLappSettings.tempDir == NULL)
-                fatalError("GBLappSettings.lastBootRecordDir = malloc(strlen(tempStr) +1) failed");
-            strcpy(GBLappSettings.tempDir, tempStr);
+            /* pointer sharing is ok since GBLappSettings.tempDir is only written from here */
+            GBLappSettings.tempDir = tempStr;
         }
     }
     else
     /* no config file */
-        GBLappSettings.tempDir = NULL;
+    {
+        GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) + 1);
+        if(GBLappSettings.tempDir == NULL)
+            fatalError("GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) +1) failed");
+        strcpy(GBLappSettings.tempDir, DEFAULT_TEMP_DIR);
+    }
+    
+    /* read/set iso sort column id */
+    if(GBLsettingsDictionary != NULL)
+    {
+        GBLappSettings.isoSortColumnId = iniparser_getint(GBLsettingsDictionary, 
+                                                          "ui:isosortcolumnid", INT_MAX);
+        if(GBLappSettings.isoSortColumnId == INT_MAX)
+            GBLappSettings.isoSortColumnId = COLUMN_FILENAME;
+    }
+    else
+    /* no config file */
+        GBLappSettings.isoSortColumnId = COLUMN_FILENAME;
+    
+    /* read/set iso sort direction */
+    if(GBLsettingsDictionary != NULL)
+    {
+        GBLappSettings.isoSortDirection = iniparser_getint(GBLsettingsDictionary, 
+                                                          "ui:isosortdirection", INT_MAX);
+        if(GBLappSettings.isoSortDirection == INT_MAX)
+            GBLappSettings.isoSortDirection = GTK_SORT_ASCENDING;
+    }
+    else
+    /* no config file */
+        GBLappSettings.isoSortDirection = GTK_SORT_ASCENDING;
+    
+    /* read/set fs sort column id */
+    if(GBLsettingsDictionary != NULL)
+    {
+        GBLappSettings.fsSortColumnId = iniparser_getint(GBLsettingsDictionary, 
+                                                          "ui:fssortcolumnid", INT_MAX);
+        if(GBLappSettings.fsSortColumnId == INT_MAX)
+            GBLappSettings.fsSortColumnId = COLUMN_FILENAME;
+    }
+    else
+    /* no config file */
+        GBLappSettings.fsSortColumnId = COLUMN_FILENAME;
+    
+    /* read/set fs sort direction */
+    if(GBLsettingsDictionary != NULL)
+    {
+        GBLappSettings.fsSortDirection = iniparser_getint(GBLsettingsDictionary, 
+                                                          "ui:fssortdirection", INT_MAX);
+        if(GBLappSettings.fsSortDirection == INT_MAX)
+            GBLappSettings.fsSortDirection = GTK_SORT_ASCENDING;
+    }
+    else
+    /* no config file */
+        GBLappSettings.fsSortDirection = GTK_SORT_ASCENDING;
     
     free(configFileName);
 }
@@ -705,6 +746,8 @@ void writeSettings(void)
     char numberStr[20];
     int width;
     int height;
+    int sortColumnId;
+    GtkSortType sortDirection;
     
     if(strcmp(GBLuserHomeDir, "/") == 0)
     {
@@ -772,11 +815,25 @@ void writeSettings(void)
     snprintf(numberStr, 20, "%d", GBLappSettings.appendExtension);
     iniparser_setstr(GBLsettingsDictionary, "ui:appendextension", numberStr);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:editor", GBLappSettings.editor);
+    iniparser_setstr(GBLsettingsDictionary, "ui:editor", gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)));
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:viewer", GBLappSettings.viewer);
+    iniparser_setstr(GBLsettingsDictionary, "ui:viewer", gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)));
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:tempdir", GBLappSettings.tempDir);
+    iniparser_setstr(GBLsettingsDictionary, "ui:tempdir", gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
+    
+    gtk_tree_sortable_get_sort_column_id(GTK_TREE_SORTABLE(GBLisoListStore), 
+                                         &sortColumnId, &sortDirection);
+    snprintf(numberStr, 20, "%d", sortColumnId);
+    iniparser_setstr(GBLsettingsDictionary, "ui:isosortcolumnid", numberStr);
+    snprintf(numberStr, 20, "%d", sortDirection);
+    iniparser_setstr(GBLsettingsDictionary, "ui:isosortdirection", numberStr);
+    
+    gtk_tree_sortable_get_sort_column_id(GTK_TREE_SORTABLE(GBLfsListStore), 
+                                         &sortColumnId, &sortDirection);
+    snprintf(numberStr, 20, "%d", sortColumnId);
+    iniparser_setstr(GBLsettingsDictionary, "ui:fssortcolumnid", numberStr);
+    snprintf(numberStr, 20, "%d", sortDirection);
+    iniparser_setstr(GBLsettingsDictionary, "ui:fssortdirection", numberStr);
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }

@@ -19,6 +19,13 @@ typedef struct
     int windowHeight;
     int topPaneHeight;
     char* fsCurrentDir;
+    int isoSortColumnId;
+    int isoSortDirection;
+    int fsSortColumnId;
+    int fsSortDirection;
+    char* editor;
+    char* viewer;
+    char* tempDir;
     
     /* stuff read from the config file that will also be written back from here */
     bool showHiddenFilesFs;
@@ -29,9 +36,6 @@ typedef struct
     char* lastIsoDir;
     bool appendExtension;
     char* lastBootRecordDir;
-    char* editor;
-    char* viewer;
-    char* tempDir;
     
 } AppSettings;
 
