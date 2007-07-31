@@ -8,9 +8,9 @@ void buildIsoBrowser(GtkWidget* boxToPackInto);
 void buildIsoLocator(GtkWidget* boxToPackInto);
 void cancelOperation(GtkDialog* dialog, gint arg1, gpointer user_data);
 void changeIsoDirectory(const char* newDirStr);
-void changPermissionsBtnCbk(GtkMenuItem *menuitem, gpointer data);
-void changPermissionsRowCbk(GtkTreeModel* model, GtkTreePath* path,
-                            GtkTreeIter* iterator, gpointer data);
+void changePermissionsBtnCbk(GtkMenuItem *menuitem, gpointer data);
+void changePermissionsRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                             GtkTreeIter* iterator, gpointer data);
 void closeIso(void);
 bool confirmCloseIso(void);
 void deleteSelectedFromIso(void);

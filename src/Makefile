@@ -58,10 +58,11 @@ CPPFLAGS += -D_FILE_OFFSET_BITS=64
 
 OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o editfile.o
 
-all: isomaster translations isomaster.desktop
+all: translations isomaster.desktop isomaster
 
 isomaster: $(OBJECTS) lib iniparser
-	$(CC) $(OBJECTS) bk/bk.a iniparser-2.17/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
+	@echo 'Linking isomaster'
+	@$(CC) $(OBJECTS) bk/bk.a iniparser-2.17/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
 
 # static pattern rule
 $(OBJECTS): %.o: %.c bk/bk.h Makefile

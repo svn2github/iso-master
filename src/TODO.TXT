@@ -1,8 +1,5 @@
 ui:
 -drop-down list to select track - can do multitrack
--maybe change creation date, but i don't know
--some dialog boxes could stay up after failure for a second try (e.g. rename)
--change permission, change permission for all selected
 -write sort columns/directions to settings file
 -show exec failed warnings from editor.c
 -add 'select in iso and right-click -> more options' to help window
@@ -22,7 +19,7 @@ bk:
 
 manual:
 -add_as() and extract_as()
--how to get permissions without file type?
+-get_ and set_permissions()
 
 
 c99 compatibility issues:

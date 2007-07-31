@@ -438,7 +438,7 @@ void changeIsoDirectory(const char* newDirStr)
     gtk_entry_set_text(GTK_ENTRY(GBLisoCurrentDirField), GBLisoCurrentDir);
 }
 
-void changPermissionsBtnCbk(GtkMenuItem *menuitem, gpointer data)
+void changePermissionsBtnCbk(GtkMenuItem *menuitem, gpointer data)
 {
     GtkTreeSelection* selection;
     
@@ -446,23 +446,212 @@ void changPermissionsBtnCbk(GtkMenuItem *menuitem, gpointer data)
     if(!GBLisoPaneActive)
         return;
     
-    
-    
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
-    gtk_tree_selection_selected_foreach(selection, changPermissionsRowCbk, NULL);
+    gtk_tree_selection_selected_foreach(selection, changePermissionsRowCbk, NULL);
 }
 
-void changPermissionsRowCbk(GtkTreeModel* model, GtkTreePath* path,
-                            GtkTreeIter* iterator, gpointer data)
+void changePermissionsRowCbk(GtkTreeModel* model, GtkTreePath* path,
+                             GtkTreeIter* iterator, gpointer data)
 {
-    //int rc;
+    GtkWidget* dialog;
+    GtkWidget* table;
+    GtkWidget* label;
+    int rc;
+    int count;
     char* itemName;
-    //GtkWidget* warningDialog;
+    char* fullItemName;
+    mode_t permissions;
     
     gtk_tree_model_get(model, iterator, COLUMN_FILENAME, &itemName, -1);
     
-    printf("chmod %s\n", itemName);
+    fullItemName = malloc(strlen(GBLisoCurrentDir) + strlen(itemName) + 1);
+    if(fullItemName == NULL)
+        fatalError("changePermissionsRowCbk(): malloc("
+                   "strlen(GBLisoCurrentDir) + strlen(itemName) + 1) failed (out of memory?)");
+    
+    strcpy(fullItemName, GBLisoCurrentDir);
+    strcat(fullItemName, itemName);
+    
+    printf("chmod %s\n", fullItemName);
+    rc = bk_get_permissions(&GBLvolInfo, fullItemName, &permissions);
+    if(rc <= 0)
+    {
+        dialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                        GTK_DIALOG_DESTROY_WITH_PARENT,
+                                        GTK_MESSAGE_ERROR,
+                                        GTK_BUTTONS_CLOSE,
+                                        "bk_get_permissions() failed (%s), please report bug",
+                                        bk_get_error_string(rc));
+        gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(dialog));
+        gtk_widget_destroy(dialog);
+        return;
+    }
+    
+    dialog = gtk_dialog_new_with_buttons(_("Change permissions"),
+                                         GTK_WINDOW(GBLmainWindow),
+                                         GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_STOCK_OK,
+                                         GTK_RESPONSE_ACCEPT,
+                                         GTK_STOCK_CANCEL,
+                                         GTK_RESPONSE_REJECT,
+                                         NULL);
+    g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
+    gtk_dialog_set_default_response(GTK_DIALOG(dialog), GTK_RESPONSE_ACCEPT);
+    
+    table = gtk_table_new(3, 11, FALSE);
+    //~ gtk_table_set_row_spacings(GTK_TABLE(table), 5);
+    //~ gtk_table_set_col_spacings(GTK_TABLE(table), 5);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), table, TRUE, TRUE, 0);
+    gtk_widget_show(table);
+    
+    label = gtk_label_new("User");
+    gtk_table_attach_defaults(GTK_TABLE(table), label, 0, 3, 0, 1);
+    gtk_widget_show(label);
+    
+    label = gtk_label_new("Group");
+    gtk_table_attach_defaults(GTK_TABLE(table), label, 4, 7, 0, 1);
+    gtk_widget_show(label);
+    
+    label = gtk_label_new("Others");
+    gtk_table_attach_defaults(GTK_TABLE(table), label, 8, 11, 0, 1);
+    gtk_widget_show(label);
+    
+    for(count = 0; count < 11; count++)
+    {
+        if(count == 0 || count == 4 || count == 8)
+        {
+            label = gtk_label_new("r");
+            gtk_table_attach_defaults(GTK_TABLE(table), label, count, count + 1, 1, 2);
+            gtk_widget_show(label);
+        }
+        else if(count == 1 || count == 5 || count == 9)
+        {
+            label = gtk_label_new("w");
+            gtk_table_attach_defaults(GTK_TABLE(table), label, count, count + 1, 1, 2);
+            gtk_widget_show(label);
+        }
+        else if(count == 2 || count == 6 || count == 10)
+        {
+            label = gtk_label_new("x");
+            gtk_table_attach_defaults(GTK_TABLE(table), label, count, count + 1, 1, 2);
+            gtk_widget_show(label);
+        }
+        else
+        {
+            label = gtk_label_new("-");
+            gtk_table_attach_defaults(GTK_TABLE(table), label, count, count + 1, 1, 2);
+            gtk_widget_show(label);
+        }
+    }
+    
+    /* CREATE checkboxes for permissions */
+    GtkWidget* urCbk; /* user read */
+    GtkWidget* uwCbk;
+    GtkWidget* uxCbk;
+    GtkWidget* grCbk; /* group read */
+    GtkWidget* gwCbk;
+    GtkWidget* gxCbk;
+    GtkWidget* orCbk; /* others readd */
+    GtkWidget* owCbk;
+    GtkWidget* oxCbk;
+    
+    urCbk = gtk_check_button_new();
+    gtk_table_attach_defaults(GTK_TABLE(table), urCbk, 0, 1, 2, 3);
+    if(permissions & 0400)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(urCbk), TRUE);
+    gtk_widget_show(urCbk);
+    
+    uwCbk = gtk_check_button_new();
+    gtk_table_attach_defaults(GTK_TABLE(table), uwCbk, 1, 2, 2, 3);
+    if(permissions & 0200)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(uwCbk), TRUE);
+    gtk_widget_show(uwCbk);
+    
+    uxCbk = gtk_check_button_new();
+    gtk_table_attach_defaults(GTK_TABLE(table), uxCbk, 2, 3, 2, 3);
+    if(permissions & 0100)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(uxCbk), TRUE);
+    gtk_widget_show(uxCbk);
+    
+    label = gtk_label_new("-");
+    gtk_table_attach_defaults(GTK_TABLE(table), label, 3, 4, 2, 3);
+    gtk_widget_show(label);
+    
+    grCbk = gtk_check_button_new();
+    gtk_table_attach_defaults(GTK_TABLE(table), grCbk, 4, 5, 2, 3);
+    if(permissions & 0040)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(grCbk), TRUE);
+    gtk_widget_show(grCbk);
+    
+    gwCbk = gtk_check_button_new();
+    gtk_table_attach_defaults(GTK_TABLE(table), gwCbk, 5, 6, 2, 3);
+    if(permissions & 0020)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gwCbk), TRUE);
+    gtk_widget_show(gwCbk);
+    
+    gxCbk = gtk_check_button_new();
+    gtk_table_attach_defaults(GTK_TABLE(table), gxCbk, 6, 7, 2, 3);
+    if(permissions & 0010)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gxCbk), TRUE);
+    gtk_widget_show(gxCbk);
+    
+    label = gtk_label_new("-");
+    gtk_table_attach_defaults(GTK_TABLE(table), label, 7, 8, 2, 3);
+    gtk_widget_show(label);
+    
+    orCbk = gtk_check_button_new();
+    gtk_table_attach_defaults(GTK_TABLE(table), orCbk, 8, 9, 2, 3);
+    if(permissions & 0004)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(orCbk), TRUE);
+    gtk_widget_show(orCbk);
+    
+    owCbk = gtk_check_button_new();
+    gtk_table_attach_defaults(GTK_TABLE(table), owCbk, 9, 10, 2, 3);
+    if(permissions & 0002)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(owCbk), TRUE);
+    gtk_widget_show(owCbk);
+    
+    oxCbk = gtk_check_button_new();
+    gtk_table_attach_defaults(GTK_TABLE(table), oxCbk, 10, 11, 2, 3);
+    if(permissions & 0001)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(oxCbk), TRUE);
+    gtk_widget_show(oxCbk);
+    /* END CREATE checkboxes for permissions */
+    
+    gtk_widget_show(dialog);
+    
+    rc = gtk_dialog_run(GTK_DIALOG(dialog));
+    if(rc == GTK_RESPONSE_ACCEPT)
+    {
+        permissions = 0;
+        
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(urCbk)))
+            permissions |= 0400;
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(uwCbk)))
+            permissions |= 0200;
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(uxCbk)))
+            permissions |= 0100;
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(grCbk)))
+            permissions |= 0040;
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gwCbk)))
+            permissions |= 0020;
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gxCbk)))
+            permissions |= 0010;
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(orCbk)))
+            permissions |= 0004;
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(owCbk)))
+            permissions |= 0002;
+        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(oxCbk)))
+            permissions |= 0001;
+        
+        bk_set_permissions(&GBLvolInfo, fullItemName, permissions);
+        
+        GBLisoChangesProbable = true;
+    }
+    
+    gtk_widget_destroy(dialog);
     
     g_free(itemName);
 }
@@ -1535,15 +1724,14 @@ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
     menu = gtk_menu_new();
     gtk_menu_set_accel_group(GTK_MENU(menu), accelGroup);
     
-    if(numSelectedRows == 1)
-    {
-        menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
-        g_signal_connect(menuItem, "activate", 
-                         (GCallback)renameSelectedBtnCbk, NULL);
-        gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/Rename");
-        gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
-        gtk_widget_show_all(menu);
-    }
+    menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
+    g_signal_connect(menuItem, "activate", 
+                     (GCallback)renameSelectedBtnCbk, NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/Rename");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show_all(menu);
+    if(numSelectedRows > 1)
+        gtk_widget_set_sensitive(menuItem, FALSE);
     
     menuItem = gtk_image_menu_item_new_with_label(_("View"));
     g_signal_connect(menuItem, "activate", 
@@ -1561,9 +1749,11 @@ void showIsoContextMenu(GtkWidget* isoView, GdkEventButton* event)
     
     menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
     g_signal_connect(menuItem, "activate", 
-                     (GCallback)changPermissionsBtnCbk, NULL);
+                     (GCallback)changePermissionsBtnCbk, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show_all(menu);
+    if(numSelectedRows > 1)
+        gtk_widget_set_sensitive(menuItem, FALSE);
     
     gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
                    event->button, gdk_event_get_time((GdkEvent*)event));
