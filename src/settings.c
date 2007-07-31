@@ -144,12 +144,40 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     {
         const char* publisher;
         const char* volName;
+        int rc2;
+        GtkWidget* warningDialog;
         
         publisher = gtk_entry_get_text(GTK_ENTRY(publisherField));
-        bk_set_publisher(&GBLvolInfo, publisher);
+        rc2 = bk_set_publisher(&GBLvolInfo, publisher);
+        if(rc2 <= 0)
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   _("Invalid publisher '%s': '%s'"),
+                                                   publisher,
+                                                   bk_get_error_string(rc2));
+            gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
         
         volName = gtk_entry_get_text(GTK_ENTRY(volNameField));
-        bk_set_vol_name(&GBLvolInfo, volName);
+        rc2 = bk_set_vol_name(&GBLvolInfo, volName);
+        if(rc2 <= 0)
+        {
+            warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                                   GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                   GTK_MESSAGE_ERROR,
+                                                   GTK_BUTTONS_CLOSE,
+                                                   _("Invalid volume name '%s': '%s'"),
+                                                   publisher,
+                                                   bk_get_error_string(rc2));
+            gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+            gtk_dialog_run(GTK_DIALOG(warningDialog));
+            gtk_widget_destroy(warningDialog);
+        }
         
         if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(rockridgeCheck)))
             GBLappSettings.filenameTypesToWrite |= FNTYPE_ROCKRIDGE;
