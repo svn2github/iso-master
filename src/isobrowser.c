@@ -474,7 +474,6 @@ void changePermissionsRowCbk(GtkTreeModel* model, GtkTreePath* path,
     strcpy(fullItemName, GBLisoCurrentDir);
     strcat(fullItemName, itemName);
     
-    printf("chmod %s\n", fullItemName);
     rc = bk_get_permissions(&GBLvolInfo, fullItemName, &permissions);
     if(rc <= 0)
     {

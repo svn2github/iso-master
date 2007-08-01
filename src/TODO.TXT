@@ -1,10 +1,9 @@
 ui:
 -drop-down list to select track - can do multitrack
--write sort columns/directions to settings file
 -show exec failed warnings from editor.c
+-checkboxes and lables not aligned in change permissions window
 -add 'select in iso and right-click -> more options' to help window
 -log bug 'file size not updated after editing a file'
-checkboxes and lables not aligned in change permissions window
 
 
 bk:
