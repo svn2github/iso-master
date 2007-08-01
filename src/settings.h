@@ -32,10 +32,12 @@ typedef struct
     bool sortDirectoriesFirst;
     bool scanForDuplicateFiles;
     bool followSymLinks;
-    int filenameTypesToWrite;
     char* lastIsoDir;
     bool appendExtension;
     char* lastBootRecordDir;
+    
+    /* stuf that's never in the config file, but is a setting */
+    int filenameTypesToWrite;
     
 } AppSettings;
 
