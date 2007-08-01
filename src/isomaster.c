@@ -17,6 +17,7 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "isomaster.h"
 
