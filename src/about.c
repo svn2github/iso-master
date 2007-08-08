@@ -245,6 +245,9 @@ N_(
 "You can also delete files or directories from the ISO and create new\n"
 "directories both on the ISO and your local filesystem.\n"
 "\n"
+"If you select something in the bottom file browser and right-click on it,\n"
+"there are several more options available.\n"
+"\n"
 "Once you made all the changes to the new ISO image, click on 'Image' and\n"
 "'Save As'. You cannot overwrite the original ISO.\n"
 );

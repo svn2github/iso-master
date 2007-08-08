@@ -1440,9 +1440,8 @@ void renameSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   _("Failed to rename '%s' to '%s': %s"),
+                                                   _("Failed to rename '%s': %s"),
                                                    itemName,
-                                                   gtk_entry_get_text(GTK_ENTRY(nameField)),
                                                    bk_get_error_string(rc));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
             gtk_dialog_run(GTK_DIALOG(warningDialog));
