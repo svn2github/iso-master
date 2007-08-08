@@ -815,15 +815,12 @@ void writeSettings(void)
     snprintf(numberStr, 20, "%d", GBLappSettings.appendExtension);
     iniparser_setstr(GBLsettingsDictionary, "ui:appendextension", numberStr);
     
-    printf("trying to iniparser_setstr() editor: ");fflush(NULL);
     printf("'%s'\n", gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)));fflush(NULL);
     iniparser_setstr(GBLsettingsDictionary, "ui:editor", gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)));
     
-    printf("trying to iniparser_setstr() viewer: ");fflush(NULL);
     printf("'%s'\n", gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)));fflush(NULL);
     iniparser_setstr(GBLsettingsDictionary, "ui:viewer", gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)));
     
-    printf("trying to iniparser_setstr() tempdir: ");fflush(NULL);
     printf("'%s'\n", gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));fflush(NULL);
     iniparser_setstr(GBLsettingsDictionary, "ui:tempdir", gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
     
