@@ -32,7 +32,7 @@ msgstr ""
 #: ../editfile.c:115 ../editfile.c:317
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr ""
+msgstr "«%s» er ikke en vanlig fil"
 
 #: ../isobrowser.c:139 ../isobrowser.c:1179
 msgid "(scanning for duplicate files)"
@@ -84,7 +84,7 @@ msgstr "Oppstartssektortype: Ingen etterligning"
 
 #: ../isobrowser.c:492 ../isobrowser.c:1754
 msgid "Change permissions"
-msgstr ""
+msgstr "Endre rettigheter"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
@@ -108,11 +108,11 @@ msgstr "Slett fra ISO"
 
 #: ../isobrowser.c:1747
 msgid "Edit"
-msgstr ""
+msgstr "Rediger"
 
 #: ../settings.c:206 ../window.c:334 ../window.c:337
 msgid "Editor"
-msgstr ""
+msgstr "Redigerings verktøy"
 
 #: ../isobrowser.c:1414
 msgid "Enter a new name:"
@@ -237,7 +237,8 @@ msgstr "Fra fil: ingen etterligning"
 #: ../isobrowser.c:794
 msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
-msgstr "GUI feil, det fungerer ikke å slette noe annet enn filer og mapper"
+msgstr ""
+"GUI feil, det fungerer ikke å slette noe annet enn filer og mapper"
 
 #: ../window.c:59 ../window.c:450
 msgid "Go back"
@@ -264,14 +265,12 @@ msgid "Image Information"
 msgstr "Avtrykkinformasjon"
 
 #: ../settings.c:160
-#, fuzzy, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Kunne ikke slette «%s»: «%s»"
+msgstr "Ugyldig utgiver «%s»: «%s»"
 
 #: ../settings.c:176
-#, fuzzy, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Kunne ikke endre navn på «%s»: %s"
+msgstr "Ugyldig volumnavn «%s»: «%s»"
 
 #: ../boot.c:391
 #, c-format
@@ -293,8 +292,7 @@ msgstr ""
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr ""
-"Valgt enhet er ikke en ordinær fil eller kan ikke brukes som oppstartssektor"
+msgstr "Valgt enhet er ikke en ordinær fil eller kan ikke brukes som oppstartssektor"
 
 #: ../boot.c:373 ../boot.c:380
 #, c-format
@@ -307,9 +305,8 @@ msgid "Location: to be added from '%s'"
 msgstr "Sted: vil bli lagt til fra «%s»"
 
 #: ../isobrowser.c:1279
-#, fuzzy
 msgid "MDF Images"
-msgstr "ISO-avtrykk"
+msgstr "MDF-avtrykk"
 
 #: ../isobrowser.c:1274
 msgid "NRG Images"
@@ -325,8 +322,7 @@ msgstr "Ny mappe"
 
 #: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr ""
-"Ingen oppstartssektor ble lest fra originalen eller lagret på avtrykket"
+msgstr "Ingen oppstartssektor ble lest fra originalen eller lagret på avtrykket"
 
 #: ../boot.c:108
 msgid "No boot to delete"
@@ -370,9 +366,8 @@ msgid "Remove"
 msgstr "Fjern"
 
 #: ../isobrowser.c:1731
-#, fuzzy
 msgid "Rename"
-msgstr "Fjern"
+msgstr "Endre navn"
 
 #: ../isobrowser.c:1553
 msgid "Save File"
@@ -402,7 +397,8 @@ msgstr "Størrelse: %d byte"
 #: ../fsbrowser.c:270
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Hopper over mappe fordi filnavn lengre enn 256 tegn ikke kan håndteres"
+msgstr ""
+"Hopper over mappe fordi filnavn lengre enn 256 tegn ikke kan håndteres"
 
 #: ../fsbrowser.c:288
 #, c-format
@@ -410,12 +406,10 @@ msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Hopper over mappe fordi stat(%s) feilet med %d"
 
 #: ../settings.c:244 ../window.c:386 ../window.c:389
-#, fuzzy
 msgid "Temporary directory"
-msgstr "Ny mappe"
+msgstr "Midlertidig mappe"
 
 #: ../about.c:231
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -441,22 +435,25 @@ msgid ""
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
 "ISO Master vinduet er delt i to deler:\n"
-" - Den øverste fil utforskeren viser filer og mapper på din datamaskin.\n"
-" - Den underste fil utforskeren viser filer og mapper på ISO-avtrykket.\n"
+" - Den øverste fil-utforskeren viser filer og mapper på din datamaskin.\n"
+" - Den underste fil-utforskeren viser filer og mapper på ISO-avtrykket.\n"
 "\n"
-"Trykk på «Åpne» for å åpne en eksisterende ISO-fil, for å opprette en\n"
+"Trykk på «Avtrykk» og «Åpne» for å åpne en eksisterende ISO-fil, for å opprette en\n"
 "ny ISO-fil klikk på «Avtrykk» og «Ny».\n"
 "\n"
-"Velg filer eller mapper i det øverste fil utforskeren og trykk på «Legg til\n"
+"Velg filer eller mapper i det øverste fil-utforskeren og trykk på «Legg til\n"
 "i ISO' knappen i den midtre verktøylinjen for å legge dem til i\n"
 "ISO-avtrykket.\n"
 "\n"
-"Velg filer eller mapper i den nederste fil utforskeren og trykk på\n"
+"Velg filer eller mapper i den nederste fil-utforskeren og trykk på\n"
 "«Pakk ut fra ISO» knappen i den midtre verktøylinjen for å pakke ut\n"
 "filer fra ISO.\n"
 "\n"
 "Du kan også slette filer og mapper fra ISO-filen og opprette nye\n"
 "mapper både på ISO-filen og det lokale filsystemet.\n"
+"\n"
+"Hvis du velger noe i den underste fil-utforskeren og høyreklikker på det\n"
+"vil du finne flere ekstravalg.\n"
 "\n"
 "Når du har utført alle endringene til det nye ISO-avtrykket, trykk på\n"
 "«Avtrykk» og «Lagre som», Du kan ikke overskrive det originale\n"
@@ -467,14 +464,12 @@ msgid "Use selected file on image (no emulation)"
 msgstr "Bruk valgt fil på avtrykket (ingen etterligning)"
 
 #: ../isobrowser.c:1740
-#, fuzzy
 msgid "View"
-msgstr "_Vis"
+msgstr "Vis"
 
 #: ../settings.c:282 ../window.c:360 ../window.c:363
-#, fuzzy
 msgid "Viewer"
-msgstr "_Vis"
+msgstr "Vis"
 
 #: ../settings.c:97
 msgid "Volume name:"
@@ -483,7 +478,8 @@ msgstr "Volum navn:"
 #: ../settings.c:734
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
-msgstr "Du må lukke og åpne ISO-filen igjen for at endringene skal bli synlige"
+msgstr ""
+"Du må lukke og åpne ISO-filen igjen for at endringene skal bli synlige"
 
 #: ../window.c:241
 msgid "_BootRecord"

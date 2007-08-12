@@ -62,7 +62,7 @@ all: translations isomaster.desktop isomaster
 
 isomaster: $(OBJECTS) lib iniparser
 	@echo 'Linking isomaster'
-	@$(CC) $(OBJECTS) bk/bk.a iniparser-2.17/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0`-o isomaster
+	@$(CC) $(OBJECTS) bk/bk.a iniparser-2.17/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0` -o isomaster
 
 # static pattern rule
 $(OBJECTS): %.o: %.c bk/bk.h Makefile

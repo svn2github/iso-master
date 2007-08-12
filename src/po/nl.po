@@ -1,4 +1,4 @@
-# Dutch translation of ISO Master
+# Dutch translation of ISO Master.
 # This file is distributed under the same license as the ISO Master package.
 #
 msgid ""
@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-08 07:09-0400\n"
-"PO-Revision-Date: 2007-05-26 14:54+0100\n"
+"PO-Revision-Date: 2007-08-10 19:23+0100\n"
 "Last-Translator: Stephen Brandt <stephen@stephenbrandt.com>\n"
 "Language-Team: Dutch <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,12 +28,14 @@ msgstr ""
 "\n"
 "Wilt u doorgaan?"
 
-#: ../editfile.c:115 ../editfile.c:317
+#: ../editfile.c:115
+#: ../editfile.c:317
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr ""
+msgstr "'%s' is geen gangbaar bestand"
 
-#: ../isobrowser.c:139 ../isobrowser.c:1179
+#: ../isobrowser.c:139
+#: ../isobrowser.c:1179
 msgid "(scanning for duplicate files)"
 msgstr "(bezig met het zoeken naar dubbele bestanden)"
 
@@ -43,51 +45,53 @@ msgstr "Toevoegen"
 
 #: ../isobrowser.c:1572
 msgid "Add extension automatically"
-msgstr "Voeg extensie automatisch toe"
+msgstr "Extensie automatisch toevoegen"
 
 #: ../window.c:461
 msgid "Add to the ISO"
 msgstr "Toevoegen aan de ISO"
 
-#: ../isobrowser.c:1284 ../isobrowser.c:1569
+#: ../isobrowser.c:1284
+#: ../isobrowser.c:1569
 msgid "All files"
 msgstr "Alle bestanden"
 
 #: ../boot.c:334
 msgid "Boot Record Information"
-msgstr "Boot record informatie"
+msgstr "Bootrecord-informatie"
 
 #: ../boot.c:122
 msgid "Boot record deleted"
-msgstr "Boot record verwijderd"
+msgstr "Bootrecord verwijderd"
 
 #: ../boot.c:350
 #, c-format
 msgid "Boot record type: 1200KiB Floppy"
-msgstr "Boot record type: 1200KiB diskette"
+msgstr "Bootrecord-type: 1200KiB diskette"
 
 #: ../boot.c:352
 #, c-format
 msgid "Boot record type: 1440KiB Floppy"
-msgstr "Boot record type: 1440KiB diskette"
+msgstr "Bootrecord-type: 1440KiB diskette"
 
 #: ../boot.c:354
 #, c-format
 msgid "Boot record type: 2880KiB Floppy"
-msgstr "Boot record type: 2880KiB diskette"
+msgstr "Bootrecord-type: 2880KiB diskette"
 
 #: ../boot.c:348
 #, c-format
 msgid "Boot record type: No Emulation"
-msgstr "Boot record type: Geen emulatie"
+msgstr "Bootrecord-type: Geen emulatie"
 
-#: ../isobrowser.c:492 ../isobrowser.c:1754
+#: ../isobrowser.c:492
+#: ../isobrowser.c:1754
 msgid "Change permissions"
-msgstr ""
+msgstr "Permissies veranderen"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
-msgstr "Kies boot record bestand"
+msgstr "Kies bootrecord bestand"
 
 #: ../window.c:457
 msgid "Create new directory on the ISO"
@@ -107,11 +111,13 @@ msgstr "Verwijder van de ISO"
 
 #: ../isobrowser.c:1747
 msgid "Edit"
-msgstr ""
+msgstr "Bewerk"
 
-#: ../settings.c:206 ../window.c:334 ../window.c:337
+#: ../settings.c:206
+#: ../window.c:334
+#: ../window.c:337
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../isobrowser.c:1414
 msgid "Enter a new name:"
@@ -129,7 +135,8 @@ msgstr "Uitpakken"
 msgid "Extract from the ISO"
 msgstr "Uitpakken van de ISO"
 
-#: ../editfile.c:219 ../isobrowser.c:207
+#: ../editfile.c:219
+#: ../isobrowser.c:207
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Het toevoegen van '%s' is mislukt: '%s'"
@@ -137,7 +144,7 @@ msgstr "Het toevoegen van '%s' is mislukt: '%s'"
 #: ../boot.c:79
 #, c-format
 msgid "Failed to add boot record: '%s'"
-msgstr "Het toevoegen van het boot record is mislukt: '%s'"
+msgstr "Het toevoegen van het bootrecord is mislukt: '%s'"
 
 #: ../isobrowser.c:355
 #, c-format
@@ -154,12 +161,15 @@ msgstr "Het aanmaken van de map '%s' is mislukt"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Het aanmaken van de map '%s' is mislukt: '%s'"
 
-#: ../editfile.c:193 ../isobrowser.c:776
+#: ../editfile.c:193
+#: ../isobrowser.c:776
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Het verwijderen van '%s' is mislukt: '%s'"
 
-#: ../editfile.c:157 ../editfile.c:359 ../isobrowser.c:884
+#: ../editfile.c:157
+#: ../editfile.c:359
+#: ../isobrowser.c:884
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr " '%s' kon niet worden uitgepakt: '%s'"
@@ -167,9 +177,10 @@ msgstr " '%s' kon niet worden uitgepakt: '%s'"
 #: ../boot.c:202
 #, c-format
 msgid "Failed to extract boot record: '%s'"
-msgstr "Het uitpakken van het boot record is mislukt: '%s'"
+msgstr "Het uitpakken van het bootrecord is mislukt: '%s'"
 
-#: ../isobrowser.c:1067 ../isobrowser.c:1115
+#: ../isobrowser.c:1067
+#: ../isobrowser.c:1115
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Het opstarten van bkisofs is mislukt: '%s'"
@@ -182,7 +193,7 @@ msgstr "Het openen van de map '%s' is mislukt, fout %d"
 #: ../isobrowser.c:1134
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
-msgstr "Het openen van het in te lezen ISO bestand is mislukt: '%s'"
+msgstr "Het openen van het in te lezen ISO-bestand is mislukt: '%s'"
 
 #: ../isobrowser.c:1209
 #, c-format
@@ -202,7 +213,7 @@ msgstr "De naam van het bestand '%s' kon niet gewijzigd worden: %s"
 #: ../boot.c:296
 #, c-format
 msgid "Failed to set %s as boot record: '%s'"
-msgstr "Het instellen van '%s' als boot record is mislukt: '%s'"
+msgstr "Het instellen van '%s' als bootrecord is mislukt: '%s'"
 
 #: ../isobrowser.c:1515
 #, c-format
@@ -211,11 +222,11 @@ msgstr "Het wegschrijven van het image naar '%s' is mislukt: '%s'"
 
 #: ../settings.c:125
 msgid "Filename types (both recommended):"
-msgstr "Bestandsextensies (beide aanbevolen):"
+msgstr "Bestandsnaamsoorten (beide aanbevolen):"
 
 #: ../window.c:322
 msgid "Follow symbolic links"
-msgstr "Volg symbolische koppelingen"
+msgstr "Volg symbolische verwijzingen"
 
 #: ../window.c:285
 msgid "From file: 1200KiB floppy"
@@ -234,11 +245,11 @@ msgid "From file: no emulation"
 msgstr "Vanuit bestand: geen emulatie"
 
 #: ../isobrowser.c:794
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
-msgstr "GUI fout, alleen bestanden en mappen kunnen verwijderd worden"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgstr "GUI-fout, alleen bestanden en mappen kunnen verwijderd worden"
 
-#: ../window.c:59 ../window.c:450
+#: ../window.c:59
+#: ../window.c:450
 msgid "Go back"
 msgstr "Terug"
 
@@ -248,11 +259,12 @@ msgstr "Eén map omhoog op de ISO"
 
 #: ../window.c:60
 msgid "Go back up one directory on the filesystem"
-msgstr "Eén map omhoog om het bestandssysteem"
+msgstr "Eén map omhoog op het bestandssysteem"
 
-#: ../isobrowser.c:1269 ../isobrowser.c:1564
+#: ../isobrowser.c:1269
+#: ../isobrowser.c:1564
 msgid "ISO Images"
-msgstr "ISO images"
+msgstr "ISO-images"
 
 #: ../about.c:290
 msgid "ISO Master Help"
@@ -260,17 +272,17 @@ msgstr "Uitleg over ISO Master"
 
 #: ../settings.c:65
 msgid "Image Information"
-msgstr "Image informatie"
+msgstr "Image-informatie"
 
 #: ../settings.c:160
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Het verwijderen van '%s' is mislukt: '%s'"
+msgstr "Ongeldige uitgever '%s': '%s'"
 
 #: ../settings.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "De naam van het bestand '%s' kon niet gewijzigd worden: %s"
+msgstr "Ongeldige stationsnaam '%s': '%s'"
 
 #: ../boot.c:391
 #, c-format
@@ -283,60 +295,59 @@ msgid "Is visible on image as '%s'"
 msgstr "Is zichtbaar op het image als '%s'"
 
 #: ../isobrowser.c:696
-msgid ""
-"It seems that you have made changes to the ISO but haven't saved them. Are "
-"you sure you want to close it?"
-msgstr ""
-"U heeft veranderingen aangebracht aan de ISO maar deze niet opgeslagen. Weet "
-"u zeker dat u wilt doorgaan met sluiten?"
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgstr "U heeft veranderingen aangebracht aan de ISO maar deze niet opgeslagen. Weet u zeker dat u wilt doorgaan met sluiten?"
 
 #: ../boot.c:271
-msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Het geselecteerde item kan niet worden gebruikt als boot record"
+msgid "Item selected is not a regular file and cannot be used as a bootrecord"
+msgstr "Het geselecteerde item kan niet worden gebruikt als bootrecord"
 
-#: ../boot.c:373 ../boot.c:380
+#: ../boot.c:373
+#: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Lokatie: op origineel image bij 0x%llX"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:375
+#: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Lokatie: zal worden toegevoegd vanuit '%s'"
 
 #: ../isobrowser.c:1279
-#, fuzzy
 msgid "MDF Images"
-msgstr "ISO images"
+msgstr "MDF-images"
 
 #: ../isobrowser.c:1274
 msgid "NRG Images"
-msgstr "NRG images"
+msgstr "NRG-images"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:283
+#: ../fsbrowser.c:110
+#: ../isobrowser.c:283
 msgid "Name"
 msgstr "Naam"
 
-#: ../window.c:65 ../window.c:456
+#: ../window.c:65
+#: ../window.c:456
 msgid "New Directory"
 msgstr "Nieuwe map"
 
-#: ../boot.c:149 ../boot.c:327
+#: ../boot.c:149
+#: ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr "Er is geen boot record gevonden"
+msgstr "Er is geen bootrecord gevonden"
 
 #: ../boot.c:108
 msgid "No boot to delete"
-msgstr "Er is geen boot record om te verwijderen"
+msgstr "Er is geen bootrecord om te verwijderen"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr ""
-"Selecteer een bestand in de ISO browser om als boot record te gebruiken"
+msgstr "Selecteer een bestand in de ISO-browser om als bootrecord te gebruiken"
 
 #: ../boot.c:243
 msgid "Please select no more then one file in the ISO browser"
-msgstr "Selecteer niet meer dan één bestand in de ISO browser"
+msgstr "Selecteer niet meer dan één bestand in de ISO-browser"
 
 #: ../isobrowser.c:133
 msgid "Please wait while I'm adding the selected items..."
@@ -354,7 +365,9 @@ msgstr "Het image wordt gelezen..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Het nieuwe image wordt op de schijf opgeslagen..."
 
-#: ../isobrowser.c:126 ../isobrowser.c:823 ../isobrowser.c:1166
+#: ../isobrowser.c:126
+#: ../isobrowser.c:823
+#: ../isobrowser.c:1166
 #: ../isobrowser.c:1477
 msgid "Progress"
 msgstr "Voortgang"
@@ -368,9 +381,8 @@ msgid "Remove"
 msgstr "Verwijderen"
 
 #: ../isobrowser.c:1731
-#, fuzzy
 msgid "Rename"
-msgstr "Verwijderen"
+msgstr "Hernoemen"
 
 #: ../isobrowser.c:1553
 msgid "Save File"
@@ -378,7 +390,7 @@ msgstr "Bestand opslaan"
 
 #: ../boot.c:156
 msgid "Save a copy of the boot record"
-msgstr "Een kopie van het boot record opslaan"
+msgstr "Een kopie van het bootrecord opslaan"
 
 #: ../window.c:312
 msgid "Scan for duplicate files (slow)"
@@ -388,7 +400,8 @@ msgstr "Zoek naar dubbele bestanden (langzaam)"
 msgid "Show _hidden files"
 msgstr "Laat _verborgen bestanden zien"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:306
+#: ../fsbrowser.c:131
+#: ../isobrowser.c:306
 msgid "Size"
 msgstr "Grootte"
 
@@ -398,26 +411,21 @@ msgid "Size: %d bytes"
 msgstr "Grootte: %d bytes"
 
 #: ../fsbrowser.c:270
-msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
-msgstr ""
-"Map wordt overgeslagen omdat bestandsnamen langer dan 256 karakters niet "
-"verwerkt kunnen worden"
+msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
+msgstr "Map wordt overgeslagen omdat bestandsnamen met meer dan 256 tekens niet verwerkt kunnen worden"
 
 #: ../fsbrowser.c:288
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
-msgstr ""
-"Map wordt overgeslagen omdat er een programmafout is opgetreden in 'stat(%"
-"s)' met waarde %d"
+msgstr "Map wordt overgeslagen omdat er een programmafout is opgetreden in 'stat(%s)' met waarde %d"
 
-#: ../settings.c:244 ../window.c:386 ../window.c:389
-#, fuzzy
+#: ../settings.c:244
+#: ../window.c:386
+#: ../window.c:389
 msgid "Temporary directory"
-msgstr "Nieuwe map"
+msgstr "Tijdelijke map"
 
 #: ../about.c:231
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -445,11 +453,11 @@ msgstr ""
 "Het ISO Master venster is in twee delen opgedeeld:\n"
 " - Het bovenste gedeelte geeft de mappen en bestanden op uw\n"
 "computer weer.\n"
-" - Het onderste gedeelte geeft de mappen en bestanden op het ISO\n"
-"image weer.\n"
+" - Het onderste gedeelte geeft de mappen en bestanden op het\n"
+"ISO-image weer.\n"
 "\n"
-"Om een bestaand ISO image te openen klikt u op 'Image' en vervolgens\n"
-"'Open'. Om een nieuw ISO image te maken klikt u op 'Image' en\n"
+"Om een bestaand ISO-image te openen klikt u op 'Image' en vervolgens\n"
+"'Open'. Om een nieuw ISO-image te maken klikt u op 'Image' en\n"
 "vervolgens 'Nieuw'.\n"
 "\n"
 "Om één of meerdere mappen of bestanden toe te voegen aan de ISO\n"
@@ -463,7 +471,10 @@ msgstr ""
 "U kunt ook mappen en bestanden van de ISO verwijderen en nieuwe\n"
 "mappen op zowel de ISO en uw computer aanmaken.\n"
 "\n"
-"Wanneer u alle gewenste aanpassingen aan uw nieuwe ISO image\n"
+"Wanneer u een bestand of map in het onderste gedeelte selecteerd en\n"
+"met de rechter muisknop aanklikt, zijn er aanvullende opties beschikbaar.\n"
+"\n"
+"Wanneer u alle gewenste aanpassingen aan uw nieuwe ISO-image\n"
 "voltooid heeft klikt u op 'Image' en vervolgens 'Opslaan als'. U kunt de\n"
 "originele ISO niet overschrijven.\n"
 
@@ -472,29 +483,26 @@ msgid "Use selected file on image (no emulation)"
 msgstr "Pas het geselecteerde bestand toe op het image (geen emulatie)"
 
 #: ../isobrowser.c:1740
-#, fuzzy
 msgid "View"
-msgstr "_Beeld"
+msgstr "Bekijk"
 
-#: ../settings.c:282 ../window.c:360 ../window.c:363
-#, fuzzy
+#: ../settings.c:282
+#: ../window.c:360
+#: ../window.c:363
 msgid "Viewer"
-msgstr "_Beeld"
+msgstr "Viewer"
 
 #: ../settings.c:97
 msgid "Volume name:"
-msgstr "Volume naam:"
+msgstr "Stationsnaam:"
 
 #: ../settings.c:734
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
-msgstr ""
-"U dient de ISO te sluiten en opnieuw te openen om deze wijziging in werking "
-"te laten treden"
+msgid "You will have to close and reopen the ISO for this change to take effect"
+msgstr "U dient de ISO te sluiten en opnieuw te openen om deze wijziging in werking te laten treden"
 
 #: ../window.c:241
 msgid "_BootRecord"
-msgstr "B_oot record"
+msgstr "B_ootrecord"
 
 #: ../window.c:412
 msgid "_Help"
@@ -519,3 +527,4 @@ msgstr "_Sorteer mappen als eerste"
 #: ../window.c:204
 msgid "_View"
 msgstr "_Beeld"
+

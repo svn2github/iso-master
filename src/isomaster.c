@@ -45,7 +45,7 @@ int main(int argc, char** argv)
             return 0;
         }
     }
-
+    
 #ifdef ENABLE_NLS
     /* initialize gettext */
     bindtextdomain("isomaster", LOCALEDIR);

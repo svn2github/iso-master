@@ -2,22 +2,23 @@
 # This file is distributed under the same license as the ISO Master package.
 # Translation by Josep Sanchez Mesegue <papapep@gmail.com>
 # and Rafael Carreras <rcarreras@caliu.cat>, 2007.
-#
+# 
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master Unknown\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-08 07:09-0400\n"
-"PO-Revision-Date: 2007-06-03 17:10-0500\n"
+"PO-Revision-Date: 2007-08-08 14:53+0200\n"
 "Last-Translator: Josep Sanchez Mesegue <papapep@gmail.com>\n"
 "Language-Team: Catala\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: ../window.c:475
 msgid "      Estimated ISO Size: "
-msgstr " Mida estimada de la imatge ISO:"
+msgstr "      Mida estimada de la imatge ISO:"
 
 #: ../isobrowser.c:1338
 #, c-format
@@ -33,7 +34,7 @@ msgstr ""
 #: ../editfile.c:115 ../editfile.c:317
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr ""
+msgstr "'%s' no és un fitxer convencional"
 
 #: ../isobrowser.c:139 ../isobrowser.c:1179
 msgid "(scanning for duplicate files)"
@@ -85,7 +86,7 @@ msgstr "Tipus de registre d'arrencada: Sense emulació"
 
 #: ../isobrowser.c:492 ../isobrowser.c:1754
 msgid "Change permissions"
-msgstr ""
+msgstr "Canviar permisos"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
@@ -109,11 +110,11 @@ msgstr "Esborra de la ISO"
 
 #: ../isobrowser.c:1747
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: ../settings.c:206 ../window.c:334 ../window.c:337
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../isobrowser.c:1414
 msgid "Enter a new name:"
@@ -121,7 +122,7 @@ msgstr "Introduïu un nou nom:"
 
 #: ../browser.c:71
 msgid "Enter name for new directory"
-msgstr "Introduïu un nom per al nou directori"
+msgstr "Introduïu un nom pel nou directori"
 
 #: ../window.c:466
 msgid "Extract"
@@ -199,7 +200,7 @@ msgstr "Error llegint la informació del volum: '%s'"
 #: ../isobrowser.c:1443
 #, c-format
 msgid "Failed to rename '%s': %s"
-msgstr "Error reanomenant '%s': '%s'"
+msgstr "Error canviant al nom '%s': '%s'"
 
 #: ../boot.c:296
 #, c-format
@@ -267,14 +268,14 @@ msgid "Image Information"
 msgstr "Informació de la imatge"
 
 #: ../settings.c:160
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Error esborrant '%s': '%s'"
+msgstr "Editor no vàlid '%s': '%s'"
 
 #: ../settings.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Error reanomenant '%s': '%s'"
+msgstr "Nom de volum erroni '%s': '%s'"
 
 #: ../boot.c:391
 #, c-format
@@ -311,9 +312,8 @@ msgid "Location: to be added from '%s'"
 msgstr "Ubicació: afegeix-lo de '%s'"
 
 #: ../isobrowser.c:1279
-#, fuzzy
 msgid "MDF Images"
-msgstr "Imatges ISO"
+msgstr "Imatges MDF"
 
 #: ../isobrowser.c:1274
 msgid "NRG Images"
@@ -376,9 +376,8 @@ msgid "Remove"
 msgstr "Esborra"
 
 #: ../isobrowser.c:1731
-#, fuzzy
 msgid "Rename"
-msgstr "Esborra"
+msgstr "Canviar el nom"
 
 #: ../isobrowser.c:1553
 msgid "Save File"
@@ -418,12 +417,10 @@ msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "S'omet el directori perquè l'estat (%s) ha fallat amb %d"
 
 #: ../settings.c:244 ../window.c:386 ../window.c:389
-#, fuzzy
 msgid "Temporary directory"
-msgstr "Nou directori"
+msgstr "Directori temporal"
 
 #: ../about.c:231
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -461,12 +458,15 @@ msgstr ""
 "d'eines del mig.\n"
 "\n"
 "Per a extreure un o més fitxers o directoris de la ISO, seleccioneu-los\n"
-"des de la finestra inferior i feu clic damunt la icona 'Extreure de la ISO' "
+"des·de·la·finestra·inferior·i·feu·clic·damunt·la·icona·'Extreure·de·la·ISO'·"
 "de\n"
-"la barra d'eines del mig.\n"
+"la·barra·d'eines·del·mig.\n"
 "\n"
-"També podeu esborrar fitxers o directoris de la imatge ISO i crear nous\n"
-"directoris tant a la ISO com al vostre sistema de fitxers local.\n"
+"També·podeu·esborrar·fitxers·o·directoris·de·la·imatge·ISO·i·crear·nous\n"
+"directoris·tant·a·la·ISO·com·al·vostre·sistema·de·fitxers·local.\n"
+"\n"
+"Si seleccioneu algun objecte a la finestra inferior i hi feu clic amb el botó de\n"
+" la dreta del ratolí veureu les diverses opcions disponibles.\n"
 "\n"
 "Un cop heu efectuat tots els canvis a la nova imatge ISO, feu clic a "
 "'Imatge'\n"
@@ -477,12 +477,10 @@ msgid "Use selected file on image (no emulation)"
 msgstr "Utilitzeu el fitxer seleccionat a la imatge (sense emulació)"
 
 #: ../isobrowser.c:1740
-#, fuzzy
 msgid "View"
-msgstr "_Veure"
+msgstr "_Visor"
 
 #: ../settings.c:282 ../window.c:360 ../window.c:363
-#, fuzzy
 msgid "Viewer"
 msgstr "_Veure"
 
@@ -523,3 +521,4 @@ msgstr "Ordena directori_s primer"
 #: ../window.c:204
 msgid "_View"
 msgstr "_Veure"
+
