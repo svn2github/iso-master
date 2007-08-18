@@ -32,7 +32,7 @@ msgstr ""
 #: ../editfile.c:115 ../editfile.c:317
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr ""
+msgstr "'%s' nie jest plikiem"
 
 #: ../isobrowser.c:139 ../isobrowser.c:1179
 msgid "(scanning for duplicate files)"
@@ -84,7 +84,7 @@ msgstr "Typ rekordu startowego: bez emulacji"
 
 #: ../isobrowser.c:492 ../isobrowser.c:1754
 msgid "Change permissions"
-msgstr ""
+msgstr "Zmień uprawnienia"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
@@ -108,11 +108,11 @@ msgstr "Usuń z obrazu ISO"
 
 #: ../isobrowser.c:1747
 msgid "Edit"
-msgstr ""
+msgstr "Edytuj"
 
 #: ../settings.c:206 ../window.c:334 ../window.c:337
 msgid "Editor"
-msgstr ""
+msgstr "Edytor"
 
 #: ../isobrowser.c:1414
 msgid "Enter a new name:"
@@ -265,14 +265,12 @@ msgid "Image Information"
 msgstr "Informacja o obrazie"
 
 #: ../settings.c:160
-#, fuzzy, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Usunięcie %s nie powiodło się: '%s'"
+msgstr "Błędna nazwa wydawcy '%s': '%s'"
 
 #: ../settings.c:176
-#, fuzzy, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Zmiana nazwy nie powiodła się '%s': %s"
+msgstr "Błędna nazwa nośnika '%s': %s"
 
 #: ../boot.c:391
 #, c-format
@@ -308,9 +306,8 @@ msgid "Location: to be added from '%s'"
 msgstr "Położenie: będzie dodane z '%s'"
 
 #: ../isobrowser.c:1279
-#, fuzzy
 msgid "MDF Images"
-msgstr "Obrazy ISO"
+msgstr "Obrazy MDF"
 
 #: ../isobrowser.c:1274
 msgid "NRG Images"
@@ -370,9 +367,8 @@ msgid "Remove"
 msgstr "Usuń"
 
 #: ../isobrowser.c:1731
-#, fuzzy
 msgid "Rename"
-msgstr "Usuń"
+msgstr "Zmień nazwę"
 
 #: ../isobrowser.c:1553
 msgid "Save File"
@@ -412,12 +408,10 @@ msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Pomijam katalog ponieważ stat(%s) zakończony niepowodzeniem z %d"
 
 #: ../settings.c:244 ../window.c:386 ../window.c:389
-#, fuzzy
 msgid "Temporary directory"
-msgstr "Nowy katalog"
+msgstr "Katalog tymczasowy"
 
 #: ../about.c:231
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -462,6 +456,9 @@ msgstr ""
 "Dodatkowo możesz usuwać pliki i katalogi z obrazu ISO i tworzyć nowe\n"
 "katalogi zarówno w obrazie ISO jak i lokalnym systemie plików.\n"
 "\n"
+"Jeśli wybierzesz pozycję na dole przeglądarki plików i klikniesz na niej\n" 
+"prawym przyciskiem myszy, dostępnych będzie kilka opcji więcej.\n"
+"\n"
 "Gdy wszystkie zmiany zostaną wprowadzone do obrazu ISO, kliknij\n"
 "'Obraz' -> 'Zapisz jako'. Nie można nadpisywać oryginalnego obrazu ISO.\n"
 
@@ -470,14 +467,12 @@ msgid "Use selected file on image (no emulation)"
 msgstr "Użycie zaznaczonego pliku w obrazie (bez emulacji)"
 
 #: ../isobrowser.c:1740
-#, fuzzy
 msgid "View"
-msgstr "_Widok"
+msgstr "Widok"
 
 #: ../settings.c:282 ../window.c:360 ../window.c:363
-#, fuzzy
 msgid "Viewer"
-msgstr "_Widok"
+msgstr "Przeglądarka"
 
 #: ../settings.c:97
 msgid "Volume name:"

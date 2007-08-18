@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-08 07:09-0400\n"
-"PO-Revision-Date: 2007-06-03 20:11-0500\n"
+"PO-Revision-Date: 2007-08-14 06:01-0500\n"
 "Last-Translator: Robert Groenning <slimg@iggu.org>\n"
 "Language-Team:  <oversettelse@ubuntu.no>\n"
 "MIME-Version: 1.0\n"
@@ -29,12 +29,14 @@ msgstr ""
 "\n"
 "Vil du fortsette?"
 
-#: ../editfile.c:115 ../editfile.c:317
+#: ../editfile.c:115
+#: ../editfile.c:317
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "«%s» er ikke en vanlig fil"
 
-#: ../isobrowser.c:139 ../isobrowser.c:1179
+#: ../isobrowser.c:139
+#: ../isobrowser.c:1179
 msgid "(scanning for duplicate files)"
 msgstr "(Søker etter duplikatfiler)"
 
@@ -50,7 +52,8 @@ msgstr "Legg til utviding automatisk"
 msgid "Add to the ISO"
 msgstr "Legg til i ISO"
 
-#: ../isobrowser.c:1284 ../isobrowser.c:1569
+#: ../isobrowser.c:1284
+#: ../isobrowser.c:1569
 msgid "All files"
 msgstr "Alle filer"
 
@@ -82,7 +85,8 @@ msgstr "Oppstartssektortype: 2880KiB Diskett"
 msgid "Boot record type: No Emulation"
 msgstr "Oppstartssektortype: Ingen etterligning"
 
-#: ../isobrowser.c:492 ../isobrowser.c:1754
+#: ../isobrowser.c:492
+#: ../isobrowser.c:1754
 msgid "Change permissions"
 msgstr "Endre rettigheter"
 
@@ -110,7 +114,9 @@ msgstr "Slett fra ISO"
 msgid "Edit"
 msgstr "Rediger"
 
-#: ../settings.c:206 ../window.c:334 ../window.c:337
+#: ../settings.c:206
+#: ../window.c:334
+#: ../window.c:337
 msgid "Editor"
 msgstr "Redigerings verktøy"
 
@@ -130,7 +136,8 @@ msgstr "Pakk ut"
 msgid "Extract from the ISO"
 msgstr "Pakk ut fra ISO"
 
-#: ../editfile.c:219 ../isobrowser.c:207
+#: ../editfile.c:219
+#: ../isobrowser.c:207
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Kunne ikke legge til «%s»: «%s»"
@@ -155,12 +162,15 @@ msgstr "Kunne ikke opprette mappe %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Kunne ikke opprette mappe %s: «%s»"
 
-#: ../editfile.c:193 ../isobrowser.c:776
+#: ../editfile.c:193
+#: ../isobrowser.c:776
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Kunne ikke slette «%s»: «%s»"
 
-#: ../editfile.c:157 ../editfile.c:359 ../isobrowser.c:884
+#: ../editfile.c:157
+#: ../editfile.c:359
+#: ../isobrowser.c:884
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Kunne ikke pakke ut «%s»: «%s»"
@@ -170,7 +180,8 @@ msgstr "Kunne ikke pakke ut «%s»: «%s»"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Kunne ikke pakke ut oppstartssektor: «%s»"
 
-#: ../isobrowser.c:1067 ../isobrowser.c:1115
+#: ../isobrowser.c:1067
+#: ../isobrowser.c:1115
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Kunne ikke starte bkisofs: «%s»"
@@ -235,12 +246,11 @@ msgid "From file: no emulation"
 msgstr "Fra fil: ingen etterligning"
 
 #: ../isobrowser.c:794
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
-msgstr ""
-"GUI feil, det fungerer ikke å slette noe annet enn filer og mapper"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgstr "GUI feil, det fungerer ikke å slette noe annet enn filer og mapper"
 
-#: ../window.c:59 ../window.c:450
+#: ../window.c:59
+#: ../window.c:450
 msgid "Go back"
 msgstr "Gå tilbake"
 
@@ -252,7 +262,8 @@ msgstr "Gå tilbake opp en mappe på ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Gå tilbake opp en mappe på filsystemet"
 
-#: ../isobrowser.c:1269 ../isobrowser.c:1564
+#: ../isobrowser.c:1269
+#: ../isobrowser.c:1564
 msgid "ISO Images"
 msgstr "ISO-avtrykk"
 
@@ -283,23 +294,21 @@ msgid "Is visible on image as '%s'"
 msgstr "Er synlig på avtrykket som «%s»"
 
 #: ../isobrowser.c:696
-msgid ""
-"It seems that you have made changes to the ISO but haven't saved them. Are "
-"you sure you want to close it?"
-msgstr ""
-"Du har gjort endringer på ISO-filen uten å lagre.Er du sikker på du vil "
-"lukke den?"
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgstr "Du har gjort endringer på ISO-filen uten å lagre.Er du sikker på du vil lukke den?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr "Valgt enhet er ikke en ordinær fil eller kan ikke brukes som oppstartssektor"
 
-#: ../boot.c:373 ../boot.c:380
+#: ../boot.c:373
+#: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Sted: på det originale avtrykket ved 0x%llX"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:375
+#: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Sted: vil bli lagt til fra «%s»"
@@ -312,15 +321,18 @@ msgstr "MDF-avtrykk"
 msgid "NRG Images"
 msgstr "NRG-avtrykk"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:283
+#: ../fsbrowser.c:110
+#: ../isobrowser.c:283
 msgid "Name"
 msgstr "Navn"
 
-#: ../window.c:65 ../window.c:456
+#: ../window.c:65
+#: ../window.c:456
 msgid "New Directory"
 msgstr "Ny mappe"
 
-#: ../boot.c:149 ../boot.c:327
+#: ../boot.c:149
+#: ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "Ingen oppstartssektor ble lest fra originalen eller lagret på avtrykket"
 
@@ -352,7 +364,9 @@ msgstr "Vennligst vent mens avtrykket blir lest..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Vennligst vent mens det nye avtrykket blir lagret til disk..."
 
-#: ../isobrowser.c:126 ../isobrowser.c:823 ../isobrowser.c:1166
+#: ../isobrowser.c:126
+#: ../isobrowser.c:823
+#: ../isobrowser.c:1166
 #: ../isobrowser.c:1477
 msgid "Progress"
 msgstr "Forløp"
@@ -385,7 +399,8 @@ msgstr "Søk etter duplikatfiler (treg)"
 msgid "Show _hidden files"
 msgstr "Vis _skjulte filer"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:306
+#: ../fsbrowser.c:131
+#: ../isobrowser.c:306
 msgid "Size"
 msgstr "Størrelse"
 
@@ -395,17 +410,17 @@ msgid "Size: %d bytes"
 msgstr "Størrelse: %d byte"
 
 #: ../fsbrowser.c:270
-msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
-msgstr ""
-"Hopper over mappe fordi filnavn lengre enn 256 tegn ikke kan håndteres"
+msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
+msgstr "Hopper over mappe fordi filnavn lengre enn 256 tegn ikke kan håndteres"
 
 #: ../fsbrowser.c:288
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Hopper over mappe fordi stat(%s) feilet med %d"
 
-#: ../settings.c:244 ../window.c:386 ../window.c:389
+#: ../settings.c:244
+#: ../window.c:386
+#: ../window.c:389
 msgid "Temporary directory"
 msgstr "Midlertidig mappe"
 
@@ -438,8 +453,8 @@ msgstr ""
 " - Den øverste fil-utforskeren viser filer og mapper på din datamaskin.\n"
 " - Den underste fil-utforskeren viser filer og mapper på ISO-avtrykket.\n"
 "\n"
-"Trykk på «Avtrykk» og «Åpne» for å åpne en eksisterende ISO-fil, for å opprette en\n"
-"ny ISO-fil klikk på «Avtrykk» og «Ny».\n"
+"Trykk på «Avtrykk» og «Åpne» for å åpne en eksisterende ISO-fil, for å \n"
+"opprette en ny ISO-fil klikk på «Avtrykk» og «Ny».\n"
 "\n"
 "Velg filer eller mapper i det øverste fil-utforskeren og trykk på «Legg til\n"
 "i ISO' knappen i den midtre verktøylinjen for å legge dem til i\n"
@@ -467,7 +482,9 @@ msgstr "Bruk valgt fil på avtrykket (ingen etterligning)"
 msgid "View"
 msgstr "Vis"
 
-#: ../settings.c:282 ../window.c:360 ../window.c:363
+#: ../settings.c:282
+#: ../window.c:360
+#: ../window.c:363
 msgid "Viewer"
 msgstr "Vis"
 
@@ -476,10 +493,8 @@ msgid "Volume name:"
 msgstr "Volum navn:"
 
 #: ../settings.c:734
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
-msgstr ""
-"Du må lukke og åpne ISO-filen igjen for at endringene skal bli synlige"
+msgid "You will have to close and reopen the ISO for this change to take effect"
+msgstr "Du må lukke og åpne ISO-filen igjen for at endringene skal bli synlige"
 
 #: ../window.c:241
 msgid "_BootRecord"
@@ -508,3 +523,4 @@ msgstr "Sorter _mapper først"
 #: ../window.c:204
 msgid "_View"
 msgstr "_Vis"
+

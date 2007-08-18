@@ -31,7 +31,7 @@ msgstr ""
 #: ../editfile.c:115 ../editfile.c:317
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr ""
+msgstr "'%s' није прописан фајл"
 
 #: ../isobrowser.c:139 ../isobrowser.c:1179
 msgid "(scanning for duplicate files)"
@@ -83,7 +83,7 @@ msgstr "Врста бутабилног фајла: Без емулације"
 
 #: ../isobrowser.c:492 ../isobrowser.c:1754
 msgid "Change permissions"
-msgstr ""
+msgstr "Измени дозволе за приступ"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
@@ -107,11 +107,11 @@ msgstr "Избриши из ISO-а"
 
 #: ../isobrowser.c:1747
 msgid "Edit"
-msgstr ""
+msgstr "Измени"
 
 #: ../settings.c:206 ../window.c:334 ../window.c:337
 msgid "Editor"
-msgstr ""
+msgstr "Уређивач"
 
 #: ../isobrowser.c:1414
 msgid "Enter a new name:"
@@ -263,14 +263,12 @@ msgid "Image Information"
 msgstr "Информације о имиџу"
 
 #: ../settings.c:160
-#, fuzzy, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Неуспешно брисање '%s': '%s'"
+msgstr "Погрешан издавач '%s': '%s'"
 
 #: ../settings.c:176
-#, fuzzy, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Неуспешно преименовање '%s': %s"
+msgstr "Погрешан назив волумена '%s': %s"
 
 #: ../boot.c:391
 #, c-format
@@ -307,9 +305,8 @@ msgid "Location: to be added from '%s'"
 msgstr "Локација: за додавање из '%s'"
 
 #: ../isobrowser.c:1279
-#, fuzzy
 msgid "MDF Images"
-msgstr "ISO имиџи"
+msgstr "MDF имиџи"
 
 #: ../isobrowser.c:1274
 msgid "NRG Images"
@@ -369,9 +366,8 @@ msgid "Remove"
 msgstr "Уклони"
 
 #: ../isobrowser.c:1731
-#, fuzzy
 msgid "Rename"
-msgstr "Уклони"
+msgstr "Преименуј"
 
 #: ../isobrowser.c:1553
 msgid "Save File"
@@ -411,12 +407,10 @@ msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Поништавам унос директоријума због статуса(%s) неуспело са %d"
 
 #: ../settings.c:244 ../window.c:386 ../window.c:389
-#, fuzzy
 msgid "Temporary directory"
-msgstr "Нови директоријум"
+msgstr "Привремени директоријум"
 
 #: ../about.c:231
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -461,6 +455,9 @@ msgstr ""
 "Такође можете брисати фајлове и директоријуме из ISO-а и креирати\n"
 "нове директоријуме и у ISO-у и у фајлсистему.\n"
 "\n"
+"Ako изаберете нешто у доњем прегледнику фајлова и направите десни\n"
+"клик мишем на тај фајл- појавиће вам се додатне опције.\n"
+"\n"
 "Када направите жељене измене у ISO имиџу, кликните на 'Имиџ' и\n"
 "'Сачувај као'. Не можете пребрисати оригинални ISO.\n"
 
@@ -469,14 +466,12 @@ msgid "Use selected file on image (no emulation)"
 msgstr "Користи одабрани фајл у имиџу (без емулације)"
 
 #: ../isobrowser.c:1740
-#, fuzzy
 msgid "View"
-msgstr "П_рикажи"
+msgstr "Прикажи"
 
 #: ../settings.c:282 ../window.c:360 ../window.c:363
-#, fuzzy
 msgid "Viewer"
-msgstr "П_рикажи"
+msgstr "Прегледник"
 
 #: ../settings.c:97
 msgid "Volume name:"
@@ -501,7 +496,7 @@ msgstr "_Имиџ"
 
 #: ../window.c:421
 msgid "_Overview"
-msgstr "_Преглед"
+msgstr "Kratko _uputstvo"
 
 #: ../window.c:305
 msgid "_Settings"
