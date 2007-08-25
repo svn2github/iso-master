@@ -1,3 +1,4 @@
+# translation of cs.po_[k6bxCb].po to
 # Czech translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
 #
@@ -5,11 +6,11 @@
 # Updated by Jiri Huf <jirihuf@seznam.cz>
 msgid ""
 msgstr ""
-"Project-Id-Version: isomaster\n"
+"Project-Id-Version: cs.po_[k6bxCb]\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-08-08 07:09-0400\n"
-"PO-Revision-Date: 2007-07-06 03:01-0500\n"
-"Last-Translator: Jiri Huf <jirihuf@seznam.cz>\n"
+"PO-Revision-Date: 2007-08-24 20:47+0200\n"
+"Last-Translator: Schmaki <smallsmaky@seznam.cz>\n"
 "Language-Team:  <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -34,7 +35,7 @@ msgstr ""
 #: ../editfile.c:115 ../editfile.c:317
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr ""
+msgstr "'%s' není platný soubor"
 
 #: ../isobrowser.c:139 ../isobrowser.c:1179
 msgid "(scanning for duplicate files)"
@@ -86,7 +87,7 @@ msgstr "Typ zaváděcího záznamu: Bez emulace"
 
 #: ../isobrowser.c:492 ../isobrowser.c:1754
 msgid "Change permissions"
-msgstr ""
+msgstr "Změnit oprávnění"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
@@ -110,11 +111,11 @@ msgstr "Smazat z ISO obrazu"
 
 #: ../isobrowser.c:1747
 msgid "Edit"
-msgstr ""
+msgstr "Upravit"
 
 #: ../settings.c:206 ../window.c:334 ../window.c:337
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../isobrowser.c:1414
 msgid "Enter a new name:"
@@ -237,8 +238,7 @@ msgid "From file: no emulation"
 msgstr "Ze souboru: bez emulace"
 
 #: ../isobrowser.c:794
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "Chyba GUI: Není možné smazat nic jiného než soubory a adresáře"
 
 #: ../window.c:59 ../window.c:450
@@ -266,14 +266,14 @@ msgid "Image Information"
 msgstr "Informace o obrazu"
 
 #: ../settings.c:160
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Nepodařilo se smazat %s: '%s'"
+msgstr "Neplatný autor '%s': '%s'"
 
 #: ../settings.c:176
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Nepodařilo se přejmenovat %s: '%s'"
+msgstr "Neplatný název svazku %s: '%s'"
 
 #: ../boot.c:391
 #, c-format
@@ -289,13 +289,11 @@ msgstr "Je v obrazu viditelný jako '%s'"
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
-msgstr ""
-"Úpravy provedené v ISO obrazu nebyly uloženy.Opravdu si přejete obraz zavřít?"
+msgstr "Úpravy provedené v ISO obrazu nebyly uloženy.Opravdu si přejete obraz zavřít?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr ""
-"Vybraná položka není regulérní soubor a nelze ji použít jako zaváděcí záznam"
+msgstr "Vybraná položka není regulérní soubor a nelze ji použít jako zaváděcí záznam"
 
 #: ../boot.c:373 ../boot.c:380
 #, c-format
@@ -308,9 +306,8 @@ msgid "Location: to be added from '%s'"
 msgstr "Umístění: bude přidáno z '%s'"
 
 #: ../isobrowser.c:1279
-#, fuzzy
 msgid "MDF Images"
-msgstr "ISO obrazy"
+msgstr "MDF obrazy"
 
 #: ../isobrowser.c:1274
 msgid "NRG Images"
@@ -374,9 +371,8 @@ msgid "Remove"
 msgstr "Odstranit"
 
 #: ../isobrowser.c:1731
-#, fuzzy
 msgid "Rename"
-msgstr "Odstranit"
+msgstr "Přejmenovat"
 
 #: ../isobrowser.c:1553
 msgid "Save File"
@@ -404,8 +400,7 @@ msgid "Size: %d bytes"
 msgstr "Velikost: %d bajtů"
 
 #: ../fsbrowser.c:270
-msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
+msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr "Název delší než 256 znaků, přeskakuji adresář"
 
 #: ../fsbrowser.c:288
@@ -414,12 +409,10 @@ msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Stat(%s) se nezdařil (%d); přeskakuji adresář"
 
 #: ../settings.c:244 ../window.c:386 ../window.c:389
-#, fuzzy
 msgid "Temporary directory"
-msgstr "Nový adresář"
+msgstr "Dočasný adresář"
 
 #: ../about.c:231
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -463,6 +456,9 @@ msgstr ""
 "Můžete také mazat soubory nebo adresáře z ISO obrazu a vytvářet\n"
 "nové, a to jak v ISO obraze, tak i ve vašem systému.\n"
 "\n"
+"Pokud vyberete nějakou položku ve spodním prohlížeči souborů a kliknete na ni pravým tlačítkem,\n"
+"objeví se několik dalších nových voleb\n"
+"\n"
 "Po provedení všech změn v novém ISO obraze klikněte na 'Obraz' a\n"
 "'Uložit jako'. Původní ISO obraz nelze přepsat.\n"
 
@@ -471,22 +467,19 @@ msgid "Use selected file on image (no emulation)"
 msgstr "Použít vybraný soubor na obraz (bez emulace)"
 
 #: ../isobrowser.c:1740
-#, fuzzy
 msgid "View"
-msgstr "_Pohled"
+msgstr "Pohled"
 
 #: ../settings.c:282 ../window.c:360 ../window.c:363
-#, fuzzy
 msgid "Viewer"
-msgstr "_Pohled"
+msgstr "Prohlížeč"
 
 #: ../settings.c:97
 msgid "Volume name:"
 msgstr "Název svazku:"
 
 #: ../settings.c:734
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
+msgid "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Aby se změny projevily, musíte zavřít a znovu otevřít ISO obraz"
 
 #: ../window.c:241
@@ -516,3 +509,4 @@ msgstr "_Řadit nejdřív adresáře"
 #: ../window.c:204
 msgid "_View"
 msgstr "_Pohled"
+
