@@ -4,6 +4,7 @@ ui:
 -checkboxes and lables not aligned in change permissions window
 -log bug 'file size not updated after editing a file'
 -send mail to Croatian <lokalizacija@linux.hr> for translation update
+-make progress bars smoother
 
 
 bk:
@@ -11,6 +12,7 @@ bk:
 -add path tables, boot record to size estimate
 -need a bk_set_warning_foo()
 -using access() to check whether a file exists is no good, target of a dead symlink will get overwritten
+-fedora7 takes forever to remangle. try either fix the algorithm or allow longer 9660 names.
 
 
 manual:
@@ -36,7 +38,6 @@ tests to run before a release:
  - from scratch
  - starting with an existing no emulation bootable disk
 - delete config file, make sure it still works
-- use config file from previous version, make sure it still works
 - add a bunch of files to an iso, delete all the files, add some more, save
 - edit some text and binary files, make sure they extract and write properly
 

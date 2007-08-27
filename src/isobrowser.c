@@ -1643,13 +1643,7 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
             
             if(regexec(&extensionRegex, nameWithExtension, 0, NULL, 0) != 0)
             /* doesn't already end with .iso */
-            {
-                printf("no match\n");
                 strcat(nameWithExtension, ".iso");
-            }
-            else
-                printf("match\n");
-            
             
             GBLappSettings.appendExtension = true;
         }
