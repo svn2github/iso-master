@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 07:09-0400\n"
+"POT-Creation-Date: 2007-08-27 04:07-0400\n"
 "PO-Revision-Date: 2007-08-27 03:57-0500\n"
 "Last-Translator: ivoks <(null)>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:475
+#: ../window.c:474
 msgid "      Estimated ISO Size: "
 msgstr "      Predviđena ISO veličina: "
 
@@ -29,18 +29,16 @@ msgstr ""
 "\n"
 "Želite li nastaviti?"
 
-#: ../editfile.c:115
-#: ../editfile.c:317
+#: ../editfile.c:115 ../editfile.c:317
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr ""
 
-#: ../isobrowser.c:139
-#: ../isobrowser.c:1179
+#: ../isobrowser.c:139 ../isobrowser.c:1179
 msgid "(scanning for duplicate files)"
 msgstr "(tražim duplicirane datoteke)"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add"
 msgstr "Dodaj"
 
@@ -48,12 +46,11 @@ msgstr "Dodaj"
 msgid "Add extension automatically"
 msgstr "Automatski dodaj nastavak"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add to the ISO"
 msgstr "Dodaj u ISO"
 
-#: ../isobrowser.c:1284
-#: ../isobrowser.c:1569
+#: ../isobrowser.c:1284 ../isobrowser.c:1569
 msgid "All files"
 msgstr "Sve datoteke"
 
@@ -85,8 +82,7 @@ msgstr "Tip Boot zapisa: 2880KiB disketa"
 msgid "Boot record type: No Emulation"
 msgstr "Tip Boot zapisa: bez emulacije"
 
-#: ../isobrowser.c:492
-#: ../isobrowser.c:1754
+#: ../isobrowser.c:492 ../isobrowser.c:1754
 msgid "Change permissions"
 msgstr ""
 
@@ -94,7 +90,7 @@ msgstr ""
 msgid "Choose Boot Record File"
 msgstr "Odaberite datoteku Boot zapisa"
 
-#: ../window.c:457
+#: ../window.c:456
 msgid "Create new directory on the ISO"
 msgstr "Izradi novi direktorij u ISO-u"
 
@@ -106,7 +102,7 @@ msgstr "Izradi novi direktorij na datotečnom sustavu"
 msgid "Creation time:"
 msgstr "Datum izrade:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Delete from the ISO"
 msgstr "Obriši sa ISO-a"
 
@@ -114,9 +110,7 @@ msgstr "Obriši sa ISO-a"
 msgid "Edit"
 msgstr ""
 
-#: ../settings.c:206
-#: ../window.c:334
-#: ../window.c:337
+#: ../settings.c:206 ../window.c:333 ../window.c:336
 msgid "Editor"
 msgstr ""
 
@@ -128,16 +122,15 @@ msgstr "Upišite novo ime:"
 msgid "Enter name for new directory"
 msgstr "Upišite novo ime za direktorij"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract"
 msgstr "Izvuci"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract from the ISO"
 msgstr "Izvuci iz ISO-a"
 
-#: ../editfile.c:219
-#: ../isobrowser.c:207
+#: ../editfile.c:219 ../isobrowser.c:207
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Neuspjeh pri dodavanju '%s': '%s'"
@@ -162,15 +155,12 @@ msgstr "Neuspjeh pri izradi direktorija %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Neuspjeh pri izradi direktorija %s: '%s'"
 
-#: ../editfile.c:193
-#: ../isobrowser.c:776
+#: ../editfile.c:193 ../isobrowser.c:776
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Neuspjeh pri brisanju '%s': '%s'"
 
-#: ../editfile.c:157
-#: ../editfile.c:359
-#: ../isobrowser.c:884
+#: ../editfile.c:157 ../editfile.c:359 ../isobrowser.c:884
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Neuspjeh pri izvlačenju '%s': '%s'"
@@ -180,8 +170,7 @@ msgstr "Neuspjeh pri izvlačenju '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Neuspjeh pri izvlačenju boot zapisa: '%s'"
 
-#: ../isobrowser.c:1067
-#: ../isobrowser.c:1115
+#: ../isobrowser.c:1067 ../isobrowser.c:1115
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Neuspjeh pri inicijaciji bkisofs: '%s'"
@@ -225,36 +214,36 @@ msgstr "Neuspjeh pri pisanju slika na '%s': '%s'"
 msgid "Filename types (both recommended):"
 msgstr "Tipovi imena datoteka (uključujući predložene):"
 
-#: ../window.c:322
+#: ../window.c:321
 msgid "Follow symbolic links"
 msgstr "Prati simboličke linkove"
 
-#: ../window.c:285
+#: ../window.c:284
 msgid "From file: 1200KiB floppy"
 msgstr "Iz datoteke: 1200KiB disketa"
 
-#: ../window.c:291
+#: ../window.c:290
 msgid "From file: 1440KiB floppy"
 msgstr "Iz datoteke: 1440KiB disketa"
 
-#: ../window.c:297
+#: ../window.c:296
 msgid "From file: 2880KiB floppy"
 msgstr "Iz datoteke: 2880KiB disketa"
 
-#: ../window.c:279
+#: ../window.c:278
 msgid "From file: no emulation"
 msgstr "Iz datoteke: bez emulacije"
 
 #: ../isobrowser.c:794
-msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgid ""
+"GUI error, deleting anything other than files and directories doesn't work"
 msgstr "GUI greška, brisanje svega osim datoteka i direktorija ne radi"
 
-#: ../window.c:59
-#: ../window.c:450
+#: ../window.c:59 ../window.c:449
 msgid "Go back"
 msgstr "Idi natrag"
 
-#: ../window.c:451
+#: ../window.c:450
 msgid "Go back up one directory on the ISO"
 msgstr "Idi natrag jedan direktorij na ISO-u"
 
@@ -262,8 +251,7 @@ msgstr "Idi natrag jedan direktorij na ISO-u"
 msgid "Go back up one directory on the filesystem"
 msgstr "Idi natrag jedan direktorij na datotečnom sustavu"
 
-#: ../isobrowser.c:1269
-#: ../isobrowser.c:1564
+#: ../isobrowser.c:1269 ../isobrowser.c:1564
 msgid "ISO Images"
 msgstr "ISO slike"
 
@@ -296,21 +284,25 @@ msgid "Is visible on image as '%s'"
 msgstr "Vidljivo je na slici kao '%s'"
 
 #: ../isobrowser.c:696
-msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
-msgstr "Napravili ste izmjene na ISO-u, ali ih niste pohranili. Jeste li sigurni da gaželite zatvoriti?"
+msgid ""
+"It seems that you have made changes to the ISO but haven't saved them. Are "
+"you sure you want to close it?"
+msgstr ""
+"Napravili ste izmjene na ISO-u, ali ih niste pohranili. Jeste li sigurni da "
+"gaželite zatvoriti?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Odabrana stavka nije uobičajena datoteka i ne može se koristiti kao boot zapis"
+msgstr ""
+"Odabrana stavka nije uobičajena datoteka i ne može se koristiti kao boot "
+"zapis"
 
-#: ../boot.c:373
-#: ../boot.c:380
+#: ../boot.c:373 ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Lokacija: na originalnoj slici, na 0x%llX"
 
-#: ../boot.c:375
-#: ../boot.c:382
+#: ../boot.c:375 ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Lokacija: dodati iz '%s'"
@@ -324,18 +316,15 @@ msgstr "ISO slike"
 msgid "NRG Images"
 msgstr "NRG slike"
 
-#: ../fsbrowser.c:110
-#: ../isobrowser.c:283
+#: ../fsbrowser.c:110 ../isobrowser.c:283
 msgid "Name"
 msgstr "Ime"
 
-#: ../window.c:65
-#: ../window.c:456
+#: ../window.c:65 ../window.c:455
 msgid "New Directory"
 msgstr "Novi direktorij"
 
-#: ../boot.c:149
-#: ../boot.c:327
+#: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "Nema boot zapisa na originalnoj slici"
 
@@ -345,7 +334,8 @@ msgstr "Nema boota za brisanje"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr "Odaberite datoteku u ISO pregledniku koja će se koristiti kao boot zapis"
+msgstr ""
+"Odaberite datoteku u ISO pregledniku koja će se koristiti kao boot zapis"
 
 #: ../boot.c:243
 msgid "Please select no more then one file in the ISO browser"
@@ -367,9 +357,7 @@ msgstr "Pričekajte dok čitam sliku..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Pričekajte dok spremam novu sliku na disk..."
 
-#: ../isobrowser.c:126
-#: ../isobrowser.c:823
-#: ../isobrowser.c:1166
+#: ../isobrowser.c:126 ../isobrowser.c:823 ../isobrowser.c:1166
 #: ../isobrowser.c:1477
 msgid "Progress"
 msgstr "Napredak"
@@ -378,7 +366,7 @@ msgstr "Napredak"
 msgid "Publisher:"
 msgstr "Izdavač:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Remove"
 msgstr "Ukloni"
 
@@ -395,16 +383,15 @@ msgstr "Spremi datoteku"
 msgid "Save a copy of the boot record"
 msgstr "Spremi kopiju boot zapisa"
 
-#: ../window.c:312
+#: ../window.c:311
 msgid "Scan for duplicate files (slow)"
 msgstr "Pretraži duplicirane datoteke (sporo)"
 
-#: ../window.c:219
+#: ../window.c:218
 msgid "Show _hidden files"
 msgstr "Prikaži sk_rivene datoteke"
 
-#: ../fsbrowser.c:131
-#: ../isobrowser.c:306
+#: ../fsbrowser.c:131 ../isobrowser.c:306
 msgid "Size"
 msgstr "Veličina"
 
@@ -414,23 +401,24 @@ msgid "Size: %d bytes"
 msgstr "Veličina: %d byteova"
 
 #: ../fsbrowser.c:270
-msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Preskačem direktorij jer nije moguće baratati imenima datoteka dužim od 256 znakova"
+msgid ""
+"Skiping directory entry because cannot handle filename longer than 256 chars"
+msgstr ""
+"Preskačem direktorij jer nije moguće baratati imenima datoteka dužim od 256 "
+"znakova"
 
 #: ../fsbrowser.c:288
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Preskačem direktorij jer stat(%s) nije uspio s %d"
 
-#: ../settings.c:244
-#: ../window.c:386
-#: ../window.c:389
+#: ../settings.c:244 ../window.c:385 ../window.c:388
 #, fuzzy
 msgid "Temporary directory"
 msgstr "Novi direktorij"
 
-#: ../about.c:231
 # !! this translation is incomplete
+#: ../about.c:231
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -459,24 +447,29 @@ msgstr ""
 " - Gornji pretraživač prikazuje datoteke i direktorije na vašem računalu.\n"
 " - Donji pretraživač prikazuje datoteke i direktorije na ISO slici.\n"
 "\n"
-"Kako biste otvorili ISO datoteku, kliknite na 'Slika' i 'Otvori'. Kako biste\n"
+"Kako biste otvorili ISO datoteku, kliknite na 'Slika' i 'Otvori'. Kako "
+"biste\n"
 "napravili novu ISO sliku, kliknite na 'Slika' i 'Novi'.\n"
 "\n"
-"Kako biste dodali jednu ili više datoteka ili direktorija na ISO, odaberite ih\n"
+"Kako biste dodali jednu ili više datoteka ili direktorija na ISO, odaberite "
+"ih\n"
 "u gornjem pretraživaču i kliknite 'Dodaj na ISO' tipku u sredinjoj pomoćnoj\n"
 "trakci.\n"
 "\n"
-"Kako biste izvukli jednu ili više datoteka ili direktorija sa ISO slike, odaberite\n"
-"ih u donjem pretraživaču i kliknite 'Izvuci sa ISO' tipku u srednjoj pomoćnoj\n"
+"Kako biste izvukli jednu ili više datoteka ili direktorija sa ISO slike, "
+"odaberite\n"
+"ih u donjem pretraživaču i kliknite 'Izvuci sa ISO' tipku u srednjoj "
+"pomoćnoj\n"
 "traci.\n"
 "\n"
-"Možete obrisati datoteke ili direktorije sa ISO i napraviti nove direktorije na\n"
+"Možete obrisati datoteke ili direktorije sa ISO i napraviti nove direktorije "
+"na\n"
 "njemu i na datotečnom sustavu.\n"
 "\n"
 "Jednom kada napravite sve promjene na ISO slici, kliknite 'Slika' i potom\n"
 "'Spremi kao'. Možete prepisati originalni ISO.\n"
 
-#: ../window.c:273
+#: ../window.c:272
 msgid "Use selected file on image (no emulation)"
 msgstr "Upotrijebi odabranu datoteku na slici (bez emulacije)"
 
@@ -485,9 +478,7 @@ msgstr "Upotrijebi odabranu datoteku na slici (bez emulacije)"
 msgid "View"
 msgstr "P_ogled"
 
-#: ../settings.c:282
-#: ../window.c:360
-#: ../window.c:363
+#: ../settings.c:282 ../window.c:359 ../window.c:362
 #, fuzzy
 msgid "Viewer"
 msgstr "P_ogled"
@@ -497,34 +488,35 @@ msgid "Volume name:"
 msgstr "Ime volumena:"
 
 #: ../settings.c:734
-msgid "You will have to close and reopen the ISO for this change to take effect"
-msgstr "Morate zatvoriti i ponovo otvoriti ISO kako bi promjene bile prihvaćene"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
+msgstr ""
+"Morate zatvoriti i ponovo otvoriti ISO kako bi promjene bile prihvaćene"
 
-#: ../window.c:241
+#: ../window.c:240
 msgid "_BootRecord"
 msgstr "Boot_Zapis"
 
-#: ../window.c:412
+#: ../window.c:411
 msgid "_Help"
 msgstr "_Pomoć"
 
-#: ../window.c:146
+#: ../window.c:145
 msgid "_Image"
 msgstr "Sli_ka"
 
-#: ../window.c:421
+#: ../window.c:420
 msgid "_Overview"
 msgstr "P_regled"
 
-#: ../window.c:305
+#: ../window.c:304
 msgid "_Settings"
 msgstr "Po_stavke"
 
-#: ../window.c:229
+#: ../window.c:228
 msgid "_Sort directories first"
 msgstr "Posloži _direktorije ispred"
 
-#: ../window.c:204
+#: ../window.c:203
 msgid "_View"
 msgstr "P_ogled"
-

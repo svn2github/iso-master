@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 07:09-0400\n"
+"POT-Creation-Date: 2007-08-27 04:07-0400\n"
 "PO-Revision-Date: 2007-06-07 14:18-0500\n"
 "Last-Translator: Bogdan Radulescu <bogdan@nimblex.net>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:475
+#: ../window.c:474
 msgid "      Estimated ISO Size: "
 msgstr "      Dimensiunea ISO Estimată: "
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "(scanning for duplicate files)"
 msgstr "(scanez fişiere duplicate)"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add"
 msgstr "Adaugă"
 
@@ -45,7 +45,7 @@ msgstr "Adaugă"
 msgid "Add extension automatically"
 msgstr "Adaugă extensie automat"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add to the ISO"
 msgstr "Adaugă la ISO"
 
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Choose Boot Record File"
 msgstr "Alege fişierul boot record"
 
-#: ../window.c:457
+#: ../window.c:456
 msgid "Create new directory on the ISO"
 msgstr "Crează un nou director pe ISO"
 
@@ -101,7 +101,7 @@ msgstr "Crează un nou director în sistemul de fişiere"
 msgid "Creation time:"
 msgstr "Momentul creării:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Delete from the ISO"
 msgstr "Şterge din ISO"
 
@@ -109,7 +109,7 @@ msgstr "Şterge din ISO"
 msgid "Edit"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:334 ../window.c:337
+#: ../settings.c:206 ../window.c:333 ../window.c:336
 msgid "Editor"
 msgstr ""
 
@@ -121,11 +121,11 @@ msgstr "Introduce un nou nume:"
 msgid "Enter name for new directory"
 msgstr "Introdu numele noului director"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract"
 msgstr "Extrage"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract from the ISO"
 msgstr "Extrage din ISO"
 
@@ -213,23 +213,23 @@ msgstr "Nu pot să scriu imaginea pe '%s': '%s'"
 msgid "Filename types (both recommended):"
 msgstr "Tipurile fişierelor (recomandat ambele)"
 
-#: ../window.c:322
+#: ../window.c:321
 msgid "Follow symbolic links"
 msgstr "Urmareşte legăturile simbolice"
 
-#: ../window.c:285
+#: ../window.c:284
 msgid "From file: 1200KiB floppy"
 msgstr "Din fişier: 1200KiB floppy"
 
-#: ../window.c:291
+#: ../window.c:290
 msgid "From file: 1440KiB floppy"
 msgstr "Din fişier: 1440KiB floppy"
 
-#: ../window.c:297
+#: ../window.c:296
 msgid "From file: 2880KiB floppy"
 msgstr "Din fişier: 2880KiB floppy"
 
-#: ../window.c:279
+#: ../window.c:278
 msgid "From file: no emulation"
 msgstr "Din fişier: fără emulare"
 
@@ -240,11 +240,11 @@ msgstr ""
 "Eroare de interfaţă; şterg orice altceva în afară de fişierele şi "
 "directoarele care nu funcţionează"
 
-#: ../window.c:59 ../window.c:450
+#: ../window.c:59 ../window.c:449
 msgid "Go back"
 msgstr "Înapoi"
 
-#: ../window.c:451
+#: ../window.c:450
 msgid "Go back up one directory on the ISO"
 msgstr "Du-te un director în sus pe ISO"
 
@@ -321,7 +321,7 @@ msgstr "Imagini NRG"
 msgid "Name"
 msgstr "Nume"
 
-#: ../window.c:65 ../window.c:456
+#: ../window.c:65 ../window.c:455
 msgid "New Directory"
 msgstr "Director Nou"
 
@@ -366,7 +366,7 @@ msgstr "Progres"
 msgid "Publisher:"
 msgstr "Editor:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Remove"
 msgstr "Şterge"
 
@@ -383,11 +383,11 @@ msgstr "SalveazÄ fisier"
 msgid "Save a copy of the boot record"
 msgstr "Salvează o copie la boot record"
 
-#: ../window.c:312
+#: ../window.c:311
 msgid "Scan for duplicate files (slow)"
 msgstr "Scanez fişiere duplicate (lent)"
 
-#: ../window.c:219
+#: ../window.c:218
 msgid "Show _hidden files"
 msgstr "Arata fisierele _ascunse"
 
@@ -412,13 +412,13 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Exclud această intrare pentru că stat(%s) a eşuat cu %d"
 
-#: ../settings.c:244 ../window.c:386 ../window.c:389
+#: ../settings.c:244 ../window.c:385 ../window.c:388
 #, fuzzy
 msgid "Temporary directory"
 msgstr "Director Nou"
 
-#: ../about.c:231
 # !! this translation is incomplete
+#: ../about.c:231
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -465,7 +465,7 @@ msgstr ""
 "Odată ce aţi făcut toate modificările pe noua imagine ISO daţi click\n"
 "pe 'Imagine' si pe 'Salveaza ca'.Nu puteţi rescrie imaginea originală.\n"
 
-#: ../window.c:273
+#: ../window.c:272
 msgid "Use selected file on image (no emulation)"
 msgstr "Foloseşte fişierul selectat pe imagine (fără emulare)"
 
@@ -474,7 +474,7 @@ msgstr "Foloseşte fişierul selectat pe imagine (fără emulare)"
 msgid "View"
 msgstr "_Vizualizează"
 
-#: ../settings.c:282 ../window.c:360 ../window.c:363
+#: ../settings.c:282 ../window.c:359 ../window.c:362
 #, fuzzy
 msgid "Viewer"
 msgstr "_Vizualizează"
@@ -490,30 +490,30 @@ msgstr ""
 "Va trebui să închizi şi să redeschizi ISO pentru ca aceste modificări să "
 "aibă efect"
 
-#: ../window.c:241
+#: ../window.c:240
 msgid "_BootRecord"
 msgstr "_BootRecord"
 
-#: ../window.c:412
+#: ../window.c:411
 msgid "_Help"
 msgstr "_Ajutor"
 
-#: ../window.c:146
+#: ../window.c:145
 msgid "_Image"
 msgstr "_Imagine"
 
-#: ../window.c:421
+#: ../window.c:420
 msgid "_Overview"
 msgstr "_Ansamblu"
 
-#: ../window.c:305
+#: ../window.c:304
 msgid "_Settings"
 msgstr "_Setări"
 
-#: ../window.c:229
+#: ../window.c:228
 msgid "_Sort directories first"
 msgstr "_Sortează directoarele primele"
 
-#: ../window.c:204
+#: ../window.c:203
 msgid "_View"
 msgstr "_Vizualizează"

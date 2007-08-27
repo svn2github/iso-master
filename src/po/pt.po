@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 07:09-0400\n"
+"POT-Creation-Date: 2007-08-27 04:07-0400\n"
 "PO-Revision-Date: 2007-06-05 21:38+0100\n"
 "Last-Translator: João de Ferro <joaodeferro@gmail.com>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Country: PORTUGAL\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../window.c:475
+#: ../window.c:474
 msgid "      Estimated ISO Size: "
 msgstr "      Tamanho Estimado da ISO:"
 
@@ -39,7 +39,7 @@ msgstr ""
 msgid "(scanning for duplicate files)"
 msgstr "(procurando novos ficheiros)"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add"
 msgstr "Adicionar"
 
@@ -47,7 +47,7 @@ msgstr "Adicionar"
 msgid "Add extension automatically"
 msgstr "Adicionar extensão automaticamente"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add to the ISO"
 msgstr "Adicionar à ISO"
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "Choose Boot Record File"
 msgstr "Escolher Ficheiro de Disco de Arranque"
 
-#: ../window.c:457
+#: ../window.c:456
 msgid "Create new directory on the ISO"
 msgstr "Criar nova directoria na ISO"
 
@@ -103,7 +103,7 @@ msgstr "Criar nova directoria no Sistema de Ficheiros"
 msgid "Creation time:"
 msgstr "Tempo de Criação:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Delete from the ISO"
 msgstr "Apagar da ISO"
 
@@ -111,7 +111,7 @@ msgstr "Apagar da ISO"
 msgid "Edit"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:334 ../window.c:337
+#: ../settings.c:206 ../window.c:333 ../window.c:336
 msgid "Editor"
 msgstr ""
 
@@ -123,11 +123,11 @@ msgstr "Escrever um novo nome:"
 msgid "Enter name for new directory"
 msgstr "Introduza o nome da nova directoria"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract"
 msgstr "Extrair"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract from the ISO"
 msgstr "Extrair da ISO"
 
@@ -215,23 +215,23 @@ msgstr "Falhou escrita de imagem para '%s': '%s'"
 msgid "Filename types (both recommended):"
 msgstr "Tipos de Ficheiro (ambos recomendados):"
 
-#: ../window.c:322
+#: ../window.c:321
 msgid "Follow symbolic links"
 msgstr "Seguir links simbólicos"
 
-#: ../window.c:285
+#: ../window.c:284
 msgid "From file: 1200KiB floppy"
 msgstr "Do ficheiro: Disquete 1200 kB"
 
-#: ../window.c:291
+#: ../window.c:290
 msgid "From file: 1440KiB floppy"
 msgstr "Do ficheiro: Disquete 1440 kB"
 
-#: ../window.c:297
+#: ../window.c:296
 msgid "From file: 2880KiB floppy"
 msgstr "Do ficheiro: Disquete 2880 kB"
 
-#: ../window.c:279
+#: ../window.c:278
 msgid "From file: no emulation"
 msgstr "Do ficheiro: sem emulação"
 
@@ -240,11 +240,11 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "Erro de GUI, não é possível apagar mais que ficheiros e directorias"
 
-#: ../window.c:59 ../window.c:450
+#: ../window.c:59 ../window.c:449
 msgid "Go back"
 msgstr "Atrás"
 
-#: ../window.c:451
+#: ../window.c:450
 msgid "Go back up one directory on the ISO"
 msgstr "Atrás uma directoria da ISO"
 
@@ -321,7 +321,7 @@ msgstr "Imagens NRG"
 msgid "Name"
 msgstr "Nome"
 
-#: ../window.c:65 ../window.c:456
+#: ../window.c:65 ../window.c:455
 msgid "New Directory"
 msgstr "Nova Directoria"
 
@@ -368,7 +368,7 @@ msgstr "Progresso"
 msgid "Publisher:"
 msgstr "Editor:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Remove"
 msgstr "Remover"
 
@@ -385,11 +385,11 @@ msgstr "Guardar Ficheiro"
 msgid "Save a copy of the boot record"
 msgstr "Guardar cópia de disco de arranque"
 
-#: ../window.c:312
+#: ../window.c:311
 msgid "Scan for duplicate files (slow)"
 msgstr "Procurando por ficheiros duplicados (Lento)"
 
-#: ../window.c:219
+#: ../window.c:218
 msgid "Show _hidden files"
 msgstr "Mostrar _ficheiros escondidos"
 
@@ -414,13 +414,13 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Saltando entrada de directoria por stat(%s) falhou com %d"
 
-#: ../settings.c:244 ../window.c:386 ../window.c:389
+#: ../settings.c:244 ../window.c:385 ../window.c:388
 #, fuzzy
 msgid "Temporary directory"
 msgstr "Nova Directoria"
 
-#: ../about.c:231
 # !! this translation is incomplete
+#: ../about.c:231
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -469,7 +469,7 @@ msgstr ""
 "Depois de efectuar todas as alterações à nova imagem ISO, clique em\n"
 "'Imagem' e em 'Gravar como'. Não pode substituir a imagem ISO original.\n"
 
-#: ../window.c:273
+#: ../window.c:272
 msgid "Use selected file on image (no emulation)"
 msgstr "Usar ficheiro selecionado na imagem (sem emulação)"
 
@@ -478,7 +478,7 @@ msgstr "Usar ficheiro selecionado na imagem (sem emulação)"
 msgid "View"
 msgstr "_Ver"
 
-#: ../settings.c:282 ../window.c:360 ../window.c:363
+#: ../settings.c:282 ../window.c:359 ../window.c:362
 #, fuzzy
 msgid "Viewer"
 msgstr "_Ver"
@@ -492,30 +492,30 @@ msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Terá de fechar e reabrir a ISO para que as alterações tenham efeito"
 
-#: ../window.c:241
+#: ../window.c:240
 msgid "_BootRecord"
 msgstr "_Disco de Arranque"
 
-#: ../window.c:412
+#: ../window.c:411
 msgid "_Help"
 msgstr "_Ajuda"
 
-#: ../window.c:146
+#: ../window.c:145
 msgid "_Image"
 msgstr "_Imagem"
 
-#: ../window.c:421
+#: ../window.c:420
 msgid "_Overview"
 msgstr "_Geral"
 
-#: ../window.c:305
+#: ../window.c:304
 msgid "_Settings"
 msgstr "_Configuração"
 
-#: ../window.c:229
+#: ../window.c:228
 msgid "_Sort directories first"
 msgstr "_ListarDirectoriasPrimeiro"
 
-#: ../window.c:204
+#: ../window.c:203
 msgid "_View"
 msgstr "_Ver"

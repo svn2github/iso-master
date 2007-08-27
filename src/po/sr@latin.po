@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 07:09-0400\n"
+"POT-Creation-Date: 2007-08-27 04:07-0400\n"
 "PO-Revision-Date: 2007-06-03 02:13-0500\n"
 "Last-Translator: Danijel Muharemovic <majstor_dane@inbox.com>\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:475
+#: ../window.c:474
 msgid "      Estimated ISO Size: "
 msgstr "Proračunata veličina ISO fajla: "
 
@@ -38,7 +38,7 @@ msgstr "'%s' nije propisan fajl"
 msgid "(scanning for duplicate files)"
 msgstr "(pretraga za dupliranim datotekama)"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add"
 msgstr "Dodaj"
 
@@ -46,7 +46,7 @@ msgstr "Dodaj"
 msgid "Add extension automatically"
 msgstr "Automatski dodaj ekstenziju"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add to the ISO"
 msgstr "Dodaj u ISO"
 
@@ -90,7 +90,7 @@ msgstr "Izmeni dozvole za pristup"
 msgid "Choose Boot Record File"
 msgstr "Izaberi BOOT fajl"
 
-#: ../window.c:457
+#: ../window.c:456
 msgid "Create new directory on the ISO"
 msgstr "Kreiraj novi direktorijum u ISO-u"
 
@@ -102,7 +102,7 @@ msgstr "Kreiraj novi direktorijum u fajlsistemu"
 msgid "Creation time:"
 msgstr "Vreme kreiranja:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Delete from the ISO"
 msgstr "Izbriši iz ISO-a"
 
@@ -110,7 +110,7 @@ msgstr "Izbriši iz ISO-a"
 msgid "Edit"
 msgstr "Izmeni"
 
-#: ../settings.c:206 ../window.c:334 ../window.c:337
+#: ../settings.c:206 ../window.c:333 ../window.c:336
 msgid "Editor"
 msgstr "Uređivač"
 
@@ -122,11 +122,11 @@ msgstr "Unesi novo ime:"
 msgid "Enter name for new directory"
 msgstr "Unesi ime novog direktorijuma"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract"
 msgstr "Ekstrakcija"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract from the ISO"
 msgstr "Ekstraktuj iz ISO-a"
 
@@ -214,23 +214,23 @@ msgstr "Neuspešna zabeleška imidža u '%s': '%s'"
 msgid "Filename types (both recommended):"
 msgstr "Tipovi datoteka (oba preporučena)"
 
-#: ../window.c:322
+#: ../window.c:321
 msgid "Follow symbolic links"
 msgstr "Sledi simbolični link"
 
-#: ../window.c:285
+#: ../window.c:284
 msgid "From file: 1200KiB floppy"
 msgstr "Iz fajla: 1200KiB flopi"
 
-#: ../window.c:291
+#: ../window.c:290
 msgid "From file: 1440KiB floppy"
 msgstr "Iz fajla: 1440KiB flopi"
 
-#: ../window.c:297
+#: ../window.c:296
 msgid "From file: 2880KiB floppy"
 msgstr "Iz fajla: 2880KiB flopi"
 
-#: ../window.c:279
+#: ../window.c:278
 msgid "From file: no emulation"
 msgstr "Iz fajla: bez emulacije"
 
@@ -240,11 +240,11 @@ msgid ""
 msgstr ""
 "GUI greška, brisanje bilo čega osim fajlova i direktorijuma nije moguće"
 
-#: ../window.c:59 ../window.c:450
+#: ../window.c:59 ../window.c:449
 msgid "Go back"
 msgstr "Nazad"
 
-#: ../window.c:451
+#: ../window.c:450
 msgid "Go back up one directory on the ISO"
 msgstr "Povratak u nadređeni direktorijum u ISO-u"
 
@@ -265,10 +265,12 @@ msgid "Image Information"
 msgstr "Informacije o imidžu"
 
 #: ../settings.c:160
+#, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr "Pogrešan izdavač '%s': '%s'"
 
 #: ../settings.c:176
+#, c-format
 msgid "Invalid volume name '%s': '%s'"
 msgstr "Pogrešan naziv volumena '%s': %s"
 
@@ -317,7 +319,7 @@ msgstr "NRG imidži"
 msgid "Name"
 msgstr "Ime"
 
-#: ../window.c:65 ../window.c:456
+#: ../window.c:65 ../window.c:455
 msgid "New Directory"
 msgstr "Novi direktorijum"
 
@@ -362,7 +364,7 @@ msgstr "Napredak"
 msgid "Publisher:"
 msgstr "Izdavač:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Remove"
 msgstr "Ukloni"
 
@@ -378,11 +380,11 @@ msgstr "Sačuvaj fajl"
 msgid "Save a copy of the boot record"
 msgstr "Sačuvaj kopiju BOOT fajla"
 
-#: ../window.c:312
+#: ../window.c:311
 msgid "Scan for duplicate files (slow)"
 msgstr "Pretraživanje duplih datoteka (sporo)"
 
-#: ../window.c:219
+#: ../window.c:218
 msgid "Show _hidden files"
 msgstr "Prikaži skrivene fajlove"
 
@@ -407,7 +409,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Poništavam unos direktorijuma zbog statusa(%s) neuspelo sa %d"
 
-#: ../settings.c:244 ../window.c:386 ../window.c:389
+#: ../settings.c:244 ../window.c:385 ../window.c:388
 msgid "Temporary directory"
 msgstr "Privremeni direktorijum"
 
@@ -463,7 +465,7 @@ msgstr ""
 "Kada napravite željene izmene u ISO imidžu, kliknite na 'Imidž' i\n"
 "'Sačuvaj kao'. Ne možete prebrisati originalni ISO.\n"
 
-#: ../window.c:273
+#: ../window.c:272
 msgid "Use selected file on image (no emulation)"
 msgstr "Koristi odabrani fajl u imidžu (bez emulacije)"
 
@@ -471,7 +473,7 @@ msgstr "Koristi odabrani fajl u imidžu (bez emulacije)"
 msgid "View"
 msgstr "Prikaži"
 
-#: ../settings.c:282 ../window.c:360 ../window.c:363
+#: ../settings.c:282 ../window.c:359 ../window.c:362
 msgid "Viewer"
 msgstr "Preglednik"
 
@@ -484,30 +486,30 @@ msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Morate zatvoriti ISO i ponovo ga otvoriti da bi izmene bile vidjive"
 
-#: ../window.c:241
+#: ../window.c:240
 msgid "_BootRecord"
 msgstr "_BOOTfajl"
 
-#: ../window.c:412
+#: ../window.c:411
 msgid "_Help"
 msgstr "Po_moć"
 
-#: ../window.c:146
+#: ../window.c:145
 msgid "_Image"
 msgstr "_Imidž"
 
-#: ../window.c:421
+#: ../window.c:420
 msgid "_Overview"
 msgstr "Kratko _uputstvo"
 
-#: ../window.c:305
+#: ../window.c:304
 msgid "_Settings"
 msgstr "_Podešavanja"
 
-#: ../window.c:229
+#: ../window.c:228
 msgid "_Sort directories first"
 msgstr "_Prvo sortiraj direktorijume"
 
-#: ../window.c:204
+#: ../window.c:203
 msgid "_View"
 msgstr "_Prikaži"

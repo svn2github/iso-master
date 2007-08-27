@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 07:09-0400\n"
+"POT-Creation-Date: 2007-08-27 04:07-0400\n"
 "PO-Revision-Date: 2007-03-09 17:04-0500\n"
 "Last-Translator: Maciej Libuda <maciej.libuda@gmail.com>\n"
 "Language-Team: polish <LL@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:475
+#: ../window.c:474
 msgid "      Estimated ISO Size: "
 msgstr "      Szacowany rozmiar ISO: "
 
@@ -38,7 +38,7 @@ msgstr "'%s' nie jest plikiem"
 msgid "(scanning for duplicate files)"
 msgstr "(skanowanie w poszukiwaniu duplikatów)"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add"
 msgstr "Dodaj"
 
@@ -46,7 +46,7 @@ msgstr "Dodaj"
 msgid "Add extension automatically"
 msgstr "Dodaj rozszerzenie automatycznie"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add to the ISO"
 msgstr "Dodaj do obrazu ISO"
 
@@ -90,7 +90,7 @@ msgstr "Zmień uprawnienia"
 msgid "Choose Boot Record File"
 msgstr "Wybierz plik z rekordem startowym"
 
-#: ../window.c:457
+#: ../window.c:456
 msgid "Create new directory on the ISO"
 msgstr "Utwórz nowy katalog w obrazie ISO"
 
@@ -102,7 +102,7 @@ msgstr "Utwórz nowy katalog w systemie plików"
 msgid "Creation time:"
 msgstr "Czas utworzenia:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Delete from the ISO"
 msgstr "Usuń z obrazu ISO"
 
@@ -110,7 +110,7 @@ msgstr "Usuń z obrazu ISO"
 msgid "Edit"
 msgstr "Edytuj"
 
-#: ../settings.c:206 ../window.c:334 ../window.c:337
+#: ../settings.c:206 ../window.c:333 ../window.c:336
 msgid "Editor"
 msgstr "Edytor"
 
@@ -122,11 +122,11 @@ msgstr "Wprowadź nową nazwę:"
 msgid "Enter name for new directory"
 msgstr "Wprowadź nazwę nowego katalogu"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract"
 msgstr "Wypakuj"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract from the ISO"
 msgstr "Wypakuj z obrazu ISO"
 
@@ -214,23 +214,23 @@ msgstr "Zapis obrazu do '%s' nie powiódł się: '%s'"
 msgid "Filename types (both recommended):"
 msgstr "Typy nazw plików (zalecane oba)"
 
-#: ../window.c:322
+#: ../window.c:321
 msgid "Follow symbolic links"
 msgstr "Podążaj za dowiązaniami"
 
-#: ../window.c:285
+#: ../window.c:284
 msgid "From file: 1200KiB floppy"
 msgstr "Z pliku: dyskietka 1200KiB"
 
-#: ../window.c:291
+#: ../window.c:290
 msgid "From file: 1440KiB floppy"
 msgstr "Z pliku: dyskietka 1440KiB"
 
-#: ../window.c:297
+#: ../window.c:296
 msgid "From file: 2880KiB floppy"
 msgstr "Z pliku: dyskietka 2880KiB"
 
-#: ../window.c:279
+#: ../window.c:278
 msgid "From file: no emulation"
 msgstr "Z pliku: bez emulacji"
 
@@ -240,11 +240,11 @@ msgid ""
 msgstr ""
 "Błąd GUI, usunięcie czegokolwiek poza plikami i katalogami nie zadziała"
 
-#: ../window.c:59 ../window.c:450
+#: ../window.c:59 ../window.c:449
 msgid "Go back"
 msgstr "Cofnij"
 
-#: ../window.c:451
+#: ../window.c:450
 msgid "Go back up one directory on the ISO"
 msgstr "Jeden katalog wyżej w obrazie ISO "
 
@@ -265,10 +265,12 @@ msgid "Image Information"
 msgstr "Informacja o obrazie"
 
 #: ../settings.c:160
+#, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr "Błędna nazwa wydawcy '%s': '%s'"
 
 #: ../settings.c:176
+#, c-format
 msgid "Invalid volume name '%s': '%s'"
 msgstr "Błędna nazwa nośnika '%s': %s"
 
@@ -317,7 +319,7 @@ msgstr "Obrazy NRG"
 msgid "Name"
 msgstr "Nazwa"
 
-#: ../window.c:65 ../window.c:456
+#: ../window.c:65 ../window.c:455
 msgid "New Directory"
 msgstr "Nowy katalog"
 
@@ -362,7 +364,7 @@ msgstr "Postęp"
 msgid "Publisher:"
 msgstr "Wydawca:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Remove"
 msgstr "Usuń"
 
@@ -378,11 +380,11 @@ msgstr "Zapisz plik"
 msgid "Save a copy of the boot record"
 msgstr "Zapisz kopię rekordu startowego"
 
-#: ../window.c:312
+#: ../window.c:311
 msgid "Scan for duplicate files (slow)"
 msgstr "Szukaj duplikatów plików (wolne)"
 
-#: ../window.c:219
+#: ../window.c:218
 msgid "Show _hidden files"
 msgstr "Pokaż _ukryte pliki"
 
@@ -407,7 +409,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Pomijam katalog ponieważ stat(%s) zakończony niepowodzeniem z %d"
 
-#: ../settings.c:244 ../window.c:386 ../window.c:389
+#: ../settings.c:244 ../window.c:385 ../window.c:388
 msgid "Temporary directory"
 msgstr "Katalog tymczasowy"
 
@@ -456,13 +458,13 @@ msgstr ""
 "Dodatkowo możesz usuwać pliki i katalogi z obrazu ISO i tworzyć nowe\n"
 "katalogi zarówno w obrazie ISO jak i lokalnym systemie plików.\n"
 "\n"
-"Jeśli wybierzesz pozycję na dole przeglądarki plików i klikniesz na niej\n" 
+"Jeśli wybierzesz pozycję na dole przeglądarki plików i klikniesz na niej\n"
 "prawym przyciskiem myszy, dostępnych będzie kilka opcji więcej.\n"
 "\n"
 "Gdy wszystkie zmiany zostaną wprowadzone do obrazu ISO, kliknij\n"
 "'Obraz' -> 'Zapisz jako'. Nie można nadpisywać oryginalnego obrazu ISO.\n"
 
-#: ../window.c:273
+#: ../window.c:272
 msgid "Use selected file on image (no emulation)"
 msgstr "Użycie zaznaczonego pliku w obrazie (bez emulacji)"
 
@@ -470,7 +472,7 @@ msgstr "Użycie zaznaczonego pliku w obrazie (bez emulacji)"
 msgid "View"
 msgstr "Widok"
 
-#: ../settings.c:282 ../window.c:360 ../window.c:363
+#: ../settings.c:282 ../window.c:359 ../window.c:362
 msgid "Viewer"
 msgstr "Przeglądarka"
 
@@ -483,31 +485,31 @@ msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Musisz ponownie wczytać obraz ISO aby zmiana odniosła skutek"
 
-#: ../window.c:241
+#: ../window.c:240
 msgid "_BootRecord"
 msgstr "_Rekord startowy"
 
-#: ../window.c:412
+#: ../window.c:411
 msgid "_Help"
 msgstr "_Pomoc"
 
-#: ../window.c:146
+#: ../window.c:145
 msgid "_Image"
 msgstr "_Obraz"
 
-#: ../window.c:421
+#: ../window.c:420
 msgid "_Overview"
 msgstr "_Zawartość"
 
-#: ../window.c:305
+#: ../window.c:304
 msgid "_Settings"
 msgstr "_Ustawienia"
 
-#: ../window.c:229
+#: ../window.c:228
 msgid "_Sort directories first"
 msgstr "_Katalogi na początku"
 
-#: ../window.c:204
+#: ../window.c:203
 msgid "_View"
 msgstr "_Widok"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 07:09-0400\n"
+"POT-Creation-Date: 2007-08-27 04:07-0400\n"
 "PO-Revision-Date: 2007-05-25 10:33+0200\n"
 "Last-Translator: Jozef Riha <jose1711@gmail.com\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:475
+#: ../window.c:474
 msgid "      Estimated ISO Size: "
 msgstr "      Odhadovaná veľkosť ISO: "
 
@@ -38,7 +38,7 @@ msgstr ""
 msgid "(scanning for duplicate files)"
 msgstr "(hľadám zdvojené súbory)"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add"
 msgstr "Pridať"
 
@@ -46,7 +46,7 @@ msgstr "Pridať"
 msgid "Add extension automatically"
 msgstr "Pridať príponu automaticky"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add to the ISO"
 msgstr "Pridať do ISO"
 
@@ -90,7 +90,7 @@ msgstr ""
 msgid "Choose Boot Record File"
 msgstr "Vyberte súbor s Boot Recordom"
 
-#: ../window.c:457
+#: ../window.c:456
 msgid "Create new directory on the ISO"
 msgstr "Vytvoriť nový adresár na ISO"
 
@@ -102,7 +102,7 @@ msgstr "Vytvoriť nový adresár na súborovom systéme"
 msgid "Creation time:"
 msgstr "Čas vytvorenia:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Delete from the ISO"
 msgstr "Vymazať z ISO"
 
@@ -110,7 +110,7 @@ msgstr "Vymazať z ISO"
 msgid "Edit"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:334 ../window.c:337
+#: ../settings.c:206 ../window.c:333 ../window.c:336
 msgid "Editor"
 msgstr ""
 
@@ -122,11 +122,11 @@ msgstr "Zadajte nový názov:"
 msgid "Enter name for new directory"
 msgstr "Zadajte názov pre nový adresár"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract"
 msgstr "Extrahovať"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract from the ISO"
 msgstr "Extrahovať z ISO"
 
@@ -214,23 +214,23 @@ msgstr "Nepodarilo sa zapísať obraz do '%s': '%s'"
 msgid "Filename types (both recommended):"
 msgstr "Typy názvov súborov (oba odporúčané):"
 
-#: ../window.c:322
+#: ../window.c:321
 msgid "Follow symbolic links"
 msgstr "Nasledovať symbolické odkazy"
 
-#: ../window.c:285
+#: ../window.c:284
 msgid "From file: 1200KiB floppy"
 msgstr "Zo súboru: 1200KiB floppy"
 
-#: ../window.c:291
+#: ../window.c:290
 msgid "From file: 1440KiB floppy"
 msgstr "Zo súboru: 1440KiB floppy"
 
-#: ../window.c:297
+#: ../window.c:296
 msgid "From file: 2880KiB floppy"
 msgstr "Zo súboru: 2880KiB floppy"
 
-#: ../window.c:279
+#: ../window.c:278
 msgid "From file: no emulation"
 msgstr "Zo súboru: bez emulácie"
 
@@ -239,11 +239,11 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "Chyba GUI, mazanie čohokoľvek mimo súborov a adresárov nefunguje"
 
-#: ../window.c:59 ../window.c:450
+#: ../window.c:59 ../window.c:449
 msgid "Go back"
 msgstr "Ísť späť"
 
-#: ../window.c:451
+#: ../window.c:450
 msgid "Go back up one directory on the ISO"
 msgstr "Prejsť o jeden adresár vyššie v ISO"
 
@@ -319,7 +319,7 @@ msgstr "NRG súbory"
 msgid "Name"
 msgstr "Názov"
 
-#: ../window.c:65 ../window.c:456
+#: ../window.c:65 ../window.c:455
 msgid "New Directory"
 msgstr "Nový adresár"
 
@@ -365,7 +365,7 @@ msgstr "Priebeh"
 msgid "Publisher:"
 msgstr "Vydávateľ:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Remove"
 msgstr "Odstrániť"
 
@@ -382,11 +382,11 @@ msgstr "Uložiť súbor"
 msgid "Save a copy of the boot record"
 msgstr "Uložiť kópiu Boot Recordu"
 
-#: ../window.c:312
+#: ../window.c:311
 msgid "Scan for duplicate files (slow)"
 msgstr "Hľadanie zdvojených súborov (pomalé)"
 
-#: ../window.c:219
+#: ../window.c:218
 msgid "Show _hidden files"
 msgstr "Zobraziť _skryté súbory"
 
@@ -411,13 +411,13 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Preskakujem adresárovú položku, pretože stat(%s) skončilo s chybou %d"
 
-#: ../settings.c:244 ../window.c:386 ../window.c:389
+#: ../settings.c:244 ../window.c:385 ../window.c:388
 #, fuzzy
 msgid "Temporary directory"
 msgstr "Nový adresár"
 
-#: ../about.c:231
 # !! this translation is incomplete
+#: ../about.c:231
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -461,7 +461,7 @@ msgstr ""
 "Po vykonaní všetkých zmien na novom ISO obraze, kliknite na 'Obraz' a\n"
 "'Uložiť ako'. Nemôžete prepísať pôvodný ISO súbor.\n"
 
-#: ../window.c:273
+#: ../window.c:272
 msgid "Use selected file on image (no emulation)"
 msgstr "Použiť vybraný súbor v obraze (bez emulácie)"
 
@@ -470,7 +470,7 @@ msgstr "Použiť vybraný súbor v obraze (bez emulácie)"
 msgid "View"
 msgstr "Po_hľad"
 
-#: ../settings.c:282 ../window.c:360 ../window.c:363
+#: ../settings.c:282 ../window.c:359 ../window.c:362
 #, fuzzy
 msgid "Viewer"
 msgstr "Po_hľad"
@@ -484,30 +484,30 @@ msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Budete musieť zavrieť a opätovne otvoriť ISO, aby boli zmeny použité"
 
-#: ../window.c:241
+#: ../window.c:240
 msgid "_BootRecord"
 msgstr "_BootRecord"
 
-#: ../window.c:412
+#: ../window.c:411
 msgid "_Help"
 msgstr "_Pomocník"
 
-#: ../window.c:146
+#: ../window.c:145
 msgid "_Image"
 msgstr "_Obraz"
 
-#: ../window.c:421
+#: ../window.c:420
 msgid "_Overview"
 msgstr "P_rehľad"
 
-#: ../window.c:305
+#: ../window.c:304
 msgid "_Settings"
 msgstr "_Nastavenia"
 
-#: ../window.c:229
+#: ../window.c:228
 msgid "_Sort directories first"
 msgstr "Radiť _adresáre ako prvé"
 
-#: ../window.c:204
+#: ../window.c:203
 msgid "_View"
 msgstr "Po_hľad"

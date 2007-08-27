@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master Unknown\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 07:09-0400\n"
+"POT-Creation-Date: 2007-08-27 04:07-0400\n"
 "PO-Revision-Date: 2007-08-08 14:53+0200\n"
 "Last-Translator: Josep Sanchez Mesegue <papapep@gmail.com>\n"
 "Language-Team: Catala\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit"
+"Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:475
+#: ../window.c:474
 msgid "      Estimated ISO Size: "
 msgstr "      Mida estimada de la imatge ISO:"
 
@@ -40,7 +40,7 @@ msgstr "'%s' no és un fitxer convencional"
 msgid "(scanning for duplicate files)"
 msgstr "(Cercant fitxers duplicats)"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add"
 msgstr "Afegeix"
 
@@ -48,7 +48,7 @@ msgstr "Afegeix"
 msgid "Add extension automatically"
 msgstr "Afegeix l'extensió automàticament"
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add to the ISO"
 msgstr "Afegeix a la ISO"
 
@@ -92,7 +92,7 @@ msgstr "Canviar permisos"
 msgid "Choose Boot Record File"
 msgstr "Fitxer de registre d'arrencada seleccionat"
 
-#: ../window.c:457
+#: ../window.c:456
 msgid "Create new directory on the ISO"
 msgstr "Crea un nou directori a la ISO"
 
@@ -104,7 +104,7 @@ msgstr "Crea un nou directori al sistema de fitxers"
 msgid "Creation time:"
 msgstr "Hora de la creació:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Delete from the ISO"
 msgstr "Esborra de la ISO"
 
@@ -112,7 +112,7 @@ msgstr "Esborra de la ISO"
 msgid "Edit"
 msgstr "Editar"
 
-#: ../settings.c:206 ../window.c:334 ../window.c:337
+#: ../settings.c:206 ../window.c:333 ../window.c:336
 msgid "Editor"
 msgstr "Editor"
 
@@ -124,11 +124,11 @@ msgstr "Introduïu un nou nom:"
 msgid "Enter name for new directory"
 msgstr "Introduïu un nom pel nou directori"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract"
 msgstr "Extreu"
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract from the ISO"
 msgstr "Extreu de la ISO"
 
@@ -216,23 +216,23 @@ msgstr "Error desant la imatge a '%s': '%s'"
 msgid "Filename types (both recommended):"
 msgstr "Tipus de nom de fitxers (ambdós recomanats):"
 
-#: ../window.c:322
+#: ../window.c:321
 msgid "Follow symbolic links"
 msgstr "Segueix els enllaços simbòlics"
 
-#: ../window.c:285
+#: ../window.c:284
 msgid "From file: 1200KiB floppy"
 msgstr "De fitxer: disquet de 1200 KB"
 
-#: ../window.c:291
+#: ../window.c:290
 msgid "From file: 1440KiB floppy"
 msgstr "De fitxer: disquet de 1440 KB"
 
-#: ../window.c:297
+#: ../window.c:296
 msgid "From file: 2880KiB floppy"
 msgstr "De fitxer: disquet de 2880 KB"
 
-#: ../window.c:279
+#: ../window.c:278
 msgid "From file: no emulation"
 msgstr "Des de fitxer: sense emulació"
 
@@ -243,11 +243,11 @@ msgstr ""
 "Error d'interfície gràfica, esborrar altra cosa que fitxers i directoris no "
 "funciona"
 
-#: ../window.c:59 ../window.c:450
+#: ../window.c:59 ../window.c:449
 msgid "Go back"
 msgstr "Puja"
 
-#: ../window.c:451
+#: ../window.c:450
 msgid "Go back up one directory on the ISO"
 msgstr "Puja un directori a la ISO"
 
@@ -323,7 +323,7 @@ msgstr "Imatges NRG"
 msgid "Name"
 msgstr "Nom"
 
-#: ../window.c:65 ../window.c:456
+#: ../window.c:65 ../window.c:455
 msgid "New Directory"
 msgstr "Nou directori"
 
@@ -371,7 +371,7 @@ msgstr "Progrés"
 msgid "Publisher:"
 msgstr "Creador:"
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Remove"
 msgstr "Esborra"
 
@@ -387,11 +387,11 @@ msgstr "Desa el fitxer"
 msgid "Save a copy of the boot record"
 msgstr "Desa una còpia del registre d'arrencada"
 
-#: ../window.c:312
+#: ../window.c:311
 msgid "Scan for duplicate files (slow)"
 msgstr "Busca els fitxers duplicats (lent)"
 
-#: ../window.c:219
+#: ../window.c:218
 msgid "Show _hidden files"
 msgstr "Mostra els fitxers _amagats"
 
@@ -416,7 +416,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "S'omet el directori perquè l'estat (%s) ha fallat amb %d"
 
-#: ../settings.c:244 ../window.c:386 ../window.c:389
+#: ../settings.c:244 ../window.c:385 ../window.c:388
 msgid "Temporary directory"
 msgstr "Directori temporal"
 
@@ -458,21 +458,21 @@ msgstr ""
 "d'eines del mig.\n"
 "\n"
 "Per a extreure un o més fitxers o directoris de la ISO, seleccioneu-los\n"
-"des·de·la·finestra·inferior·i·feu·clic·damunt·la·icona·'Extreure·de·la·ISO'·"
-"de\n"
+"des·de·la·finestra·inferior·i·feu·clic·damunt·la·icona·'Extreure·de·la·ISO'·de\n"
 "la·barra·d'eines·del·mig.\n"
 "\n"
 "També·podeu·esborrar·fitxers·o·directoris·de·la·imatge·ISO·i·crear·nous\n"
 "directoris·tant·a·la·ISO·com·al·vostre·sistema·de·fitxers·local.\n"
 "\n"
-"Si seleccioneu algun objecte a la finestra inferior i hi feu clic amb el botó de\n"
+"Si seleccioneu algun objecte a la finestra inferior i hi feu clic amb el "
+"botó de\n"
 " la dreta del ratolí veureu les diverses opcions disponibles.\n"
 "\n"
 "Un cop heu efectuat tots els canvis a la nova imatge ISO, feu clic a "
 "'Imatge'\n"
 "i 'Anomena i desa'. No podeu sobreescriure la imatge ISO original.\n"
 
-#: ../window.c:273
+#: ../window.c:272
 msgid "Use selected file on image (no emulation)"
 msgstr "Utilitzeu el fitxer seleccionat a la imatge (sense emulació)"
 
@@ -480,7 +480,7 @@ msgstr "Utilitzeu el fitxer seleccionat a la imatge (sense emulació)"
 msgid "View"
 msgstr "_Visor"
 
-#: ../settings.c:282 ../window.c:360 ../window.c:363
+#: ../settings.c:282 ../window.c:359 ../window.c:362
 msgid "Viewer"
 msgstr "_Veure"
 
@@ -494,31 +494,30 @@ msgid ""
 msgstr ""
 "Heu de tancar i tornar a obrir la ISO per tal que el canvi tingui efecte"
 
-#: ../window.c:241
+#: ../window.c:240
 msgid "_BootRecord"
 msgstr "_RegistreD'arrencada"
 
-#: ../window.c:412
+#: ../window.c:411
 msgid "_Help"
 msgstr "A_juda"
 
-#: ../window.c:146
+#: ../window.c:145
 msgid "_Image"
 msgstr "_Imatge"
 
-#: ../window.c:421
+#: ../window.c:420
 msgid "_Overview"
 msgstr "Visi_ó general"
 
-#: ../window.c:305
+#: ../window.c:304
 msgid "_Settings"
 msgstr "_Preferències"
 
-#: ../window.c:229
+#: ../window.c:228
 msgid "_Sort directories first"
 msgstr "Ordena directori_s primer"
 
-#: ../window.c:204
+#: ../window.c:203
 msgid "_View"
 msgstr "_Veure"
-
