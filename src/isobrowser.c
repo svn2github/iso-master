@@ -59,6 +59,8 @@ GtkWidget* GBLwritingProgressWindow;
 #ifdef ENABLE_SAVE_OVERWRITE
 static char* openIsoPathAndName = NULL;
 #endif
+/* to really stop an operation, not just for one row */
+static bool GBLoperationCanceled;
 
 void activityProgressUpdaterCbk(VolInfo* volInfo)
 {
@@ -153,6 +155,8 @@ void addToIsoCbk(GtkButton *button, gpointer data)
     gtk_widget_show(progressWindow);
     /* END CREATE and show progress bar */
     
+    GBLoperationCanceled = false;
+    
     gtk_tree_selection_selected_foreach(selection, addToIsoEachRowCbk, NULL);
     
     gtk_widget_destroy(progressWindow);
@@ -182,6 +186,9 @@ void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     char* fullItemName; /* with full path */
     int rc;
     GtkWidget* warningDialog;
+    
+    if(GBLoperationCanceled)
+        return;
     
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
                                         COLUMN_FILENAME, &itemName, -1);
@@ -334,6 +341,7 @@ void buildIsoLocator(GtkWidget* boxToPackInto)
 void cancelOperation(GtkDialog* dialog, gint arg1, gpointer user_data)
 {
     bk_cancel_operation(&GBLvolInfo);
+    GBLoperationCanceled = true;
 }
 
 void changeIsoDirectory(const char* newDirStr)
@@ -843,6 +851,8 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         /* if i show it before i add the children, the window ends up being not centered */
         gtk_widget_show(progressWindow);
         
+        GBLoperationCanceled = false;
+        
         gtk_tree_selection_selected_foreach(selection, extractFromIsoEachRowCbk, NULL);
         
         refreshFsView();
@@ -861,6 +871,9 @@ void extractFromIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
     char* fullItemName; /* with full path */
     int rc;
     GtkWidget* warningDialog;
+    
+    if(GBLoperationCanceled)
+        return;
     
     gtk_tree_model_get(model, iterator, COLUMN_HIDDEN_TYPE, &fileType, 
                                         COLUMN_FILENAME, &itemName, -1);
@@ -1345,7 +1358,10 @@ bool operationFailed(const char* msg)
     if(response == GTK_RESPONSE_YES)
         return true;
     else
+    {
+        GBLoperationCanceled = true;
         return false;
+    }
 }
 
 void refreshIsoView(void)
