@@ -416,7 +416,7 @@ msgid "Temporary directory"
 msgstr "Yeni Dizin"
 
 #: ../about.c:231
-#, fuzzy
+# !! this translation is incomplete
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
