@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-08 07:09-0400\n"
+"POT-Creation-Date: 2007-08-27 04:17-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:475
+#: ../window.c:474
 msgid "      Estimated ISO Size: "
 msgstr ""
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "(scanning for duplicate files)"
 msgstr ""
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Add extension automatically"
 msgstr ""
 
-#: ../window.c:461
+#: ../window.c:460
 msgid "Add to the ISO"
 msgstr ""
 
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Choose Boot Record File"
 msgstr ""
 
-#: ../window.c:457
+#: ../window.c:456
 msgid "Create new directory on the ISO"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgstr ""
 msgid "Creation time:"
 msgstr ""
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Delete from the ISO"
 msgstr ""
 
@@ -109,7 +109,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:334 ../window.c:337
+#: ../settings.c:206 ../window.c:333 ../window.c:336
 msgid "Editor"
 msgstr ""
 
@@ -121,11 +121,11 @@ msgstr ""
 msgid "Enter name for new directory"
 msgstr ""
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract"
 msgstr ""
 
-#: ../window.c:466
+#: ../window.c:465
 msgid "Extract from the ISO"
 msgstr ""
 
@@ -213,23 +213,23 @@ msgstr ""
 msgid "Filename types (both recommended):"
 msgstr ""
 
-#: ../window.c:322
+#: ../window.c:321
 msgid "Follow symbolic links"
 msgstr ""
 
-#: ../window.c:285
+#: ../window.c:284
 msgid "From file: 1200KiB floppy"
 msgstr ""
 
-#: ../window.c:291
+#: ../window.c:290
 msgid "From file: 1440KiB floppy"
 msgstr ""
 
-#: ../window.c:297
+#: ../window.c:296
 msgid "From file: 2880KiB floppy"
 msgstr ""
 
-#: ../window.c:279
+#: ../window.c:278
 msgid "From file: no emulation"
 msgstr ""
 
@@ -238,11 +238,11 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr ""
 
-#: ../window.c:59 ../window.c:450
+#: ../window.c:59 ../window.c:449
 msgid "Go back"
 msgstr ""
 
-#: ../window.c:451
+#: ../window.c:450
 msgid "Go back up one directory on the ISO"
 msgstr ""
 
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: ../window.c:65 ../window.c:456
+#: ../window.c:65 ../window.c:455
 msgid "New Directory"
 msgstr ""
 
@@ -331,7 +331,7 @@ msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr ""
 
 #: ../boot.c:243
-msgid "Please select no more then one file in the ISO browser"
+msgid "Please select no more than one file in the ISO browser"
 msgstr ""
 
 #: ../isobrowser.c:133
@@ -359,7 +359,7 @@ msgstr ""
 msgid "Publisher:"
 msgstr ""
 
-#: ../window.c:471
+#: ../window.c:470
 msgid "Remove"
 msgstr ""
 
@@ -375,11 +375,11 @@ msgstr ""
 msgid "Save a copy of the boot record"
 msgstr ""
 
-#: ../window.c:312
+#: ../window.c:311
 msgid "Scan for duplicate files (slow)"
 msgstr ""
 
-#: ../window.c:219
+#: ../window.c:218
 msgid "Show _hidden files"
 msgstr ""
 
@@ -402,7 +402,7 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr ""
 
-#: ../settings.c:244 ../window.c:386 ../window.c:389
+#: ../settings.c:244 ../window.c:385 ../window.c:388
 msgid "Temporary directory"
 msgstr ""
 
@@ -432,7 +432,7 @@ msgid ""
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
 
-#: ../window.c:273
+#: ../window.c:272
 msgid "Use selected file on image (no emulation)"
 msgstr ""
 
@@ -440,7 +440,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: ../settings.c:282 ../window.c:360 ../window.c:363
+#: ../settings.c:282 ../window.c:359 ../window.c:362
 msgid "Viewer"
 msgstr ""
 
@@ -453,30 +453,30 @@ msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
 
-#: ../window.c:241
+#: ../window.c:240
 msgid "_BootRecord"
 msgstr ""
 
-#: ../window.c:412
+#: ../window.c:411
 msgid "_Help"
 msgstr ""
 
-#: ../window.c:146
+#: ../window.c:145
 msgid "_Image"
 msgstr ""
 
-#: ../window.c:421
+#: ../window.c:420
 msgid "_Overview"
 msgstr ""
 
-#: ../window.c:305
+#: ../window.c:304
 msgid "_Settings"
 msgstr ""
 
-#: ../window.c:229
+#: ../window.c:228
 msgid "_Sort directories first"
 msgstr ""
 
-#: ../window.c:204
+#: ../window.c:203
 msgid "_View"
 msgstr ""

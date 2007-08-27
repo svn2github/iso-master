@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs.po_[k6bxCb]\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-27 04:07-0400\n"
+"POT-Creation-Date: 2007-08-27 04:17-0400\n"
 "PO-Revision-Date: 2007-08-24 20:47+0200\n"
 "Last-Translator: Schmaki <smallsmaky@seznam.cz>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -341,7 +341,7 @@ msgstr ""
 "obrazů"
 
 #: ../boot.c:243
-msgid "Please select no more then one file in the ISO browser"
+msgid "Please select no more than one file in the ISO browser"
 msgstr "V prohlížeči ISO obrazů vyberte pouze jeden soubor"
 
 #: ../isobrowser.c:133

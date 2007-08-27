@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-27 04:07-0400\n"
+"POT-Creation-Date: 2007-08-27 04:17-0400\n"
 "PO-Revision-Date: 2007-06-07 14:18-0500\n"
 "Last-Translator: Bogdan Radulescu <bogdan@nimblex.net>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -338,7 +338,7 @@ msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr "Te rog selectează un fişier pentru a-l folosii ca boot record"
 
 #: ../boot.c:243
-msgid "Please select no more then one file in the ISO browser"
+msgid "Please select no more than one file in the ISO browser"
 msgstr "Te rog să nu selectezi mai mult de un fişier"
 
 #: ../isobrowser.c:133

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-27 04:07-0400\n"
+"POT-Creation-Date: 2007-08-27 04:17-0400\n"
 "PO-Revision-Date: 2007-08-22 19:06+0300\n"
 "Last-Translator: Serhey Kusyumoff <kusyumoff@gmail.com>\n"
 "Language-Team: \n"
@@ -340,7 +340,7 @@ msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr "Оберіть файл в ISO-оглядачі для використання як завантажувальний запис"
 
 #: ../boot.c:243
-msgid "Please select no more then one file in the ISO browser"
+msgid "Please select no more than one file in the ISO browser"
 msgstr "В ISO-оглядачі обирайте не більше одного файлу"
 
 #: ../isobrowser.c:133

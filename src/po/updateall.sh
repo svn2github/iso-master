@@ -8,3 +8,6 @@ do
   msgmerge $NAME isomaster-new.pot > `basename $NAME .po`-updated.po
   mv `basename $NAME .po`-updated.po $NAME
 done
+
+mv isomaster-new.pot isomaster.pot
+

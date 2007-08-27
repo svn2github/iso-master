@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-27 04:07-0400\n"
+"POT-Creation-Date: 2007-08-27 04:17-0400\n"
 "PO-Revision-Date: 2007-08-14 06:01-0500\n"
 "Last-Translator: Robert Groenning <slimg@iggu.org>\n"
 "Language-Team:  <oversettelse@ubuntu.no>\n"
@@ -336,7 +336,7 @@ msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr "Velg en fil i ISO-utforskeren til å bruke som oppstartssektor"
 
 #: ../boot.c:243
-msgid "Please select no more then one file in the ISO browser"
+msgid "Please select no more than one file in the ISO browser"
 msgstr "Ikke velg mer enn en fil i ISO-utforskeren"
 
 #: ../isobrowser.c:133

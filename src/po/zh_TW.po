@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-27 04:07-0400\n"
+"POT-Creation-Date: 2007-08-27 04:17-0400\n"
 "PO-Revision-Date: 2007-08-09 06:27+0800\n"
 "Last-Translator: Chien Cheng Wei <e.cwchien@gmail.com>\n"
 "Language-Team: Chien Cheng Wei <e.cwchien@gmail.com>\n"
@@ -335,7 +335,7 @@ msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr "請從映像檔瀏覽器裡選擇一個檔案作為開機紀錄"
 
 #: ../boot.c:243
-msgid "Please select no more then one file in the ISO browser"
+msgid "Please select no more than one file in the ISO browser"
 msgstr "請從映像檔瀏覽器裡最多選擇一個檔案"
 
 #: ../isobrowser.c:133

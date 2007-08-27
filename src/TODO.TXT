@@ -4,7 +4,7 @@ ui:
 -checkboxes and lables not aligned in change permissions window
 -log bug 'file size not updated after editing a file'
 -figure out what happend to the norwegian nronsk translation
--see mike's note in el.po then->than
+-send mail to Croatian <lokalizacija@linux.hr> for translation update
 
 
 bk:

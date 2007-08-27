@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-27 04:07-0400\n"
+"POT-Creation-Date: 2007-08-27 04:17-0400\n"
 "PO-Revision-Date: 2007-05-25 10:33+0200\n"
 "Last-Translator: Jozef Riha <jose1711@gmail.com\n"
 "Language-Team: Slovak <sk@li.org>\n"
@@ -337,7 +337,7 @@ msgstr ""
 "Prosím vyberte súbor v ISO prehliadači, ktorý má byť použitý ako Boot Record"
 
 #: ../boot.c:243
-msgid "Please select no more then one file in the ISO browser"
+msgid "Please select no more than one file in the ISO browser"
 msgstr "Prosím nevyberajte viacej než jeden súbor v ISO prehliadači"
 
 #: ../isobrowser.c:133

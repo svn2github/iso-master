@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-27 04:07-0400\n"
+"POT-Creation-Date: 2007-08-27 04:17-0400\n"
 "PO-Revision-Date: 2007-08-18 07:53+0200\n"
 "Last-Translator: Eero Salokannel <eero.salokannel@gmail.com>\n"
 "Language-Team: \n"
@@ -336,7 +336,7 @@ msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr "Valitse levykuvalta käynnistyslohkona käytettävä tiedosto"
 
 #: ../boot.c:243
-msgid "Please select no more then one file in the ISO browser"
+msgid "Please select no more than one file in the ISO browser"
 msgstr "Valitse levykuvalta enintään yksi tiedosto"
 
 #: ../isobrowser.c:133

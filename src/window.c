@@ -135,7 +135,6 @@ void buildMenu(GtkWidget* boxToPackInto)
     closure = g_cclosure_new(G_CALLBACK(editSelectedBtnCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
     gtk_accel_map_add_entry("<ISOMaster>/Contextmenu/Edit", accelKey, accelModifier);
-    
     /* END KEYBOARD accelerators */
     
     menuBar = gtk_menu_bar_new();
