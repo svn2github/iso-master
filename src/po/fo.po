@@ -1,19 +1,19 @@
-# German translation of ISO Master
+# Faroese translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-08-27 04:17-0400\n"
-"PO-Revision-Date: 2007-08-13 20:06-0000\n"
+"POT-Creation-Date: 2007-08-13 22:43-0400\n"
+"PO-Revision-Date: 2007-09-21 17:57-0000\n"
 "Last-Translator: Magnus Valle <magnus@vallenett.no>\n"
 "Language-Team: <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:474
+#: ../window.c:475
 msgid "      Estimated ISO Size: "
 msgstr "Met ISO stødd:"
 
@@ -37,7 +37,7 @@ msgstr ""
 msgid "(scanning for duplicate files)"
 msgstr "(laitar eftur eins fílum)"
 
-#: ../window.c:460
+#: ../window.c:461
 msgid "Add"
 msgstr "Legg afturat"
 
@@ -45,7 +45,7 @@ msgstr "Legg afturat"
 msgid "Add extension automatically"
 msgstr ""
 
-#: ../window.c:460
+#: ../window.c:461
 msgid "Add to the ISO"
 msgstr "Skoyt uppí ISO'ðina"
 
@@ -89,19 +89,19 @@ msgstr ""
 msgid "Choose Boot Record File"
 msgstr ""
 
-#: ../window.c:456
+#: ../window.c:457
 msgid "Create new directory on the ISO"
-msgstr ""
+msgstr "Gerð eina nýggja fíluskrá á ISO'ðini"
 
 #: ../window.c:66
 msgid "Create new directory on the filesystem"
-msgstr ""
+msgstr "Gerð eina nýggja fíluskrá á fílukervinum"
 
 #: ../settings.c:81
 msgid "Creation time:"
 msgstr ""
 
-#: ../window.c:470
+#: ../window.c:471
 msgid "Delete from the ISO"
 msgstr "Koyr ur ISO'ðini"
 
@@ -109,7 +109,7 @@ msgstr "Koyr ur ISO'ðini"
 msgid "Edit"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:206 ../window.c:334 ../window.c:337
 msgid "Editor"
 msgstr ""
 
@@ -119,15 +119,15 @@ msgstr "Skriva eitt nýtt navn:"
 
 #: ../browser.c:71
 msgid "Enter name for new directory"
-msgstr ""
+msgstr "Skriva navni á nýggja fílukervinum"
 
-#: ../window.c:465
+#: ../window.c:466
 msgid "Extract"
-msgstr "Tak burturúr"
+msgstr "Tak frá"
 
-#: ../window.c:465
+#: ../window.c:466
 msgid "Extract from the ISO"
-msgstr "Tak burturúr ISO'ðini"
+msgstr "Tak frá ISO'ðini"
 
 #: ../editfile.c:219 ../isobrowser.c:207
 #, c-format
@@ -142,17 +142,17 @@ msgstr ""
 #: ../isobrowser.c:355
 #, c-format
 msgid "Failed to change directory: '%s'"
-msgstr ""
+msgstr "Missednaðist at broyta fíluskráðina: '%s'"
 
 #: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
-msgstr ""
+msgstr "Missednaðist at gerða fíluskrá '%s'"
 
 #: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
-msgstr ""
+msgstr "Missednaðist at gerða fíluskrá '%s': '%s'"
 
 #: ../editfile.c:193 ../isobrowser.c:776
 #, c-format
@@ -162,7 +162,7 @@ msgstr "Mislukkaði at sletta '%s': '%s'"
 #: ../editfile.c:157 ../editfile.c:359 ../isobrowser.c:884
 #, c-format
 msgid "Failed to extract '%s': '%s'"
-msgstr ""
+msgstr "Missednaðist at taka '%s' frá: '%s'"
 
 #: ../boot.c:202
 #, c-format
@@ -177,7 +177,7 @@ msgstr ""
 #: ../fsbrowser.c:219
 #, c-format
 msgid "Failed to open directory '%s', error %d"
-msgstr ""
+msgstr "Missednaðist at gopna fíluskrá '%s', feil '%d'"
 
 #: ../isobrowser.c:1134
 #, c-format
@@ -187,7 +187,7 @@ msgstr ""
 #: ../isobrowser.c:1209
 #, c-format
 msgid "Failed to read directory tree: '%s'"
-msgstr ""
+msgstr "Missednaðist at lesa fíluskrás træði: '%s'"
 
 #: ../isobrowser.c:1149
 #, c-format
@@ -197,7 +197,7 @@ msgstr ""
 #: ../isobrowser.c:1443
 #, c-format
 msgid "Failed to rename '%s': %s"
-msgstr ""
+msgstr "Missednaðist at endurnevna '%s': '%s'"
 
 #: ../boot.c:296
 #, c-format
@@ -207,29 +207,29 @@ msgstr ""
 #: ../isobrowser.c:1515
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
-msgstr ""
+msgstr "Missednaðist at skriva mynduna til '%s': '%s'"
 
 #: ../settings.c:125
 msgid "Filename types (both recommended):"
-msgstr ""
+msgstr "Slag av fílunavni (bæði tilrátt):"
 
-#: ../window.c:321
+#: ../window.c:322
 msgid "Follow symbolic links"
-msgstr ""
+msgstr "Fylg symbolsku leinkju"
 
-#: ../window.c:284
+#: ../window.c:285
 msgid "From file: 1200KiB floppy"
 msgstr "Frá fílu: 1200KiB diskettu"
 
-#: ../window.c:290
+#: ../window.c:291
 msgid "From file: 1440KiB floppy"
 msgstr "Frá fílu: 1440KiB diskettu"
 
-#: ../window.c:296
+#: ../window.c:297
 msgid "From file: 2880KiB floppy"
 msgstr "Frá fílu: 2880KiB diskettu"
 
-#: ../window.c:278
+#: ../window.c:279
 msgid "From file: no emulation"
 msgstr "Frá fílu: eingin emulatión"
 
@@ -238,21 +238,21 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr ""
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:59 ../window.c:450
 msgid "Go back"
 msgstr "Far aftur"
 
-#: ../window.c:450
+#: ../window.c:451
 msgid "Go back up one directory on the ISO"
-msgstr ""
+msgstr "Far upp eitt fíluskrá á ISO'ðini"
 
 #: ../window.c:60
 msgid "Go back up one directory on the filesystem"
-msgstr ""
+msgstr "Far upp eitt fíluskrá á fílukervinum"
 
 #: ../isobrowser.c:1269 ../isobrowser.c:1564
 msgid "ISO Images"
-msgstr "ISM myndur"
+msgstr "ISO myndur"
 
 #: ../about.c:290
 msgid "ISO Master Help"
@@ -263,19 +263,19 @@ msgid "Image Information"
 msgstr "Mynd upplýsing"
 
 #: ../settings.c:160
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Mislukkaði at sletta '%s': '%s'"
+msgstr ""
 
 #: ../settings.c:176
-#, fuzzy, c-format
+#,  c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Mislukkaðist at leggja '%s' afturat: '%s'"
+msgstr ""
 
 #: ../boot.c:391
 #, c-format
 msgid "Is not visible on image"
-msgstr ""
+msgstr "Er ikki sjónligt á mynduni"
 
 #: ../boot.c:389
 #, c-format
@@ -305,9 +305,9 @@ msgid "Location: to be added from '%s'"
 msgstr ""
 
 #: ../isobrowser.c:1279
-#, fuzzy
+#
 msgid "MDF Images"
-msgstr "ISM myndur"
+msgstr ""
 
 #: ../isobrowser.c:1274
 msgid "NRG Images"
@@ -317,9 +317,9 @@ msgstr "NRG Mynd"
 msgid "Name"
 msgstr "Navn"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:65 ../window.c:456
 msgid "New Directory"
-msgstr ""
+msgstr "Nýggj Fíluskrá"
 
 #: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
@@ -334,8 +334,7 @@ msgid "Please select a file in the ISO browser to use as the boot record"
 msgstr ""
 
 #: ../boot.c:243
-#, fuzzy
-msgid "Please select no more than one file in the ISO browser"
+msgid "Please select no more then one file in the ISO browser"
 msgstr "Vinarliga ikki vel maira en eina fílu in ISO -browser-"
 
 #: ../isobrowser.c:133
@@ -363,14 +362,14 @@ msgstr "Far víðari"
 msgid "Publisher:"
 msgstr ""
 
-#: ../window.c:470
+#: ../window.c:471
 msgid "Remove"
 msgstr "Koyr vekk"
 
 #: ../isobrowser.c:1731
-#, fuzzy
+#
 msgid "Rename"
-msgstr "Koyr vekk"
+msgstr ""
 
 #: ../isobrowser.c:1553
 msgid "Save File"
@@ -380,11 +379,11 @@ msgstr "Goym Fílu"
 msgid "Save a copy of the boot record"
 msgstr ""
 
-#: ../window.c:311
+#: ../window.c:312
 msgid "Scan for duplicate files (slow)"
 msgstr "Laita eftur eins fílum (seint)"
 
-#: ../window.c:218
+#: ../window.c:219
 msgid "Show _hidden files"
 msgstr "Vís _goymdir fílar"
 
@@ -407,11 +406,13 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr ""
 
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:244 ../window.c:386 ../window.c:389
+#
 msgid "Temporary directory"
 msgstr ""
 
 #: ../about.c:231
+# !! the last paragraph is untranslated
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -436,8 +437,29 @@ msgid ""
 "Once you made all the changes to the new ISO image, click on 'Image' and\n"
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
+"ISO Master gluggin er búttur í tveir parter:\n"
+" - Ovari parturin vísur fílur og fíluskráðir á tínari teldu.\n"
+" - Niðari parturin vísur fílur og fíluskráðir á ISO mynduni.\n"
+"\n"
+"Fyri at opena ein ISO fílu, ið longu er gjørd, klikk á 'Mynd' og 'Opnað'.\n"
+"Fyri at gera eina nýggja ISO fílu, kilkk á 'Mynd' og 'Nýggj'.\n"
+"\n"
+"Fyri at skoyta ein ella fleiri fílur ella fíluskráðir uppí ISO'ðini, vel "
+"tær\n"
+"í tí ovara kaganum og kikk á 'Skoyt uppí ISO'ðini' í amboðsbjálkanum.\n"
+"\n"
+"Fyri at taka ein ella fleiri fílur ellu fíluskráðir frá ISO'ðini, vel tær í "
+"tí\n"
+"niðara kaganum og kilkk á 'Tak frá ISO'ðini' í amoðsbjálkanum.\n"
+"\n"
+"Tú kanst eisini strika fílur ella fíluskráðir frá ISO'ðini og gera nýggj\n"
+"fíluskráðir bæði á ISO'ðini og á tínum fílukervi.\n"
+"\n"
+"Tá tú hevur gjørt allar broytingarnar á tí nýggju ISO mynudi, klikk á\n"
+"'Mynd' og 'Goym Sum'. Tú kanst ikki goyma oman á tað uppruna\n"
+"ISO mynuna\n"
 
-#: ../window.c:272
+#: ../window.c:273
 msgid "Use selected file on image (no emulation)"
 msgstr "Nýt valgda fílu á mynduni (eingin emulatión)"
 
@@ -445,7 +467,7 @@ msgstr "Nýt valgda fílu á mynduni (eingin emulatión)"
 msgid "View"
 msgstr ""
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:282 ../window.c:360 ../window.c:363
 msgid "Viewer"
 msgstr ""
 
@@ -460,30 +482,30 @@ msgstr ""
 "Fyri hendan broytingin skal gerast virkin, mast tu lata aftur og so opna "
 "ISO'ðina"
 
-#: ../window.c:240
+#: ../window.c:241
 msgid "_BootRecord"
 msgstr ""
 
-#: ../window.c:411
+#: ../window.c:412
 msgid "_Help"
 msgstr "_Hjálp"
 
-#: ../window.c:145
+#: ../window.c:146
 msgid "_Image"
-msgstr "_myndir"
+msgstr "_Mynd"
 
-#: ../window.c:420
+#: ../window.c:421
 msgid "_Overview"
 msgstr ""
 
-#: ../window.c:304
+#: ../window.c:305
 msgid "_Settings"
 msgstr ""
 
-#: ../window.c:228
+#: ../window.c:229
 msgid "_Sort directories first"
 msgstr ""
 
-#: ../window.c:203
+#: ../window.c:204
 msgid "_View"
 msgstr ""
