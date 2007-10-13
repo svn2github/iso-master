@@ -41,6 +41,15 @@ tests to run before a release:
 - add a bunch of files to an iso, delete all the files, add some more, save
 - edit some text and binary files, make sure they extract and write properly
 
+to make a fedora package:
+- install rpmdevtools (via yum)
+- fedora-buildrpmtree (as *your* user)
+- Check if there is a file ~/.rpmmacros (if not create it).
+- Make sure there is a line:
+ - %dist   .fc7
+- Download my SRPMS [1] to ~/rpmbuild/SRPMS
+- Call: rpmbuild --rebuild isomaster-1.0-1.src.rpm
+- Wait a moment and look for a built RPM in ~/rpmbuild/RPMS/i386
 
 to package a release:
 - update the version number in the about box
