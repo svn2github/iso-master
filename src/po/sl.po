@@ -1,4 +1,4 @@
-# Slovak translation of ISO Master
+# Slovenian translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
 #
 # Uros Golob <na1pir@gmail.com>, 2007.

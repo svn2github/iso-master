@@ -921,7 +921,7 @@ gboolean isoButtonPressedCbk(GtkWidget* isoView, GdkEventButton* event, gpointer
     if(event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
     {
         /* Stop event propagation */
-        /* Would be nice if I could only stop event propagation if click was on
+        /*!! Would be nice if I could only stop event propagation if click was on
         * the selection, I have to look into how that may be done, if at all */
         return TRUE;
     }

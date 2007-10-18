@@ -22,11 +22,11 @@ DESKTOPPATH ?= $(PREFIX)/share/applications
 # The default editor for files from the image. Users can change this. I
 # recommend you set it to a graphical text editor that is likely to be 
 # installed by default on your distribution.
-DEFAULT_EDITOR = mousepad
+DEFAULT_EDITOR ?= mousepad
 
 # The default viewer for files from the image. I recommend you make it 
 # a web browser because it can display the widest range of files.
-DEFAULT_VIEWER = firefox
+DEFAULT_VIEWER ?= firefox
 
 # To disable i18n completely, uncomment the following line 
 # or define WITHOUT_NLS somewhere else.

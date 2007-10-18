@@ -5,6 +5,7 @@ ui:
 -log bug 'file size not updated after editing a file'
 -send mail to Croatian <lokalizacija@linux.hr> for translation update
 -make progress bars smoother
+-add filename to window title
 
 
 bk:
