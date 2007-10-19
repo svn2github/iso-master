@@ -678,6 +678,8 @@ void closeIso(void)
     GBLisoSize = 0;
     gtk_label_set_text(GTK_LABEL(GBLisoSizeLbl), "");
     
+    gtk_window_set_title(GTK_WINDOW(GBLmainWindow), "ISO Master");
+    
     gtk_widget_set_sensitive(GBLisoCurrentDirField, FALSE);
     gtk_widget_set_sensitive(GBLisoTreeView, FALSE);
     
@@ -1246,6 +1248,30 @@ void openIso(char* filename)
     GBLisoSize = 35845;
     //if(GBLvolInfo.filenameTypes & FNTYPE_JOLIET)
         GBLisoSize += 2048;
+    
+    /* SET WINDOW title */
+    int filenameLen = strlen(filename);
+    
+    char* windowTitle = malloc(filenameLen + strlen(" - ISO Master") + 1);
+    if(windowTitle == NULL)
+            fatalError("windowTitle = malloc(strlen(filename) + \" - ISO Master\" + 1) failed");
+    
+    int lastSlashIndex = -1;
+    int count;
+    for(count = 0; count < filenameLen; count++)
+    {
+        if(filename[count] == '/')
+            lastSlashIndex = count;
+    }
+    
+    if(lastSlashIndex == -1)
+        strcpy(windowTitle, filename);
+    else
+        strcpy(windowTitle, filename + lastSlashIndex + 1);
+    strcat(windowTitle, " - ISO Master");
+    
+    gtk_window_set_title(GTK_WINDOW(GBLmainWindow), windowTitle);
+    /* END SET WINDOW title */
     
     GBLisoSize += bk_estimate_iso_size(&GBLvolInfo, FNTYPE_9660 | FNTYPE_JOLIET | FNTYPE_ROCKRIDGE);
     formatSize(GBLisoSize, sizeStr, sizeof(sizeStr));

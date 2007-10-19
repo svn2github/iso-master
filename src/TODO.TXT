@@ -3,7 +3,6 @@ ui:
 -show exec failed warnings from editor.c
 -checkboxes and lables not aligned in change permissions window
 -log bug 'file size not updated after editing a file'
--add filename to window title
 
 
 bk:
