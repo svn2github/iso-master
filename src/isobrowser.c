@@ -1271,6 +1271,8 @@ void openIso(char* filename)
     strcat(windowTitle, " - ISO Master");
     
     gtk_window_set_title(GTK_WINDOW(GBLmainWindow), windowTitle);
+    
+    free(windowTitle);
     /* END SET WINDOW title */
     
     GBLisoSize += bk_estimate_iso_size(&GBLvolInfo, FNTYPE_9660 | FNTYPE_JOLIET | FNTYPE_ROCKRIDGE);
