@@ -10,9 +10,9 @@ Prerequisites for Compiling from Source
 ---------------------------------------
 You need a C compiler, make and whatever packages required for compiling GTK2 applications. On ubuntu I had to install (using Synaptic): build-essential, libgtk2.0-dev, pkg-config and gettext. On Slackware I didn't have to install anything.
 
-Compiling
----------
-At this early time bkisofs comes in the same package as ISO Master so it doesn't need to be downloaded/built separately.
+Compiling and Installing from Source
+------------------------------------
+At this time bkisofs comes in the same package as ISO Master so it doesn't need to be downloaded/built separately.
 
 To compile, simply type
 
@@ -32,6 +32,19 @@ sudo make install
 [enter user's password]
 
 If you get errors, or even warnings, please do send me the output so I can fix them.
+
+Uninstalling from Source
+------------------------
+If you followed the steps above to install ISO Master, use the following to uninstall it:
+
+su
+[enter root password]
+make uninstall
+
+Or on something like Ubuntu that won't let you su:
+
+sudo make uninstall
+[enter user's password]
 
 Contact
 -------
