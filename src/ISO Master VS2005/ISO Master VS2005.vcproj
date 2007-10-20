@@ -61,6 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="comctl32.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
@@ -265,7 +266,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\error.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\isomaster.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\window.cpp"
 				>
 			</File>
 		</Filter>
@@ -351,7 +360,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\error.h"
+				>
+			</File>
+			<File
 				RelativePath=".\resource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\window.h"
 				>
 			</File>
 		</Filter>
@@ -360,6 +377,10 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath=".\ISO Master VS2005.rc"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
