@@ -2,10 +2,10 @@
 * Windows main for ISO Master
 * */
 
-#define WIN32_LEAN_AND_MEAN
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <windows.h>
+#include <shlobj.h>
 #include <stdio.h>
 
 #include "resource.h"
@@ -141,6 +141,30 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         else if(wParam == ID_IMAGE_OPEN)
         {
             logWarning("open");
+            
+            OPENFILENAME openFileName;
+            LPTSTR filePathAndName = new TCHAR[1024];
+            filePathAndName[0] = NULL;
+            
+            memset(&openFileName, 0, sizeof(openFileName));
+            openFileName.lStructSize = sizeof(OPENFILENAME);
+            openFileName.hwndOwner = hwnd;
+            openFileName.hInstance = NULL;
+            openFileName.lpstrFilter = NULL;
+            openFileName.lpstrCustomFilter = NULL;
+            openFileName.nMaxCustFilter = 0;
+            openFileName.nFilterIndex = 0;
+            openFileName.lpstrFile = filePathAndName;
+            openFileName.nMaxFile = 1024;
+            openFileName.lpstrFileTitle = NULL;
+            openFileName.nMaxFileTitle = 0;
+            openFileName.lpstrInitialDir = NULL;
+            openFileName.lpstrTitle = NULL;
+            openFileName.Flags = 0;
+            
+            GetOpenFileName(&openFileName);
+            
+            delete filePathAndName;
         }
         break;
         
