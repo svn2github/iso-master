@@ -5,6 +5,8 @@
 #include "resource.h"
 
 extern HINSTANCE GBLhInstance;
+extern HWND GBLfsBrowser;
+extern HWND GBLisoBrowser;
 
 #define IDM_NEW                         1
 #define IDM_OPEN                        2

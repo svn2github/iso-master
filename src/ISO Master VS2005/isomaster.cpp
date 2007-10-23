@@ -13,6 +13,8 @@
 #include "window.h"
 
 HINSTANCE GBLhInstance;
+HWND GBLfsBrowser;
+HWND GBLisoBrowser;
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -78,8 +80,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static DWORD dwSplitterPos;
-    static HWND topPane;
-    static HWND bottomPane;
     static HCURSOR hCursor;
     static BOOL bSplitterMoving;
     RECT rect;
@@ -88,21 +88,42 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_CREATE:
         
+        logWarning("WM_CREATE");
+        
         //createSimpleToolbar(hwnd);
         
-        topPane = CreateWindowEx(WS_EX_CLIENTEDGE,
-                                 L"edit", NULL,  
-                                 WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | ES_MULTILINE | WS_VSCROLL, 
-                                 0, 0, 0, 0, 
-                                 hwnd, (HMENU)1,
-                                 GBLhInstance, NULL);
+        // for WC_LISTVIEW
+        InitCommonControls();
         
-        bottomPane = CreateWindowEx(WS_EX_CLIENTEDGE,
-                                    L"edit", NULL,  
-                                    WS_CHILD | WS_VISIBLE | WS_CLIPSIBLINGS | ES_MULTILINE | WS_VSCROLL, 
-                                    0, 0, 0, 0, 
-                                    hwnd, (HMENU)2,
-                                    GBLhInstance, NULL);
+        GBLfsBrowser = CreateWindowEx(WS_EX_CLIENTEDGE,
+                                      WC_LISTVIEW, NULL,  
+                                      WS_CHILD | WS_VISIBLE | LVS_LIST | LVS_REPORT | LVS_EDITLABELS, 
+                                      0, 0, 0, 0, 
+                                      hwnd, NULL,
+                                      GBLhInstance, NULL);
+        
+        LVITEM lvitem;
+        lvitem.mask = LVIF_TEXT | /*LVIF_IMAGE |*/ LVIF_PARAM | LVIF_STATE; 
+        lvitem.state = 0; 
+        lvitem.stateMask = 0; 
+        for(int count = 0; count < 10; count++)
+        {
+            lvitem.iItem = count;
+            //lvitem.iImage = index;
+            lvitem.iSubItem = 0;
+            //lvitem.lParam = (LPARAM) &rgPetInfo[index];
+            lvitem.pszText = LPSTR_TEXTCALLBACK; // sends an LVN_GETDISP message.
+
+            if(ListView_InsertItem(GBLfsBrowser, &lvitem) == -1)
+                break;
+        }
+        
+        GBLisoBrowser = CreateWindowEx(WS_EX_CLIENTEDGE,
+                                       WC_LISTVIEW, NULL,  
+                                       WS_CHILD | WS_VISIBLE | LVS_LIST | LVS_REPORT | LVS_EDITLABELS, 
+                                       0, 0, 0, 0, 
+                                       hwnd, NULL,
+                                       GBLhInstance, NULL);
         
         hCursor = LoadCursor(NULL, MAKEINTRESOURCE(IDC_SIZENS));
         
@@ -112,6 +133,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         return 0;
     
     case WM_SIZE:
+        
+        logWarning("WM_SIZE");
         
         //!! need some smarter way to deal with this to have minimum bottom height
         //!! and increase the size when window made bigger
@@ -126,20 +149,22 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         
         // Adjust the children's size and position
-        MoveWindow(topPane, 0, 0, LOWORD(lParam), dwSplitterPos - 1, TRUE);
-        MoveWindow(bottomPane, 0, dwSplitterPos + 2, LOWORD(lParam) , HIWORD(lParam) - dwSplitterPos - 2, TRUE);
+        MoveWindow(GBLfsBrowser, 0, 0, LOWORD(lParam), dwSplitterPos - 1, TRUE);
+        MoveWindow(GBLisoBrowser, 0, dwSplitterPos + 2, LOWORD(lParam) , HIWORD(lParam) - dwSplitterPos - 2, TRUE);
 		
         return 0;
 
     case WM_COMMAND:
         
-        if(wParam == ID_IMAGE_QUIT)
+        logWarning("WM_COMMAND");
+        
+        switch(wParam)
         {
+        case ID_IMAGE_QUIT:
             logWarning("quit");
             PostQuitMessage(1);
-        }
-        else if(wParam == ID_IMAGE_OPEN)
-        {
+        break;
+        case ID_IMAGE_OPEN:
             logWarning("open");
             
             OPENFILENAME openFileName;
@@ -164,12 +189,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
             
             GetOpenFileName(&openFileName);
             
+            // see msdn OPENFILENAME->lpstrFile for how to get the actual filename
+            
             delete filePathAndName;
-        }
         break;
+        }
+        return 0;
         
     case WM_MOUSEMOVE:
-
+        
+        logWarning("WM_MOUSEMOVE");
+        
         if (HIWORD(lParam) > 20) // do not allow above this mark
         {
             SetCursor(hCursor);
@@ -186,20 +216,60 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
         return 0;
         
     case WM_LBUTTONDOWN:
-    
+        
+        logWarning("WM_LBUTTONDOWN");
+        
         SetCursor(hCursor);
         bSplitterMoving = TRUE;
         SetCapture(hwnd);
         return 0;
 
     case WM_LBUTTONUP:
-    
+        
+        logWarning("WM_LBUTTONUP");
+        
         ReleaseCapture();
         bSplitterMoving = FALSE;
         return 0;
-		
-    case WM_CLOSE: 
+    
+    case WM_NOTIFY:
+        
+        logWarning("WM_NOTIFY");
+        
+        switch (((LPNMHDR) lParam)->code)
+        {
+        case LVN_GETDISPINFO:
+            NMLVDISPINFO* plvdi = (NMLVDISPINFO*)lParam;
+            switch (((NMLVDISPINFO*)lParam)->item.iSubItem)
+            {
+            case 0:
+                plvdi->item.pszText = L"asd";
+                break;
+        	
+            case 1:
+                plvdi->item.pszText = L"qwe";
+                break;
+            
+            case 2:
+                plvdi->item.pszText = L"zxc";
+                break;
+            
+            default:
+                break;
+            }
+            // NOTE: in addition to setting pszText to point to the item text, you could 
+            // copy the item text into pszText using StringCchCopy. For example:
 
+            // StringCchCopy(rgPetInfo[plvdi->item.iItem].szKind, 
+            //                         sizeof(rgPetInfo[plvdi->item.iItem].szKind), 
+            //                         plvdi->item.pszText);
+        }
+        return 0;
+        
+    case WM_CLOSE: 
+        
+        logWarning("WM_CLOSE");
+        
         PostQuitMessage(0);
         return 0;
 
