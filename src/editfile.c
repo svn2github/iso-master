@@ -16,11 +16,16 @@
 #include <gdk/gdkkeysyms.h>
 #include <libintl.h>
 #include <errno.h>
+#include <signal.h>
+#include <sys/wait.h>
 
 #include "isomaster.h"
 
 #define MAX_RANDOM_BASE_NAME_LEN 26
 #define RANDOM_STR_NAME_LEN 6
+
+/* milliseconds */
+#define TIMEOUT_TIME 50
 
 /* files that I created in the temp dir for editing */
 TempFileCreated* GBLtempFilesList = NULL;
@@ -34,6 +39,11 @@ extern bool GBLisoChangesProbable;
 extern GtkWidget* GBLeditorFld;
 extern GtkWidget* GBLviewerFld;
 extern GtkWidget* GBLtempDirFld;
+
+static bool GBLeditFailed;
+static bool GBLcancelEditTimeout;
+static bool GBLviewFailed;
+static bool GBLcancelViewTimeout;
 
 /******************************************************************************
 * addToTempFilesList()
@@ -56,6 +66,52 @@ void addToTempFilesList(const char* pathAndName)
     newNode->next = GBLtempFilesList;
     
     GBLtempFilesList = newNode;
+}
+
+gboolean checkEditFailed(gpointer data)
+{
+    if(GBLcancelEditTimeout)
+        return FALSE;
+    
+    if(GBLeditFailed)
+    {
+        GtkWidget* warningDialog;
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("Edit failed, please check Settings/Editor"));
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        
+        return FALSE;
+    }
+    else
+        return TRUE;
+}
+
+gboolean checkViewFailed(gpointer data)
+{
+    if(GBLcancelViewTimeout)
+        return FALSE;
+    
+    if(GBLviewFailed)
+    {
+        GtkWidget* warningDialog;
+        warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
+                                               GTK_DIALOG_DESTROY_WITH_PARENT,
+                                               GTK_MESSAGE_ERROR,
+                                               GTK_BUTTONS_CLOSE,
+                                               _("View failed, please check Settings/Viewer"));
+        gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
+        gtk_dialog_run(GTK_DIALOG(warningDialog));
+        gtk_widget_destroy(warningDialog);
+        
+        return FALSE;
+    }
+    else
+        return TRUE;
 }
 
 void deleteTempFiles(void)
@@ -84,6 +140,17 @@ void editSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data)
         return;
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
+    
+    static guint timeoutTag = 0;
+    
+    /* kill the previous timeout function (if any) */
+    if(timeoutTag != 0)
+        g_source_remove(timeoutTag);
+    
+    GBLeditFailed = false;
+    
+    /* a timeout that will keep checking whether GBLeditFailed */
+    timeoutTag = g_timeout_add(TIMEOUT_TIME, checkEditFailed, NULL);
     
     /* there's just one row selected but this is the easiest way to do it */
     gtk_tree_selection_selected_foreach(selection, editSelectedRowCbk, NULL);
@@ -176,8 +243,7 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     {
         execlp(gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)), "editor", pathAndNameOnFs, NULL);
         
-        printf("Failed to execute %s, error %d\n", gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)), errno);
-        printf("!! need to send a signal to iso master here to show a dialog\n");
+        kill(getppid(), SIGUSR1);
         
         exit(1);
     }
@@ -288,6 +354,17 @@ void viewSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data)
     
     selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLisoTreeView));
     
+    static guint timeoutTag = 0;
+    
+    /* kill the previous timeout function (if any) */
+    if(timeoutTag != 0)
+        g_source_remove(timeoutTag);
+    
+    GBLviewFailed = false;
+    
+    /* a timeout that will keep checking whether GBLviewFailed */
+    timeoutTag = g_timeout_add(TIMEOUT_TIME, checkViewFailed, NULL);
+    
     /* there's just one row selected but this is the easiest way to do it */
     gtk_tree_selection_selected_foreach(selection, viewSelectedRowCbk, NULL);
 }
@@ -378,8 +455,7 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     {
         execlp(gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)), "viewer", pathAndNameOnFs, NULL);
         
-        printf("Failed to execute %s, error %d\n", gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)), errno);
-        printf("!! need to send a signal to iso master here to show a dialog\n");
+        kill(getppid(), SIGUSR2);
         
         exit(1);
     }
@@ -389,4 +465,14 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     free(pathAndNameOnFs);
     free(pathAndNameOnIso);
     GBLvolInfo.warningCbk = savedWarningCbk;
+}
+
+void sigusr1(int signum)
+{
+    GBLeditFailed = true;
+}
+
+void sigusr2(int signum)
+{
+    GBLviewFailed = true;
 }

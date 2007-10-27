@@ -1,4 +1,6 @@
 void addToTempFilesList(const char* pathAndName);
+gboolean checkEditFailed(gpointer data);
+gboolean checkViewFailed(gpointer data);
 void deleteTempFiles(void);
 void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
                         GtkTreeIter* iterator, gpointer data);
@@ -7,6 +9,8 @@ char* makeRandomFilename(const char* sourceName);
 void viewSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data);
 void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
                         GtkTreeIter* iterator, gpointer data);
+void sigusr1(int signum);
+void sigusr2(int signum);
 
 /******************************************************************************
 * FileCreated
