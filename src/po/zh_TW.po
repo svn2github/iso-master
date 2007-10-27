@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 20:20-0400\n"
+"POT-Creation-Date: 2007-10-26 23:45-0400\n"
 "PO-Revision-Date: 2007-08-09 06:27+0800\n"
 "Last-Translator: Chien Cheng Wei <e.cwchien@gmail.com>\n"
 "Language-Team: Chien Cheng Wei <e.cwchien@gmail.com>\n"
@@ -262,7 +262,7 @@ msgstr "本機中返回上一層目錄"
 msgid "ISO Images"
 msgstr "ISO 映像檔"
 
-#: ../about.c:315
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "ISO Master 說明"
 
@@ -414,7 +414,7 @@ msgstr "狀態（%s）錯誤代號 %d，故略過目錄項目"
 msgid "Temporary directory"
 msgstr "暫存目錄"
 
-#: ../about.c:256
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

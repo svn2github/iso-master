@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 20:20-0400\n"
+"POT-Creation-Date: 2007-10-26 23:45-0400\n"
 "PO-Revision-Date: 2007-08-14 14:01+0200\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: Albanian <translation-team-sq@lists.sourceforge.net>\n"
@@ -264,7 +264,7 @@ msgstr "Shko sipër te sistem kartelash një drejtori"
 msgid "ISO Images"
 msgstr "Pamje ISO"
 
-#: ../about.c:315
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "Ndihmë për ISO Master"
 
@@ -426,7 +426,7 @@ msgstr "Po e anashkaloj këtë zë drejtorie pasi stat(%s) dështoi me %d"
 msgid "Temporary directory"
 msgstr "Drejtori e përkohshme"
 
-#: ../about.c:256
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

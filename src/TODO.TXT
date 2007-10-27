@@ -9,6 +9,7 @@ bk:
 -need a bk_set_warning_foo()
 -using access() to check whether a file exists is no good, target of a dead symlink will get overwritten
 -fedora7 dvd takes forever to remangle. try either fix the algorithm or allow longer 9660 names.
+-sorting 9660/joliet can also be slow
 
 
 manual:
@@ -49,6 +50,7 @@ to make a fedora package:
 - Wait a moment and look for a built RPM in ~/rpmbuild/RPMS/i386
 
 to package a release:
+- cd po && ./extractstrings.sh && ./updateall.sh && rm sr\@Latn.po && svn up
 - update the version number in the about box
 - update version in man page
 - remove -g and -DDEBUG from Makefile and bk/Makefile

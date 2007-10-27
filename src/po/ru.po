@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 20:20-0400\n"
+"POT-Creation-Date: 2007-10-26 23:45-0400\n"
 "PO-Revision-Date: 2007-08-27 03:51-0500\n"
 "Last-Translator: Antonio_99RUS <scsiman@yandex.ru>\n"
 "Language-Team: \n"
@@ -259,7 +259,7 @@ msgstr "Вернуться на каталог вверх вне образа"
 msgid "ISO Images"
 msgstr "ISO образы"
 
-#: ../about.c:315
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "Справка по ISO Master"
 
@@ -419,7 +419,7 @@ msgstr "Пропускаем каталог, поскольку stat(%s) вер�
 msgid "Temporary directory"
 msgstr "Временный каталог"
 
-#: ../about.c:256
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

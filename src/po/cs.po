@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs.po_[k6bxCb]\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 20:20-0400\n"
+"POT-Creation-Date: 2007-10-26 23:45-0400\n"
 "PO-Revision-Date: 2007-08-24 20:47+0200\n"
 "Last-Translator: Schmaki <smallsmaky@seznam.cz>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -262,7 +262,7 @@ msgstr "Jdi v systému souborů zpět o jeden adresář"
 msgid "ISO Images"
 msgstr "ISO obrazy"
 
-#: ../about.c:315
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "Nápověda ISO Masteru"
 
@@ -420,7 +420,7 @@ msgstr "Stat(%s) se nezdařil (%d); přeskakuji adresář"
 msgid "Temporary directory"
 msgstr "Dočasný adresář"
 
-#: ../about.c:256
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

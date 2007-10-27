@@ -1,3 +1,11 @@
+27 Oct 2007 - 1.2
+=================
+- Added Faroese, Slovenian, Hungarian translations.
+- Fixed bug where El Torito boot records with size not divisible by 4 were not allowed.
+- Progress bars are now much smoother.
+- Name of the open file is now in the title ofthe window.
+- If the viewer or editor fails to start, an error message is now displayed.
+
 27 Aug 2007 - 1.1
 =================
 - Added Serbian/Latin, and Turkish translations.

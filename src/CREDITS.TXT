@@ -57,24 +57,24 @@ http://www.david-web.co.uk/
 
 Marcin Zajaczkowski
 http://timeoff.wsisiz.edu.pl/rpms.html
-- Fedora packages of ISO Master, versions 0.3 - 1.0
+- Fedora packages of ISO Master, versions 0.3 - 1.1
 
 Toni Graffy
 Maintainer of many SuSE packages at PackMan
-- SuSE packages of ISO Master, versions 0.4 - 1.0
+- SuSE packages of ISO Master, versions 0.4 - 1.1
 
 Maciej Libuda
-- Arch packages of ISO Master, versions 0.3 - 1.0
+- Arch packages of ISO Master, versions 0.3 - 1.1
 
 GuestToo
 - Puppy packages of ISO Master, versions 0.1, 0.4 - 1.0
 
 vktgz
 http://www.vktgz.homelinux.net/
-- Gentoo ebuilds of ISO Master, versions 0.4 - 1.0
+- Gentoo ebuilds of ISO Master, versions 0.4 - 1.1
 
 Babak Farrokhi
-- FreeBSD ports package of ISO Master, versions 0.6 - 1.0
+- FreeBSD ports package of ISO Master, versions 0.6 - 1.1
 
 James Bowling
 http://www.jamesbowling.com/
@@ -93,22 +93,28 @@ http://www.happyassassin.net/
 Matias A. Fonzo
 - Slackware package of ISO Master, versions 0.8 - 1.0
 
+Giovanni Bechis
+http://www.snb.it/
+- OpenBSD ports package of ISO Master, versions 1.0 - 1.1
+
+Pierrick Le Brun
+- Zenwalk package of ISO Master, versions 1.0 - 1.1
+
+Muggins
+- Puppy package of ISO Master, version 1.1
+
+Todd
+- Puppy package of ISO Master, version 1.1
+
 F. Lombardi
 SLAX package of ISO Master, version 0.7
 
 Bogdan Radulescu
 - NimbleX package of ISO Master, version 0.7
 
-Pierrick Le Brun
-- Zenwalk package of ISO Master, version 1.0
-
 Wolven
 http://wolvix.org/
 - Wolvix package of ISO Master, version 1.0
-
-Giovanni Bechis
-http://www.snb.it/
-- OpenBSD ports package of ISO Master, version 1.0
 
 Translations:
 
@@ -132,6 +138,9 @@ Juan Garcia-Murga Monago
 
 Eero Salokannel
 - fi (Finnish) translation of ISO Master version 1.1
+
+Magnus Valle
+- fo (Faroese) translation of ISO Master version 1.1
 
 Leif Thande
 - fr (French) translation of ISO Master version 0.6
@@ -174,6 +183,9 @@ Anton Obidin
 
 Jozef Riha
 - sk (Slovak) translation of ISO Master version 1.0
+
+Uros Golob
+- sl (Slovenian) translation of ISO Master version 1.1
 
 Besnik Bleta
 - sq (Albanian) translation of ISO Master versions 0.8 - 1.1

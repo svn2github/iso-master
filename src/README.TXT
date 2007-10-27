@@ -64,4 +64,4 @@ See CREDITS.TXT or Help/About/Credits for a list of contributors to ISO Master.
 
 License
 -------
-The source code for this version of ISO Master and bkisofs is distributed under the GNU General Public Licence version 2.
+The source code for this version of ISO Master and bkisofs is distributed under the GNU General Public Licence version 2. See LICENCE.TXT for full text.

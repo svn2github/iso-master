@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 20:20-0400\n"
+"POT-Creation-Date: 2007-10-26 23:45-0400\n"
 "PO-Revision-Date: 2007-08-14 16:44+0100\n"
 "Last-Translator: Bruno Bord <bruno@comedia-production.com>\n"
 "Language-Team: \n"
@@ -264,7 +264,7 @@ msgstr "Remonter d'un dossier sur le système de fichier"
 msgid "ISO Images"
 msgstr "Images ISO"
 
-#: ../about.c:315
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "Aide ISO Master"
 
@@ -420,7 +420,7 @@ msgstr "Dossier ignoré car stat(%s) a échoué avec %d"
 msgid "Temporary directory"
 msgstr "Dossier temporaire"
 
-#: ../about.c:256
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

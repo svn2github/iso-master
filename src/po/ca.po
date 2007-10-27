@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master Unknown\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 20:20-0400\n"
+"POT-Creation-Date: 2007-10-26 23:45-0400\n"
 "PO-Revision-Date: 2007-08-08 14:53+0200\n"
 "Last-Translator: Josep Sanchez Mesegue <papapep@gmail.com>\n"
 "Language-Team: Catala\n"
@@ -263,7 +263,7 @@ msgstr "Puja un directori del sistema de fitxers"
 msgid "ISO Images"
 msgstr "Imatges ISO"
 
-#: ../about.c:315
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "Ajuda d'ISO Master"
 
@@ -424,7 +424,7 @@ msgstr "S'omet el directori perquè l'estat (%s) ha fallat amb %d"
 msgid "Temporary directory"
 msgstr "Directori temporal"
 
-#: ../about.c:256
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

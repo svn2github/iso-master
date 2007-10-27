@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 20:20-0400\n"
+"POT-Creation-Date: 2007-10-26 23:45-0400\n"
 "PO-Revision-Date: 2007-06-07 14:18-0500\n"
 "Last-Translator: Bogdan Radulescu <bogdan@nimblex.net>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -260,7 +260,7 @@ msgstr "Du-te un director în sus pe sistemul de fişiere"
 msgid "ISO Images"
 msgstr "Imagini ISO"
 
-#: ../about.c:315
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "ISO Master Ajutor"
 
@@ -422,7 +422,7 @@ msgid "Temporary directory"
 msgstr "Director Nou"
 
 # !! this translation is incomplete
-#: ../about.c:256
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 20:20-0400\n"
+"POT-Creation-Date: 2007-10-26 23:45-0400\n"
 "PO-Revision-Date: 2007-08-21 10:31+0100\n"
 "Last-Translator: Valerio Guaglianone aka Valpenguin <valpenguin@gmail.com>\n"
 "Language-Team: \n"
@@ -263,7 +263,7 @@ msgstr "Cartella precedente sul disco"
 msgid "ISO Images"
 msgstr "Immagini ISO"
 
-#: ../about.c:315
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "Guida di ISO Master"
 
@@ -420,7 +420,7 @@ msgstr "Escluso oggetto, perchè 'stat(%s)' ha segnalato l'errore %d"
 msgid "Temporary directory"
 msgstr "Cartella temporanea"
 
-#: ../about.c:256
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
