@@ -22,6 +22,7 @@ c99 compatibility issues:
 -localtime_r() - implicit declaration
 -strdup() - implicit declaration
 -lstat() - implicit declaration and some mess with st_size
+-try to make sure icons are loaded relative to the isomaster dir
 
 
 tests to run before a release:
