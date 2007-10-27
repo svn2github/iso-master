@@ -1,8 +1,6 @@
 ui:
 -drop-down list to select track - can do multitrack
--show exec failed warnings from editor.c
 -checkboxes and lables not aligned in change permissions window
--start the child processes somehow that it does the wait in the end automatically
 
 
 bk:
