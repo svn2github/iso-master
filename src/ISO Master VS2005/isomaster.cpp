@@ -112,7 +112,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
             //lvitem.iImage = index;
             lvitem.iSubItem = 0;
             //lvitem.lParam = (LPARAM) &rgPetInfo[index];
-            lvitem.pszText = LPSTR_TEXTCALLBACK; // sends an LVN_GETDISP message.
+            //lvitem.pszText = LPSTR_TEXTCALLBACK; // sends an LVN_GETDISP message.
+            lvitem.pszText = L"asd";
 
             if(ListView_InsertItem(GBLfsBrowser, &lvitem) == -1)
                 break;
@@ -234,8 +235,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
     
     case WM_NOTIFY:
         
-        logWarning("WM_NOTIFY");
-        
         switch (((LPNMHDR) lParam)->code)
         {
         case LVN_GETDISPINFO:
@@ -243,14 +242,17 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
             switch (((NMLVDISPINFO*)lParam)->item.iSubItem)
             {
             case 0:
+            logWarning("WM_NOTIFY:LVN_GETDISPINFO0");
                 plvdi->item.pszText = L"asd";
                 break;
         	
             case 1:
+            logWarning("WM_NOTIFY:LVN_GETDISPINFO1");
                 plvdi->item.pszText = L"qwe";
                 break;
             
             case 2:
+            logWarning("WM_NOTIFY:LVN_GETDISPINFO2");
                 plvdi->item.pszText = L"zxc";
                 break;
             
