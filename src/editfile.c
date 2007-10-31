@@ -17,9 +17,12 @@
 #include <libintl.h>
 #include <errno.h>
 #include <signal.h>
-#include <sys/wait.h>
 
 #include "isomaster.h"
+
+#ifndef MINGW_TEST
+    #include <sys/wait.h>
+#endif
 
 #define MAX_RANDOM_BASE_NAME_LEN 26
 #define RANDOM_STR_NAME_LEN 6
@@ -237,7 +240,7 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     }
     
     addToTempFilesList(pathAndNameOnFs);
-    
+#ifndef MINGW_TEST    
     /* start the editor */
     if(!fork())
     {
@@ -247,7 +250,7 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         exit(1);
     }
-    
+#endif
     /* delete the file from the iso */
     rc = bk_delete(&GBLvolInfo, pathAndNameOnIso);
     if(rc <= 0)
@@ -323,7 +326,9 @@ char* makeRandomFilename(const char* sourceName)
         gotGoodChar = false;
         while(!gotGoodChar)
         {
+#ifndef MINGW_TEST
             oneRandomChar = random();
+#endif
             if(64 < oneRandomChar && oneRandomChar < 91)
             {
                 gotGoodChar = true;
@@ -449,7 +454,7 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     }
     
     addToTempFilesList(pathAndNameOnFs);
-    
+#ifndef MINGW_TEST    
     /* start the viewer */
     if(!fork())
     {
@@ -459,7 +464,7 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         exit(1);
     }
-    
+#endif
     g_free(itemName);
     free(randomizedItemName);
     free(pathAndNameOnFs);

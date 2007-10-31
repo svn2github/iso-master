@@ -65,14 +65,14 @@ int main(int argc, char** argv)
     appIcon = gdk_pixbuf_new_from_file(ICONPATH"/isomaster.png", NULL);
     
     loadIcons();
-    
+    #ifndef MINGW_TEST
     /* set up the signal handler for exiting editors and viewers */
     signal(SIGUSR1, sigusr1);
     signal(SIGUSR2, sigusr2);
     
     /* make sure childrent don't become zombies */
     signal(SIGCHLD, SIG_IGN);
-    
+    #endif
     /* main window */
     GBLmainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_default_size(GTK_WINDOW(GBLmainWindow), 
@@ -125,9 +125,9 @@ int main(int argc, char** argv)
 
     if(argv[1] != NULL)
       openIso(argv[1]);
-    
+#ifndef MINGW_TEST
     srandom((int)time(NULL));
-    
+#endif
     gtk_main();
     
     return 0;

@@ -382,7 +382,8 @@ void openConfigFile(char* configFileName)
         printWarning("failed to open config file for reading, trying to create");
         
         int newConfigFile;
-        
+
+#ifndef MINGW_TEST
         newConfigFile = creat(configFileName, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
         if(newConfigFile <= 0)
         {
@@ -390,7 +391,7 @@ void openConfigFile(char* configFileName)
             return;
         }
         close(newConfigFile);
-        
+#endif
         GBLsettingsDictionary = iniparser_load(configFileName);
         if(GBLsettingsDictionary == NULL)
         {

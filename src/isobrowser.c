@@ -22,10 +22,13 @@
 #include <sys/stat.h>
 #include <time.h>
 #include <libintl.h>
-#include <regex.h>
 #include <errno.h>
 
 #include "isomaster.h"
+
+#ifndef MINGW_TEST
+    #include <regex.h>
+#endif
 
 extern GtkWidget* GBLmainWindow;
 extern GtkWidget* GBLisoTreeView;
@@ -1654,6 +1657,7 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
     
     if(dialogResponse == GTK_RESPONSE_ACCEPT)
     {
+#ifndef MINGW_TEST
         char* nameWithExtension;
         
         nameWithExtension = malloc(strlen(filename) + 5);
@@ -1681,6 +1685,7 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
         saveIso(nameWithExtension);
         
         free(nameWithExtension);
+#endif
     }
     
     //~ saveIso("/home/andrei/out.iso");
