@@ -403,9 +403,19 @@ void openConfigFile(char* configFileName)
     {
         printWarning("failed to open config file for reading, trying to create");
         
+#ifdef MINGW_TEST
+        FILE* newConfigFile;
+        
+        newConfigFile = fopen(configFileName, "w");
+        if(newConfigFile == NULL)
+        {
+            printWarning("failed to create '.isomaster'");
+            return;
+        }
+        fclose(newConfigFile);
+#else
         int newConfigFile;
 
-#ifndef MINGW_TEST
         newConfigFile = creat(configFileName, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
         if(newConfigFile <= 0)
         {
