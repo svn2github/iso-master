@@ -3,7 +3,6 @@ Name=ISO Master
 GenericName=CD image editor
 Comment=Graphical CD image editor for reading, modifying and writing ISO images
 Exec=isomaster
-Encoding=UTF-8
 Terminal=false
 StartupNotify=true
 Type=Application
