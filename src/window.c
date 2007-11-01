@@ -18,6 +18,10 @@
 
 #include "isomaster.h"
 
+#ifdef MINGW_TEST
+    #include <windows.h>
+#endif
+
 /* the label that holds the value of the iso size */
 GtkWidget* GBLisoSizeLbl;
 /* icon for 'go back' for fs browser */
@@ -522,6 +526,42 @@ void loadIcons(void)
     
     gtk_icon_size_lookup(GTK_ICON_SIZE_LARGE_TOOLBAR, &size, &size);
     
+#ifdef MINGW_TEST
+    char moduleFilename[1024];
+    char iconPathAndName[1124]; /* 100 bytes ought to be enough  for the filename */
+    char* lastChar;
+    
+    GetModuleFileName(NULL, moduleFilename, 1024);
+    
+     /* set the first char following the \ to \0 */
+    lastChar = strrchr(moduleFilename, '\\');
+    lastChar++;
+    *lastChar = '\0';
+    
+    strcpy(iconPathAndName, moduleFilename);
+    strcat(iconPathAndName, "icons\\go-back-kearone.png");
+    loadIcon(&GBLgoBackIcon, iconPathAndName, size);
+    
+    loadIcon(&GBLgoBackIcon2, iconPathAndName, size);
+    
+    strcpy(iconPathAndName, moduleFilename);
+    strcat(iconPathAndName, "icons\\folder-new-kearone.png");
+    loadIcon(&GBLnewDirIcon, iconPathAndName, size);
+    
+    loadIcon(&GBLnewDirIcon2, iconPathAndName, size);
+    
+    strcpy(iconPathAndName, moduleFilename);
+    strcat(iconPathAndName, "icons\\add2-kearone.png");
+    loadIcon(&GBLaddIcon, iconPathAndName, size);
+    
+    strcpy(iconPathAndName, moduleFilename);
+    strcat(iconPathAndName, "icons\\extract2-kearone.png");
+    loadIcon(&GBLextractIcon, iconPathAndName, size);
+    
+    strcpy(iconPathAndName, moduleFilename);
+    strcat(iconPathAndName, "icons\\delete-kearone.png");
+    loadIcon(&GBLdeleteIcon2, iconPathAndName, size);
+#else
     loadIcon(&GBLgoBackIcon, ICONPATH"/go-back-kearone.png", size);
     loadIcon(&GBLgoBackIcon2, ICONPATH"/go-back-kearone.png", size);
     loadIcon(&GBLnewDirIcon, ICONPATH"/folder-new-kearone.png", size);
@@ -529,6 +569,7 @@ void loadIcons(void)
     loadIcon(&GBLaddIcon, ICONPATH"/add2-kearone.png", size);
     loadIcon(&GBLextractIcon, ICONPATH"/extract2-kearone.png", size);
     loadIcon(&GBLdeleteIcon2, ICONPATH"/delete-kearone.png", size);
+#endif
 }
 
 void rejectDialogCbk(GtkWidget *widget, GdkEvent *event)
