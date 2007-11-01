@@ -49,7 +49,11 @@ void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
     
     newPath = gtk_entry_get_text(entry);
     
+#ifdef MINGW_TEST
+    if(newPath[strlen(newPath) - 1] == '\\')
+#else
     if(newPath[strlen(newPath) - 1] == '/')
+#endif
     {
         changeFsDirectory((char*)newPath);
     }
@@ -60,7 +64,11 @@ void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
             fatalError("newPathTerminated = malloc(strlen(newPath) + 2) failed");
         
         strcpy(newPathTerminated, newPath);
+#ifdef MINGW_TEST
+        strcat(newPathTerminated, "\\");
+#else
         strcat(newPathTerminated, "/");
+#endif
         
         changeFsDirectory(newPathTerminated);
         
@@ -256,9 +264,11 @@ bool changeFsDirectory(char* newDirStr)
         if(strcmp(nextItem->d_name, ".") == 0 || strcmp(nextItem->d_name, "..") == 0)
             continue;
         
+#ifndef MINGW_TEST        
         if(nextItem->d_name[0] == '.' && !GBLappSettings.showHiddenFilesFs)
         /* skip hidden files/dirs */
             continue;
+#endif
         
         /* mind 256 is assumed in the malloc below */
         if(strlen(nextItem->d_name) > 256)
@@ -277,7 +287,9 @@ bool changeFsDirectory(char* newDirStr)
         
         strcpy(nextItemPathAndName, newDirStr);
         strcat(nextItemPathAndName, nextItem->d_name);
-#ifndef MINGW_TEST        
+#ifdef MINGW_TEST
+        rc = stat(nextItemPathAndName, &nextItemInfo);
+#else
         rc = lstat(nextItemPathAndName, &nextItemInfo);
 #endif
         if(rc == -1)
@@ -318,12 +330,12 @@ bool changeFsDirectory(char* newDirStr)
                                COLUMN_FILENAME, nextItem->d_name,
                                //COLUMN_FILENAME, g_filename_to_utf8(nextItem->d_name, -1, 0, 0, 0),
                                //COLUMN_FILENAME, g_locale_to_utf8(nextItem->d_name, -1, 0, 0, 0), 
-                               COLUMN_SIZE, nextItemInfo.st_size,
+                               COLUMN_SIZE, (unsigned long long)(nextItemInfo.st_size),
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
                                -1);
         }
         else if(IS_SYMLINK(nextItemInfo.st_mode))
-        /* regular file */
+        /* symbolic link */
         {
             gtk_list_store_append(GBLfsListStore, &listIterator);
             gtk_list_store_set(GBLfsListStore, &listIterator, 
@@ -387,7 +399,11 @@ void fsGoUpDirTreeCbk(GtkButton *button, gpointer data)
     done = false;
     for(count = strlen(newCurrentDir) - 1; !done; count--)
     {
+#ifdef MINGW_TEST
+        if(newCurrentDir[count - 1] == '\\')
+#else
         if(newCurrentDir[count - 1] == '/')
+#endif
         /* truncate the string */
         {
             newCurrentDir[count] = '\0';
@@ -436,7 +452,11 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
         
         strcpy(newCurrentDir, GBLfsCurrentDir);
         strcat(newCurrentDir, name);
+#ifdef MINGW_TEST
+        strcat(newCurrentDir, "\\");
+#else
         strcat(newCurrentDir, "/");
+#endif
         
         changeFsDirectory(newCurrentDir);
         
