@@ -65,7 +65,7 @@ isomaster: $(OBJECTS) lib iniparser
 	@$(CC) $(OBJECTS) bk/bk.a iniparser-2.17/libiniparser.a $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0` -o isomaster
 
 # static pattern rule
-$(OBJECTS): %.o: %.c bk/bk.h Makefile
+$(OBJECTS): %.o: %.c %.h bk/bk.h Makefile
 	@echo 'Compiling' $<
 	@$(CC) $< $(CFLAGS) $(CPPFLAGS) -c -o $@
 

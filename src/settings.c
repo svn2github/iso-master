@@ -23,6 +23,10 @@
 
 #include "isomaster.h"
 
+#ifdef MINGW_TEST
+    #include <windows.h>
+#endif
+
 /* used by iniparser */
 dictionary* GBLsettingsDictionary;
 /* home directory with full path or "/" if don't know it */
@@ -313,6 +317,24 @@ void changeViewerCbk(GtkButton *button, gpointer data)
 
 void findHomeDir(void)
 {
+#ifdef MINGW_TEST
+    char appDataDir[1024];
+    
+    if(GetEnvironmentVariable("APPDATA", appDataDir, 1024) == 0)
+    {
+        GBLuserHomeDir = (char*)malloc(2);
+        if(GBLuserHomeDir == NULL)
+            fatalError("findHomeDir(): malloc(2) failed");
+        strcpy(GBLuserHomeDir, "/");
+        return;
+    }
+    
+    GBLuserHomeDir = malloc(strlen(appDataDir) + 2);
+    if(GBLuserHomeDir == NULL)
+        fatalError("findHomeDir(): malloc(strlen(appDataDir) + 2) failed");
+    strcpy(GBLuserHomeDir, appDataDir);
+    strcat(GBLuserHomeDir, "\\");
+#else
     char* userHomeDir;
     int pathLen;
     
@@ -325,8 +347,7 @@ void findHomeDir(void)
         GBLuserHomeDir = (char*)malloc(2);
         if(GBLuserHomeDir == NULL)
             fatalError("findHomeDir(): malloc(2) failed");
-        GBLuserHomeDir[0] = '/';
-        GBLuserHomeDir[1] = '\0';
+        strcpy(GBLuserHomeDir, "/");
         return;
     }
     
@@ -340,7 +361,7 @@ void findHomeDir(void)
                                                             userHomeDir);
         GBLuserHomeDir = (char*)malloc(2);
         if(GBLuserHomeDir == NULL)
-            fatalError("findHomeDir(): malloc(pathLen + 1) failed");
+            fatalError("findHomeDir(): malloc(2) failed");
         strcpy(GBLuserHomeDir, "/");
         return;
     }
@@ -365,6 +386,7 @@ void findHomeDir(void)
         strcpy(GBLuserHomeDir, userHomeDir);
         strcat(GBLuserHomeDir, "/");
     }
+#endif /* MINGW_TEST */
 }
 
 void followSymLinksCbk(GtkButton *button, gpointer data)
