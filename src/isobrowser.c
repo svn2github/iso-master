@@ -50,7 +50,7 @@ bool GBLisoPaneActive = false;
 /* to know whether any changes to the image have been requested */
 bool GBLisoChangesProbable = false;
 /* the size of the iso if it were written right now */
-static off_t GBLisoSize = 0;
+static bk_off_t GBLisoSize = 0;
 /* the progress bar from the writing dialog box */
 static GtkWidget* GBLWritingProgressBar;
 /* the progress bar from the extracting dialog box */

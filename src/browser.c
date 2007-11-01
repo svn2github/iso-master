@@ -151,7 +151,7 @@ void createDirCbk(GtkButton *button, gpointer onFs)
     gtk_widget_destroy(dialog);
 }
 
-void formatSize(off_t sizeInt, char* sizeStr, int sizeStrLen)
+void formatSize(bk_off_t sizeInt, char* sizeStr, int sizeStrLen)
 {
     if(sizeInt > 1073741824)
     /* print gibibytes */
