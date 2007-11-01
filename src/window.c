@@ -502,6 +502,31 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
     return TRUE;
 }
 
+void loadAppIcon(GdkPixbuf** appIcon)
+{
+#ifdef MINGW_TEST
+    char moduleFilename[1024];
+    char iconPathAndName[1124]; /* 100 bytes ought to be enough  for the filename */
+    char* lastChar;
+    
+    GetModuleFileName(NULL, moduleFilename, 1024);
+    
+     /* set the first char following the \ to \0 */
+    lastChar = strrchr(moduleFilename, '\\');
+    lastChar++;
+    *lastChar = '\0';
+    
+    strcpy(iconPathAndName, moduleFilename);
+    strcat(iconPathAndName, "icons\\isomaster.png");
+    
+    *appIcon = gdk_pixbuf_new_from_file(iconPathAndName, NULL);
+#else
+    /* the path ICONPATH is defined in the makefile
+    * if this fails i get NULL which is ok */
+    *appIcon = gdk_pixbuf_new_from_file(ICONPATH"/isomaster.png", NULL);
+#endif
+}
+
 void loadIcon(GtkWidget** destIcon, const char* srcFile, int size)
 {
     GdkPixbuf* pixbuf;
