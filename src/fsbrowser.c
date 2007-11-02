@@ -23,6 +23,10 @@
 
 #include "isomaster.h"
 
+#ifdef MINGW_TEST
+    #include <windows.h>
+#endif
+
 extern AppSettings GBLappSettings;
 extern char* GBLuserHomeDir;
 
@@ -211,7 +215,6 @@ bool changeFsDirectory(char* newDirStr)
     DIR* newDir;
     struct dirent* nextItem; /* for contents of the directory */
     char* nextItemPathAndName; /* for use with stat() */
-    struct stat nextItemInfo;
     GtkTreeIter listIterator;
     int rc;
     GtkTreeModel* model;
@@ -287,9 +290,12 @@ bool changeFsDirectory(char* newDirStr)
         
         strcpy(nextItemPathAndName, newDirStr);
         strcat(nextItemPathAndName, nextItem->d_name);
+        
 #ifdef MINGW_TEST
-        rc = stat(nextItemPathAndName, &nextItemInfo);
+        struct _stati64 nextItemInfo;
+        rc = _stati64(nextItemPathAndName, &nextItemInfo);
 #else
+        struct stat nextItemInfo;
         rc = lstat(nextItemPathAndName, &nextItemInfo);
 #endif
         if(rc == -1)
@@ -330,7 +336,7 @@ bool changeFsDirectory(char* newDirStr)
                                COLUMN_FILENAME, nextItem->d_name,
                                //COLUMN_FILENAME, g_filename_to_utf8(nextItem->d_name, -1, 0, 0, 0),
                                //COLUMN_FILENAME, g_locale_to_utf8(nextItem->d_name, -1, 0, 0, 0), 
-                               COLUMN_SIZE, (unsigned long long)(nextItemInfo.st_size),
+                               COLUMN_SIZE, nextItemInfo.st_size,
                                COLUMN_HIDDEN_TYPE, FILE_TYPE_REGULAR,
                                -1);
         }
