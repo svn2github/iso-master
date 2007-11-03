@@ -13,6 +13,12 @@ bk:
 -sorting 9660/joliet can also be slow
 
 
+windows port:
+-make sure all open() calls have _0_BINARY and all other options have _
+-make sure there are no read(), write(), lseek() calls except in wrappers
+-toolbar buttons shouldn't have text
+
+
 manual:
 -add_as() and extract_as()
 -get_ and set_permissions()
