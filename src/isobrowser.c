@@ -1263,7 +1263,11 @@ void openIso(char* filename)
     int count;
     for(count = 0; count < filenameLen; count++)
     {
+#ifdef MINGW_TEST
+        if(filename[count] == '\\')
+#else
         if(filename[count] == '/')
+#endif
             lastSlashIndex = count;
     }
     
