@@ -101,7 +101,10 @@ void createDirCbk(GtkButton *button, gpointer onFs)
             
             strcpy(pathAndName, GBLfsCurrentDir);
             strcat(pathAndName, newDirName);
-#ifndef MINGW_TEST            
+            
+#ifdef MINGW_TEST            
+            rc = mkdir(pathAndName);
+#else
             rc = mkdir(pathAndName, 0755);
 #endif
             if(rc == -1)
