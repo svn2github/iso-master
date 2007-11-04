@@ -250,7 +250,7 @@ GBLcomments = "An application for editing ISO9660 images based on the "
               "bkisofs access library and the GTK2 GUI toolkit.";
 
 static const char* 
-GBLcopyright = "Copyright 2005-2007 Andrew Smith";
+GBLcopyright = "Copyright 2005-2008 Andrew Smith";
 
 static const char* 
 GBLwebsite = "http://littlesvr.ca/isomaster/";

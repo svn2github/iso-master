@@ -9,7 +9,7 @@ bk:
 -dos doesn't like names to start with underscores
 -add path tables, boot record to size estimate
 -need a bk_set_warning_foo()
--using access() to check whether a file exists is no good, target of a dead symlink will get overwritten
+-using access() to check whether a file exists is no good, target of a dead symlink will get written
 -fedora7 dvd takes forever to remangle. try either fix the algorithm or allow longer 9660 names.
 -sorting 9660/joliet can also be slow
 -look for !!, there are some new ones
@@ -17,6 +17,7 @@ bk:
 
 windows port:
 -gui stuff to remove: show hidden files, follow symlinks
+-check about box. file bug?
 
 
 manual:

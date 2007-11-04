@@ -22,6 +22,10 @@
 
 #include "isomaster.h"
 
+#ifdef MINGW_TEST
+    #include <windows.h>
+#endif
+
 GtkWidget* GBLmainWindow;
 /* to be able to resize the two file browsers */
 GtkWidget* GBLbrowserPaned;
@@ -49,7 +53,23 @@ int main(int argc, char** argv)
     
 #ifdef ENABLE_NLS
     /* initialize gettext */
+#ifdef MINGW_TEST
+    char moduleFilename[1024];
+    char* lastChar;
+    
+    GetModuleFileName(NULL, moduleFilename, 1024);
+    
+     /* set the first char following the \ to \0 */
+    lastChar = strrchr(moduleFilename, '\\');
+    lastChar++;
+    *lastChar = '\0';
+    
+    strncat(moduleFilename, "po", 1024);
+    
+    bindtextdomain("isomaster", moduleFilename);
+#else
     bindtextdomain("isomaster", LOCALEDIR);
+#endif
     bind_textdomain_codeset("isomaster", "UTF-8"); /* so that gettext() returns UTF-8 strings */
     textdomain("isomaster");
 #endif
