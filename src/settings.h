@@ -2,6 +2,8 @@
 #define window_h
 
 #include <stdbool.h>
+
+#include "isomaster.h"
 #include "iniparser-2.17/src/iniparser.h"
 
 #define ISOMASTER_DEFAULT_WINDOW_WIDTH 500
@@ -47,6 +49,9 @@ void changeTempDirCbk(GtkButton *button, gpointer data);
 void changeViewerCbk(GtkButton *button, gpointer data);
 void findHomeDir(void);
 void followSymLinksCbk(GtkButton *button, gpointer data);
+void getDefaultEditor(char** destStr);
+void getDefaultTempDir(char** destStr);
+void getDefaultViewer(char** destStr);
 void openConfigFile(char* configFilePathAndName);
 void loadSettings(void);
 void scanForDuplicatesCbk(GtkButton *button, gpointer data);

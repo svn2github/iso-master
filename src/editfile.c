@@ -20,7 +20,9 @@
 
 #include "isomaster.h"
 
-#ifndef MINGW_TEST
+#ifdef MINGW_TEST
+    #include <windows.h>
+#else
     #include <sys/wait.h>
 #endif
 
@@ -44,9 +46,7 @@ extern GtkWidget* GBLviewerFld;
 extern GtkWidget* GBLtempDirFld;
 
 static bool GBLeditFailed;
-static bool GBLcancelEditTimeout;
 static bool GBLviewFailed;
-static bool GBLcancelViewTimeout;
 
 /******************************************************************************
 * addToTempFilesList()
@@ -73,9 +73,6 @@ void addToTempFilesList(const char* pathAndName)
 
 gboolean checkEditFailed(gpointer data)
 {
-    if(GBLcancelEditTimeout)
-        return FALSE;
-    
     if(GBLeditFailed)
     {
         GtkWidget* warningDialog;
@@ -96,9 +93,6 @@ gboolean checkEditFailed(gpointer data)
 
 gboolean checkViewFailed(gpointer data)
 {
-    if(GBLcancelViewTimeout)
-        return FALSE;
-    
     if(GBLviewFailed)
     {
         GtkWidget* warningDialog;
@@ -155,7 +149,6 @@ void editSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data)
     /* a timeout that will keep checking whether GBLeditFailed */
     timeoutTag = g_timeout_add(TIMEOUT_TIME, checkEditFailed, NULL);
     
-    /* there's just one row selected but this is the easiest way to do it */
     gtk_tree_selection_selected_foreach(selection, editSelectedRowCbk, NULL);
     
     /* can't put this in the callback because gtk complains */
@@ -207,7 +200,13 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         fatalError("malloc(strlen(gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld))) + "
                    "strlen(randomizedItemName) + 2) failed");
     strcpy(pathAndNameOnFs, gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
+    
+#ifdef MINGW_TEST
+    strcat(pathAndNameOnFs, "\\"); /* doesn't hurt even if not needed */
+#else
     strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
+#endif
+    
     strcat(pathAndNameOnFs, randomizedItemName);
     
     /* disable warnings, so user isn't confused with 'continue' buttons */
@@ -240,7 +239,15 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     }
     
     addToTempFilesList(pathAndNameOnFs);
-#ifndef MINGW_TEST    
+    
+#ifdef MINGW_TEST
+    HINSTANCE rc2;
+    rc2 = ShellExecute(NULL, "open", 
+                       gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)), 
+                       pathAndNameOnFs, NULL, SW_SHOW);
+    if((int)rc2 <= 32)
+        GBLeditFailed = true;
+#else
     /* start the editor */
     if(!fork())
     {
@@ -251,6 +258,7 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         exit(1);
     }
 #endif
+    
     /* delete the file from the iso */
     rc = bk_delete(&GBLvolInfo, pathAndNameOnIso);
     if(rc <= 0)
@@ -326,7 +334,9 @@ char* makeRandomFilename(const char* sourceName)
         gotGoodChar = false;
         while(!gotGoodChar)
         {
-#ifndef MINGW_TEST
+#ifdef MINGW_TEST
+            oneRandomChar = rand();
+#else
             oneRandomChar = random();
 #endif
             if(64 < oneRandomChar && oneRandomChar < 91)
@@ -370,7 +380,6 @@ void viewSelectedBtnCbk(GtkMenuItem *menuitem, gpointer data)
     /* a timeout that will keep checking whether GBLviewFailed */
     timeoutTag = g_timeout_add(TIMEOUT_TIME, checkViewFailed, NULL);
     
-    /* there's just one row selected but this is the easiest way to do it */
     gtk_tree_selection_selected_foreach(selection, viewSelectedRowCbk, NULL);
 }
 
@@ -421,7 +430,13 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         fatalError("malloc(strlen(gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld))) + "
                    "strlen(randomizedItemName) + 2) failed");
     strcpy(pathAndNameOnFs, gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
+    
+#ifdef MINGW_TEST
+    strcat(pathAndNameOnFs, "\\"); /* doesn't hurt even if not needed */
+#else
     strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
+#endif
+    
     strcat(pathAndNameOnFs, randomizedItemName);
     
     /* disable warnings, so user isn't confused with 'continue' buttons */
@@ -454,7 +469,15 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     }
     
     addToTempFilesList(pathAndNameOnFs);
-#ifndef MINGW_TEST    
+    
+#ifdef MINGW_TEST
+    HINSTANCE rc2;
+    rc2 = ShellExecute(NULL, "open", 
+                       gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)), 
+                       pathAndNameOnFs, NULL, SW_SHOW);
+    if((int)rc2 <= 32)
+        GBLeditFailed = true;
+#else
     /* start the viewer */
     if(!fork())
     {
@@ -465,6 +488,7 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         exit(1);
     }
 #endif
+    
     g_free(itemName);
     free(randomizedItemName);
     free(pathAndNameOnFs);

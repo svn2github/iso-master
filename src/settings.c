@@ -434,6 +434,63 @@ void openConfigFile(char* configFilePathAndName)
     }
 }
 
+void getDefaultEditor(char** destStr)
+{
+#ifdef MINGW_TEST
+    *destStr = malloc(strlen("wordpad") + 1);
+    if(*destStr == NULL)
+        fatalError("*destStr = malloc(strlen('wordpad') +1) failed");
+    strcpy(*destStr, "wordpad");
+#else
+    *destStr = malloc(strlen(DEFAULT_EDITOR) + 1);
+    if(*destStr == NULL)
+        fatalError("*destStr = malloc(strlen(DEFAULT_EDITOR) +1) failed");
+    strcpy(*destStr, DEFAULT_EDITOR);
+#endif
+}
+
+void getDefaultTempDir(char** destStr)
+{
+#ifdef MINGW_TEST
+    char tempDir[1024];
+    
+    if(GetTempPath(1024, tempDir) == 0)
+    {
+        *destStr = malloc(strlen("c:\\") + 1);
+        if(*destStr == NULL)
+            fatalError("getWindowsTempDir(): malloc(strlen('c:\\') + 1) failed");
+        strcpy(*destStr, "c:\\");
+        return;
+    }
+    
+    *destStr = malloc(strlen(tempDir) + 2);
+    if(*destStr == NULL)
+        fatalError("getWindowsTempDir(): malloc(strlen(tempDir) + 2) failed");
+    strcpy(*destStr, tempDir);
+    strcat(*destStr, "\\");
+#else
+    *destStr = malloc(strlen(DEFAULT_TEMP_DIR) + 1);
+    if(*destStr == NULL)
+        fatalError("*destStr = malloc(strlen(DEFAULT_TEMP_DIR) +1) failed");
+    strcpy(*destStr, DEFAULT_TEMP_DIR);
+#endif
+}
+
+void getDefaultViewer(char** destStr)
+{
+#ifdef MINGW_TEST
+    *destStr = malloc(strlen("firefox") + 1);
+    if(*destStr == NULL)
+        fatalError("*destStr = malloc(strlen('firefox') +1) failed");
+    strcpy(*destStr, "firefox");
+#else
+    *destStr = malloc(strlen(DEFAULT_VIEWER) + 1);
+    if(*destStr == NULL)
+        fatalError("*destStr = malloc(strlen(DEFAULT_VIEWER) +1) failed");
+    strcpy(*destStr, DEFAULT_VIEWER);
+#endif
+}
+
 void loadSettings(void)
 {
     char* configFileName;
@@ -635,10 +692,7 @@ void loadSettings(void)
                                       "ui:editor", NULL);
         if(tempStr == NULL)
         {
-            GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) + 1);
-            if(GBLappSettings.editor == NULL)
-                fatalError("GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) +1) failed");
-            strcpy(GBLappSettings.editor, DEFAULT_EDITOR);
+            getDefaultEditor( &(GBLappSettings.editor) );
         }
         else
         {
@@ -649,10 +703,7 @@ void loadSettings(void)
     else
     /* no config file */
     {
-        GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) + 1);
-        if(GBLappSettings.editor == NULL)
-            fatalError("GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) +1) failed");
-        strcpy(GBLappSettings.editor, DEFAULT_EDITOR);
+        getDefaultEditor( &(GBLappSettings.editor) );
     }
     
     /* read/set viewer */
@@ -662,10 +713,7 @@ void loadSettings(void)
                                       "ui:viewer", NULL);
         if(tempStr == NULL)
         {
-            GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) + 1);
-            if(GBLappSettings.viewer == NULL)
-                fatalError("GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) +1) failed");
-            strcpy(GBLappSettings.viewer, DEFAULT_VIEWER);
+            getDefaultViewer( &(GBLappSettings.viewer) );
         }
         else
         {
@@ -676,10 +724,7 @@ void loadSettings(void)
     else
     /* no config file */
     {
-        GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) + 1);
-        if(GBLappSettings.viewer == NULL)
-            fatalError("GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) +1) failed");
-        strcpy(GBLappSettings.viewer, DEFAULT_VIEWER);
+        getDefaultViewer( &(GBLappSettings.viewer) );
     }
     
     /* read/set temporary directory */
@@ -689,10 +734,7 @@ void loadSettings(void)
                                       "ui:tempdir", NULL);
         if(tempStr == NULL)
         {
-            GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) + 1);
-            if(GBLappSettings.tempDir == NULL)
-                fatalError("GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) +1) failed");
-            strcpy(GBLappSettings.tempDir, DEFAULT_TEMP_DIR);
+            getDefaultTempDir( &(GBLappSettings.tempDir) );
         }
         else
         {
@@ -703,10 +745,7 @@ void loadSettings(void)
     else
     /* no config file */
     {
-        GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) + 1);
-        if(GBLappSettings.tempDir == NULL)
-            fatalError("GBLappSettings.tempDir = malloc(strlen(DEFAULT_TEMP_DIR) +1) failed");
-        strcpy(GBLappSettings.tempDir, DEFAULT_TEMP_DIR);
+        getDefaultTempDir( &(GBLappSettings.tempDir) );
     }
     
     /* read/set iso sort column id */

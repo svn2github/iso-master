@@ -124,10 +124,14 @@ int main(int argc, char** argv)
     gtk_box_pack_start(GTK_BOX(mainVBox), statusBar, FALSE, FALSE, 0);
 
     if(argv[1] != NULL)
-      openIso(argv[1]);
-#ifndef MINGW_TEST
+        openIso(argv[1]);
+    
+#ifdef MINGW_TEST
+    srand((int)time(NULL));
+#else
     srandom((int)time(NULL));
 #endif
+    
     gtk_main();
     
     return 0;

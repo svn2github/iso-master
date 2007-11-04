@@ -16,10 +16,7 @@ bk:
 
 
 windows port:
--make sure added files and dirs have reasonable permissions
 -gui stuff to remove: show hidden files, follow symlinks
--default editor should be wordpad
--temporary directory?
 
 
 manual:
