@@ -18,7 +18,6 @@ bk:
 windows port:
 -check about box. file bug?
 -drop-down with drive letter, and maybe 'my documents'
--get rid of the command-line window when not a debug build
 
 
 manual:
@@ -60,7 +59,7 @@ to make a fedora package:
 - Call: rpmbuild --rebuild isomaster-1.0-1.src.rpm
 - Wait a moment and look for a built RPM in ~/rpmbuild/RPMS/i386
 
-libraries from C:\MinGW\bin:
+DLLs needed for windows:
 iconv.dll
 intl.dll
 jpeg62.dll
