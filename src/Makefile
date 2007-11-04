@@ -1,3 +1,6 @@
+# Uncomment for a Windows build
+export WINDOWS_BUILD = 1
+
 # Other paths are relative to this.
 PREFIX ?= /usr/local
 
@@ -22,11 +25,19 @@ DESKTOPPATH ?= $(PREFIX)/share/applications
 # The default editor for files from the image. Users can change this. I
 # recommend you set it to a graphical text editor that is likely to be 
 # installed by default on your distribution.
-DEFAULT_EDITOR ?= mousepad
+ifdef WINDOWS_BUILD
+  DEFAULT_EDITOR ?= wordpad
+else
+  DEFAULT_EDITOR ?= mousepad
+endif
 
 # The default viewer for files from the image. I recommend you make it 
 # a web browser because it can display the widest range of files.
-DEFAULT_VIEWER ?= firefox
+ifdef WINDOWS_BUILD
+  DEFAULT_VIEWER ?= firefox
+else
+  DEFAULT_VIEWER ?= firefox
+endif
 
 # To disable i18n completely, uncomment the following line 
 # or define WITHOUT_NLS somewhere else.
@@ -35,7 +46,7 @@ DEFAULT_VIEWER ?= firefox
 
 # This enables overwriting the original iso,
 # don't uncomment it unless you are willing to risk losing data.
-#CFLAGS += -DENABLE_SAVE_OVERWRITE
+#CPPFLAGS += -DENABLE_SAVE_OVERWRITE
 
 # programs used in the Makefiles:
 export CC      ?= gcc
@@ -53,8 +64,12 @@ endif
 
 CPPFLAGS +=  -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEFAULT_EDITOR=\"$(DEFAULT_EDITOR)\" -DDEFAULT_VIEWER=\"$(DEFAULT_VIEWER)\"
 
-# the _FILE_OFFSET_BITS=64 is to enable stat() for large files
+# the _FILE_OFFSET_BITS=64 is to enable stat() for large files on linuxish systems
 CPPFLAGS += -D_FILE_OFFSET_BITS=64
+
+ifdef WINDOWS_BUILD
+  CPPFLAGS += -DWINDOWS_BUILD
+endif
 
 OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o editfile.o
 

@@ -20,7 +20,7 @@
 
 #include "isomaster.h"
 
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     #include <windows.h>
 #else
     #include <sys/wait.h>
@@ -201,7 +201,7 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
                    "strlen(randomizedItemName) + 2) failed");
     strcpy(pathAndNameOnFs, gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     strcat(pathAndNameOnFs, "\\"); /* doesn't hurt even if not needed */
 #else
     strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
@@ -240,13 +240,25 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     addToTempFilesList(pathAndNameOnFs);
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     HINSTANCE rc2;
+    char* quotedPathAndName;
+    
+    /* need quotes in case there are spaces in the string */
+    quotedPathAndName = malloc(strlen(pathAndNameOnFs) + 3);
+    if(quotedPathAndName == NULL)
+        fatalError("quotedPathAndName = malloc(strlen(pathAndNameOnFs) + 3) failed");
+    strcpy(quotedPathAndName, "\"");
+    strcat(quotedPathAndName, pathAndNameOnFs);
+    strcat(quotedPathAndName, "\"");
+    
     rc2 = ShellExecute(NULL, "open", 
                        gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)), 
-                       pathAndNameOnFs, NULL, SW_SHOW);
+                       quotedPathAndName, NULL, SW_SHOW);
     if((int)rc2 <= 32)
         GBLeditFailed = true;
+    
+    free(quotedPathAndName);
 #else
     /* start the editor */
     if(!fork())
@@ -334,7 +346,7 @@ char* makeRandomFilename(const char* sourceName)
         gotGoodChar = false;
         while(!gotGoodChar)
         {
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
             oneRandomChar = rand();
 #else
             oneRandomChar = random();
@@ -431,7 +443,7 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
                    "strlen(randomizedItemName) + 2) failed");
     strcpy(pathAndNameOnFs, gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     strcat(pathAndNameOnFs, "\\"); /* doesn't hurt even if not needed */
 #else
     strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
@@ -470,13 +482,25 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     addToTempFilesList(pathAndNameOnFs);
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     HINSTANCE rc2;
+    char* quotedPathAndName;
+    
+    /* need quotes in case there are spaces in the string */
+    quotedPathAndName = malloc(strlen(pathAndNameOnFs) + 3);
+    if(quotedPathAndName == NULL)
+        fatalError("quotedPathAndName = malloc(strlen(pathAndNameOnFs) + 3) failed");
+    strcpy(quotedPathAndName, "\"");
+    strcat(quotedPathAndName, pathAndNameOnFs);
+    strcat(quotedPathAndName, "\"");
+    
     rc2 = ShellExecute(NULL, "open", 
                        gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)), 
-                       pathAndNameOnFs, NULL, SW_SHOW);
+                       quotedPathAndName, NULL, SW_SHOW);
     if((int)rc2 <= 32)
         GBLeditFailed = true;
+    
+    free(quotedPathAndName);
 #else
     /* start the viewer */
     if(!fork())

@@ -23,7 +23,7 @@
 
 #include "isomaster.h"
 
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     #include <windows.h>
 #endif
 
@@ -53,7 +53,7 @@ void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
     
     newPath = gtk_entry_get_text(entry);
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     if(newPath[strlen(newPath) - 1] == '\\')
 #else
     if(newPath[strlen(newPath) - 1] == '/')
@@ -68,7 +68,7 @@ void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
             fatalError("newPathTerminated = malloc(strlen(newPath) + 2) failed");
         
         strcpy(newPathTerminated, newPath);
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
         strcat(newPathTerminated, "\\");
 #else
         strcat(newPathTerminated, "/");
@@ -199,7 +199,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
             changeFsDirectory(GBLuserHomeDir);
     }
     else
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
         changeFsDirectory("c:\\");
 #else
         changeFsDirectory(GBLuserHomeDir);
@@ -271,7 +271,7 @@ bool changeFsDirectory(const char* newDirStr)
         if(strcmp(nextItem->d_name, ".") == 0 || strcmp(nextItem->d_name, "..") == 0)
             continue;
         
-#ifndef MINGW_TEST        
+#ifndef WINDOWS_BUILD        
         if(nextItem->d_name[0] == '.' && !GBLappSettings.showHiddenFilesFs)
         /* skip hidden files/dirs */
             continue;
@@ -295,7 +295,7 @@ bool changeFsDirectory(const char* newDirStr)
         strcpy(nextItemPathAndName, newDirStr);
         strcat(nextItemPathAndName, nextItem->d_name);
         
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
         struct _stati64 nextItemInfo;
         rc = _stati64(nextItemPathAndName, &nextItemInfo);
 #else
@@ -409,7 +409,7 @@ void fsGoUpDirTreeCbk(GtkButton *button, gpointer data)
     done = false;
     for(count = strlen(newCurrentDir) - 1; !done; count--)
     {
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
         if(newCurrentDir[count - 1] == '\\')
 #else
         if(newCurrentDir[count - 1] == '/')
@@ -462,7 +462,7 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
         
         strcpy(newCurrentDir, GBLfsCurrentDir);
         strcat(newCurrentDir, name);
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
         strcat(newCurrentDir, "\\");
 #else
         strcat(newCurrentDir, "/");

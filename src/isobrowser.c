@@ -26,7 +26,7 @@
 
 #include "isomaster.h"
 
-#ifndef MINGW_TEST
+#ifndef WINDOWS_BUILD
     #include <regex.h>
 #endif
 
@@ -1263,7 +1263,7 @@ void openIso(char* filename)
     int count;
     for(count = 0; count < filenameLen; count++)
     {
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
         if(filename[count] == '\\')
 #else
         if(filename[count] == '/')
@@ -1661,7 +1661,7 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
 //    
 //    if(dialogResponse == GTK_RESPONSE_ACCEPT)
 //    {
-//#ifndef MINGW_TEST
+//#ifndef WINDOWS_BUILD
 //        char* nameWithExtension;
 //        
 //        nameWithExtension = malloc(strlen(filename) + 5);

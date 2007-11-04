@@ -22,7 +22,7 @@
 
 #include "isomaster.h"
 
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     #include <windows.h>
 #endif
 
@@ -53,7 +53,7 @@ int main(int argc, char** argv)
     
 #ifdef ENABLE_NLS
     /* initialize gettext */
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     char moduleFilename[1024];
     char* lastChar;
     
@@ -84,7 +84,7 @@ int main(int argc, char** argv)
     
     loadIcons();
     
-#ifndef MINGW_TEST
+#ifndef WINDOWS_BUILD
     /* set up the signal handler for exiting editors and viewers */
     signal(SIGUSR1, sigusr1);
     signal(SIGUSR2, sigusr2);
@@ -146,7 +146,7 @@ int main(int argc, char** argv)
     if(argv[1] != NULL)
         openIso(argv[1]);
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     srand((int)time(NULL));
 #else
     srandom((int)time(NULL));

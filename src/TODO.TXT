@@ -18,6 +18,7 @@ bk:
 windows port:
 -check about box. file bug?
 -drop-down with drive letter, and maybe 'my documents'
+-get rid of the command-line window when not a debug build
 
 
 manual:

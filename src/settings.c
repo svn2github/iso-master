@@ -23,7 +23,7 @@
 
 #include "isomaster.h"
 
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     #include <windows.h>
 #endif
 
@@ -257,7 +257,7 @@ void changeTempDirCbk(GtkButton *button, gpointer data)
     
     textField = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(textField), gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     gtk_entry_set_width_chars(GTK_ENTRY(textField), 62);
 #else
     gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
@@ -321,7 +321,7 @@ void changeViewerCbk(GtkButton *button, gpointer data)
 
 void findHomeDir(void)
 {
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     char appDataDir[1024];
     
     if(GetEnvironmentVariable("APPDATA", appDataDir, 1024) == 0)
@@ -390,7 +390,7 @@ void findHomeDir(void)
         strcpy(GBLuserHomeDir, userHomeDir);
         strcat(GBLuserHomeDir, "/");
     }
-#endif /* MINGW_TEST */
+#endif /* WINDOWS_BUILD */
 }
 
 void followSymLinksCbk(GtkButton *button, gpointer data)
@@ -407,7 +407,7 @@ void openConfigFile(char* configFilePathAndName)
     {
         printWarning("failed to open config file for reading, trying to create");
         
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
         FILE* newConfigFile;
         
         newConfigFile = fopen(configFilePathAndName, "w");
@@ -438,24 +438,9 @@ void openConfigFile(char* configFilePathAndName)
     }
 }
 
-void getDefaultEditor(char** destStr)
-{
-#ifdef MINGW_TEST
-    *destStr = malloc(strlen("wordpad") + 1);
-    if(*destStr == NULL)
-        fatalError("*destStr = malloc(strlen('wordpad') +1) failed");
-    strcpy(*destStr, "wordpad");
-#else
-    *destStr = malloc(strlen(DEFAULT_EDITOR) + 1);
-    if(*destStr == NULL)
-        fatalError("*destStr = malloc(strlen(DEFAULT_EDITOR) +1) failed");
-    strcpy(*destStr, DEFAULT_EDITOR);
-#endif
-}
-
 void getDefaultTempDir(char** destStr)
 {
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     char tempDir[1024];
     
     if(GetTempPath(1024, tempDir) == 0)
@@ -480,21 +465,6 @@ void getDefaultTempDir(char** destStr)
 #endif
 }
 
-void getDefaultViewer(char** destStr)
-{
-#ifdef MINGW_TEST
-    *destStr = malloc(strlen("firefox") + 1);
-    if(*destStr == NULL)
-        fatalError("*destStr = malloc(strlen('firefox') +1) failed");
-    strcpy(*destStr, "firefox");
-#else
-    *destStr = malloc(strlen(DEFAULT_VIEWER) + 1);
-    if(*destStr == NULL)
-        fatalError("*destStr = malloc(strlen(DEFAULT_VIEWER) +1) failed");
-    strcpy(*destStr, DEFAULT_VIEWER);
-#endif
-}
-
 void loadSettings(void)
 {
     char* configFileName;
@@ -507,7 +477,7 @@ void loadSettings(void)
     char* tempStr;
     int appendExtension;
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen("isomaster.ini") + 1);
 #else
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
@@ -516,7 +486,7 @@ void loadSettings(void)
         fatalError("loadSettings(): malloc(config file name) failed");
     
     strcpy(configFileName, GBLuserHomeDir);
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     strcat(configFileName, "isomaster.ini");
 #else
     strcat(configFileName, ".isomaster");
@@ -696,7 +666,10 @@ void loadSettings(void)
                                       "ui:editor", NULL);
         if(tempStr == NULL)
         {
-            getDefaultEditor( &(GBLappSettings.editor) );
+            GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) + 1);
+            if(GBLappSettings.editor == NULL)
+                fatalError("GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) +1) failed");
+            strcpy(GBLappSettings.editor, DEFAULT_EDITOR);
         }
         else
         {
@@ -707,7 +680,10 @@ void loadSettings(void)
     else
     /* no config file */
     {
-        getDefaultEditor( &(GBLappSettings.editor) );
+        GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) + 1);
+        if(GBLappSettings.editor == NULL)
+            fatalError("GBLappSettings.editor = malloc(strlen(DEFAULT_EDITOR) +1) failed");
+        strcpy(GBLappSettings.editor, DEFAULT_EDITOR);
     }
     
     /* read/set viewer */
@@ -717,7 +693,10 @@ void loadSettings(void)
                                       "ui:viewer", NULL);
         if(tempStr == NULL)
         {
-            getDefaultViewer( &(GBLappSettings.viewer) );
+            GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) + 1);
+            if(GBLappSettings.viewer == NULL)
+                fatalError("GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) +1) failed");
+            strcpy(GBLappSettings.viewer, DEFAULT_VIEWER);
         }
         else
         {
@@ -728,7 +707,10 @@ void loadSettings(void)
     else
     /* no config file */
     {
-        getDefaultViewer( &(GBLappSettings.viewer) );
+        GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) + 1);
+        if(GBLappSettings.viewer == NULL)
+            fatalError("GBLappSettings.viewer = malloc(strlen(DEFAULT_VIEWER) +1) failed");
+        strcpy(GBLappSettings.viewer, DEFAULT_VIEWER);
     }
     
     /* read/set temporary directory */
@@ -845,7 +827,7 @@ void writeSettings(void)
         return;
     }
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen("isomaster.ini") + 1);
 #else
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
@@ -854,7 +836,7 @@ void writeSettings(void)
         fatalError("writeSettings(): malloc(config file name) failed");
     
     strcpy(configFileName, GBLuserHomeDir);
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     strcat(configFileName, "isomaster.ini");
 #else
     strcat(configFileName, ".isomaster");

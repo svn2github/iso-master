@@ -18,7 +18,7 @@
 
 #include "isomaster.h"
 
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     #include <windows.h>
 #endif
 
@@ -59,7 +59,7 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     gtk_toolbar_set_style(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_ICONS);
 #endif
     
@@ -223,7 +223,7 @@ void buildMenu(GtkWidget* boxToPackInto)
                      G_CALLBACK(refreshBothViewsCbk), NULL);
     gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/View/Refresh");
     
-#ifndef MINGW_TEST
+#ifndef WINDOWS_BUILD
     checkbox = gtk_check_menu_item_new_with_mnemonic(_("Show _hidden files"));
     if(GBLappSettings.showHiddenFilesFs)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
@@ -328,7 +328,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(scanForDuplicatesCbk), NULL);
     
-#ifndef MINGW_TEST
+#ifndef WINDOWS_BUILD
     checkbox = gtk_check_menu_item_new_with_mnemonic(_("Follow symbolic links"));
     if(GBLappSettings.followSymLinks)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
@@ -414,7 +414,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     GBLtempDirFld = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(GBLtempDirFld), GBLappSettings.tempDir);
     gtk_editable_set_editable(GTK_EDITABLE(GBLtempDirFld), FALSE);
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     gtk_entry_set_width_chars(GTK_ENTRY(GBLtempDirFld), 60);
 #else
     gtk_entry_set_width_chars(GTK_ENTRY(GBLtempDirFld), 30);
@@ -461,7 +461,7 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, TRUE, 0);
     gtk_widget_show(toolbar);
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     gtk_toolbar_set_style(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_ICONS);
 #endif
     
@@ -520,7 +520,7 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
 
 void loadAppIcon(GdkPixbuf** appIcon)
 {
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     char moduleFilename[1024];
     char iconPathAndName[1124]; /* 100 bytes ought to be enough  for the filename */
     char* lastChar;
@@ -567,7 +567,7 @@ void loadIcons(void)
     
     gtk_icon_size_lookup(GTK_ICON_SIZE_LARGE_TOOLBAR, &size, &size);
     
-#ifdef MINGW_TEST
+#ifdef WINDOWS_BUILD
     char moduleFilename[1024];
     char iconPathAndName[1124]; /* 100 bytes ought to be enough  for the filename */
     char* lastChar;
