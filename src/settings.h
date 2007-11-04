@@ -47,7 +47,7 @@ void changeTempDirCbk(GtkButton *button, gpointer data);
 void changeViewerCbk(GtkButton *button, gpointer data);
 void findHomeDir(void);
 void followSymLinksCbk(GtkButton *button, gpointer data);
-void openConfigFile(char* configFileName);
+void openConfigFile(char* configFilePathAndName);
 void loadSettings(void);
 void scanForDuplicatesCbk(GtkButton *button, gpointer data);
 void writeSettings(void);

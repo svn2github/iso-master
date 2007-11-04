@@ -2,6 +2,7 @@ ui:
 -drop-down list to select track - can do multitrack
 -checkboxes and lables not aligned in change permissions window
 -other gtk apps on windows: gimp, pidgin, inkscape
+-add 'case-sensitive sort' view option
 
 
 bk:
@@ -16,7 +17,9 @@ bk:
 
 windows port:
 -make sure added files and dirs have reasonable permissions
--should be isomaster.ini not .isomaster
+-gui stuff to remove: show hidden files, follow symlinks
+-default editor should be wordpad
+-temporary directory?
 
 
 manual:

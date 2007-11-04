@@ -322,10 +322,10 @@ void findHomeDir(void)
     
     if(GetEnvironmentVariable("APPDATA", appDataDir, 1024) == 0)
     {
-        GBLuserHomeDir = (char*)malloc(2);
+        GBLuserHomeDir = malloc(strlen("c:\\") + 1);
         if(GBLuserHomeDir == NULL)
             fatalError("findHomeDir(): malloc(2) failed");
-        strcpy(GBLuserHomeDir, "/");
+        strcpy(GBLuserHomeDir, "c:\\");
         return;
     }
     
@@ -396,9 +396,9 @@ void followSymLinksCbk(GtkButton *button, gpointer data)
     bk_set_follow_symlinks(&GBLvolInfo, GBLappSettings.followSymLinks);
 }
 
-void openConfigFile(char* configFileName)
+void openConfigFile(char* configFilePathAndName)
 {
-    GBLsettingsDictionary = iniparser_load(configFileName);
+    GBLsettingsDictionary = iniparser_load(configFilePathAndName);
     if(GBLsettingsDictionary == NULL)
     {
         printWarning("failed to open config file for reading, trying to create");
@@ -406,25 +406,25 @@ void openConfigFile(char* configFileName)
 #ifdef MINGW_TEST
         FILE* newConfigFile;
         
-        newConfigFile = fopen(configFileName, "w");
+        newConfigFile = fopen(configFilePathAndName, "w");
         if(newConfigFile == NULL)
         {
-            printWarning("failed to create '.isomaster'");
+            printWarning("failed to create config file");
             return;
         }
         fclose(newConfigFile);
 #else
         int newConfigFile;
 
-        newConfigFile = creat(configFileName, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+        newConfigFile = creat(configFilePathAndName, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
         if(newConfigFile <= 0)
         {
-            printWarning("failed to create '.isomaster'");
+            printWarning("failed to create config file");
             return;
         }
         close(newConfigFile);
 #endif
-        GBLsettingsDictionary = iniparser_load(configFileName);
+        GBLsettingsDictionary = iniparser_load(configFilePathAndName);
         if(GBLsettingsDictionary == NULL)
         {
             printWarning("iniparser failed to load the '.isomaster' just created, "
@@ -446,15 +446,22 @@ void loadSettings(void)
     char* tempStr;
     int appendExtension;
     
+#ifdef MINGW_TEST
+    configFileName = malloc(strlen(GBLuserHomeDir) + strlen("isomaster.ini") + 1);
+#else
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
+#endif
     if(configFileName == NULL)
-        fatalError("loadSettings(): malloc(strlen(GBLuserHomeDir) + "
-                   "strlen('.isomaster') + 1) failed");
+        fatalError("loadSettings(): malloc(config file name) failed");
     
     strcpy(configFileName, GBLuserHomeDir);
+#ifdef MINGW_TEST
+    strcat(configFileName, "isomaster.ini");
+#else
     strcat(configFileName, ".isomaster");
+#endif
     
-    if(strcmp(GBLuserHomeDir, "/") != 0)
+    if(strcmp(GBLuserHomeDir, "/") != 0 && strcmp(GBLuserHomeDir, "c:\\") != 0)
         openConfigFile(configFileName);
     else
         printWarning("don't know user's home directory, so will not try to "
@@ -782,26 +789,33 @@ void writeSettings(void)
     int sortColumnId;
     GtkSortType sortDirection;
     
-    if(strcmp(GBLuserHomeDir, "/") == 0)
+    if(strcmp(GBLuserHomeDir, "/") == 0 || strcmp(GBLuserHomeDir, "c:\\") == 0)
     {
         printWarning("don't know user's home directory, so will not try to save "
-                     "config file (~/.isomaster)");
+                     "config file");
         return;
     }
     if(GBLsettingsDictionary == NULL)
     {
-        printWarning("failed to create config file (~/.isomaster) when app started, "
+        printWarning("failed to create config file when app started, "
                      "will not try again, settings not saved");
         return;
     }
     
+#ifdef MINGW_TEST
+    configFileName = malloc(strlen(GBLuserHomeDir) + strlen("isomaster.ini") + 1);
+#else
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
+#endif
     if(configFileName == NULL)
-        fatalError("writeSettings(): malloc(strlen(GBLuserHomeDir) + "
-                   "strlen('.isomaster') + 1) failed");
+        fatalError("writeSettings(): malloc(config file name) failed");
     
     strcpy(configFileName, GBLuserHomeDir);
+#ifdef MINGW_TEST
+    strcat(configFileName, "isomaster.ini");
+#else
     strcat(configFileName, ".isomaster");
+#endif
     
     fileToWrite = fopen(configFileName, "w");
     if(fileToWrite == NULL)
