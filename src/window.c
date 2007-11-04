@@ -223,6 +223,7 @@ void buildMenu(GtkWidget* boxToPackInto)
                      G_CALLBACK(refreshBothViewsCbk), NULL);
     gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/View/Refresh");
     
+#ifndef MINGW_TEST
     checkbox = gtk_check_menu_item_new_with_mnemonic(_("Show _hidden files"));
     if(GBLappSettings.showHiddenFilesFs)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
@@ -232,6 +233,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(checkbox);
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(showHiddenCbk), NULL);
+#endif
     
     checkbox = gtk_check_menu_item_new_with_mnemonic(_("_Sort directories first"));
     if(GBLappSettings.sortDirectoriesFirst)
@@ -326,6 +328,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(scanForDuplicatesCbk), NULL);
     
+#ifndef MINGW_TEST
     checkbox = gtk_check_menu_item_new_with_mnemonic(_("Follow symbolic links"));
     if(GBLappSettings.followSymLinks)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
@@ -335,6 +338,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(checkbox);
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(followSymLinksCbk), NULL);
+#endif
     
 #if GTK_MINOR_VERSION >= 6
     icon = gtk_image_new_from_stock(GTK_STOCK_EDIT, GTK_ICON_SIZE_MENU);
@@ -410,7 +414,11 @@ void buildMenu(GtkWidget* boxToPackInto)
     GBLtempDirFld = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(GBLtempDirFld), GBLappSettings.tempDir);
     gtk_editable_set_editable(GTK_EDITABLE(GBLtempDirFld), FALSE);
+#ifdef MINGW_TEST
+    gtk_entry_set_width_chars(GTK_ENTRY(GBLtempDirFld), 60);
+#else
     gtk_entry_set_width_chars(GTK_ENTRY(GBLtempDirFld), 30);
+#endif
     gtk_container_add(GTK_CONTAINER(menuItem), GBLtempDirFld);
     gtk_widget_show(GBLtempDirFld);
     /* END SETTINGS menu */

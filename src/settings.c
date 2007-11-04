@@ -257,7 +257,11 @@ void changeTempDirCbk(GtkButton *button, gpointer data)
     
     textField = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(textField), gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
+#ifdef MINGW_TEST
+    gtk_entry_set_width_chars(GTK_ENTRY(textField), 62);
+#else
     gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
+#endif
     g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
     gtk_widget_show(textField);
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), textField, TRUE, TRUE, 0);

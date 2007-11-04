@@ -16,8 +16,8 @@ bk:
 
 
 windows port:
--gui stuff to remove: show hidden files, follow symlinks
 -check about box. file bug?
+-drop-down with drive letter, and maybe 'my documents'
 
 
 manual:
