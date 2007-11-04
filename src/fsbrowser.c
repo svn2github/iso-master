@@ -199,7 +199,11 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
             changeFsDirectory(GBLuserHomeDir);
     }
     else
+#ifdef MINGW_TEST
+        changeFsDirectory("c:\\");
+#else
         changeFsDirectory(GBLuserHomeDir);
+#endif
 }
 
 void buildFsLocator(GtkWidget* boxToPackInto)
@@ -210,7 +214,7 @@ void buildFsLocator(GtkWidget* boxToPackInto)
     gtk_widget_show(GBLfsCurrentDirField);
 }
 
-bool changeFsDirectory(char* newDirStr)
+bool changeFsDirectory(const char* newDirStr)
 {
     DIR* newDir;
     struct dirent* nextItem; /* for contents of the directory */

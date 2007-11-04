@@ -3,7 +3,7 @@
 void acceptFsPathCbk(GtkEntry *entry, gpointer user_data);
 void buildFsBrowser(GtkWidget* boxToPackInto);
 void buildFsLocator(GtkWidget* boxToPackInto);
-bool changeFsDirectory(char* newDirStr);
+bool changeFsDirectory(const char* newDirStr);
 void fsGoUpDirTreeCbk(GtkButton *button, gpointer data);
 void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
                       GtkTreeViewColumn* col, gpointer data);
