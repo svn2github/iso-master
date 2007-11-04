@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-26 23:45-0400\n"
-"PO-Revision-Date: 2007-08-12 13:44+0100\n"
+"PO-Revision-Date: 2007-11-03 17:05+0100\n"
 "Last-Translator: Sun Minchao <sunminchao@gmx.de>\n"
 "Language-Team:  <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -29,12 +29,14 @@ msgstr ""
 "\n"
 "是否继续？"
 
-#: ../editfile.c:182 ../editfile.c:394
+#: ../editfile.c:182
+#: ../editfile.c:394
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' 不是正规文件"
 
-#: ../isobrowser.c:141 ../isobrowser.c:1194
+#: ../isobrowser.c:141
+#: ../isobrowser.c:1194
 msgid "(scanning for duplicate files)"
 msgstr "（正在扫描重复文件）"
 
@@ -50,7 +52,8 @@ msgstr "自动添加扩展"
 msgid "Add to the ISO"
 msgstr "添加到 ISO"
 
-#: ../isobrowser.c:1325 ../isobrowser.c:1613
+#: ../isobrowser.c:1325
+#: ../isobrowser.c:1613
 msgid "All files"
 msgstr "所有文件"
 
@@ -82,7 +85,8 @@ msgstr "引导记录类型：2880KB 软盘"
 msgid "Boot record type: No Emulation"
 msgstr "引导记录类型：不模拟"
 
-#: ../isobrowser.c:500 ../isobrowser.c:1792
+#: ../isobrowser.c:500
+#: ../isobrowser.c:1792
 msgid "Change permissions"
 msgstr "改变权限"
 
@@ -112,9 +116,11 @@ msgstr "编辑"
 
 #: ../editfile.c:83
 msgid "Edit failed, please check Settings/Editor"
-msgstr ""
+msgstr "编辑失败，请检查 “设置/编辑器”"
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:206
+#: ../window.c:333
+#: ../window.c:336
 msgid "Editor"
 msgstr "编辑器"
 
@@ -134,7 +140,8 @@ msgstr "提取"
 msgid "Extract from the ISO"
 msgstr "从 ISO 中提取"
 
-#: ../editfile.c:285 ../isobrowser.c:214
+#: ../editfile.c:285
+#: ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "无法添加 '%s'：'%s'"
@@ -159,12 +166,15 @@ msgstr "无法创建目录：'%s'"
 msgid "Failed to create directory %s: '%s'"
 msgstr "无法创建目录 %s：'%s'"
 
-#: ../editfile.c:259 ../isobrowser.c:786
+#: ../editfile.c:259
+#: ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "无法删除 '%s'：'%s'"
 
-#: ../editfile.c:224 ../editfile.c:436 ../isobrowser.c:899
+#: ../editfile.c:224
+#: ../editfile.c:436
+#: ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "无法提取 '%s'：'%s'"
@@ -174,7 +184,8 @@ msgstr "无法提取 '%s'：'%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "无法提取引导记录：'%s'"
 
-#: ../isobrowser.c:1082 ../isobrowser.c:1130
+#: ../isobrowser.c:1082
+#: ../isobrowser.c:1130
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "无法初始化 bkisofs：'%s'"
@@ -239,11 +250,11 @@ msgid "From file: no emulation"
 msgstr "从文件：不模拟"
 
 #: ../isobrowser.c:804
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "GUI 错误，正在删除错误的文件与目录"
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:59
+#: ../window.c:449
 msgid "Go back"
 msgstr "返回"
 
@@ -255,7 +266,8 @@ msgstr "在 ISO 中返回上一级目录"
 msgid "Go back up one directory on the filesystem"
 msgstr "在文件系统中返回上一级目录"
 
-#: ../isobrowser.c:1310 ../isobrowser.c:1608
+#: ../isobrowser.c:1310
+#: ../isobrowser.c:1608
 msgid "ISO Images"
 msgstr "ISO 映像文件"
 
@@ -288,21 +300,21 @@ msgid "Is visible on image as '%s'"
 msgstr "在映像文件中显示为 '%s'"
 
 #: ../isobrowser.c:706
-msgid ""
-"It seems that you have made changes to the ISO but haven't saved them. Are "
-"you sure you want to close it?"
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
 msgstr "您似乎更改了 ISO 文件但没有保存，您确定要关闭它？"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr "所选项非常规文件且不能被用作引导记录"
 
-#: ../boot.c:373 ../boot.c:380
+#: ../boot.c:373
+#: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "位置：于原始映像文件的 0x%llX"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:375
+#: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "位置：添加自 '%s'"
@@ -315,15 +327,18 @@ msgstr "MDF 映像文件"
 msgid "NRG Images"
 msgstr "NGR 映像文件"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:290
+#: ../fsbrowser.c:110
+#: ../isobrowser.c:290
 msgid "Name"
 msgstr "名称"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:65
+#: ../window.c:455
 msgid "New Directory"
 msgstr "新目录"
 
-#: ../boot.c:149 ../boot.c:327
+#: ../boot.c:149
+#: ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "未读取原始引导记录或在映像文件中指定"
 
@@ -355,7 +370,9 @@ msgstr "正在读取映像，请稍候..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "正在保存新映像至磁盘，请稍候..."
 
-#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1181
+#: ../isobrowser.c:128
+#: ../isobrowser.c:833
+#: ../isobrowser.c:1181
 #: ../isobrowser.c:1521
 msgid "Progress"
 msgstr "进度"
@@ -388,7 +405,8 @@ msgstr "扫描重复文件（慢）"
 msgid "Show _hidden files"
 msgstr "显示隐藏文件(_h)"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:313
+#: ../fsbrowser.c:131
+#: ../isobrowser.c:313
 msgid "Size"
 msgstr "大小"
 
@@ -398,8 +416,7 @@ msgid "Size: %d bytes"
 msgstr "大小：%d bytes"
 
 #: ../fsbrowser.c:270
-msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
+msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr "无法处理超过 256 个字符的长文件名，略过目录项"
 
 #: ../fsbrowser.c:288
@@ -407,7 +424,9 @@ msgstr "无法处理超过 256 个字符的长文件名，略过目录项"
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "状态（%s）错误：%d，略过目录项"
 
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:244
+#: ../window.c:385
+#: ../window.c:388
 msgid "Temporary directory"
 msgstr "临时目录"
 
@@ -465,9 +484,11 @@ msgstr "查看"
 
 #: ../editfile.c:106
 msgid "View failed, please check Settings/Viewer"
-msgstr ""
+msgstr "查看失败，请检查 “设置/查看器“"
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:282
+#: ../window.c:359
+#: ../window.c:362
 msgid "Viewer"
 msgstr "查看器"
 
@@ -476,8 +497,7 @@ msgid "Volume name:"
 msgstr "卷名称："
 
 #: ../settings.c:734
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
+msgid "You will have to close and reopen the ISO for this change to take effect"
 msgstr "必须重启 ISO Master 以使改变生效"
 
 #: ../window.c:240
@@ -507,3 +527,4 @@ msgstr "排序目录(_S)"
 #: ../window.c:203
 msgid "_View"
 msgstr "查看(_V)"
+
