@@ -59,12 +59,16 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
     
+#ifdef MINGW_TEST
+    gtk_toolbar_set_style(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_ICONS);
+#endif
+    
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("Go back"), 
                                      _("Go back up one directory on the filesystem"), "Private",
                                      GBLgoBackIcon, G_CALLBACK(fsGoUpDirTreeCbk),
                                      NULL);
-    
+
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("New Directory"), 
                                      _("Create new directory on the filesystem"), "Private",
@@ -448,6 +452,10 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     toolbar = gtk_toolbar_new();
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, TRUE, 0);
     gtk_widget_show(toolbar);
+    
+#ifdef MINGW_TEST
+    gtk_toolbar_set_style(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_ICONS);
+#endif
     
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("Go back"), 

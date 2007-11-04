@@ -16,7 +16,6 @@ bk:
 
 windows port:
 -make sure added files and dirs have reasonable permissions
--toolbar buttons shouldn't have text
 -should be isomaster.ini not .isomaster
 
 
