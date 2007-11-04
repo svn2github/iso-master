@@ -11,12 +11,13 @@ bk:
 -using access() to check whether a file exists is no good, target of a dead symlink will get overwritten
 -fedora7 dvd takes forever to remangle. try either fix the algorithm or allow longer 9660 names.
 -sorting 9660/joliet can also be slow
+-look for !!, there are some new ones
 
 
 windows port:
--make sure all open() calls have _0_BINARY and all other options have _
--make sure there are no read(), write(), lseek() calls except in wrappers
+-make sure added files and dirs have reasonable permissions
 -toolbar buttons shouldn't have text
+-should be isomaster.ini not .isomaster
 
 
 manual:
@@ -33,6 +34,7 @@ c99 compatibility issues:
 
 
 tests to run before a release:
+- make an iso with some 3G files in it, open it, save it, make sure the files are not corrupted
 - open iso from command-line
 - create blank, see if it mounts (try norock, nojoliet)
 - make a bootable windows (also add, delete some files)
