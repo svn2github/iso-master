@@ -17,7 +17,7 @@ bk:
 
 windows port:
 -check about box. file bug?
-
+-find an installer
 
 manual:
 -add_as() and extract_as()

@@ -470,8 +470,6 @@ void fsDriveChanged(GtkComboBox* comboBox, gpointer user_data)
     }
     else
         oldSelectedComboBoxIndex = gtk_combo_box_get_active(comboBox);
-    
-    printf("'%s' %c\n", selectedComboBoxText, driveLetter);fflush(NULL);
 #endif /* WINDOWS_BUILD */
 }
 
