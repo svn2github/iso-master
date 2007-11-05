@@ -111,6 +111,10 @@ int main(int argc, char** argv)
     
     buildMainToolbar(mainVBox);
     
+#ifdef WINDOWS_BUILD
+    buildFsDriveSelector(mainVBox);
+#endif
+    
     buildFsLocator(mainVBox);
     
     mainFrame = gtk_frame_new(NULL);

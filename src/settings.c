@@ -782,6 +782,29 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.fsSortDirection = GTK_SORT_ASCENDING;
     
+    /* read/set fs drive */
+    GBLappSettings.fsDrive = malloc(4); /* "c:\\" */
+    if(GBLappSettings.fsDrive == NULL)
+        fatalError("GBLappSettings.fsDrive = malloc(5) failed");
+    if(GBLsettingsDictionary != NULL)
+    {
+        tempStr = iniparser_getstring(GBLsettingsDictionary, 
+                                      "ui:fsdrive", NULL);
+        if(tempStr == NULL || tempStr[1] != ':' || tempStr[2] != '\\' || tempStr[3] != '\0')
+        {
+            strcpy(GBLappSettings.fsDrive, "c:\\");
+        }
+        else
+        {
+            strcpy(GBLappSettings.fsDrive, tempStr);
+        }
+    }
+    else
+    /* no config file */
+    {
+        strcpy(GBLappSettings.fsDrive, "c:\\");
+    }
+    
     free(configFileName);
 }
 
@@ -906,6 +929,8 @@ void writeSettings(void)
     iniparser_setstr(GBLsettingsDictionary, "ui:fssortcolumnid", numberStr);
     snprintf(numberStr, 20, "%d", sortDirection);
     iniparser_setstr(GBLsettingsDictionary, "ui:fssortdirection", numberStr);
+    
+    iniparser_setstr(GBLsettingsDictionary, "ui:fsdrive", GBLappSettings.fsDrive);
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }

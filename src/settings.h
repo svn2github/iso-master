@@ -37,6 +37,7 @@ typedef struct
     char* lastIsoDir;
     bool appendExtension;
     char* lastBootRecordDir;
+    char* fsDrive;
     
     /* stuf that's never in the config file, but is a setting */
     int filenameTypesToWrite;

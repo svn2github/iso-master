@@ -45,6 +45,8 @@ extern int errno;
 
 /* the column for the filename in the fs pane */
 static GtkTreeViewColumn* GBLfilenameFsColumn;
+/* so i can disconnect the handler */
+static int GBLfsDriveChangedConnectionId;
 
 void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
 {
@@ -204,6 +206,49 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
 #else
         changeFsDirectory(GBLuserHomeDir);
 #endif
+}
+
+void buildFsDriveSelector(GtkWidget* boxToPackInto)
+{
+#ifdef WINDOWS_BUILD
+    GtkWidget* comboBox;
+    DWORD drives;
+    int count;
+    int comboBoxCount;
+    int indexSelectedDrive = -1;
+    
+    comboBox = gtk_combo_box_new_text();
+    gtk_box_pack_start(GTK_BOX(boxToPackInto), comboBox, FALSE, TRUE, 0);
+    GBLfsDriveChangedConnectionId = g_signal_connect(
+                            G_OBJECT(comboBox), "changed",
+                            G_CALLBACK(fsDriveChanged), NULL);
+    gtk_widget_show(comboBox);
+    
+    drives = GetLogicalDrives();
+    
+    comboBoxCount = 0;
+    for(count = 0; count < 26; count++)
+    {
+        if( (drives >> count) & 0x01 )
+        {
+            char driveStr[20];
+            
+            if( GBLappSettings.fsDrive[0] == 65 + count ||
+                GBLappSettings.fsDrive[0] == 97 + count )
+            /* this is the drive i want selected */
+                indexSelectedDrive = comboBoxCount;
+            
+            sprintf(driveStr, "Drive %c:", 65 + count);
+            
+            gtk_combo_box_append_text(GTK_COMBO_BOX(comboBox), driveStr);
+            
+            comboBoxCount++;
+        }
+    }
+    
+    gtk_combo_box_set_active(GTK_COMBO_BOX(comboBox), indexSelectedDrive);
+    
+#endif /* WINDOWS_BUILD */
 }
 
 void buildFsLocator(GtkWidget* boxToPackInto)
@@ -385,6 +430,49 @@ bool changeFsDirectory(const char* newDirStr)
     gtk_entry_set_text(GTK_ENTRY(GBLfsCurrentDirField), GBLfsCurrentDir);
     
     return true;
+}
+
+void fsDriveChanged(GtkComboBox* comboBox, gpointer user_data)
+{
+#ifdef WINDOWS_BUILD
+    static int oldSelectedComboBoxIndex;
+    char* selectedComboBoxText;
+    static bool justStarted = true;
+    char driveLetter;
+    bool rc;
+    
+    if(justStarted)
+    {
+        justStarted = false;
+        oldSelectedComboBoxIndex = gtk_combo_box_get_active(comboBox);
+        return;
+    }
+    
+    selectedComboBoxText = gtk_combo_box_get_active_text(comboBox);
+    
+    /* get the drive letter out of there */
+    sscanf(selectedComboBoxText, "Drive %c", &driveLetter);
+    
+    /* store it in the settings as a "c:\\" string */
+    sprintf(GBLappSettings.fsDrive, "%c:\\", driveLetter);
+    
+    /* change fs dir to root of that drive */
+    rc = changeFsDirectory(GBLappSettings.fsDrive);
+    
+    if(!rc)
+    {
+        /* just restore the old drive, don't need to call this function again */
+        gtk_signal_disconnect(comboBox, GBLfsDriveChangedConnectionId);
+        gtk_combo_box_set_active(comboBox, oldSelectedComboBoxIndex);
+        GBLfsDriveChangedConnectionId = g_signal_connect(
+                                G_OBJECT(comboBox), "changed",
+                                G_CALLBACK(fsDriveChanged), NULL);
+    }
+    else
+        oldSelectedComboBoxIndex = gtk_combo_box_get_active(comboBox);
+    
+    printf("'%s' %c\n", selectedComboBoxText, driveLetter);fflush(NULL);
+#endif /* WINDOWS_BUILD */
 }
 
 /* this is called from a button and via a treeview event so don't use the parameters */

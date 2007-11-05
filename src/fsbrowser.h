@@ -2,8 +2,10 @@
 
 void acceptFsPathCbk(GtkEntry *entry, gpointer user_data);
 void buildFsBrowser(GtkWidget* boxToPackInto);
+void buildFsDriveSelector(GtkWidget* boxToPackInto);
 void buildFsLocator(GtkWidget* boxToPackInto);
 bool changeFsDirectory(const char* newDirStr);
+void fsDriveChanged(GtkComboBox* comboBox, gpointer user_data);
 void fsGoUpDirTreeCbk(GtkButton *button, gpointer data);
 void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
                       GtkTreeViewColumn* col, gpointer data);
