@@ -533,7 +533,7 @@ void loadAppIcon(GdkPixbuf** appIcon)
     *lastChar = '\0';
     
     strcpy(iconPathAndName, moduleFilename);
-    strcat(iconPathAndName, "icons\\isomaster.png");
+    strcat(iconPathAndName, "icons\\isomaster.ico");
     
     *appIcon = gdk_pixbuf_new_from_file(iconPathAndName, NULL);
 #else
