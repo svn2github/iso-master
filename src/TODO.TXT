@@ -17,10 +17,6 @@ bk:
 
 windows port:
 -file bug about about box
--resize isomaster.png to 16x16 to use on windows, multiple-size .ico would be perfect
--embed an icon in isomaster.exe
--install shortcut to the desktop
--associate iso with isomaster
 -nag screen
 
 manual:

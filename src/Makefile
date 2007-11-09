@@ -72,7 +72,7 @@ ifdef WINDOWS_BUILD
   CPPFLAGS += -DWINDOWS_BUILD
 endif
 
-OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o editfile.o
+OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o editfile.o nag.o
 
 all: translations isomaster.desktop isomaster
 
