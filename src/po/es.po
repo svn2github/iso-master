@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-10-26 23:45-0400\n"
-"PO-Revision-Date: 2007-08-10 17:54+0100\n"
+"PO-Revision-Date: 2007-11-07 16:49+0100\n"
 "Last-Translator: Juan García-Murga Monago <marakaid@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,12 +29,14 @@ msgstr ""
 "\n"
 "¿Desea continuar?"
 
-#: ../editfile.c:182 ../editfile.c:394
+#: ../editfile.c:182
+#: ../editfile.c:394
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' no es un archivo normal"
 
-#: ../isobrowser.c:141 ../isobrowser.c:1194
+#: ../isobrowser.c:141
+#: ../isobrowser.c:1194
 msgid "(scanning for duplicate files)"
 msgstr "(buscando archivos duplicados)"
 
@@ -50,7 +52,8 @@ msgstr "Añadir extensión automáticamente"
 msgid "Add to the ISO"
 msgstr "Añadir al ISO"
 
-#: ../isobrowser.c:1325 ../isobrowser.c:1613
+#: ../isobrowser.c:1325
+#: ../isobrowser.c:1613
 msgid "All files"
 msgstr "Todos los archivos"
 
@@ -82,7 +85,8 @@ msgstr "Tipo de registro de arranque: Disquete 2880KiB"
 msgid "Boot record type: No Emulation"
 msgstr "Tipo de registro de arranque: Sin Emulación"
 
-#: ../isobrowser.c:500 ../isobrowser.c:1792
+#: ../isobrowser.c:500
+#: ../isobrowser.c:1792
 msgid "Change permissions"
 msgstr "Cambiar permisos"
 
@@ -112,9 +116,11 @@ msgstr "Editar"
 
 #: ../editfile.c:83
 msgid "Edit failed, please check Settings/Editor"
-msgstr ""
+msgstr "Fallo al editar, por favor comprueba Opciones/Editor"
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:206
+#: ../window.c:333
+#: ../window.c:336
 msgid "Editor"
 msgstr "Editor"
 
@@ -134,7 +140,8 @@ msgstr "Extraer"
 msgid "Extract from the ISO"
 msgstr "Extraer de la ISO"
 
-#: ../editfile.c:285 ../isobrowser.c:214
+#: ../editfile.c:285
+#: ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Fallo al añadir '%s': '%s'"
@@ -159,12 +166,15 @@ msgstr "Fallo al crear directorio %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Fallo al crear directorio %s: '%s'"
 
-#: ../editfile.c:259 ../isobrowser.c:786
+#: ../editfile.c:259
+#: ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Fallo al borrar '%s': '%s'"
 
-#: ../editfile.c:224 ../editfile.c:436 ../isobrowser.c:899
+#: ../editfile.c:224
+#: ../editfile.c:436
+#: ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Fallo al extraer '%s': '%s'"
@@ -174,7 +184,8 @@ msgstr "Fallo al extraer '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Fallo al extraer registro de arranque: '%s'"
 
-#: ../isobrowser.c:1082 ../isobrowser.c:1130
+#: ../isobrowser.c:1082
+#: ../isobrowser.c:1130
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Fallo al inicializar bkisofs: '%s'"
@@ -239,12 +250,11 @@ msgid "From file: no emulation"
 msgstr "Desde archivo: sin emulación"
 
 #: ../isobrowser.c:804
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
-msgstr ""
-"Error de Interfaz, borrar algo que no sean archivos o directorios no funciona"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgstr "Error de Interfaz, borrar algo que no sean archivos o directorios no funciona"
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:59
+#: ../window.c:449
 msgid "Go back"
 msgstr "Ir atrás"
 
@@ -256,7 +266,8 @@ msgstr "Ir atrás un directorio en la ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Ir atrás un directorio en el sistema de archivos"
 
-#: ../isobrowser.c:1310 ../isobrowser.c:1608
+#: ../isobrowser.c:1310
+#: ../isobrowser.c:1608
 msgid "ISO Images"
 msgstr "Imágenes ISO"
 
@@ -289,25 +300,21 @@ msgid "Is visible on image as '%s'"
 msgstr "Es visible en la imagen como '%s'"
 
 #: ../isobrowser.c:706
-msgid ""
-"It seems that you have made changes to the ISO but haven't saved them. Are "
-"you sure you want to close it?"
-msgstr ""
-"Parece que ha realizado cambios en la ISO pero que no han sido guardados. "
-"¿Seguro que desea cerrarla?"
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgstr "Parece que ha realizado cambios en la ISO pero que no han sido guardados. ¿Seguro que desea cerrarla?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr ""
-"El ítem seleccionado no es un archivo normal y no puede usarse como registro "
-"de arranque"
+msgstr "El ítem seleccionado no es un archivo normal y no puede usarse como registro de arranque"
 
-#: ../boot.c:373 ../boot.c:380
+#: ../boot.c:373
+#: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Lugar: en la imagen original en 0x%llX"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:375
+#: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Lugar: para ser añadido desde '%s'"
@@ -320,18 +327,20 @@ msgstr "Imágenes MDF"
 msgid "NRG Images"
 msgstr "Imágenes NRG"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:290
+#: ../fsbrowser.c:110
+#: ../isobrowser.c:290
 msgid "Name"
 msgstr "Nombre"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:65
+#: ../window.c:455
 msgid "New Directory"
 msgstr "Nuevo Directorio"
 
-#: ../boot.c:149 ../boot.c:327
+#: ../boot.c:149
+#: ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr ""
-"Ningún registro de arranque leído desde el origen o asignado en la imagen"
+msgstr "Ningún registro de arranque leído desde el origen o asignado en la imagen"
 
 #: ../boot.c:108
 msgid "No boot to delete"
@@ -339,9 +348,7 @@ msgstr "Sin arranque que borrar"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr ""
-"Por favor elija un archivo en el explorador ISO para usarlo como registro de "
-"arranque"
+msgstr "Por favor elija un archivo en el explorador ISO para usarlo como registro de arranque"
 
 #: ../boot.c:243
 msgid "Please select no more than one file in the ISO browser"
@@ -349,8 +356,7 @@ msgstr "Por favor no elija más de un archivo en el explorador ISO"
 
 #: ../isobrowser.c:135
 msgid "Please wait while I'm adding the selected items..."
-msgstr ""
-"Por favor espere mientras estoy añadiendo los archivos seleccionados..."
+msgstr "Por favor espere mientras estoy añadiendo los archivos seleccionados..."
 
 #: ../isobrowser.c:841
 msgid "Please wait while I'm extracting the selected files..."
@@ -364,7 +370,9 @@ msgstr "Por favor espere mientras estoy leyendo la imagen..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Por favor espere mientras se graba la nueva imagen en disco..."
 
-#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1181
+#: ../isobrowser.c:128
+#: ../isobrowser.c:833
+#: ../isobrowser.c:1181
 #: ../isobrowser.c:1521
 msgid "Progress"
 msgstr "Progreso"
@@ -397,7 +405,8 @@ msgstr "Buscar archivos duplicados (lento)"
 msgid "Show _hidden files"
 msgstr "Mostrar _archivos escondidos"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:313
+#: ../fsbrowser.c:131
+#: ../isobrowser.c:313
 msgid "Size"
 msgstr "Tamaño"
 
@@ -407,18 +416,17 @@ msgid "Size: %d bytes"
 msgstr "Tamaño: %d bytes"
 
 #: ../fsbrowser.c:270
-msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
-msgstr ""
-"Saltando entrada de directorio porque no se puede manejar un nombre de "
-"archivo más largo que 256 caracteres"
+msgid "Skiping directory entry because cannot handle filename longer than 256 chars"
+msgstr "Saltando entrada de directorio porque no se puede manejar un nombre de archivo más largo que 256 caracteres"
 
 #: ../fsbrowser.c:288
 #, c-format
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Saltando entrada de directorio porque stat(%s) falló con %d"
 
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:244
+#: ../window.c:385
+#: ../window.c:388
 msgid "Temporary directory"
 msgstr "Directorio temporal"
 
@@ -457,8 +465,7 @@ msgstr ""
 "Para crear una nueva imagen ISO en 'Imagen' y 'Nueva'.\n"
 "\n"
 "Para añadir uno o más archivos o directorios en la ISO selecciónalos en\n"
-"el explorador de la parte superior y pulsa el botón 'Añadir en la ISO' en "
-"la\n"
+"el explorador de la parte superior y pulsa el botón 'Añadir en la ISO' en la\n"
 "barra del medio.\n"
 "\n"
 "Para extraer uno o más archivos o directorios de la ISO selecciónalos \n"
@@ -484,9 +491,11 @@ msgstr "Ver"
 
 #: ../editfile.c:106
 msgid "View failed, please check Settings/Viewer"
-msgstr ""
+msgstr "Fallo al ver, por favor comprueba Opciones/Visor"
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:282
+#: ../window.c:359
+#: ../window.c:362
 msgid "Viewer"
 msgstr "Visor"
 
@@ -495,10 +504,8 @@ msgid "Volume name:"
 msgstr "Nombre del volumen:"
 
 #: ../settings.c:734
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
-msgstr ""
-"Habrás de cerrar y abrir de nuevo la ISO para que el cambio tenga efecto"
+msgid "You will have to close and reopen the ISO for this change to take effect"
+msgstr "Habrás de cerrar y abrir de nuevo la ISO para que el cambio tenga efecto"
 
 #: ../window.c:240
 msgid "_BootRecord"
@@ -527,3 +534,4 @@ msgstr "_Ordenar directorios primero"
 #: ../window.c:203
 msgid "_View"
 msgstr "_Ver"
+

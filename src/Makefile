@@ -1,6 +1,3 @@
-# Uncomment for a Windows build
-export WINDOWS_BUILD = 1
-
 # Other paths are relative to this.
 PREFIX ?= /usr/local
 
@@ -25,19 +22,11 @@ DESKTOPPATH ?= $(PREFIX)/share/applications
 # The default editor for files from the image. Users can change this. I
 # recommend you set it to a graphical text editor that is likely to be 
 # installed by default on your distribution.
-ifdef WINDOWS_BUILD
-  DEFAULT_EDITOR ?= wordpad
-else
-  DEFAULT_EDITOR ?= mousepad
-endif
+DEFAULT_EDITOR ?= mousepad
 
 # The default viewer for files from the image. I recommend you make it 
 # a web browser because it can display the widest range of files.
-ifdef WINDOWS_BUILD
-  DEFAULT_VIEWER ?= firefox
-else
-  DEFAULT_VIEWER ?= firefox
-endif
+DEFAULT_VIEWER ?= firefox
 
 # To disable i18n completely, uncomment the following line 
 # or define WITHOUT_NLS somewhere else.
@@ -67,12 +56,7 @@ CPPFLAGS +=  -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEFAULT_E
 # the _FILE_OFFSET_BITS=64 is to enable stat() for large files on linuxish systems
 CPPFLAGS += -D_FILE_OFFSET_BITS=64
 
-ifdef WINDOWS_BUILD
-  CFLAGS +=  -mwindows
-  CPPFLAGS += -DWINDOWS_BUILD
-endif
-
-OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o editfile.o nag.o
+OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o editfile.o
 
 all: translations isomaster.desktop isomaster
 

@@ -13,7 +13,6 @@
 #include "boot.h"
 #include "about.h"
 #include "editfile.h"
-#include "nag.h"
 
 #ifdef ENABLE_NLS
 #  include <libintl.h>

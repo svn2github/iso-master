@@ -22,10 +22,6 @@
 
 #include "isomaster.h"
 
-#ifdef WINDOWS_BUILD
-    #include <windows.h>
-#endif
-
 GtkWidget* GBLmainWindow;
 /* to be able to resize the two file browsers */
 GtkWidget* GBLbrowserPaned;
@@ -53,23 +49,7 @@ int main(int argc, char** argv)
     
 #ifdef ENABLE_NLS
     /* initialize gettext */
-#ifdef WINDOWS_BUILD
-    char moduleFilename[1024];
-    char* lastChar;
-    
-    GetModuleFileName(NULL, moduleFilename, 1024);
-    
-     /* set the first char following the \ to \0 */
-    lastChar = strrchr(moduleFilename, '\\');
-    lastChar++;
-    *lastChar = '\0';
-    
-    strncat(moduleFilename, "po", 1024);
-    
-    bindtextdomain("isomaster", moduleFilename);
-#else
     bindtextdomain("isomaster", LOCALEDIR);
-#endif
     bind_textdomain_codeset("isomaster", "UTF-8"); /* so that gettext() returns UTF-8 strings */
     textdomain("isomaster");
 #endif
@@ -84,14 +64,12 @@ int main(int argc, char** argv)
     
     loadIcons();
     
-#ifndef WINDOWS_BUILD
     /* set up the signal handler for exiting editors and viewers */
     signal(SIGUSR1, sigusr1);
     signal(SIGUSR2, sigusr2);
     
     /* make sure childrent don't become zombies */
     signal(SIGCHLD, SIG_IGN);
-#endif
     
     /* main window */
     GBLmainWindow = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -110,10 +88,6 @@ int main(int argc, char** argv)
     buildMenu(mainVBox);
     
     buildMainToolbar(mainVBox);
-    
-#ifdef WINDOWS_BUILD
-    buildFsDriveSelector(mainVBox);
-#endif
     
     buildFsLocator(mainVBox);
     
@@ -147,18 +121,10 @@ int main(int argc, char** argv)
     gtk_widget_show(statusBar);
     gtk_box_pack_start(GTK_BOX(mainVBox), statusBar, FALSE, FALSE, 0);
     
-#ifdef WINDOWS_BUILD
-    //showNagScreen();
-#endif
-    
     if(argv[1] != NULL)
         openIso(argv[1]);
     
-#ifdef WINDOWS_BUILD
-    srand((int)time(NULL));
-#else
     srandom((int)time(NULL));
-#endif
     
     gtk_main();
     

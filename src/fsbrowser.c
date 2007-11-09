@@ -23,10 +23,6 @@
 
 #include "isomaster.h"
 
-#ifdef WINDOWS_BUILD
-    #include <windows.h>
-#endif
-
 extern AppSettings GBLappSettings;
 extern char* GBLuserHomeDir;
 
@@ -45,8 +41,6 @@ extern int errno;
 
 /* the column for the filename in the fs pane */
 static GtkTreeViewColumn* GBLfilenameFsColumn;
-/* so i can disconnect the handler */
-static int GBLfsDriveChangedConnectionId;
 
 void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
 {
@@ -55,11 +49,7 @@ void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
     
     newPath = gtk_entry_get_text(entry);
     
-#ifdef WINDOWS_BUILD
-    if(newPath[strlen(newPath) - 1] == '\\')
-#else
     if(newPath[strlen(newPath) - 1] == '/')
-#endif
     {
         changeFsDirectory((char*)newPath);
     }
@@ -70,11 +60,7 @@ void acceptFsPathCbk(GtkEntry *entry, gpointer user_data)
             fatalError("newPathTerminated = malloc(strlen(newPath) + 2) failed");
         
         strcpy(newPathTerminated, newPath);
-#ifdef WINDOWS_BUILD
-        strcat(newPathTerminated, "\\");
-#else
         strcat(newPathTerminated, "/");
-#endif
         
         changeFsDirectory(newPathTerminated);
         
@@ -201,54 +187,7 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
             changeFsDirectory(GBLuserHomeDir);
     }
     else
-#ifdef WINDOWS_BUILD
-        changeFsDirectory("c:\\");
-#else
         changeFsDirectory(GBLuserHomeDir);
-#endif
-}
-
-void buildFsDriveSelector(GtkWidget* boxToPackInto)
-{
-#ifdef WINDOWS_BUILD
-    GtkWidget* comboBox;
-    DWORD drives;
-    int count;
-    int comboBoxCount;
-    int indexSelectedDrive = -1;
-    
-    comboBox = gtk_combo_box_new_text();
-    gtk_box_pack_start(GTK_BOX(boxToPackInto), comboBox, FALSE, TRUE, 0);
-    GBLfsDriveChangedConnectionId = g_signal_connect(
-                            G_OBJECT(comboBox), "changed",
-                            G_CALLBACK(fsDriveChanged), NULL);
-    gtk_widget_show(comboBox);
-    
-    drives = GetLogicalDrives();
-    
-    comboBoxCount = 0;
-    for(count = 0; count < 26; count++)
-    {
-        if( (drives >> count) & 0x01 )
-        {
-            char driveStr[20];
-            
-            if( GBLappSettings.fsDrive[0] == 65 + count ||
-                GBLappSettings.fsDrive[0] == 97 + count )
-            /* this is the drive i want selected */
-                indexSelectedDrive = comboBoxCount;
-            
-            sprintf(driveStr, "Drive %c:", 65 + count);
-            
-            gtk_combo_box_append_text(GTK_COMBO_BOX(comboBox), driveStr);
-            
-            comboBoxCount++;
-        }
-    }
-    
-    gtk_combo_box_set_active(GTK_COMBO_BOX(comboBox), indexSelectedDrive);
-    
-#endif /* WINDOWS_BUILD */
 }
 
 void buildFsLocator(GtkWidget* boxToPackInto)
@@ -316,11 +255,9 @@ bool changeFsDirectory(const char* newDirStr)
         if(strcmp(nextItem->d_name, ".") == 0 || strcmp(nextItem->d_name, "..") == 0)
             continue;
         
-#ifndef WINDOWS_BUILD        
         if(nextItem->d_name[0] == '.' && !GBLappSettings.showHiddenFilesFs)
         /* skip hidden files/dirs */
             continue;
-#endif
         
         /* mind 256 is assumed in the malloc below */
         if(strlen(nextItem->d_name) > 256)
@@ -340,13 +277,8 @@ bool changeFsDirectory(const char* newDirStr)
         strcpy(nextItemPathAndName, newDirStr);
         strcat(nextItemPathAndName, nextItem->d_name);
         
-#ifdef WINDOWS_BUILD
-        struct _stati64 nextItemInfo;
-        rc = _stati64(nextItemPathAndName, &nextItemInfo);
-#else
         struct stat nextItemInfo;
         rc = lstat(nextItemPathAndName, &nextItemInfo);
-#endif
         if(rc == -1)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -432,47 +364,6 @@ bool changeFsDirectory(const char* newDirStr)
     return true;
 }
 
-void fsDriveChanged(GtkComboBox* comboBox, gpointer user_data)
-{
-#ifdef WINDOWS_BUILD
-    static int oldSelectedComboBoxIndex;
-    char* selectedComboBoxText;
-    static bool justStarted = true;
-    char driveLetter;
-    bool rc;
-    
-    if(justStarted)
-    {
-        justStarted = false;
-        oldSelectedComboBoxIndex = gtk_combo_box_get_active(comboBox);
-        return;
-    }
-    
-    selectedComboBoxText = gtk_combo_box_get_active_text(comboBox);
-    
-    /* get the drive letter out of there */
-    sscanf(selectedComboBoxText, "Drive %c", &driveLetter);
-    
-    /* store it in the settings as a "c:\\" string */
-    sprintf(GBLappSettings.fsDrive, "%c:\\", driveLetter);
-    
-    /* change fs dir to root of that drive */
-    rc = changeFsDirectory(GBLappSettings.fsDrive);
-    
-    if(!rc)
-    {
-        /* just restore the old drive, don't need to call this function again */
-        gtk_signal_disconnect(comboBox, GBLfsDriveChangedConnectionId);
-        gtk_combo_box_set_active(comboBox, oldSelectedComboBoxIndex);
-        GBLfsDriveChangedConnectionId = g_signal_connect(
-                                G_OBJECT(comboBox), "changed",
-                                G_CALLBACK(fsDriveChanged), NULL);
-    }
-    else
-        oldSelectedComboBoxIndex = gtk_combo_box_get_active(comboBox);
-#endif /* WINDOWS_BUILD */
-}
-
 /* this is called from a button and via a treeview event so don't use the parameters */
 void fsGoUpDirTreeCbk(GtkButton *button, gpointer data)
 {
@@ -495,11 +386,7 @@ void fsGoUpDirTreeCbk(GtkButton *button, gpointer data)
     done = false;
     for(count = strlen(newCurrentDir) - 1; !done; count--)
     {
-#ifdef WINDOWS_BUILD
-        if(newCurrentDir[count - 1] == '\\')
-#else
         if(newCurrentDir[count - 1] == '/')
-#endif
         /* truncate the string */
         {
             newCurrentDir[count] = '\0';
@@ -548,11 +435,7 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
         
         strcpy(newCurrentDir, GBLfsCurrentDir);
         strcat(newCurrentDir, name);
-#ifdef WINDOWS_BUILD
-        strcat(newCurrentDir, "\\");
-#else
         strcat(newCurrentDir, "/");
-#endif
         
         changeFsDirectory(newCurrentDir);
         

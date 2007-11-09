@@ -102,11 +102,7 @@ void createDirCbk(GtkButton *button, gpointer onFs)
             strcpy(pathAndName, GBLfsCurrentDir);
             strcat(pathAndName, newDirName);
             
-#ifdef WINDOWS_BUILD            
-            rc = mkdir(pathAndName);
-#else
             rc = mkdir(pathAndName, 0755);
-#endif
             if(rc == -1)
             {
                 warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),

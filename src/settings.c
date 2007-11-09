@@ -23,10 +23,6 @@
 
 #include "isomaster.h"
 
-#ifdef WINDOWS_BUILD
-    #include <windows.h>
-#endif
-
 /* used by iniparser */
 dictionary* GBLsettingsDictionary;
 /* home directory with full path or "/" if don't know it */
@@ -257,11 +253,7 @@ void changeTempDirCbk(GtkButton *button, gpointer data)
     
     textField = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(textField), gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
-#ifdef WINDOWS_BUILD
-    gtk_entry_set_width_chars(GTK_ENTRY(textField), 62);
-#else
     gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
-#endif
     g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
     gtk_widget_show(textField);
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), textField, TRUE, TRUE, 0);
@@ -321,24 +313,6 @@ void changeViewerCbk(GtkButton *button, gpointer data)
 
 void findHomeDir(void)
 {
-#ifdef WINDOWS_BUILD
-    char appDataDir[1024];
-    
-    if(GetEnvironmentVariable("APPDATA", appDataDir, 1024) == 0)
-    {
-        GBLuserHomeDir = malloc(strlen("c:\\") + 1);
-        if(GBLuserHomeDir == NULL)
-            fatalError("findHomeDir(): malloc(2) failed");
-        strcpy(GBLuserHomeDir, "c:\\");
-        return;
-    }
-    
-    GBLuserHomeDir = malloc(strlen(appDataDir) + 2);
-    if(GBLuserHomeDir == NULL)
-        fatalError("findHomeDir(): malloc(strlen(appDataDir) + 2) failed");
-    strcpy(GBLuserHomeDir, appDataDir);
-    strcat(GBLuserHomeDir, "\\");
-#else
     char* userHomeDir;
     int pathLen;
     
@@ -390,7 +364,6 @@ void findHomeDir(void)
         strcpy(GBLuserHomeDir, userHomeDir);
         strcat(GBLuserHomeDir, "/");
     }
-#endif /* WINDOWS_BUILD */
 }
 
 void followSymLinksCbk(GtkButton *button, gpointer data)
@@ -407,17 +380,6 @@ void openConfigFile(char* configFilePathAndName)
     {
         printWarning("failed to open config file for reading, trying to create");
         
-#ifdef WINDOWS_BUILD
-        FILE* newConfigFile;
-        
-        newConfigFile = fopen(configFilePathAndName, "w");
-        if(newConfigFile == NULL)
-        {
-            printWarning("failed to create config file");
-            return;
-        }
-        fclose(newConfigFile);
-#else
         int newConfigFile;
 
         newConfigFile = creat(configFilePathAndName, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
@@ -427,7 +389,7 @@ void openConfigFile(char* configFilePathAndName)
             return;
         }
         close(newConfigFile);
-#endif
+        
         GBLsettingsDictionary = iniparser_load(configFilePathAndName);
         if(GBLsettingsDictionary == NULL)
         {
@@ -440,29 +402,10 @@ void openConfigFile(char* configFilePathAndName)
 
 void getDefaultTempDir(char** destStr)
 {
-#ifdef WINDOWS_BUILD
-    char tempDir[1024];
-    
-    if(GetTempPath(1024, tempDir) == 0)
-    {
-        *destStr = malloc(strlen("c:\\") + 1);
-        if(*destStr == NULL)
-            fatalError("getWindowsTempDir(): malloc(strlen('c:\\') + 1) failed");
-        strcpy(*destStr, "c:\\");
-        return;
-    }
-    
-    *destStr = malloc(strlen(tempDir) + 2);
-    if(*destStr == NULL)
-        fatalError("getWindowsTempDir(): malloc(strlen(tempDir) + 2) failed");
-    strcpy(*destStr, tempDir);
-    strcat(*destStr, "\\");
-#else
     *destStr = malloc(strlen(DEFAULT_TEMP_DIR) + 1);
     if(*destStr == NULL)
         fatalError("*destStr = malloc(strlen(DEFAULT_TEMP_DIR) +1) failed");
     strcpy(*destStr, DEFAULT_TEMP_DIR);
-#endif
 }
 
 void loadSettings(void)
@@ -477,20 +420,12 @@ void loadSettings(void)
     char* tempStr;
     int appendExtension;
     
-#ifdef WINDOWS_BUILD
-    configFileName = malloc(strlen(GBLuserHomeDir) + strlen("isomaster.ini") + 1);
-#else
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
-#endif
     if(configFileName == NULL)
         fatalError("loadSettings(): malloc(config file name) failed");
     
     strcpy(configFileName, GBLuserHomeDir);
-#ifdef WINDOWS_BUILD
-    strcat(configFileName, "isomaster.ini");
-#else
     strcat(configFileName, ".isomaster");
-#endif
     
     if(strcmp(GBLuserHomeDir, "/") != 0 && strcmp(GBLuserHomeDir, "c:\\") != 0)
         openConfigFile(configFileName);
@@ -850,20 +785,12 @@ void writeSettings(void)
         return;
     }
     
-#ifdef WINDOWS_BUILD
-    configFileName = malloc(strlen(GBLuserHomeDir) + strlen("isomaster.ini") + 1);
-#else
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
-#endif
     if(configFileName == NULL)
         fatalError("writeSettings(): malloc(config file name) failed");
     
     strcpy(configFileName, GBLuserHomeDir);
-#ifdef WINDOWS_BUILD
-    strcat(configFileName, "isomaster.ini");
-#else
     strcat(configFileName, ".isomaster");
-#endif
     
     fileToWrite = fopen(configFileName, "w");
     if(fileToWrite == NULL)

@@ -18,10 +18,6 @@
 
 #include "isomaster.h"
 
-#ifdef WINDOWS_BUILD
-    #include <windows.h>
-#endif
-
 /* the label that holds the value of the iso size */
 GtkWidget* GBLisoSizeLbl;
 /* icon for 'go back' for fs browser */
@@ -58,10 +54,6 @@ void buildMainToolbar(GtkWidget* boxToPackInto)
     toolbar = gtk_toolbar_new();
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
-    
-#ifdef WINDOWS_BUILD
-    gtk_toolbar_set_style(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_ICONS);
-#endif
     
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("Go back"), 
@@ -223,7 +215,6 @@ void buildMenu(GtkWidget* boxToPackInto)
                      G_CALLBACK(refreshBothViewsCbk), NULL);
     gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/View/Refresh");
     
-#ifndef WINDOWS_BUILD
     checkbox = gtk_check_menu_item_new_with_mnemonic(_("Show _hidden files"));
     if(GBLappSettings.showHiddenFilesFs)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
@@ -233,7 +224,6 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(checkbox);
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(showHiddenCbk), NULL);
-#endif
     
     checkbox = gtk_check_menu_item_new_with_mnemonic(_("_Sort directories first"));
     if(GBLappSettings.sortDirectoriesFirst)
@@ -328,7 +318,6 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(scanForDuplicatesCbk), NULL);
     
-#ifndef WINDOWS_BUILD
     checkbox = gtk_check_menu_item_new_with_mnemonic(_("Follow symbolic links"));
     if(GBLappSettings.followSymLinks)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
@@ -338,7 +327,6 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(checkbox);
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(followSymLinksCbk), NULL);
-#endif
     
 #if GTK_MINOR_VERSION >= 6
     icon = gtk_image_new_from_stock(GTK_STOCK_EDIT, GTK_ICON_SIZE_MENU);
@@ -414,11 +402,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     GBLtempDirFld = gtk_entry_new();
     gtk_entry_set_text(GTK_ENTRY(GBLtempDirFld), GBLappSettings.tempDir);
     gtk_editable_set_editable(GTK_EDITABLE(GBLtempDirFld), FALSE);
-#ifdef WINDOWS_BUILD
-    gtk_entry_set_width_chars(GTK_ENTRY(GBLtempDirFld), 60);
-#else
     gtk_entry_set_width_chars(GTK_ENTRY(GBLtempDirFld), 30);
-#endif
     gtk_container_add(GTK_CONTAINER(menuItem), GBLtempDirFld);
     gtk_widget_show(GBLtempDirFld);
     /* END SETTINGS menu */
@@ -460,10 +444,6 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     toolbar = gtk_toolbar_new();
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, TRUE, 0);
     gtk_widget_show(toolbar);
-    
-#ifdef WINDOWS_BUILD
-    gtk_toolbar_set_style(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_ICONS);
-#endif
     
     button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
                                      _("Go back"), 
@@ -520,27 +500,9 @@ gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
 
 void loadAppIcon(GdkPixbuf** appIcon)
 {
-#ifdef WINDOWS_BUILD
-    char moduleFilename[1024];
-    char iconPathAndName[1124]; /* 100 bytes ought to be enough  for the filename */
-    char* lastChar;
-    
-    GetModuleFileName(NULL, moduleFilename, 1024);
-    
-     /* set the first char following the \ to \0 */
-    lastChar = strrchr(moduleFilename, '\\');
-    lastChar++;
-    *lastChar = '\0';
-    
-    strcpy(iconPathAndName, moduleFilename);
-    strcat(iconPathAndName, "icons\\isomaster.ico");
-    
-    *appIcon = gdk_pixbuf_new_from_file(iconPathAndName, NULL);
-#else
     /* the path ICONPATH is defined in the makefile
     * if this fails i get NULL which is ok */
     *appIcon = gdk_pixbuf_new_from_file(ICONPATH"/isomaster.png", NULL);
-#endif
 }
 
 void loadIcon(GtkWidget** destIcon, const char* srcFile, int size)
@@ -567,42 +529,6 @@ void loadIcons(void)
     
     gtk_icon_size_lookup(GTK_ICON_SIZE_LARGE_TOOLBAR, &size, &size);
     
-#ifdef WINDOWS_BUILD
-    char moduleFilename[1024];
-    char iconPathAndName[1124]; /* 100 bytes ought to be enough  for the filename */
-    char* lastChar;
-    
-    GetModuleFileName(NULL, moduleFilename, 1024);
-    
-     /* set the first char following the \ to \0 */
-    lastChar = strrchr(moduleFilename, '\\');
-    lastChar++;
-    *lastChar = '\0';
-    
-    strcpy(iconPathAndName, moduleFilename);
-    strcat(iconPathAndName, "icons\\go-back-kearone.png");
-    loadIcon(&GBLgoBackIcon, iconPathAndName, size);
-    
-    loadIcon(&GBLgoBackIcon2, iconPathAndName, size);
-    
-    strcpy(iconPathAndName, moduleFilename);
-    strcat(iconPathAndName, "icons\\folder-new-kearone.png");
-    loadIcon(&GBLnewDirIcon, iconPathAndName, size);
-    
-    loadIcon(&GBLnewDirIcon2, iconPathAndName, size);
-    
-    strcpy(iconPathAndName, moduleFilename);
-    strcat(iconPathAndName, "icons\\add2-kearone.png");
-    loadIcon(&GBLaddIcon, iconPathAndName, size);
-    
-    strcpy(iconPathAndName, moduleFilename);
-    strcat(iconPathAndName, "icons\\extract2-kearone.png");
-    loadIcon(&GBLextractIcon, iconPathAndName, size);
-    
-    strcpy(iconPathAndName, moduleFilename);
-    strcat(iconPathAndName, "icons\\delete-kearone.png");
-    loadIcon(&GBLdeleteIcon2, iconPathAndName, size);
-#else
     loadIcon(&GBLgoBackIcon, ICONPATH"/go-back-kearone.png", size);
     loadIcon(&GBLgoBackIcon2, ICONPATH"/go-back-kearone.png", size);
     loadIcon(&GBLnewDirIcon, ICONPATH"/folder-new-kearone.png", size);
@@ -610,7 +536,6 @@ void loadIcons(void)
     loadIcon(&GBLaddIcon, ICONPATH"/add2-kearone.png", size);
     loadIcon(&GBLextractIcon, ICONPATH"/extract2-kearone.png", size);
     loadIcon(&GBLdeleteIcon2, ICONPATH"/delete-kearone.png", size);
-#endif
 }
 
 void rejectDialogCbk(GtkWidget *widget, GdkEvent *event)

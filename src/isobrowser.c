@@ -26,10 +26,6 @@
 
 #include "isomaster.h"
 
-#ifndef WINDOWS_BUILD
-    #include <regex.h>
-#endif
-
 extern GtkWidget* GBLmainWindow;
 extern GtkWidget* GBLisoTreeView;
 extern GtkListStore* GBLisoListStore;
@@ -1263,11 +1259,7 @@ void openIso(char* filename)
     int count;
     for(count = 0; count < filenameLen; count++)
     {
-#ifdef WINDOWS_BUILD
-        if(filename[count] == '\\')
-#else
         if(filename[count] == '/')
-#endif
             lastSlashIndex = count;
     }
     
@@ -1661,7 +1653,6 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
 //    
 //    if(dialogResponse == GTK_RESPONSE_ACCEPT)
 //    {
-//#ifndef WINDOWS_BUILD
 //        char* nameWithExtension;
 //        
 //        nameWithExtension = malloc(strlen(filename) + 5);
@@ -1689,10 +1680,9 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
 //        saveIso(nameWithExtension);
 //        
 //        free(nameWithExtension);
-//#endif
 //    }
     
-    saveIso("c:\\out.iso");
+    saveIso("/home/andrei/out.iso");
     
     /* the accelerator callback must return true */
     return TRUE;

@@ -20,11 +20,7 @@
 
 #include "isomaster.h"
 
-#ifdef WINDOWS_BUILD
-    #include <windows.h>
-#else
-    #include <sys/wait.h>
-#endif
+#include <sys/wait.h>
 
 #define MAX_RANDOM_BASE_NAME_LEN 26
 #define RANDOM_STR_NAME_LEN 6
@@ -201,11 +197,7 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
                    "strlen(randomizedItemName) + 2) failed");
     strcpy(pathAndNameOnFs, gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
     
-#ifdef WINDOWS_BUILD
-    strcat(pathAndNameOnFs, "\\"); /* doesn't hurt even if not needed */
-#else
     strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
-#endif
     
     strcat(pathAndNameOnFs, randomizedItemName);
     
@@ -240,26 +232,6 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     addToTempFilesList(pathAndNameOnFs);
     
-#ifdef WINDOWS_BUILD
-    HINSTANCE rc2;
-    char* quotedPathAndName;
-    
-    /* need quotes in case there are spaces in the string */
-    quotedPathAndName = malloc(strlen(pathAndNameOnFs) + 3);
-    if(quotedPathAndName == NULL)
-        fatalError("quotedPathAndName = malloc(strlen(pathAndNameOnFs) + 3) failed");
-    strcpy(quotedPathAndName, "\"");
-    strcat(quotedPathAndName, pathAndNameOnFs);
-    strcat(quotedPathAndName, "\"");
-    
-    rc2 = ShellExecute(NULL, "open", 
-                       gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)), 
-                       quotedPathAndName, NULL, SW_SHOW);
-    if((int)rc2 <= 32)
-        GBLeditFailed = true;
-    
-    free(quotedPathAndName);
-#else
     /* start the editor */
     if(!fork())
     {
@@ -269,7 +241,6 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         exit(1);
     }
-#endif
     
     /* delete the file from the iso */
     rc = bk_delete(&GBLvolInfo, pathAndNameOnIso);
@@ -346,11 +317,7 @@ char* makeRandomFilename(const char* sourceName)
         gotGoodChar = false;
         while(!gotGoodChar)
         {
-#ifdef WINDOWS_BUILD
-            oneRandomChar = rand();
-#else
             oneRandomChar = random();
-#endif
             if(64 < oneRandomChar && oneRandomChar < 91)
             {
                 gotGoodChar = true;
@@ -443,11 +410,7 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
                    "strlen(randomizedItemName) + 2) failed");
     strcpy(pathAndNameOnFs, gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
     
-#ifdef WINDOWS_BUILD
-    strcat(pathAndNameOnFs, "\\"); /* doesn't hurt even if not needed */
-#else
     strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
-#endif
     
     strcat(pathAndNameOnFs, randomizedItemName);
     
@@ -482,26 +445,6 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     addToTempFilesList(pathAndNameOnFs);
     
-#ifdef WINDOWS_BUILD
-    HINSTANCE rc2;
-    char* quotedPathAndName;
-    
-    /* need quotes in case there are spaces in the string */
-    quotedPathAndName = malloc(strlen(pathAndNameOnFs) + 3);
-    if(quotedPathAndName == NULL)
-        fatalError("quotedPathAndName = malloc(strlen(pathAndNameOnFs) + 3) failed");
-    strcpy(quotedPathAndName, "\"");
-    strcat(quotedPathAndName, pathAndNameOnFs);
-    strcat(quotedPathAndName, "\"");
-    
-    rc2 = ShellExecute(NULL, "open", 
-                       gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)), 
-                       quotedPathAndName, NULL, SW_SHOW);
-    if((int)rc2 <= 32)
-        GBLeditFailed = true;
-    
-    free(quotedPathAndName);
-#else
     /* start the viewer */
     if(!fork())
     {
@@ -511,7 +454,6 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
         
         exit(1);
     }
-#endif
     
     g_free(itemName);
     free(randomizedItemName);
