@@ -90,17 +90,17 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_accelerator_parse("<Control>N", &accelKey, &accelModifier);
     closure = g_cclosure_new(G_CALLBACK(newIsoCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
-    gtk_accel_map_add_entry("<ISOMaster>/Image/New", accelKey, accelModifier);
+    gtk_accel_map_add_entry("<ISOMaster>/File/New", accelKey, accelModifier);
     
     gtk_accelerator_parse("<Control>O", &accelKey, &accelModifier);
     closure = g_cclosure_new(G_CALLBACK(openIsoCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
-    gtk_accel_map_add_entry("<ISOMaster>/Image/Open", accelKey, accelModifier);
+    gtk_accel_map_add_entry("<ISOMaster>/File/Open", accelKey, accelModifier);
     
     gtk_accelerator_parse("<Control>S", &accelKey, &accelModifier);
     closure = g_cclosure_new(G_CALLBACK(saveIsoCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
-    gtk_accel_map_add_entry("<ISOMaster>/Image/Save", accelKey, accelModifier);
+    gtk_accel_map_add_entry("<ISOMaster>/File/Save", accelKey, accelModifier);
     
     gtk_accelerator_parse("<Control>W", &accelKey, &accelModifier);
     closure = g_cclosure_new(G_CALLBACK(closeMainWindowCbk), NULL, NULL);
@@ -109,7 +109,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_accelerator_parse("<Control>Q", &accelKey, &accelModifier);
     closure = g_cclosure_new(G_CALLBACK(closeMainWindowCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
-    gtk_accel_map_add_entry("<ISOMaster>/Image/Quit", accelKey, accelModifier);
+    gtk_accel_map_add_entry("<ISOMaster>/File/Quit", accelKey, accelModifier);
     
     gtk_accelerator_parse("F5", &accelKey, &accelModifier);
     closure = g_cclosure_new(G_CALLBACK(refreshBothViewsCbk), NULL, NULL);
@@ -142,7 +142,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuBar);
     
     /* FILE menu */
-    rootMenu = gtk_menu_item_new_with_mnemonic(_("_Image"));
+    rootMenu = gtk_menu_item_new_with_mnemonic(_("_File"));
     gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
     gtk_widget_show(rootMenu);
     
@@ -157,14 +157,14 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(newIsoCbk), NULL);
-    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Image/New");
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/File/New");
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_OPEN, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(openIsoCbk), NULL);
-    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Image/Open");
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/File/Open");
     
 #ifdef ENABLE_SAVE_OVERWRITE
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_SAVE, NULL);
@@ -179,7 +179,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(saveIsoCbk), NULL);
-    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Image/Save");
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/File/Save");
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PROPERTIES, NULL);
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
@@ -196,7 +196,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(closeMainWindowCbk), NULL);
-    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Image/Quit");
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/File/Quit");
     /* END FILE menu */
     
     /* VIEW menu */
