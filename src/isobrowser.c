@@ -23,6 +23,7 @@
 #include <time.h>
 #include <libintl.h>
 #include <errno.h>
+#include <regex.h>
 
 #include "isomaster.h"
 
