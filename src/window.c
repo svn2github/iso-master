@@ -82,6 +82,8 @@ void buildMenu(GtkWidget* boxToPackInto)
     GClosure *closure = NULL;
     GtkWidget* submenu;
     GtkWidget* rootSubmenu;
+    GtkWidget* submenu2;
+    GtkWidget* rootSubmenu2;
     
     /* KEYBOARD accelerators */
     accelGroup = gtk_accel_group_new();
@@ -236,176 +238,84 @@ void buildMenu(GtkWidget* boxToPackInto)
                      G_CALLBACK(sortDirsFirstCbk), NULL);
     /* END VIEW menu */
     
-    /* BOOT menu */
-    rootMenu = gtk_menu_item_new_with_mnemonic(_("_BootRecord"));
+    /* TOOLS menu */
+    rootMenu = gtk_menu_item_new_with_mnemonic(_("_Tools"));
     gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
     gtk_widget_show(rootMenu);
     
     menu = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
     
+    /* BOOT submenu */
+    rootSubmenu = gtk_menu_item_new_with_mnemonic(_("_Boot Record"));
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
+    gtk_widget_show(rootSubmenu);
+    
+    submenu = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
+    
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PROPERTIES, NULL);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(showBootInfoCbk), NULL);
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_SAVE_AS, NULL);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(extractBootRecordCbk), NULL);
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_DELETE, NULL);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(deleteBootRecordCbk), NULL);
     
-    rootSubmenu = gtk_image_menu_item_new_from_stock(GTK_STOCK_ADD, NULL);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
-    gtk_widget_show(rootSubmenu);
+    rootSubmenu2 = gtk_image_menu_item_new_from_stock(GTK_STOCK_ADD, NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), rootSubmenu2);
+    gtk_widget_show(rootSubmenu2);
     
-    submenu = gtk_menu_new();
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
+    submenu2 = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu2), submenu2);
     
     menuItem = gtk_menu_item_new_with_label(_("Use selected file on image (no emulation)"));
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu2), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(setFileAsBootRecordCbk), NULL);
     
     menuItem = gtk_menu_item_new_with_label(_("From file: no emulation"));
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu2), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(addBootRecordFromFileCbk), (gpointer)BOOT_MEDIA_NO_EMULATION);
     
     menuItem = gtk_menu_item_new_with_label(_("From file: 1200KiB floppy"));
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu2), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(addBootRecordFromFileCbk), (gpointer)BOOT_MEDIA_1_2_FLOPPY);
     
     menuItem = gtk_menu_item_new_with_label(_("From file: 1440KiB floppy"));
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu2), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(addBootRecordFromFileCbk), (gpointer)BOOT_MEDIA_1_44_FLOPPY);
     
     menuItem = gtk_menu_item_new_with_label(_("From file: 2880KiB floppy"));
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
+    gtk_menu_shell_append(GTK_MENU_SHELL(submenu2), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(addBootRecordFromFileCbk), (gpointer)BOOT_MEDIA_2_88_FLOPPY);
-    /* END BOOT menu */
+    /* END BOOT submenu */
     
-    /* SETTINGS menu */
-    rootMenu = gtk_menu_item_new_with_mnemonic(_("_Settings"));
-    gtk_menu_shell_append(GTK_MENU_SHELL(menuBar), rootMenu);
-    gtk_widget_show(rootMenu);
-    
-    menu = gtk_menu_new();
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootMenu), menu);
-    
-    checkbox = gtk_check_menu_item_new_with_mnemonic(_("Scan for duplicate files (slow)"));
-    if(GBLappSettings.scanForDuplicateFiles)
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
-    else
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), FALSE);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), checkbox);
-    gtk_widget_show(checkbox);
-    g_signal_connect(G_OBJECT(checkbox), "activate",
-                     G_CALLBACK(scanForDuplicatesCbk), NULL);
-    
-    checkbox = gtk_check_menu_item_new_with_mnemonic(_("Follow symbolic links"));
-    if(GBLappSettings.followSymLinks)
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
-    else
-        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), FALSE);
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), checkbox);
-    gtk_widget_show(checkbox);
-    g_signal_connect(G_OBJECT(checkbox), "activate",
-                     G_CALLBACK(followSymLinksCbk), NULL);
-    
-#if GTK_MINOR_VERSION >= 6
-    icon = gtk_image_new_from_stock(GTK_STOCK_EDIT, GTK_ICON_SIZE_MENU);
-    rootSubmenu = gtk_image_menu_item_new_with_label(_("Editor"));
-    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(rootSubmenu), icon);
-#else
-    rootSubmenu = gtk_menu_item_new_with_label(_("Editor"));
-#endif
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
-    gtk_widget_show(rootSubmenu);
-    
-    submenu = gtk_menu_new();
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
-    
-    menuItem = gtk_menu_item_new();
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
+    menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
-                     G_CALLBACK(changeEditorCbk), NULL);
-    
-    GBLeditorFld = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(GBLeditorFld), GBLappSettings.editor);
-    gtk_editable_set_editable(GTK_EDITABLE(GBLeditorFld), FALSE);
-    gtk_entry_set_width_chars(GTK_ENTRY(GBLeditorFld), 30);
-    gtk_container_add(GTK_CONTAINER(menuItem), GBLeditorFld);
-    gtk_widget_show(GBLeditorFld);
-    
-#if GTK_MINOR_VERSION >= 6
-    icon = gtk_image_new_from_stock(GTK_STOCK_EDIT, GTK_ICON_SIZE_MENU);
-    rootSubmenu = gtk_image_menu_item_new_with_label(_("Viewer"));
-    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(rootSubmenu), icon);
-#else
-    rootSubmenu = gtk_menu_item_new_with_label(_("Viewer"));
-#endif
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
-    gtk_widget_show(rootSubmenu);
-    
-    submenu = gtk_menu_new();
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
-    
-    menuItem = gtk_menu_item_new();
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
-    gtk_widget_show(menuItem);
-    g_signal_connect(G_OBJECT(menuItem), "activate",
-                     G_CALLBACK(changeViewerCbk), NULL);
-    
-    GBLviewerFld = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(GBLviewerFld), GBLappSettings.viewer);
-    gtk_editable_set_editable(GTK_EDITABLE(GBLviewerFld), FALSE);
-    gtk_entry_set_width_chars(GTK_ENTRY(GBLviewerFld), 30);
-    gtk_container_add(GTK_CONTAINER(menuItem), GBLviewerFld);
-    gtk_widget_show(GBLviewerFld);
-    
-#if GTK_MINOR_VERSION >= 6
-    icon = gtk_image_new_from_stock(GTK_STOCK_DIRECTORY, GTK_ICON_SIZE_MENU);
-    rootSubmenu = gtk_image_menu_item_new_with_label(_("Temporary directory"));
-    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(rootSubmenu), icon);
-#else
-    rootSubmenu = gtk_menu_item_new_with_label(_("Temporary directory"));
-#endif
-    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
-    gtk_widget_show(rootSubmenu);
-    
-    submenu = gtk_menu_new();
-    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
-    
-    menuItem = gtk_menu_item_new();
-    gtk_menu_shell_append(GTK_MENU_SHELL(submenu), menuItem);
-    gtk_widget_show(menuItem);
-    g_signal_connect(G_OBJECT(menuItem), "activate",
-                     G_CALLBACK(changeTempDirCbk), NULL);
-    
-    GBLtempDirFld = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(GBLtempDirFld), GBLappSettings.tempDir);
-    gtk_editable_set_editable(GTK_EDITABLE(GBLtempDirFld), FALSE);
-    gtk_entry_set_width_chars(GTK_ENTRY(GBLtempDirFld), 30);
-    gtk_container_add(GTK_CONTAINER(menuItem), GBLtempDirFld);
-    gtk_widget_show(GBLtempDirFld);
-    /* END SETTINGS menu */
+                     G_CALLBACK(showPreferencesWindowCbk), (gpointer)BOOT_MEDIA_1_44_FLOPPY);
+    /* END TOOLS menu */
     
     /* HELP menu */
     rootMenu = gtk_menu_item_new_with_mnemonic(_("_Help"));

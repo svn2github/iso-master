@@ -197,120 +197,6 @@ void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
     gtk_widget_destroy(dialog);
 }
 
-void changeEditorCbk(GtkButton *button, gpointer data)
-{
-    GtkWidget* dialog;
-    GtkWidget* textField;
-    int rc;
-    
-    dialog = gtk_dialog_new_with_buttons(_("Editor"),
-                                         GTK_WINDOW(GBLmainWindow),
-                                         GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_STOCK_OK,
-                                         GTK_RESPONSE_ACCEPT,
-                                         GTK_STOCK_CANCEL,
-                                         GTK_RESPONSE_REJECT,
-                                         NULL);
-    g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
-    
-    textField = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(textField), gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)));
-    gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
-    g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
-    gtk_widget_show(textField);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), textField, TRUE, TRUE, 0);
-    
-    gtk_widget_show(dialog);
-    
-    rc = gtk_dialog_run(GTK_DIALOG(dialog));
-    if(rc == GTK_RESPONSE_ACCEPT)
-    {
-        const gchar* newEditor;
-        
-        newEditor = gtk_entry_get_text(GTK_ENTRY(textField));
-        
-        gtk_entry_set_text(GTK_ENTRY(GBLeditorFld), newEditor);
-    }
-    
-    gtk_widget_destroy(dialog);
-}
-
-void changeTempDirCbk(GtkButton *button, gpointer data)
-{
-    GtkWidget* dialog;
-    GtkWidget* textField;
-    int rc;
-    
-    dialog = gtk_dialog_new_with_buttons(_("Temporary directory"),
-                                         GTK_WINDOW(GBLmainWindow),
-                                         GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_STOCK_OK,
-                                         GTK_RESPONSE_ACCEPT,
-                                         GTK_STOCK_CANCEL,
-                                         GTK_RESPONSE_REJECT,
-                                         NULL);
-    g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
-    
-    textField = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(textField), gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
-    gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
-    g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
-    gtk_widget_show(textField);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), textField, TRUE, TRUE, 0);
-    
-    gtk_widget_show(dialog);
-    
-    rc = gtk_dialog_run(GTK_DIALOG(dialog));
-    if(rc == GTK_RESPONSE_ACCEPT)
-    {
-        const gchar* newDir;
-        
-        newDir = gtk_entry_get_text(GTK_ENTRY(textField));
-        
-        gtk_entry_set_text(GTK_ENTRY(GBLtempDirFld), newDir);
-    }
-    
-    gtk_widget_destroy(dialog);
-}
-
-void changeViewerCbk(GtkButton *button, gpointer data)
-{
-    GtkWidget* dialog;
-    GtkWidget* textField;
-    int rc;
-    
-    dialog = gtk_dialog_new_with_buttons(_("Viewer"),
-                                         GTK_WINDOW(GBLmainWindow),
-                                         GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_STOCK_OK,
-                                         GTK_RESPONSE_ACCEPT,
-                                         GTK_STOCK_CANCEL,
-                                         GTK_RESPONSE_REJECT,
-                                         NULL);
-    g_signal_connect(dialog, "close", G_CALLBACK(rejectDialogCbk), NULL);
-    
-    textField = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(textField), gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)));
-    gtk_entry_set_width_chars(GTK_ENTRY(textField), 32);
-    g_signal_connect(textField, "activate", (GCallback)acceptDialogCbk, dialog);
-    gtk_widget_show(textField);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), textField, TRUE, TRUE, 0);
-    
-    gtk_widget_show(dialog);
-    
-    rc = gtk_dialog_run(GTK_DIALOG(dialog));
-    if(rc == GTK_RESPONSE_ACCEPT)
-    {
-        const gchar* newViewer;
-        
-        newViewer = gtk_entry_get_text(GTK_ENTRY(textField));
-        
-        gtk_entry_set_text(GTK_ENTRY(GBLviewerFld), newViewer);
-    }
-    
-    gtk_widget_destroy(dialog);
-}
-
 void findHomeDir(void)
 {
     char* userHomeDir;
@@ -364,13 +250,6 @@ void findHomeDir(void)
         strcpy(GBLuserHomeDir, userHomeDir);
         strcat(GBLuserHomeDir, "/");
     }
-}
-
-void followSymLinksCbk(GtkButton *button, gpointer data)
-{
-    GBLappSettings.followSymLinks = !GBLappSettings.followSymLinks;
-    
-    bk_set_follow_symlinks(&GBLvolInfo, GBLappSettings.followSymLinks);
 }
 
 void openConfigFile(char* configFilePathAndName)
@@ -608,8 +487,10 @@ void loadSettings(void)
         }
         else
         {
-            /* pointer sharing is ok since GBLappSettings.editor is only written from here */
-            GBLappSettings.editor = tempStr;
+            GBLappSettings.editor = malloc(strlen(tempStr) + 1);
+            if(GBLappSettings.editor == NULL)
+                fatalError("GBLappSettings.editor = malloc(strlen(tempStr) + 1) failed");
+            strcpy(GBLappSettings.editor, tempStr);
         }
     }
     else
@@ -635,8 +516,10 @@ void loadSettings(void)
         }
         else
         {
-            /* pointer sharing is ok since GBLappSettings.viewer is only written from here */
-            GBLappSettings.viewer = tempStr;
+            GBLappSettings.viewer = malloc(strlen(tempStr) + 1);
+            if(GBLappSettings.viewer == NULL)
+                fatalError("GBLappSettings.viewer = malloc(strlen(tempStr) + 1) failed");
+            strcpy(GBLappSettings.viewer, tempStr);
         }
     }
     else
@@ -659,8 +542,10 @@ void loadSettings(void)
         }
         else
         {
-            /* pointer sharing is ok since GBLappSettings.tempDir is only written from here */
-            GBLappSettings.tempDir = tempStr;
+            GBLappSettings.tempDir = malloc(strlen(tempStr) + 1);
+            if(GBLappSettings.tempDir == NULL)
+                fatalError("GBLappSettings.tempDir = malloc(strlen(tempStr) + 1) failed");
+            strcpy(GBLappSettings.tempDir, tempStr);
         }
     }
     else
@@ -743,10 +628,8 @@ void loadSettings(void)
     free(configFileName);
 }
 
-void scanForDuplicatesCbk(GtkButton *button, gpointer data)
+void scanForDuplicatesCbk(GtkButton* button, gpointer data)
 {
-    GBLappSettings.scanForDuplicateFiles = !GBLappSettings.scanForDuplicateFiles;
-    
     if(GBLisoPaneActive)
     {
         GtkWidget* warningDialog;
@@ -760,6 +643,117 @@ void scanForDuplicatesCbk(GtkButton *button, gpointer data)
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
     }
+}
+
+void showPreferencesWindowCbk(GtkButton* button, gpointer data)
+{
+    int rc;
+    static PrefWidgets prefWidgets;
+    GtkWidget* label;
+    
+    prefWidgets.dialog = gtk_dialog_new_with_buttons(_("Preferences"),
+                                         GTK_WINDOW(GBLmainWindow),
+                                         GTK_DIALOG_DESTROY_WITH_PARENT,
+                                         GTK_STOCK_OK,
+                                         GTK_RESPONSE_ACCEPT,
+                                         GTK_STOCK_CANCEL,
+                                         GTK_RESPONSE_REJECT,
+                                         NULL);
+    gtk_window_set_transient_for(GTK_WINDOW(prefWidgets.dialog), GTK_WINDOW(GBLmainWindow));
+    gtk_window_set_modal(GTK_WINDOW(prefWidgets.dialog), TRUE);
+    
+    prefWidgets.scanForDuplicateFiles = gtk_check_button_new_with_mnemonic(
+                                            _("Scan for duplicate files (slow)"));
+    if(GBLappSettings.scanForDuplicateFiles)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prefWidgets.scanForDuplicateFiles), TRUE);
+    else
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prefWidgets.scanForDuplicateFiles), FALSE);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), 
+                       prefWidgets.scanForDuplicateFiles, 
+                       TRUE, TRUE, 0);
+    gtk_widget_show(prefWidgets.scanForDuplicateFiles);
+    g_signal_connect(G_OBJECT(prefWidgets.scanForDuplicateFiles), "activate",
+                     G_CALLBACK(scanForDuplicatesCbk), NULL);
+    
+    prefWidgets.followSymlinks = gtk_check_button_new_with_mnemonic(
+                                    _("Follow symbolic links"));
+    if(GBLappSettings.followSymLinks)
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prefWidgets.followSymlinks), TRUE);
+    else
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(prefWidgets.followSymlinks), FALSE);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), 
+                       prefWidgets.followSymlinks, 
+                       TRUE, TRUE, 0);
+    gtk_widget_show(prefWidgets.followSymlinks);
+    
+    label = gtk_label_new(_("Editor"));
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), 
+                       label, TRUE, TRUE, 0);
+    gtk_widget_show(label);
+    
+    prefWidgets.editor = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(prefWidgets.editor), GBLappSettings.editor);
+    gtk_entry_set_width_chars(GTK_ENTRY(prefWidgets.editor), 30);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), 
+                       prefWidgets.editor, TRUE, TRUE, 0);
+    gtk_widget_show(prefWidgets.editor);
+    
+    label = gtk_label_new(_("Viewer"));
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), label, TRUE, TRUE, 0);
+    gtk_widget_show(label);
+    
+    prefWidgets.viewer = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(prefWidgets.viewer), GBLappSettings.viewer);
+    gtk_entry_set_width_chars(GTK_ENTRY(prefWidgets.viewer), 30);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), 
+                       prefWidgets.viewer, TRUE, TRUE, 0);
+    gtk_widget_show(prefWidgets.viewer);
+    
+    label = gtk_label_new(_("Temporary directory"));
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), label, TRUE, TRUE, 0);
+    gtk_widget_show(label);
+    
+    prefWidgets.tempDir = gtk_entry_new();
+    gtk_entry_set_text(GTK_ENTRY(prefWidgets.tempDir), GBLappSettings.tempDir);
+    gtk_entry_set_width_chars(GTK_ENTRY(prefWidgets.tempDir), 30);
+    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), 
+                       prefWidgets.tempDir, TRUE, TRUE, 0);
+    gtk_widget_show(prefWidgets.tempDir);
+    
+    rc = gtk_dialog_run(GTK_DIALOG(prefWidgets.dialog));
+    if(rc == GTK_RESPONSE_ACCEPT)
+    {
+        GBLappSettings.scanForDuplicateFiles = 
+                gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(prefWidgets.scanForDuplicateFiles));
+        
+        GBLappSettings.followSymLinks = 
+                gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(prefWidgets.followSymlinks));
+        bk_set_follow_symlinks(&GBLvolInfo, GBLappSettings.followSymLinks);
+        
+        if(GBLappSettings.editor != NULL)
+            free(GBLappSettings.editor);
+        GBLappSettings.editor = malloc(strlen(gtk_entry_get_text(GTK_ENTRY(prefWidgets.editor))) + 1);
+        if(GBLappSettings.editor == NULL)
+            fatalError("GBLappSettings.editor = malloc(...) failed");
+        strcpy(GBLappSettings.editor, gtk_entry_get_text(GTK_ENTRY(prefWidgets.editor)));
+        
+        if(GBLappSettings.viewer != NULL)
+            free(GBLappSettings.viewer);
+        GBLappSettings.viewer = malloc(strlen(gtk_entry_get_text(GTK_ENTRY(prefWidgets.viewer))) + 1);
+        if(GBLappSettings.viewer == NULL)
+            fatalError("GBLappSettings.viewer = malloc(...) failed");
+        strcpy(GBLappSettings.viewer, gtk_entry_get_text(GTK_ENTRY(prefWidgets.viewer)));
+        
+        if(GBLappSettings.tempDir != NULL)
+            free(GBLappSettings.tempDir);
+        GBLappSettings.tempDir = malloc(strlen(gtk_entry_get_text(GTK_ENTRY(prefWidgets.tempDir))) + 1);
+        if(GBLappSettings.tempDir == NULL)
+            fatalError("GBLappSettings.tempDir = malloc(...) failed");
+        strcpy(GBLappSettings.tempDir, gtk_entry_get_text(GTK_ENTRY(prefWidgets.tempDir)));
+        
+    }
+    
+    gtk_widget_destroy(prefWidgets.dialog);
 }
 
 void writeSettings(void)
@@ -837,11 +831,11 @@ void writeSettings(void)
     snprintf(numberStr, 20, "%d", GBLappSettings.appendExtension);
     iniparser_setstr(GBLsettingsDictionary, "ui:appendextension", numberStr);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:editor", gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)));
+    iniparser_setstr(GBLsettingsDictionary, "ui:editor", GBLappSettings.editor);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:viewer", gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)));
+    iniparser_setstr(GBLsettingsDictionary, "ui:viewer", GBLappSettings.viewer);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:tempdir", gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
+    iniparser_setstr(GBLsettingsDictionary, "ui:tempdir", GBLappSettings.tempDir);
     
     gtk_tree_sortable_get_sort_column_id(GTK_TREE_SORTABLE(GBLisoListStore), 
                                          &sortColumnId, &sortDirection);

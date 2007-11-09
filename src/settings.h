@@ -44,16 +44,24 @@ typedef struct
     
 } AppSettings;
 
+typedef struct
+{
+    GtkWidget* dialog;
+    GtkWidget* scanForDuplicateFiles;
+    GtkWidget* followSymlinks;
+    GtkWidget* editor;
+    GtkWidget* viewer;
+    GtkWidget* tempDir;
+    
+} PrefWidgets;
+
 void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event);
-void changeEditorCbk(GtkButton *button, gpointer data);
-void changeTempDirCbk(GtkButton *button, gpointer data);
-void changeViewerCbk(GtkButton *button, gpointer data);
 void findHomeDir(void);
-void followSymLinksCbk(GtkButton *button, gpointer data);
 void getDefaultTempDir(char** destStr);
 void openConfigFile(char* configFilePathAndName);
 void loadSettings(void);
-void scanForDuplicatesCbk(GtkButton *button, gpointer data);
+void scanForDuplicatesCbk(GtkButton* button, gpointer data);
+void showPreferencesWindowCbk(GtkButton* button, gpointer data);
 void writeSettings(void);
 
 #endif
