@@ -648,7 +648,7 @@ void showPreferencesWindowCbk(GtkButton* button, gpointer data)
     static PrefWidgets prefWidgets;
     GtkWidget* label;
     
-    prefWidgets.dialog = gtk_dialog_new_with_buttons(_("Preferences"),
+    prefWidgets.dialog = gtk_dialog_new_with_buttons(_("Options"),
                                          GTK_WINDOW(GBLmainWindow),
                                          GTK_DIALOG_DESTROY_WITH_PARENT,
                                          GTK_STOCK_OK,

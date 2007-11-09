@@ -305,6 +305,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     /* END BOOT submenu */
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
+    menuItem = gtk_menu_item_new_with_label(_("Options"));
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
