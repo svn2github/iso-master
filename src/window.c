@@ -34,12 +34,6 @@ GtkWidget* GBLaddIcon;
 GtkWidget* GBLextractIcon;
 /* icon for 'delete' for iso browser */
 GtkWidget* GBLdeleteIcon2;
-/* text field for the editor setting */
-GtkWidget* GBLeditorFld;
-/* text field for the viewer setting */
-GtkWidget* GBLviewerFld;
-/* text field for the temp directory setting */
-GtkWidget* GBLtempDirFld;
 
 extern GtkWidget* GBLmainWindow;
 extern AppSettings GBLappSettings;

@@ -36,9 +36,6 @@ extern char* GBLfsCurrentDir;
 extern bool GBLisoPaneActive;
 extern VolInfo GBLvolInfo;
 extern bool GBLisoChangesProbable;
-extern GtkWidget* GBLeditorFld;
-extern GtkWidget* GBLviewerFld;
-extern GtkWidget* GBLtempDirFld;
 extern GtkListStore* GBLfsListStore;
 extern GtkListStore* GBLisoListStore;
 

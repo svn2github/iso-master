@@ -37,9 +37,7 @@ extern char* GBLisoCurrentDir;
 extern VolInfo GBLvolInfo;
 extern GtkWidget* GBLmainWindow;
 extern bool GBLisoChangesProbable;
-extern GtkWidget* GBLeditorFld;
-extern GtkWidget* GBLviewerFld;
-extern GtkWidget* GBLtempDirFld;
+extern AppSettings GBLappSettings;
 
 static bool GBLeditFailed;
 static bool GBLviewFailed;
@@ -190,12 +188,12 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     /* create full path and name for the extracted file */
     randomizedItemName = makeRandomFilename(itemName);
-    pathAndNameOnFs = malloc(strlen(gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld))) + 
+    pathAndNameOnFs = malloc(strlen(GBLappSettings.tempDir) + 
                              strlen(randomizedItemName) + 2);
     if(pathAndNameOnFs == NULL)
-        fatalError("malloc(strlen(gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld))) + "
+        fatalError("malloc(strlen(GBLappSettings.tempDir) + "
                    "strlen(randomizedItemName) + 2) failed");
-    strcpy(pathAndNameOnFs, gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
+    strcpy(pathAndNameOnFs, GBLappSettings.tempDir);
     
     strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
     
@@ -207,7 +205,7 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     /* extract the file to the temporary directory */
     rc = bk_extract_as(&GBLvolInfo, pathAndNameOnIso, 
-                       gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)), 
+                       GBLappSettings.tempDir, 
                        randomizedItemName, false, activityProgressUpdaterCbk);
     if(rc <= 0)
     {
@@ -235,7 +233,7 @@ void editSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     /* start the editor */
     if(!fork())
     {
-        execlp(gtk_entry_get_text(GTK_ENTRY(GBLeditorFld)), "editor", pathAndNameOnFs, NULL);
+        execlp(GBLappSettings.editor, "editor", pathAndNameOnFs, NULL);
         
         kill(getppid(), SIGUSR1);
         
@@ -403,12 +401,12 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     /* create full path and name for the extracted file */
     randomizedItemName = makeRandomFilename(itemName);
-    pathAndNameOnFs = malloc(strlen(gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld))) + 
+    pathAndNameOnFs = malloc(strlen(GBLappSettings.tempDir) + 
                              strlen(randomizedItemName) + 2);
     if(pathAndNameOnFs == NULL)
-        fatalError("malloc(strlen(gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld))) + "
+        fatalError("malloc(strlen(GBLappSettings.tempDir) + "
                    "strlen(randomizedItemName) + 2) failed");
-    strcpy(pathAndNameOnFs, gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)));
+    strcpy(pathAndNameOnFs, GBLappSettings.tempDir);
     
     strcat(pathAndNameOnFs, "/"); /* doesn't hurt even if not needed */
     
@@ -420,7 +418,7 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     
     /* extract the file to the temporary directory */
     rc = bk_extract_as(&GBLvolInfo, pathAndNameOnIso, 
-                       gtk_entry_get_text(GTK_ENTRY(GBLtempDirFld)), 
+                       GBLappSettings.tempDir, 
                        randomizedItemName, false, activityProgressUpdaterCbk);
     if(rc <= 0)
     {
@@ -448,7 +446,7 @@ void viewSelectedRowCbk(GtkTreeModel* model, GtkTreePath* path,
     /* start the viewer */
     if(!fork())
     {
-        execlp(gtk_entry_get_text(GTK_ENTRY(GBLviewerFld)), "viewer", pathAndNameOnFs, NULL);
+        execlp(GBLappSettings.viewer, "viewer", pathAndNameOnFs, NULL);
         
         kill(getppid(), SIGUSR2);
         
