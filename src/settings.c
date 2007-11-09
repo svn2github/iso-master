@@ -295,6 +295,7 @@ void loadSettings(void)
     int followSymLinks;
     char* tempStr;
     int appendExtension;
+    int caseSensitiveSort;
     
     configFileName = malloc(strlen(GBLuserHomeDir) + strlen(".isomaster") + 1);
     if(configFileName == NULL)
@@ -456,7 +457,7 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.lastBootRecordDir = NULL;
     
-    /* read/set show hidden files on filesystem */
+    /* read/set append extension */
     if(GBLsettingsDictionary != NULL)
     {
         appendExtension = iniparser_getboolean(GBLsettingsDictionary, 
@@ -622,6 +623,20 @@ void loadSettings(void)
         strcpy(GBLappSettings.fsDrive, "c:\\");
     }
     
+    /* read/set case sensitive sort */
+    if(GBLsettingsDictionary != NULL)
+    {
+        caseSensitiveSort = iniparser_getboolean(GBLsettingsDictionary, 
+                                                 "ui:casesensitivesort", INT_MAX);
+        if(caseSensitiveSort == INT_MAX)
+            GBLappSettings.caseSensitiveSort = false;
+        else
+            GBLappSettings.caseSensitiveSort = caseSensitiveSort;
+    }
+    else
+    /* no config file */
+        GBLappSettings.caseSensitiveSort = false;
+    
     free(configFileName);
 }
 
@@ -747,7 +762,6 @@ void showPreferencesWindowCbk(GtkButton* button, gpointer data)
         if(GBLappSettings.tempDir == NULL)
             fatalError("GBLappSettings.tempDir = malloc(...) failed");
         strcpy(GBLappSettings.tempDir, gtk_entry_get_text(GTK_ENTRY(prefWidgets.tempDir)));
-        
     }
     
     gtk_widget_destroy(prefWidgets.dialog);
@@ -849,6 +863,9 @@ void writeSettings(void)
     iniparser_setstr(GBLsettingsDictionary, "ui:fssortdirection", numberStr);
     
     iniparser_setstr(GBLsettingsDictionary, "ui:fsdrive", GBLappSettings.fsDrive);
+    
+    snprintf(numberStr, 20, "%d", GBLappSettings.caseSensitiveSort);
+    iniparser_setstr(GBLsettingsDictionary, "ui:casesensitivesort", numberStr);
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }

@@ -248,7 +248,7 @@ gint sortByName(GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer us
         gtk_tree_model_get(model, b, COLUMN_HIDDEN_TYPE, &bFileType, -1);
         
         /* have to make sure directories come first regardless of sort order, 
-        * that's why all the fancyness below */
+        * that's why all the fancyness in the rest of this block */
         gtk_tree_sortable_get_sort_column_id(GTK_TREE_SORTABLE(model), &unused, &order);
         
         if(aFileType == FILE_TYPE_DIRECTORY && bFileType != FILE_TYPE_DIRECTORY)
@@ -274,7 +274,10 @@ gint sortByName(GtkTreeModel *model, GtkTreeIter *a, GtkTreeIter *b, gpointer us
     gtk_tree_model_get(model, a, COLUMN_FILENAME, &aName, -1);
     gtk_tree_model_get(model, b, COLUMN_FILENAME, &bName, -1);
     
-    toReturn = strcmp(aName, bName);
+    if(GBLappSettings.caseSensitiveSort)
+        toReturn = strcmp(aName, bName);
+    else
+        toReturn = strcasecmp(aName, bName);
     
     g_free(aName);
     g_free(bName);

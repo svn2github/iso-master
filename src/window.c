@@ -230,6 +230,16 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_widget_show(checkbox);
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(sortDirsFirstCbk), NULL);
+    
+    checkbox = gtk_check_menu_item_new_with_mnemonic(_("_Sort is case sensitive"));
+    if(GBLappSettings.caseSensitiveSort)
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
+    else
+        gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), FALSE);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), checkbox);
+    gtk_widget_show(checkbox);
+    g_signal_connect(G_OBJECT(checkbox), "activate",
+                     G_CALLBACK(caseSensitiveSortCbk), NULL);
     /* END VIEW menu */
     
     /* TOOLS menu */
@@ -305,7 +315,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     /* END BOOT submenu */
     
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_PREFERENCES, NULL);
-    menuItem = gtk_menu_item_new_with_label(_("Options"));
+    menuItem = gtk_menu_item_new_with_mnemonic(_("_Options"));
     gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
     gtk_widget_show(menuItem);
     g_signal_connect(G_OBJECT(menuItem), "activate",
@@ -385,6 +395,15 @@ void buildMiddleToolbar(GtkWidget* boxToPackInto)
     gtk_toolbar_append_element(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_CHILD_WIDGET,
                                GBLisoSizeLbl, NULL, NULL, NULL, NULL, NULL, NULL);
     gtk_widget_show(GBLisoSizeLbl);
+}
+
+void caseSensitiveSortCbk(GtkButton *button, gpointer data)
+{
+    GBLappSettings.caseSensitiveSort = !GBLappSettings.caseSensitiveSort;
+    
+    refreshFsView();
+    if(GBLisoPaneActive)
+        refreshIsoView();
 }
 
 gboolean closeMainWindowCbk(GtkWidget *widget, GdkEvent *event)
