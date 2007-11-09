@@ -629,13 +629,13 @@ void loadSettings(void)
         caseSensitiveSort = iniparser_getboolean(GBLsettingsDictionary, 
                                                  "ui:casesensitivesort", INT_MAX);
         if(caseSensitiveSort == INT_MAX)
-            GBLappSettings.caseSensitiveSort = false;
+            GBLappSettings.caseSensitiveSort = true;
         else
             GBLappSettings.caseSensitiveSort = caseSensitiveSort;
     }
     else
     /* no config file */
-        GBLappSettings.caseSensitiveSort = false;
+        GBLappSettings.caseSensitiveSort = true;
     
     free(configFileName);
 }
