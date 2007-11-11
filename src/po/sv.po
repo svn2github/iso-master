@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 23:45-0400\n"
+"POT-Creation-Date: 2007-11-11 10:38-0500\n"
 "PO-Revision-Date: 2007-08-08 15:22+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:474
+#: ../window.c:389
 msgid "      Estimated ISO Size: "
 msgstr "   Uppskattad avbildsstorlek: "
 
@@ -30,7 +30,7 @@ msgstr ""
 "\n"
 "Vill du fortsätta?"
 
-#: ../editfile.c:182 ../editfile.c:394
+#: ../editfile.c:172 ../editfile.c:385
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "\"%s\" är inte en vanlig fil"
@@ -39,7 +39,7 @@ msgstr "\"%s\" är inte en vanlig fil"
 msgid "(scanning for duplicate files)"
 msgstr "(söker efter dublettfiler)"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add"
 msgstr "Lägg till"
 
@@ -47,7 +47,7 @@ msgstr "Lägg till"
 msgid "Add extension automatically"
 msgstr "Lägg automatiskt till filändelse"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add to the ISO"
 msgstr "Lägg till i avbild"
 
@@ -91,19 +91,19 @@ msgstr "Ändra rättigheter"
 msgid "Choose Boot Record File"
 msgstr "Välj startsektorfil"
 
-#: ../window.c:456
+#: ../window.c:371
 msgid "Create new directory on the ISO"
 msgstr "Skapa ny katalog i avbilden"
 
-#: ../window.c:66
+#: ../window.c:60
 msgid "Create new directory on the filesystem"
 msgstr "Skapa ny katalog i filsystemet"
 
-#: ../settings.c:81
+#: ../settings.c:78
 msgid "Creation time:"
 msgstr "Skapad den:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Delete from the ISO"
 msgstr "Ta bort från avbild"
 
@@ -111,11 +111,11 @@ msgstr "Ta bort från avbild"
 msgid "Edit"
 msgstr "Redigera"
 
-#: ../editfile.c:83
-msgid "Edit failed, please check Settings/Editor"
+#: ../editfile.c:77
+msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:701
 msgid "Editor"
 msgstr "Redigerare"
 
@@ -127,15 +127,15 @@ msgstr "Ange ett nytt namn:"
 msgid "Enter name for new directory"
 msgstr "Ange namn för ny katalog"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract"
 msgstr "Extrahera"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract from the ISO"
 msgstr "Extrahera från avbilden"
 
-#: ../editfile.c:285 ../isobrowser.c:214
+#: ../editfile.c:277 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Misslyckades med att lägga till \"%s\": \"%s\""
@@ -160,12 +160,12 @@ msgstr "Misslyckades med att skapa katalogen %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Misslyckades med att skapa katalogen %s: \"%s\""
 
-#: ../editfile.c:259 ../isobrowser.c:786
+#: ../editfile.c:251 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Misslyckades med att ta bort \"%s\": '%s'"
 
-#: ../editfile.c:224 ../editfile.c:436 ../isobrowser.c:899
+#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Misslyckades med att extrahera \"%s\": \"%s\""
@@ -180,7 +180,7 @@ msgstr "Misslyckades med att extrahera startsektor: \"%s\""
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Misslyckades med att initiera bkisofs: \"%s\""
 
-#: ../fsbrowser.c:219
+#: ../fsbrowser.c:218
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Misslyckades med att öppna katalogen \"%s\", fel %d"
@@ -215,27 +215,27 @@ msgstr "Misslyckades med att ställa in %s som startsektor: \"%s\""
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Misslyckades med att skriva avbild till \"%s\": \"%s\""
 
-#: ../settings.c:125
+#: ../settings.c:122
 msgid "Filename types (both recommended):"
 msgstr "Filnamnstyper (båda rekommenderas):"
 
-#: ../window.c:321
+#: ../settings.c:691
 msgid "Follow symbolic links"
 msgstr "Följ symboliska länkar"
 
-#: ../window.c:284
+#: ../window.c:298
 msgid "From file: 1200KiB floppy"
 msgstr "Från fil: 1200 KiB diskett"
 
-#: ../window.c:290
+#: ../window.c:304
 msgid "From file: 1440KiB floppy"
 msgstr "Från fil: 1440 KiB diskett"
 
-#: ../window.c:296
+#: ../window.c:310
 msgid "From file: 2880KiB floppy"
 msgstr "Från fil: 2880 KiB diskett"
 
-#: ../window.c:278
+#: ../window.c:292
 msgid "From file: no emulation"
 msgstr "Från fil: ingen emulering"
 
@@ -246,15 +246,15 @@ msgstr ""
 "Gränssnittsfel, borttagning av allt annat än filer och kataloger fungerar "
 "inte"
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:53 ../window.c:364
 msgid "Go back"
 msgstr "Gå bakåt"
 
-#: ../window.c:450
+#: ../window.c:365
 msgid "Go back up one directory on the ISO"
 msgstr "Gå tillbaka en katalog i avbilden"
 
-#: ../window.c:60
+#: ../window.c:54
 msgid "Go back up one directory on the filesystem"
 msgstr "Gå tillbaka en katalog i filsystemet"
 
@@ -266,16 +266,16 @@ msgstr "ISO-avbilder"
 msgid "ISO Master Help"
 msgstr "Hjälp för ISO Master"
 
-#: ../settings.c:65
+#: ../settings.c:62
 msgid "Image Information"
 msgstr "Avbildsinformation"
 
-#: ../settings.c:160
+#: ../settings.c:157
 #, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr "Ogiltig utgivare \"%s\": \"%s\""
 
-#: ../settings.c:176
+#: ../settings.c:173
 #, c-format
 msgid "Invalid volume name '%s': '%s'"
 msgstr "Ogiltigt volymnamn \"%s\": \"%s\""
@@ -325,7 +325,7 @@ msgstr "NRG-avbilder"
 msgid "Name"
 msgstr "Namn"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:59 ../window.c:370
 msgid "New Directory"
 msgstr "Ny katalog"
 
@@ -336,6 +336,10 @@ msgstr "Ingen startsektor inläst från originalet eller inställd på avbild"
 #: ../boot.c:108
 msgid "No boot to delete"
 msgstr "Ingen startsektor att ta bort"
+
+#: ../settings.c:666
+msgid "Options"
+msgstr ""
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -366,11 +370,11 @@ msgstr "Vänta under tiden jag sparar den nya avbilden till disk..."
 msgid "Progress"
 msgstr "Förlopp"
 
-#: ../settings.c:109
+#: ../settings.c:106
 msgid "Publisher:"
 msgstr "Utgivare:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Remove"
 msgstr "Ta bort"
 
@@ -386,11 +390,11 @@ msgstr "Spara fil"
 msgid "Save a copy of the boot record"
 msgstr "Spara en kopia av startsektorn"
 
-#: ../window.c:311
+#: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
 msgstr "Sök efter dublettfiler (långsam)"
 
-#: ../window.c:218
+#: ../window.c:214
 msgid "Show _hidden files"
 msgstr "Visa _dolda filer"
 
@@ -403,7 +407,7 @@ msgstr "Storlek"
 msgid "Size: %d bytes"
 msgstr "Storlek: %d byte"
 
-#: ../fsbrowser.c:270
+#: ../fsbrowser.c:269
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
@@ -414,18 +418,19 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Hoppar över katalogobjekt på grund av att stat(%s) misslyckades med %d"
 
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Temporär katalog"
 
 #: ../about.c:268
+#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
 " - The bottom file browser shows files and directories on the ISO image.\n"
 "\n"
-"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
-"ISO file click on 'Image' and 'New'.\n"
+"To open an existing ISO file click on 'File' and 'Open'. To create a new\n"
+"ISO file click on 'File' and 'New'.\n"
 "\n"
 "To add one or more files or directories to the ISO select them in the top\n"
 "file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
@@ -470,7 +475,7 @@ msgstr ""
 "\"\n"
 "och \"Spara som\". Du kan inte skriva över den ursprungliga iso-avbilden.\n"
 
-#: ../window.c:272
+#: ../window.c:286
 msgid "Use selected file on image (no emulation)"
 msgstr "Använd markerad fil i avbild (ingen emulering)"
 
@@ -478,49 +483,65 @@ msgstr "Använd markerad fil i avbild (ingen emulering)"
 msgid "View"
 msgstr "Visa"
 
-#: ../editfile.c:106
-msgid "View failed, please check Settings/Viewer"
+#: ../editfile.c:97
+msgid "View failed, please check Options/Viewer"
 msgstr ""
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:713
 msgid "Viewer"
 msgstr "Visare"
 
-#: ../settings.c:97
+#: ../settings.c:94
 msgid "Volume name:"
 msgstr "Volymnamn:"
 
-#: ../settings.c:734
+#: ../settings.c:652
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
 "Du måste stänga och öppna avbilden igen för att den här ändringen ska bli "
 "aktiv"
 
-#: ../window.c:240
-msgid "_BootRecord"
+#: ../window.c:254
+#, fuzzy
+msgid "_Boot Record"
 msgstr "_Startsektor"
 
-#: ../window.c:411
+#: ../window.c:141
+#, fuzzy
+msgid "_File"
+msgstr "_Visa"
+
+#: ../window.c:326
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: ../window.c:145
-msgid "_Image"
-msgstr "_Avbild"
+#: ../window.c:318
+msgid "_Options"
+msgstr ""
 
-#: ../window.c:420
+#: ../window.c:335
 msgid "_Overview"
 msgstr "Ö_versikt"
 
-#: ../window.c:304
-msgid "_Settings"
-msgstr "_Inställningar"
-
-#: ../window.c:228
+#: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_Sortera kataloger först"
 
-#: ../window.c:203
+#: ../window.c:234
+msgid "_Sort is case sensitive"
+msgstr ""
+
+#: ../window.c:246
+msgid "_Tools"
+msgstr ""
+
+#: ../window.c:199
 msgid "_View"
 msgstr "_Visa"
+
+#~ msgid "_Image"
+#~ msgstr "_Avbild"
+
+#~ msgid "_Settings"
+#~ msgstr "_Inställningar"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 23:45-0400\n"
+"POT-Creation-Date: 2007-11-11 10:38-0500\n"
 "PO-Revision-Date: 2007-09-21 17:57-0000\n"
 "Last-Translator: Magnus Valle <magnus@vallenett.no>\n"
 "Language-Team: <LL@li.org>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:474
+#: ../window.c:389
 msgid "      Estimated ISO Size: "
 msgstr "Met ISO stødd:"
 
@@ -28,7 +28,7 @@ msgstr ""
 "\n"
 "Vilt tú farða víðari?"
 
-#: ../editfile.c:182 ../editfile.c:394
+#: ../editfile.c:172 ../editfile.c:385
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr ""
@@ -37,7 +37,7 @@ msgstr ""
 msgid "(scanning for duplicate files)"
 msgstr "(laitar eftur eins fílum)"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add"
 msgstr "Legg afturat"
 
@@ -45,7 +45,7 @@ msgstr "Legg afturat"
 msgid "Add extension automatically"
 msgstr ""
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add to the ISO"
 msgstr "Skoyt uppí ISO'ðina"
 
@@ -89,19 +89,19 @@ msgstr ""
 msgid "Choose Boot Record File"
 msgstr ""
 
-#: ../window.c:456
+#: ../window.c:371
 msgid "Create new directory on the ISO"
 msgstr "Gerð eina nýggja fíluskrá á ISO'ðini"
 
-#: ../window.c:66
+#: ../window.c:60
 msgid "Create new directory on the filesystem"
 msgstr "Gerð eina nýggja fíluskrá á fílukervinum"
 
-#: ../settings.c:81
+#: ../settings.c:78
 msgid "Creation time:"
 msgstr ""
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Delete from the ISO"
 msgstr "Koyr ur ISO'ðini"
 
@@ -109,11 +109,11 @@ msgstr "Koyr ur ISO'ðini"
 msgid "Edit"
 msgstr ""
 
-#: ../editfile.c:83
-msgid "Edit failed, please check Settings/Editor"
+#: ../editfile.c:77
+msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:701
 msgid "Editor"
 msgstr ""
 
@@ -125,15 +125,15 @@ msgstr "Skriva eitt nýtt navn:"
 msgid "Enter name for new directory"
 msgstr "Skriva navni á nýggja fílukervinum"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract"
 msgstr "Tak frá"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract from the ISO"
 msgstr "Tak frá ISO'ðini"
 
-#: ../editfile.c:285 ../isobrowser.c:214
+#: ../editfile.c:277 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Mislukkaðist at leggja '%s' afturat: '%s'"
@@ -158,12 +158,12 @@ msgstr "Missednaðist at gerða fíluskrá '%s'"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Missednaðist at gerða fíluskrá '%s': '%s'"
 
-#: ../editfile.c:259 ../isobrowser.c:786
+#: ../editfile.c:251 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Mislukkaði at sletta '%s': '%s'"
 
-#: ../editfile.c:224 ../editfile.c:436 ../isobrowser.c:899
+#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Missednaðist at taka '%s' frá: '%s'"
@@ -178,7 +178,7 @@ msgstr ""
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr ""
 
-#: ../fsbrowser.c:219
+#: ../fsbrowser.c:218
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Missednaðist at gopna fíluskrá '%s', feil '%d'"
@@ -213,27 +213,27 @@ msgstr ""
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Missednaðist at skriva mynduna til '%s': '%s'"
 
-#: ../settings.c:125
+#: ../settings.c:122
 msgid "Filename types (both recommended):"
 msgstr "Slag av fílunavni (bæði tilrátt):"
 
-#: ../window.c:321
+#: ../settings.c:691
 msgid "Follow symbolic links"
 msgstr "Fylg symbolsku leinkju"
 
-#: ../window.c:284
+#: ../window.c:298
 msgid "From file: 1200KiB floppy"
 msgstr "Frá fílu: 1200KiB diskettu"
 
-#: ../window.c:290
+#: ../window.c:304
 msgid "From file: 1440KiB floppy"
 msgstr "Frá fílu: 1440KiB diskettu"
 
-#: ../window.c:296
+#: ../window.c:310
 msgid "From file: 2880KiB floppy"
 msgstr "Frá fílu: 2880KiB diskettu"
 
-#: ../window.c:278
+#: ../window.c:292
 msgid "From file: no emulation"
 msgstr "Frá fílu: eingin emulatión"
 
@@ -242,15 +242,15 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr ""
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:53 ../window.c:364
 msgid "Go back"
 msgstr "Far aftur"
 
-#: ../window.c:450
+#: ../window.c:365
 msgid "Go back up one directory on the ISO"
 msgstr "Far upp eitt fíluskrá á ISO'ðini"
 
-#: ../window.c:60
+#: ../window.c:54
 msgid "Go back up one directory on the filesystem"
 msgstr "Far upp eitt fíluskrá á fílukervinum"
 
@@ -262,16 +262,16 @@ msgstr "ISO myndur"
 msgid "ISO Master Help"
 msgstr "ISO Master Hjálp"
 
-#: ../settings.c:65
+#: ../settings.c:62
 msgid "Image Information"
 msgstr "Mynd upplýsing"
 
-#: ../settings.c:160
+#: ../settings.c:157
 #, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr ""
 
-#: ../settings.c:176
+#: ../settings.c:173
 #, c-format
 msgid "Invalid volume name '%s': '%s'"
 msgstr ""
@@ -321,7 +321,7 @@ msgstr "NRG Mynd"
 msgid "Name"
 msgstr "Navn"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:59 ../window.c:370
 msgid "New Directory"
 msgstr "Nýggj Fíluskrá"
 
@@ -331,6 +331,10 @@ msgstr ""
 
 #: ../boot.c:108
 msgid "No boot to delete"
+msgstr ""
+
+#: ../settings.c:666
+msgid "Options"
 msgstr ""
 
 #: ../boot.c:229
@@ -363,11 +367,11 @@ msgstr "Vinarliga bíða ímeðan eg goymi tað nýggju myndina á fløguna..."
 msgid "Progress"
 msgstr "Far víðari"
 
-#: ../settings.c:109
+#: ../settings.c:106
 msgid "Publisher:"
 msgstr ""
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Remove"
 msgstr "Koyr vekk"
 
@@ -384,11 +388,11 @@ msgstr "Goym Fílu"
 msgid "Save a copy of the boot record"
 msgstr ""
 
-#: ../window.c:311
+#: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
 msgstr "Laita eftur eins fílum (seint)"
 
-#: ../window.c:218
+#: ../window.c:214
 msgid "Show _hidden files"
 msgstr "Vís _goymdir fílar"
 
@@ -401,7 +405,7 @@ msgstr "Stødd"
 msgid "Size: %d bytes"
 msgstr "Stødd: %d byte"
 
-#: ../fsbrowser.c:270
+#: ../fsbrowser.c:269
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
@@ -412,19 +416,20 @@ msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr ""
 
 #
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:724
 msgid "Temporary directory"
 msgstr ""
 
 # !! the last paragraph is untranslated
 #: ../about.c:268
+#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
 " - The bottom file browser shows files and directories on the ISO image.\n"
 "\n"
-"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
-"ISO file click on 'Image' and 'New'.\n"
+"To open an existing ISO file click on 'File' and 'Open'. To create a new\n"
+"ISO file click on 'File' and 'New'.\n"
 "\n"
 "To add one or more files or directories to the ISO select them in the top\n"
 "file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
@@ -464,7 +469,7 @@ msgstr ""
 "'Mynd' og 'Goym Sum'. Tú kanst ikki goyma oman á tað uppruna\n"
 "ISO mynuna\n"
 
-#: ../window.c:272
+#: ../window.c:286
 msgid "Use selected file on image (no emulation)"
 msgstr "Nýt valgda fílu á mynduni (eingin emulatión)"
 
@@ -472,49 +477,60 @@ msgstr "Nýt valgda fílu á mynduni (eingin emulatión)"
 msgid "View"
 msgstr ""
 
-#: ../editfile.c:106
-msgid "View failed, please check Settings/Viewer"
+#: ../editfile.c:97
+msgid "View failed, please check Options/Viewer"
 msgstr ""
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:713
 msgid "Viewer"
 msgstr ""
 
-#: ../settings.c:97
+#: ../settings.c:94
 msgid "Volume name:"
 msgstr ""
 
-#: ../settings.c:734
+#: ../settings.c:652
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
 "Fyri hendan broytingin skal gerast virkin, mast tu lata aftur og so opna "
 "ISO'ðina"
 
-#: ../window.c:240
-msgid "_BootRecord"
+#: ../window.c:254
+msgid "_Boot Record"
 msgstr ""
 
-#: ../window.c:411
+#: ../window.c:141
+msgid "_File"
+msgstr ""
+
+#: ../window.c:326
 msgid "_Help"
 msgstr "_Hjálp"
 
-#: ../window.c:145
-msgid "_Image"
-msgstr "_Mynd"
+#: ../window.c:318
+msgid "_Options"
+msgstr ""
 
-#: ../window.c:420
+#: ../window.c:335
 msgid "_Overview"
 msgstr ""
 
-#: ../window.c:304
-msgid "_Settings"
-msgstr ""
-
-#: ../window.c:228
+#: ../window.c:224
 msgid "_Sort directories first"
 msgstr ""
 
-#: ../window.c:203
+#: ../window.c:234
+msgid "_Sort is case sensitive"
+msgstr ""
+
+#: ../window.c:246
+msgid "_Tools"
+msgstr ""
+
+#: ../window.c:199
 msgid "_View"
 msgstr ""
+
+#~ msgid "_Image"
+#~ msgstr "_Mynd"

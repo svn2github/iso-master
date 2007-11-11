@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 23:45-0400\n"
+"POT-Creation-Date: 2007-11-11 10:38-0500\n"
 "PO-Revision-Date: 2007-08-27 04:01-0500\n"
 "Last-Translator: Danijel Muharemovic <majstor_dane@inbox.com>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:474
+#: ../window.c:389
 msgid "      Estimated ISO Size: "
 msgstr "Прорачуната величина ISO фајла:"
 
@@ -28,7 +28,7 @@ msgstr ""
 "\n"
 "Да ли желите да наставите?"
 
-#: ../editfile.c:182 ../editfile.c:394
+#: ../editfile.c:172 ../editfile.c:385
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' није прописан фајл"
@@ -37,7 +37,7 @@ msgstr "'%s' није прописан фајл"
 msgid "(scanning for duplicate files)"
 msgstr "(претрага за дуплираним датотекама)"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add"
 msgstr "Додај"
 
@@ -45,7 +45,7 @@ msgstr "Додај"
 msgid "Add extension automatically"
 msgstr "Аутоматски додај екстензију"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add to the ISO"
 msgstr "Додај у ISO"
 
@@ -89,19 +89,19 @@ msgstr "Измени дозволе за приступ"
 msgid "Choose Boot Record File"
 msgstr "Изабери бутабилни фајл"
 
-#: ../window.c:456
+#: ../window.c:371
 msgid "Create new directory on the ISO"
 msgstr "Креирај нови директоријум у ISO-у"
 
-#: ../window.c:66
+#: ../window.c:60
 msgid "Create new directory on the filesystem"
 msgstr "Креирај нови директоријум у фајлсистему"
 
-#: ../settings.c:81
+#: ../settings.c:78
 msgid "Creation time:"
 msgstr "Време креирања:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Delete from the ISO"
 msgstr "Избриши из ISO-а"
 
@@ -109,11 +109,11 @@ msgstr "Избриши из ISO-а"
 msgid "Edit"
 msgstr "Измени"
 
-#: ../editfile.c:83
-msgid "Edit failed, please check Settings/Editor"
+#: ../editfile.c:77
+msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:701
 msgid "Editor"
 msgstr "Уређивач"
 
@@ -125,15 +125,15 @@ msgstr "Унеси ново име:"
 msgid "Enter name for new directory"
 msgstr "Унеси име новог директоријума"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract"
 msgstr "Екстракција"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract from the ISO"
 msgstr "Екстрактуј из ISO-а"
 
-#: ../editfile.c:285 ../isobrowser.c:214
+#: ../editfile.c:277 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Неуспешно додавање '%s': '%s' "
@@ -158,12 +158,12 @@ msgstr "Неуспешно креирање директоријума %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Неуспешно креирање директоријума %s: '%s'"
 
-#: ../editfile.c:259 ../isobrowser.c:786
+#: ../editfile.c:251 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Неуспешно брисање '%s': '%s'"
 
-#: ../editfile.c:224 ../editfile.c:436 ../isobrowser.c:899
+#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Неуспешна екстракција '%s': '%s'"
@@ -178,7 +178,7 @@ msgstr "Неуспешна екстракција бутабилног фајл�
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Неуспешно покретање bkisofs: '%s'"
 
-#: ../fsbrowser.c:219
+#: ../fsbrowser.c:218
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Неуспешно отварање директоријума '%s', greška %d"
@@ -213,27 +213,27 @@ msgstr "Неуспешна поставка %s као бутабилног фа�
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Неуспешна забелешка имиџа у '%s': '%s'"
 
-#: ../settings.c:125
+#: ../settings.c:122
 msgid "Filename types (both recommended):"
 msgstr "Типови датотека (оба препоручена)"
 
-#: ../window.c:321
+#: ../settings.c:691
 msgid "Follow symbolic links"
 msgstr "Следи симболични линк"
 
-#: ../window.c:284
+#: ../window.c:298
 msgid "From file: 1200KiB floppy"
 msgstr "Из фајла: 1200KiB Флопи"
 
-#: ../window.c:290
+#: ../window.c:304
 msgid "From file: 1440KiB floppy"
 msgstr "Из фајла: 1440KiB Флопи"
 
-#: ../window.c:296
+#: ../window.c:310
 msgid "From file: 2880KiB floppy"
 msgstr "Из фајла: 2880KiB Флопи"
 
-#: ../window.c:278
+#: ../window.c:292
 msgid "From file: no emulation"
 msgstr "Из фајла: без емулације"
 
@@ -242,15 +242,15 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "ГРЕШКА, брисање било чега осим фајлова и директоријума није могуће"
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:53 ../window.c:364
 msgid "Go back"
 msgstr "Назад"
 
-#: ../window.c:450
+#: ../window.c:365
 msgid "Go back up one directory on the ISO"
 msgstr "Повратак у надређени директоријум у ISO-у"
 
-#: ../window.c:60
+#: ../window.c:54
 msgid "Go back up one directory on the filesystem"
 msgstr "Повратак у надређени директоријум у фајлсистему"
 
@@ -262,16 +262,16 @@ msgstr "ISO имиџи"
 msgid "ISO Master Help"
 msgstr "ISO Master Помоћ"
 
-#: ../settings.c:65
+#: ../settings.c:62
 msgid "Image Information"
 msgstr "Информације о имиџу"
 
-#: ../settings.c:160
+#: ../settings.c:157
 #, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr "Погрешан издавач '%s': '%s'"
 
-#: ../settings.c:176
+#: ../settings.c:173
 #, c-format
 msgid "Invalid volume name '%s': '%s'"
 msgstr "Погрешан назив волумена '%s': %s"
@@ -322,7 +322,7 @@ msgstr "NRG имиџ"
 msgid "Name"
 msgstr "Име"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:59 ../window.c:370
 msgid "New Directory"
 msgstr "Нови директоријум"
 
@@ -333,6 +333,10 @@ msgstr "Не постоји бутабилни фајл у оригиналу н
 #: ../boot.c:108
 msgid "No boot to delete"
 msgstr "Без бутабилног фајла за брисање"
+
+#: ../settings.c:666
+msgid "Options"
+msgstr ""
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -363,11 +367,11 @@ msgstr "Молим причекајте док се нови имиџ запис
 msgid "Progress"
 msgstr "Напредак"
 
-#: ../settings.c:109
+#: ../settings.c:106
 msgid "Publisher:"
 msgstr "Издавач:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Remove"
 msgstr "Уклони"
 
@@ -383,11 +387,11 @@ msgstr "Сачувај фајл"
 msgid "Save a copy of the boot record"
 msgstr "Екстрактуј бутабилни фајл из ISO-а"
 
-#: ../window.c:311
+#: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
 msgstr "Претраживање дуплих датотека (споро)"
 
-#: ../window.c:218
+#: ../window.c:214
 msgid "Show _hidden files"
 msgstr "Прикажи _скривене фајлове"
 
@@ -400,7 +404,7 @@ msgstr "Величина"
 msgid "Size: %d bytes"
 msgstr "Величина: %d бајтова "
 
-#: ../fsbrowser.c:270
+#: ../fsbrowser.c:269
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
@@ -412,18 +416,19 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Поништавам унос директоријума због статуса(%s) неуспело са %d"
 
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Привремени директоријум"
 
 #: ../about.c:268
+#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
 " - The bottom file browser shows files and directories on the ISO image.\n"
 "\n"
-"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
-"ISO file click on 'Image' and 'New'.\n"
+"To open an existing ISO file click on 'File' and 'Open'. To create a new\n"
+"ISO file click on 'File' and 'New'.\n"
 "\n"
 "To add one or more files or directories to the ISO select them in the top\n"
 "file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
@@ -467,7 +472,7 @@ msgstr ""
 "Када направите жељене измене у ISO имиџу, кликните на 'Имиџ' и\n"
 "'Сачувај као'. Не можете пребрисати оригинални ISO.\n"
 
-#: ../window.c:272
+#: ../window.c:286
 msgid "Use selected file on image (no emulation)"
 msgstr "Користи одабрани фајл у имиџу (без емулације)"
 
@@ -475,47 +480,63 @@ msgstr "Користи одабрани фајл у имиџу (без емул�
 msgid "View"
 msgstr "Прикажи"
 
-#: ../editfile.c:106
-msgid "View failed, please check Settings/Viewer"
+#: ../editfile.c:97
+msgid "View failed, please check Options/Viewer"
 msgstr ""
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:713
 msgid "Viewer"
 msgstr "Прегледник"
 
-#: ../settings.c:97
+#: ../settings.c:94
 msgid "Volume name:"
 msgstr "Назив волумена:"
 
-#: ../settings.c:734
+#: ../settings.c:652
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Морате затворити ISO и поново га отворити да би промене биле видљиве"
 
-#: ../window.c:240
-msgid "_BootRecord"
+#: ../window.c:254
+#, fuzzy
+msgid "_Boot Record"
 msgstr "_Бутабилни-фајл"
 
-#: ../window.c:411
+#: ../window.c:141
+#, fuzzy
+msgid "_File"
+msgstr "П_рикажи"
+
+#: ../window.c:326
 msgid "_Help"
 msgstr "По_моћ"
 
-#: ../window.c:145
-msgid "_Image"
-msgstr "_Имиџ"
+#: ../window.c:318
+msgid "_Options"
+msgstr ""
 
-#: ../window.c:420
+#: ../window.c:335
 msgid "_Overview"
 msgstr "Kratko _uputstvo"
 
-#: ../window.c:304
-msgid "_Settings"
-msgstr "_Подешавања"
-
-#: ../window.c:228
+#: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_Прво сортирај директоријуме"
 
-#: ../window.c:203
+#: ../window.c:234
+msgid "_Sort is case sensitive"
+msgstr ""
+
+#: ../window.c:246
+msgid "_Tools"
+msgstr ""
+
+#: ../window.c:199
 msgid "_View"
 msgstr "П_рикажи"
+
+#~ msgid "_Image"
+#~ msgstr "_Имиџ"
+
+#~ msgid "_Settings"
+#~ msgstr "_Подешавања"

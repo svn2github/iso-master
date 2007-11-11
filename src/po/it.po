@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 23:45-0400\n"
+"POT-Creation-Date: 2007-11-11 10:38-0500\n"
 "PO-Revision-Date: 2007-08-21 10:31+0100\n"
 "Last-Translator: Valerio Guaglianone aka Valpenguin <valpenguin@gmail.com>\n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Country: ITALY\n"
 
-#: ../window.c:474
+#: ../window.c:389
 msgid "      Estimated ISO Size: "
 msgstr "      Dimensioni ISO stimata:"
 
@@ -33,7 +33,7 @@ msgstr ""
 "\n"
 "Si vuole continuare ?"
 
-#: ../editfile.c:182 ../editfile.c:394
+#: ../editfile.c:172 ../editfile.c:385
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' non è un file regolare"
@@ -42,7 +42,7 @@ msgstr "'%s' non è un file regolare"
 msgid "(scanning for duplicate files)"
 msgstr "(scansione in corso per ricerca file duplicati)"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add"
 msgstr "Aggiungi"
 
@@ -50,7 +50,7 @@ msgstr "Aggiungi"
 msgid "Add extension automatically"
 msgstr "Suffisso aggiunto automaticamente"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add to the ISO"
 msgstr "Aggiungi all'immagine ISO"
 
@@ -94,19 +94,19 @@ msgstr "Cambia permessi"
 msgid "Choose Boot Record File"
 msgstr "Scegliere il file di Boot Record"
 
-#: ../window.c:456
+#: ../window.c:371
 msgid "Create new directory on the ISO"
 msgstr "Creazione nuova cartella sull'immagine ISO"
 
-#: ../window.c:66
+#: ../window.c:60
 msgid "Create new directory on the filesystem"
 msgstr "Creazione nuova cartella sul disco"
 
-#: ../settings.c:81
+#: ../settings.c:78
 msgid "Creation time:"
 msgstr "Timestamp di creazione:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Delete from the ISO"
 msgstr "Cancella dall'immagine ISO"
 
@@ -114,11 +114,11 @@ msgstr "Cancella dall'immagine ISO"
 msgid "Edit"
 msgstr "Edita"
 
-#: ../editfile.c:83
-msgid "Edit failed, please check Settings/Editor"
+#: ../editfile.c:77
+msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:701
 msgid "Editor"
 msgstr "Editor"
 
@@ -130,15 +130,15 @@ msgstr "Inserisci un nuovo nome"
 msgid "Enter name for new directory"
 msgstr "Inserire il nome della nuova cartella"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract"
 msgstr "Estrai"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract from the ISO"
 msgstr "Estrai dall'immagine ISO"
 
-#: ../editfile.c:285 ../isobrowser.c:214
+#: ../editfile.c:277 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Errore nell'aggiungere '%s': '%s'"
@@ -163,12 +163,12 @@ msgstr "Errore nel creare la cartella '%s'"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Errore nel creare la cartella '%s': '%s'"
 
-#: ../editfile.c:259 ../isobrowser.c:786
+#: ../editfile.c:251 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Errore nel cancellare '%s': '%s'"
 
-#: ../editfile.c:224 ../editfile.c:436 ../isobrowser.c:899
+#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Errore nell'estrarre '%s': '%s'"
@@ -183,7 +183,7 @@ msgstr "Errore nell'estrarre il boot record: '%s'"
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Errore nell'inizializzare bkisofs: '%s'"
 
-#: ../fsbrowser.c:219
+#: ../fsbrowser.c:218
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Errore nell'aprire la cartella '%s': errore %d"
@@ -218,27 +218,27 @@ msgstr "Errore nell'impostare '%s' come boot record: '%s'"
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Errore nella scittura dell'immagine su '%s': '%s'"
 
-#: ../settings.c:125
+#: ../settings.c:122
 msgid "Filename types (both recommended):"
 msgstr "Tipo file (entrambi consigliati):"
 
-#: ../window.c:321
+#: ../settings.c:691
 msgid "Follow symbolic links"
 msgstr "Seguire i link simbolici"
 
-#: ../window.c:284
+#: ../window.c:298
 msgid "From file: 1200KiB floppy"
 msgstr "Da file: 1200 KiB floppy"
 
-#: ../window.c:290
+#: ../window.c:304
 msgid "From file: 1440KiB floppy"
 msgstr "Da file: 1440 KiB floppy"
 
-#: ../window.c:296
+#: ../window.c:310
 msgid "From file: 2880KiB floppy"
 msgstr "Da file: 2880 KiB floppy"
 
-#: ../window.c:278
+#: ../window.c:292
 msgid "From file: no emulation"
 msgstr "Da file: no emulazione"
 
@@ -247,15 +247,15 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "Errore GUI, solo i file e cartelle possono essere cancellati"
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:53 ../window.c:364
 msgid "Go back"
 msgstr "Precedente"
 
-#: ../window.c:450
+#: ../window.c:365
 msgid "Go back up one directory on the ISO"
 msgstr "Cartella precedente sull'immagine ISO"
 
-#: ../window.c:60
+#: ../window.c:54
 msgid "Go back up one directory on the filesystem"
 msgstr "Cartella precedente sul disco"
 
@@ -267,16 +267,16 @@ msgstr "Immagini ISO"
 msgid "ISO Master Help"
 msgstr "Guida di ISO Master"
 
-#: ../settings.c:65
+#: ../settings.c:62
 msgid "Image Information"
 msgstr "Informazioni immagine ISO"
 
-#: ../settings.c:160
+#: ../settings.c:157
 #, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr "Editore non valido '%s': '%s'"
 
-#: ../settings.c:176
+#: ../settings.c:173
 #, c-format
 msgid "Invalid volume name '%s': '%s'"
 msgstr "Nome di volume non valido '%s': %s"
@@ -326,7 +326,7 @@ msgstr "Immagini NRG"
 msgid "Name"
 msgstr "Nome"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:59 ../window.c:370
 msgid "New Directory"
 msgstr "Nuova cartella"
 
@@ -337,6 +337,10 @@ msgstr "Boot record non presente nell'originale o non definito"
 #: ../boot.c:108
 msgid "No boot to delete"
 msgstr "Nessun Boot Record da cancellare"
+
+#: ../settings.c:666
+msgid "Options"
+msgstr ""
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -369,11 +373,11 @@ msgstr "Attendere mentre viene creata la nuova immagine su disco ..."
 msgid "Progress"
 msgstr "In corso"
 
-#: ../settings.c:109
+#: ../settings.c:106
 msgid "Publisher:"
 msgstr "Editore:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Remove"
 msgstr "Elimina"
 
@@ -389,11 +393,11 @@ msgstr "Salva file"
 msgid "Save a copy of the boot record"
 msgstr "Salva una copia del Boot Record"
 
-#: ../window.c:311
+#: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
 msgstr "Scansione per ricerca file duplicati (lenta)"
 
-#: ../window.c:218
+#: ../window.c:214
 msgid "Show _hidden files"
 msgstr "Mostra i file _nascosti"
 
@@ -406,7 +410,7 @@ msgstr "Dimensione"
 msgid "Size: %d bytes"
 msgstr "Dimensione: %d byte"
 
-#: ../fsbrowser.c:270
+#: ../fsbrowser.c:269
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr "Escluso oggetto, perchè il nome completo è più lungo di 256 caratteri"
@@ -416,18 +420,19 @@ msgstr "Escluso oggetto, perchè il nome completo è più lungo di 256 caratteri
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Escluso oggetto, perchè 'stat(%s)' ha segnalato l'errore %d"
 
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Cartella temporanea"
 
 #: ../about.c:268
+#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
 " - The bottom file browser shows files and directories on the ISO image.\n"
 "\n"
-"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
-"ISO file click on 'Image' and 'New'.\n"
+"To open an existing ISO file click on 'File' and 'Open'. To create a new\n"
+"ISO file click on 'File' and 'New'.\n"
 "\n"
 "To add one or more files or directories to the ISO select them in the top\n"
 "file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
@@ -476,7 +481,7 @@ msgstr ""
 "nel browser dei file, verranno visualizzate tutte le opzioni disponibili.\n"
 "\n"
 
-#: ../window.c:272
+#: ../window.c:286
 msgid "Use selected file on image (no emulation)"
 msgstr "Usare il file selezionato sull'immagine (no emulazione)"
 
@@ -484,49 +489,65 @@ msgstr "Usare il file selezionato sull'immagine (no emulazione)"
 msgid "View"
 msgstr "Visualizza"
 
-#: ../editfile.c:106
-msgid "View failed, please check Settings/Viewer"
+#: ../editfile.c:97
+msgid "View failed, please check Options/Viewer"
 msgstr ""
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:713
 msgid "Viewer"
 msgstr "_Visualizzatore"
 
-#: ../settings.c:97
+#: ../settings.c:94
 msgid "Volume name:"
 msgstr "Nome volume:"
 
-#: ../settings.c:734
+#: ../settings.c:652
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
 "E' necessario chiudere e riaprire l'immagine ISO affinchè le modifiche "
 "risultino operative"
 
-#: ../window.c:240
-msgid "_BootRecord"
+#: ../window.c:254
+#, fuzzy
+msgid "_Boot Record"
 msgstr "_BootRecord"
 
-#: ../window.c:411
+#: ../window.c:141
+#, fuzzy
+msgid "_File"
+msgstr "_Visualizza"
+
+#: ../window.c:326
 msgid "_Help"
 msgstr "_Guida"
 
-#: ../window.c:145
-msgid "_Image"
-msgstr "_ISO"
+#: ../window.c:318
+msgid "_Options"
+msgstr ""
 
-#: ../window.c:420
+#: ../window.c:335
 msgid "_Overview"
 msgstr "_Introduzione"
 
-#: ../window.c:304
-msgid "_Settings"
-msgstr "I_mpostazioni"
-
-#: ../window.c:228
+#: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_Ordina prima le cartelle"
 
-#: ../window.c:203
+#: ../window.c:234
+msgid "_Sort is case sensitive"
+msgstr ""
+
+#: ../window.c:246
+msgid "_Tools"
+msgstr ""
+
+#: ../window.c:199
 msgid "_View"
 msgstr "_Visualizza"
+
+#~ msgid "_Image"
+#~ msgstr "_ISO"
+
+#~ msgid "_Settings"
+#~ msgstr "I_mpostazioni"

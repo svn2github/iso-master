@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 23:45-0400\n"
+"POT-Creation-Date: 2007-11-11 10:38-0500\n"
 "PO-Revision-Date: 2007-10-05 22:03+0100\n"
 "Last-Translator: András Horváth <han@log69.com>\n"
 "Language-Team: András Horváth <han@log69.com>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "X-Poedit-Country: HUNGARY\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../window.c:474
+#: ../window.c:389
 msgid "      Estimated ISO Size: "
 msgstr "      Becsült ISO fájl-méret:"
 
@@ -30,7 +30,7 @@ msgstr ""
 "\n"
 "Kívánja folytatni?"
 
-#: ../editfile.c:182 ../editfile.c:394
+#: ../editfile.c:172 ../editfile.c:385
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' nem szokványos fájl"
@@ -39,7 +39,7 @@ msgstr "'%s' nem szokványos fájl"
 msgid "(scanning for duplicate files)"
 msgstr "(duplikált fájlok keresése)"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add"
 msgstr "Hozzáadás"
 
@@ -47,7 +47,7 @@ msgstr "Hozzáadás"
 msgid "Add extension automatically"
 msgstr "Kiterjesztés automatikus hozzáadása"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add to the ISO"
 msgstr "Hozzáadás az ISO-hoz"
 
@@ -91,19 +91,19 @@ msgstr "Engedélyek megváltoztatása"
 msgid "Choose Boot Record File"
 msgstr "Válasszon Indító Rekord Fájlt"
 
-#: ../window.c:456
+#: ../window.c:371
 msgid "Create new directory on the ISO"
 msgstr "Új mappa létrehozása az ISO-n"
 
-#: ../window.c:66
+#: ../window.c:60
 msgid "Create new directory on the filesystem"
 msgstr "Új mappa létrehozása a fájlrendszeren"
 
-#: ../settings.c:81
+#: ../settings.c:78
 msgid "Creation time:"
 msgstr "Létrehozás ideje:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Delete from the ISO"
 msgstr "Törlés az ISO-ból"
 
@@ -111,11 +111,11 @@ msgstr "Törlés az ISO-ból"
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: ../editfile.c:83
-msgid "Edit failed, please check Settings/Editor"
+#: ../editfile.c:77
+msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:701
 msgid "Editor"
 msgstr "Szerkesztő"
 
@@ -127,15 +127,15 @@ msgstr "Adjon meg egy új nevet:"
 msgid "Enter name for new directory"
 msgstr "Adja meg az új mappa nevét"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract"
 msgstr "Kicsomagolás"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract from the ISO"
 msgstr "Kicsomagolás az ISO-ból"
 
-#: ../editfile.c:285 ../isobrowser.c:214
+#: ../editfile.c:277 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Hiba '%s' hozzáadáskor: '%s'"
@@ -160,12 +160,12 @@ msgstr "Hiba '%s' mappa létrehozásakor"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Hiba %s mappa létrehozásakor: '%s'"
 
-#: ../editfile.c:259 ../isobrowser.c:786
+#: ../editfile.c:251 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Hiba '%s' törlésekor: '%s'"
 
-#: ../editfile.c:224 ../editfile.c:436 ../isobrowser.c:899
+#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Hiba '%s' kicsomagolásakor: '%s'"
@@ -180,7 +180,7 @@ msgstr "Hiba az indító rekord kicsomagolásakor: '%s'"
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Hiba bkisofs inicializálásakor: '%s'"
 
-#: ../fsbrowser.c:219
+#: ../fsbrowser.c:218
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Hiba '%s' mappa megnyitásakor, hibakód %d"
@@ -215,27 +215,27 @@ msgstr "Hiba %s indító rekordnak való beállításakor: '%s'"
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Hiba a képfájl '%s'-hoz való hozzáírásakor: '%s'"
 
-#: ../settings.c:125
+#: ../settings.c:122
 msgid "Filename types (both recommended):"
 msgstr "Fájlnév típusok (mindkettő ajánlott):"
 
-#: ../window.c:321
+#: ../settings.c:691
 msgid "Follow symbolic links"
 msgstr "Szimbolikus link követése"
 
-#: ../window.c:284
+#: ../window.c:298
 msgid "From file: 1200KiB floppy"
 msgstr "Fájlból: 1200KiB floppy"
 
-#: ../window.c:290
+#: ../window.c:304
 msgid "From file: 1440KiB floppy"
 msgstr "Fájlból: 1440KiB floppy"
 
-#: ../window.c:296
+#: ../window.c:310
 msgid "From file: 2880KiB floppy"
 msgstr "Fájlból: 2880KiB floppy"
 
-#: ../window.c:278
+#: ../window.c:292
 msgid "From file: no emulation"
 msgstr "Fájlból: nincs emuláció"
 
@@ -245,15 +245,15 @@ msgid ""
 msgstr ""
 "Grafikus felület hiba, nem működik a fájlokon és mappákon kívüli törlés"
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:53 ../window.c:364
 msgid "Go back"
 msgstr "Vissza"
 
-#: ../window.c:450
+#: ../window.c:365
 msgid "Go back up one directory on the ISO"
 msgstr "Vissza egy könyvtár szinttel az ISO-n"
 
-#: ../window.c:60
+#: ../window.c:54
 msgid "Go back up one directory on the filesystem"
 msgstr "Vissza egy könyvtár szinttel a fájlrendszeren"
 
@@ -265,16 +265,16 @@ msgstr "ISO képfájlok"
 msgid "ISO Master Help"
 msgstr "ISO Mster Súgó"
 
-#: ../settings.c:65
+#: ../settings.c:62
 msgid "Image Information"
 msgstr "Képfájl információ"
 
-#: ../settings.c:160
+#: ../settings.c:157
 #, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr "Érvénytelen kiadó '%s': '%s'"
 
-#: ../settings.c:176
+#: ../settings.c:173
 #, c-format
 msgid "Invalid volume name '%s': '%s'"
 msgstr "Érvénytelen kötet név '%s': '%s'"
@@ -325,7 +325,7 @@ msgstr "NRG képfájlok"
 msgid "Name"
 msgstr "Név"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:59 ../window.c:370
 msgid "New Directory"
 msgstr "Új Mappa"
 
@@ -336,6 +336,10 @@ msgstr "Nincs olvasható vagy beállított indító rekord a képfájlon"
 #: ../boot.c:108
 msgid "No boot to delete"
 msgstr "Nincs törölhető indító rekord"
+
+#: ../settings.c:666
+msgid "Options"
+msgstr ""
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -366,11 +370,11 @@ msgstr "Kérem várjon amíg elmentem az új képfájlt a lemezre..."
 msgid "Progress"
 msgstr "Folyamat"
 
-#: ../settings.c:109
+#: ../settings.c:106
 msgid "Publisher:"
 msgstr "Kiadó:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Remove"
 msgstr "Eltávolítás"
 
@@ -386,11 +390,11 @@ msgstr "Fájl mentése"
 msgid "Save a copy of the boot record"
 msgstr "Indító rekord másolatának mentése"
 
-#: ../window.c:311
+#: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
 msgstr "Duplikált fájlok keresése (lassú)"
 
-#: ../window.c:218
+#: ../window.c:214
 msgid "Show _hidden files"
 msgstr "Rejtett fájlok mutatása"
 
@@ -403,7 +407,7 @@ msgstr "Méret"
 msgid "Size: %d bytes"
 msgstr "Méret: %d byte"
 
-#: ../fsbrowser.c:270
+#: ../fsbrowser.c:269
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
@@ -416,18 +420,19 @@ msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr ""
 "Könyvtár bemenet átugrása mivel (%s) statisztikai hibát okozott %d kóddal"
 
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Átmeneti mappa"
 
 #: ../about.c:268
+#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
 " - The bottom file browser shows files and directories on the ISO image.\n"
 "\n"
-"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
-"ISO file click on 'Image' and 'New'.\n"
+"To open an existing ISO file click on 'File' and 'Open'. To create a new\n"
+"ISO file click on 'File' and 'New'.\n"
 "\n"
 "To add one or more files or directories to the ISO select them in the top\n"
 "file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
@@ -476,7 +481,7 @@ msgstr ""
 "klikkeljen a 'Képfájl' és 'Mentés másként' menüre.\n"
 "Nem tudja felülírni az eredeti ISO-t.\n"
 
-#: ../window.c:272
+#: ../window.c:286
 msgid "Use selected file on image (no emulation)"
 msgstr "Kiválasztott fájl használata a képfájlon (nincs emuláció)"
 
@@ -484,49 +489,65 @@ msgstr "Kiválasztott fájl használata a képfájlon (nincs emuláció)"
 msgid "View"
 msgstr "Nézet"
 
-#: ../editfile.c:106
-msgid "View failed, please check Settings/Viewer"
+#: ../editfile.c:97
+msgid "View failed, please check Options/Viewer"
 msgstr ""
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:713
 msgid "Viewer"
 msgstr "Megtekintő"
 
-#: ../settings.c:97
+#: ../settings.c:94
 msgid "Volume name:"
 msgstr "Kötet név:"
 
-#: ../settings.c:734
+#: ../settings.c:652
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
 "Be kell zárnia majd és újra megnyitni az ISO-t hogy a módosítások életbe "
 "lépjenek"
 
-#: ../window.c:240
-msgid "_BootRecord"
+#: ../window.c:254
+#, fuzzy
+msgid "_Boot Record"
 msgstr "_IndítóRekord"
 
-#: ../window.c:411
+#: ../window.c:141
+#, fuzzy
+msgid "_File"
+msgstr "_Nézet"
+
+#: ../window.c:326
 msgid "_Help"
 msgstr "_Súgó"
 
-#: ../window.c:145
-msgid "_Image"
-msgstr "_Képfájl"
+#: ../window.c:318
+msgid "_Options"
+msgstr ""
 
-#: ../window.c:420
+#: ../window.c:335
 msgid "_Overview"
 msgstr "_Áttekintés"
 
-#: ../window.c:304
-msgid "_Settings"
-msgstr "_Beállítások"
-
-#: ../window.c:228
+#: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_Mappák sorrendbe rendezése először"
 
-#: ../window.c:203
+#: ../window.c:234
+msgid "_Sort is case sensitive"
+msgstr ""
+
+#: ../window.c:246
+msgid "_Tools"
+msgstr ""
+
+#: ../window.c:199
 msgid "_View"
 msgstr "_Nézet"
+
+#~ msgid "_Image"
+#~ msgstr "_Képfájl"
+
+#~ msgid "_Settings"
+#~ msgstr "_Beállítások"

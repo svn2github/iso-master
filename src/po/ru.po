@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 23:45-0400\n"
+"POT-Creation-Date: 2007-11-11 10:38-0500\n"
 "PO-Revision-Date: 2007-08-27 03:51-0500\n"
 "Last-Translator: Antonio_99RUS <scsiman@yandex.ru>\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "X-Poedit-Language: Russian\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 
-#: ../window.c:474
+#: ../window.c:389
 msgid "      Estimated ISO Size: "
 msgstr " Ожидаемый размер ISO: "
 
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "Вы хотите продолжить?"
 
-#: ../editfile.c:182 ../editfile.c:394
+#: ../editfile.c:172 ../editfile.c:385
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' не является обычным файлом"
@@ -38,7 +38,7 @@ msgstr "'%s' не является обычным файлом"
 msgid "(scanning for duplicate files)"
 msgstr "(поиск дублированных файлов)"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add"
 msgstr "Добавить"
 
@@ -46,7 +46,7 @@ msgstr "Добавить"
 msgid "Add extension automatically"
 msgstr "Добавить расширение автоматически"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add to the ISO"
 msgstr "Добавить в ISO"
 
@@ -90,19 +90,19 @@ msgstr "Изменить права"
 msgid "Choose Boot Record File"
 msgstr "Выбрать файл загрузочной записи"
 
-#: ../window.c:456
+#: ../window.c:371
 msgid "Create new directory on the ISO"
 msgstr "Создать новый каталог в ISO"
 
-#: ../window.c:66
+#: ../window.c:60
 msgid "Create new directory on the filesystem"
 msgstr "Создать новый каталог вне образа"
 
-#: ../settings.c:81
+#: ../settings.c:78
 msgid "Creation time:"
 msgstr "Время создания:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Delete from the ISO"
 msgstr "Удалить из ISO"
 
@@ -110,11 +110,11 @@ msgstr "Удалить из ISO"
 msgid "Edit"
 msgstr "Править"
 
-#: ../editfile.c:83
-msgid "Edit failed, please check Settings/Editor"
+#: ../editfile.c:77
+msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:701
 msgid "Editor"
 msgstr "Редактор"
 
@@ -126,15 +126,15 @@ msgstr "Введите новое имя:"
 msgid "Enter name for new directory"
 msgstr "Введите имя нового каталога"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract"
 msgstr "Извлечь"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract from the ISO"
 msgstr "Извлечь из ISO"
 
-#: ../editfile.c:285 ../isobrowser.c:214
+#: ../editfile.c:277 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Не удалось добавить %s: '%s'"
@@ -159,12 +159,12 @@ msgstr "Не удалось создать каталог %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Не удалось создать каталог %s: '%s'"
 
-#: ../editfile.c:259 ../isobrowser.c:786
+#: ../editfile.c:251 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Не удалось удалить %s: '%s'"
 
-#: ../editfile.c:224 ../editfile.c:436 ../isobrowser.c:899
+#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Не удалось извлечь %s: '%s'"
@@ -179,7 +179,7 @@ msgstr "Не удалось извлечь загрузочную запись: 
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Не удалось инициализировать bkisofs: '%s'"
 
-#: ../fsbrowser.c:219
+#: ../fsbrowser.c:218
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Не удалось открыть каталог '%s', ошибка %d"
@@ -214,27 +214,27 @@ msgstr "Не удалось установить %s в качестве загр
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Не удалось записать образ в '%s': '%s'"
 
-#: ../settings.c:125
+#: ../settings.c:122
 msgid "Filename types (both recommended):"
 msgstr "Типы имён файлов (рекомендуются оба):"
 
-#: ../window.c:321
+#: ../settings.c:691
 msgid "Follow symbolic links"
 msgstr "Разыменовывать симлинки"
 
-#: ../window.c:284
+#: ../window.c:298
 msgid "From file: 1200KiB floppy"
 msgstr "Файл источника: 1200KiB флоппи"
 
-#: ../window.c:290
+#: ../window.c:304
 msgid "From file: 1440KiB floppy"
 msgstr "Файл источника: 1440KiB флоппи"
 
-#: ../window.c:296
+#: ../window.c:310
 msgid "From file: 2880KiB floppy"
 msgstr "Файл источника: 2880KiB флоппи"
 
-#: ../window.c:278
+#: ../window.c:292
 msgid "From file: no emulation"
 msgstr "Файл источника: без эмуляции"
 
@@ -243,15 +243,15 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "Ошибка, удалять можно только файлы и каталоги"
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:53 ../window.c:364
 msgid "Go back"
 msgstr "Вернуться назад"
 
-#: ../window.c:450
+#: ../window.c:365
 msgid "Go back up one directory on the ISO"
 msgstr "Вернуться на каталог вверх на ISO"
 
-#: ../window.c:60
+#: ../window.c:54
 msgid "Go back up one directory on the filesystem"
 msgstr "Вернуться на каталог вверх вне образа"
 
@@ -263,16 +263,16 @@ msgstr "ISO образы"
 msgid "ISO Master Help"
 msgstr "Справка по ISO Master"
 
-#: ../settings.c:65
+#: ../settings.c:62
 msgid "Image Information"
 msgstr "Информация об образе"
 
-#: ../settings.c:160
+#: ../settings.c:157
 #, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr "Некорректный издатель '%s': '%s'"
 
-#: ../settings.c:176
+#: ../settings.c:173
 #, c-format
 msgid "Invalid volume name '%s': '%s'"
 msgstr "Некорректное имя тома '%s': '%s'"
@@ -323,7 +323,7 @@ msgstr "Образы Nero"
 msgid "Name"
 msgstr "Имя"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:59 ../window.c:370
 msgid "New Directory"
 msgstr "Новый каталог"
 
@@ -335,6 +335,10 @@ msgstr ""
 #: ../boot.c:108
 msgid "No boot to delete"
 msgstr "Отсутствует загрузочная запись для удаления"
+
+#: ../settings.c:666
+msgid "Options"
+msgstr ""
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -367,11 +371,11 @@ msgstr "Подождите, сохраняется новый образ..."
 msgid "Progress"
 msgstr "Выполнено"
 
-#: ../settings.c:109
+#: ../settings.c:106
 msgid "Publisher:"
 msgstr "Издатель:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Remove"
 msgstr "Удалить"
 
@@ -387,11 +391,11 @@ msgstr "Сохранить файл"
 msgid "Save a copy of the boot record"
 msgstr "Сохранить копию загрузочной записи"
 
-#: ../window.c:311
+#: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
 msgstr "Поиск дублированных файлов (медленный)"
 
-#: ../window.c:218
+#: ../window.c:214
 msgid "Show _hidden files"
 msgstr "_Показать скрытые файлы"
 
@@ -404,7 +408,7 @@ msgstr "Размер"
 msgid "Size: %d bytes"
 msgstr "Размер: %d байт(а)"
 
-#: ../fsbrowser.c:270
+#: ../fsbrowser.c:269
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
@@ -415,18 +419,19 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Пропускаем каталог, поскольку stat(%s) вернуло код ошибки %d"
 
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Временный каталог"
 
 #: ../about.c:268
+#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
 " - The bottom file browser shows files and directories on the ISO image.\n"
 "\n"
-"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
-"ISO file click on 'Image' and 'New'.\n"
+"To open an existing ISO file click on 'File' and 'Open'. To create a new\n"
+"ISO file click on 'File' and 'New'.\n"
 "\n"
 "To add one or more files or directories to the ISO select them in the top\n"
 "file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
@@ -468,7 +473,7 @@ msgstr ""
 "Когда вы внесёте все изменения в новый образ, нажмите 'Образ' и\n"
 "'Сохранить как'. Исходный образ перезаписать нельзя.\n"
 
-#: ../window.c:272
+#: ../window.c:286
 msgid "Use selected file on image (no emulation)"
 msgstr "Использовать выбранный файл в образе (без эмуляции)"
 
@@ -476,52 +481,68 @@ msgstr "Использовать выбранный файл в образе (б
 msgid "View"
 msgstr "Вид"
 
-#: ../editfile.c:106
-msgid "View failed, please check Settings/Viewer"
+#: ../editfile.c:97
+msgid "View failed, please check Options/Viewer"
 msgstr ""
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:713
 msgid "Viewer"
 msgstr "Просмотрщик"
 
-#: ../settings.c:97
+#: ../settings.c:94
 msgid "Volume name:"
 msgstr "Имя тома:"
 
-#: ../settings.c:734
+#: ../settings.c:652
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
 "Для того, чтобы это изменение вступило в силу, необходимо закрыть и вновь "
 "открыть образ"
 
-#: ../window.c:240
-msgid "_BootRecord"
+#: ../window.c:254
+#, fuzzy
+msgid "_Boot Record"
 msgstr "_Загрузочная Запись"
 
-#: ../window.c:411
+#: ../window.c:141
+#, fuzzy
+msgid "_File"
+msgstr "_Вид"
+
+#: ../window.c:326
 msgid "_Help"
 msgstr "_Справка"
 
-#: ../window.c:145
-msgid "_Image"
-msgstr "_Образ"
+#: ../window.c:318
+msgid "_Options"
+msgstr ""
 
-#: ../window.c:420
+#: ../window.c:335
 msgid "_Overview"
 msgstr "О_бзор"
 
-#: ../window.c:304
-msgid "_Settings"
-msgstr "_Настройки"
-
-#: ../window.c:228
+#: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_Каталоги сначала, файлы после"
 
-#: ../window.c:203
+#: ../window.c:234
+msgid "_Sort is case sensitive"
+msgstr ""
+
+#: ../window.c:246
+msgid "_Tools"
+msgstr ""
+
+#: ../window.c:199
 msgid "_View"
 msgstr "_Вид"
+
+#~ msgid "_Image"
+#~ msgstr "_Образ"
+
+#~ msgid "_Settings"
+#~ msgstr "_Настройки"
 
 #~ msgid "Failed to delete directory %s: '%s'"
 #~ msgstr "Не удалось удалить каталог %s: '%s'"

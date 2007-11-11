@@ -74,7 +74,7 @@ gboolean checkEditFailed(gpointer data)
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               _("Edit failed, please check Settings/Editor"));
+                                               _("Edit failed, please check Options/Editor"));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);
@@ -94,7 +94,7 @@ gboolean checkViewFailed(gpointer data)
                                                GTK_DIALOG_DESTROY_WITH_PARENT,
                                                GTK_MESSAGE_ERROR,
                                                GTK_BUTTONS_CLOSE,
-                                               _("View failed, please check Settings/Viewer"));
+                                               _("View failed, please check Options/Viewer"));
         gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
         gtk_dialog_run(GTK_DIALOG(warningDialog));
         gtk_widget_destroy(warningDialog);

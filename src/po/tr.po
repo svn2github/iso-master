@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-10-26 23:45-0400\n"
+"POT-Creation-Date: 2007-11-11 10:38-0500\n"
 "PO-Revision-Date: 2007-09-11 14:50+0100\n"
 "Last-Translator: Holger Jakobs <holger@jakobs.com>\n"
 "Language-Team: Tutku DALMAZ <t@gmail.com>\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:474
+#: ../window.c:389
 msgid "      Estimated ISO Size: "
 msgstr "      Tahmini Kalıp Boyutu: "
 
@@ -28,7 +28,7 @@ msgstr ""
 "\n"
 "Devam etmek istiyor musunuz?"
 
-#: ../editfile.c:182 ../editfile.c:394
+#: ../editfile.c:172 ../editfile.c:385
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' olağan bir dosya değildir"
@@ -37,7 +37,7 @@ msgstr "'%s' olağan bir dosya değildir"
 msgid "(scanning for duplicate files)"
 msgstr "(benzer dosyalar taranıyor)"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add"
 msgstr "Ekle"
 
@@ -45,7 +45,7 @@ msgstr "Ekle"
 msgid "Add extension automatically"
 msgstr "Otomatik olarak uzantıyı ekle"
 
-#: ../window.c:460
+#: ../window.c:375
 msgid "Add to the ISO"
 msgstr "ISO'ya Ekle"
 
@@ -89,19 +89,19 @@ msgstr "izinleri değiştir"
 msgid "Choose Boot Record File"
 msgstr "Önyükleyici Kayıt Dosyasını Seçin"
 
-#: ../window.c:456
+#: ../window.c:371
 msgid "Create new directory on the ISO"
 msgstr "ISO üzerinde yeni dizin oluştur"
 
-#: ../window.c:66
+#: ../window.c:60
 msgid "Create new directory on the filesystem"
 msgstr "Dosya sistemi üzerinde yeni dizin oluştur"
 
-#: ../settings.c:81
+#: ../settings.c:78
 msgid "Creation time:"
 msgstr "Oluşturma zamanı:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Delete from the ISO"
 msgstr "ISO'dan sil"
 
@@ -109,11 +109,11 @@ msgstr "ISO'dan sil"
 msgid "Edit"
 msgstr "araştır"
 
-#: ../editfile.c:83
-msgid "Edit failed, please check Settings/Editor"
+#: ../editfile.c:77
+msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
-#: ../settings.c:206 ../window.c:333 ../window.c:336
+#: ../settings.c:701
 msgid "Editor"
 msgstr "araştırım"
 
@@ -125,15 +125,15 @@ msgstr "Yeni bir isim girin:"
 msgid "Enter name for new directory"
 msgstr "Yeni dizin için isim girin:"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract"
 msgstr "Çıkart"
 
-#: ../window.c:465
+#: ../window.c:380
 msgid "Extract from the ISO"
 msgstr "ISO'dan çıkart"
 
-#: ../editfile.c:285 ../isobrowser.c:214
+#: ../editfile.c:277 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "'%s' eklenmesi başarısız oldu: '%s'"
@@ -158,12 +158,12 @@ msgstr "Dizinin oluşturulması başarısız oldu %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "%s dizininin oluşturulması başarısız oldu: '%s'"
 
-#: ../editfile.c:259 ../isobrowser.c:786
+#: ../editfile.c:251 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "'%'s' in silinmesi başarısız oldu: '%s'"
 
-#: ../editfile.c:224 ../editfile.c:436 ../isobrowser.c:899
+#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "'%s' in çıkartılması başarısız oldu: '%s'"
@@ -178,7 +178,7 @@ msgstr "Önyükleyici kaydının çıkartılması başarısız oldu: '%s'"
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "bkisofs'nin başlatılması başarısız oldu: '%s'"
 
-#: ../fsbrowser.c:219
+#: ../fsbrowser.c:218
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "'%s' dizininin açılması başarısız oldu, hata %d"
@@ -213,27 +213,27 @@ msgstr "%s in önyükleyici kaydı olarak ayarlanması başarısız oldu: '%s'"
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Kalıba '%s' in yazdırılması başarısız oldu: '%s'"
 
-#: ../settings.c:125
+#: ../settings.c:122
 msgid "Filename types (both recommended):"
 msgstr "Dosya ismi tipleri (hepsi önerilir):"
 
-#: ../window.c:321
+#: ../settings.c:691
 msgid "Follow symbolic links"
 msgstr "Sembolik bağlantıları takip edin"
 
-#: ../window.c:284
+#: ../window.c:298
 msgid "From file: 1200KiB floppy"
 msgstr "Kaynak dosya: 1200KiB floppy"
 
-#: ../window.c:290
+#: ../window.c:304
 msgid "From file: 1440KiB floppy"
 msgstr "Kaynak dosya: 1440KiB floppy"
 
-#: ../window.c:296
+#: ../window.c:310
 msgid "From file: 2880KiB floppy"
 msgstr "Kaynak dosya: 2880KiB floppy"
 
-#: ../window.c:278
+#: ../window.c:292
 msgid "From file: no emulation"
 msgstr "Kaynak dosya: benzeme yok"
 
@@ -243,15 +243,15 @@ msgid ""
 msgstr ""
 "GUI hatası, hiçbirşey silinmedi aksi halde dosyalar ve dizinler çalışmaz"
 
-#: ../window.c:59 ../window.c:449
+#: ../window.c:53 ../window.c:364
 msgid "Go back"
 msgstr "Geri git"
 
-#: ../window.c:450
+#: ../window.c:365
 msgid "Go back up one directory on the ISO"
 msgstr "ISO içerisinde bir üst dizine git"
 
-#: ../window.c:60
+#: ../window.c:54
 msgid "Go back up one directory on the filesystem"
 msgstr "Dosya sistemi içerisinde bir üst dizine git"
 
@@ -263,16 +263,16 @@ msgstr "ISO kalıpları"
 msgid "ISO Master Help"
 msgstr "ISO Master Yardım"
 
-#: ../settings.c:65
+#: ../settings.c:62
 msgid "Image Information"
 msgstr "Kalıp Bilgisi"
 
-#: ../settings.c:160
+#: ../settings.c:157
 #, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr "yayımcının adı geçerli değildir '%'s': '%s'"
 
-#: ../settings.c:176
+#: ../settings.c:173
 #, c-format
 msgid "Invalid volume name '%s': '%s'"
 msgstr "cildin adı geçerli değildir '%'s': '%s'"
@@ -322,7 +322,7 @@ msgstr "NRG Kalıpları"
 msgid "Name"
 msgstr "İsim"
 
-#: ../window.c:65 ../window.c:455
+#: ../window.c:59 ../window.c:370
 msgid "New Directory"
 msgstr "Yeni Dizin"
 
@@ -333,6 +333,10 @@ msgstr "Önyükleyici Kaydı (boot record) disk'te yok, ISO kalıpta yok"
 #: ../boot.c:108
 msgid "No boot to delete"
 msgstr "Silinecek önyükleyici yok"
+
+#: ../settings.c:666
+msgid "Options"
+msgstr ""
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -364,11 +368,11 @@ msgstr "Ben yeni kalıbı diske kaydederken lütfen bekleyiniz..."
 msgid "Progress"
 msgstr "İlerleme"
 
-#: ../settings.c:109
+#: ../settings.c:106
 msgid "Publisher:"
 msgstr "Yayıncı:"
 
-#: ../window.c:470
+#: ../window.c:385
 msgid "Remove"
 msgstr "Kaldır"
 
@@ -384,11 +388,11 @@ msgstr "Dosyayı Kaydet"
 msgid "Save a copy of the boot record"
 msgstr "Önyükleyici kaydının bir kopyasını kaydet"
 
-#: ../window.c:311
+#: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
 msgstr "Benzer dosyaları tara (yavaş)"
 
-#: ../window.c:218
+#: ../window.c:214
 msgid "Show _hidden files"
 msgstr "_Gizli dosyaları göster"
 
@@ -401,7 +405,7 @@ msgstr "Boyut"
 msgid "Size: %d bytes"
 msgstr "Boyut: %d byte"
 
-#: ../fsbrowser.c:270
+#: ../fsbrowser.c:269
 msgid ""
 "Skiping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
@@ -412,19 +416,20 @@ msgstr ""
 msgid "Skiping directory entry because stat(%s) failed with %d"
 msgstr "Dizin girişi atlanıyor çünkü durum(%s) başarısız oldu %d"
 
-#: ../settings.c:244 ../window.c:385 ../window.c:388
+#: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Geçici Dizin"
 
 # !! this translation is incomplete
 #: ../about.c:268
+#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
 " - The bottom file browser shows files and directories on the ISO image.\n"
 "\n"
-"To open an existing ISO file click on 'Image' and 'Open'. To create a new\n"
-"ISO file click on 'Image' and 'New'.\n"
+"To open an existing ISO file click on 'File' and 'Open'. To create a new\n"
+"ISO file click on 'File' and 'New'.\n"
 "\n"
 "To add one or more files or directories to the ISO select them in the top\n"
 "file browser and click the 'Add to the ISO' button in the middle toolbar.\n"
@@ -467,7 +472,7 @@ msgstr ""
 "Kaydet'\n"
 "menülerine tıklayın. Özgün ISO üzerine değişiklikleri kaydedemezsiniz.\n"
 
-#: ../window.c:272
+#: ../window.c:286
 msgid "Use selected file on image (no emulation)"
 msgstr "Seçili dosyaları kalıpta kullan (benzeme yok)"
 
@@ -475,48 +480,64 @@ msgstr "Seçili dosyaları kalıpta kullan (benzeme yok)"
 msgid "View"
 msgstr "Seyret"
 
-#: ../editfile.c:106
-msgid "View failed, please check Settings/Viewer"
+#: ../editfile.c:97
+msgid "View failed, please check Options/Viewer"
 msgstr ""
 
-#: ../settings.c:282 ../window.c:359 ../window.c:362
+#: ../settings.c:713
 msgid "Viewer"
 msgstr "Seyretim"
 
-#: ../settings.c:97
+#: ../settings.c:94
 msgid "Volume name:"
 msgstr "Bölüm ismi:"
 
-#: ../settings.c:734
+#: ../settings.c:652
 msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
 "Değişiklikletin etkin hale gelmesi için ISO'yu kapatıp yeniden açmanız gerek"
 
-#: ../window.c:240
-msgid "_BootRecord"
+#: ../window.c:254
+#, fuzzy
+msgid "_Boot Record"
 msgstr "_Önyükleyici Kaydı"
 
-#: ../window.c:411
+#: ../window.c:141
+#, fuzzy
+msgid "_File"
+msgstr "_Görünüm"
+
+#: ../window.c:326
 msgid "_Help"
 msgstr "_Yardım"
 
-#: ../window.c:145
-msgid "_Image"
-msgstr "_Kalıp"
+#: ../window.c:318
+msgid "_Options"
+msgstr ""
 
-#: ../window.c:420
+#: ../window.c:335
 msgid "_Overview"
 msgstr "_Tanıtma"
 
-#: ../window.c:304
-msgid "_Settings"
-msgstr "_Ayarlar"
-
-#: ../window.c:228
+#: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_İlk olarak dizinleri sırala"
 
-#: ../window.c:203
+#: ../window.c:234
+msgid "_Sort is case sensitive"
+msgstr ""
+
+#: ../window.c:246
+msgid "_Tools"
+msgstr ""
+
+#: ../window.c:199
 msgid "_View"
 msgstr "_Görünüm"
+
+#~ msgid "_Image"
+#~ msgstr "_Kalıp"
+
+#~ msgid "_Settings"
+#~ msgstr "_Ayarlar"
