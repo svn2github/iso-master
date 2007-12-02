@@ -3,6 +3,11 @@ ui:
 -checkboxes and lables not aligned in change permissions window
 -other gtk apps on windows: gimp, pidgin, inkscape
 -add 'case-sensitive sort' view option
+-button to browse for temp dir
+-'Skiping' directory entry
+-remove Utility from .desktop to get it out of 'accessories'
+-double-click .iso on fs -> open iso (make sure confirmation for closing works)
+-view/edit fs files
 
 
 bk:
@@ -78,7 +83,7 @@ libtiff3.dll
 zlib1.dll
 
 to package a release:
-- cd po && ./extractstrings.sh && ./updateall.sh && rm sr\@Latn.po && svn up
+- cd po && ./extractstrings.sh && ./updateall.sh
 - update the version number in the about box
 - update version in man page
 - remove -g and -DDEBUG from Makefile and bk/Makefile

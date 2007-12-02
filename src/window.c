@@ -231,7 +231,7 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(checkbox), "activate",
                      G_CALLBACK(sortDirsFirstCbk), NULL);
     
-    checkbox = gtk_check_menu_item_new_with_mnemonic(_("_Sort is case sensitive"));
+    checkbox = gtk_check_menu_item_new_with_mnemonic(_("Sort is _case sensitive"));
     if(GBLappSettings.caseSensitiveSort)
         gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(checkbox), TRUE);
     else
