@@ -4,10 +4,10 @@ ui:
 -button to browse for temp dir
 -'Skiping' directory entry
 -remove Utility from .desktop to get it out of 'accessories'
--double-click .iso on fs -> open iso (make sure confirmation for closing works)
 -double-click on a symlink to a dir in fs -> change dir
 -view/edit fs files
 -'open recent' list
+-open iso needs to check whether ok to close the existing one
 
 
 bk:

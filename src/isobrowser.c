@@ -1118,6 +1118,9 @@ void openIso(char* filename)
     int rc;
     GtkWidget* warningDialog;
     
+    if(GBLisoChangesProbable && !confirmCloseIso())
+        return;
+    
     closeIso();
     
     rc = bk_init_vol_info(&GBLvolInfo, GBLappSettings.scanForDuplicateFiles);
