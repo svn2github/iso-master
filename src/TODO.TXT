@@ -1,13 +1,13 @@
 ui:
 -drop-down list to select track - can do multitrack
 -checkboxes and lables not aligned in change permissions window
--other gtk apps on windows: gimp, pidgin, inkscape
--add 'case-sensitive sort' view option
 -button to browse for temp dir
 -'Skiping' directory entry
 -remove Utility from .desktop to get it out of 'accessories'
 -double-click .iso on fs -> open iso (make sure confirmation for closing works)
+-double-click on a symlink to a dir in fs -> change dir
 -view/edit fs files
+-'open recent' list
 
 
 bk:
@@ -17,24 +17,13 @@ bk:
 -using access() to check whether a file exists is no good, target of a dead symlink will get written
 -fedora7 dvd takes forever to remangle. try either fix the algorithm or allow longer 9660 names.
 -sorting 9660/joliet can also be slow
--look for !!, there are some new ones
+-why never checking the return from seekset?
 
-
-windows port:
--file bug about about box
--nag screen
 
 manual:
 -add_as() and extract_as()
 -get_ and set_permissions()
 -bk_set_publisher() and bk_set_vol_name() now return int
-
-
-c99 compatibility issues:
--localtime_r() - implicit declaration
--strdup() - implicit declaration
--lstat() - implicit declaration and some mess with st_size
--try to make sure icons are loaded relative to the isomaster dir
 
 
 tests to run before a release:
@@ -62,25 +51,6 @@ to make a fedora package:
 - Download my SRPMS [1] to ~/rpmbuild/SRPMS
 - Call: rpmbuild --rebuild isomaster-1.0-1.src.rpm
 - Wait a moment and look for a built RPM in ~/rpmbuild/RPMS/i386
-
-DLLs needed for windows:
-iconv.dll
-intl.dll
-jpeg62.dll
-libatk-1.0-0.dll
-libcairo-2.dll
-libgdk-win32-2.0-0.dll
-libgdk_pixbuf-2.0-0.dll
-libglib-2.0-0.dll
-libgmodule-2.0-0.dll
-libgobject-2.0-0.dll
-libgtk-win32-2.0-0.dll
-libpango-1.0-0.dll
-libpangocairo-1.0-0.dll
-libpangowin32-1.0-0.dll
-libpng13.dll
-libtiff3.dll
-zlib1.dll
 
 to package a release:
 - cd po && ./extractstrings.sh && ./updateall.sh
