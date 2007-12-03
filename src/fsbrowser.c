@@ -37,6 +37,8 @@ extern GdkPixbuf* GBLdirPixbuf;
 extern GdkPixbuf* GBLfilePixbuf;
 //~ extern GdkPixbuf* GBLsymlinkPixbuf;
 
+extern bool GBLisoChangesProbable;
+
 extern int errno;
 
 /* the column for the filename in the fs pane */
@@ -404,7 +406,7 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
     GtkTreeModel* model;
     GtkTreeIter iterator;
     char* name;
-    char* newCurrentDir;
+    char* selectedPathAndName;
     int fileType;
     GtkWidget* warningDialog;
     
@@ -424,24 +426,58 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
         return;
     }
     
+    gtk_tree_model_get(model, &iterator, COLUMN_FILENAME, &name, -1);
+    
+    /* 2 in case i need to append a '/' */
+    selectedPathAndName = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(name) + 2);
+    if(selectedPathAndName == NULL)
+        fatalError("fsRowDblClicked(): malloc(strlen(GBLfsCurrentDir) + strlen(name) + 2) failed");
+    
+    strcpy(selectedPathAndName, GBLfsCurrentDir);
+    strcat(selectedPathAndName, name);
+    
     gtk_tree_model_get(model, &iterator, COLUMN_HIDDEN_TYPE, &fileType, -1);
     if(fileType == FILE_TYPE_DIRECTORY)
+    /* change directory */
     {
-        gtk_tree_model_get(model, &iterator, COLUMN_FILENAME, &name, -1);
-        
-        newCurrentDir = (char*)malloc(strlen(GBLfsCurrentDir) + strlen(name) + 2);
-        if(newCurrentDir == NULL)
-            fatalError("fsRowDblClicked(): malloc(strlen(GBLfsCurrentDir) + strlen(name) + 2) failed");
-        
-        strcpy(newCurrentDir, GBLfsCurrentDir);
-        strcat(newCurrentDir, name);
-        strcat(newCurrentDir, "/");
-        
-        changeFsDirectory(newCurrentDir);
-        
-        free(newCurrentDir);
-        g_free(name);
+        strcat(selectedPathAndName, "/");
+        changeFsDirectory(selectedPathAndName);
     }
+    else if(fileType == FILE_TYPE_SYMLINK)
+    /* if it's a symlink to a dir, change directory */
+    {
+        ;
+    }
+    else if(fileType == FILE_TYPE_REGULAR)
+    /* if it's an image, open it */
+    {
+        int strLen = strlen(name);
+        
+        if( (name[strLen - 4] == '.' &&
+             (name[strLen - 3] == 'i' || name[strLen - 3] == 'I') &&
+             (name[strLen - 2] == 's' || name[strLen - 2] == 'S') &&
+             (name[strLen - 1] == 'o' || name[strLen - 1] == 'O'))
+            ||
+            (name[strLen - 4] == '.' &&
+             (name[strLen - 3] == 'n' || name[strLen - 3] == 'N') &&
+             (name[strLen - 2] == 'r' || name[strLen - 2] == 'R') &&
+             (name[strLen - 1] == 'g' || name[strLen - 1] == 'G'))
+            ||
+            (name[strLen - 4] == '.' &&
+             (name[strLen - 3] == 'm' || name[strLen - 3] == 'M') &&
+             (name[strLen - 2] == 'd' || name[strLen - 2] == 'D') &&
+             (name[strLen - 1] == 'f' || name[strLen - 1] == 'F')) )
+        {
+            if( !GBLisoChangesProbable || confirmCloseIso() )
+            {
+                openIso(selectedPathAndName);
+            }
+        }
+    }
+    
+        
+    free(selectedPathAndName);
+    g_free(name);
 }
 
 void refreshFsView(void)
