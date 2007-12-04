@@ -112,7 +112,7 @@ gboolean checkViewFailed(gpointer data)
 
 bool copyFsToFs(const char* src, const char* dest)
 {
-    struct stat statStruct;
+    BkStatStruct statStruct;
     int srcFile;
     int destFile;
     int rc;
@@ -122,7 +122,7 @@ bool copyFsToFs(const char* src, const char* dest)
     int sizeLastBlock;
     char buffer[blockSize];
     
-    rc = stat(src, &statStruct);
+    rc = bkStat(src, &statStruct);
     if(rc != 0)
         return false;
     
