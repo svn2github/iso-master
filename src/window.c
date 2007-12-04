@@ -107,11 +107,6 @@ void buildMenu(GtkWidget* boxToPackInto)
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
     gtk_accel_map_add_entry("<ISOMaster>/File/Quit", accelKey, accelModifier);
     
-    gtk_accelerator_parse("F5", &accelKey, &accelModifier);
-    closure = g_cclosure_new(G_CALLBACK(refreshBothViewsCbk), NULL, NULL);
-    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
-    gtk_accel_map_add_entry("<ISOMaster>/View/Refresh", accelKey, accelModifier);
-    
     gtk_accelerator_parse("F1", &accelKey, &accelModifier);
     closure = g_cclosure_new(G_CALLBACK(showHelpOverviewCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
@@ -131,6 +126,11 @@ void buildMenu(GtkWidget* boxToPackInto)
     closure = g_cclosure_new(G_CALLBACK(editSelectedBtnCbk), NULL, NULL);
     gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
     gtk_accel_map_add_entry("<ISOMaster>/Contextmenu/Edit", accelKey, accelModifier);
+    
+    gtk_accelerator_parse("F5", &accelKey, &accelModifier);
+    closure = g_cclosure_new(G_CALLBACK(refreshBothViewsCbk), NULL, NULL);
+    gtk_accel_group_connect(accelGroup, accelKey, accelModifier, GTK_ACCEL_VISIBLE, closure);
+    gtk_accel_map_add_entry("<ISOMaster>/View/Refresh", accelKey, accelModifier);
     /* END KEYBOARD accelerators */
     
     menuBar = gtk_menu_bar_new();

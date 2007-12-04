@@ -7,7 +7,6 @@ ui:
 -double-click on a symlink to a dir in fs -> change dir
 -view/edit fs files
 -'open recent' list
--open iso needs to check whether ok to close the existing one
 
 
 bk:

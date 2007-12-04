@@ -93,6 +93,10 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     gtk_container_add(GTK_CONTAINER(scrolledWindow), GBLfsTreeView);
     g_signal_connect(GBLfsTreeView, "row-activated", (GCallback)fsRowDblClickCbk, NULL);
     g_signal_connect(GBLfsTreeView, "select-cursor-parent", (GCallback)fsGoUpDirTreeCbk, NULL);
+    /* The problem with this is that i get a popup menu before the row is selected.
+    * if i do a connect_after the handler never gets called. So no right-click menu. */
+    g_signal_connect(GBLfsTreeView, "button-press-event", (GCallback)fsButtonPressedCbk, NULL);
+    g_signal_connect(GBLfsTreeView, "button-release-event", (GCallback)fsButtonReleasedCbk, NULL);
     gtk_widget_show(GBLfsTreeView);
     
     /* this won't be enabled until gtk allows me to drag a multiple selection */
@@ -366,6 +370,37 @@ bool changeFsDirectory(const char* newDirStr)
     return true;
 }
 
+/******************************************************************************
+* fsButtonPressedCbk()
+* Make sure that a right-click on the view doesn't send the signal to the
+* widget. If it did, a selection of multiple rows would be lost.
+* I have a feeling someone did this shit in GTK just to piss on users */
+gboolean fsButtonPressedCbk(GtkWidget* fsView, GdkEventButton* event, gpointer user_data)
+{
+    if(event->type == GDK_BUTTON_PRESS  &&  event->button == 3)
+    {
+        /* Stop event propagation */
+        /*!! Would be nice if I could only stop event propagation if click was on
+        * the selection, I have to look into how that may be done, if at all */
+        return TRUE;
+    }
+    
+    return FALSE;
+}
+
+/******************************************************************************
+* fsButtonReleasedCbk()
+* Show context menu if releasing the right mouse button */
+gboolean fsButtonReleasedCbk(GtkWidget* fsView, GdkEventButton* event, gpointer user_data)
+{
+    if(event->type == GDK_BUTTON_RELEASE &&  event->button == 3)
+    {
+        showFsContextMenu(fsView, event);
+    }
+    
+    return FALSE;
+}
+
 /* this is called from a button and via a treeview event so don't use the parameters */
 void fsGoUpDirTreeCbk(GtkButton *button, gpointer data)
 {
@@ -500,6 +535,62 @@ void refreshFsView(void)
     gtk_tree_view_scroll_to_point(GTK_TREE_VIEW(GBLfsTreeView), visibleRect.x - 1, visibleRect.y - 1);
     
     free(fsCurrentDir);
+}
+
+void showFsContextMenu(GtkWidget* fsView, GdkEventButton* event)
+{
+    GtkWidget* menu;
+    GtkWidget* menuItem;
+    GtkTreeSelection* selection;
+    gint numSelectedRows;
+    GtkAccelGroup* accelGroup;
+    
+    selection = gtk_tree_view_get_selection(GTK_TREE_VIEW(GBLfsTreeView));
+    
+    numSelectedRows = gtk_tree_selection_count_selected_rows(selection);
+    if(numSelectedRows == 0)
+        return;
+    
+    /* have this here just so that the shortcut keys show in the context menu */
+    accelGroup = gtk_accel_group_new();
+    gtk_window_add_accel_group(GTK_WINDOW(GBLmainWindow), accelGroup);
+    
+    menu = gtk_menu_new();
+    gtk_menu_set_accel_group(GTK_MENU(menu), accelGroup);
+    /*
+    menuItem = gtk_image_menu_item_new_with_label(_("Rename"));
+    g_signal_connect(menuItem, "activate", 
+                     (GCallback)renameSelectedBtnCbk, NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/Rename");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show_all(menu);
+    if(numSelectedRows > 1)
+        gtk_widget_set_sensitive(menuItem, FALSE);
+    */
+    menuItem = gtk_image_menu_item_new_with_label(_("View"));
+    g_signal_connect(menuItem, "activate", 
+                     (GCallback)viewSelectedBtnCbk, NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/View");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show_all(menu);
+    
+    menuItem = gtk_image_menu_item_new_with_label(_("Edit"));
+    g_signal_connect(menuItem, "activate", 
+                     (GCallback)editSelectedBtnCbk, NULL);
+    gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/Contextmenu/Edit");
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show_all(menu);
+    /*
+    menuItem = gtk_image_menu_item_new_with_label(_("Change permissions"));
+    g_signal_connect(menuItem, "activate", 
+                     (GCallback)changePermissionsBtnCbk, NULL);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), menuItem);
+    gtk_widget_show_all(menu);
+    if(numSelectedRows > 1)
+        gtk_widget_set_sensitive(menuItem, FALSE);
+    */
+    gtk_menu_popup(GTK_MENU(menu), NULL, NULL, NULL, NULL,
+                   event->button, gdk_event_get_time((GdkEvent*)event));
 }
 
 void showHiddenCbk(GtkButton *button, gpointer data)
