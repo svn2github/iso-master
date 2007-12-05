@@ -272,7 +272,7 @@ bool changeFsDirectory(const char* newDirStr)
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   _("Skiping directory entry because "
+                                                   _("Skipping directory entry because "
                                                    "cannot handle filename longer than 256 chars"));
             gtk_window_set_modal(GTK_WINDOW(warningDialog), TRUE);
             gtk_dialog_run(GTK_DIALOG(warningDialog));
@@ -291,7 +291,7 @@ bool changeFsDirectory(const char* newDirStr)
                                                    GTK_DIALOG_DESTROY_WITH_PARENT,
                                                    GTK_MESSAGE_ERROR,
                                                    GTK_BUTTONS_CLOSE,
-                                                   _("Skiping directory entry because "
+                                                   _("Skipping directory entry because "
                                                    "stat(%s) failed with %d"),
                                                    nextItemPathAndName,
                                                    errno);
