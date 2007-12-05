@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-30 17:09-0500\n"
+"POT-Creation-Date: 2007-12-05 00:17-0500\n"
 "PO-Revision-Date: 2007-10-05 22:03+0100\n"
 "Last-Translator: András Horváth <han@log69.com>\n"
 "Language-Team: András Horváth <han@log69.com>\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      Becsült ISO fájl-méret:"
 
-#: ../isobrowser.c:1379
+#: ../isobrowser.c:1382
 #, c-format
 msgid ""
 "%s\n"
@@ -30,12 +30,12 @@ msgstr ""
 "\n"
 "Kívánja folytatni?"
 
-#: ../editfile.c:172 ../editfile.c:385
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' nem szokványos fájl"
 
-#: ../isobrowser.c:141 ../isobrowser.c:1194
+#: ../isobrowser.c:141 ../isobrowser.c:1197
 msgid "(scanning for duplicate files)"
 msgstr "(duplikált fájlok keresése)"
 
@@ -43,7 +43,7 @@ msgstr "(duplikált fájlok keresése)"
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: ../isobrowser.c:1616
+#: ../isobrowser.c:1619
 msgid "Add extension automatically"
 msgstr "Kiterjesztés automatikus hozzáadása"
 
@@ -51,7 +51,7 @@ msgstr "Kiterjesztés automatikus hozzáadása"
 msgid "Add to the ISO"
 msgstr "Hozzáadás az ISO-hoz"
 
-#: ../isobrowser.c:1325 ../isobrowser.c:1613
+#: ../isobrowser.c:1328 ../isobrowser.c:1616
 msgid "All files"
 msgstr "Minden fájl"
 
@@ -83,7 +83,7 @@ msgstr "Indító rekord típusa: 2880KiB Floppy"
 msgid "Boot record type: No Emulation"
 msgstr "Indító rekord típusa: Nincs emuláció"
 
-#: ../isobrowser.c:500 ../isobrowser.c:1792
+#: ../isobrowser.c:500 ../isobrowser.c:1795
 msgid "Change permissions"
 msgstr "Engedélyek megváltoztatása"
 
@@ -107,11 +107,11 @@ msgstr "Létrehozás ideje:"
 msgid "Delete from the ISO"
 msgstr "Törlés az ISO-ból"
 
-#: ../isobrowser.c:1785
+#: ../fsbrowser.c:577 ../isobrowser.c:1788
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: ../editfile.c:77
+#: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Editor"
 msgstr "Szerkesztő"
 
-#: ../isobrowser.c:1458
+#: ../isobrowser.c:1461
 msgid "Enter a new name:"
 msgstr "Adjon meg egy új nevet:"
 
@@ -135,7 +135,7 @@ msgstr "Kicsomagolás"
 msgid "Extract from the ISO"
 msgstr "Kicsomagolás az ISO-ból"
 
-#: ../editfile.c:277 ../isobrowser.c:214
+#: ../editfile.c:473 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Hiba '%s' hozzáadáskor: '%s'"
@@ -160,12 +160,12 @@ msgstr "Hiba '%s' mappa létrehozásakor"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Hiba %s mappa létrehozásakor: '%s'"
 
-#: ../editfile.c:251 ../isobrowser.c:786
+#: ../editfile.c:447 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Hiba '%s' törlésekor: '%s'"
 
-#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Hiba '%s' kicsomagolásakor: '%s'"
@@ -175,32 +175,32 @@ msgstr "Hiba '%s' kicsomagolásakor: '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Hiba az indító rekord kicsomagolásakor: '%s'"
 
-#: ../isobrowser.c:1082 ../isobrowser.c:1130
+#: ../isobrowser.c:1082 ../isobrowser.c:1133
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Hiba bkisofs inicializálásakor: '%s'"
 
-#: ../fsbrowser.c:218
+#: ../fsbrowser.c:224
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Hiba '%s' mappa megnyitásakor, hibakód %d"
 
-#: ../isobrowser.c:1149
+#: ../isobrowser.c:1152
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Hiba az iso fájl olvasásra való megnyitásakor: '%s'"
 
-#: ../isobrowser.c:1224
+#: ../isobrowser.c:1227
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Hiba a könyvtár fa olvasásakor: '%s'"
 
-#: ../isobrowser.c:1164
+#: ../isobrowser.c:1167
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Hiba a kötet info olvasásakor: '%s'"
 
-#: ../isobrowser.c:1487
+#: ../isobrowser.c:1490
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Hiba '%s' átnevezésekor: '%s'"
@@ -210,7 +210,7 @@ msgstr "Hiba '%s' átnevezésekor: '%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Hiba %s indító rekordnak való beállításakor: '%s'"
 
-#: ../isobrowser.c:1559
+#: ../isobrowser.c:1562
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Hiba a képfájl '%s'-hoz való hozzáírásakor: '%s'"
@@ -257,7 +257,7 @@ msgstr "Vissza egy könyvtár szinttel az ISO-n"
 msgid "Go back up one directory on the filesystem"
 msgstr "Vissza egy könyvtár szinttel a fájlrendszeren"
 
-#: ../isobrowser.c:1310 ../isobrowser.c:1608
+#: ../isobrowser.c:1313 ../isobrowser.c:1611
 msgid "ISO Images"
 msgstr "ISO képfájlok"
 
@@ -313,15 +313,15 @@ msgstr "Hely: az eredeti képfájlon 0x%llX pozícióban"
 msgid "Location: to be added from '%s'"
 msgstr "Hely: hozzáadásra '%s'-ből"
 
-#: ../isobrowser.c:1320
+#: ../isobrowser.c:1323
 msgid "MDF Images"
 msgstr "MDF képfájlok"
 
-#: ../isobrowser.c:1315
+#: ../isobrowser.c:1318
 msgid "NRG Images"
 msgstr "NRG képfájlok"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:290
+#: ../fsbrowser.c:116 ../isobrowser.c:290
 msgid "Name"
 msgstr "Név"
 
@@ -357,16 +357,16 @@ msgstr "Kérem várjon amíg hozzáadom a kiválasztott elemeket..."
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Kérem várjon amíg kicsomagolom a kiválasztott elemeket..."
 
-#: ../isobrowser.c:1188
+#: ../isobrowser.c:1191
 msgid "Please wait while I'm reading the image..."
 msgstr "Kérem várjon amíg a képfájlt olvasom..."
 
-#: ../isobrowser.c:1531
+#: ../isobrowser.c:1534
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Kérem várjon amíg elmentem az új képfájlt a lemezre..."
 
-#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1181
-#: ../isobrowser.c:1521
+#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1184
+#: ../isobrowser.c:1524
 msgid "Progress"
 msgstr "Folyamat"
 
@@ -378,11 +378,11 @@ msgstr "Kiadó:"
 msgid "Remove"
 msgstr "Eltávolítás"
 
-#: ../isobrowser.c:1769
+#: ../isobrowser.c:1772
 msgid "Rename"
 msgstr "Átnevezés"
 
-#: ../isobrowser.c:1597
+#: ../isobrowser.c:1600
 msgid "Save File"
 msgstr "Fájl mentése"
 
@@ -398,7 +398,7 @@ msgstr "Duplikált fájlok keresése (lassú)"
 msgid "Show _hidden files"
 msgstr "Rejtett fájlok mutatása"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:313
+#: ../fsbrowser.c:137 ../isobrowser.c:313
 msgid "Size"
 msgstr "Méret"
 
@@ -407,18 +407,22 @@ msgstr "Méret"
 msgid "Size: %d bytes"
 msgstr "Méret: %d byte"
 
-#: ../fsbrowser.c:269
+#: ../fsbrowser.c:275
 msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
+"Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
 "Könyvtár bemenet átugrása mivel 256 karakternél hosszabb fájlnév nem "
 "kezelhető"
 
-#: ../fsbrowser.c:288
+#: ../fsbrowser.c:294
 #, c-format
-msgid "Skiping directory entry because stat(%s) failed with %d"
+msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr ""
 "Könyvtár bemenet átugrása mivel (%s) statisztikai hibát okozott %d kóddal"
+
+#: ../window.c:234
+msgid "Sort is _case sensitive"
+msgstr ""
 
 #: ../settings.c:724
 msgid "Temporary directory"
@@ -485,11 +489,11 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "Kiválasztott fájl használata a képfájlon (nincs emuláció)"
 
-#: ../isobrowser.c:1778
+#: ../fsbrowser.c:570 ../isobrowser.c:1781
 msgid "View"
 msgstr "Nézet"
 
-#: ../editfile.c:97
+#: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
 msgstr ""
 
@@ -533,10 +537,6 @@ msgstr "_Áttekintés"
 #: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_Mappák sorrendbe rendezése először"
-
-#: ../window.c:234
-msgid "_Sort is case sensitive"
-msgstr ""
 
 #: ../window.c:246
 msgid "_Tools"

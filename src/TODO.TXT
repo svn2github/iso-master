@@ -5,7 +5,6 @@ ui:
 -'Skiping' directory entry
 -remove Utility from .desktop to get it out of 'accessories'
 -double-click on a symlink to a dir in fs -> change dir
--view/edit fs files
 -'open recent' list
 
 

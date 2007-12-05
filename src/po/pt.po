@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-30 17:09-0500\n"
+"POT-Creation-Date: 2007-12-05 00:17-0500\n"
 "PO-Revision-Date: 2007-06-05 21:38+0100\n"
 "Last-Translator: João de Ferro <joaodeferro@gmail.com>\n"
 "Language-Team: pt <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      Tamanho Estimado da ISO:"
 
-#: ../isobrowser.c:1379
+#: ../isobrowser.c:1382
 #, c-format
 msgid ""
 "%s\n"
@@ -30,12 +30,12 @@ msgstr ""
 "\n"
 "Deseja continuar?"
 
-#: ../editfile.c:172 ../editfile.c:385
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr ""
 
-#: ../isobrowser.c:141 ../isobrowser.c:1194
+#: ../isobrowser.c:141 ../isobrowser.c:1197
 msgid "(scanning for duplicate files)"
 msgstr "(procurando novos ficheiros)"
 
@@ -43,7 +43,7 @@ msgstr "(procurando novos ficheiros)"
 msgid "Add"
 msgstr "Adicionar"
 
-#: ../isobrowser.c:1616
+#: ../isobrowser.c:1619
 msgid "Add extension automatically"
 msgstr "Adicionar extensão automaticamente"
 
@@ -51,7 +51,7 @@ msgstr "Adicionar extensão automaticamente"
 msgid "Add to the ISO"
 msgstr "Adicionar à ISO"
 
-#: ../isobrowser.c:1325 ../isobrowser.c:1613
+#: ../isobrowser.c:1328 ../isobrowser.c:1616
 msgid "All files"
 msgstr "Todos os Ficheiros"
 
@@ -83,7 +83,7 @@ msgstr "Disco de Arranque: Disquete 2880 kB"
 msgid "Boot record type: No Emulation"
 msgstr "Disco de Arranque: Sem Emulação"
 
-#: ../isobrowser.c:500 ../isobrowser.c:1792
+#: ../isobrowser.c:500 ../isobrowser.c:1795
 msgid "Change permissions"
 msgstr ""
 
@@ -107,11 +107,11 @@ msgstr "Tempo de Criação:"
 msgid "Delete from the ISO"
 msgstr "Apagar da ISO"
 
-#: ../isobrowser.c:1785
+#: ../fsbrowser.c:577 ../isobrowser.c:1788
 msgid "Edit"
 msgstr ""
 
-#: ../editfile.c:77
+#: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: ../isobrowser.c:1458
+#: ../isobrowser.c:1461
 msgid "Enter a new name:"
 msgstr "Escrever um novo nome:"
 
@@ -135,7 +135,7 @@ msgstr "Extrair"
 msgid "Extract from the ISO"
 msgstr "Extrair da ISO"
 
-#: ../editfile.c:277 ../isobrowser.c:214
+#: ../editfile.c:473 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Falha ao adicionar '%s': '%s'"
@@ -160,12 +160,12 @@ msgstr "Falhou criar directoria %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Falhou criar directoria %s: '%s'"
 
-#: ../editfile.c:251 ../isobrowser.c:786
+#: ../editfile.c:447 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Falhou apagar '%s': '%s'"
 
-#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Falhou extracção de '%s': '%s'"
@@ -175,32 +175,32 @@ msgstr "Falhou extracção de '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Falhou extracção de disco de arranque: '%s'"
 
-#: ../isobrowser.c:1082 ../isobrowser.c:1130
+#: ../isobrowser.c:1082 ../isobrowser.c:1133
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Falhou inicialização bkisofs: '%s'"
 
-#: ../fsbrowser.c:218
+#: ../fsbrowser.c:224
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Falhou abrir directoria '%s', error %d"
 
-#: ../isobrowser.c:1149
+#: ../isobrowser.c:1152
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Falhou abrir ficheiro para leitura: '%s'"
 
-#: ../isobrowser.c:1224
+#: ../isobrowser.c:1227
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Falhou leitura de árvore de directorias: '%s'"
 
-#: ../isobrowser.c:1164
+#: ../isobrowser.c:1167
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Falhou leitura de informação de volume: '%s'"
 
-#: ../isobrowser.c:1487
+#: ../isobrowser.c:1490
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Falhou renomear '%s': %s"
@@ -210,7 +210,7 @@ msgstr "Falhou renomear '%s': %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Falhou selecção de %s como disco de arranque: '%s'"
 
-#: ../isobrowser.c:1559
+#: ../isobrowser.c:1562
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Falhou escrita de imagem para '%s': '%s'"
@@ -256,7 +256,7 @@ msgstr "Atrás uma directoria da ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Atrás uma directoria no sistema de ficheiros"
 
-#: ../isobrowser.c:1310 ../isobrowser.c:1608
+#: ../isobrowser.c:1313 ../isobrowser.c:1611
 msgid "ISO Images"
 msgstr "Imagens ISO"
 
@@ -312,16 +312,16 @@ msgstr "Localização: na imagem original em 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Localização: a adicionar de '%s'"
 
-#: ../isobrowser.c:1320
+#: ../isobrowser.c:1323
 #, fuzzy
 msgid "MDF Images"
 msgstr "Imagens ISO"
 
-#: ../isobrowser.c:1315
+#: ../isobrowser.c:1318
 msgid "NRG Images"
 msgstr "Imagens NRG"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:290
+#: ../fsbrowser.c:116 ../isobrowser.c:290
 msgid "Name"
 msgstr "Nome"
 
@@ -359,16 +359,16 @@ msgstr "Por favor aguarde enquanto adiciono os ficheiros selecionados..."
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Por favor aguarde enquanto extraio os ficheiros selecionados"
 
-#: ../isobrowser.c:1188
+#: ../isobrowser.c:1191
 msgid "Please wait while I'm reading the image..."
 msgstr "Por favor aguarde enquanto leio a imagem..."
 
-#: ../isobrowser.c:1531
+#: ../isobrowser.c:1534
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Por favor aguarde enquanto gravo a nova imagem no disco..."
 
-#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1181
-#: ../isobrowser.c:1521
+#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1184
+#: ../isobrowser.c:1524
 msgid "Progress"
 msgstr "Progresso"
 
@@ -380,12 +380,12 @@ msgstr "Editor:"
 msgid "Remove"
 msgstr "Remover"
 
-#: ../isobrowser.c:1769
+#: ../isobrowser.c:1772
 #, fuzzy
 msgid "Rename"
 msgstr "Remover"
 
-#: ../isobrowser.c:1597
+#: ../isobrowser.c:1600
 msgid "Save File"
 msgstr "Guardar Ficheiro"
 
@@ -401,7 +401,7 @@ msgstr "Procurando por ficheiros duplicados (Lento)"
 msgid "Show _hidden files"
 msgstr "Mostrar _ficheiros escondidos"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:313
+#: ../fsbrowser.c:137 ../isobrowser.c:313
 msgid "Size"
 msgstr "Tamanho"
 
@@ -410,17 +410,21 @@ msgstr "Tamanho"
 msgid "Size: %d bytes"
 msgstr "Tamanho: %d bytes"
 
-#: ../fsbrowser.c:269
+#: ../fsbrowser.c:275
 msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
+"Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
 "Saltando entrada de directoria, nomes de ficheiros maiores que 256 "
 "caractéres não são suportados"
 
-#: ../fsbrowser.c:288
+#: ../fsbrowser.c:294
 #, c-format
-msgid "Skiping directory entry because stat(%s) failed with %d"
+msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Saltando entrada de directoria por stat(%s) falhou com %d"
+
+#: ../window.c:234
+msgid "Sort is _case sensitive"
+msgstr ""
 
 #: ../settings.c:724
 #, fuzzy
@@ -482,12 +486,12 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "Usar ficheiro selecionado na imagem (sem emulação)"
 
-#: ../isobrowser.c:1778
+#: ../fsbrowser.c:570 ../isobrowser.c:1781
 #, fuzzy
 msgid "View"
 msgstr "_Ver"
 
-#: ../editfile.c:97
+#: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
 msgstr ""
 
@@ -530,10 +534,6 @@ msgstr "_Geral"
 #: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_ListarDirectoriasPrimeiro"
-
-#: ../window.c:234
-msgid "_Sort is case sensitive"
-msgstr ""
 
 #: ../window.c:246
 msgid "_Tools"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-30 17:09-0500\n"
+"POT-Creation-Date: 2007-12-05 00:17-0500\n"
 "PO-Revision-Date: 2007-09-11 14:50+0100\n"
 "Last-Translator: Holger Jakobs <holger@jakobs.com>\n"
 "Language-Team: Tutku DALMAZ <t@gmail.com>\n"
@@ -17,7 +17,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      Tahmini Kalıp Boyutu: "
 
-#: ../isobrowser.c:1379
+#: ../isobrowser.c:1382
 #, c-format
 msgid ""
 "%s\n"
@@ -28,12 +28,12 @@ msgstr ""
 "\n"
 "Devam etmek istiyor musunuz?"
 
-#: ../editfile.c:172 ../editfile.c:385
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' olağan bir dosya değildir"
 
-#: ../isobrowser.c:141 ../isobrowser.c:1194
+#: ../isobrowser.c:141 ../isobrowser.c:1197
 msgid "(scanning for duplicate files)"
 msgstr "(benzer dosyalar taranıyor)"
 
@@ -41,7 +41,7 @@ msgstr "(benzer dosyalar taranıyor)"
 msgid "Add"
 msgstr "Ekle"
 
-#: ../isobrowser.c:1616
+#: ../isobrowser.c:1619
 msgid "Add extension automatically"
 msgstr "Otomatik olarak uzantıyı ekle"
 
@@ -49,7 +49,7 @@ msgstr "Otomatik olarak uzantıyı ekle"
 msgid "Add to the ISO"
 msgstr "ISO'ya Ekle"
 
-#: ../isobrowser.c:1325 ../isobrowser.c:1613
+#: ../isobrowser.c:1328 ../isobrowser.c:1616
 msgid "All files"
 msgstr "Tüm dosyalar"
 
@@ -81,7 +81,7 @@ msgstr "Önyükleyici kayıt tipi: 2880KiB Floppy"
 msgid "Boot record type: No Emulation"
 msgstr "Önyükleyici kayıt tipi: Benzeme Yok"
 
-#: ../isobrowser.c:500 ../isobrowser.c:1792
+#: ../isobrowser.c:500 ../isobrowser.c:1795
 msgid "Change permissions"
 msgstr "izinleri değiştir"
 
@@ -105,11 +105,11 @@ msgstr "Oluşturma zamanı:"
 msgid "Delete from the ISO"
 msgstr "ISO'dan sil"
 
-#: ../isobrowser.c:1785
+#: ../fsbrowser.c:577 ../isobrowser.c:1788
 msgid "Edit"
 msgstr "araştır"
 
-#: ../editfile.c:77
+#: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
@@ -117,7 +117,7 @@ msgstr ""
 msgid "Editor"
 msgstr "araştırım"
 
-#: ../isobrowser.c:1458
+#: ../isobrowser.c:1461
 msgid "Enter a new name:"
 msgstr "Yeni bir isim girin:"
 
@@ -133,7 +133,7 @@ msgstr "Çıkart"
 msgid "Extract from the ISO"
 msgstr "ISO'dan çıkart"
 
-#: ../editfile.c:277 ../isobrowser.c:214
+#: ../editfile.c:473 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "'%s' eklenmesi başarısız oldu: '%s'"
@@ -158,12 +158,12 @@ msgstr "Dizinin oluşturulması başarısız oldu %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "%s dizininin oluşturulması başarısız oldu: '%s'"
 
-#: ../editfile.c:251 ../isobrowser.c:786
+#: ../editfile.c:447 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "'%'s' in silinmesi başarısız oldu: '%s'"
 
-#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "'%s' in çıkartılması başarısız oldu: '%s'"
@@ -173,32 +173,32 @@ msgstr "'%s' in çıkartılması başarısız oldu: '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Önyükleyici kaydının çıkartılması başarısız oldu: '%s'"
 
-#: ../isobrowser.c:1082 ../isobrowser.c:1130
+#: ../isobrowser.c:1082 ../isobrowser.c:1133
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "bkisofs'nin başlatılması başarısız oldu: '%s'"
 
-#: ../fsbrowser.c:218
+#: ../fsbrowser.c:224
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "'%s' dizininin açılması başarısız oldu, hata %d"
 
-#: ../isobrowser.c:1149
+#: ../isobrowser.c:1152
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "ISO dosyasının okumak için açılması başarısız oldu: '%s'"
 
-#: ../isobrowser.c:1224
+#: ../isobrowser.c:1227
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Dizin ağacının okunması başarısız oldu: '%s'"
 
-#: ../isobrowser.c:1164
+#: ../isobrowser.c:1167
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Bölüm bilgisinin okunması başarısız oldu: '%s'"
 
-#: ../isobrowser.c:1487
+#: ../isobrowser.c:1490
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "'%s' in yeniden adlandırılması başarısız oldu: %s"
@@ -208,7 +208,7 @@ msgstr "'%s' in yeniden adlandırılması başarısız oldu: %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "%s in önyükleyici kaydı olarak ayarlanması başarısız oldu: '%s'"
 
-#: ../isobrowser.c:1559
+#: ../isobrowser.c:1562
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Kalıba '%s' in yazdırılması başarısız oldu: '%s'"
@@ -255,7 +255,7 @@ msgstr "ISO içerisinde bir üst dizine git"
 msgid "Go back up one directory on the filesystem"
 msgstr "Dosya sistemi içerisinde bir üst dizine git"
 
-#: ../isobrowser.c:1310 ../isobrowser.c:1608
+#: ../isobrowser.c:1313 ../isobrowser.c:1611
 msgid "ISO Images"
 msgstr "ISO kalıpları"
 
@@ -310,15 +310,15 @@ msgstr "Konum: özgün kalıp üzerinde 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Konum: '%s' den eklenecek"
 
-#: ../isobrowser.c:1320
+#: ../isobrowser.c:1323
 msgid "MDF Images"
 msgstr "MDF kalıpları"
 
-#: ../isobrowser.c:1315
+#: ../isobrowser.c:1318
 msgid "NRG Images"
 msgstr "NRG Kalıpları"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:290
+#: ../fsbrowser.c:116 ../isobrowser.c:290
 msgid "Name"
 msgstr "İsim"
 
@@ -355,16 +355,16 @@ msgstr "Ben seçili öğeleri eklerken lütfen bekleyiniz..."
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Ben seçili öğeleri çıkarırken lütfen bekleyiniz..."
 
-#: ../isobrowser.c:1188
+#: ../isobrowser.c:1191
 msgid "Please wait while I'm reading the image..."
 msgstr "Ben kalıbı okurken lütfen bekleyiniz..."
 
-#: ../isobrowser.c:1531
+#: ../isobrowser.c:1534
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Ben yeni kalıbı diske kaydederken lütfen bekleyiniz..."
 
-#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1181
-#: ../isobrowser.c:1521
+#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1184
+#: ../isobrowser.c:1524
 msgid "Progress"
 msgstr "İlerleme"
 
@@ -376,11 +376,11 @@ msgstr "Yayıncı:"
 msgid "Remove"
 msgstr "Kaldır"
 
-#: ../isobrowser.c:1769
+#: ../isobrowser.c:1772
 msgid "Rename"
 msgstr "Adını değiştir"
 
-#: ../isobrowser.c:1597
+#: ../isobrowser.c:1600
 msgid "Save File"
 msgstr "Dosyayı Kaydet"
 
@@ -396,7 +396,7 @@ msgstr "Benzer dosyaları tara (yavaş)"
 msgid "Show _hidden files"
 msgstr "_Gizli dosyaları göster"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:313
+#: ../fsbrowser.c:137 ../isobrowser.c:313
 msgid "Size"
 msgstr "Boyut"
 
@@ -405,16 +405,20 @@ msgstr "Boyut"
 msgid "Size: %d bytes"
 msgstr "Boyut: %d byte"
 
-#: ../fsbrowser.c:269
+#: ../fsbrowser.c:275
 msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
+"Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
 "Dizin girişi atlanıyor çünkü 256 karakterden fazla dosya ismi kullanılamaz"
 
-#: ../fsbrowser.c:288
+#: ../fsbrowser.c:294
 #, c-format
-msgid "Skiping directory entry because stat(%s) failed with %d"
+msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Dizin girişi atlanıyor çünkü durum(%s) başarısız oldu %d"
+
+#: ../window.c:234
+msgid "Sort is _case sensitive"
+msgstr ""
 
 #: ../settings.c:724
 msgid "Temporary directory"
@@ -476,11 +480,11 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "Seçili dosyaları kalıpta kullan (benzeme yok)"
 
-#: ../isobrowser.c:1778
+#: ../fsbrowser.c:570 ../isobrowser.c:1781
 msgid "View"
 msgstr "Seyret"
 
-#: ../editfile.c:97
+#: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
 msgstr ""
 
@@ -523,10 +527,6 @@ msgstr "_Tanıtma"
 #: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_İlk olarak dizinleri sırala"
-
-#: ../window.c:234
-msgid "_Sort is case sensitive"
-msgstr ""
 
 #: ../window.c:246
 msgid "_Tools"

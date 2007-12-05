@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master Hebrew\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-30 17:09-0500\n"
+"POT-Creation-Date: 2007-12-05 00:17-0500\n"
 "PO-Revision-Date: 2007-11-30 00:53-0500\n"
 "Last-Translator: Fima Kachinski <xrayon@gmail.com>\n"
 "Language-Team: Fima Kachinski <xrayon@gmail.com>\n"
@@ -16,7 +16,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "גודל דמות ISO משוערת:"
 
-#: ../isobrowser.c:1379
+#: ../isobrowser.c:1382
 #, c-format
 msgid ""
 "%s\n"
@@ -27,12 +27,12 @@ msgstr ""
 "\n"
 "האם אתה רוצה להמשיך?"
 
-#: ../editfile.c:172 ../editfile.c:385
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' הוא לא קובץ רגיל"
 
-#: ../isobrowser.c:141 ../isobrowser.c:1194
+#: ../isobrowser.c:141 ../isobrowser.c:1197
 msgid "(scanning for duplicate files)"
 msgstr "(סורק אחר קבצים זהים)"
 
@@ -40,7 +40,7 @@ msgstr "(סורק אחר קבצים זהים)"
 msgid "Add"
 msgstr "הוסף"
 
-#: ../isobrowser.c:1616
+#: ../isobrowser.c:1619
 msgid "Add extension automatically"
 msgstr "הוסף סיומת מתאימה אוטומטית"
 
@@ -48,7 +48,7 @@ msgstr "הוסף סיומת מתאימה אוטומטית"
 msgid "Add to the ISO"
 msgstr "הוסף לדמות הISO"
 
-#: ../isobrowser.c:1325 ../isobrowser.c:1613
+#: ../isobrowser.c:1328 ../isobrowser.c:1616
 msgid "All files"
 msgstr "הוסף קבצים"
 
@@ -80,7 +80,7 @@ msgstr "סוג של אזור אתחול: 2880KB דיסקט"
 msgid "Boot record type: No Emulation"
 msgstr "סוג של אזור אתחול: ללא הדמיה"
 
-#: ../isobrowser.c:500 ../isobrowser.c:1792
+#: ../isobrowser.c:500 ../isobrowser.c:1795
 msgid "Change permissions"
 msgstr "שנה הרשאות"
 
@@ -104,11 +104,11 @@ msgstr "זמן היצירה:"
 msgid "Delete from the ISO"
 msgstr "מחוק מדמות הISO"
 
-#: ../isobrowser.c:1785
+#: ../fsbrowser.c:577 ../isobrowser.c:1788
 msgid "Edit"
 msgstr "עריכה"
 
-#: ../editfile.c:77
+#: ../editfile.c:82
 #, fuzzy
 msgid "Edit failed, please check Options/Editor"
 msgstr "העריכה נכשלה, יש לבדוק את הפרטים בתפריט הגדרות\\עורך"
@@ -117,7 +117,7 @@ msgstr "העריכה נכשלה, יש לבדוק את הפרטים בתפריט 
 msgid "Editor"
 msgstr "עורך"
 
-#: ../isobrowser.c:1458
+#: ../isobrowser.c:1461
 msgid "Enter a new name:"
 msgstr "הכנס שם חדש:"
 
@@ -133,7 +133,7 @@ msgstr "פרוס"
 msgid "Extract from the ISO"
 msgstr "פרוס מדמות הISO"
 
-#: ../editfile.c:277 ../isobrowser.c:214
+#: ../editfile.c:473 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "ההוספה של '%s': '%s' נכשלה"
@@ -158,12 +158,12 @@ msgstr "יצירת התיקייה נכשלה %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "יצירת התיקייה נכשלה %s: '%s'"
 
-#: ../editfile.c:251 ../isobrowser.c:786
+#: ../editfile.c:447 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "המחיקה נכשלה '%s': '%s'"
 
-#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "הפריסה נכשלה '%s': '%s'"
@@ -173,32 +173,32 @@ msgstr "הפריסה נכשלה '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "פריסת אזור האתחול נכשלה: '%s'"
 
-#: ../isobrowser.c:1082 ../isobrowser.c:1130
+#: ../isobrowser.c:1082 ../isobrowser.c:1133
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "אתחול ספריית BKISOFS נכשלה:  '%s'"
 
-#: ../fsbrowser.c:218
+#: ../fsbrowser.c:224
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "פתיחת התיקייה נכשלה '%s', שגיאה %d"
 
-#: ../isobrowser.c:1149
+#: ../isobrowser.c:1152
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "פתיחת דמות הISO לקריאה נכשלה: '%s'"
 
-#: ../isobrowser.c:1224
+#: ../isobrowser.c:1227
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "קריאת מבנה עץ התיקיות נכשלה: '%s'"
 
-#: ../isobrowser.c:1164
+#: ../isobrowser.c:1167
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "קריאת הנתונים של הכרך נכשלה: '%s'"
 
-#: ../isobrowser.c:1487
+#: ../isobrowser.c:1490
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "שינוי השם נכשל '%s': %s"
@@ -208,7 +208,7 @@ msgstr "שינוי השם נכשל '%s': %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "קביעת %s כאזור האתחול נכשל: '%s'"
 
-#: ../isobrowser.c:1559
+#: ../isobrowser.c:1562
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "כתיבת הדמות ל'%s': '%s' נכשלה"
@@ -254,7 +254,7 @@ msgstr "שוטט תיקייה אחת אחורה בדמות הISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "שוטט תיקייה אחת אחורה בכונן הקשיח"
 
-#: ../isobrowser.c:1310 ../isobrowser.c:1608
+#: ../isobrowser.c:1313 ../isobrowser.c:1611
 msgid "ISO Images"
 msgstr "דמויות ISO"
 
@@ -308,15 +308,15 @@ msgstr "מיקום: על הדמות המקורית ב0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "מיקום: מקור ההוספה מ'%s'"
 
-#: ../isobrowser.c:1320
+#: ../isobrowser.c:1323
 msgid "MDF Images"
 msgstr "דמויות MDF"
 
-#: ../isobrowser.c:1315
+#: ../isobrowser.c:1318
 msgid "NRG Images"
 msgstr "דמויות NRG"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:290
+#: ../fsbrowser.c:116 ../isobrowser.c:290
 msgid "Name"
 msgstr "שם"
 
@@ -352,16 +352,16 @@ msgstr "נא להמתין בזמן שהתכנה מוסיפה את הקבצים �
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "נא להמתין בזמן שהתכנה פורסת את הקבצים שבחרתם..."
 
-#: ../isobrowser.c:1188
+#: ../isobrowser.c:1191
 msgid "Please wait while I'm reading the image..."
 msgstr "נא להמתין בזמן שהתכנה קוראת מהדמות..."
 
-#: ../isobrowser.c:1531
+#: ../isobrowser.c:1534
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "נא להמתין בזמן שהתכנה שומרת את הדמות החדשה לכונן הקשיח..."
 
-#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1181
-#: ../isobrowser.c:1521
+#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1184
+#: ../isobrowser.c:1524
 msgid "Progress"
 msgstr "קדמה"
 
@@ -373,11 +373,11 @@ msgstr "מוציא לאור:"
 msgid "Remove"
 msgstr "הסר"
 
-#: ../isobrowser.c:1769
+#: ../isobrowser.c:1772
 msgid "Rename"
 msgstr "שנה שם"
 
-#: ../isobrowser.c:1597
+#: ../isobrowser.c:1600
 msgid "Save File"
 msgstr "שמור קובץ"
 
@@ -393,7 +393,7 @@ msgstr "תסורק אחר קבצים זהים (סריקה איטית)"
 msgid "Show _hidden files"
 msgstr "הראה קבצים נסתרים"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:313
+#: ../fsbrowser.c:137 ../isobrowser.c:313
 msgid "Size"
 msgstr "גודל"
 
@@ -402,17 +402,21 @@ msgstr "גודל"
 msgid "Size: %d bytes"
 msgstr "גודל: %d bytes"
 
-#: ../fsbrowser.c:269
+#: ../fsbrowser.c:275
 msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
+"Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
 "מדלג על הכניסה לתיקיה משום שהתכנה לא מזהה קבצים עם אורך שם גדול יותר מ256 "
 "תווים   "
 
-#: ../fsbrowser.c:288
+#: ../fsbrowser.c:294
 #, c-format
-msgid "Skiping directory entry because stat(%s) failed with %d"
+msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "מדלג על הכניסה לתיקיה משום שstat(%s) נכשל עם %d"
+
+#: ../window.c:234
+msgid "Sort is _case sensitive"
+msgstr ""
 
 #: ../settings.c:724
 msgid "Temporary directory"
@@ -471,11 +475,11 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "תשתמש בקובץ שנבחר על הדמות (ללא הדמיה)"
 
-#: ../isobrowser.c:1778
+#: ../fsbrowser.c:570 ../isobrowser.c:1781
 msgid "View"
 msgstr "הצג"
 
-#: ../editfile.c:97
+#: ../editfile.c:102
 #, fuzzy
 msgid "View failed, please check Options/Viewer"
 msgstr "ההצגה נכשלה, נא לבדוק הגדרות\\מציג "
@@ -518,10 +522,6 @@ msgstr "כללי "
 #: ../window.c:224
 msgid "_Sort directories first"
 msgstr "מיין תיקיות בראש "
-
-#: ../window.c:234
-msgid "_Sort is case sensitive"
-msgstr ""
 
 #: ../window.c:246
 msgid "_Tools"

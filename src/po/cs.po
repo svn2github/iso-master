@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs.po_[k6bxCb]\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-11-30 17:09-0500\n"
+"POT-Creation-Date: 2007-12-05 00:17-0500\n"
 "PO-Revision-Date: 2007-08-24 20:47+0200\n"
 "Last-Translator: Schmaki <smallsmaky@seznam.cz>\n"
 "Language-Team:  <cs@li.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr " Předpokládaná velikost ISO obrazu: "
 
-#: ../isobrowser.c:1379
+#: ../isobrowser.c:1382
 #, c-format
 msgid ""
 "%s\n"
@@ -32,12 +32,12 @@ msgstr ""
 "\n"
 "Přejete si pokračovat?"
 
-#: ../editfile.c:172 ../editfile.c:385
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' není platný soubor"
 
-#: ../isobrowser.c:141 ../isobrowser.c:1194
+#: ../isobrowser.c:141 ../isobrowser.c:1197
 msgid "(scanning for duplicate files)"
 msgstr "(vyhledávám duplicitní soubory)"
 
@@ -45,7 +45,7 @@ msgstr "(vyhledávám duplicitní soubory)"
 msgid "Add"
 msgstr "Přidat"
 
-#: ../isobrowser.c:1616
+#: ../isobrowser.c:1619
 msgid "Add extension automatically"
 msgstr "Přidat příponu automaticky"
 
@@ -53,7 +53,7 @@ msgstr "Přidat příponu automaticky"
 msgid "Add to the ISO"
 msgstr "Přidat do ISO obrazu"
 
-#: ../isobrowser.c:1325 ../isobrowser.c:1613
+#: ../isobrowser.c:1328 ../isobrowser.c:1616
 msgid "All files"
 msgstr "Všechny soubory"
 
@@ -85,7 +85,7 @@ msgstr "Typ zaváděcího záznamu: 2880KiB disketa"
 msgid "Boot record type: No Emulation"
 msgstr "Typ zaváděcího záznamu: Bez emulace"
 
-#: ../isobrowser.c:500 ../isobrowser.c:1792
+#: ../isobrowser.c:500 ../isobrowser.c:1795
 msgid "Change permissions"
 msgstr "Změnit oprávnění"
 
@@ -109,11 +109,11 @@ msgstr "Čas vytvoření:"
 msgid "Delete from the ISO"
 msgstr "Smazat z ISO obrazu"
 
-#: ../isobrowser.c:1785
+#: ../fsbrowser.c:577 ../isobrowser.c:1788
 msgid "Edit"
 msgstr "Upravit"
 
-#: ../editfile.c:77
+#: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
 msgstr ""
 
@@ -121,7 +121,7 @@ msgstr ""
 msgid "Editor"
 msgstr "Editor"
 
-#: ../isobrowser.c:1458
+#: ../isobrowser.c:1461
 msgid "Enter a new name:"
 msgstr "Vložte nový název:"
 
@@ -137,7 +137,7 @@ msgstr "Extrahovat"
 msgid "Extract from the ISO"
 msgstr "Extrahovat z ISO obrazu"
 
-#: ../editfile.c:277 ../isobrowser.c:214
+#: ../editfile.c:473 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Nepodařilo se přidat '%s': '%s'"
@@ -162,12 +162,12 @@ msgstr "Nepodařilo se vytvořit adresář '%s'"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Nepodařilo se vytvořit adresář %s: '%s'"
 
-#: ../editfile.c:251 ../isobrowser.c:786
+#: ../editfile.c:447 ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Nepodařilo se smazat %s: '%s'"
 
-#: ../editfile.c:216 ../editfile.c:429 ../isobrowser.c:899
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Nepodařilo se extrahovat %s: '%s'"
@@ -177,32 +177,32 @@ msgstr "Nepodařilo se extrahovat %s: '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Nepodařilo se extrahovat zaváděcí záznam: '%s'"
 
-#: ../isobrowser.c:1082 ../isobrowser.c:1130
+#: ../isobrowser.c:1082 ../isobrowser.c:1133
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Nepodařilo se inicializovat bkisofs: '%s'"
 
-#: ../fsbrowser.c:218
+#: ../fsbrowser.c:224
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Nepodařilo se otevřít adresář '%s', chyba %d"
 
-#: ../isobrowser.c:1149
+#: ../isobrowser.c:1152
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Nepodařilo se otevřít ISO obraz pro čtení: '%s'"
 
-#: ../isobrowser.c:1224
+#: ../isobrowser.c:1227
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Nepodařilo se přečíst adresářovou strukturu: %s"
 
-#: ../isobrowser.c:1164
+#: ../isobrowser.c:1167
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Nepodařilo se načíst informace o svazku: '%s'"
 
-#: ../isobrowser.c:1487
+#: ../isobrowser.c:1490
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Nepodařilo se přejmenovat %s: '%s'"
@@ -212,7 +212,7 @@ msgstr "Nepodařilo se přejmenovat %s: '%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Nepodařilo se nastavit %s jako zaváděcí záznam: '%s'"
 
-#: ../isobrowser.c:1559
+#: ../isobrowser.c:1562
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Nepodařilo se zapsat obraz do %s: '%s'"
@@ -258,7 +258,7 @@ msgstr "Jdi v ISO obrazu zpět o jeden adresář"
 msgid "Go back up one directory on the filesystem"
 msgstr "Jdi v systému souborů zpět o jeden adresář"
 
-#: ../isobrowser.c:1310 ../isobrowser.c:1608
+#: ../isobrowser.c:1313 ../isobrowser.c:1611
 msgid "ISO Images"
 msgstr "ISO obrazy"
 
@@ -312,15 +312,15 @@ msgstr "Umístění: v původním obrazu v 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Umístění: bude přidáno z '%s'"
 
-#: ../isobrowser.c:1320
+#: ../isobrowser.c:1323
 msgid "MDF Images"
 msgstr "MDF obrazy"
 
-#: ../isobrowser.c:1315
+#: ../isobrowser.c:1318
 msgid "NRG Images"
 msgstr "Obrazy NRG"
 
-#: ../fsbrowser.c:110 ../isobrowser.c:290
+#: ../fsbrowser.c:116 ../isobrowser.c:290
 msgid "Name"
 msgstr "Název"
 
@@ -360,16 +360,16 @@ msgstr "Čekejte prosím, přidávám vybrané položky..."
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Čekejte prosím, extrahuji vybrané položky..."
 
-#: ../isobrowser.c:1188
+#: ../isobrowser.c:1191
 msgid "Please wait while I'm reading the image..."
 msgstr "Čekejte prosím, načítám obraz..."
 
-#: ../isobrowser.c:1531
+#: ../isobrowser.c:1534
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Čekejte prosím, ukládám nový obraz na disk..."
 
-#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1181
-#: ../isobrowser.c:1521
+#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1184
+#: ../isobrowser.c:1524
 msgid "Progress"
 msgstr "Průběh"
 
@@ -381,11 +381,11 @@ msgstr "Autor:"
 msgid "Remove"
 msgstr "Odstranit"
 
-#: ../isobrowser.c:1769
+#: ../isobrowser.c:1772
 msgid "Rename"
 msgstr "Přejmenovat"
 
-#: ../isobrowser.c:1597
+#: ../isobrowser.c:1600
 msgid "Save File"
 msgstr "Uložit soubor"
 
@@ -401,7 +401,7 @@ msgstr "Vyhledat duplicitní soubory (pomalé)"
 msgid "Show _hidden files"
 msgstr "Ukázat _skryté soubory"
 
-#: ../fsbrowser.c:131 ../isobrowser.c:313
+#: ../fsbrowser.c:137 ../isobrowser.c:313
 msgid "Size"
 msgstr "Velikost"
 
@@ -410,15 +410,19 @@ msgstr "Velikost"
 msgid "Size: %d bytes"
 msgstr "Velikost: %d bajtů"
 
-#: ../fsbrowser.c:269
+#: ../fsbrowser.c:275
 msgid ""
-"Skiping directory entry because cannot handle filename longer than 256 chars"
+"Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr "Název delší než 256 znaků, přeskakuji adresář"
 
-#: ../fsbrowser.c:288
+#: ../fsbrowser.c:294
 #, c-format
-msgid "Skiping directory entry because stat(%s) failed with %d"
+msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Stat(%s) se nezdařil (%d); přeskakuji adresář"
+
+#: ../window.c:234
+msgid "Sort is _case sensitive"
+msgstr ""
 
 #: ../settings.c:724
 msgid "Temporary directory"
@@ -480,11 +484,11 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "Použít vybraný soubor na obraz (bez emulace)"
 
-#: ../isobrowser.c:1778
+#: ../fsbrowser.c:570 ../isobrowser.c:1781
 msgid "View"
 msgstr "Pohled"
 
-#: ../editfile.c:97
+#: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
 msgstr ""
 
@@ -526,10 +530,6 @@ msgstr "_Přehled"
 #: ../window.c:224
 msgid "_Sort directories first"
 msgstr "_Řadit nejdřív adresáře"
-
-#: ../window.c:234
-msgid "_Sort is case sensitive"
-msgstr ""
 
 #: ../window.c:246
 msgid "_Tools"
