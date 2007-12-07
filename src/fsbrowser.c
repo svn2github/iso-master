@@ -486,7 +486,15 @@ void fsRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
     else if(fileType == FILE_TYPE_SYMLINK)
     /* if it's a symlink to a dir, change directory */
     {
-        ;
+        struct stat statStruct;
+        int rc;
+        
+        rc = stat(selectedPathAndName, &statStruct);
+        if( rc == 0 && (statStruct.st_mode & S_IFDIR) )
+        {
+            strcat(selectedPathAndName, "/");
+            changeFsDirectory(selectedPathAndName);
+        }
     }
     else if(fileType == FILE_TYPE_REGULAR)
     /* if it's an image, open it */

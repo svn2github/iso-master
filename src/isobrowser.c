@@ -246,10 +246,12 @@ void buildIsoBrowser(GtkWidget* boxToPackInto)
     GtkCellRenderer* renderer;
     GtkTreeViewColumn* column;
     
-    GBLisoListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, 
-                                         G_TYPE_STRING, 
-                                         G_TYPE_UINT, /* 64-bit sizes not allowed on an iso */
-                                         G_TYPE_UINT);
+    GBLisoListStore = gtk_list_store_new(NUM_COLUMNS, 
+                                         GDK_TYPE_PIXBUF, /* icon */
+                                         G_TYPE_STRING, /* name */
+                                         G_TYPE_UINT, /* size (64-bit sizes not allowed on an iso) */
+                                         G_TYPE_UINT /* file type */
+                                         );
     
     scrolledWindow = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
