@@ -200,7 +200,7 @@ GBLtranslators =
 "Robert Groenning\n"
 "- nn (Norwegian Nynorsk) translation of ISO Master version 1.1\n"
 "\n"
-"Marciej Libuda\n"
+"Maciej Libuda\n"
 "- pl (Polish) translation of ISO Master versions 0.6 - 1.1\n"
 "\n"
 "Joao de Ferro\n"

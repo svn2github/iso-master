@@ -77,7 +77,12 @@ void buildFsBrowser(GtkWidget* boxToPackInto)
     GtkCellRenderer* renderer;
     GtkTreeViewColumn* column;
     
-    GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_UINT64, G_TYPE_UINT);
+    GBLfsListStore = gtk_list_store_new(NUM_COLUMNS, 
+                                        GDK_TYPE_PIXBUF, /* icon */
+                                        G_TYPE_STRING,  /* name */
+                                        G_TYPE_UINT64, /* size */
+                                        G_TYPE_UINT /* file type */
+                                        );
     
     scrolledWindow = gtk_scrolled_window_new(NULL, NULL);
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolledWindow),
