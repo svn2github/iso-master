@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: ISO Master 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-05 00:17-0500\n"
-"PO-Revision-Date: 2007-09-12 21:20+0200\n"
+"PO-Revision-Date: 2007-12-05 09:00+0200\n"
 "Last-Translator: Jozef Riha <jose1711@gmail.com>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgstr "Upraviť"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr ""
+msgstr "Úprava zlyhala, prosím skontrolujte Voľby/Editor"
 
 #: ../settings.c:701
 msgid "Editor"
@@ -336,7 +336,7 @@ msgstr "Neexistuje boot, ktorý by bolo možné vymazať"
 
 #: ../settings.c:666
 msgid "Options"
-msgstr ""
+msgstr "Voľby"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -419,7 +419,7 @@ msgstr "Preskakujem adresárovú položku, pretože stat(%s) skončilo s chybou 
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr ""
+msgstr "Rade_nie berie ohľad na veľkosť znakov"
 
 #: ../settings.c:724
 msgid "Temporary directory"
@@ -427,7 +427,6 @@ msgstr "Dočasný adresár"
 
 # !! this translation is incomplete
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -458,17 +457,20 @@ msgstr ""
 " - spodný prehliadač súborov zobrazuje súbory a adresáre v obraze\n"
 "ISO.\n"
 "\n"
-"Pre otvorenie existujúceho súboru ISO kliknite na 'Obraz' a 'Otvoriť'. Pre\n"
-"vytvorenie nového ISO súboru kliknite na 'Obraz' a 'Nový'.\n"
+"Pre otvorenie existujúceho súboru ISO kliknite na 'Súbor' a 'Otvoriť'. Pre\n"
+"vytvorenie nového ISO súboru kliknite na 'Súbor' a 'Nový'.\n"
 "\n"
 "Pre pridanie jedného alebo viacerých súborov alebo adresárov do ISO\n"
 "obrazu, vyberte ich v hornom prehliadači súborov a kliknite na tlačidlo\n"
 "'Pridať do ISO' na strednej lište.\n"
 "\n"
+"Pre extrahovanie jedného alebo viacerých súborov alebo adresárov z ISO\n"
+"obrazu, vyberte ich v spodnom prehliadači súborov a kliknite na tlačidlo\n"
+"'Extrahovať z ISO' na strednej lište.\n"
 "Môžete tiež vymazať súbory alebo adresáre z ISO súboru alebo vytvoriť\n"
-"nové adresáre tak v ISO obraze ako aj v lokálnom súborovom systéme.\n"
+"nové adresáre tak v ISO obraze ako aj na lokálnom súborovom systéme.\n"
 "\n"
-"Po vykonaní všetkých zmien na novom ISO obraze, kliknite na 'Obraz' a\n"
+"Po vykonaní všetkých zmien v novom ISO obraze, kliknite na 'Obraz' a\n"
 "'Uložiť ako'. Nemôžete prepísať pôvodný ISO súbor.\n"
 
 #: ../window.c:286
@@ -481,7 +483,7 @@ msgstr "Pohľad"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr ""
+msgstr "Pohľad zlyhal, prosím skontrolujte Voľby/Pohľad"
 
 #: ../settings.c:713
 msgid "Viewer"
@@ -497,14 +499,12 @@ msgid ""
 msgstr "Budete musieť zavrieť a opätovne otvoriť ISO, aby boli zmeny použité"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
-msgstr "_BootRecord"
+msgstr "_Boot Record"
 
 #: ../window.c:141
-#, fuzzy
 msgid "_File"
-msgstr "Po_hľad"
+msgstr "_Súbor"
 
 #: ../window.c:326
 msgid "_Help"
@@ -512,7 +512,7 @@ msgstr "_Pomocník"
 
 #: ../window.c:318
 msgid "_Options"
-msgstr ""
+msgstr "_Voľby"
 
 #: ../window.c:335
 msgid "_Overview"
@@ -524,7 +524,7 @@ msgstr "Radiť _adresáre ako prvé"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr ""
+msgstr "_Nástroje"
 
 #: ../window.c:199
 msgid "_View"

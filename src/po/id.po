@@ -1,23 +1,23 @@
-# Dutch translation of ISO Master.
+# Indonesian translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ISO Master 1.3\n"
+"Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-05 00:17-0500\n"
-"PO-Revision-Date: 2007-12-06 22:11+0100\n"
-"Last-Translator: Stephen Brandt <stephen@stephenbrandt.com>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2007-12-07 00:23-0500\n"
+"PO-Revision-Date: 2007-12-07 13:45+0700\n"
+"Last-Translator: Wahyu <w4h703@gmail.com>\n"
+"Language-Team: Indonesian <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../window.c:389
 msgid "      Estimated ISO Size: "
-msgstr "      Geschatte ISO grootte: "
+msgstr "      Perkiraan ukuran ISO: "
 
-#: ../isobrowser.c:1382
+#: ../isobrowser.c:1384
 #, c-format
 msgid ""
 "%s\n"
@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "%s\n"
 "\n"
-"Wilt u doorgaan?"
+"apa kamu ingin melanjutkan?"
 
 #: ../editfile.c:272
 #: ../editfile.c:368
@@ -34,407 +34,407 @@ msgstr ""
 #: ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr "'%s' is geen gangbaar bestand"
+msgstr "'%s' bukan berkas reguler"
 
 #: ../isobrowser.c:141
-#: ../isobrowser.c:1197
+#: ../isobrowser.c:1199
 msgid "(scanning for duplicate files)"
-msgstr "(bezig met het zoeken naar dubbele bestanden)"
+msgstr "(mencari berkas ganda)"
 
 #: ../window.c:375
 msgid "Add"
-msgstr "Toevoegen"
+msgstr "Tambah"
 
-#: ../isobrowser.c:1619
+#: ../isobrowser.c:1621
 msgid "Add extension automatically"
-msgstr "Extensie automatisch toevoegen"
+msgstr "Tambah ektensi otomatis"
 
 #: ../window.c:375
 msgid "Add to the ISO"
-msgstr "Toevoegen aan de ISO"
+msgstr "Tambah ke ISO"
 
-#: ../isobrowser.c:1328
-#: ../isobrowser.c:1616
+#: ../isobrowser.c:1330
+#: ../isobrowser.c:1618
 msgid "All files"
-msgstr "Alle bestanden"
+msgstr "Tambah berkas"
 
 #: ../boot.c:334
 msgid "Boot Record Information"
-msgstr "Bootrecord-informatie"
+msgstr "Informasi Boot Record"
 
 #: ../boot.c:122
 msgid "Boot record deleted"
-msgstr "Bootrecord verwijderd"
+msgstr "Boot Record dihapus"
 
 #: ../boot.c:350
 #, c-format
 msgid "Boot record type: 1200KiB Floppy"
-msgstr "Bootrecord-type: 1200KiB diskette"
+msgstr "Tipe Boot Record: 1200KiB Floppy"
 
 #: ../boot.c:352
 #, c-format
 msgid "Boot record type: 1440KiB Floppy"
-msgstr "Bootrecord-type: 1440KiB diskette"
+msgstr "Tipe Boot Record: 1440KiB Floppy"
 
 #: ../boot.c:354
 #, c-format
 msgid "Boot record type: 2880KiB Floppy"
-msgstr "Bootrecord-type: 2880KiB diskette"
+msgstr "Tipe Boot Record: 2880KiB Floppy"
 
 #: ../boot.c:348
 #, c-format
 msgid "Boot record type: No Emulation"
-msgstr "Bootrecord-type: Geen emulatie"
+msgstr "Tipe Boot Record: Tidak Ada Emulasi"
 
-#: ../isobrowser.c:500
-#: ../isobrowser.c:1795
+#: ../isobrowser.c:502
+#: ../isobrowser.c:1797
 msgid "Change permissions"
-msgstr "Permissies veranderen"
+msgstr "Rubah ijin"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
-msgstr "Kies bootrecord bestand"
+msgstr "Pilih berkas Boot Record"
 
 #: ../window.c:371
 msgid "Create new directory on the ISO"
-msgstr "Nieuwe map maken op de ISO"
+msgstr "Buat Berkas baru di ISO"
 
 #: ../window.c:60
 msgid "Create new directory on the filesystem"
-msgstr "Nieuwe map maken op het bestandssysteem"
+msgstr "Buat berkas baru di sistem berkas"
 
 #: ../settings.c:78
 msgid "Creation time:"
-msgstr "Tijdstip van creatie:"
+msgstr "Waktu pembuatan:"
 
 #: ../window.c:385
 msgid "Delete from the ISO"
-msgstr "Verwijder van de ISO"
+msgstr "Hapus dari ISO"
 
-#: ../fsbrowser.c:577
-#: ../isobrowser.c:1788
+#: ../fsbrowser.c:582
+#: ../isobrowser.c:1790
 msgid "Edit"
-msgstr "Bewerk"
+msgstr "Ubah"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr ""
+msgstr "Perubahan gagal, tolong periksa Pilihan/Editor"
 
 #: ../settings.c:701
 msgid "Editor"
 msgstr "Editor"
 
-#: ../isobrowser.c:1461
+#: ../isobrowser.c:1463
 msgid "Enter a new name:"
-msgstr "Geef een nieuwe naam:"
+msgstr "Masukkan nama baru:"
 
 #: ../browser.c:71
 msgid "Enter name for new directory"
-msgstr "Voer een naam voor de nieuwe map in"
+msgstr "Masukkan nama direktori baru"
 
 #: ../window.c:380
 msgid "Extract"
-msgstr "Uitpakken"
+msgstr "Ekstrak"
 
 #: ../window.c:380
 msgid "Extract from the ISO"
-msgstr "Uitpakken van de ISO"
+msgstr "Ekstrak dari ISO"
 
 #: ../editfile.c:473
 #: ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
-msgstr "Het toevoegen van '%s' is mislukt: '%s'"
+msgstr "Gagal menambah '%s': '%s'"
 
 #: ../boot.c:79
 #, c-format
 msgid "Failed to add boot record: '%s'"
-msgstr "Het toevoegen van het bootrecord is mislukt: '%s'"
+msgstr "Gagal menambah boot record: '%s'"
 
-#: ../isobrowser.c:363
+#: ../isobrowser.c:365
 #, c-format
 msgid "Failed to change directory: '%s'"
-msgstr "Het veranderen van de map is mislukt: '%s'"
+msgstr "Gagal merubah direktori: '%s'"
 
 #: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
-msgstr "Het aanmaken van de map '%s' is mislukt"
+msgstr "Gagal membuat direktori %s"
 
 #: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
-msgstr "Het aanmaken van de map '%s' is mislukt: '%s'"
+msgstr "Gagal membuat direktori %s: '%s'"
 
 #: ../editfile.c:447
-#: ../isobrowser.c:786
+#: ../isobrowser.c:788
 #, c-format
 msgid "Failed to delete '%s': '%s'"
-msgstr "Het verwijderen van '%s' is mislukt: '%s'"
+msgstr "Gagal menghapus '%s': '%s'"
 
 #: ../editfile.c:412
 #: ../editfile.c:740
-#: ../isobrowser.c:899
+#: ../isobrowser.c:901
 #, c-format
 msgid "Failed to extract '%s': '%s'"
-msgstr " '%s' kon niet worden uitgepakt: '%s'"
+msgstr "Gagal mengekstrak '%s': '%s'"
 
 #: ../boot.c:202
 #, c-format
 msgid "Failed to extract boot record: '%s'"
-msgstr "Het uitpakken van het bootrecord is mislukt: '%s'"
+msgstr "Gagal mengekstrak boot record: '%s'"
 
-#: ../isobrowser.c:1082
-#: ../isobrowser.c:1133
+#: ../isobrowser.c:1084
+#: ../isobrowser.c:1135
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
-msgstr "Het opstarten van bkisofs is mislukt: '%s'"
+msgstr "Gagal menginisialisasi bkisofs: '%s'"
 
-#: ../fsbrowser.c:224
+#: ../fsbrowser.c:229
 #, c-format
 msgid "Failed to open directory '%s', error %d"
-msgstr "Het openen van de map '%s' is mislukt, fout %d"
+msgstr "Gagal membuka direktori '%s', error %d"
 
-#: ../isobrowser.c:1152
+#: ../isobrowser.c:1154
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
-msgstr "Het openen van het in te lezen ISO-bestand is mislukt: '%s'"
+msgstr "Gagal membuka berkas ISO untuk dibaca: '%s'"
 
-#: ../isobrowser.c:1227
+#: ../isobrowser.c:1229
 #, c-format
 msgid "Failed to read directory tree: '%s'"
-msgstr "Het inlezen van de mapstructuur is mislukt: '%s'"
+msgstr "Gagal membaca struktur direktori: '%s'"
 
-#: ../isobrowser.c:1167
+#: ../isobrowser.c:1169
 #, c-format
 msgid "Failed to read volume info: '%s'"
-msgstr "Het inlezen van de volume info is mislukt: '%s'"
+msgstr "Gagal membaca informasi volume: '%s'"
 
-#: ../isobrowser.c:1490
+#: ../isobrowser.c:1492
 #, c-format
 msgid "Failed to rename '%s': %s"
-msgstr "De naam van het bestand '%s' kon niet gewijzigd worden: %s"
+msgstr "Gagal merubah nama '%s': %s"
 
 #: ../boot.c:296
 #, c-format
 msgid "Failed to set %s as boot record: '%s'"
-msgstr "Het instellen van '%s' als bootrecord is mislukt: '%s'"
+msgstr "Gagal menset %s sebagai boot record: '%s'"
 
-#: ../isobrowser.c:1562
+#: ../isobrowser.c:1564
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
-msgstr "Het wegschrijven van het image naar '%s' is mislukt: '%s'"
+msgstr "Gagal menulis image ke '%s': '%s'"
 
 #: ../settings.c:122
 msgid "Filename types (both recommended):"
-msgstr "Bestandsnaamsoorten (beide aanbevolen):"
+msgstr "Tipe nama berkas (keduanya direkomendasikan):"
 
 #: ../settings.c:691
 msgid "Follow symbolic links"
-msgstr "Volg symbolische verwijzingen"
+msgstr "Ikuti link simbol"
 
 #: ../window.c:298
 msgid "From file: 1200KiB floppy"
-msgstr "Vanuit bestand: 1200KiB diskette"
+msgstr "Dari berkas: 1200KiB floppy"
 
 #: ../window.c:304
 msgid "From file: 1440KiB floppy"
-msgstr "Vanuit bestand: 1440KiB diskette"
+msgstr "Dari berkas: 1440KiB floppy"
 
 #: ../window.c:310
 msgid "From file: 2880KiB floppy"
-msgstr "Vanuit bestand: 2880KiB diskette"
+msgstr "Dari berkas: 2880KiB floppy"
 
 #: ../window.c:292
 msgid "From file: no emulation"
-msgstr "Vanuit bestand: geen emulatie"
+msgstr "Dari berkas: Tanpa emulasi"
 
-#: ../isobrowser.c:804
+#: ../isobrowser.c:806
 msgid "GUI error, deleting anything other than files and directories doesn't work"
-msgstr "GUI-fout, alleen bestanden en mappen kunnen verwijderd worden"
+msgstr "GUI eror, hapus semua selain berkas dan direktori yang tidak bekerja"
 
 #: ../window.c:53
 #: ../window.c:364
 msgid "Go back"
-msgstr "Terug"
+msgstr "Kembali"
 
 #: ../window.c:365
 msgid "Go back up one directory on the ISO"
-msgstr "Eén map omhoog op de ISO"
+msgstr "Kembali satu direktori pada ISO"
 
 #: ../window.c:54
 msgid "Go back up one directory on the filesystem"
-msgstr "Eén map omhoog op het bestandssysteem"
+msgstr "Kembali satu direktori pada sistem berkas"
 
-#: ../isobrowser.c:1313
-#: ../isobrowser.c:1611
+#: ../isobrowser.c:1315
+#: ../isobrowser.c:1613
 msgid "ISO Images"
-msgstr "ISO-images"
+msgstr "Image ISO"
 
 #: ../about.c:327
 msgid "ISO Master Help"
-msgstr "Uitleg over ISO Master"
+msgstr "Bantuan ISO Master"
 
 #: ../settings.c:62
 msgid "Image Information"
-msgstr "Image-informatie"
+msgstr "Informasi image"
 
 #: ../settings.c:157
 #, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Ongeldige uitgever '%s': '%s'"
+msgstr "Publisher salah '%s': '%s'"
 
 #: ../settings.c:173
 #, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Ongeldige stationsnaam '%s': '%s'"
+msgstr "Nama volume salah '%s': '%s'"
 
 #: ../boot.c:391
 #, c-format
 msgid "Is not visible on image"
-msgstr "Is niet zichtbaar op het image"
+msgstr "Tidak ada pada image"
 
 #: ../boot.c:389
 #, c-format
 msgid "Is visible on image as '%s'"
-msgstr "Is zichtbaar op het image als '%s'"
+msgstr "Ada pada image sebagai '%s'"
 
-#: ../isobrowser.c:706
+#: ../isobrowser.c:708
 msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
-msgstr "U heeft veranderingen aangebracht aan de ISO maar deze niet opgeslagen. Weet u zeker dat u wilt doorgaan met sluiten?"
+msgstr "Tampaknya anda merlakukan perubahan pada ISO tetapi belum disimpan, Yakin mau menutup ini?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Het geselecteerde item kan niet worden gebruikt als bootrecord"
+msgstr "Item terseleksi bukan berkas reguler dan tidak dapat digunakan sebagai boot record"
 
 #: ../boot.c:373
 #: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
-msgstr "Locatie: op origineel image bij 0x%llX"
+msgstr "Lokasi: image asli pada 0x%llX"
 
 #: ../boot.c:375
 #: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
-msgstr "Locatie: zal worden toegevoegd vanuit '%s'"
+msgstr "Lokasi: Untuk ditambah dari '%s'"
 
-#: ../isobrowser.c:1323
+#: ../isobrowser.c:1325
 msgid "MDF Images"
-msgstr "MDF-images"
+msgstr "Image MDF"
 
-#: ../isobrowser.c:1318
+#: ../isobrowser.c:1320
 msgid "NRG Images"
-msgstr "NRG-images"
+msgstr "Image NRG "
 
-#: ../fsbrowser.c:116
-#: ../isobrowser.c:290
+#: ../fsbrowser.c:121
+#: ../isobrowser.c:292
 msgid "Name"
-msgstr "Naam"
+msgstr "Nama"
 
 #: ../window.c:59
 #: ../window.c:370
 msgid "New Directory"
-msgstr "Nieuwe map"
+msgstr "Direktori baru"
 
 #: ../boot.c:149
 #: ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr "Er is geen bootrecord gevonden"
+msgstr "Tidak ada boot record dari image asli"
 
 #: ../boot.c:108
 msgid "No boot to delete"
-msgstr "Er is geen bootrecord om te verwijderen"
+msgstr "tidak ada boot record untuk dihapus"
 
 #: ../settings.c:666
 msgid "Options"
-msgstr "Opties"
+msgstr "Pilihan"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr "Selecteer een bestand in de ISO-browser om als bootrecord te gebruiken"
+msgstr "Silahkan pilih sebuah berkas di browser ISO untuk digunakan sebagai boot record"
 
 #: ../boot.c:243
 msgid "Please select no more than one file in the ISO browser"
-msgstr "Selecteer niet meer dan één bestand in de ISO-browser"
+msgstr "Silahkan pilih tidak lebih dari satu berkas di ISO browser"
 
 #: ../isobrowser.c:135
 msgid "Please wait while I'm adding the selected items..."
-msgstr "De geselecteerde items worden toegevoegd..."
+msgstr "Silahkan tunggu saat saya menambah item yang dipilih..."
 
-#: ../isobrowser.c:841
+#: ../isobrowser.c:843
 msgid "Please wait while I'm extracting the selected files..."
-msgstr "De geselecteerde bestanden worden uitgepakt..."
+msgstr "Silahkan tunggu saat saya mengekstrak berkas terpilih..."
 
-#: ../isobrowser.c:1191
+#: ../isobrowser.c:1193
 msgid "Please wait while I'm reading the image..."
-msgstr "Het image wordt gelezen..."
+msgstr "Silahkan tunggu saat saya membaca image..."
 
-#: ../isobrowser.c:1534
+#: ../isobrowser.c:1536
 msgid "Please wait while I'm saving the new image to disk..."
-msgstr "Het nieuwe image wordt op de schijf opgeslagen..."
+msgstr "Silahkan tunggu saat saya menyimpan image baru ke disk..."
 
 #: ../isobrowser.c:128
-#: ../isobrowser.c:833
-#: ../isobrowser.c:1184
-#: ../isobrowser.c:1524
+#: ../isobrowser.c:835
+#: ../isobrowser.c:1186
+#: ../isobrowser.c:1526
 msgid "Progress"
-msgstr "Voortgang"
+msgstr "Proses"
 
 #: ../settings.c:106
 msgid "Publisher:"
-msgstr "Uitgever:"
+msgstr "Publisher:"
 
 #: ../window.c:385
 msgid "Remove"
-msgstr "Verwijderen"
+msgstr "Hilangkan"
 
-#: ../isobrowser.c:1772
+#: ../isobrowser.c:1774
 msgid "Rename"
-msgstr "Hernoemen"
+msgstr "Ubah Nama"
 
-#: ../isobrowser.c:1600
+#: ../isobrowser.c:1602
 msgid "Save File"
-msgstr "Bestand opslaan"
+msgstr "Simpan Berkas"
 
 #: ../boot.c:156
 msgid "Save a copy of the boot record"
-msgstr "Een kopie van het bootrecord opslaan"
+msgstr "Simpan salinan boot record"
 
 #: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
-msgstr "Zoek naar dubbele bestanden (langzaam)"
+msgstr "Cari berkas ganda (lambat)"
 
 #: ../window.c:214
 msgid "Show _hidden files"
-msgstr "Laat _verborgen bestanden zien"
+msgstr "Tampilkan_berkas tersembunyi"
 
-#: ../fsbrowser.c:137
-#: ../isobrowser.c:313
+#: ../fsbrowser.c:142
+#: ../isobrowser.c:315
 msgid "Size"
-msgstr "Grootte"
+msgstr "Ukuran"
 
 #: ../boot.c:363
 #, c-format
 msgid "Size: %d bytes"
-msgstr "Grootte: %d bytes"
+msgstr "Ukuran: %d bytes"
 
-#: ../fsbrowser.c:275
+#: ../fsbrowser.c:280
 msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Map wordt overgeslagen omdat bestandsnamen met meer dan 256 tekens niet verwerkt kunnen worden"
+msgstr "Lewati isian direktori karena tidak dapat menangani nama berkas lebih panjang dari 256 chars"
 
-#: ../fsbrowser.c:294
+#: ../fsbrowser.c:299
 #, c-format
 msgid "Skipping directory entry because stat(%s) failed with %d"
-msgstr "Map wordt overgeslagen omdat er een programmafout is opgetreden in 'stat(%s)' met waarde %d"
+msgstr "Lewati isian direktori karena stat(%s) gagal dengan %d"
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr "Sortering is _hoofdlettergevoelig"
+msgstr "Pengurutan _sensitif kasus"
 
 #: ../settings.c:724
 msgid "Temporary directory"
-msgstr "Tijdelijke map"
+msgstr "Direktori sementara"
 
 #: ../about.c:268
 msgid ""
@@ -461,46 +461,41 @@ msgid ""
 "Once you made all the changes to the new ISO image, click on 'Image' and\n"
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
-"Het ISO Master venster is in twee delen opgedeeld:\n"
-" - Het bovenste gedeelte geeft de mappen en bestanden op uw\n"
-"computer weer.\n"
-" - Het onderste gedeelte geeft de mappen en bestanden op het\n"
-"ISO-image weer.\n"
+"Jendela ISO Master terbagi menjadi 2 bagian:\n"
+" - Browser berkas bagian atas menampilkan berkas dan direktori pada mesin anda .\n"
+" - Browser berkas bagian bawah menampilkan berkas dan direktori pada image ISO.\n"
 "\n"
-"Om een bestaand ISO-image te openen klikt u op 'Image' en vervolgens\n"
-"'Open'. Om een nieuw ISO-image te maken klikt u op 'Image' en\n"
-"vervolgens 'Nieuw'.\n"
+"Untuk membuka ISO yang sudah ada tekan 'Berkas' dan 'Buka'. Untuk membuat\n"
+"berkas ISO baru tekan 'Berkas' dan 'Baru'.\n"
 "\n"
-"Om één of meerdere mappen of bestanden toe te voegen aan de ISO\n"
-"selecteerd u de gewenste bestanden op uw computer en klikt u\n"
-"vervolgens op de knop 'Toevoegen aan ISO'.\n"
+"Untuk menambah satu atau lebih berkas dan direktori ke ISO pilih di bagian atas\n"
+"browser berkas dan tekan tombol 'Tambah ke ISO' di toolbar tengah.\n"
 "\n"
-"Om één of meerdere bestanden van de ISO naar uw computer uit te\n"
-"pakken selecteerd u de gewenste mappen of bestanden in het onderste\n"
-"gedeelte en klikt u vervolgens op de knop 'Uitpakken van de ISO'.\n"
+"Untuk mengekstrak satu atau lebih berkas atau direktori dari ISO pilih di\n"
+"browser berkas dan tekan tombol 'Ekstrak dari ISO' di tool\n"
+"toolbar tengah.\n"
 "\n"
-"U kunt ook mappen en bestanden van de ISO verwijderen en nieuwe\n"
-"mappen op zowel de ISO en uw computer aanmaken.\n"
+"Kamu juga bisa menghapus berkas atau direktori dari ISO dan membuat\n"
+"direktori baru baik di ISO maupun lokal sistem.\n"
 "\n"
-"Wanneer u een bestand of map in het onderste gedeelte selecteerd en\n"
-"met de rechter muisknop aanklikt, zijn er aanvullende opties beschikbaar.\n"
+"Jika kamu memilih sesuatu di browser berkas bawah dan klik kanan pada bagian itu,\n"
+"akan ada beberapa pilihan yang disediakan.\n"
 "\n"
-"Wanneer u alle gewenste aanpassingen aan uw nieuwe ISO-image\n"
-"voltooid heeft klikt u op 'Image' en vervolgens 'Opslaan als'. U kunt de\n"
-"originele ISO niet overschrijven.\n"
+"Sekali kamu melakukan perubahan pada image ISO, tekan pada 'Image' dan\n"
+"'Simpan Sebagai'. Kamu tidak bisa menulis ulang ISO asli.\n"
 
 #: ../window.c:286
 msgid "Use selected file on image (no emulation)"
-msgstr "Pas het geselecteerde bestand toe op het image (geen emulatie)"
+msgstr "Gunakan berkas pada image terpilih (tanpa emulasi)"
 
-#: ../fsbrowser.c:570
-#: ../isobrowser.c:1781
+#: ../fsbrowser.c:575
+#: ../isobrowser.c:1783
 msgid "View"
-msgstr "Bekijk"
+msgstr "Lihat"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr ""
+msgstr "View gagal, tolong periksa Pilihan/Viewer"
 
 #: ../settings.c:713
 msgid "Viewer"
@@ -508,46 +503,46 @@ msgstr "Viewer"
 
 #: ../settings.c:94
 msgid "Volume name:"
-msgstr "Stationsnaam:"
+msgstr "Nama Volume:"
 
 #: ../settings.c:652
 msgid "You will have to close and reopen the ISO for this change to take effect"
-msgstr "U dient de ISO te sluiten en opnieuw te openen om deze wijziging in werking te laten treden"
+msgstr "Kamu akan menutup dan membuka kembali ISO agar perubahan ini diterapkan"
 
 #: ../window.c:254
 msgid "_Boot Record"
-msgstr "Boot_record"
+msgstr "Boot _Record"
 
 #: ../window.c:141
 msgid "_File"
-msgstr "_Bestand"
+msgstr "_Berkas"
 
 #: ../window.c:326
 msgid "_Help"
-msgstr "_Help"
+msgstr "_Bantuan"
 
 #: ../window.c:318
 msgid "_Options"
-msgstr "_Opties"
+msgstr "_Pilihan"
 
 #: ../window.c:335
 msgid "_Overview"
-msgstr "_Overzicht"
+msgstr "_LihatKembali"
 
 #: ../window.c:224
 msgid "_Sort directories first"
-msgstr "_Sorteer mappen als eerste"
+msgstr "_Urut berdasar Berkas"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr "_Gereedschappen"
+msgstr "Pe_rangkat"
 
 #: ../window.c:199
 msgid "_View"
-msgstr "B_eeld"
+msgstr "_Lihat"
 
 #~ msgid "_Image"
 #~ msgstr "_Image"
 #~ msgid "_Settings"
-#~ msgstr "I_nstellingen"
+#~ msgstr "_Seting"
 

@@ -112,11 +112,11 @@ msgstr "Edytuj"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr ""
+msgstr "Edycja zakończona niepowodzeniem. Sprawdź Opcje/Edytor tekstu"
 
 #: ../settings.c:701
 msgid "Editor"
-msgstr "Edytor"
+msgstr "Edytor tekstu"
 
 #: ../isobrowser.c:1461
 msgid "Enter a new name:"
@@ -337,7 +337,7 @@ msgstr "Brak rekordu startowego do usunięcia"
 
 #: ../settings.c:666
 msgid "Options"
-msgstr ""
+msgstr "Opcje"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -419,14 +419,13 @@ msgstr "Pomijam katalog ponieważ stat(%s) zakończony niepowodzeniem z %d"
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr ""
+msgstr "_Rozróżniaj wielkość liter"
 
 #: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Katalog tymczasowy"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -441,6 +440,7 @@ msgid ""
 "To extract one or more files or directories from the ISO select them in\n"
 "the bottom file browser and click the 'Extract from ISO' button in the\n"
 "middle toolbar.\n"
+
 "\n"
 "You can also delete files or directories from the ISO and create new\n"
 "directories both on the ISO and your local filesystem.\n"
@@ -452,13 +452,13 @@ msgid ""
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
 "Okno programu ISO Master jest podzielone na 2 części:\n"
-" - Górna przeglądarka wyświetla pliki i katalogi znajdujące się w\n"
+" - Górna część okna wyświetla pliki i katalogi znajdujące się w\n"
 "komputerze.\n"
-" - Dolna przeglądarka wyświetla pliki i katalogi znajdujące się w\n"
+" - Dolna część okna wyświetla pliki i katalogi znajdujące się w\n"
 "obrazie ISO.\n"
 "\n"
-"Aby otworzyć plik obrazu ISO kliknij 'Obraz' -> 'Otwórz'. Aby utworzyć\n"
-"nowy plik obrazu ISO kliknij 'Obraz' -> 'Nowy'.\n"
+"Aby otworzyć plik obrazu ISO kliknij 'Plik' i 'Otwórz'. Aby utworzyć\n"
+"nowy plik obrazu ISO kliknij 'Plik' i 'Nowy'.\n"
 "\n"
 "Aby dodać jeden lub więcej plików lub katalogów do obrazu ISO wybierz\n"
 "je w górnej przeglądarce i kliknij 'Dodaj do obrazu ISO' na pasku\n"
@@ -475,7 +475,7 @@ msgstr ""
 "prawym przyciskiem myszy, dostępnych będzie kilka opcji więcej.\n"
 "\n"
 "Gdy wszystkie zmiany zostaną wprowadzone do obrazu ISO, kliknij\n"
-"'Obraz' -> 'Zapisz jako'. Nie można nadpisywać oryginalnego obrazu ISO.\n"
+"'Obraz' i 'Zapisz jako'. Nie można nadpisywać oryginalnego obrazu ISO.\n"
 
 #: ../window.c:286
 msgid "Use selected file on image (no emulation)"
@@ -487,7 +487,7 @@ msgstr "Widok"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr ""
+msgstr "Nie można otworzyć podglądu. Sprawdź Opcje/Przeglądarka"
 
 #: ../settings.c:713
 msgid "Viewer"
@@ -503,22 +503,20 @@ msgid ""
 msgstr "Musisz ponownie wczytać obraz ISO aby zmiana odniosła skutek"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
 msgstr "_Rekord startowy"
 
 #: ../window.c:141
-#, fuzzy
 msgid "_File"
-msgstr "_Widok"
+msgstr "_Plik"
 
 #: ../window.c:326
 msgid "_Help"
-msgstr "_Pomoc"
+msgstr "Pomo_c"
 
 #: ../window.c:318
 msgid "_Options"
-msgstr ""
+msgstr "_Opcje"
 
 #: ../window.c:335
 msgid "_Overview"
@@ -530,7 +528,7 @@ msgstr "_Katalogi na początku"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr ""
+msgstr "_Narzędzia"
 
 #: ../window.c:199
 msgid "_View"

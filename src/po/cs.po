@@ -1,3 +1,4 @@
+# translation of cs.po to
 # translation of cs.po_[k6bxCb].po to
 # Czech translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
@@ -6,10 +7,10 @@
 # Updated by Jiri Huf <jirihuf@seznam.cz>
 msgid ""
 msgstr ""
-"Project-Id-Version: cs.po_[k6bxCb]\n"
+"Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-05 00:17-0500\n"
-"PO-Revision-Date: 2007-08-24 20:47+0200\n"
+"PO-Revision-Date: 2007-12-07 19:14+0100\n"
 "Last-Translator: Schmaki <smallsmaky@seznam.cz>\n"
 "Language-Team:  <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -115,7 +116,7 @@ msgstr "Upravit"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr ""
+msgstr "Editace se nezdařila, prosím, zkotrolujte Volby/Editor"
 
 #: ../settings.c:701
 msgid "Editor"
@@ -242,8 +243,7 @@ msgid "From file: no emulation"
 msgstr "Ze souboru: bez emulace"
 
 #: ../isobrowser.c:804
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "Chyba GUI: Není možné smazat nic jiného než soubory a adresáře"
 
 #: ../window.c:53 ../window.c:364
@@ -294,13 +294,11 @@ msgstr "Je v obrazu viditelný jako '%s'"
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
-msgstr ""
-"Úpravy provedené v ISO obrazu nebyly uloženy.Opravdu si přejete obraz zavřít?"
+msgstr "Úpravy provedené v ISO obrazu nebyly uloženy.Opravdu si přejete obraz zavřít?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr ""
-"Vybraná položka není regulérní soubor a nelze ji použít jako zaváděcí záznam"
+msgstr "Vybraná položka není regulérní soubor a nelze ji použít jako zaváděcí záznam"
 
 #: ../boot.c:373 ../boot.c:380
 #, c-format
@@ -340,7 +338,7 @@ msgstr "Nelze smazat, zaváděcí záznam neexistuje nebo není zvolen"
 
 #: ../settings.c:666
 msgid "Options"
-msgstr ""
+msgstr "Volby"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -411,8 +409,7 @@ msgid "Size: %d bytes"
 msgstr "Velikost: %d bajtů"
 
 #: ../fsbrowser.c:275
-msgid ""
-"Skipping directory entry because cannot handle filename longer than 256 chars"
+msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr "Název delší než 256 znaků, přeskakuji adresář"
 
 #: ../fsbrowser.c:294
@@ -422,14 +419,13 @@ msgstr "Stat(%s) se nezdařil (%d); přeskakuji adresář"
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr ""
+msgstr "Seřazení ovlivňuje velké/malé písmeno"
 
 #: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Dočasný adresář"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -490,7 +486,7 @@ msgstr "Pohled"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr ""
+msgstr "Náhled se nezdařil, prosím zkontrolujte Volby/Prohlížeč"
 
 #: ../settings.c:713
 msgid "Viewer"
@@ -501,19 +497,16 @@ msgid "Volume name:"
 msgstr "Název svazku:"
 
 #: ../settings.c:652
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
+msgid "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Aby se změny projevily, musíte zavřít a znovu otevřít ISO obraz"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
-msgstr "_ZaváděcíZáznam"
+msgstr "_Zaváděcí Záznam"
 
 #: ../window.c:141
-#, fuzzy
 msgid "_File"
-msgstr "_Pohled"
+msgstr "_Soubor"
 
 #: ../window.c:326
 msgid "_Help"
@@ -521,7 +514,7 @@ msgstr "_Nápověda"
 
 #: ../window.c:318
 msgid "_Options"
-msgstr ""
+msgstr "_Volby"
 
 #: ../window.c:335
 msgid "_Overview"
@@ -533,14 +526,9 @@ msgstr "_Řadit nejdřív adresáře"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr ""
+msgstr "_Nástroje"
 
 #: ../window.c:199
 msgid "_View"
 msgstr "_Pohled"
 
-#~ msgid "_Image"
-#~ msgstr "_Obraz"
-
-#~ msgid "_Settings"
-#~ msgstr "N_astavení"
