@@ -45,13 +45,15 @@ export INSTALL = install
 export CP      = cp
 export ECHO    = echo
 
+VERSION = 1.3
+
 # -DDEBUG and -g only used during development
 CFLAGS += -Wall -pedantic -std=gnu99 -Wundef -Wcast-align -W -Wpointer-arith -Wwrite-strings -Wno-unused-parameter `pkg-config --cflags gtk+-2.0`
 ifndef WITHOUT_NLS
 	CFLAGS += -DENABLE_NLS
 endif
 
-CPPFLAGS +=  -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEFAULT_EDITOR=\"$(DEFAULT_EDITOR)\" -DDEFAULT_VIEWER=\"$(DEFAULT_VIEWER)\"
+CPPFLAGS +=  -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEFAULT_EDITOR=\"$(DEFAULT_EDITOR)\" -DDEFAULT_VIEWER=\"$(DEFAULT_VIEWER)\" -DVERSION=\"$(VERSION)\"
 
 # the _FILE_OFFSET_BITS=64 is to enable stat() for large files on linuxish systems
 CPPFLAGS += -D_FILE_OFFSET_BITS=64
