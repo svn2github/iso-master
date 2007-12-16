@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-05 00:17-0500\n"
-"PO-Revision-Date: 2007-12-05 23:06+0100\n"
+"PO-Revision-Date: 2007-12-12 16:35-0500\n"
 "Last-Translator: Sun Minchao <sunminchao@gmx.de>\n"
 "Language-Team:  <zh@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -118,7 +118,6 @@ msgid "Edit"
 msgstr "编辑"
 
 #: ../editfile.c:82
-#, fuzzy
 msgid "Edit failed, please check Options/Editor"
 msgstr "编辑失败，请检查 “设置/编辑器”"
 
@@ -439,7 +438,6 @@ msgid "Temporary directory"
 msgstr "临时目录"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -493,7 +491,6 @@ msgid "View"
 msgstr "查看"
 
 #: ../editfile.c:102
-#, fuzzy
 msgid "View failed, please check Options/Viewer"
 msgstr "查看失败，请检查 “设置/查看器“"
 
@@ -510,14 +507,12 @@ msgid "You will have to close and reopen the ISO for this change to take effect"
 msgstr "必须重启 ISO Master 以使改变生效"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
 msgstr "引导记录(_B)"
 
 #: ../window.c:141
-#, fuzzy
 msgid "_File"
-msgstr "查看(_V)"
+msgstr "文件(_F)"
 
 #: ../window.c:326
 msgid "_Help"

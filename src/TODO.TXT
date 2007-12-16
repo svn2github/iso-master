@@ -2,9 +2,7 @@ ui:
 -drop-down list to select track - can do multitrack
 -checkboxes and lables not aligned in change permissions window
 -button to browse for temp dir
--'Skiping' directory entry
 -remove Utility from .desktop to get it out of 'accessories'
--double-click on a symlink to a dir in fs -> change dir
 -'open recent' list
 
 

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-05 00:17-0500\n"
-"PO-Revision-Date: 2007-12-05 15:09+0100\n"
+"PO-Revision-Date: 2007-12-12 01:18+0100\n"
 "Last-Translator: uros\n"
 "Language-Team:  <sl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -417,7 +417,7 @@ msgstr "Preskakujem kazalo ker (%s) neuspešen z %d"
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr "Pri razvrščanju upoštevaj _male in velike črke"
+msgstr "Razlikuj _male in velike črke"
 
 #: ../settings.c:724
 msgid "Temporary directory"
@@ -507,17 +507,17 @@ msgstr "M_ožnosti"
 
 #: ../window.c:335
 msgid "_Overview"
-msgstr "_Pregled"
+msgstr "Pr_iročnik"
 
 #: ../window.c:224
 msgid "_Sort directories first"
-msgstr "Najprej razvr_sti kazala"
+msgstr "_Najprej razvrsti kazala"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr "_Orodja"
+msgstr "O_rodja"
 
 #: ../window.c:199
 msgid "_View"
-msgstr "_Pogled"
+msgstr "Po_gled"
 
