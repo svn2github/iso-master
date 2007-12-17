@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-05 00:17-0500\n"
+"POT-Creation-Date: 2007-12-16 23:50-0500\n"
 "PO-Revision-Date: 2007-12-05 10:40+0200\n"
 "Last-Translator: Besnik Bleta <besnik@programeshqip.org>\n"
 "Language-Team: Albanian <translation-team-sq@lists.sourceforge.net>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "      Madhësi e Parashikuar për ISO-n: "
 
-#: ../isobrowser.c:1382
+#: ../isobrowser.c:1384
 #, c-format
 msgid ""
 "%s\n"
@@ -32,16 +32,12 @@ msgstr ""
 "\n"
 "Dëshironi të vazhdohet?"
 
-#: ../editfile.c:272
-#: ../editfile.c:368
-#: ../editfile.c:601
-#: ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' nuk është kartelë e rregullt"
 
-#: ../isobrowser.c:141
-#: ../isobrowser.c:1197
+#: ../isobrowser.c:141 ../isobrowser.c:1199
 msgid "(scanning for duplicate files)"
 msgstr "(po kontrolloj për kartela që gjenden dy herë)"
 
@@ -49,7 +45,7 @@ msgstr "(po kontrolloj për kartela që gjenden dy herë)"
 msgid "Add"
 msgstr "Shto"
 
-#: ../isobrowser.c:1619
+#: ../isobrowser.c:1621
 msgid "Add extension automatically"
 msgstr "Shtoji prapashtesë vetvetiu"
 
@@ -57,8 +53,7 @@ msgstr "Shtoji prapashtesë vetvetiu"
 msgid "Add to the ISO"
 msgstr "Shtoje te ISO"
 
-#: ../isobrowser.c:1328
-#: ../isobrowser.c:1616
+#: ../isobrowser.c:1330 ../isobrowser.c:1618
 msgid "All files"
 msgstr "Tërë kartelat "
 
@@ -90,8 +85,7 @@ msgstr "Tip regjistrimi nisjeje: Disketë 2880KiB"
 msgid "Boot record type: No Emulation"
 msgstr "Tip regjistrimi nisjeje: Pa Emulim"
 
-#: ../isobrowser.c:500
-#: ../isobrowser.c:1795
+#: ../isobrowser.c:502 ../isobrowser.c:1797
 msgid "Change permissions"
 msgstr "Ndryshoni lejet"
 
@@ -115,8 +109,7 @@ msgstr "Koha e krijimit:"
 msgid "Delete from the ISO"
 msgstr "Fshij prej ISO-s"
 
-#: ../fsbrowser.c:577
-#: ../isobrowser.c:1788
+#: ../fsbrowser.c:590 ../isobrowser.c:1790
 msgid "Edit"
 msgstr "Përpunim"
 
@@ -128,7 +121,7 @@ msgstr "Përpunimi dështoi, ju lutem kontrolloni Mundësi/Përpunoni"
 msgid "Editor"
 msgstr "Përpunues"
 
-#: ../isobrowser.c:1461
+#: ../isobrowser.c:1463
 msgid "Enter a new name:"
 msgstr "Jepni një emër të ri:"
 
@@ -144,8 +137,7 @@ msgstr "Përfto"
 msgid "Extract from the ISO"
 msgstr "Përfto prej CD-së"
 
-#: ../editfile.c:473
-#: ../isobrowser.c:214
+#: ../editfile.c:473 ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Dështova në shtimin e '%s': '%s'"
@@ -155,7 +147,7 @@ msgstr "Dështova në shtimin e '%s': '%s'"
 msgid "Failed to add boot record: '%s'"
 msgstr "Dështova në shtim regjistrimi nisjeje: '%s'"
 
-#: ../isobrowser.c:363
+#: ../isobrowser.c:365
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr "Dështova në ndryshimin e drejtorisë: '%s'"
@@ -170,15 +162,12 @@ msgstr "Dështova në krijimin e drejtorisë %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Dështova në krijimin e drejtorisë %s: '%s'"
 
-#: ../editfile.c:447
-#: ../isobrowser.c:786
+#: ../editfile.c:447 ../isobrowser.c:788
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Dështova në fshirjen e '%s': '%s'"
 
-#: ../editfile.c:412
-#: ../editfile.c:740
-#: ../isobrowser.c:899
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:901
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Dështova në përftimin e '%s': '%s'"
@@ -188,33 +177,32 @@ msgstr "Dështova në përftimin e '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Dështova në përftimin e regjistrimit të nisjes: '%s'"
 
-#: ../isobrowser.c:1082
-#: ../isobrowser.c:1133
+#: ../isobrowser.c:1084 ../isobrowser.c:1135
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Dështova në gatitjen e bkisofs-it: '%s'"
 
-#: ../fsbrowser.c:224
+#: ../fsbrowser.c:229
 #, c-format
 msgid "Failed to open directory '%s', error %d"
 msgstr "Dështova në hapjen e drejtorisë '%s', gabim %d"
 
-#: ../isobrowser.c:1152
+#: ../isobrowser.c:1154
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Dështova në hapjen e kartelës iso për lexim: '%s'"
 
-#: ../isobrowser.c:1227
+#: ../isobrowser.c:1229
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Dështova në leximin e pemës së drejtorisë: '%s'"
 
-#: ../isobrowser.c:1167
+#: ../isobrowser.c:1169
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Dështova në leximin e të dhënave të vëllimit: '%s'"
 
-#: ../isobrowser.c:1490
+#: ../isobrowser.c:1492
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Dështova në riemërtimin e '%s': %s"
@@ -224,7 +212,7 @@ msgstr "Dështova në riemërtimin e '%s': %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Dështova në caktimin e %s si regjistrim nisjeje: '%s'"
 
-#: ../isobrowser.c:1562
+#: ../isobrowser.c:1564
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Dështova në shkrimin e pamjes te '%s': '%s'"
@@ -253,12 +241,14 @@ msgstr "Prej kartele: disketë 2880KiB"
 msgid "From file: no emulation"
 msgstr "Prej kartele: pa emulim"
 
-#: ../isobrowser.c:804
-msgid "GUI error, deleting anything other than files and directories doesn't work"
-msgstr "Gabim GUI, fshirja e çfarëdo gjëje tjetër, hiq kartela dhe drejtori, s'funksionon"
+#: ../isobrowser.c:806
+msgid ""
+"GUI error, deleting anything other than files and directories doesn't work"
+msgstr ""
+"Gabim GUI, fshirja e çfarëdo gjëje tjetër, hiq kartela dhe drejtori, "
+"s'funksionon"
 
-#: ../window.c:53
-#: ../window.c:364
+#: ../window.c:53 ../window.c:364
 msgid "Go back"
 msgstr "Shko prapa"
 
@@ -270,8 +260,7 @@ msgstr "Shko sipër te ISO një drejtori"
 msgid "Go back up one directory on the filesystem"
 msgstr "Shko sipër te sistem kartelash një drejtori"
 
-#: ../isobrowser.c:1313
-#: ../isobrowser.c:1611
+#: ../isobrowser.c:1315 ../isobrowser.c:1613
 msgid "ISO Images"
 msgstr "Pamje ISO"
 
@@ -303,48 +292,50 @@ msgstr "Nuk është i dukshëm në pamje"
 msgid "Is visible on image as '%s'"
 msgstr "Është e dukshme si '%s' te pamja"
 
-#: ../isobrowser.c:706
-msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
-msgstr "Duket se keni bërë ndryshime te ISO por nuk i keni ruajtur ato. Jeni i sigurtë se doni ta mbyllni?"
+#: ../isobrowser.c:708
+msgid ""
+"It seems that you have made changes to the ISO but haven't saved them. Are "
+"you sure you want to close it?"
+msgstr ""
+"Duket se keni bërë ndryshime te ISO por nuk i keni ruajtur ato. Jeni i "
+"sigurtë se doni ta mbyllni?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Objekti i përzgjedhur nuk është kartelë e rregullt dhe nuk përdoret dot si regjistrim nisjeje"
+msgstr ""
+"Objekti i përzgjedhur nuk është kartelë e rregullt dhe nuk përdoret dot si "
+"regjistrim nisjeje"
 
-#: ../boot.c:373
-#: ../boot.c:380
+#: ../boot.c:373 ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Vendi: te pamja origjinale 0x%llX"
 
-#: ../boot.c:375
-#: ../boot.c:382
+#: ../boot.c:375 ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Vend: për shtesë prej '%s'"
 
-#: ../isobrowser.c:1323
+#: ../isobrowser.c:1325
 msgid "MDF Images"
 msgstr "Pamje MDF"
 
-#: ../isobrowser.c:1318
+#: ../isobrowser.c:1320
 msgid "NRG Images"
 msgstr "Pamje NRG"
 
-#: ../fsbrowser.c:116
-#: ../isobrowser.c:290
+#: ../fsbrowser.c:121 ../isobrowser.c:292
 msgid "Name"
 msgstr "Emër"
 
-#: ../window.c:59
-#: ../window.c:370
+#: ../window.c:59 ../window.c:370
 msgid "New Directory"
 msgstr "Drejtori e Re"
 
-#: ../boot.c:149
-#: ../boot.c:327
+#: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr "Nuk u lexua prej origjinalit, e as u caktua në pamje, regjistrim nisjeje"
+msgstr ""
+"Nuk u lexua prej origjinalit, e as u caktua në pamje, regjistrim nisjeje"
 
 #: ../boot.c:108
 msgid "No boot to delete"
@@ -356,7 +347,9 @@ msgstr "Mundësi"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr "Ju lutem përzgjidhni një kartelë prej shfletuesit ISO për ta përdorur si regjistrimin nisës"
+msgstr ""
+"Ju lutem përzgjidhni një kartelë prej shfletuesit ISO për ta përdorur si "
+"regjistrimin nisës"
 
 #: ../boot.c:243
 msgid "Please select no more than one file in the ISO browser"
@@ -366,22 +359,21 @@ msgstr "Ju lutem mos përzgjidhni më shumë se një kartelë prej shfletuesit I
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Ju lutem prisni ndërkohë që jam duke shtuar objektet e përzgjedhura..."
 
-#: ../isobrowser.c:841
+#: ../isobrowser.c:843
 msgid "Please wait while I'm extracting the selected files..."
-msgstr "Ju lutem prisni ndërkohë që jam duke përftuar kartelat e përzgjedhura..."
+msgstr ""
+"Ju lutem prisni ndërkohë që jam duke përftuar kartelat e përzgjedhura..."
 
-#: ../isobrowser.c:1191
+#: ../isobrowser.c:1193
 msgid "Please wait while I'm reading the image..."
 msgstr "Ju lutem prisni ndërkohë që po lexoj pamjen..."
 
-#: ../isobrowser.c:1534
+#: ../isobrowser.c:1536
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Ju lutem prisni ndërkohë që jam duke ruajtur pamjen e re në disk..."
 
-#: ../isobrowser.c:128
-#: ../isobrowser.c:833
-#: ../isobrowser.c:1184
-#: ../isobrowser.c:1524
+#: ../isobrowser.c:128 ../isobrowser.c:835 ../isobrowser.c:1186
+#: ../isobrowser.c:1526
 msgid "Progress"
 msgstr " Përparim"
 
@@ -393,11 +385,11 @@ msgstr "Botues:"
 msgid "Remove"
 msgstr "Hiq"
 
-#: ../isobrowser.c:1772
+#: ../isobrowser.c:1774
 msgid "Rename"
 msgstr "Riemërto"
 
-#: ../isobrowser.c:1600
+#: ../isobrowser.c:1602
 msgid "Save File"
 msgstr "Ruaj Kartelën"
 
@@ -413,8 +405,7 @@ msgstr "Kontrollo për kartela që gjenden dy herë (e ngadaltë)"
 msgid "Show _hidden files"
 msgstr "Shfaq kartela të _fshehura"
 
-#: ../fsbrowser.c:137
-#: ../isobrowser.c:313
+#: ../fsbrowser.c:142 ../isobrowser.c:315
 msgid "Size"
 msgstr "Madhësi"
 
@@ -423,11 +414,14 @@ msgstr "Madhësi"
 msgid "Size: %d bytes"
 msgstr "Madhësi: %d bajte"
 
-#: ../fsbrowser.c:275
-msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Po e anashkaloj këtë zë drejtorie pasi nuk mund të trajtoj emra kartelash më të gjatë se 256 shenja"
+#: ../fsbrowser.c:280
+msgid ""
+"Skipping directory entry because cannot handle filename longer than 256 chars"
+msgstr ""
+"Po e anashkaloj këtë zë drejtorie pasi nuk mund të trajtoj emra kartelash më "
+"të gjatë se 256 shenja"
 
-#: ../fsbrowser.c:294
+#: ../fsbrowser.c:299
 #, c-format
 msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Po e anashkaloj këtë zë drejtorie pasi stat(%s) dështoi me %d"
@@ -441,6 +435,7 @@ msgid "Temporary directory"
 msgstr "Drejtori e përkohshme"
 
 #: ../about.c:268
+#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -462,17 +457,20 @@ msgid ""
 "If you select something in the bottom file browser and right-click on it,\n"
 "there are several more options available.\n"
 "\n"
-"Once you made all the changes to the new ISO image, click on 'Image' and\n"
+"Once you made all the changes to the new ISO image, click on 'File' and\n"
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
 "Dritarja e ISO Master-it është e ndarë në 2 pjesë:\n"
-" - Shfletuesi i kartelave sipër tregon drejtoritë dhe kartelat në makinën tuaj.\n"
-" - Shfletuesi i kartelave poshtë tregon drejtoritë dhe kartelat në pamjen ISO.\n"
+" - Shfletuesi i kartelave sipër tregon drejtoritë dhe kartelat në makinën "
+"tuaj.\n"
+" - Shfletuesi i kartelave poshtë tregon drejtoritë dhe kartelat në pamjen "
+"ISO.\n"
 "\n"
 "Për të hapur një kartelë ISO ekzistuese klikoni mbi 'Pamje' dhe 'Hape'. Për\n"
 "të krijuar një kartelë të re ISO klikoni mbi 'Pamje' dhe 'e Re'.\n"
 "\n"
-"Për të shtuar te ISO-ja një ose më tepër kartela apo drejtori, përzgjidhini te\n"
+"Për të shtuar te ISO-ja një ose më tepër kartela apo drejtori, përzgjidhini "
+"te\n"
 "shfletuesi i sipërm i kartelave dhe klikoni mbi butonin 'Shto te ISO-ja' te\n"
 "paneli i mesit.\n"
 "\n"
@@ -481,9 +479,11 @@ msgstr ""
 "'Përfto prej ISO-s' te paneli i mesit.\n"
 "\n"
 "Mundeni gjithashtu të fshini prej ISO-s kartela apo drejtori dhe të krijoni\n"
-"drejtori të reja si në ISO-n, ashtu edhe në sistemin tuaj vendor të kartelave.\n"
+"drejtori të reja si në ISO-n, ashtu edhe në sistemin tuaj vendor të "
+"kartelave.\n"
 "\n"
-"Nëse përzgjidhni diçka te shfletuesi i kartelave më poshtë dhe djathtasklikoni mbi të,\n"
+"Nëse përzgjidhni diçka te shfletuesi i kartelave më poshtë dhe "
+"djathtasklikoni mbi të,\n"
 "do të shihni edhe disa mundësi të tjera.\n"
 "\n"
 "Pasi të keni bërë tërë ndryshimet te pamja e re ISO, klikoni mbi 'Pamje'\n"
@@ -493,8 +493,7 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "Përdor në pamjen kartelën e përzgjedhur (pa emulim)"
 
-#: ../fsbrowser.c:570
-#: ../isobrowser.c:1781
+#: ../fsbrowser.c:583 ../isobrowser.c:1783
 msgid "View"
 msgstr "Parje"
 
@@ -511,7 +510,8 @@ msgid "Volume name:"
 msgstr "Emër volumi:"
 
 #: ../settings.c:652
-msgid "You will have to close and reopen the ISO for this change to take effect"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
 msgstr "Duhet të mbyllni dhe rihapni ISO-n që të ketë efekt ky ndryshim"
 
 #: ../window.c:254
@@ -548,6 +548,6 @@ msgstr "P_arje"
 
 #~ msgid "_Image"
 #~ msgstr "_Pamje"
+
 #~ msgid "_Settings"
 #~ msgstr "_Rregullime"
-

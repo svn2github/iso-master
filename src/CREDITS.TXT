@@ -52,26 +52,26 @@ Packages:
 
 David Johnson
 http://www.david-web.co.uk/
-- Debian packages of ISO Master, versions 0.1 - 1.0
+- Debian packages of ISO Master, versions 0.1 - 1.2
 - Nexenta GNU/OpenSolaris package of ISO Master, version 1.0
 
 Marcin Zajaczkowski
 http://timeoff.wsisiz.edu.pl/rpms.html
-- Fedora packages of ISO Master, versions 0.3 - 1.1
+- Fedora packages of ISO Master, versions 0.3 - 1.2
 
 Toni Graffy
 Maintainer of many SuSE packages at PackMan
-- SuSE packages of ISO Master, versions 0.4 - 1.1
+- SuSE packages of ISO Master, versions 0.4 - 1.2
 
 Maciej Libuda
-- Arch packages of ISO Master, versions 0.3 - 1.1
+- Arch packages of ISO Master, versions 0.3 - 1.2
 
 GuestToo
 - Puppy packages of ISO Master, versions 0.1, 0.4 - 1.0
 
 vktgz
 http://www.vktgz.homelinux.net/
-- Gentoo ebuilds of ISO Master, versions 0.4 - 1.1
+- Gentoo ebuilds of ISO Master, versions 0.4 - 1.2
 
 Babak Farrokhi
 - FreeBSD ports package of ISO Master, versions 0.6 - 1.1
@@ -81,30 +81,30 @@ http://www.jamesbowling.com/
 - Slackware packages of ISO Master, versions 0.4 - 0.5
 
 Michael Shigorin
-- Alt packages of ISO Master, versions 0.5, 0.7
+- Alt packages of ISO Master, versions 0.5, 0.7, 1.2
 
 Rene Eric
-SLAX packages of versions 0.7 - 1.0
+SLAX packages of versions 0.7 - 1.2
 
 Adam Williamson
 http://www.happyassassin.net/
-- Mandriva package of ISO Master, versions 0.8 - 1.0
+- Mandriva package of ISO Master, versions 0.8 - 1.2
 
 Matias A. Fonzo
-- Slackware package of ISO Master, versions 0.8 - 1.0
+- Slackware package of ISO Master, versions 0.8 - 1.2
 
 Giovanni Bechis
 http://www.snb.it/
-- OpenBSD ports package of ISO Master, versions 1.0 - 1.1
+- OpenBSD port of ISO Master, versions 1.0 - 1.2
 
 Pierrick Le Brun
-- Zenwalk package of ISO Master, versions 1.0 - 1.1
+- Zenwalk package of ISO Master, versions 1.0 - 1.2
 
-Muggins
-- Puppy package of ISO Master, version 1.1
+Todd (muggins)
+- Puppy package of ISO Master, versions 1.1 - 1.2
 
-Todd
-- Puppy package of ISO Master, version 1.1
+Kenan Pelit
+- Pardus package of ISO Master, version 1.2
 
 F. Lombardi
 SLAX package of ISO Master, version 0.7
@@ -119,7 +119,7 @@ http://wolvix.org/
 Translations:
 
 Dessislav Petrov
-- bg (Bulgarian) translation of ISO Master versions 0.6 - 1.1
+- bg (Bulgarian) translation of ISO Master versions 0.6 - 1.3
 
 Rafael Carreras
 - ca (Catalan) translation of ISO Master version 1.1
@@ -127,17 +127,20 @@ Rafael Carreras
 Schmaki
 - cs (Czech) translation of ISO Master version 1.1
 
+Jiri Huf
+- cs (Czech) translation of ISO Master version 1.3
+
 Toni Graffy
-- de (German) translation of ISO Master versions 0.6 - 1.1
+- de (German) translation of ISO Master versions 0.6 - 1.3
 
 Mike Kranidis
-- el (Greek) translation of ISO Master version 1.1
+- el (Greek) translation of ISO Master versions 1.1 - 1.3
 
 Juan Garcia-Murga Monago
 - es (Spanish) translation of ISO Master version 0.7 - 1.1
 
 Eero Salokannel
-- fi (Finnish) translation of ISO Master version 1.1
+- fi (Finnish) translation of ISO Master versions 1.1 - 1.3
 
 Magnus Valle
 - fo (Faroese) translation of ISO Master version 1.1
@@ -149,10 +152,16 @@ Andrew Smith
 - fr (French) translation of ISO Master version 0.7
 
 Bruno Bord
-- fr (French) translation of ISO Master versions 0.8 - 1.1
+- fr (French) translation of ISO Master versions 0.8 - 1.3
 
 Ante Karamatic
  - hr (Croatian) translation of ISO Master version 1.0
+
+Andras Horvath
+ - hu (Hungarian) translation of ISO Master version 1.3
+
+Wahyu Puji L
+ - id (Indonesian) translation of ISO Master version 1.3
 
 F. Lombardi
 - it (Italian) translation of ISO Master version 0.7 - 1.0
@@ -164,13 +173,13 @@ Robert Groenning
 - nb (Norwegian Bokmal) translation of ISO Master version 1.0
 
 Stephen Brandt
-- nl (Dutch) translation of ISO Master version 0.7 - 1.0
+- nl (Dutch) translation of ISO Master versions 0.7 - 1.3
 
 Robert Groenning
 - nn (Norwegian Nynorsk) translation of ISO Master version 1.1
 
-Marciej Libuda
-- pl (Polish) translation of ISO Master versions 0.6 - 1.1
+Maciej Libuda
+- pl (Polish) translation of ISO Master versions 0.6 - 1.3
 
 Joao de Ferro
 - pt (Portuguese) translation of ISO Master version 0.8, 1.0
@@ -179,16 +188,16 @@ Bogdan Radulescu
 - ro (Romanian) translation of ISO Master version 0.7 - 0.8, 1.0
 
 Anton Obidin
-- ru (Russian) translation of ISO Master versions 0.6 - 1.0
+- ru (Russian) translation of ISO Master versions 0.6 - 1.3
 
 Jozef Riha
-- sk (Slovak) translation of ISO Master version 1.0
+- sk (Slovak) translation of ISO Master versions 1.0 - 1.3
 
 Uros Golob
-- sl (Slovenian) translation of ISO Master version 1.1
+- sl (Slovenian) translation of ISO Master versions 1.1 - 1.3
 
 Besnik Bleta
-- sq (Albanian) translation of ISO Master versions 0.8 - 1.1
+- sq (Albanian) translation of ISO Master versions 0.8 - 1.3
 
 Danijel Muharemovic
 - sr (Serbian) translation of ISO Master version 1.1
@@ -206,10 +215,10 @@ Tutku Dalmaz
 - tr (Turkish) translation of ISO Master version 1.0
 
 Serhey Kusyumoff
-- uk (Ukrainian) translation of ISO Master version 0.8
+- uk (Ukrainian) translation of ISO Master versions 0.8, 1.3
 
 Sun Minchao
-- zh_CN (Simplified Chineese) translation of ISO Master version 0.7 - 1.1
+- zh_CN (Simplified Chineese) translation of ISO Master version 0.7 - 1.3
 
 Cheng-Wei Chien
-- zh_TW (Chineese/Taiwan) translation of ISO Master version 0.6 - 1.1
+- zh_TW (Chineese/Taiwan) translation of ISO Master version 0.6 - 1.3

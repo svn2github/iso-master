@@ -49,8 +49,8 @@ to make a fedora package:
 - Wait a moment and look for a built RPM in ~/rpmbuild/RPMS/i386
 
 to package a release:
-- cd po && ./extractstrings.sh && ./updateall.sh
-- update the version number in the about box
+- cd po && ./updateall.sh
+- update VERSION in the makefile
 - update version in man page
 - remove -g and -DDEBUG from Makefile and bk/Makefile
 - update changelog.txt

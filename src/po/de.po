@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-05 00:17-0500\n"
-"PO-Revision-Date: 2007-08-27 03:52-0500\n"
+"PO-Revision-Date: 2007-12-05 22:49+0100\n"
 "Last-Translator: Toni <toni@links2linux.de>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,12 +29,16 @@ msgstr ""
 "\n"
 "Wollen Sie fortfahren?"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272
+#: ../editfile.c:368
+#: ../editfile.c:601
+#: ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' ist keine gültige Datei"
 
-#: ../isobrowser.c:141 ../isobrowser.c:1197
+#: ../isobrowser.c:141
+#: ../isobrowser.c:1197
 msgid "(scanning for duplicate files)"
 msgstr "(suche nach doppelten Dateien)"
 
@@ -50,7 +54,8 @@ msgstr "Erweiterung automatisch hinzufügen"
 msgid "Add to the ISO"
 msgstr "Zum Abbild hinzufügen "
 
-#: ../isobrowser.c:1328 ../isobrowser.c:1616
+#: ../isobrowser.c:1328
+#: ../isobrowser.c:1616
 msgid "All files"
 msgstr "Alle Dateien"
 
@@ -82,7 +87,8 @@ msgstr "'boot record' Typ: 2880KiB Diskette"
 msgid "Boot record type: No Emulation"
 msgstr "'boot record' Typ: keine Emulation"
 
-#: ../isobrowser.c:500 ../isobrowser.c:1795
+#: ../isobrowser.c:500
+#: ../isobrowser.c:1795
 msgid "Change permissions"
 msgstr "Rechte ändern"
 
@@ -106,13 +112,14 @@ msgstr "Zeit der Erstellung:"
 msgid "Delete from the ISO"
 msgstr "Aus Abbild löschen"
 
-#: ../fsbrowser.c:577 ../isobrowser.c:1788
+#: ../fsbrowser.c:577
+#: ../isobrowser.c:1788
 msgid "Edit"
 msgstr "Bearbeiten"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr ""
+msgstr "Bearbeitung fehlgeschlagen, überprüfen Sie die Optionen/Editor"
 
 #: ../settings.c:701
 msgid "Editor"
@@ -134,7 +141,8 @@ msgstr "Entpacken"
 msgid "Extract from the ISO"
 msgstr "Datei aus Abbild extrahieren"
 
-#: ../editfile.c:473 ../isobrowser.c:214
+#: ../editfile.c:473
+#: ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Konnte Datei '%s nicht hinzufügen: '%s'"
@@ -159,12 +167,15 @@ msgstr "Konnte Verzeichnis %s nicht erstellen"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Konnte Verzeichnis %s nicht erstellen: %s"
 
-#: ../editfile.c:447 ../isobrowser.c:786
+#: ../editfile.c:447
+#: ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Konnte »%s«: %s nicht löschen."
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:899
+#: ../editfile.c:412
+#: ../editfile.c:740
+#: ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Die Datei %s:%s  kann nicht entpackt werden."
@@ -174,7 +185,8 @@ msgstr "Die Datei %s:%s  kann nicht entpackt werden."
 msgid "Failed to extract boot record: '%s'"
 msgstr "Fehler beim Entpacken des 'boot record': %s"
 
-#: ../isobrowser.c:1082 ../isobrowser.c:1133
+#: ../isobrowser.c:1082
+#: ../isobrowser.c:1133
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Initialisieren von bkisofs fehlgeschlagen '%s'"
@@ -239,11 +251,11 @@ msgid "From file: no emulation"
 msgstr "Von Datei: Ohne Emulation"
 
 #: ../isobrowser.c:804
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "GUI Fehler, es können nur Verzeichnisse und Dateien gelöscht werden"
 
-#: ../window.c:53 ../window.c:364
+#: ../window.c:53
+#: ../window.c:364
 msgid "Go back"
 msgstr "Zurück"
 
@@ -255,7 +267,8 @@ msgstr "Zum übergeordneten Verzeichnis auf dem Abbild"
 msgid "Go back up one directory on the filesystem"
 msgstr "Zum übergeordneten Verzeichnis wechseln"
 
-#: ../isobrowser.c:1313 ../isobrowser.c:1611
+#: ../isobrowser.c:1313
+#: ../isobrowser.c:1611
 msgid "ISO Images"
 msgstr "ISO Abbilder:"
 
@@ -288,21 +301,21 @@ msgid "Is visible on image as '%s'"
 msgstr "Ist sichtbar auf dem Abbild als '%s'"
 
 #: ../isobrowser.c:706
-msgid ""
-"It seems that you have made changes to the ISO but haven't saved them. Are "
-"you sure you want to close it?"
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
 msgstr "Ungesicherte Änderungen auf dem Abbild. Willst du wirklich beenden ?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr "Ungültige Datei und kann nicht als 'boot record' verwendet werden"
 
-#: ../boot.c:373 ../boot.c:380
+#: ../boot.c:373
+#: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Location: auf Original Abbild bei 0x%llX"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:375
+#: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Location: wird hinzugefügt von '%s'"
@@ -315,19 +328,20 @@ msgstr "MDF Abbilder:"
 msgid "NRG Images"
 msgstr "NRG Abbilder:"
 
-#: ../fsbrowser.c:116 ../isobrowser.c:290
+#: ../fsbrowser.c:116
+#: ../isobrowser.c:290
 msgid "Name"
 msgstr "Name"
 
-#: ../window.c:59 ../window.c:370
+#: ../window.c:59
+#: ../window.c:370
 msgid "New Directory"
 msgstr "Verzeichnis anlegen"
 
-#: ../boot.c:149 ../boot.c:327
+#: ../boot.c:149
+#: ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr ""
-"Kein 'boot record' auf dem Original vorhanden oder kein 'boot record' auf "
-"dem Abbild definiert"
+msgstr "Kein 'boot record' auf dem Original vorhanden oder kein 'boot record' auf dem Abbild definiert"
 
 #: ../boot.c:108
 msgid "No boot to delete"
@@ -335,7 +349,7 @@ msgstr "Kein 'boot record' zum löschen"
 
 #: ../settings.c:666
 msgid "Options"
-msgstr ""
+msgstr "Optionen"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -361,7 +375,9 @@ msgstr "Bitte warten, Abbild wird geschrieben ..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Bitte warten, Abbild wird geschrieben ..."
 
-#: ../isobrowser.c:128 ../isobrowser.c:833 ../isobrowser.c:1184
+#: ../isobrowser.c:128
+#: ../isobrowser.c:833
+#: ../isobrowser.c:1184
 #: ../isobrowser.c:1524
 msgid "Progress"
 msgstr "Fortschritt"
@@ -394,7 +410,8 @@ msgstr "Suche nach doppelten Einträgen (langsam)"
 msgid "Show _hidden files"
 msgstr "_Verborgene Dateien anzeigen"
 
-#: ../fsbrowser.c:137 ../isobrowser.c:313
+#: ../fsbrowser.c:137
+#: ../isobrowser.c:313
 msgid "Size"
 msgstr "Größe"
 
@@ -404,8 +421,7 @@ msgid "Size: %d bytes"
 msgstr "Größe: %d (Bytes)"
 
 #: ../fsbrowser.c:275
-msgid ""
-"Skipping directory entry because cannot handle filename longer than 256 chars"
+msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr "Überspringe das Verzeichnis, da Dateinamen länger als 256 Zeichen"
 
 #: ../fsbrowser.c:294
@@ -415,14 +431,13 @@ msgstr "Überspringe Verzeichnis %s, Fehler: %d"
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr ""
+msgstr "Sortierung mit Groß-/Kleinschreibung Unterscheidung"
 
 #: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Tempräres Verzeichnis anlegen"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -453,7 +468,7 @@ msgstr ""
 " - Das untere Fenster zeigt die Verzeichnisse und Dateien auf der\n"
 "Abbild-Datei an.\n"
 "\n"
-"Um ein Abbild zu öffnen, wählen Sie 'Abbild' und 'Öffnen'. Um ein neues\n"
+"Um ein Abbild zu öffnen, wählen Sie 'Datei' und 'Öffnen'. Um ein neues\n"
 "Abbild zu erstellen wählen Sie 'Abbild' und 'Neu'.\n"
 "\n"
 "Um eine oder mehrere Dateien oder Verzeichnisse zum Abbild\n"
@@ -478,13 +493,14 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "Benutze ausgewählte Datei auf Abbild (keine Emulation)"
 
-#: ../fsbrowser.c:570 ../isobrowser.c:1781
+#: ../fsbrowser.c:570
+#: ../isobrowser.c:1781
 msgid "View"
 msgstr "Ansicht"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr ""
+msgstr "Ansicht fehlgeschlagen, überprüfen Sie die Optionen/Anzeige"
 
 #: ../settings.c:713
 msgid "Viewer"
@@ -495,21 +511,16 @@ msgid "Volume name:"
 msgstr "Datenträgername:"
 
 #: ../settings.c:652
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
-msgstr ""
-"Das Abbild muss geschlossen und erneut geöffnet werden, um die Änderung "
-"wirksam werden zu lassen"
+msgid "You will have to close and reopen the ISO for this change to take effect"
+msgstr "Das Abbild muss geschlossen und erneut geöffnet werden, um die Änderung wirksam werden zu lassen"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
 msgstr "_BootRecord"
 
 #: ../window.c:141
-#, fuzzy
 msgid "_File"
-msgstr "_Ansicht"
+msgstr "_Datei"
 
 #: ../window.c:326
 msgid "_Help"
@@ -517,7 +528,7 @@ msgstr "_Hilfe"
 
 #: ../window.c:318
 msgid "_Options"
-msgstr ""
+msgstr "_Optionen"
 
 #: ../window.c:335
 msgid "_Overview"
@@ -529,7 +540,7 @@ msgstr "V_erzeichnisse vor Dateien anordnen"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr ""
+msgstr "_Werkzeuge"
 
 #: ../window.c:199
 msgid "_View"
@@ -537,12 +548,9 @@ msgstr "_Ansicht"
 
 #~ msgid "_Image"
 #~ msgstr "A_bbild"
-
 #~ msgid "_Settings"
 #~ msgstr "_Einstellungen"
-
 #~ msgid "Failed to delete directory %s: '%s'"
 #~ msgstr "konnte Verzeichnis %s nicht löschen: %s"
-
 #~ msgid "Failed to extract directory %s: '%s'"
 #~ msgstr "Konnte Verzeichnis %s nicht extrahieren: %s"

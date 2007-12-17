@@ -1,3 +1,11 @@
+17 Dec 2007 - 1.3
+=================
+- Added Hebrew and Indonesian translations.
+- A few usability improvements.
+- Sorting no longer has to be case-sensitive.
+- Fixed bug where a false positive isolinux detection would cause some ISOs to not be bootable anyy more.
+- Can now view and edit files on the regular filesystem, not just on the image.
+
 27 Oct 2007 - 1.2
 =================
 - Added Faroese, Slovenian, Hungarian translations.
