@@ -186,7 +186,7 @@ GBLtranslators =
 "- fr (French) translation of ISO Master versions 0.8 - 1.3\n"
 "\n"
 "Fima Kachinski\n"
-"- he (Hebrew) translation of ISO Master version 1.2\n"
+"- he (Hebrew) translation of ISO Master version 1.3\n"
 "\n"
 "Ante Karamatic\n"
 "- hr (Croatian) translation of ISO Master version 1.0\n"
