@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2007-12-16 23:50-0500\n"
-"PO-Revision-Date: 2007-08-08 15:22+0100\n"
+"PO-Revision-Date: 2007-12-28 23:18+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr "Redigera"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr ""
+msgstr "Redigering misslyckades, kontrollera Alternativ/Redigerare"
 
 #: ../settings.c:701
 msgid "Editor"
@@ -339,7 +339,7 @@ msgstr "Ingen startsektor att ta bort"
 
 #: ../settings.c:666
 msgid "Options"
-msgstr ""
+msgstr "Alternativ"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -420,14 +420,13 @@ msgstr "Hoppar över katalogobjekt på grund av att stat(%s) misslyckades med %d
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr ""
+msgstr "Sortering är sk_iftlägeskänslig"
 
 #: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Temporär katalog"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -454,11 +453,11 @@ msgid ""
 msgstr ""
 "Fönstret i ISO Master är uppdelat i två delar:\n"
 " - Den övre filbläddraren visar filer och kataloger på din dator.\n"
-" - Den nedre filbläddraren visar filer och kataloger i avbildsfilen.\n"
+" - Den nedre filbläddraren visar filer och kataloger i ISO-avbilden.\n"
 "\n"
-"För att öppna en befintlig iso-fil, klicka på \"Avbild\" och \"Öppna\". För "
+"För att öppna en befintlig iso-fil, klicka på \"Arkiv\" och \"Öppna\". För "
 "att\n"
-"skapa en ny iso-avbild, klicka på \"Avbild\" och sedan \"Ny\".\n"
+"skapa en ny iso-avbild, klicka på \"Arkiv\" och sedan \"Ny\".\n"
 "\n"
 "För att lägga till en eller flera filer eller kataloger till avbilden, "
 "markera\n"
@@ -469,11 +468,11 @@ msgstr ""
 "i den nedre filbläddraren och klicka på knappen \"Extrahera från avbild\" i\n"
 "verktygsraden i mitten av fönstret.\n"
 "\n"
-"Du kan även ta bort filer eller kataloger från avbilden och skapa nya\n"
+"Du kan även ta bort filer eller kataloger från avbilden samt skapa nya\n"
 "kataloger både på avbilden och på ditt lokala filsystem.\n"
 "\n"
 "Om du markerar någonting i den nedre filbläddraren och högerklickar på\n"
-"den, kommer flera alternativ att finnas tillgängliga.\n"
+"den, kommer fler alternativ att finnas tillgängliga.\n"
 "\n"
 "När du har gjort alla ändringar i den nya iso-avbilden, klicka på \"Avbild"
 "\"\n"
@@ -489,7 +488,7 @@ msgstr "Visa"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr ""
+msgstr "Visning misslyckades, kontrollera Alternativ/Visare"
 
 #: ../settings.c:713
 msgid "Viewer"
@@ -507,14 +506,12 @@ msgstr ""
 "aktiv"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
 msgstr "_Startsektor"
 
 #: ../window.c:141
-#, fuzzy
 msgid "_File"
-msgstr "_Visa"
+msgstr "_Arkiv"
 
 #: ../window.c:326
 msgid "_Help"
@@ -522,7 +519,7 @@ msgstr "_Hjälp"
 
 #: ../window.c:318
 msgid "_Options"
-msgstr ""
+msgstr "A_lternativ"
 
 #: ../window.c:335
 msgid "_Overview"
@@ -534,7 +531,7 @@ msgstr "_Sortera kataloger först"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr ""
+msgstr "_Verktyg"
 
 #: ../window.c:199
 msgid "_View"

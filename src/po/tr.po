@@ -426,7 +426,6 @@ msgstr "Geçici Dizin"
 
 # !! this translation is incomplete
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -503,7 +502,6 @@ msgstr ""
 "Değişiklikletin etkin hale gelmesi için ISO'yu kapatıp yeniden açmanız gerek"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
 msgstr "_Önyükleyici Kaydı"
 

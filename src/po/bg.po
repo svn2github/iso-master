@@ -421,7 +421,6 @@ msgid "Temporary directory"
 msgstr "Временна папка"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -498,7 +497,6 @@ msgid ""
 msgstr "Рестартирайте програмата, за да бъдат актуализирани промените"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
 msgstr "_Боот-Запис"
 

@@ -433,7 +433,6 @@ msgid "Temporary directory"
 msgstr "Directori temporal"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -512,9 +511,8 @@ msgstr ""
 "Heu de tancar i tornar a obrir la ISO per tal que el canvi tingui efecte"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
-msgstr "_RegistreD'arrencada"
+msgstr "_Registre D'arrencada"
 
 #: ../window.c:141
 #, fuzzy

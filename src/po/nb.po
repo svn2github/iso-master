@@ -424,7 +424,6 @@ msgid "Temporary directory"
 msgstr "Midlertidig mappe"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -500,7 +499,6 @@ msgid ""
 msgstr "Du må lukke og åpne ISO-filen igjen for at endringene skal bli synlige"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
 msgstr "O_ppstartssektor"
 

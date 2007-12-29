@@ -427,7 +427,6 @@ msgid "Temporary directory"
 msgstr "Privremeni direktorijum"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -505,9 +504,8 @@ msgid ""
 msgstr "Morate zatvoriti ISO i ponovo ga otvoriti da bi izmene bile vidjive"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
-msgstr "_BOOTfajl"
+msgstr "_BOOT fajl"
 
 #: ../window.c:141
 #, fuzzy

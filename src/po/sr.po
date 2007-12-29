@@ -405,7 +405,6 @@ msgid "Size: %d bytes"
 msgstr "Величина: %d бајтова "
 
 #: ../fsbrowser.c:280
-#, fuzzy
 msgid ""
 "Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
@@ -413,7 +412,7 @@ msgstr ""
 "карактера"
 
 #: ../fsbrowser.c:299
-#, fuzzy, c-format
+#, c-format
 msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Поништавам унос директоријума због статуса(%s) неуспело са %d"
 
@@ -426,7 +425,6 @@ msgid "Temporary directory"
 msgstr "Привремени директоријум"
 
 #: ../about.c:268
-#, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -503,7 +501,6 @@ msgid ""
 msgstr "Морате затворити ISO и поново га отворити да би промене биле видљиве"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
 msgstr "_Бутабилни-фајл"
 
