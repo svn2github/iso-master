@@ -23,7 +23,6 @@ manual:
 
 
 tests to run before a release:
-- make an iso with some 3G files in it, open it, save it, make sure the files are not corrupted
 - open iso from command-line
 - create blank, see if it mounts (try norock, nojoliet)
 - make a bootable windows (also add, delete some files)
@@ -37,6 +36,7 @@ tests to run before a release:
 - add a bunch of files to an iso, delete all the files, add some more, save
 - edit some text and binary files, make sure they extract and write properly
 - add a 3 gig file, make sure image saves and can extract it afterwords
+- make an iso with some 3G files in it, open it, save it, make sure the files are not corrupted
 
 to make a fedora package:
 - install rpmdevtools (via yum)
