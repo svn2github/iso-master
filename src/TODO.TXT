@@ -4,6 +4,7 @@ ui:
 -button to browse for temp dir
 -remove Utility from .desktop to get it out of 'accessories'
 -'open recent' list
+-check out thunar translators
 
 
 bk:
@@ -14,6 +15,10 @@ bk:
 -fedora7 dvd takes forever to remangle. try either fix the algorithm or allow longer 9660 names.
 -sorting 9660/joliet can also be slow
 -why never checking the return from seekset?
+-images to support:
+ -bin/cue
+ -multitrack mdf
+ -uif
 
 
 manual:
@@ -50,6 +55,7 @@ to make a fedora package:
 
 to package a release:
 - cd po && ./updateall.sh
+- cp sr\@latin.po sr\@Latn.po
 - update VERSION in the makefile
 - update version in man page
 - remove -g and -DDEBUG from Makefile and bk/Makefile
@@ -59,3 +65,6 @@ to package a release:
 - cd isomaster && svn export src releases/isomaster-version
 - delete icons/originals
 - tar cvjf isomaster-version.tar.bz2 isomaster-version/
+
+fonts:
+- 'the ultimate...' Mukti Narrow Bold or Nimbus Sans L Bold
