@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-16 23:50-0500\n"
+"POT-Creation-Date: 2008-02-03 14:48-0500\n"
 "PO-Revision-Date: 2007-08-14 06:01-0500\n"
 "Last-Translator: Robert Groenning <slimg@iggu.org>\n"
 "Language-Team:  <oversettelse@ubuntu.no>\n"
@@ -259,7 +259,7 @@ msgstr "Gå tilbake opp en mappe på filsystemet"
 msgid "ISO Images"
 msgstr "ISO-avtrykk"
 
-#: ../about.c:327
+#: ../about.c:339
 msgid "ISO Master Help"
 msgstr "Hjelp"
 
@@ -423,7 +423,7 @@ msgstr ""
 msgid "Temporary directory"
 msgstr "Midlertidig mappe"
 
-#: ../about.c:268
+#: ../about.c:280
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

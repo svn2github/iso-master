@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-16 23:50-0500\n"
+"POT-Creation-Date: 2008-02-03 14:48-0500\n"
 "PO-Revision-Date: 2007-12-06 12:34+0300\n"
 "Last-Translator: Antonio_99RUS <scsiman@yandex.ru>\n"
 "Language-Team: \n"
@@ -239,7 +239,8 @@ msgid "From file: no emulation"
 msgstr "Файл источника: без эмуляции"
 
 #: ../isobrowser.c:806
-msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgid ""
+"GUI error, deleting anything other than files and directories doesn't work"
 msgstr "Ошибка, удалять можно только файлы и каталоги"
 
 #: ../window.c:53 ../window.c:364
@@ -258,7 +259,7 @@ msgstr "Вернуться на каталог вверх вне образа"
 msgid "ISO Images"
 msgstr "ISO образы"
 
-#: ../about.c:327
+#: ../about.c:339
 msgid "ISO Master Help"
 msgstr "Справка по ISO Master"
 
@@ -296,7 +297,9 @@ msgstr ""
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Выбранное не является обычным файлом и не может быть использовано как загрузочная запись"
+msgstr ""
+"Выбранное не является обычным файлом и не может быть использовано как "
+"загрузочная запись"
 
 #: ../boot.c:373 ../boot.c:380
 #, c-format
@@ -326,7 +329,8 @@ msgstr "Новый каталог"
 
 #: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr "Загрузочная запись с оригинала не прочитана либо не установлена на образ"
+msgstr ""
+"Загрузочная запись с оригинала не прочитана либо не установлена на образ"
 
 #: ../boot.c:108
 msgid "No boot to delete"
@@ -405,8 +409,10 @@ msgid "Size: %d bytes"
 msgstr "Размер: %d байт(а)"
 
 #: ../fsbrowser.c:280
-msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Пропускаем каталог, потому что имя файла не должно быть длиннее 256 символов"
+msgid ""
+"Skipping directory entry because cannot handle filename longer than 256 chars"
+msgstr ""
+"Пропускаем каталог, потому что имя файла не должно быть длиннее 256 символов"
 
 #: ../fsbrowser.c:299
 #, c-format
@@ -421,7 +427,7 @@ msgstr "Сортировка _регистрозависима"
 msgid "Temporary directory"
 msgstr "Временный каталог"
 
-#: ../about.c:268
+#: ../about.c:280
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -491,7 +497,8 @@ msgid "Volume name:"
 msgstr "Имя тома:"
 
 #: ../settings.c:652
-msgid "You will have to close and reopen the ISO for this change to take effect"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
 msgstr ""
 "Для того, чтобы это изменение вступило в силу, необходимо закрыть и вновь "
 "открыть образ"
@@ -539,4 +546,3 @@ msgstr "_Вид"
 
 #~ msgid "Failed to extract directory %s: '%s'"
 #~ msgstr "Не удалось извлечь каталог %s: '%s'"
-

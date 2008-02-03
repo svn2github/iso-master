@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-12-16 23:50-0500\n"
+"POT-Creation-Date: 2008-02-03 14:48-0500\n"
 "PO-Revision-Date: 2007-08-27 03:57-0500\n"
 "Last-Translator: ivoks <(null)>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
@@ -259,7 +259,7 @@ msgstr "Idi natrag jedan direktorij na datotečnom sustavu"
 msgid "ISO Images"
 msgstr "ISO slike"
 
-#: ../about.c:327
+#: ../about.c:339
 msgid "ISO Master Help"
 msgstr "ISO Master pomoć"
 
@@ -430,7 +430,7 @@ msgid "Temporary directory"
 msgstr "Novi direktorij"
 
 # !! this translation is incomplete
-#: ../about.c:268
+#: ../about.c:280
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

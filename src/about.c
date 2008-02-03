@@ -149,6 +149,9 @@ NULL};
 
 static const char* 
 GBLtranslators = 
+"Ihar Hrachyshka\n"
+"- be (Belarusian) translation of ISO Master version 1.3\n"
+"\n"
 "Dessislav Petrov\n"
 "- bg (Bulgarian) translation of ISO Master versions 0.6 - 1.3\n"
 "\n"
@@ -168,7 +171,10 @@ GBLtranslators =
 "- el (Greek) translation of ISO Master versions 1.1 - 1.3\n"
 "\n"
 "Juan Garcia-Murga Monago\n"
-"- es (Spanish) translation of ISO Master version 0.7 - 1.1\n"
+"- es (Spanish) translation of ISO Master versions 0.7 - 1.1\n"
+"\n"
+"Edmund Laugasson\n"
+"- et (Estonian) translation of ISO Master version 1.3\n"
 "\n"
 "Eero Salokannel\n"
 "- fi (Finnish) translation of ISO Master versions 1.1 - 1.3\n"
