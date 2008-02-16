@@ -1,4 +1,4 @@
-# Faroese translation of ISO Master
+# Danish translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
 #
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 
 #: ../window.c:389
 msgid "      Estimated ISO Size: "
-msgstr "      Met ISO stødd:"
+msgstr "      Vurderet ISO Størrelse:"
 
 #: ../isobrowser.c:1382
 #, c-format
@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "%s\n"
 "\n"
-"Vilt tú farða víðari?"
+"Vil do forsætte?"
 
 #: ../editfile.c:272
 #: ../editfile.c:368
@@ -34,196 +34,196 @@ msgstr ""
 #: ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr "'%s' er ikki ein vanlig fíla"
+msgstr "'%s' er ikke en vanlig fil"
 
 #: ../isobrowser.c:141
 #: ../isobrowser.c:1197
 msgid "(scanning for duplicate files)"
-msgstr "(laitar eftur eins fílum)"
+msgstr "(skanner for dobbelte filer)"
 
 #: ../window.c:375
 msgid "Add"
-msgstr "Skoyt uppí"
+msgstr "Tilføj"
 
 #: ../isobrowser.c:1619
 msgid "Add extension automatically"
-msgstr "Skoyt fíl-endingar uppí av sær sjálvum"
+msgstr "Tilføj automatisk fil-endelser"
 
 #: ../window.c:375
 msgid "Add to the ISO"
-msgstr "Skoyt uppí ISO'ini"
+msgstr "Tilføj til ISO filen"
 
 #: ../isobrowser.c:1328
 #: ../isobrowser.c:1616
 msgid "All files"
-msgstr "Allar fílur"
+msgstr "Alle filer"
 
 #: ../boot.c:334
 msgid "Boot Record Information"
-msgstr "Boot Rit Kunning"
+msgstr "Boot Record Infromation"
 
 #: ../boot.c:122
 msgid "Boot record deleted"
-msgstr "Boot rit koyrt burtur"
+msgstr "Boot record er sletter"
 
 #: ../boot.c:350
 #, c-format
 msgid "Boot record type: 1200KiB Floppy"
-msgstr "Slag av boot rit: 1200KiB Disketta"
+msgstr "Boot record type: 1200KiB Floppy"
 
 #: ../boot.c:352
 #, c-format
 msgid "Boot record type: 1440KiB Floppy"
-msgstr "Slag av boot rit: 1440KiB Disketta"
+msgstr "Boot record type: 1440KiB Floppy"
 
 #: ../boot.c:354
 #, c-format
 msgid "Boot record type: 2880KiB Floppy"
-msgstr "Slag av boot rit: 2880KiB Disketta"
+msgstr "Boot record type: 2880KiB Floppy"
 
 #: ../boot.c:348
 #, c-format
 msgid "Boot record type: No Emulation"
-msgstr "Slag av boot rit: Eingin Emulatión"
+msgstr "Boot record type: Ingen Emulation"
 
 #: ../isobrowser.c:500
 #: ../isobrowser.c:1795
 msgid "Change permissions"
-msgstr "Broyt loyvir"
+msgstr "Skift tilaldelser"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
-msgstr "Vel Boot Rit Fílu"
+msgstr "Velg Boot Record fil"
 
 #: ../window.c:371
 msgid "Create new directory on the ISO"
-msgstr "Gerð eina nýggja fíluskrá á ISO'ðini"
+msgstr "Lav en ny mappe på ISOen"
 
 #: ../window.c:60
 msgid "Create new directory on the filesystem"
-msgstr "Gerð eina nýggja fíluskrá á fílukervinum"
+msgstr "Lav en ny mappe på filsystemet"
 
 #: ../settings.c:78
 msgid "Creation time:"
-msgstr "Skapt:"
+msgstr "Lavet:"
 
 #: ../window.c:385
 msgid "Delete from the ISO"
-msgstr "Koyr úr ISO'ðini"
+msgstr "Stet fra ISOen"
 
 #: ../fsbrowser.c:577
 #: ../isobrowser.c:1788
 msgid "Edit"
-msgstr "Ritstjórna"
+msgstr "Rediger"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr "Ritstjórv misednaðist, vinarliga hygg í Stillingar/Ritil"
+msgstr "Redigering mislykkedes, venligst se i Rediger/Editor"
 
 #: ../settings.c:701
 msgid "Editor"
-msgstr "Ritil"
+msgstr "Editor"
 
 #: ../isobrowser.c:1461
 msgid "Enter a new name:"
-msgstr "Skriva eitt nýtt navn:"
+msgstr "Skriv et nyt navn:"
 
 #: ../browser.c:71
 msgid "Enter name for new directory"
-msgstr "Skriva navni á nýggja fíluskrá"
+msgstr "Skriv et navn for the nye mappe"
 
 #: ../window.c:380
 msgid "Extract"
-msgstr "Tak frá"
+msgstr "Ekstrakt"
 
 #: ../window.c:380
 msgid "Extract from the ISO"
-msgstr "Tak frá ISO'ðini"
+msgstr "Ekstrakt fra ISO filen"
 
 #: ../editfile.c:473
 #: ../isobrowser.c:214
 #, c-format
 msgid "Failed to add '%s': '%s'"
-msgstr "Misednaðist at leggja '%s' afturat: '%s'"
+msgstr "Mislykkedes at tilføje '%s': '%s'"
 
 #: ../boot.c:79
 #, c-format
 msgid "Failed to add boot record: '%s'"
-msgstr "Misednaðist at skoyta boot rit uppí: '%s'"
+msgstr "Misslykkedes at tilføje boot record: '%s'"
 
 #: ../isobrowser.c:363
 #, c-format
 msgid "Failed to change directory: '%s'"
-msgstr "Misednaðist at broyta fíluskráðina: '%s'"
+msgstr "Mislykkedes at skifte mappe: '%s'"
 
 #: ../browser.c:112
 #, c-format
 msgid "Failed to create directory %s"
-msgstr "Misednaðist at gerða fíluskrá '%s'"
+msgstr "Mislykkedes at lave mappe '%s'"
 
 #: ../browser.c:135
 #, c-format
 msgid "Failed to create directory %s: '%s'"
-msgstr "Misednaðist at gerða fíluskrá '%s': '%s'"
+msgstr "Mislykkedes at lave mappe '%s': '%s'"
 
 #: ../editfile.c:447
 #: ../isobrowser.c:786
 #, c-format
 msgid "Failed to delete '%s': '%s'"
-msgstr "Misednaðist at sletta '%s': '%s'"
+msgstr "Mislykkedes at slette '%s': '%s'"
 
 #: ../editfile.c:412
 #: ../editfile.c:740
 #: ../isobrowser.c:899
 #, c-format
 msgid "Failed to extract '%s': '%s'"
-msgstr "Misednaðist at taka '%s' frá: '%s'"
+msgstr "Mislykkedes at ekstraktere '%s': '%s'"
 
 #: ../boot.c:202
 #, c-format
 msgid "Failed to extract boot record: '%s'"
-msgstr "Misednaðist at taka boot rit frá: '%s'"
+msgstr "Misslykkedes at ekstrakte boor record: '%s'"
 
 #: ../isobrowser.c:1082
 #: ../isobrowser.c:1133
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
-msgstr "Misednaðist at innleiða bkisofs: '%s'"
+msgstr "Misslykkedes at starte bkisofs: '%s'"
 
 #: ../fsbrowser.c:224
 #, c-format
 msgid "Failed to open directory '%s', error %d"
-msgstr "Misednaðist at opna fíluskrá '%s', feilur '%d'"
+msgstr "Mislykkedes at opne mappe '%s', feil '%d'"
 
 #: ../isobrowser.c:1152
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
-msgstr "Misednaðist opna ISO fílun fyri at lesa hann: '%s'"
+msgstr "Mislykkedes at åbne ISO filen til at læse: '%s'"
 
 #: ../isobrowser.c:1227
 #, c-format
 msgid "Failed to read directory tree: '%s'"
-msgstr "Misednaðist at lesa fíluskrás træði: '%s'"
+msgstr "Mislykkedes at lese mappe træ: '%s'"
 
 #: ../isobrowser.c:1167
 #, c-format
 msgid "Failed to read volume info: '%s'"
-msgstr "Misednaðist at lesa miðils kunning: '%s'"
+msgstr "Misslykkedes at lese medie infromation: '%s'"
 
 #: ../isobrowser.c:1490
 #, c-format
 msgid "Failed to rename '%s': %s"
-msgstr "Misednaðist at broyta navni '%s': '%s'"
+msgstr "Mislykkedes at skifte navn '%s': '%s'"
 
 #: ../boot.c:296
 #, c-format
 msgid "Failed to set %s as boot record: '%s'"
-msgstr "Misednaðist at seta %s sum boot rit: '%s'"
+msgstr "Mislykkedes at sette %s som boot revord: '%s'"
 
 #: ../isobrowser.c:1562
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
-msgstr "Misednaðist at skriva mynduna til '%s': '%s'"
+msgstr "Mislykkedes at skrive billede til '%s': '%s'"
 
 #: ../settings.c:122
 msgid "Filename types (both recommended):"
@@ -231,102 +231,102 @@ msgstr "Slag av fílunavni (bæði tilrátt):"
 
 #: ../settings.c:691
 msgid "Follow symbolic links"
-msgstr "Fylg symbolsku leinkju"
+msgstr "Følg symbolsk link"
 
 #: ../window.c:298
 msgid "From file: 1200KiB floppy"
-msgstr "Frá fílu: 1200KiB diskettu"
+msgstr "Fra fil: 1200KiB diskette"
 
 #: ../window.c:304
 msgid "From file: 1440KiB floppy"
-msgstr "Frá fílu: 1440KiB diskettu"
+msgstr "Fra fil: 1440KiB diskette"
 
 #: ../window.c:310
 msgid "From file: 2880KiB floppy"
-msgstr "Frá fílu: 2880KiB diskettu"
+msgstr "Fra fil: 2880KiB diskette"
 
 #: ../window.c:292
 msgid "From file: no emulation"
-msgstr "Frá fílu: eingin emulatión"
+msgstr "Fra fil: eingin emulatión"
 
 #: ../isobrowser.c:804
 msgid "GUI error, deleting anything other than files and directories doesn't work"
-msgstr "Brúkaraflatu feilur, alt uttan fílur og fíluskráðir kunnu ikki koyrast burtur"
+msgstr "Grafisk feil, alt untaget filer og mapper kan ikke slettes"
 
 #: ../window.c:53
 #: ../window.c:364
 msgid "Go back"
-msgstr "Far aftur"
+msgstr "Go tilbage"
 
 #: ../window.c:365
 msgid "Go back up one directory on the ISO"
-msgstr "Far upp eitt fíluskrá á ISO'ðini"
+msgstr "Go op en mappe på ISO'en"
 
 #: ../window.c:54
 msgid "Go back up one directory on the filesystem"
-msgstr "Far eitt fíluskrá uppá fílukervinum"
+msgstr "Go op en mappe på filsystemet"
 
 #: ../isobrowser.c:1313
 #: ../isobrowser.c:1611
 msgid "ISO Images"
-msgstr "ISO myndur"
+msgstr "ISO Billeder"
 
 #: ../about.c:327
 msgid "ISO Master Help"
-msgstr "ISO Master Hjálp"
+msgstr "ISO Master Hjælp"
 
 #: ../settings.c:62
 msgid "Image Information"
-msgstr "Mynda Kunning"
+msgstr "Billede Infromation"
 
 #: ../settings.c:157
 #, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Ógildin útgevari '%s': '%s'"
+msgstr "Ugyldig udgiver '%s': '%s'"
 
 #: ../settings.c:173
 #, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Ógildugt navn á miðli '%s': '%s'"
+msgstr "Ugyldigt medie navn: '%s': '%s'"
 
 #: ../boot.c:391
 #, c-format
 msgid "Is not visible on image"
-msgstr "Er ikki sjónligt á mynduni"
+msgstr "Er ikki synligt på biledet"
 
 #: ../boot.c:389
 #, c-format
 msgid "Is visible on image as '%s'"
-msgstr "Er sjónligt á mynduni sum '%s'"
+msgstr "Er ikke synligt på billedet sum '%s'"
 
 #: ../isobrowser.c:706
 msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
-msgstr "Tú hevður gjørt broytingar í ISO'ðini, ið ikki eru goymdir. Ert tú sikkur tú vilt lata aftur?"
+msgstr "Der er endringer ISO'en, sum ikke er gemte. Er du sikker at du vil slukke?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Tað valgda evni er ikki ein vanligur fíla, og kann ikki brúkast sum boot rit"
+msgstr "Det du har valt er ikke en vanlig fil og kan ikke bruges sum boot record"
 
 #: ../boot.c:373
 #: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
-msgstr "Plassering: á uppruna mynduni á 0x%llX"
+msgstr "Plassering: på oprindelige billede 0x%llX"
 
 #: ../boot.c:375
 #: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
-msgstr "Plassering: verður lagt afturat frá '%s'"
+msgstr "Plassering: bliver tilføjet fra '%s'"
 
 #
 #: ../isobrowser.c:1323
 msgid "MDF Images"
-msgstr "MDF Myndir"
+msgstr "MDF Billeder"
 
 #: ../isobrowser.c:1318
 msgid "NRG Images"
-msgstr "NRG Mynd"
+msgstr "NRG Billeder"
 
 #: ../fsbrowser.c:116
 #: ../isobrowser.c:290
@@ -336,108 +336,108 @@ msgstr "Navn"
 #: ../window.c:59
 #: ../window.c:370
 msgid "New Directory"
-msgstr "Nýggj Fíluskrá"
+msgstr "Ny Mappe"
 
 #: ../boot.c:149
 #: ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr "Einki boot rit er lisið frá upruna ella set á mynduni"
+msgstr "Ingen boot record er læst fra den oprindelig fil eller sat på billedet"
 
 #: ../boot.c:108
 msgid "No boot to delete"
-msgstr "Eingin boot at koyra burtur"
+msgstr "Intet bott at slette"
 
 #: ../settings.c:666
 msgid "Options"
-msgstr "Stillingar"
+msgstr "Rediger"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr "Vinarliga vel eina fílu frá ISO kaganum til at búka sum boot rit"
+msgstr "Venligst velg en fil i ISO broweren til at bruge sim boot record"
 
 #: ../boot.c:243
 msgid "Please select no more than one file in the ISO browser"
-msgstr "Vinarliga ikki vel maira en eina fílu in ISO keganum"
+msgstr "Venligst ikke vælg flere end en fil ISO browseren"
 
 #: ../isobrowser.c:135
 msgid "Please wait while I'm adding the selected items..."
-msgstr "Vinarliga bíða ímeðan eg skoyti uppí teir valgdu fílurnar..."
+msgstr "Venligst vent imenst jeg tilføjer de valgt filer..."
 
 #: ../isobrowser.c:841
 msgid "Please wait while I'm extracting the selected files..."
-msgstr "Vinarliga bíða ímeðan eg taki frá tær valgdu fínurnar..."
+msgstr "Venligst vent imenst jeg ekstraker de valgte filer..."
 
 #: ../isobrowser.c:1191
 msgid "Please wait while I'm reading the image..."
-msgstr "Vinarliga bíða ímeðan eg lesði mynduna..."
+msgstr "Venligst vent imenst jeg læser billedet..."
 
 #: ../isobrowser.c:1534
 msgid "Please wait while I'm saving the new image to disk..."
-msgstr "Vinarliga bíða ímeðan eg goymi tað nýggju myndina á fløguna..."
+msgstr "Venligst vent imens jeg gemmer det nye billede på disken..."
 
 #: ../isobrowser.c:128
 #: ../isobrowser.c:833
 #: ../isobrowser.c:1184
 #: ../isobrowser.c:1524
 msgid "Progress"
-msgstr "Gongd"
+msgstr "Forløb"
 
 #: ../settings.c:106
 msgid "Publisher:"
-msgstr "Útgevari:"
+msgstr "Udgiver:"
 
 #: ../window.c:385
 msgid "Remove"
-msgstr "Koyr burtur"
+msgstr "Fjern"
 
 #
 #: ../isobrowser.c:1772
 msgid "Rename"
-msgstr "Broyt Navn"
+msgstr "Skift Navn"
 
 #: ../isobrowser.c:1600
 msgid "Save File"
-msgstr "Goym Fílu"
+msgstr "Gem Fil"
 
 #: ../boot.c:156
 msgid "Save a copy of the boot record"
-msgstr "Goym eitt avrit av boot rit"
+msgstr "Gem et en copy av boot record"
 
 #: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
-msgstr "Laita eftur eins fílum (seint)"
+msgstr "Let efter dobbelte filer (sent)"
 
 #: ../window.c:214
 msgid "Show _hidden files"
-msgstr "Vís _goymdir fílar"
+msgstr "vis _gemte filer"
 
 #: ../fsbrowser.c:137
 #: ../isobrowser.c:313
 msgid "Size"
-msgstr "Stødd"
+msgstr "Størrelse"
 
 #: ../boot.c:363
 #, c-format
 msgid "Size: %d bytes"
-msgstr "Stødd: %d byte"
+msgstr "Størrelse: '%d' bytes"
 
 #: ../fsbrowser.c:275
 msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Leypur fíluskrá um tí fílnøvn kunnu ikki verða longur enn 256 stavir langt"
+msgstr "Hopper over mappen, fordi filnavne kan ikke være mere end 256 bokstaver"
 
 #: ../fsbrowser.c:294
 #, c-format
 msgid "Skipping directory entry because stat(%s) failed with %d"
-msgstr "Leypur fíluskrá um tí stat(%s) misednaðist við %d"
+msgstr "Hopper over mappen, fordi stat(%s) mislykkedes med %d"
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr "Sortering ger mun á stórum og smáðum bókstavum."
+msgstr "Sortering er følsom overfor store og små bokstaver"
 
 #
 #: ../settings.c:724
 msgid "Temporary directory"
-msgstr "Fyribils fíluskrá"
+msgstr "Midlertidig mappe"
 
 # !! the last paragraph is untranslated
 #: ../about.c:268
@@ -465,82 +465,83 @@ msgid ""
 "Once you made all the changes to the new ISO image, click on 'Image' and\n"
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
-"ISO Master gluggin er búttur í tveir parter:\n"
-" - Ovari parturin vísur fílur og fíluskráðir á tínari teldu.\n"
-" - Niðari parturin vísur fílur og fíluskráðir á ISO mynduni.\n"
+"ISO Master vinduet er delt i 2 dele:\n"
+" - Øverste vindue viser file og mapper på maskinen.\n"
+" - Nederste delen viser filer og mapper på ISO billedet.\n"
 "\n"
-"Fyri at opena ein ISO fílu, ið longu er gjørd, klikk á 'Mynd' og síðani\n"
-"'Opnað'. Fyri at gera eina nýggja ISO fílu, kilkk á 'Mynd' og síðani\n"
-"'Nýggj'.\n"
-"Fyri at skoyta ein ella fleiri fílur ella fíluskráðir uppí ISO'ðini, vel tær\n"
-"í tí ovara kaganum og kikk á 'Skoyt uppí ISO'ðini' í amboðsbjálkanum.\n"
+"For at opne en ISO fil som allerede eksisterer, klik på 'Filer' også 'Åben'.\n"
+"For at lave en ny ISO fil, klik på 'Filer' også 'Ny'\n"
 "\n"
-"Tú kanst eisini strika fílur ella fíluskráðir frá ISO'ðini og gera nýggj\n"
-"fíluskráðir bæði á ISO'ðini og á tínum fílukervi.\n"
+"For at tilføje en eller flere filer eller mapper til ISO filen, velg dem i\n"
+"værktøjskassen i det øverste vindue og klik på 'Tilføj til ISO filen'.\n"
 "\n"
-"Um tú velur okkurt í tí niðara keganum og høgra-klikkar á tað eru\n"
-"fleiri arðir hentleikar at velja ímillum\n"
+"For at tage en eller flere filer fra ISO filen, velg dem i det nederste vidue\n"
+"og kilk på 'Ekstrakt fra ISO filen'\n"
 "\n"
-" Tá tú hevur gjørt allar broytingarnar á tí nýggju ISO mynudi, klikk á\n"
-"'Mynd' og 'Goym Sum'. Tú kanst ikki goyma oman á tað uppruna\n"
-"ISO mynuna\n"
+"Do kan også slette filer og mapper fra ISO filen og lave nye mapper\n"
+"både i ISO filen og i filsystemet\n"
+"\n"
+"Hvis du højre-klikker noget i det nederste vindue, har du flere valgmuligheder\n"
+"\n"
+"Da du har lavet alle ændringerne i den nye ISO fil, klik på 'Billede' og 'Gem som'.\n"
+"Du kan ikke skrive over den oprindelige ISO fil.\n"
 
 #: ../window.c:286
 msgid "Use selected file on image (no emulation)"
-msgstr "Nýt valgda fílu á mynduni (eingin emulatión)"
+msgstr "Bruge valgte filer på billedet (ingen emulation)"
 
 #: ../fsbrowser.c:570
 #: ../isobrowser.c:1781
 msgid "View"
-msgstr "Vís"
+msgstr "Vis"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr "Misednaðist at vísa, vinarliga hýgg í Stillingar/Vísari"
+msgstr "Mislykkedes at vise, venligst se i Rediger/Viser"
 
 #: ../settings.c:713
 msgid "Viewer"
-msgstr "Vísari"
+msgstr "Viser"
 
 #: ../settings.c:94
 msgid "Volume name:"
-msgstr "Miðils navn:"
+msgstr "Medie navn:"
 
 #: ../settings.c:652
 msgid "You will have to close and reopen the ISO for this change to take effect"
-msgstr "Fyri hendan broytingin skal gerast virkin, mast tu lata aftur og so opna ISO'ðina"
+msgstr "For at denne endring skal virke, må du genåbne ISO filen"
 
 #: ../window.c:254
 msgid "_Boot Record"
-msgstr "_Boot Rit"
+msgstr "_Boot Record"
 
 #: ../window.c:141
 msgid "_File"
-msgstr "_Fíla"
+msgstr "_Filer"
 
 #: ../window.c:326
 msgid "_Help"
-msgstr "_Hjálp"
+msgstr "_Hjælp"
 
 #: ../window.c:318
 msgid "_Options"
-msgstr "_Stillingar"
+msgstr "_Rediger"
 
 #: ../window.c:335
 msgid "_Overview"
-msgstr "_Yvirlit"
+msgstr "_Oversigt"
 
 #: ../window.c:224
 msgid "_Sort directories first"
-msgstr "_Raða fílaskráðini fyrst"
+msgstr "_Sorter mapper først"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr "_Amboð"
+msgstr "_Funktioner"
 
 #: ../window.c:199
 msgid "_View"
-msgstr "_Vís"
+msgstr "_Vis"
 
 #~ msgid "_Image"
 #~ msgstr "_Mynd"
