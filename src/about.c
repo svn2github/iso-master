@@ -119,7 +119,7 @@ GBLauthors[2] = {
 "- Mandriva package of ISO Master, versions 0.8 - 1.2\n"
 "\n"
 "Matias A. Fonzo\n"
-"- Slackware package of ISO Master, versions 0.8 - 1.2\n"
+"- Slackware package of ISO Master, versions 0.8 - 1.3.1\n"
 "\n"
 "Giovanni Bechis\n"
 "http://www.snb.it/\n"
