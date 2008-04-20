@@ -324,6 +324,9 @@ void showAboutWindowCbk(GtkMenuItem* menuItem, gpointer data)
 #if GTK_MINOR_VERSION >= 6
     gtk_show_about_dialog(GTK_WINDOW(GBLmainWindow), 
                           "name", GBLprogramName,
+#if GTK_MINOR_VERSION >= 12
+                          "program-name", GBLprogramName,
+#endif
                           "authors", GBLauthors,
                           "translator-credits", GBLtranslators,
                           "comments", GBLcomments,
