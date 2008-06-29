@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-03 14:48-0500\n"
+"POT-Creation-Date: 2008-06-28 20:48-0400\n"
 "PO-Revision-Date: 2007-12-05 22:42-0500\n"
 "Last-Translator: Mike Kranidis <mikek@openforall.com>\n"
 "Language-Team: Mike Kranidis <mikek@openforall.com>\n"
@@ -262,7 +262,7 @@ msgstr "Πήγαινε πίσω ένα κατάλογο στο σύστημα α
 msgid "ISO Images"
 msgstr "ISO Εικόνες"
 
-#: ../about.c:339
+#: ../about.c:348
 msgid "ISO Master Help"
 msgstr "Βοήθεια για το ISO Master"
 
@@ -429,7 +429,7 @@ msgstr "Η ταξινόμηση είναι _με διαχωρισμό κεφαλ
 msgid "Temporary directory"
 msgstr "Προσωρινός Κατάλογος"
 
-#: ../about.c:280
+#: ../about.c:286
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

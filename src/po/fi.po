@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-03 14:48-0500\n"
+"POT-Creation-Date: 2008-06-28 20:48-0400\n"
 "PO-Revision-Date: 2007-12-16 19:08+0200\n"
 "Last-Translator: Eero Salokannel <eero.salokannel@gmail.com>\n"
 "Language-Team: \n"
@@ -260,7 +260,7 @@ msgstr "Avaa yläkansio tiedostojärjestelmässä"
 msgid "ISO Images"
 msgstr "ISO tiedostot"
 
-#: ../about.c:339
+#: ../about.c:348
 msgid "ISO Master Help"
 msgstr "ISO Master ohje"
 
@@ -423,7 +423,7 @@ msgstr "Järjestä on riippuvainen _kirjainkoosta"
 msgid "Temporary directory"
 msgstr "Väliaikainen hakemisto"
 
-#: ../about.c:280
+#: ../about.c:286
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

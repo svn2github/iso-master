@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-03 14:48-0500\n"
+"POT-Creation-Date: 2008-06-28 20:48-0400\n"
 "PO-Revision-Date: 2007-12-05 16:07+0100\n"
 "Last-Translator: Bruno Bord <bbord@interfaceip.fr>\n"
 "Language-Team: Bruno Bord <bruno@jehaisleprintemps.net>\n"
@@ -264,7 +264,7 @@ msgstr "Remonter d'un dossier sur le système de fichier"
 msgid "ISO Images"
 msgstr "Images ISO"
 
-#: ../about.c:339
+#: ../about.c:348
 msgid "ISO Master Help"
 msgstr "Aide ISO Master"
 
@@ -428,7 +428,7 @@ msgstr "Le tri est sensible à la _casse"
 msgid "Temporary directory"
 msgstr "Dossier temporaire"
 
-#: ../about.c:280
+#: ../about.c:286
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

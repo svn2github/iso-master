@@ -1,3 +1,11 @@
+28 Jun 2008 - 1.3.2
+===================
+- Updated Catalan, Italian, Dutch, and Faroese translations.
+- Added Danish translation.
+- Fixed about window to show the program name and version properly.
+- Added a dummy configure script.
+- Fixed bug where filenames would have ';1' terminators when only ISO9660 filenames were on the original ISO.
+
 03 Feb 2008 - 1.3.1
 ===================
 - Added Belarusian and Estonian translations.

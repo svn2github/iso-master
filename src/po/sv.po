@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-02-03 14:48-0500\n"
+"POT-Creation-Date: 2008-06-28 20:48-0400\n"
 "PO-Revision-Date: 2007-12-28 23:18+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
@@ -262,7 +262,7 @@ msgstr "Gå tillbaka en katalog i filsystemet"
 msgid "ISO Images"
 msgstr "ISO-avbilder"
 
-#: ../about.c:339
+#: ../about.c:348
 msgid "ISO Master Help"
 msgstr "Hjälp för ISO Master"
 
@@ -426,7 +426,7 @@ msgstr "Sortering är sk_iftlägeskänslig"
 msgid "Temporary directory"
 msgstr "Temporär katalog"
 
-#: ../about.c:280
+#: ../about.c:286
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
