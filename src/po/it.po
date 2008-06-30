@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-28 20:48-0400\n"
+"POT-Creation-Date: 2008-06-30 18:03-0400\n"
 "PO-Revision-Date: 2008-02-04 15:44+0100\n"
 "Last-Translator: Valerio Guaglianone aka Valpenguin <valpenguin@gmail.com>\n"
 "Language-Team: \n"
@@ -263,7 +263,7 @@ msgstr "Cartella precedente sul disco"
 msgid "ISO Images"
 msgstr "Immagini ISO"
 
-#: ../about.c:348
+#: ../about.c:351
 msgid "ISO Master Help"
 msgstr "Guida di ISO Master"
 
@@ -428,7 +428,7 @@ msgstr "Ordinamento _case sensitive"
 msgid "Temporary directory"
 msgstr "Cartella temporanea"
 
-#: ../about.c:286
+#: ../about.c:289
 #, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"

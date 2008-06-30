@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-28 20:48-0400\n"
+"POT-Creation-Date: 2008-06-30 18:03-0400\n"
 "PO-Revision-Date: 2008-02-15 17:10-0000\n"
 "Last-Translator: Magnus Valle <magnus@vallenett.no>\n"
 "Language-Team:  <LL@li.org>\n"
@@ -258,7 +258,7 @@ msgstr "Go op en mappe på filsystemet"
 msgid "ISO Images"
 msgstr "ISO Billeder"
 
-#: ../about.c:348
+#: ../about.c:351
 msgid "ISO Master Help"
 msgstr "ISO Master Hjælp"
 
@@ -425,7 +425,7 @@ msgid "Temporary directory"
 msgstr "Midlertidig mappe"
 
 # !! the last paragraph is untranslated
-#: ../about.c:286
+#: ../about.c:289
 #, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
