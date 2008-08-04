@@ -323,7 +323,7 @@ void loadSettings(void)
     else
     /* no config file */
         GBLappSettings.windowWidth = ISOMASTER_DEFAULT_WINDOW_WIDTH;
-    
+    iniparser_dump(GBLsettingsDictionary, stdout);printf("\n");
     /* read/set window height */
     if(GBLsettingsDictionary != NULL)
     {
