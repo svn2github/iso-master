@@ -5,9 +5,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-30 18:03-0400\n"
+"POT-Creation-Date: 2007-12-16 23:50-0500\n"
 "PO-Revision-Date: 2007-06-05 21:38+0100\n"
-"Last-Translator: João de Ferro <joaodeferro@gmail.com>\n"
+"Last-Translator: JoÃ£o de Ferro <j@gmail.com>\n"
 "Language-Team: pt <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -33,11 +33,11 @@ msgstr ""
 #: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr ""
+msgstr "'%s' não é um ficheiro regular"
 
 #: ../isobrowser.c:141 ../isobrowser.c:1199
 msgid "(scanning for duplicate files)"
-msgstr "(procurando novos ficheiros)"
+msgstr "(a procurar ficheiros duplicados)"
 
 #: ../window.c:375
 msgid "Add"
@@ -85,7 +85,7 @@ msgstr "Disco de Arranque: Sem Emulação"
 
 #: ../isobrowser.c:502 ../isobrowser.c:1797
 msgid "Change permissions"
-msgstr ""
+msgstr "Mudar permissões"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
@@ -109,15 +109,15 @@ msgstr "Apagar da ISO"
 
 #: ../fsbrowser.c:590 ../isobrowser.c:1790
 msgid "Edit"
-msgstr ""
+msgstr "Editar"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr ""
+msgstr "Edição falhada, por favor verificar Opções/Editor"
 
 #: ../settings.c:701
 msgid "Editor"
-msgstr ""
+msgstr "Editor"
 
 #: ../isobrowser.c:1463
 msgid "Enter a new name:"
@@ -242,7 +242,7 @@ msgstr "Do ficheiro: sem emulação"
 #: ../isobrowser.c:806
 msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
-msgstr "Erro de GUI, não é possível apagar mais que ficheiros e directorias"
+msgstr "Erro de GUI, não é possível apagar mais do que ficheiros e directorias"
 
 #: ../window.c:53 ../window.c:364
 msgid "Go back"
@@ -260,7 +260,7 @@ msgstr "Atrás uma directoria no sistema de ficheiros"
 msgid "ISO Images"
 msgstr "Imagens ISO"
 
-#: ../about.c:351
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "Ajuda do ISO Master"
 
@@ -269,14 +269,14 @@ msgid "Image Information"
 msgstr "Informação da Imagem"
 
 #: ../settings.c:157
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid publisher '%s': '%s'"
 msgstr "Falhou apagar '%s': '%s'"
 
 #: ../settings.c:173
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Falhou renomear '%s': %s"
+msgstr "Falhou renomear volume '%s': %s"
 
 #: ../boot.c:391
 #, c-format
@@ -313,9 +313,8 @@ msgid "Location: to be added from '%s'"
 msgstr "Localização: a adicionar de '%s'"
 
 #: ../isobrowser.c:1325
-#, fuzzy
 msgid "MDF Images"
-msgstr "Imagens ISO"
+msgstr "Imagens MDF"
 
 #: ../isobrowser.c:1320
 msgid "NRG Images"
@@ -339,7 +338,7 @@ msgstr "Nenhum disco de arranque para apagar"
 
 #: ../settings.c:666
 msgid "Options"
-msgstr ""
+msgstr "Opções"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -381,9 +380,8 @@ msgid "Remove"
 msgstr "Remover"
 
 #: ../isobrowser.c:1774
-#, fuzzy
 msgid "Rename"
-msgstr "Remover"
+msgstr "Renomear"
 
 #: ../isobrowser.c:1602
 msgid "Save File"
@@ -395,7 +393,7 @@ msgstr "Guardar cópia de disco de arranque"
 
 #: ../settings.c:678
 msgid "Scan for duplicate files (slow)"
-msgstr "Procurando por ficheiros duplicados (Lento)"
+msgstr "PProcurar por ficheiros duplicados (Lento)"
 
 #: ../window.c:214
 msgid "Show _hidden files"
@@ -427,13 +425,10 @@ msgid "Sort is _case sensitive"
 msgstr ""
 
 #: ../settings.c:724
-#, fuzzy
 msgid "Temporary directory"
 msgstr "Nova Directoria"
 
-# !! this translation is incomplete
-#: ../about.c:289
-#, fuzzy
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -467,8 +462,8 @@ msgstr ""
 "Para abrir uma imagem ISO existente, clique em 'Imagem' ou em 'Abrir'.\n"
 "Para criar uma nova imagem, clique em 'Imagem' ou em 'Novo'.\n"
 "\n"
-"Para adicionar um ou mais ficheiros ou directorias à ISO, seleccione-os\n"
-"no navegador de ficheiros de cima e clique em 'Adicionar à ISO' na barra\n"
+"Para adicionar um ou mais ficheiros ou directorias Ã  ISO, seleccione-os\n"
+"no navegador de ficheiros de cima e clique em 'Adicionar Ã  ISO' na barra\n"
 "de ferramentas central.\n"
 "\n"
 "Para extrair um ou mais ficheiros ou directorias da ISO, seleccione-os no\n"
@@ -479,26 +474,24 @@ msgstr ""
 "e criar novas directorias na imagem ISO ou no seu sistema de ficheiros\n"
 "local.\n"
 "\n"
-"Depois de efectuar todas as alterações à nova imagem ISO, clique em\n"
-"'Imagem' e em 'Gravar como'. Não pode substituir a imagem ISO original.\n"
+"Depois de efectuar todas as alteraÃ§Ãµes Ã  nova imagem ISO, clique em\n"
+"'Imagem' e em 'Gravar como'. NÃ£o pode substituir a imagem ISO original.\n"
 
 #: ../window.c:286
 msgid "Use selected file on image (no emulation)"
 msgstr "Usar ficheiro selecionado na imagem (sem emulação)"
 
 #: ../fsbrowser.c:583 ../isobrowser.c:1783
-#, fuzzy
 msgid "View"
-msgstr "_Ver"
+msgstr "Visualizar"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr ""
+msgstr "Visualização falhou, por favor verifique Opções/Visualizador"
 
 #: ../settings.c:713
-#, fuzzy
 msgid "Viewer"
-msgstr "_Ver"
+msgstr "Visualizador"
 
 #: ../settings.c:94
 msgid "Volume name:"
@@ -510,14 +503,12 @@ msgid ""
 msgstr "Terá de fechar e reabrir a ISO para que as alterações tenham efeito"
 
 #: ../window.c:254
-#, fuzzy
 msgid "_Boot Record"
 msgstr "_Disco de Arranque"
 
 #: ../window.c:141
-#, fuzzy
 msgid "_File"
-msgstr "_Ver"
+msgstr "_Ficheiro"
 
 #: ../window.c:326
 msgid "_Help"
@@ -525,19 +516,19 @@ msgstr "_Ajuda"
 
 #: ../window.c:318
 msgid "_Options"
-msgstr ""
+msgstr "_Opções"
 
 #: ../window.c:335
 msgid "_Overview"
-msgstr "_Geral"
+msgstr "_Vista Geral"
 
 #: ../window.c:224
 msgid "_Sort directories first"
-msgstr "_ListarDirectoriasPrimeiro"
+msgstr "_Listar Directorias Primeiro"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr ""
+msgstr "_Ferramentas"
 
 #: ../window.c:199
 msgid "_View"
