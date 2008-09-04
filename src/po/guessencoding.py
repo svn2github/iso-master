@@ -2,7 +2,7 @@
 
 import locale
 
-FILENAME = "zh_CN.po"
+FILENAME = "pt.po"
 ENCODING = "UTF-8"
 
 if __name__ == "__main__":
