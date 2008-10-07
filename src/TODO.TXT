@@ -19,6 +19,8 @@ bk:
  -bin/cue
  -multitrack mdf
  -uif
+-If extractig fails because there's no disk space left, i get an 'unusable
+error number' error.
 
 
 manual:

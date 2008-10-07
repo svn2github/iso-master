@@ -1,14 +1,14 @@
 # Serbian translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
-# Danijel Muharemovic <majstor_dane@inbox.com>, 2007.
+# Danijel Muharemovic <m@inbox.com>, 2007.
 # To test try sr_CS@Latn or sr_CS@latin
 # sr@latin.po is a copy of sr@Latn.po
 msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-06-30 18:03-0400\n"
-"PO-Revision-Date: 2007-06-03 02:13-0500\n"
+"POT-Creation-Date: 2007-12-16 23:50-0500\n"
+"PO-Revision-Date: 2008-09-27 20:09-0500\n"
 "Last-Translator: Danijel Muharemovic <majstor_dane@inbox.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -113,7 +113,7 @@ msgstr "Izmeni"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr ""
+msgstr "Izmena neuspešna, molim proveri Opcije/Uređivač"
 
 #: ../settings.c:701
 msgid "Editor"
@@ -261,7 +261,7 @@ msgstr "Povratak u nadređeni direktorijum u fajlsistemu"
 msgid "ISO Images"
 msgstr "ISO imidži"
 
-#: ../about.c:351
+#: ../about.c:327
 msgid "ISO Master Help"
 msgstr "ISO Master Pomoć"
 
@@ -338,7 +338,7 @@ msgstr "Bez BOOT fajla za brisanje"
 
 #: ../settings.c:666
 msgid "Options"
-msgstr ""
+msgstr "Opcije"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -350,19 +350,19 @@ msgstr "Molim izaberite samo jedan BOOT fajl u ISO pregledniku"
 
 #: ../isobrowser.c:135
 msgid "Please wait while I'm adding the selected items..."
-msgstr "Molim pričekajte dok se izabrane stavke dodaju"
+msgstr "Molim pričekajte dok se izabrane stavke dodaju..."
 
 #: ../isobrowser.c:843
 msgid "Please wait while I'm extracting the selected files..."
-msgstr "Molim pričekajte dok se odabrane stavke ekstraktuju"
+msgstr "Molim pričekajte dok se odabrane stavke ekstraktuju..."
 
 #: ../isobrowser.c:1193
 msgid "Please wait while I'm reading the image..."
-msgstr "Molim pričekajte dok se imidž učitava"
+msgstr "Molim pričekajte dok se imidž učitava..."
 
 #: ../isobrowser.c:1536
 msgid "Please wait while I'm saving the new image to disk..."
-msgstr "Molim pričekajte dok se novi imidž zapisuje na disk"
+msgstr "Molim pričekajte dok se novi imidž zapisuje na disk..."
 
 #: ../isobrowser.c:128 ../isobrowser.c:835 ../isobrowser.c:1186
 #: ../isobrowser.c:1526
@@ -395,7 +395,7 @@ msgstr "Pretraživanje duplih datoteka (sporo)"
 
 #: ../window.c:214
 msgid "Show _hidden files"
-msgstr "Prikaži skrivene fajlove"
+msgstr "Prikaži _skrivene fajlove"
 
 #: ../fsbrowser.c:142 ../isobrowser.c:315
 msgid "Size"
@@ -420,13 +420,13 @@ msgstr "Poništavam unos direktorijuma zbog statusa(%s) neuspelo sa %d"
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr ""
+msgstr "Sortiranje je osetljivo na _velika slova"
 
 #: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Privremeni direktorijum"
 
-#: ../about.c:289
+#: ../about.c:268
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -456,8 +456,8 @@ msgstr ""
 "računaru.\n"
 " - Donji preglednik pokazuje fajlove i direktorijume u ISO imidžu.\n"
 "\n"
-"Da bi otvorili postojeći ISO fajl kliknite na 'Imidž' a zatim na 'Otvori'.\n"
-"Za kreiranje novog ISO fajla kliknite na 'Imidž' i na 'Novi'.\n"
+"Da bi otvorili postojeći ISO fajl kliknite na 'Fajl' a zatim na 'Otvori'.\n"
+"Za kreiranje novog ISO fajla kliknite na 'Fajl' i na 'Novi'.\n"
 "\n"
 "Za dodavanje jednog ili više fajlova ili direktorijuma u ISO imidž "
 "izaberite\n"
@@ -475,7 +475,7 @@ msgstr ""
 "Ako izaberete neki fajl u donjem pregledniku fajlova i napravite desni klik\n"
 "mišem na njega - pojaviće vam se nove opcije.\n"
 "\n"
-"Kada napravite željene izmene u ISO imidžu, kliknite na 'Imidž' i\n"
+"Kada napravite željene izmene u ISO imidžu, kliknite na 'Fajl' i\n"
 "'Sačuvaj kao'. Ne možete prebrisati originalni ISO.\n"
 
 #: ../window.c:286
@@ -488,7 +488,7 @@ msgstr "Prikaži"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr ""
+msgstr "Prikaz neuspeo, molim proveri Opcije/Preglednik"
 
 #: ../settings.c:713
 msgid "Viewer"
@@ -508,9 +508,8 @@ msgid "_Boot Record"
 msgstr "_BOOT fajl"
 
 #: ../window.c:141
-#, fuzzy
 msgid "_File"
-msgstr "_Prikaži"
+msgstr "_Fajl"
 
 #: ../window.c:326
 msgid "_Help"
@@ -518,7 +517,7 @@ msgstr "Po_moć"
 
 #: ../window.c:318
 msgid "_Options"
-msgstr ""
+msgstr "_Opcije"
 
 #: ../window.c:335
 msgid "_Overview"
@@ -526,11 +525,11 @@ msgstr "Kratko _uputstvo"
 
 #: ../window.c:224
 msgid "_Sort directories first"
-msgstr "_Prvo sortiraj direktorijume"
+msgstr "Prvo sortiraj _direktorijume"
 
 #: ../window.c:246
 msgid "_Tools"
-msgstr ""
+msgstr "_Alatke"
 
 #: ../window.c:199
 msgid "_View"
