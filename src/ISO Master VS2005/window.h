@@ -1,1 +1,0 @@
-HWND createSimpleToolbar(HWND hWndParent);
