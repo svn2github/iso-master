@@ -1,6 +1,5 @@
 29 Nov 2008 - 1.3.4
 ===================
-- Added  translation.
 - Updated Italian, Portuguese, Serbian Latin, and Spanish translations.
 - Added arabic translation.
 
