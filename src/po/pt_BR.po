@@ -1,13 +1,15 @@
+# translation of pt_BR.po to Brazilian Portuguese
 # Brazilian Portuguese translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
 #
-# Alexandre Marques <marquesc@oi.com.br>, 2008.
+#
+# Alexandre Marques <marquesc@oi.com.br>, 2009.
 msgid ""
 msgstr ""
-"Project-Id-Version: isomaster\n"
+"Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-11-29 06:36-0500\n"
-"PO-Revision-Date: 2008-05-15 03:46-0300\n"
+"POT-Creation-Date: 2008-02-03 14:48-0500\n"
+"PO-Revision-Date: 2009-01-07 13:48-0200\n"
 "Last-Translator: Alexandre Marques <marquesc@oi.com.br>\n"
 "Language-Team: Brazilian Portuguese\n"
 "MIME-Version: 1.0\n"
@@ -242,11 +244,8 @@ msgid "From file: no emulation"
 msgstr "Do arquivo: sem emulação"
 
 #: ../isobrowser.c:806
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
-msgstr ""
-"Erro da Interface, não é possível apagar nada mais do que arquivos e "
-"diretórios"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgstr "Erro de Interface, não é possível apagar nada mais do que arquivos e diretórios"
 
 #: ../window.c:53 ../window.c:364
 msgid "Go back"
@@ -264,7 +263,7 @@ msgstr "Voltar um diretório no sistema de arquivos"
 msgid "ISO Images"
 msgstr "Imagens ISO"
 
-#: ../about.c:360
+#: ../about.c:339
 msgid "ISO Master Help"
 msgstr "Ajuda do ISO Master"
 
@@ -297,8 +296,8 @@ msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
 msgstr ""
-"Parece que foram feitas modificações no arquivo ISO mas não foram salvas. "
-"Tem certeza que quer fechar?"
+"Parece que foram feitas modificações no arquivo ISO mas não foram salvas. Tem certeza "
+"que quer fechar?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
@@ -346,9 +345,7 @@ msgstr "Opções"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr ""
-"Por favor selecione um arquivo no painel do ISO para usar como gravação de "
-"boot"
+msgstr "Por favor selecione um arquivo no painel do ISO para usar como gravação de boot"
 
 #: ../boot.c:243
 msgid "Please select no more than one file in the ISO browser"
@@ -413,11 +410,8 @@ msgid "Size: %d bytes"
 msgstr "Tamanho: %d bytes"
 
 #: ../fsbrowser.c:280
-msgid ""
-"Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr ""
-"Pulando diretório, nomes de arquivos com mais de 256 caracteres não são "
-"suportados"
+msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
+msgstr "Pulando diretório, nomes de arquivos com mais de 256 caracteres não são suportados"
 
 #: ../fsbrowser.c:299
 #, c-format
@@ -426,14 +420,14 @@ msgstr "Pulando diretório por que identificação(%s) falhou com %d"
 
 #: ../window.c:234
 msgid "Sort is _case sensitive"
-msgstr "Ordenação é _diferenciar Maiús/Minús."
+msgstr "Ordenar _diferenciando Maiús/Minús."
 
 #: ../settings.c:724
 msgid "Temporary directory"
 msgstr "Diretório temporário"
 
 # !! this translation is incomplete
-#: ../about.c:298
+#: ../about.c:280
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -479,8 +473,7 @@ msgstr ""
 "e criar novos diretórios na imagem ISO ou no seu sistema de arquivos\n"
 "local.\n"
 "\n"
-"Se você selecionar alguma coisa no painel de baixo e clicar com o botão "
-"direito do mouse vai ver várias outras opções disponíveis\n"
+"Se você selecionar alguma coisa no painel de baixo e clicar com o botão direito do mouse vai ver várias outras opções disponíveis\n"
 "\n"
 "Depois de efetuar todas as alterações na nova imagem ISO, clique em\n"
 "'Arquivo' e em 'Salvar como'. Você não pode sobrescrever o ISO original.\n"
@@ -506,8 +499,7 @@ msgid "Volume name:"
 msgstr "Nome do volume:"
 
 #: ../settings.c:652
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
+msgid "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Você deve fechar e reabrir o ISO para que as alterações tenham efeito"
 
 #: ../window.c:254
@@ -520,7 +512,7 @@ msgstr "_Arquivo"
 
 #: ../window.c:326
 msgid "_Help"
-msgstr "_Ajuda"
+msgstr "Aj_uda"
 
 #: ../window.c:318
 msgid "_Options"
@@ -532,7 +524,7 @@ msgstr "_Visão geral"
 
 #: ../window.c:224
 msgid "_Sort directories first"
-msgstr "_Listar diretórios primeiro"
+msgstr "_Ordenar diretórios primeiro"
 
 #: ../window.c:246
 msgid "_Tools"
@@ -541,3 +533,4 @@ msgstr "_Ferramentas"
 #: ../window.c:199
 msgid "_View"
 msgstr "_Visualizar"
+
