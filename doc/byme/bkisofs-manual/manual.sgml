@@ -159,6 +159,20 @@ void add(char* fullItemName)
 <para><parameter>progressFunction</parameter> is a pointer to a function that takes a <classname>VolInfo*</classname> as a parameter and returns <classname>void</classname>. bk will call this function every 1 second or so. You can pass in NULL if you like but in that case control won't be returned to your code until <function>bk_add()</function> is finished doing what it has to do so you can't update a progress bar or cancel adding.</para>
 </sect2>
 <sect2>
+<title><function>bk_add()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_add_as</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>srcPathAndName</parameter></paramdef>
+<paramdef>const char* <parameter>destPathStr</parameter></paramdef>
+<paramdef>const char* <parameter>nameToUse</parameter></paramdef>
+<paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*)</paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>Same as <function>bk_add()</function> but with the extra <parameter>nameToUse</parameter> parameter. If this is not null, the file will be added with the name in <parameter>nameToUse</parameter> rather than the same name as it had in the source.</para>
+</sect2>
+<sect2>
 <title><function>bk_create_dir()</function></title>
 <funcsynopsis>
 <funcprototype>
@@ -204,6 +218,21 @@ void add(char* fullItemName)
 <para>Note that you cannot extract <literal>/</literal></para>
 <para>Also note that there is no way to make bk overwrite files on the filesystem.</para>
 <para><parameter>progressFunction</parameter> is a pointer to a function that takes a <classname>VolInfo*</classname> as a parameter and returns <classname>void</classname>. bk will call this function every 1 second or so. You can pass in NULL if you like but in that case control won't be returned to your code until <function>bk_extract()</function> is finished doing what it has to do so you can't update a progress bar or cancel extracting.</para>
+</sect2>
+<sect2>
+<title><function>bk_extract_as()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_extract</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>srcPathAndName</parameter></paramdef>
+<paramdef>const char* <parameter>destDir</parameter></paramdef>
+<paramdef>const char* <parameter>nameToUse</parameter></paramdef>
+<paramdef>bool <parameter>keepPermissions</parameter></paramdef>
+<paramdef>void(*<parameter>progressFunction</parameter>)(VolInfo*)</paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>Same as <function>bk_extract()</function> but with the extra <parameter>nameToUse</parameter> parameter. If this is not null it will be used as the name of the destination file, rather than the name of the source on the ISO.</para>
 </sect2>
 <sect2>
 <title><function>bk_extract_boot_record()</function></title>
@@ -307,6 +336,18 @@ void add(char* fullItemName)
 <para>The return is in the same format as that given by the system's <function>time()</function> function: the  time  since  the  Epoch (00:00:00 UTC, 1st of January, 1970), measured in seconds.</para>
 </sect2>
 <sect2>
+<title><function>bk_get_permissions()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>time_t <function>bk_get_permissions</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>pathAndName</parameter></paramdef>
+<paramdef>mode_t* <parameter>permissions</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>Gets the permissions (not all of the posix info) for an item (file, dir, etc.) and puts them into <parameter>permissions</parameter> (normally just a variable passed in by address).</para>
+</sect2>
+<sect2>
 <title><function>bk_get_publisher()</function></title>
 <funcsynopsis>
 <funcprototype>
@@ -371,6 +412,18 @@ void add(char* fullItemName)
 </funcsynopsis>
 <para>Rename the file or directory at <parameter>srcPathAndName</parameter> (full path on the ISO) to <parameter>newName</parameter> (just the name, without a path).</para>
 </sect2>
+<sect2>
+<title><function>bk_set_permissions()</function></title>
+<funcsynopsis>
+<funcprototype>
+<funcdef>int <function>bk_set_permissions</function></funcdef>
+<paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
+<paramdef>const char* <parameter>pathAndName</parameter></paramdef>
+<paramdef>mode_t <parameter>permissions</parameter></paramdef>
+</funcprototype>
+</funcsynopsis>
+<para>Set the permissions (not all of the posix info) for an item (file, dir, etc.). This obviously only has an observable effect if RockRidge records are written.</para>
+</sect2>
 <!--para>!!set warning callback</para-->
 <sect2>
 <title><function>bk_cancel_operation()</function></title>
@@ -387,7 +440,7 @@ void add(char* fullItemName)
 <title><function>bk_set_vol_name()</function></title>
 <funcsynopsis>
 <funcprototype>
-<funcdef>void <function>bk_set_vol_name</function></funcdef>
+<funcdef>int <function>bk_set_vol_name</function></funcdef>
 <paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
 <paramdef>const char* <parameter>volName</parameter></paramdef>
 </funcprototype>
@@ -398,7 +451,7 @@ void add(char* fullItemName)
 <title><function>bk_set_publisher()</function></title>
 <funcsynopsis>
 <funcprototype>
-<funcdef>void <function>bk_set_publisher</function></funcdef>
+<funcdef>int <function>bk_set_publisher</function></funcdef>
 <paramdef>VolInfo* <parameter>volInfo</parameter></paramdef>
 <paramdef>const char* <parameter>publisher</parameter></paramdef>
 </funcprototype>
