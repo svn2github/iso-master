@@ -16,6 +16,9 @@ export LOCALEDIR ?= $(PREFIX)/share/locale
 # Where to install the man page.
 MYMANPATH ?= $(PREFIX)/share/man/man1
 
+# Where to install the bkisofs docs
+MYDOCPATH ?= $(PREFIX)/doc/bkisofs
+
 # Where to install the .desktop file
 DESKTOPPATH ?= $(PREFIX)/share/applications
 
@@ -86,6 +89,9 @@ isomaster.desktop: isomaster.desktop.src
 	$(CP) isomaster.desktop.src isomaster.desktop
 	$(ECHO) Icon=$(ICONPATH)/isomaster.png >> isomaster.desktop
 
+bk-doc:
+	cd bkisofs-manual && $(MAKE)
+
 clean: 
 	cd bk && $(MAKE) clean
 	cd iniparser-2.17 && $(MAKE) clean
@@ -96,7 +102,7 @@ endif
 
 # for info about DESTDIR see http://www.gnu.org/prep/standards/html_node/DESTDIR.html
 
-install: all
+install: all bk-doc
 	$(INSTALL) -d $(DESTDIR)$(BINPATH)
 	$(INSTALL) isomaster $(DESTDIR)$(BINPATH)
 	cd icons && $(MAKE) install
@@ -107,6 +113,10 @@ endif
 	$(INSTALL) -m 644 isomaster.1 $(DESTDIR)$(MYMANPATH)
 	$(INSTALL) -d $(DESTDIR)$(DESKTOPPATH)
 	$(INSTALL) -m 644 isomaster.desktop $(DESTDIR)$(DESKTOPPATH)
+	$(INSTALL) -d $(DESTDIR)$(MYDOCPATH)
+	for FILE in bkisofs-manual/*html; do \
+            $(INSTALL) -m 644 $$FILE $(DESTDIR)$(MYDOCPATH); \
+        done;
 
 uninstall: 
 	$(RM) $(DESTDIR)$(BINPATH)/isomaster
@@ -116,3 +126,4 @@ ifndef WITHOUT_NLS
 endif
 	$(RM) $(DESTDIR)$(MYMANPATH)/isomaster.1
 	$(RM) $(DESTDIR)$(DESKTOPPATH)/isomaster.desktop
+	$(RM) -r $(DESTDIR)$(MYDOCPATH)

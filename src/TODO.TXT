@@ -1,33 +1,25 @@
-ui:
--drop-down list to select track - can do multitrack
--checkboxes and lables not aligned in change permissions window
--button to browse for temp dir
--remove Utility from .desktop to get it out of 'accessories'
--'open recent' list
--check out thunar translators
+Kristof Bal, Mesegue in credits
 
+ui:
+- drop-down list to select track - can do multitrack
+- check out thunar translators
+- translate .desktop file
 
 bk:
--dos doesn't like names to start with underscores
--add path tables, boot record to size estimate
--need a bk_set_warning_foo()
--using access() to check whether a file exists is no good, target of a dead symlink will get written
--fedora7 dvd takes forever to remangle. try either fix the algorithm or allow longer 9660 names.
--sorting 9660/joliet can also be slow
--why never checking the return from seekset?
--images to support:
- -bin/cue
- -multitrack mdf
- -uif
--If extractig fails because there's no disk space left, i get an 'unusable
-error number' error.
+- dos doesn't like names to start with underscores
+- add path tables, boot record to size estimate
+- need a bk_set_warning_foo()
+- fedora7 dvd takes forever to remangle. try either fix the algorithm or allow longer 9660 names.
+- sorting 9660/joliet can also be slow
+- why never checking the return from seekset?
+- images to support:
+ - bin/cue
+ - multitrack mdf
+ - uif
 
 
 manual:
--add_as() and extract_as()
--get_ and set_permissions()
--bk_set_publisher() and bk_set_vol_name() now return int
-
+- link on new website
 
 tests to run before a release:
 - open iso from command-line

@@ -25,6 +25,7 @@ typedef struct
     int isoSortDirection;
     int fsSortColumnId;
     int fsSortDirection;
+    char* recentlyOpen[5];
     
     /* stuff read from the config file that will also be written back from here */
     bool showHiddenFilesFs;

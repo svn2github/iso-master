@@ -12,7 +12,7 @@ I put together a list of steps you can follow if you want to help:
 
   * Save the file as xx.po where xx is the ISO 639-1 code for the 
     language. Alternatively you can save it as xx_YY.po where YY is 
-    the ISO3166 country code.
+    the ISO 3166 country code.
 
   * Please make sure when you save the .po file that it's saved in 
     UTF-8 encoding, I'll have trouble reading them otherwise.

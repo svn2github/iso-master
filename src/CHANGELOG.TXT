@@ -1,7 +1,11 @@
 30 Dec 2008 - 1.3.5
 ===================
-- Updated Danish translation.
+- Updated Danish and Chinese (Taiwan) translations.
 - Updated .desktop file to be compatible with current spec.
+- Fixed some error messages (unknown error was displayed before).
+- Target of dead symbolic links is no longer overwritten without a prompt.
+- Documentation for bkisofs is now installed together with the program.
+- Added the 'Recently opened' function.
 
 29 Nov 2008 - 1.3.4
 ===================

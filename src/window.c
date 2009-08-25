@@ -34,6 +34,8 @@ GtkWidget* GBLaddIcon;
 GtkWidget* GBLextractIcon;
 /* icon for 'delete' for iso browser */
 GtkWidget* GBLdeleteIcon2;
+/* list of all recently open ISOs (each can be NULL) */
+GtkWidget* GBLrecentlyOpenWidgets[5];
 
 extern GtkWidget* GBLmainWindow;
 extern AppSettings GBLappSettings;
@@ -161,6 +163,32 @@ void buildMenu(GtkWidget* boxToPackInto)
     g_signal_connect(G_OBJECT(menuItem), "activate",
                      G_CALLBACK(openIsoCbk), NULL);
     gtk_menu_item_set_accel_path(GTK_MENU_ITEM(menuItem), "<ISOMaster>/File/Open");
+    
+    /* OPEN recent submenu */
+    rootSubmenu = gtk_image_menu_item_new_with_label(_("Open Recent"));
+    icon = gtk_image_new_from_stock(GTK_STOCK_OPEN, GTK_ICON_SIZE_MENU);
+    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(rootSubmenu), icon);
+    gtk_menu_shell_append(GTK_MENU_SHELL(menu), rootSubmenu);
+    gtk_widget_show(rootSubmenu);
+    
+    submenu = gtk_menu_new();
+    gtk_menu_item_set_submenu(GTK_MENU_ITEM(rootSubmenu), submenu);
+    
+    for(int i = 0; i < 5; i++)
+    {
+        GBLrecentlyOpenWidgets[i] = gtk_menu_item_new_with_label("");
+        gtk_menu_shell_append(GTK_MENU_SHELL(submenu), GBLrecentlyOpenWidgets[i]);
+        g_signal_connect(G_OBJECT(GBLrecentlyOpenWidgets[i]), "activate",
+                         G_CALLBACK(openRecentIso), NULL);
+        if(GBLappSettings.recentlyOpen[i] != NULL)
+        {
+            gtk_label_set_text(GTK_LABEL(
+                    gtk_bin_get_child(GTK_BIN(GBLrecentlyOpenWidgets[i]))),
+                    GBLappSettings.recentlyOpen[i]);
+            gtk_widget_show(GBLrecentlyOpenWidgets[i]);
+        }
+    }
+    /* END OPEN recent submenu */
     
 #ifdef ENABLE_SAVE_OVERWRITE
     menuItem = gtk_image_menu_item_new_from_stock(GTK_STOCK_SAVE, NULL);

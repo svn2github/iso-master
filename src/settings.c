@@ -38,6 +38,7 @@ extern VolInfo GBLvolInfo;
 extern bool GBLisoChangesProbable;
 extern GtkListStore* GBLfsListStore;
 extern GtkListStore* GBLisoListStore;
+extern GtkWidget* GBLrecentlyOpenWidgets[5];
 
 void buildImagePropertiesWindow(GtkWidget *widget, GdkEvent *event)
 {
@@ -600,6 +601,27 @@ void loadSettings(void)
     /* no config file */
         GBLappSettings.fsSortDirection = GTK_SORT_ASCENDING;
     
+    /* read/set recently open files */
+    for(int i = 0; i < 5; i++)
+    {
+        GBLappSettings.recentlyOpen[i] = NULL;
+        if(GBLsettingsDictionary != NULL)
+        {
+            char configNameStr[20] = "ui:recentlyopen";
+            snprintf(configNameStr + 15, 20, "%d", i);
+            
+            tempStr = iniparser_getstring(GBLsettingsDictionary, 
+                                          configNameStr, NULL);
+            if(tempStr != NULL)
+            {
+                GBLappSettings.recentlyOpen[i] = malloc(strlen(tempStr) + 1);
+                if(GBLappSettings.recentlyOpen[i] == NULL)
+                    fatalError("GBLappSettings.recentlyOpen1 = malloc(strlen(tempStr) + 1) failed");
+                strcpy(GBLappSettings.recentlyOpen[i], tempStr);
+            }
+        }
+    }
+    
     /* read/set fs drive */
     GBLappSettings.fsDrive = malloc(4); /* "c:\\" */
     if(GBLappSettings.fsDrive == NULL)
@@ -725,12 +747,13 @@ void showPreferencesWindowCbk(GtkButton* button, gpointer data)
     gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), label, TRUE, TRUE, 0);
     gtk_widget_show(label);
     
-    prefWidgets.tempDir = gtk_entry_new();
-    gtk_entry_set_text(GTK_ENTRY(prefWidgets.tempDir), GBLappSettings.tempDir);
-    gtk_entry_set_width_chars(GTK_ENTRY(prefWidgets.tempDir), 30);
-    gtk_box_pack_start(GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), 
-                       prefWidgets.tempDir, TRUE, TRUE, 0);
-    gtk_widget_show(prefWidgets.tempDir);
+    prefWidgets.tempDir = gtk_file_chooser_button_new(_("Temporary directory"), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER);
+    gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(prefWidgets.tempDir), GBLappSettings.tempDir);
+    //!! add /tmp to quicklist or something
+    gtk_file_chooser_add_shortcut_folder(GTK_FILE_CHOOSER(prefWidgets.tempDir), "/tmp", NULL);
+    gtk_box_pack_start (GTK_BOX(GTK_DIALOG(prefWidgets.dialog)->vbox), prefWidgets.tempDir, 
+        TRUE, TRUE, 0);
+    gtk_widget_show (prefWidgets.tempDir);
     
     rc = gtk_dialog_run(GTK_DIALOG(prefWidgets.dialog));
     if(rc == GTK_RESPONSE_ACCEPT)
@@ -758,10 +781,10 @@ void showPreferencesWindowCbk(GtkButton* button, gpointer data)
         
         if(GBLappSettings.tempDir != NULL)
             free(GBLappSettings.tempDir);
-        GBLappSettings.tempDir = malloc(strlen(gtk_entry_get_text(GTK_ENTRY(prefWidgets.tempDir))) + 1);
+        GBLappSettings.tempDir = malloc(strlen(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(prefWidgets.tempDir))) + 1);
         if(GBLappSettings.tempDir == NULL)
             fatalError("GBLappSettings.tempDir = malloc(...) failed");
-        strcpy(GBLappSettings.tempDir, gtk_entry_get_text(GTK_ENTRY(prefWidgets.tempDir)));
+        strcpy(GBLappSettings.tempDir, gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(prefWidgets.tempDir)));
     }
     
     gtk_widget_destroy(prefWidgets.dialog);
@@ -866,6 +889,16 @@ void writeSettings(void)
     
     snprintf(numberStr, 20, "%d", GBLappSettings.caseSensitiveSort);
     iniparser_setstr(GBLsettingsDictionary, "ui:casesensitivesort", numberStr);
+    
+    for(int i = 0; i < 5; i++)
+    {
+        char configNameStr[20] = "ui:recentlyopen";
+        snprintf(configNameStr + 15, 20, "%d", i);
+        
+        iniparser_setstr(GBLsettingsDictionary, configNameStr, 
+            gtk_label_get_text(GTK_LABEL(
+                gtk_bin_get_child(GTK_BIN(GBLrecentlyOpenWidgets[i])))));
+    }
     
     iniparser_dump_ini(GBLsettingsDictionary, fileToWrite);
 }

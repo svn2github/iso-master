@@ -4,6 +4,7 @@ gboolean activityProgressWindowDeleteCbk(GtkWidget* widget, GdkEvent* event,
 void addToIsoEachRowCbk(GtkTreeModel* model, GtkTreePath* path,
                         GtkTreeIter* iterator, gpointer data);
 void addToIsoCbk(GtkButton *button, gpointer data);
+bool askForPermissions(const char* fullItemName, mode_t* permissions);
 void buildIsoBrowser(GtkWidget* boxToPackInto);
 void buildIsoLocator(GtkWidget* boxToPackInto);
 void cancelOperation(GtkDialog* dialog, gint arg1, gpointer user_data);
@@ -30,6 +31,7 @@ void isoRowDblClickCbk(GtkTreeView* treeview, GtkTreePath* path,
 gboolean newIsoCbk(GtkMenuItem* menuItem, gpointer data);
 void openIso(char* filename);
 gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data);
+void openRecentIso(GtkMenuItem *menuitem, gpointer data);
 bool operationFailed(const char* msg);
 void refreshIsoView(void);
 void renameSelected(void);
