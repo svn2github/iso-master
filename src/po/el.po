@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-23 11:31-0400\n"
-"PO-Revision-Date: 2007-12-05 22:42-0500\n"
+"PO-Revision-Date: 2009-08-24 09:32+0200\n"
 "Last-Translator: Mike Kranidis <mikek@openforall.com>\n"
 "Language-Team: Mike Kranidis <mikek@openforall.com>\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +30,16 @@ msgstr ""
 "\n"
 "Θέλεις να συνεχίσεις;"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272
+#: ../editfile.c:368
+#: ../editfile.c:601
+#: ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "Το '%s' δεν είναι κανονικό αρχείο"
 
-#: ../isobrowser.c:142 ../isobrowser.c:1312
+#: ../isobrowser.c:142
+#: ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(ανίχνευση για τα διπλές εγγραφές αρχείων)"
 
@@ -51,7 +55,8 @@ msgstr "Αυτόματη προσθήκη επέκτασης"
 msgid "Add to the ISO"
 msgstr "Προσθήκη στο ISO"
 
-#: ../isobrowser.c:1443 ../isobrowser.c:1739
+#: ../isobrowser.c:1443
+#: ../isobrowser.c:1739
 msgid "All files"
 msgstr "Όλα τα αρχεία"
 
@@ -83,7 +88,8 @@ msgstr "Τύπος Boot record: 2880KiB Floppy"
 msgid "Boot record type: No Emulation"
 msgstr "Τύπος Boot record: Χωρίς προσομοίωση"
 
-#: ../isobrowser.c:267 ../isobrowser.c:1918
+#: ../isobrowser.c:267
+#: ../isobrowser.c:1918
 msgid "Change permissions"
 msgstr "Αλλαγή δικαιωμάτων"
 
@@ -107,7 +113,8 @@ msgstr "Ώρα δημιουργίας:"
 msgid "Delete from the ISO"
 msgstr "Διαγραφή από το ISO"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1911
+#: ../fsbrowser.c:590
+#: ../isobrowser.c:1911
 msgid "Edit"
 msgstr "Επεξεργασία"
 
@@ -135,7 +142,8 @@ msgstr "Εξαγωγή"
 msgid "Extract from the ISO"
 msgstr "Εξαγωγή από το ISO"
 
-#: ../editfile.c:473 ../isobrowser.c:215
+#: ../editfile.c:473
+#: ../isobrowser.c:215
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Αποτυχία στη προσθήκη '%s': '%s'"
@@ -160,12 +168,15 @@ msgstr "Αποτυχία στη δημιουργία καταλόγου %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Αποτυχία στη δημιουργία καταλόγου %s: '%s'"
 
-#: ../editfile.c:447 ../isobrowser.c:850
+#: ../editfile.c:447
+#: ../isobrowser.c:850
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Αποτυχία στη διαγραφή '%s': '%s'"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:963
+#: ../editfile.c:412
+#: ../editfile.c:740
+#: ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Αποτυχία στην εξαγωγή '%s': '%s'"
@@ -175,7 +186,8 @@ msgstr "Αποτυχία στην εξαγωγή '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Αποτυχία εξαγωγής boot record: '%s'"
 
-#: ../isobrowser.c:1146 ../isobrowser.c:1248
+#: ../isobrowser.c:1146
+#: ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Αποτυχία αρχικοποίησης του bkisofs: '%s'"
@@ -240,13 +252,11 @@ msgid "From file: no emulation"
 msgstr "Από αρχείο: Χωρίς προσομοίωση"
 
 #: ../isobrowser.c:868
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
-msgstr ""
-"σφάλμα GUI, δε γίνετε να σβήσετε οτιδήποτε άλλο εκτός από αρχεία και "
-"καταλόγους"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgstr "σφάλμα GUI, δε γίνετε να σβήσετε οτιδήποτε άλλο εκτός από αρχεία και καταλόγους"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:55
+#: ../window.c:392
 msgid "Go back"
 msgstr "Πήγαινε πίσω"
 
@@ -258,7 +268,8 @@ msgstr "Πήγαινε πίσω ένα κατάλογο στο ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Πήγαινε πίσω ένα κατάλογο στο σύστημα αρχείου"
 
-#: ../isobrowser.c:1428 ../isobrowser.c:1734
+#: ../isobrowser.c:1428
+#: ../isobrowser.c:1734
 msgid "ISO Images"
 msgstr "ISO Εικόνες"
 
@@ -291,25 +302,21 @@ msgid "Is visible on image as '%s'"
 msgstr "Εμφανίζεται στην εικόνα σαν '%s'"
 
 #: ../isobrowser.c:770
-msgid ""
-"It seems that you have made changes to the ISO but haven't saved them. Are "
-"you sure you want to close it?"
-msgstr ""
-"Έχετε κάνει αλλαγές στο ISO αλλά δεν τις έχετε αποθηκεύσει. Είστε σίγουρος "
-"ότι θέλετε να το κλείσετε;"
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgstr "Έχετε κάνει αλλαγές στο ISO αλλά δεν τις έχετε αποθηκεύσει. Είστε σίγουρος ότι θέλετε να το κλείσετε;"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr ""
-"Το επιλεγμένο στοιχείο δεν είναι κανονικό αρχείο και δε μπορεί να "
-"χρησιμοποιηθεί σαν boot record"
+msgstr "Το επιλεγμένο στοιχείο δεν είναι κανονικό αρχείο και δε μπορεί να χρησιμοποιηθεί σαν boot record"
 
-#: ../boot.c:373 ../boot.c:380
+#: ../boot.c:373
+#: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Τοποθεσία: στην αυθεντική εικόνα στο 0x%llX"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:375
+#: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Τοποθεσία: θα προστεθεί από '%s'"
@@ -322,15 +329,18 @@ msgstr "MDF Εικόνες"
 msgid "NRG Images"
 msgstr "NRG Εικόνες"
 
-#: ../fsbrowser.c:121 ../isobrowser.c:482
+#: ../fsbrowser.c:121
+#: ../isobrowser.c:482
 msgid "Name"
 msgstr "Όνομα"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:61
+#: ../window.c:398
 msgid "New Directory"
 msgstr "Νέος Κατάλογος"
 
-#: ../boot.c:149 ../boot.c:327
+#: ../boot.c:149
+#: ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "Δε διαβάστηκε το boot record στο αυθεντικό η έγινε set στην εικόνα"
 
@@ -340,7 +350,7 @@ msgstr "Χωρίς boot για διαγραφή"
 
 #: ../window.c:168
 msgid "Open Recent"
-msgstr ""
+msgstr "Άνοιγμα προσφάτου(ων)"
 
 #: ../settings.c:688
 msgid "Options"
@@ -348,8 +358,7 @@ msgstr "Επιλογές"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr ""
-"Παρακαλώ επιλέξτε ένα αρχείο στον ISO περιηγητή για χρήση σαν boot record"
+msgstr "Παρακαλώ επιλέξτε ένα αρχείο στον ISO περιηγητή για χρήση σαν boot record"
 
 #: ../boot.c:243
 msgid "Please select no more than one file in the ISO browser"
@@ -371,7 +380,9 @@ msgstr "Παρακαλώ περιμένετε όσο θα διαβάζω την 
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Παρακαλώ περιμένετε όσο θα αποθηκεύεται στο δίσκο η νέα εικόνα..."
 
-#: ../isobrowser.c:129 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:129
+#: ../isobrowser.c:897
+#: ../isobrowser.c:1299
 #: ../isobrowser.c:1647
 msgid "Progress"
 msgstr "Πρόοδος"
@@ -404,7 +415,8 @@ msgstr "Ανίχνευση για τα διπλές εγγραφές αρχεί�
 msgid "Show _hidden files"
 msgstr "Εμφάνισε _κρυφά αρχεία"
 
-#: ../fsbrowser.c:142 ../isobrowser.c:505
+#: ../fsbrowser.c:142
+#: ../isobrowser.c:505
 msgid "Size"
 msgstr "Μέγεθος"
 
@@ -414,11 +426,8 @@ msgid "Size: %d bytes"
 msgstr "Μέγεθος: %d bytes"
 
 #: ../fsbrowser.c:280
-msgid ""
-"Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr ""
-"Παραλείπω καταχώρηση καταλόγου επειδή δε μπορώ να χειριστώ όνομα αρχείου "
-"μεγαλύτερο από 256 χαρακτήρες"
+msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
+msgstr "Παραλείπω καταχώρηση καταλόγου επειδή δε μπορώ να χειριστώ όνομα αρχείου μεγαλύτερο από 256 χαρακτήρες"
 
 #: ../fsbrowser.c:299
 #, c-format
@@ -429,7 +438,8 @@ msgstr "Παραλείπω καταχώρηση καταλόγου επειδή 
 msgid "Sort is _case sensitive"
 msgstr "Η ταξινόμηση είναι _με διαχωρισμό κεφαλαίων / μικρών"
 
-#: ../settings.c:746 ../settings.c:750
+#: ../settings.c:746
+#: ../settings.c:750
 msgid "Temporary directory"
 msgstr "Προσωρινός Κατάλογος"
 
@@ -459,41 +469,33 @@ msgid ""
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
 "Το παράθυρο του ISO Master χωρίζεται σε 2 μέρη:\n"
-" - Ο πάνω περιηγητής αρχείων, δείχνει αρχεία και καταλόγους του υπολογιστή "
-"σου.\n"
-" - Ο κάτω περιηγητής αρχείων, δείχνει αρχεία και καταλόγους της εικόνας "
-"ISO.\n"
+" - Ο πάνω περιηγητής αρχείων, δείχνει αρχεία και καταλόγους του υπολογιστή σου.\n"
+" - Ο κάτω περιηγητής αρχείων, δείχνει αρχεία και καταλόγους της εικόνας ISO.\n"
 "\n"
-"Για να ανοίξεις ένα υπάρχον αρχείο ISO, κανε κλικ στο 'Αρχείο' και "
-"'Άνοιγμα'. Για να δημιουργήσεις ένα νέο\n"
+"Για να ανοίξεις ένα υπάρχον αρχείο ISO, κανε κλικ στο 'Αρχείο' και 'Άνοιγμα'. Για να δημιουργήσεις ένα νέο\n"
 "αρχείο ISO κανε κλικ στο 'Αρχείο' και 'Νέο'.\n"
 "\n"
-"Για προσθήκη ενός οι περισσοτέρων αρχείων ή καταλόγων στο ISO επιλέξτε τα "
-"στον επάνω\\νπεριηγητή αρχείων και κάντε κλικ στο κουμπί 'Προσθήκη στο ISO' "
-"της μεσαίας εργαλειοθήκης.\n"
+"Για προσθήκη ενός οι περισσοτέρων αρχείων ή καταλόγων στο ISO επιλέξτε τα στον επάνω\\νπεριηγητή αρχείων και κάντε κλικ στο κουμπί 'Προσθήκη στο ISO' της μεσαίας εργαλειοθήκης.\n"
 "\n"
-"Για εξαγωγή ενός οι περισσοτέρων αρχείων ή καταλόγων από το ISO, επιλέξτε "
-"τα\n"
-"στο κάτω περιηγητή αρχείων και κάντε κλικ στο κουμπί 'Εξαγωγή από το ISO' "
-"της\n"
+"Για εξαγωγή ενός οι περισσοτέρων αρχείων ή καταλόγων από το ISO, επιλέξτε τα\n"
+"στο κάτω περιηγητή αρχείων και κάντε κλικ στο κουμπί 'Εξαγωγή από το ISO' της\n"
 "μεσαίας εργαλειοθήκης.\n"
 "\n"
-"Μπορείτε επίσης να διαγράψετε αρχεία ή καταλόγους από το  ISO και να "
-"δημιουργήσετε νέους\n"
+"Μπορείτε επίσης να διαγράψετε αρχεία ή καταλόγους από το  ISO και να δημιουργήσετε νέους\n"
 "καταλόγους και στο ISO και στο τοπικό σας σύστημα αρχείων.\n"
 "\n"
 "Αν επιλέξετε κάτι στο περιηγητή αρχείων στο κάτω μέρος, με δεξί κλικ\n"
 "θα βρείτε διαθέσιμες αρκετές επιλογές.\n"
 "\n"
-"Αφού κάνετε όλες τις αλλαγές σας στη νέα εικόνα ISO, κάντε κλικ στο 'Εικόνα' "
-"και\n"
+"Αφού κάνετε όλες τις αλλαγές σας στη νέα εικόνα ISO, κάντε κλικ στο 'Εικόνα' και\n"
 "'Αποθήκευση ως'. Δε μπορείτε να γράψετε πάνω στην αρχική εικόνα ISO.\n"
 
 #: ../window.c:314
 msgid "Use selected file on image (no emulation)"
 msgstr "Χρησιμοποίησε επιλεγμένο αρχείο στην εικόνα (χωρίς προσομοίωση)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1904
+#: ../fsbrowser.c:583
+#: ../isobrowser.c:1904
 msgid "View"
 msgstr "Προβολή"
 
@@ -510,10 +512,8 @@ msgid "Volume name:"
 msgstr "Όνομα Τόμου:"
 
 #: ../settings.c:674
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
-msgstr ""
-"Πρέπει να κλείσεις και να ξανανοίξεις το ISO για να ενεργοποιηθούν οι αλλαγές"
+msgid "You will have to close and reopen the ISO for this change to take effect"
+msgstr "Πρέπει να κλείσεις και να ξανανοίξεις το ISO για να ενεργοποιηθούν οι αλλαγές"
 
 #: ../window.c:282
 msgid "_Boot Record"
@@ -549,6 +549,6 @@ msgstr "_Προβολή"
 
 #~ msgid "_Image"
 #~ msgstr "_Εικόνα"
-
 #~ msgid "_Settings"
 #~ msgstr "_Ρυθμίσεις"
+

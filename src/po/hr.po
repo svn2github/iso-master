@@ -32,7 +32,7 @@ msgstr ""
 #: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
-msgstr ""
+msgstr "'%s' nije ispravna datoteka"
 
 #: ../isobrowser.c:142 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
@@ -84,7 +84,7 @@ msgstr "Tip Boot zapisa: bez emulacije"
 
 #: ../isobrowser.c:267 ../isobrowser.c:1918
 msgid "Change permissions"
-msgstr ""
+msgstr "Promijeni dozvole"
 
 #: ../boot.c:40
 msgid "Choose Boot Record File"
@@ -108,15 +108,15 @@ msgstr "Obriši sa ISO-a"
 
 #: ../fsbrowser.c:590 ../isobrowser.c:1911
 msgid "Edit"
-msgstr ""
+msgstr "Uredi"
 
 #: ../editfile.c:82
 msgid "Edit failed, please check Options/Editor"
-msgstr ""
+msgstr "Uređivanje nije uspjelo, provjerite postavke/urednik"
 
 #: ../settings.c:723
 msgid "Editor"
-msgstr ""
+msgstr "Urednik"
 
 #: ../isobrowser.c:1583
 msgid "Enter a new name:"
@@ -268,14 +268,14 @@ msgid "Image Information"
 msgstr "Informacije o slici"
 
 #: ../settings.c:158
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid publisher '%s': '%s'"
-msgstr "Neuspjeh pri brisanju '%s': '%s'"
+msgstr "Neispravan izdavač '%s': '%s'"
 
 #: ../settings.c:174
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid volume name '%s': '%s'"
-msgstr "Neuspjeh pri promjeni imena '%s': %s"
+msgstr "Neispravno ime slike '%s': %s"
 
 #: ../boot.c:391
 #, c-format
@@ -312,9 +312,8 @@ msgid "Location: to be added from '%s'"
 msgstr "Lokacija: dodati iz '%s'"
 
 #: ../isobrowser.c:1438
-#, fuzzy
 msgid "MDF Images"
-msgstr "ISO slike"
+msgstr "MDF slike"
 
 #: ../isobrowser.c:1433
 msgid "NRG Images"
@@ -338,11 +337,11 @@ msgstr "Nema boota za brisanje"
 
 #: ../window.c:168
 msgid "Open Recent"
-msgstr ""
+msgstr "Otvori nedavno"
 
 #: ../settings.c:688
 msgid "Options"
-msgstr ""
+msgstr "Postavke"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
@@ -383,9 +382,8 @@ msgid "Remove"
 msgstr "Ukloni"
 
 #: ../isobrowser.c:1895
-#, fuzzy
 msgid "Rename"
-msgstr "Ukloni"
+msgstr "Preimenuj"
 
 #: ../isobrowser.c:1723
 msgid "Save File"
@@ -426,12 +424,11 @@ msgstr "Preskačem direktorij jer stat(%s) nije uspio s %d"
 
 #: ../window.c:262
 msgid "Sort is _case sensitive"
-msgstr ""
+msgstr "Slaganje je osjetljivo na _veličinu slova"
 
 #: ../settings.c:746 ../settings.c:750
-#, fuzzy
 msgid "Temporary directory"
-msgstr "Novi direktorij"
+msgstr "Privremeni direktorij"
 
 # !! this translation is incomplete
 #: ../about.c:304
@@ -490,18 +487,16 @@ msgid "Use selected file on image (no emulation)"
 msgstr "Upotrijebi odabranu datoteku na slici (bez emulacije)"
 
 #: ../fsbrowser.c:583 ../isobrowser.c:1904
-#, fuzzy
 msgid "View"
 msgstr "P_ogled"
 
 #: ../editfile.c:102
 msgid "View failed, please check Options/Viewer"
-msgstr ""
+msgstr "Pogled nije uspio, provjerite postavke/preglednik"
 
 #: ../settings.c:735
-#, fuzzy
 msgid "Viewer"
-msgstr "P_ogled"
+msgstr "P_reglednik"
 
 #: ../settings.c:95
 msgid "Volume name:"
@@ -518,9 +513,8 @@ msgid "_Boot Record"
 msgstr "Boot _Zapis"
 
 #: ../window.c:143
-#, fuzzy
 msgid "_File"
-msgstr "P_ogled"
+msgstr "_Datoteka"
 
 #: ../window.c:354
 msgid "_Help"
@@ -528,7 +522,7 @@ msgstr "_Pomoć"
 
 #: ../window.c:346
 msgid "_Options"
-msgstr ""
+msgstr "P_ostavke"
 
 #: ../window.c:363
 msgid "_Overview"
@@ -540,7 +534,7 @@ msgstr "Posloži _direktorije ispred"
 
 #: ../window.c:274
 msgid "_Tools"
-msgstr ""
+msgstr "_Alati"
 
 #: ../window.c:227
 msgid "_View"

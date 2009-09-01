@@ -337,7 +337,7 @@ msgstr "Brak rekordu startowego do usunięcia"
 
 #: ../window.c:168
 msgid "Open Recent"
-msgstr ""
+msgstr "Otwórz poprzednie"
 
 #: ../settings.c:688
 msgid "Options"
@@ -537,14 +537,4 @@ msgstr "_Narzędzia"
 msgid "_View"
 msgstr "_Widok"
 
-#~ msgid "_Image"
-#~ msgstr "_Obraz"
 
-#~ msgid "_Settings"
-#~ msgstr "_Ustawienia"
-
-#~ msgid "Failed to delete directory %s: '%s'"
-#~ msgstr "Usunięcie katalogu %s nie powiodło się: '%s'"
-
-#~ msgid "Failed to extract directory %s: '%s'"
-#~ msgstr "Pobranie katalogu %s nie powiodło się: '%s'"

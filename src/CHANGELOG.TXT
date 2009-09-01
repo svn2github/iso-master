@@ -1,3 +1,11 @@
+1 Sep 2009 - 1.3.6
+==================
+- Added an 'open recent' function.
+- Added Latvian translation.
+- Fixed some error messages (unknown error was displayed before).
+- Target of dead symbolic links is no longer overwritten without a prompt.
+- Documentation for bkisofs is now installed together with the program.
+
 30 Dec 2008 - 1.3.5
 ===================
 - Updated Danish and Chinese (Taiwan) translations.

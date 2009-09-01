@@ -340,7 +340,7 @@ msgstr "Nincs törölhető indító rekord"
 
 #: ../window.c:168
 msgid "Open Recent"
-msgstr ""
+msgstr "Legutóbbi megnyitása"
 
 #: ../settings.c:688
 msgid "Options"

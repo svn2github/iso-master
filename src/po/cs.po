@@ -3,24 +3,26 @@
 # Czech translation of ISO Master
 # This file is distributed under the same license as the ISO Master package.
 #
-# Original translation by Schmaki <smallsmaky@seznam.cz>, 2007.
 # Updated by Jiri Huf <jirihuf@seznam.cz>
+# Original translation by Schmaki <smallsmaky@seznam.cz>, 2007.
+# Roman Smakal <smallsmaky@seznam.cz>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-23 11:31-0400\n"
-"PO-Revision-Date: 2007-12-07 19:14+0100\n"
-"Last-Translator: Schmaki <smallsmaky@seznam.cz>\n"
-"Language-Team:  <cs@li.org>\n"
+"PO-Revision-Date: 2009-08-24 13:03+0200\n"
+"Last-Translator: Roman Smakal <smallsmaky@seznam.cz>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ../window.c:417
 msgid "      Estimated ISO Size: "
-msgstr " Předpokládaná velikost ISO obrazu: "
+msgstr "      Předpokládaná velikost ISO obrazu: "
 
 #: ../isobrowser.c:1504
 #, c-format
@@ -341,7 +343,7 @@ msgstr "Nelze smazat, zaváděcí záznam neexistuje nebo není zvolen"
 
 #: ../window.c:168
 msgid "Open Recent"
-msgstr ""
+msgstr "Otevřít nedávný"
 
 #: ../settings.c:688
 msgid "Options"
@@ -540,3 +542,5 @@ msgstr "_Nástroje"
 #: ../window.c:227
 msgid "_View"
 msgstr "_Pohled"
+
+

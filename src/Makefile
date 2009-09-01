@@ -48,7 +48,7 @@ export INSTALL = install
 export CP      = cp
 export ECHO    = echo
 
-VERSION = 1.3.5
+VERSION = 1.3.6
 
 # -DDEBUG and -g only used during development
 CFLAGS += -Wall -pedantic -std=gnu99 -Wundef -Wcast-align -W -Wpointer-arith -Wwrite-strings -Wno-unused-parameter `pkg-config --cflags gtk+-2.0`

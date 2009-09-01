@@ -1,14 +1,14 @@
 # Swedish translation of ISO Master.
 # This file is distributed under the same license as the ISO Master package.
-# Copyright (C) 2007 Free Software Foundation, Inc.
-# Daniel Nylander <po@danielnylander.se>, 2007.
+# Copyright (C) 2007, 2009 Free Software Foundation, Inc.
+# Daniel Nylander <po@danielnylander.se>, 2007, 2009.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-23 11:31-0400\n"
-"PO-Revision-Date: 2007-12-28 23:18+0100\n"
+"PO-Revision-Date: 2009-08-23 20:02+0100\n"
 "Last-Translator: Daniel Nylander <po@danielnylander.se>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +30,16 @@ msgstr ""
 "\n"
 "Vill du fortsätta?"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272
+#: ../editfile.c:368
+#: ../editfile.c:601
+#: ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "\"%s\" är inte en vanlig fil"
 
-#: ../isobrowser.c:142 ../isobrowser.c:1312
+#: ../isobrowser.c:142
+#: ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(söker efter dublettfiler)"
 
@@ -51,7 +55,8 @@ msgstr "Lägg automatiskt till filändelse"
 msgid "Add to the ISO"
 msgstr "Lägg till i avbild"
 
-#: ../isobrowser.c:1443 ../isobrowser.c:1739
+#: ../isobrowser.c:1443
+#: ../isobrowser.c:1739
 msgid "All files"
 msgstr "Alla filer"
 
@@ -83,7 +88,8 @@ msgstr "Startsektortyp: 2880 KiB diskett"
 msgid "Boot record type: No Emulation"
 msgstr "Startsektortyp: Ingen emulering"
 
-#: ../isobrowser.c:267 ../isobrowser.c:1918
+#: ../isobrowser.c:267
+#: ../isobrowser.c:1918
 msgid "Change permissions"
 msgstr "Ändra rättigheter"
 
@@ -107,7 +113,8 @@ msgstr "Skapad den:"
 msgid "Delete from the ISO"
 msgstr "Ta bort från avbild"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1911
+#: ../fsbrowser.c:590
+#: ../isobrowser.c:1911
 msgid "Edit"
 msgstr "Redigera"
 
@@ -135,7 +142,8 @@ msgstr "Extrahera"
 msgid "Extract from the ISO"
 msgstr "Extrahera från avbilden"
 
-#: ../editfile.c:473 ../isobrowser.c:215
+#: ../editfile.c:473
+#: ../isobrowser.c:215
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Misslyckades med att lägga till \"%s\": \"%s\""
@@ -160,12 +168,15 @@ msgstr "Misslyckades med att skapa katalogen %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Misslyckades med att skapa katalogen %s: \"%s\""
 
-#: ../editfile.c:447 ../isobrowser.c:850
+#: ../editfile.c:447
+#: ../isobrowser.c:850
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Misslyckades med att ta bort \"%s\": '%s'"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:963
+#: ../editfile.c:412
+#: ../editfile.c:740
+#: ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Misslyckades med att extrahera \"%s\": \"%s\""
@@ -175,7 +186,8 @@ msgstr "Misslyckades med att extrahera \"%s\": \"%s\""
 msgid "Failed to extract boot record: '%s'"
 msgstr "Misslyckades med att extrahera startsektor: \"%s\""
 
-#: ../isobrowser.c:1146 ../isobrowser.c:1248
+#: ../isobrowser.c:1146
+#: ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Misslyckades med att initiera bkisofs: \"%s\""
@@ -240,13 +252,11 @@ msgid "From file: no emulation"
 msgstr "Från fil: ingen emulering"
 
 #: ../isobrowser.c:868
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
-msgstr ""
-"Gränssnittsfel, borttagning av allt annat än filer och kataloger fungerar "
-"inte"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgstr "Gränssnittsfel, borttagning av allt annat än filer och kataloger fungerar inte"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:55
+#: ../window.c:392
 msgid "Go back"
 msgstr "Gå bakåt"
 
@@ -258,7 +268,8 @@ msgstr "Gå tillbaka en katalog i avbilden"
 msgid "Go back up one directory on the filesystem"
 msgstr "Gå tillbaka en katalog i filsystemet"
 
-#: ../isobrowser.c:1428 ../isobrowser.c:1734
+#: ../isobrowser.c:1428
+#: ../isobrowser.c:1734
 msgid "ISO Images"
 msgstr "ISO-avbilder"
 
@@ -291,24 +302,21 @@ msgid "Is visible on image as '%s'"
 msgstr "Är synlig på avbilden som \"%s\""
 
 #: ../isobrowser.c:770
-msgid ""
-"It seems that you have made changes to the ISO but haven't saved them. Are "
-"you sure you want to close it?"
-msgstr ""
-"Det verkar s om om du har gjort ändringar i avbilden men ännu inte sparat "
-"dem. Är du säker på att du vill stänga den?"
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgstr "Det verkar s om om du har gjort ändringar i avbilden men ännu inte sparat dem. Är du säker på att du vill stänga den?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr ""
-"Valt objekt är inte en vanlig fil och kan inte användas som en startsektor"
+msgstr "Valt objekt är inte en vanlig fil och kan inte användas som en startsektor"
 
-#: ../boot.c:373 ../boot.c:380
+#: ../boot.c:373
+#: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Plats: i originalavbilden på 0x%llX"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:375
+#: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Plats: kommer att läggas till från \"%s\""
@@ -321,15 +329,18 @@ msgstr "MDF-avbilder"
 msgid "NRG Images"
 msgstr "NRG-avbilder"
 
-#: ../fsbrowser.c:121 ../isobrowser.c:482
+#: ../fsbrowser.c:121
+#: ../isobrowser.c:482
 msgid "Name"
 msgstr "Namn"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:61
+#: ../window.c:398
 msgid "New Directory"
 msgstr "Ny katalog"
 
-#: ../boot.c:149 ../boot.c:327
+#: ../boot.c:149
+#: ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "Ingen startsektor inläst från originalet eller inställd på avbild"
 
@@ -339,7 +350,7 @@ msgstr "Ingen startsektor att ta bort"
 
 #: ../window.c:168
 msgid "Open Recent"
-msgstr ""
+msgstr "Öppna tidigare"
 
 #: ../settings.c:688
 msgid "Options"
@@ -369,7 +380,9 @@ msgstr "Vänta under tiden jag läser avbilden..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Vänta under tiden jag sparar den nya avbilden till disk..."
 
-#: ../isobrowser.c:129 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:129
+#: ../isobrowser.c:897
+#: ../isobrowser.c:1299
 #: ../isobrowser.c:1647
 msgid "Progress"
 msgstr "Förlopp"
@@ -402,7 +415,8 @@ msgstr "Sök efter dublettfiler (långsam)"
 msgid "Show _hidden files"
 msgstr "Visa _dolda filer"
 
-#: ../fsbrowser.c:142 ../isobrowser.c:505
+#: ../fsbrowser.c:142
+#: ../isobrowser.c:505
 msgid "Size"
 msgstr "Storlek"
 
@@ -412,10 +426,8 @@ msgid "Size: %d bytes"
 msgstr "Storlek: %d byte"
 
 #: ../fsbrowser.c:280
-msgid ""
-"Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr ""
-"Hoppar över katalogobjekt på grund av att filnamnet är längre än 256 tecken"
+msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
+msgstr "Hoppar över katalogobjekt på grund av att filnamnet är längre än 256 tecken"
 
 #: ../fsbrowser.c:299
 #, c-format
@@ -426,7 +438,8 @@ msgstr "Hoppar över katalogobjekt på grund av att stat(%s) misslyckades med %d
 msgid "Sort is _case sensitive"
 msgstr "Sortering är sk_iftlägeskänslig"
 
-#: ../settings.c:746 ../settings.c:750
+#: ../settings.c:746
+#: ../settings.c:750
 msgid "Temporary directory"
 msgstr "Temporär katalog"
 
@@ -459,12 +472,10 @@ msgstr ""
 " - Den övre filbläddraren visar filer och kataloger på din dator.\n"
 " - Den nedre filbläddraren visar filer och kataloger i ISO-avbilden.\n"
 "\n"
-"För att öppna en befintlig iso-fil, klicka på \"Arkiv\" och \"Öppna\". För "
-"att\n"
+"För att öppna en befintlig iso-fil, klicka på \"Arkiv\" och \"Öppna\". För att\n"
 "skapa en ny iso-avbild, klicka på \"Arkiv\" och sedan \"Ny\".\n"
 "\n"
-"För att lägga till en eller flera filer eller kataloger till avbilden, "
-"markera\n"
+"För att lägga till en eller flera filer eller kataloger till avbilden, markera\n"
 "dem i övre filbläddraren och klicka på knappen \"Lägg till i avbild\" i\n"
 "verktygsraden i mitten av fönstret.\n"
 "\n"
@@ -478,15 +489,15 @@ msgstr ""
 "Om du markerar någonting i den nedre filbläddraren och högerklickar på\n"
 "den, kommer fler alternativ att finnas tillgängliga.\n"
 "\n"
-"När du har gjort alla ändringar i den nya iso-avbilden, klicka på \"Avbild"
-"\"\n"
+"När du har gjort alla ändringar i den nya iso-avbilden, klicka på \"Avbild\"\n"
 "och \"Spara som\". Du kan inte skriva över den ursprungliga iso-avbilden.\n"
 
 #: ../window.c:314
 msgid "Use selected file on image (no emulation)"
 msgstr "Använd markerad fil i avbild (ingen emulering)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1904
+#: ../fsbrowser.c:583
+#: ../isobrowser.c:1904
 msgid "View"
 msgstr "Visa"
 
@@ -503,11 +514,8 @@ msgid "Volume name:"
 msgstr "Volymnamn:"
 
 #: ../settings.c:674
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
-msgstr ""
-"Du måste stänga och öppna avbilden igen för att den här ändringen ska bli "
-"aktiv"
+msgid "You will have to close and reopen the ISO for this change to take effect"
+msgstr "Du måste stänga och öppna avbilden igen för att den här ändringen ska bli aktiv"
 
 #: ../window.c:282
 msgid "_Boot Record"
@@ -535,7 +543,7 @@ msgstr "_Sortera kataloger först"
 
 #: ../window.c:274
 msgid "_Tools"
-msgstr "_Verktyg"
+msgstr "Ver_ktyg"
 
 #: ../window.c:227
 msgid "_View"
@@ -543,6 +551,6 @@ msgstr "_Visa"
 
 #~ msgid "_Image"
 #~ msgstr "_Avbild"
-
 #~ msgid "_Settings"
 #~ msgstr "_Inställningar"
+

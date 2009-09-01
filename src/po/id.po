@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2009-08-23 11:31-0400\n"
-"PO-Revision-Date: 2007-12-07 13:45+0700\n"
+"PO-Revision-Date: 2009-08-24 10:03+0700\n"
 "Last-Translator: Wahyu <w4h703@gmail.com>\n"
 "Language-Team: Indonesian <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -28,12 +28,16 @@ msgstr ""
 "\n"
 "apa kamu ingin melanjutkan?"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272
+#: ../editfile.c:368
+#: ../editfile.c:601
+#: ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' bukan berkas reguler"
 
-#: ../isobrowser.c:142 ../isobrowser.c:1312
+#: ../isobrowser.c:142
+#: ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(mencari berkas ganda)"
 
@@ -49,7 +53,8 @@ msgstr "Tambah ektensi otomatis"
 msgid "Add to the ISO"
 msgstr "Tambah ke ISO"
 
-#: ../isobrowser.c:1443 ../isobrowser.c:1739
+#: ../isobrowser.c:1443
+#: ../isobrowser.c:1739
 msgid "All files"
 msgstr "Tambah berkas"
 
@@ -81,7 +86,8 @@ msgstr "Tipe Boot Record: 2880KiB Floppy"
 msgid "Boot record type: No Emulation"
 msgstr "Tipe Boot Record: Tidak Ada Emulasi"
 
-#: ../isobrowser.c:267 ../isobrowser.c:1918
+#: ../isobrowser.c:267
+#: ../isobrowser.c:1918
 msgid "Change permissions"
 msgstr "Rubah ijin"
 
@@ -105,7 +111,8 @@ msgstr "Waktu pembuatan:"
 msgid "Delete from the ISO"
 msgstr "Hapus dari ISO"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1911
+#: ../fsbrowser.c:590
+#: ../isobrowser.c:1911
 msgid "Edit"
 msgstr "Ubah"
 
@@ -133,7 +140,8 @@ msgstr "Ekstrak"
 msgid "Extract from the ISO"
 msgstr "Ekstrak dari ISO"
 
-#: ../editfile.c:473 ../isobrowser.c:215
+#: ../editfile.c:473
+#: ../isobrowser.c:215
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Gagal menambah '%s': '%s'"
@@ -158,12 +166,15 @@ msgstr "Gagal membuat direktori %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Gagal membuat direktori %s: '%s'"
 
-#: ../editfile.c:447 ../isobrowser.c:850
+#: ../editfile.c:447
+#: ../isobrowser.c:850
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Gagal menghapus '%s': '%s'"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:963
+#: ../editfile.c:412
+#: ../editfile.c:740
+#: ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Gagal mengekstrak '%s': '%s'"
@@ -173,7 +184,8 @@ msgstr "Gagal mengekstrak '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Gagal mengekstrak boot record: '%s'"
 
-#: ../isobrowser.c:1146 ../isobrowser.c:1248
+#: ../isobrowser.c:1146
+#: ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Gagal menginisialisasi bkisofs: '%s'"
@@ -238,11 +250,11 @@ msgid "From file: no emulation"
 msgstr "Dari berkas: Tanpa emulasi"
 
 #: ../isobrowser.c:868
-msgid ""
-"GUI error, deleting anything other than files and directories doesn't work"
+msgid "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "GUI eror, hapus semua selain berkas dan direktori yang tidak bekerja"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:55
+#: ../window.c:392
 msgid "Go back"
 msgstr "Kembali"
 
@@ -254,7 +266,8 @@ msgstr "Kembali satu direktori pada ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Kembali satu direktori pada sistem berkas"
 
-#: ../isobrowser.c:1428 ../isobrowser.c:1734
+#: ../isobrowser.c:1428
+#: ../isobrowser.c:1734
 msgid "ISO Images"
 msgstr "Image ISO"
 
@@ -287,25 +300,21 @@ msgid "Is visible on image as '%s'"
 msgstr "Ada pada image sebagai '%s'"
 
 #: ../isobrowser.c:770
-msgid ""
-"It seems that you have made changes to the ISO but haven't saved them. Are "
-"you sure you want to close it?"
-msgstr ""
-"Tampaknya anda merlakukan perubahan pada ISO tetapi belum disimpan, Yakin "
-"mau menutup ini?"
+msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgstr "Tampaknya anda merlakukan perubahan pada ISO tetapi belum disimpan, Yakin mau menutup ini?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr ""
-"Item terseleksi bukan berkas reguler dan tidak dapat digunakan sebagai boot "
-"record"
+msgstr "Item terseleksi bukan berkas reguler dan tidak dapat digunakan sebagai boot record"
 
-#: ../boot.c:373 ../boot.c:380
+#: ../boot.c:373
+#: ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Lokasi: image asli pada 0x%llX"
 
-#: ../boot.c:375 ../boot.c:382
+#: ../boot.c:375
+#: ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Lokasi: Untuk ditambah dari '%s'"
@@ -318,15 +327,18 @@ msgstr "Image MDF"
 msgid "NRG Images"
 msgstr "Image NRG "
 
-#: ../fsbrowser.c:121 ../isobrowser.c:482
+#: ../fsbrowser.c:121
+#: ../isobrowser.c:482
 msgid "Name"
 msgstr "Nama"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:61
+#: ../window.c:398
 msgid "New Directory"
 msgstr "Direktori baru"
 
-#: ../boot.c:149 ../boot.c:327
+#: ../boot.c:149
+#: ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "Tidak ada boot record dari image asli"
 
@@ -336,7 +348,7 @@ msgstr "tidak ada boot record untuk dihapus"
 
 #: ../window.c:168
 msgid "Open Recent"
-msgstr ""
+msgstr "Buka berkas yg baru saja"
 
 #: ../settings.c:688
 msgid "Options"
@@ -344,9 +356,7 @@ msgstr "Pilihan"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr ""
-"Silahkan pilih sebuah berkas di browser ISO untuk digunakan sebagai boot "
-"record"
+msgstr "Silahkan pilih sebuah berkas di browser ISO untuk digunakan sebagai boot record"
 
 #: ../boot.c:243
 msgid "Please select no more than one file in the ISO browser"
@@ -368,7 +378,9 @@ msgstr "Silahkan tunggu saat saya membaca image..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Silahkan tunggu saat saya menyimpan image baru ke disk..."
 
-#: ../isobrowser.c:129 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:129
+#: ../isobrowser.c:897
+#: ../isobrowser.c:1299
 #: ../isobrowser.c:1647
 msgid "Progress"
 msgstr "Proses"
@@ -401,7 +413,8 @@ msgstr "Cari berkas ganda (lambat)"
 msgid "Show _hidden files"
 msgstr "Tampilkan_berkas tersembunyi"
 
-#: ../fsbrowser.c:142 ../isobrowser.c:505
+#: ../fsbrowser.c:142
+#: ../isobrowser.c:505
 msgid "Size"
 msgstr "Ukuran"
 
@@ -411,11 +424,8 @@ msgid "Size: %d bytes"
 msgstr "Ukuran: %d bytes"
 
 #: ../fsbrowser.c:280
-msgid ""
-"Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr ""
-"Lewati isian direktori karena tidak dapat menangani nama berkas lebih "
-"panjang dari 256 chars"
+msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
+msgstr "Lewati isian direktori karena tidak dapat menangani nama berkas lebih panjang dari 256 chars"
 
 #: ../fsbrowser.c:299
 #, c-format
@@ -426,7 +436,8 @@ msgstr "Lewati isian direktori karena stat(%s) gagal dengan %d"
 msgid "Sort is _case sensitive"
 msgstr "Pengurutan _sensitif kasus"
 
-#: ../settings.c:746 ../settings.c:750
+#: ../settings.c:746
+#: ../settings.c:750
 msgid "Temporary directory"
 msgstr "Direktori sementara"
 
@@ -456,16 +467,13 @@ msgid ""
 "'Save As'. You cannot overwrite the original ISO.\n"
 msgstr ""
 "Jendela ISO Master terbagi menjadi 2 bagian:\n"
-" - Browser berkas bagian atas menampilkan berkas dan direktori pada mesin "
-"anda .\n"
-" - Browser berkas bagian bawah menampilkan berkas dan direktori pada image "
-"ISO.\n"
+" - Browser berkas bagian atas menampilkan berkas dan direktori pada mesin anda .\n"
+" - Browser berkas bagian bawah menampilkan berkas dan direktori pada image ISO.\n"
 "\n"
 "Untuk membuka ISO yang sudah ada tekan 'Berkas' dan 'Buka'. Untuk membuat\n"
 "berkas ISO baru tekan 'Berkas' dan 'Baru'.\n"
 "\n"
-"Untuk menambah satu atau lebih berkas dan direktori ke ISO pilih di bagian "
-"atas\n"
+"Untuk menambah satu atau lebih berkas dan direktori ke ISO pilih di bagian atas\n"
 "browser berkas dan tekan tombol 'Tambah ke ISO' di toolbar tengah.\n"
 "\n"
 "Untuk mengekstrak satu atau lebih berkas atau direktori dari ISO pilih di\n"
@@ -475,8 +483,7 @@ msgstr ""
 "Kamu juga bisa menghapus berkas atau direktori dari ISO dan membuat\n"
 "direktori baru baik di ISO maupun lokal sistem.\n"
 "\n"
-"Jika kamu memilih sesuatu di browser berkas bawah dan klik kanan pada bagian "
-"itu,\n"
+"Jika kamu memilih sesuatu di browser berkas bawah dan klik kanan pada bagian itu,\n"
 "akan ada beberapa pilihan yang disediakan.\n"
 "\n"
 "Sekali kamu melakukan perubahan pada image ISO, tekan pada 'Image' dan\n"
@@ -486,7 +493,8 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "Gunakan berkas pada image terpilih (tanpa emulasi)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1904
+#: ../fsbrowser.c:583
+#: ../isobrowser.c:1904
 msgid "View"
 msgstr "Lihat"
 
@@ -503,10 +511,8 @@ msgid "Volume name:"
 msgstr "Nama Volume:"
 
 #: ../settings.c:674
-msgid ""
-"You will have to close and reopen the ISO for this change to take effect"
-msgstr ""
-"Kamu akan menutup dan membuka kembali ISO agar perubahan ini diterapkan"
+msgid "You will have to close and reopen the ISO for this change to take effect"
+msgstr "Kamu akan menutup dan membuka kembali ISO agar perubahan ini diterapkan"
 
 #: ../window.c:282
 msgid "_Boot Record"
@@ -542,6 +548,6 @@ msgstr "_Lihat"
 
 #~ msgid "_Image"
 #~ msgstr "_Image"
-
 #~ msgid "_Settings"
 #~ msgstr "_Seting"
+
