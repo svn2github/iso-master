@@ -91,7 +91,7 @@ http://www.happyassassin.net/
 - Mandriva package of ISO Master, versions 0.8 - 1.2
 
 Matias A. Fonzo
-- Slackware package of ISO Master, versions 0.8 - 1.2
+- Slackware package of ISO Master, versions 0.8 - 1.3.1
 
 Giovanni Bechis
 http://www.snb.it/
@@ -118,6 +118,9 @@ http://wolvix.org/
 
 Translations:
 
+Abdellah Chelli
+- ar (arabic) translation of ISO Master version 1.3
+
 Ihar Hrachyshka
 - be (Belarusian) translation of ISO Master version 1.3
 
@@ -126,6 +129,9 @@ Dessislav Petrov
 
 Rafael Carreras
 - ca (Catalan) translation of ISO Master version 1.1
+
+Josep Sanchez Mesegue
+- ca (Catalan) translation of ISO Master version 1.2
 
 Schmaki
 - cs (Czech) translation of ISO Master version 1.1
@@ -139,11 +145,20 @@ Toni Graffy
 Magnus Valle
 - da (Danish) translation of ISO Master version 1.3
 
+Henrik Kristiansen
+- da (Danish) translation of ISO Master version 1.3
+
 Mike Kranidis
 - el (Greek) translation of ISO Master versions 1.1 - 1.3
 
 Juan Garcia-Murga Monago
 - es (Spanish) translation of ISO Master versions 0.7 - 1.1
+
+Leandro Doctors
+- es (Spanish) translation of ISO Master version 1.3
+
+Christobal
+- es (Spanish) translation of ISO Master version 1.3
 
 Edmund Laugasson
 - et (Estonian) translation of ISO Master version 1.3
@@ -179,13 +194,19 @@ F. Lombardi
 - it (Italian) translation of ISO Master version 0.7 - 1.0
 
 Valerio Guaglianone
-- it (Italian) translation of ISO Master version 0.7, 1.1
+- it (Italian) translation of ISO Master version 0.7, 1.1, 1.3
+
+Rihards Prieditis
+- lv (Latvian) translation of ISO Master version 1.3
 
 Robert Groenning
 - nb (Norwegian Bokmal) translation of ISO Master version 1.0
 
 Stephen Brandt
 - nl (Dutch) translation of ISO Master versions 0.7 - 1.3
+
+Kristof Bal
+- nl (Dutch) translation of ISO Master version 1.3
 
 Robert Groenning
 - nn (Norwegian Nynorsk) translation of ISO Master version 1.1
@@ -194,7 +215,10 @@ Maciej Libuda
 - pl (Polish) translation of ISO Master versions 0.6 - 1.3
 
 Joao de Ferro
-- pt (Portuguese) translation of ISO Master version 0.8, 1.0
+- pt (Portuguese) translation of ISO Master versions 0.8, 1.0
+
+Antonio Sousa
+- pt (Portuguese) translation of ISO Master version 1.3
 
 Alexandre Marques
 - pt_BR (Portuguese/Brasil) translation of ISO Master version 1.3
@@ -224,10 +248,7 @@ Daniel Nylander
 - sv (Swedish) translation of ISO Master version 1.1
 
 Tutku Dalmaz
-- tr (Turkish) translation of ISO Master version 1.0
-
-Tutku Dalmaz
-- tr (Turkish) translation of ISO Master version 1.0
+- tr (Turkish) translation of ISO Master version 1.0. 1.3
 
 Serhey Kusyumoff
 - uk (Ukrainian) translation of ISO Master versions 0.8, 1.3

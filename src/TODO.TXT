@@ -1,5 +1,3 @@
-Kristof Bal, Mesegue in credits
-
 ui:
 - drop-down list to select track - can do multitrack
 - check out thunar translators
