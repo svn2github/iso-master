@@ -54,9 +54,13 @@ to package a release:
 - update changelog.txt
 - update credits and credits.txt
 - check readme.txt
-- cd isomaster && svn export src releases/isomaster-version
-- delete icons/originals
-- tar cvjf isomaster-version.tar.bz2 isomaster-version/
+
+ISOMASTER_VERSION=1.3.6
+svn export src releases/isomaster-$ISOMASTER_VERSION
+rm releases/isomaster-$ISOMASTER_VERSION/bkisofs-manual
+svn export doc/byme/bkisofs-manual/ releases/isomaster-$ISOMASTER_VERSION/bkisofs-manual
+rm -r releases/isomaster-$ISOMASTER_VERSION/icons/originals
+tar cvjf releases/isomaster-$ISOMASTER_VERSION.tar.bz2 releases/isomaster-$ISOMASTER_VERSION/
 
 fonts:
 - 'the ultimate...' Mukti Narrow Bold or Nimbus Sans L Bold
