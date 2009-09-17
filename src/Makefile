@@ -17,7 +17,7 @@ export LOCALEDIR ?= $(PREFIX)/share/locale
 MYMANPATH ?= $(PREFIX)/share/man/man1
 
 # Where to install the bkisofs docs
-MYDOCPATH ?= $(PREFIX)/doc/bkisofs
+MYDOCPATH ?= $(PREFIX)/share/doc/bkisofs
 
 # Where to install the .desktop file
 DESKTOPPATH ?= $(PREFIX)/share/applications
@@ -119,11 +119,11 @@ endif
         done;
 
 uninstall: 
-	$(RM) $(DESTDIR)$(BINPATH)/isomaster
+	$(RM) -f $(DESTDIR)$(BINPATH)/isomaster
 	cd icons && $(MAKE) uninstall
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) uninstall
 endif
-	$(RM) $(DESTDIR)$(MYMANPATH)/isomaster.1
-	$(RM) $(DESTDIR)$(DESKTOPPATH)/isomaster.desktop
-	$(RM) -r $(DESTDIR)$(MYDOCPATH)
+	$(RM) -f $(DESTDIR)$(MYMANPATH)/isomaster.1
+	$(RM) -f $(DESTDIR)$(DESKTOPPATH)/isomaster.desktop
+	$(RM) -rf $(DESTDIR)$(MYDOCPATH)

@@ -10,5 +10,5 @@ install:
 
 uninstall:
 	for NAME in $(ICONS); do \
-	  $(RM) -v $(DESTDIR)$(ICONPATH)/$$NAME; \
+	  $(RM) -f $(DESTDIR)$(ICONPATH)/$$NAME; \
 	done

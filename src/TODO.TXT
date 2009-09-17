@@ -60,7 +60,9 @@ svn export src releases/isomaster-$ISOMASTER_VERSION
 rm releases/isomaster-$ISOMASTER_VERSION/bkisofs-manual
 svn export doc/byme/bkisofs-manual/ releases/isomaster-$ISOMASTER_VERSION/bkisofs-manual
 rm -r releases/isomaster-$ISOMASTER_VERSION/icons/originals
-tar cvjf releases/isomaster-$ISOMASTER_VERSION.tar.bz2 releases/isomaster-$ISOMASTER_VERSION/
+cd releases
+tar cvjf isomaster-$ISOMASTER_VERSION.tar.bz2 isomaster-$ISOMASTER_VERSION/
+cd ..
 
 fonts:
 - 'the ultimate...' Mukti Narrow Bold or Nimbus Sans L Bold

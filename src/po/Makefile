@@ -22,5 +22,5 @@ install: all
 
 uninstall:
 	for NAME in $(MOFILES); do \
-	  $(RM) -v $(DESTDIR)$(LOCALEDIR)/`basename $$NAME .mo`/LC_MESSAGES/isomaster.mo; \
+	  $(RM) -f $(DESTDIR)$(LOCALEDIR)/`basename $$NAME .mo`/LC_MESSAGES/isomaster.mo; \
 	done
