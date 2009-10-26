@@ -102,7 +102,7 @@ endif
 
 # for info about DESTDIR see http://www.gnu.org/prep/standards/html_node/DESTDIR.html
 
-install: all bk-doc
+install: all
 	$(INSTALL) -d $(DESTDIR)$(BINPATH)
 	$(INSTALL) isomaster $(DESTDIR)$(BINPATH)
 	cd icons && $(MAKE) install
