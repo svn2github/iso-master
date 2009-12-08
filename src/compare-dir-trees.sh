@@ -9,40 +9,39 @@ then
   exit
 fi
 
-#~ echo first $FIRST second $SECOND
-
-for NAME in `cd $FIRST && find -noleaf`
+cd $FIRST 
+find -noleaf | while read NAME
 do
   if [[ $NAME = "." ]]
   then
     continue
   fi
 
-  if [[ -e $FIRST/$NAME ]] && [[ ! -e $SECOND/$NAME ]]
+  if [[ -e "$FIRST/$NAME" ]] && [[ ! -e "$SECOND/$NAME" ]]
   then
     echo -n "$FIRST/$NAME doesn't exist in $SECOND continue? (Y/n) "
     read GOON
     if [[ $GOON = "n" ]]
     then
-      exit
+      exit 1
     fi
     continue
   fi
   
-  if [[ -d $FIRST/$NAME ]] && [[ ! -d $SECOND/$NAME ]]
+  if [[ -d "$FIRST/$NAME" ]] && [[ ! -d "$SECOND/$NAME" ]]
   then
     echo "$FIRST/$NAME is a directory but $SECOND/$NAME is not"
-    exit
+    exit 2
   elif [[ ! -d $FIRST/$NAME ]] && [[ ! -d $SECOND/$NAME ]]
   then
     echo -n "Checking $NAME: "
-    if [[ `md5sum $FIRST/$NAME | cut -f 1 -d ' '` != `md5sum $SECOND/$NAME | cut -f 1 -d ' '` ]]
+    if [[ `md5sum "$FIRST/$NAME" | cut -f 1 -d ' '` != `md5sum "$SECOND/$NAME" | cut -f 1 -d ' '` ]]
     then
       echo -n "Files are not the same, continue? (y/n) "
       read GOON
       if [[ $GOON = "n" ]]
       then
-        exit
+        exit 3
       fi
     else
       echo "OK."
@@ -52,3 +51,4 @@ do
   fi
   
 done
+
