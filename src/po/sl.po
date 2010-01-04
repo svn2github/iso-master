@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2010-01-04 15:33-0500\n"
 "PO-Revision-Date: 2009-08-23 21:56+0200\n"
 "Last-Translator: uros <n@g.com>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -243,7 +243,8 @@ msgid "From file: no emulation"
 msgstr "Iz datoteke: brez posnemanja"
 
 #: ../isobrowser.c:868
-msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgid ""
+"GUI error, deleting anything other than files and directories doesn't work"
 msgstr ""
 "Napaka uporabniškega vmesnika, odstranjevanje vsega razen datotek in kazal "
 "ne deluje"
@@ -264,7 +265,7 @@ msgstr "Nazaj za eno kaazalo v datotečnem sistemu"
 msgid "ISO Images"
 msgstr "ISO slike"
 
-#: ../about.c:366
+#: ../about.c:375
 msgid "ISO Master Help"
 msgstr "ISO Master Pomoč"
 
@@ -413,8 +414,10 @@ msgid "Size: %d bytes"
 msgstr "Velikost: %d bytes"
 
 #: ../fsbrowser.c:280
-msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Ker ne morem brati imen datotek večjih od 256 znakov preskakujem kazalo"
+msgid ""
+"Skipping directory entry because cannot handle filename longer than 256 chars"
+msgstr ""
+"Ker ne morem brati imen datotek večjih od 256 znakov preskakujem kazalo"
 
 #: ../fsbrowser.c:299
 #, c-format
@@ -429,7 +432,7 @@ msgstr "Razlikuj _male in velike črke"
 msgid "Temporary directory"
 msgstr "Kazalo začasnih datotek"
 
-#: ../about.c:304
+#: ../about.c:313
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -491,8 +494,10 @@ msgid "Volume name:"
 msgstr "Ime naprave:"
 
 #: ../settings.c:674
-msgid "You will have to close and reopen the ISO for this change to take effect"
-msgstr "Potrebno je zapreti in ponovno odpreti ISO sliko, da bodo spremembe delovale"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
+msgstr ""
+"Potrebno je zapreti in ponovno odpreti ISO sliko, da bodo spremembe delovale"
 
 #: ../window.c:282
 msgid "_Boot Record"
@@ -525,4 +530,3 @@ msgstr "O_rodja"
 #: ../window.c:227
 msgid "_View"
 msgstr "Po_gled"
-

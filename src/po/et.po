@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2010-01-04 15:33-0500\n"
 "PO-Revision-Date: 2007-12-23 12:41-0500\n"
 "Last-Translator: Edmund Laugasson <edmund.laugasson@eesti.ee>\n"
 "Language-Team: Edmund Laugasson <edmund.laugasson@eesti.ee>\n"
@@ -262,7 +262,7 @@ msgstr "Mine oma arvutis olevas kataloogipuus üks tase üles"
 msgid "ISO Images"
 msgstr "ISO tõmmisfailid"
 
-#: ../about.c:366
+#: ../about.c:375
 msgid "ISO Master Help"
 msgstr "ISO Master abi"
 
@@ -433,7 +433,7 @@ msgstr "_Sorteerimine on tõstutundlik"
 msgid "Temporary directory"
 msgstr "Ajutine kataloog"
 
-#: ../about.c:304
+#: ../about.c:313
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

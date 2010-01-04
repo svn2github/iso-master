@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2010-01-04 15:33-0500\n"
 "PO-Revision-Date: 2009-08-23 19:13-0000\n"
 "Last-Translator: Abdellah CHELLI <sneetsher@gmail.com>\n"
 "Language-Team: Abdellah Chelli <sneetsher@gmail.com>\n"
@@ -29,16 +29,12 @@ msgstr ""
 "\n"
 "هل تريد المواصلة؟"
 
-#: ../editfile.c:272
-#: ../editfile.c:368
-#: ../editfile.c:601
-#: ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' ليس ملفا نظاميا"
 
-#: ../isobrowser.c:142
-#: ../isobrowser.c:1312
+#: ../isobrowser.c:142 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(الكشف عن ملفات مكررة)"
 
@@ -54,8 +50,7 @@ msgstr "أضف الملحق آليا"
 msgid "Add to the ISO"
 msgstr "أضف إلى صورة ISO"
 
-#: ../isobrowser.c:1443
-#: ../isobrowser.c:1739
+#: ../isobrowser.c:1443 ../isobrowser.c:1739
 msgid "All files"
 msgstr "جميع الملفات"
 
@@ -87,8 +82,7 @@ msgstr "نوع سجل الإقلاع: قرص مرن 2880 كيلو بايت"
 msgid "Boot record type: No Emulation"
 msgstr "نوع سجل الإقلاع: لا محاكاة"
 
-#: ../isobrowser.c:267
-#: ../isobrowser.c:1918
+#: ../isobrowser.c:267 ../isobrowser.c:1918
 msgid "Change permissions"
 msgstr "غيّر التصاريح"
 
@@ -112,8 +106,7 @@ msgstr "وقت الإنشاء:"
 msgid "Delete from the ISO"
 msgstr "إحذف من صورة ISO"
 
-#: ../fsbrowser.c:590
-#: ../isobrowser.c:1911
+#: ../fsbrowser.c:590 ../isobrowser.c:1911
 msgid "Edit"
 msgstr "حرّر"
 
@@ -141,8 +134,7 @@ msgstr "استخرج"
 msgid "Extract from the ISO"
 msgstr "استخراج من صورة ISO"
 
-#: ../editfile.c:473
-#: ../isobrowser.c:215
+#: ../editfile.c:473 ../isobrowser.c:215
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "فشلت إضافة '%s': '%s'"
@@ -167,15 +159,12 @@ msgstr "فشل إنشاء المجلد %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "فشل إنشاء المجلد %s: '%s'"
 
-#: ../editfile.c:447
-#: ../isobrowser.c:850
+#: ../editfile.c:447 ../isobrowser.c:850
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "فشل حذف '%s': '%s'"
 
-#: ../editfile.c:412
-#: ../editfile.c:740
-#: ../isobrowser.c:963
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "فشل استخراج '%s': '%s'"
@@ -185,8 +174,7 @@ msgstr "فشل استخراج '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "فشل استخراج سجل الإقلاع: '%s'"
 
-#: ../isobrowser.c:1146
-#: ../isobrowser.c:1248
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "فشل التحضير الأولي لـ bkisofs: ‪'%s'"
@@ -251,11 +239,12 @@ msgid "From file: no emulation"
 msgstr "من ملف: لا محاكاة"
 
 #: ../isobrowser.c:868
-msgid "GUI error, deleting anything other than files and directories doesn't work"
-msgstr "خطأ في واجهة المستعمل الرسومية، حذف أي شيء آخر غير الملفات و المجلدات لن يعمل"
+msgid ""
+"GUI error, deleting anything other than files and directories doesn't work"
+msgstr ""
+"خطأ في واجهة المستعمل الرسومية، حذف أي شيء آخر غير الملفات و المجلدات لن يعمل"
 
-#: ../window.c:55
-#: ../window.c:392
+#: ../window.c:55 ../window.c:392
 msgid "Go back"
 msgstr "تراجع"
 
@@ -267,12 +256,11 @@ msgstr "تراجع مجلدا واحدا إلى أعلى  في صورة ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "تراجع مجلدا واحدا إلى أعلى في نظام الملفات"
 
-#: ../isobrowser.c:1428
-#: ../isobrowser.c:1734
+#: ../isobrowser.c:1428 ../isobrowser.c:1734
 msgid "ISO Images"
 msgstr "صور ISO"
 
-#: ../about.c:366
+#: ../about.c:375
 msgid "ISO Master Help"
 msgstr "مساعدة ISO Master"
 
@@ -301,21 +289,21 @@ msgid "Is visible on image as '%s'"
 msgstr "مرئي في الصورة كـ '%s'"
 
 #: ../isobrowser.c:770
-msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
+msgid ""
+"It seems that you have made changes to the ISO but haven't saved them. Are "
+"you sure you want to close it?"
 msgstr "يبدو أنك أجريت تغييرات في صورة ISO لكنك لم تحفظها.هل تريد حقا إغلاقها؟"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
 msgstr "العنصر المحدد ليس ملفا نظاميا و لا يمكن إستخدامه كسجل إقلاع"
 
-#: ../boot.c:373
-#: ../boot.c:380
+#: ../boot.c:373 ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "المكان: في الصورة الأصلية عند 0x%llX"
 
-#: ../boot.c:375
-#: ../boot.c:382
+#: ../boot.c:375 ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "المكان: سيضاف من '%s'"
@@ -328,18 +316,15 @@ msgstr "صور MDF"
 msgid "NRG Images"
 msgstr "صور NRG"
 
-#: ../fsbrowser.c:121
-#: ../isobrowser.c:482
+#: ../fsbrowser.c:121 ../isobrowser.c:482
 msgid "Name"
 msgstr "الاسم"
 
-#: ../window.c:61
-#: ../window.c:398
+#: ../window.c:61 ../window.c:398
 msgid "New Directory"
 msgstr "مجلد جديد"
 
-#: ../boot.c:149
-#: ../boot.c:327
+#: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "لا سجل إقلاع قرأ من الأصل أو وضع في الصورة"
 
@@ -379,9 +364,7 @@ msgstr "انتظر من فضلك ريثما أقرأ الصورة..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "انتظر من فضلك ريثما أحفظ الصورة الجديدة إلى القرص..."
 
-#: ../isobrowser.c:129
-#: ../isobrowser.c:897
-#: ../isobrowser.c:1299
+#: ../isobrowser.c:129 ../isobrowser.c:897 ../isobrowser.c:1299
 #: ../isobrowser.c:1647
 msgid "Progress"
 msgstr "التقدم"
@@ -414,8 +397,7 @@ msgstr "أجر كشفا عن الملفات المكررة (بطيء)"
 msgid "Show _hidden files"
 msgstr "أظهر الملفات الم_خفية"
 
-#: ../fsbrowser.c:142
-#: ../isobrowser.c:505
+#: ../fsbrowser.c:142 ../isobrowser.c:505
 msgid "Size"
 msgstr "الحجم"
 
@@ -425,7 +407,8 @@ msgid "Size: %d bytes"
 msgstr "الحجم: %d بايت"
 
 #: ../fsbrowser.c:280
-msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
+msgid ""
+"Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr "تجاوز المجلد لعدم القدرة على التعامل مع اسم ملف أطول من 256 رمزا"
 
 #: ../fsbrowser.c:299
@@ -437,12 +420,11 @@ msgstr "تجاوز المجلد لأن (%s) فشل (خطأ %d)"
 msgid "Sort is _case sensitive"
 msgstr "ترتيب _حسّاس لحالة الأحرف"
 
-#: ../settings.c:746
-#: ../settings.c:750
+#: ../settings.c:746 ../settings.c:750
 msgid "Temporary directory"
 msgstr "مجلد الملفات المؤقتة"
 
-#: ../about.c:304
+#: ../about.c:313
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -471,24 +453,29 @@ msgstr ""
 "- مستعرض ملفات علوي يعرض الملفات و المجلدات في حاسوبك.\n"
 "- مستعرض ملفات سفلي يعرض الملفات و المجلدات في صورة ISO.\n"
 "\n"
-"لفتح ملف ISO أنقر على 'ملف' ثم 'إفتح'. لإنشاء ملف ISO جديد أنقر على 'ملف' ثم 'جديد'.\n"
+"لفتح ملف ISO أنقر على 'ملف' ثم 'إفتح'. لإنشاء ملف ISO جديد أنقر على 'ملف' ثم "
+"'جديد'.\n"
 "\n"
-"لإضافة ملف أو أكثر أو مجلدات إلى صورة ISO حدد ما تريد من خلال مستعرض الملفات العلوي و أنقر  زر 'إضافة إلى صورة ISO' في لوحة الأدوات الوسطى.\n"
+"لإضافة ملف أو أكثر أو مجلدات إلى صورة ISO حدد ما تريد من خلال مستعرض الملفات "
+"العلوي و أنقر  زر 'إضافة إلى صورة ISO' في لوحة الأدوات الوسطى.\n"
 "\n"
-"لاستخراج ملف أو أكثر أو مجلدات من صورة ISO حدد ما تريد من خلال مستعرض الملفات السفلي و أنقر  زر 'إستخراج من صورة ISO' في لوحة الأدوات الوسطى.\n"
+"لاستخراج ملف أو أكثر أو مجلدات من صورة ISO حدد ما تريد من خلال مستعرض "
+"الملفات السفلي و أنقر  زر 'إستخراج من صورة ISO' في لوحة الأدوات الوسطى.\n"
 " \n"
-"يمكنك حذف ملفات أو مجلدات من صورة ISO و إنشاء مجلدات جديدة في كل من صورة ISO و نظام الملفات المحلي.\n"
+"يمكنك حذف ملفات أو مجلدات من صورة ISO و إنشاء مجلدات جديدة في كل من صورة ISO "
+"و نظام الملفات المحلي.\n"
 "\n"
-"عند تحديدك لأي عنصر من مستعرض الملفات السفلي و نقرة يمنى عليه، ستجد خيارات أخرى متوفرة.\n"
+"عند تحديدك لأي عنصر من مستعرض الملفات السفلي و نقرة يمنى عليه، ستجد خيارات "
+"أخرى متوفرة.\n"
 "\n"
-"حينما تنهي كل التغييرات على صورة ISO، أنقر على 'ملف' ثم 'إحفظ كـ'. فلا يمكنك إعادة الكتابة على ISO الأصلي مباشرة.\n"
+"حينما تنهي كل التغييرات على صورة ISO، أنقر على 'ملف' ثم 'إحفظ كـ'. فلا يمكنك "
+"إعادة الكتابة على ISO الأصلي مباشرة.\n"
 
 #: ../window.c:314
 msgid "Use selected file on image (no emulation)"
 msgstr "استخدم الملف المحدد في الصورة (لا محاكاة)"
 
-#: ../fsbrowser.c:583
-#: ../isobrowser.c:1904
+#: ../fsbrowser.c:583 ../isobrowser.c:1904
 msgid "View"
 msgstr "عرض"
 
@@ -505,7 +492,8 @@ msgid "Volume name:"
 msgstr "اسم الحجم:"
 
 #: ../settings.c:674
-msgid "You will have to close and reopen the ISO for this change to take effect"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
 msgstr "يجب عليك غلق و إعادة فتح ملف ISO من أجل تطبيق التغييرات"
 
 #: ../window.c:282
@@ -539,4 +527,3 @@ msgstr "_أدوات"
 #: ../window.c:227
 msgid "_View"
 msgstr "_عرض"
-

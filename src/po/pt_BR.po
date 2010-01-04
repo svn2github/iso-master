@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2010-01-04 15:33-0500\n"
 "PO-Revision-Date: 2009-08-28 11:38-0300\n"
 "Last-Translator: Alexandre Marques <marquesc@oi.com.br>\n"
 "Language-Team: Brazilian Portuguese\n"
@@ -244,7 +244,8 @@ msgid "From file: no emulation"
 msgstr "Do arquivo: sem emulação"
 
 #: ../isobrowser.c:868
-msgid "GUI error, deleting anything other than files and directories doesn't work"
+msgid ""
+"GUI error, deleting anything other than files and directories doesn't work"
 msgstr ""
 "Erro de Interface, não é possível apagar nada mais do que arquivos e "
 "diretórios"
@@ -265,7 +266,7 @@ msgstr "Voltar um diretório no sistema de arquivos"
 msgid "ISO Images"
 msgstr "Imagens ISO"
 
-#: ../about.c:366
+#: ../about.c:375
 msgid "ISO Master Help"
 msgstr "Ajuda do ISO Master"
 
@@ -418,7 +419,8 @@ msgid "Size: %d bytes"
 msgstr "Tamanho: %d bytes"
 
 #: ../fsbrowser.c:280
-msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
+msgid ""
+"Skipping directory entry because cannot handle filename longer than 256 chars"
 msgstr ""
 "Pulando diretório, nomes de arquivos com mais de 256 caracteres não são "
 "suportados"
@@ -437,7 +439,7 @@ msgid "Temporary directory"
 msgstr "Diretório temporário"
 
 # !! this translation is incomplete
-#: ../about.c:304
+#: ../about.c:313
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -510,7 +512,8 @@ msgid "Volume name:"
 msgstr "Nome do volume:"
 
 #: ../settings.c:674
-msgid "You will have to close and reopen the ISO for this change to take effect"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
 msgstr "Você deve fechar e reabrir o ISO para que as alterações tenham efeito"
 
 #: ../window.c:282
@@ -544,4 +547,3 @@ msgstr "_Ferramentas"
 #: ../window.c:227
 msgid "_View"
 msgstr "_Visualizar"
-

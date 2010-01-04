@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2010-01-04 15:33-0500\n"
 "PO-Revision-Date: 2007-03-09 17:04-0500\n"
 "Last-Translator: Maciej Libuda <maciej.libuda@gmail.com>\n"
 "Language-Team: polish <LL@li.org>\n"
@@ -260,7 +260,7 @@ msgstr "Jeden katalog wyżej w systemie plików"
 msgid "ISO Images"
 msgstr "Obrazy ISO"
 
-#: ../about.c:366
+#: ../about.c:375
 msgid "ISO Master Help"
 msgstr "Pomoc ISO Master"
 
@@ -429,7 +429,7 @@ msgstr "_Rozróżniaj wielkość liter"
 msgid "Temporary directory"
 msgstr "Katalog tymczasowy"
 
-#: ../about.c:304
+#: ../about.c:313
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -536,5 +536,3 @@ msgstr "_Narzędzia"
 #: ../window.c:227
 msgid "_View"
 msgstr "_Widok"
-
-

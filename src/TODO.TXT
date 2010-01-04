@@ -16,9 +16,6 @@ bk:
  - uif
 
 
-manual:
-- link on new website
-
 tests to run before a release:
 - open iso from command-line
 - create blank, see if it mounts (try norock, nojoliet)

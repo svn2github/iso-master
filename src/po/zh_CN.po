@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2010-01-04 15:33-0500\n"
 "PO-Revision-Date: 2007-12-12 16:35-0500\n"
 "Last-Translator: Sun Minchao <sunminchao@gmx.de>\n"
 "Language-Team:  <zh@li.org>\n"
@@ -259,7 +259,7 @@ msgstr "在文件系统中返回上一级目录"
 msgid "ISO Images"
 msgstr "ISO 映像文件"
 
-#: ../about.c:366
+#: ../about.c:375
 msgid "ISO Master Help"
 msgstr "ISO Master 帮助"
 
@@ -423,7 +423,7 @@ msgstr "按大小写敏感排序(_c)"
 msgid "Temporary directory"
 msgstr "临时目录"
 
-#: ../about.c:304
+#: ../about.c:313
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

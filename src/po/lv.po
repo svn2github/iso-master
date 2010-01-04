@@ -2,19 +2,20 @@
 # Copyright (C) 2009 isomaster
 # This file is distributed under the same license as the isomaster package.
 # Rihards Prieditis,<rprieditis@gmail.com> ,2009.
-#
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2010-01-04 15:33-0500\n"
 "PO-Revision-Date: 2009-08-23 21:57+0100\n"
 "Last-Translator: Rihards Priedītis <rprieditis@gmail.com>\n"
 "Language-Team: Latvian <rprieditis@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
 
 #: ../window.c:417
 msgid "      Estimated ISO Size: "
@@ -31,16 +32,12 @@ msgstr ""
 "\n"
 "Vai vēlaties turpināt?"
 
-#: ../editfile.c:272
-#: ../editfile.c:368
-#: ../editfile.c:601
-#: ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "\"%s\" nav parasts fails"
 
-#: ../isobrowser.c:142
-#: ../isobrowser.c:1312
+#: ../isobrowser.c:142 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(notiek dublikātu skenešana)"
 
@@ -56,8 +53,7 @@ msgstr "Pievienot paplašinājums automātiski"
 msgid "Add to the ISO"
 msgstr "Pievienot iekš ISO"
 
-#: ../isobrowser.c:1443
-#: ../isobrowser.c:1739
+#: ../isobrowser.c:1443 ../isobrowser.c:1739
 msgid "All files"
 msgstr "Visi faili"
 
@@ -89,8 +85,7 @@ msgstr "Ielādes ieraksta veids: 2880KiB diskete"
 msgid "Boot record type: No Emulation"
 msgstr "Ielādes ieraksta veids: Bez emulācijas"
 
-#: ../isobrowser.c:267
-#: ../isobrowser.c:1918
+#: ../isobrowser.c:267 ../isobrowser.c:1918
 msgid "Change permissions"
 msgstr "Mainīt atļaujas"
 
@@ -114,8 +109,7 @@ msgstr "Izveides laiks:"
 msgid "Delete from the ISO"
 msgstr "Dzest no ISO"
 
-#: ../fsbrowser.c:590
-#: ../isobrowser.c:1911
+#: ../fsbrowser.c:590 ../isobrowser.c:1911
 msgid "Edit"
 msgstr "Rediģēt"
 
@@ -143,8 +137,7 @@ msgstr "Atspiest"
 msgid "Extract from the ISO"
 msgstr "Atspiest no ISO"
 
-#: ../editfile.c:473
-#: ../isobrowser.c:215
+#: ../editfile.c:473 ../isobrowser.c:215
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Neizdevās pievienot \"%s\": \"%s\""
@@ -169,15 +162,12 @@ msgstr "Neizdevās izveidot direktoriju %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Neizdevās izveidot direktoriju %s: \"%s\""
 
-#: ../editfile.c:447
-#: ../isobrowser.c:850
+#: ../editfile.c:447 ../isobrowser.c:850
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Neizdevās dzēst \"%s\": \"%s\""
 
-#: ../editfile.c:412
-#: ../editfile.c:740
-#: ../isobrowser.c:963
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Neizdevās atspiest \"%s\": \"%s\""
@@ -187,8 +177,7 @@ msgstr "Neizdevās atspiest \"%s\": \"%s\""
 msgid "Failed to extract boot record: '%s'"
 msgstr "Neizdevās atspiest ielādes ierakstu: \"%s\""
 
-#: ../isobrowser.c:1146
-#: ../isobrowser.c:1248
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Neizdevās inicializēt bkisofs: \"%s\""
@@ -253,11 +242,12 @@ msgid "From file: no emulation"
 msgstr "No faila: bez emulācijas"
 
 #: ../isobrowser.c:868
-msgid "GUI error, deleting anything other than files and directories doesn't work"
-msgstr "GUI kļuda, var dzēst tikai failus un direktorijas, citāda dzēšana nestrādā"
+msgid ""
+"GUI error, deleting anything other than files and directories doesn't work"
+msgstr ""
+"GUI kļuda, var dzēst tikai failus un direktorijas, citāda dzēšana nestrādā"
 
-#: ../window.c:55
-#: ../window.c:392
+#: ../window.c:55 ../window.c:392
 msgid "Go back"
 msgstr "Doties atpakaļ"
 
@@ -269,12 +259,11 @@ msgstr "Doties vienu direktorijas līmeni uz augšu iekš ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Doties atpakaļ vienu direktoriju failusistēmā"
 
-#: ../isobrowser.c:1428
-#: ../isobrowser.c:1734
+#: ../isobrowser.c:1428 ../isobrowser.c:1734
 msgid "ISO Images"
 msgstr "ISO attēli"
 
-#: ../about.c:366
+#: ../about.c:375
 msgid "ISO Master Help"
 msgstr "ISO Master palīdzība"
 
@@ -303,21 +292,25 @@ msgid "Is visible on image as '%s'"
 msgstr "Ir redzams uz attēla kā \"%s\""
 
 #: ../isobrowser.c:770
-msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
-msgstr "Izskatās, ka esat veicis izmaiņas iekš ISO, bet neesat saglabājis. Vai esat drošs, ka vēlaties aizvērt?"
+msgid ""
+"It seems that you have made changes to the ISO but haven't saved them. Are "
+"you sure you want to close it?"
+msgstr ""
+"Izskatās, ka esat veicis izmaiņas iekš ISO, bet neesat saglabājis. Vai esat "
+"drošs, ka vēlaties aizvērt?"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "Atlasītais vienums nav parasts fails un nevar tikt izmantots, kā ielādes ieraksts"
+msgstr ""
+"Atlasītais vienums nav parasts fails un nevar tikt izmantots, kā ielādes "
+"ieraksts"
 
-#: ../boot.c:373
-#: ../boot.c:380
+#: ../boot.c:373 ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "Atrašanās vieta: uz sākotnējā attēla ir 0x%llX"
 
-#: ../boot.c:375
-#: ../boot.c:382
+#: ../boot.c:375 ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "Atrašanās vieta: tiks pievienota no \"%s\""
@@ -330,20 +323,18 @@ msgstr "MDF attēls"
 msgid "NRG Images"
 msgstr "NRG attēls"
 
-#: ../fsbrowser.c:121
-#: ../isobrowser.c:482
+#: ../fsbrowser.c:121 ../isobrowser.c:482
 msgid "Name"
 msgstr "Nosaukums"
 
-#: ../window.c:61
-#: ../window.c:398
+#: ../window.c:61 ../window.c:398
 msgid "New Directory"
 msgstr "Jauna direktorija"
 
-#: ../boot.c:149
-#: ../boot.c:327
+#: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
-msgstr "Neviens ielādes ieraksts nav nolasīts no sākotnējā vai uzstādīts attēlam"
+msgstr ""
+"Neviens ielādes ieraksts nav nolasīts no sākotnējā vai uzstādīts attēlam"
 
 #: ../boot.c:108
 msgid "No boot to delete"
@@ -381,9 +372,7 @@ msgstr "Lūdzu pagaidiet kamēr notiek attēla lasīšana..."
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Lūdzu pagaidiet kamēr notiek jaunā attēla saglabāšana diskā..."
 
-#: ../isobrowser.c:129
-#: ../isobrowser.c:897
-#: ../isobrowser.c:1299
+#: ../isobrowser.c:129 ../isobrowser.c:897 ../isobrowser.c:1299
 #: ../isobrowser.c:1647
 msgid "Progress"
 msgstr "Progress"
@@ -416,8 +405,7 @@ msgstr "Dublikātu failu skenēšana (lēni)"
 msgid "Show _hidden files"
 msgstr "Slēpt _slēptos failus"
 
-#: ../fsbrowser.c:142
-#: ../isobrowser.c:505
+#: ../fsbrowser.c:142 ../isobrowser.c:505
 msgid "Size"
 msgstr "Izmērs"
 
@@ -427,8 +415,11 @@ msgid "Size: %d bytes"
 msgstr "Izmērs: %d baiti"
 
 #: ../fsbrowser.c:280
-msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr "Tiek izlaists direktorijas ieraksts, jo nevar apstrādāt failus garākus par 256 rakstu zīmēm"
+msgid ""
+"Skipping directory entry because cannot handle filename longer than 256 chars"
+msgstr ""
+"Tiek izlaists direktorijas ieraksts, jo nevar apstrādāt failus garākus par "
+"256 rakstu zīmēm"
 
 #: ../fsbrowser.c:299
 #, c-format
@@ -439,12 +430,11 @@ msgstr "Tiek izlaists direktorijas ieraksts, jo stat(%s) neizdevās ar %d"
 msgid "Sort is _case sensitive"
 msgstr "_Reģistra jūtīga kārtošana"
 
-#: ../settings.c:746
-#: ../settings.c:750
+#: ../settings.c:746 ../settings.c:750
 msgid "Temporary directory"
 msgstr "Pagaidu direktorija"
 
-#: ../about.c:304
+#: ../about.c:313
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -473,31 +463,37 @@ msgstr ""
 " - Augšējais failu pārlūks rāda failus un direktorijas uz jūsu mašīnas.\n"
 " - Apakšējais failu pārlūks rāda failus un direktorijas uz jūsu ISO attēla.\n"
 "\n"
-"Lai atvērtu jaunu un eksistējošu ISO failu uzklikšķiniet uz \"Fails\" un \"Atvērt\".\n"
+"Lai atvērtu jaunu un eksistējošu ISO failu uzklikšķiniet uz \"Fails\" un "
+"\"Atvērt\".\n"
 "Lai izveidotu jaunu ISO failu uzklikšķiniet uz \"Fails\" un \"Jauns\".\n"
 "\n"
-"Lai pievienotu vienu vai vairākus failus vai direktorijas iekš ISO, atlasiet tos augšējā\n"
-"failu pārlūkā un noklikšķiniet uz pogas \"Pievienot iekš ISO\", kura atrodas vidējā rīkjoslā.\n"
+"Lai pievienotu vienu vai vairākus failus vai direktorijas iekš ISO, atlasiet "
+"tos augšējā\n"
+"failu pārlūkā un noklikšķiniet uz pogas \"Pievienot iekš ISO\", kura atrodas "
+"vidējā rīkjoslā.\n"
 "\n"
-"Lai atspiestu vienu vai vairākus failus vai direktorijas no ISO atlasiet tos iekš\n"
-"apakšējā failu pārlūka un uzklikšķiniet uz pogas \"Atspiest no ISO\", kura atrodas\n"
+"Lai atspiestu vienu vai vairākus failus vai direktorijas no ISO atlasiet tos "
+"iekš\n"
+"apakšējā failu pārlūka un uzklikšķiniet uz pogas \"Atspiest no ISO\", kura "
+"atrodas\n"
 "vidējā rīkjoslā.\n"
 "\n"
 "Jūs varat dzēst failus vai direktorijas no ISO un veidot jaunas\n"
 "direktorijas gan uz ISO, gan arī vietējā failusistēmā.\n"
 "\n"
-"Ja jūs atlasiet kaut ko apakšējā failu pārlūkā un uzklikšķiniet ar labo taustiņu\n"
+"Ja jūs atlasiet kaut ko apakšējā failu pārlūkā un uzklikšķiniet ar labo "
+"taustiņu\n"
 "un jums tiks piedāvātas vairākas iespējas.\n"
 "\n"
-"Kad esat veikuši visas izmaiņas jaunajam ISO attēlam, uzklikšķiniet uz \"Fails\" un\n"
+"Kad esat veikuši visas izmaiņas jaunajam ISO attēlam, uzklikšķiniet uz "
+"\"Fails\" un\n"
 "\"Saglabāt kā\". Jūs nevarat pārrakstīt pāri sākotnējam ISO.\n"
 
 #: ../window.c:314
 msgid "Use selected file on image (no emulation)"
 msgstr "Izmantot atlasīto failu uz attēla (bez emulācijas)"
 
-#: ../fsbrowser.c:583
-#: ../isobrowser.c:1904
+#: ../fsbrowser.c:583 ../isobrowser.c:1904
 msgid "View"
 msgstr "Apskatīt"
 
@@ -514,7 +510,8 @@ msgid "Volume name:"
 msgstr "Sējuma nosaukums:"
 
 #: ../settings.c:674
-msgid "You will have to close and reopen the ISO for this change to take effect"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
 msgstr "Jums būs jāaizver un jāataisa ISO, lai izmaiņas stātos spēkā"
 
 #: ../window.c:282
@@ -548,4 +545,3 @@ msgstr "_Rīki"
 #: ../window.c:227
 msgid "_View"
 msgstr "_Skats"
-

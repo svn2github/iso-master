@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2010-01-04 15:33-0500\n"
 "PO-Revision-Date: 2009-08-24 13:03+0200\n"
 "Last-Translator: Roman Smakal <smallsmaky@seznam.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -265,7 +265,7 @@ msgstr "Jdi v systému souborů zpět o jeden adresář"
 msgid "ISO Images"
 msgstr "ISO obrazy"
 
-#: ../about.c:366
+#: ../about.c:375
 msgid "ISO Master Help"
 msgstr "Nápověda ISO Masteru"
 
@@ -435,7 +435,7 @@ msgstr "Seřazení ovlivňuje velké/malé písmeno"
 msgid "Temporary directory"
 msgstr "Dočasný adresář"
 
-#: ../about.c:304
+#: ../about.c:313
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -542,5 +542,3 @@ msgstr "_Nástroje"
 #: ../window.c:227
 msgid "_View"
 msgstr "_Pohled"
-
-

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2010-01-04 15:33-0500\n"
 "PO-Revision-Date: 2008-09-27 20:09-0500\n"
 "Last-Translator: Danijel Muharemovic <majstor_dane@inbox.com>\n"
 "Language-Team: \n"
@@ -261,7 +261,7 @@ msgstr "Povratak u nadređeni direktorijum u fajlsistemu"
 msgid "ISO Images"
 msgstr "ISO imidži"
 
-#: ../about.c:366
+#: ../about.c:375
 msgid "ISO Master Help"
 msgstr "ISO Master Pomoć"
 
@@ -430,7 +430,7 @@ msgstr "Sortiranje je osetljivo na _velika slova"
 msgid "Temporary directory"
 msgstr "Privremeni direktorijum"
 
-#: ../about.c:304
+#: ../about.c:313
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
