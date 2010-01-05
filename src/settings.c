@@ -608,7 +608,7 @@ void loadSettings(void)
         if(GBLsettingsDictionary != NULL)
         {
             char configNameStr[20] = "ui:recentlyopen";
-            snprintf(configNameStr + 15, 20, "%d", i);
+            snprintf(configNameStr + 15, 5, "%d", i);
             
             tempStr = iniparser_getstring(GBLsettingsDictionary, 
                                           configNameStr, NULL);
@@ -893,7 +893,7 @@ void writeSettings(void)
     for(int i = 0; i < 5; i++)
     {
         char configNameStr[20] = "ui:recentlyopen";
-        snprintf(configNameStr + 15, 20, "%d", i);
+        snprintf(configNameStr + 15, 5, "%d", i);
         
         iniparser_setstr(GBLsettingsDictionary, configNameStr, 
             gtk_label_get_text(GTK_LABEL(
