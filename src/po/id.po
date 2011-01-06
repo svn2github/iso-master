@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-04 15:33-0500\n"
+"POT-Creation-Date: 2011-01-05 22:40-0500\n"
 "PO-Revision-Date: 2009-08-24 10:03+0700\n"
 "Last-Translator: Wahyu <w4h703@gmail.com>\n"
 "Language-Team: Indonesian <LL@li.org>\n"
@@ -258,7 +258,7 @@ msgstr "Kembali satu direktori pada sistem berkas"
 msgid "ISO Images"
 msgstr "Image ISO"
 
-#: ../about.c:375
+#: ../about.c:385
 msgid "ISO Master Help"
 msgstr "Bantuan ISO Master"
 
@@ -430,7 +430,7 @@ msgstr "Pengurutan _sensitif kasus"
 msgid "Temporary directory"
 msgstr "Direktori sementara"
 
-#: ../about.c:313
+#: ../about.c:323
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

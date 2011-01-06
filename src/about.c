@@ -292,7 +292,7 @@ GBLtranslators =
 "\n"
 "Muhammad Ali Makki\n"
 "http://makki.urducoder.com/\n"
-"- ar (Arabic) translation of ISO Master version 1.3\n"
+"- ur (Urdu) translation of ISO Master version 1.3\n"
 "\n"
 "Sun Minchao\n"
 "- zh_CN (Simplified Chineese) translation of ISO Master version 0.7 - 1.3\n"

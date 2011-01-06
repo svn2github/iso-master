@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-04 15:33-0500\n"
+"POT-Creation-Date: 2011-01-05 22:40-0500\n"
 "PO-Revision-Date: 2009-08-23 19:13-0000\n"
 "Last-Translator: Abdellah CHELLI <sneetsher@gmail.com>\n"
 "Language-Team: Abdellah Chelli <sneetsher@gmail.com>\n"
@@ -260,7 +260,7 @@ msgstr "تراجع مجلدا واحدا إلى أعلى في نظام المل�
 msgid "ISO Images"
 msgstr "صور ISO"
 
-#: ../about.c:375
+#: ../about.c:385
 msgid "ISO Master Help"
 msgstr "مساعدة ISO Master"
 
@@ -424,7 +424,7 @@ msgstr "ترتيب _حسّاس لحالة الأحرف"
 msgid "Temporary directory"
 msgstr "مجلد الملفات المؤقتة"
 
-#: ../about.c:313
+#: ../about.c:323
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

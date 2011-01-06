@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-23 11:31-0400\n"
+"POT-Creation-Date: 2011-01-05 22:40-0500\n"
 "PO-Revision-Date: 2010-08-26 16:14+0200\n"
 "Last-Translator: Toni <t@links2linux.de>\n"
 "Language-Team:  <>\n"
@@ -260,7 +260,7 @@ msgstr "Zurück zum übergeordneten Verzeichnis wechseln"
 msgid "ISO Images"
 msgstr "ISO-Abbilder"
 
-#: ../about.c:366
+#: ../about.c:385
 msgid "ISO Master Help"
 msgstr "ISO Master-Hilfe"
 
@@ -431,7 +431,7 @@ msgstr "Nach _Groß-/Kleinschreibung sortieren"
 msgid "Temporary directory"
 msgstr "Temporäres Verzeichnis"
 
-#: ../about.c:304
+#: ../about.c:323
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

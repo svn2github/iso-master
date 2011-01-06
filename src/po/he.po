@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master Hebrew\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-04 15:33-0500\n"
+"POT-Creation-Date: 2011-01-05 22:40-0500\n"
 "PO-Revision-Date: 2007-12-03 16:49-0500\n"
 "Last-Translator: \n"
 "Language-Team: Fima Kachinski <xrayon@gmail.com>\n"
@@ -257,7 +257,7 @@ msgstr "שוטט תיקייה אחת אחורה בכונן הקשיח"
 msgid "ISO Images"
 msgstr "דמויות ISO"
 
-#: ../about.c:375
+#: ../about.c:385
 msgid "ISO Master Help"
 msgstr "עזרה לISO MASTER"
 
@@ -427,7 +427,7 @@ msgstr "המיון רגיש להבדל בין אותיות קטנות וגדול
 msgid "Temporary directory"
 msgstr "תיקיה זמנית"
 
-#: ../about.c:313
+#: ../about.c:323
 #, fuzzy
 msgid ""
 "The ISO Master window is split in 2 parts:\n"

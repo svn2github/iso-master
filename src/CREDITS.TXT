@@ -116,6 +116,7 @@ Wolven
 http://wolvix.org/
 - Wolvix package of ISO Master, version 1.0
 
+
 Translations:
 
 Abdellah Chelli
@@ -139,14 +140,17 @@ Schmaki
 Jiri Huf
 - cs (Czech) translation of ISO Master version 1.3
 
-Toni Graffy
-- de (German) translation of ISO Master versions 0.6 - 1.3
-
 Magnus Valle
 - da (Danish) translation of ISO Master version 1.3
 
 Henrik Kristiansen
 - da (Danish) translation of ISO Master version 1.3
+
+Toni Graffy
+- de (German) translation of ISO Master versions 0.6 - 1.3
+
+Daniel Schury
+- de (German) translation of ISO Master version 1.3
 
 Mike Kranidis
 - el (Greek) translation of ISO Master versions 1.1 - 1.3
@@ -195,6 +199,9 @@ F. Lombardi
 
 Valerio Guaglianone
 - it (Italian) translation of ISO Master version 0.7, 1.1, 1.3
+
+Hajime Taira
+- ja (Japanese) translation of ISO Master version 1.3
 
 Rihards Prieditis
 - lv (Latvian) translation of ISO Master version 1.3
@@ -252,6 +259,10 @@ Tutku Dalmaz
 
 Serhey Kusyumoff
 - uk (Ukrainian) translation of ISO Master versions 0.8, 1.3
+
+Muhammad Ali Makki
+http://makki.urducoder.com/
+- ur (Urdu) translation of ISO Master version 1.3
 
 Sun Minchao
 - zh_CN (Simplified Chineese) translation of ISO Master version 0.7 - 1.3

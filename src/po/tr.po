@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master 0.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-04 15:33-0500\n"
+"POT-Creation-Date: 2011-01-05 22:40-0500\n"
 "PO-Revision-Date: 2009-08-23 20:44+0200\n"
 "Last-Translator: Tutku Dalmaz <tutkudalmaz@gmail.com>\n"
 "Language-Team: Tutku DALMAZ <t@gmail.com>\n"
@@ -260,7 +260,7 @@ msgstr "Dosya sistemi içerisinde bir üst dizine git"
 msgid "ISO Images"
 msgstr "ISO kalıpları"
 
-#: ../about.c:375
+#: ../about.c:385
 msgid "ISO Master Help"
 msgstr "ISO Master Yardım"
 
@@ -430,7 +430,7 @@ msgid "Temporary directory"
 msgstr "Geçici Dizin"
 
 # !! this translation is incomplete
-#: ../about.c:313
+#: ../about.c:323
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"

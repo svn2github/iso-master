@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-04 15:33-0500\n"
+"POT-Creation-Date: 2011-01-05 22:40-0500\n"
 "PO-Revision-Date: 2010-12-27 22:45+0200\n"
 "Last-Translator: Muhammad Ali Makki <makkiabufaris@aol.com>\n"
 "Language-Team: Urdu <makkiabufaris@aol.com>\n"
@@ -34,16 +34,12 @@ msgstr ""
 "\n"
 "کیا آپ آگے بڑھنا چاہتے ہیں؟"
 
-#: ../editfile.c:272
-#: ../editfile.c:368
-#: ../editfile.c:601
-#: ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' باضابطہ فائل نہیں ہے"
 
-#: ../isobrowser.c:142
-#: ../isobrowser.c:1312
+#: ../isobrowser.c:142 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(مثنی فائلوں کے لیے سکین کیا جارہا ہے)"
 
@@ -59,8 +55,7 @@ msgstr "لاحقہ خودکار شامل کریں"
 msgid "Add to the ISO"
 msgstr "آئی ایس او میں شامل کریں"
 
-#: ../isobrowser.c:1443
-#: ../isobrowser.c:1739
+#: ../isobrowser.c:1443 ../isobrowser.c:1739
 msgid "All files"
 msgstr "تمام فائلیں"
 
@@ -92,8 +87,7 @@ msgstr "بوٹ ریکارڈ کی نوعیت: 2880KiB فلاپی"
 msgid "Boot record type: No Emulation"
 msgstr "بوٹ ریکارڈ کی نوعیت: کوئی شبیہ سازی نہیں"
 
-#: ../isobrowser.c:267
-#: ../isobrowser.c:1918
+#: ../isobrowser.c:267 ../isobrowser.c:1918
 msgid "Change permissions"
 msgstr "اجازے بدلیں"
 
@@ -117,8 +111,7 @@ msgstr "بنانے کا وقت:"
 msgid "Delete from the ISO"
 msgstr "آئی ایس او سے حذف کریں"
 
-#: ../fsbrowser.c:590
-#: ../isobrowser.c:1911
+#: ../fsbrowser.c:590 ../isobrowser.c:1911
 msgid "Edit"
 msgstr "تدوین"
 
@@ -146,8 +139,7 @@ msgstr "کشید کریں"
 msgid "Extract from the ISO"
 msgstr "آئی ایس او سے کشید کریں"
 
-#: ../editfile.c:473
-#: ../isobrowser.c:215
+#: ../editfile.c:473 ../isobrowser.c:215
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "شامل کرنے میں ناکامی '%s': '%s'"
@@ -172,15 +164,12 @@ msgstr "ڈائریکٹری بنانے میں ناکامی %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "ڈائریکٹری بنانے میں ناکامی %s: '%s'"
 
-#: ../editfile.c:447
-#: ../isobrowser.c:850
+#: ../editfile.c:447 ../isobrowser.c:850
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "حذف کرنے میں ناکامی '%s': '%s'"
 
-#: ../editfile.c:412
-#: ../editfile.c:740
-#: ../isobrowser.c:963
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "کشید کرنے میں ناکامی '%s': '%s'"
@@ -190,8 +179,7 @@ msgstr "کشید کرنے میں ناکامی '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "بوٹ ریکارڈ کشید کرنے میں ناکامی: '%s'"
 
-#: ../isobrowser.c:1146
-#: ../isobrowser.c:1248
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "bkisofs کی ابتداء کرنے میں ناکامی: '%s'"
@@ -256,11 +244,12 @@ msgid "From file: no emulation"
 msgstr "از فائل: کوئی شبیہ سازی نہیں"
 
 #: ../isobrowser.c:868
-msgid "GUI error, deleting anything other than files and directories doesn't work"
-msgstr "مواجہ غلطی: فائلوں اور ڈائریکٹریوں کے علاوہ کچھ بھی حذف کرنا کام نہیں کرے گا"
+msgid ""
+"GUI error, deleting anything other than files and directories doesn't work"
+msgstr ""
+"مواجہ غلطی: فائلوں اور ڈائریکٹریوں کے علاوہ کچھ بھی حذف کرنا کام نہیں کرے گا"
 
-#: ../window.c:55
-#: ../window.c:392
+#: ../window.c:55 ../window.c:392
 msgid "Go back"
 msgstr "پیچھے جائیں"
 
@@ -272,12 +261,11 @@ msgstr "آئی ایس او میں ایک ڈائریکٹری پیچھے جائی�
 msgid "Go back up one directory on the filesystem"
 msgstr "فائل نظام میں ایک ڈائریکٹری پیچھے جائیں"
 
-#: ../isobrowser.c:1428
-#: ../isobrowser.c:1734
+#: ../isobrowser.c:1428 ../isobrowser.c:1734
 msgid "ISO Images"
 msgstr "آئی ایس او تصاویر"
 
-#: ../about.c:375
+#: ../about.c:385
 msgid "ISO Master Help"
 msgstr "آئی ایس او ماسٹر کی ہدایات"
 
@@ -306,21 +294,25 @@ msgid "Is visible on image as '%s'"
 msgstr "تصویر میں بطور '%s' رویت پذیر ہے"
 
 #: ../isobrowser.c:770
-msgid "It seems that you have made changes to the ISO but haven't saved them. Are you sure you want to close it?"
-msgstr "معلوم ہوتا ہے کہ آپ نے آئی ایس او میں تبدیلیاں کی ہیں مگر انہیں محفوظ نہیں کیا. کیا آپ واقعی اسے بند کرنا چاہتے ہیں؟"
+msgid ""
+"It seems that you have made changes to the ISO but haven't saved them. Are "
+"you sure you want to close it?"
+msgstr ""
+"معلوم ہوتا ہے کہ آپ نے آئی ایس او میں تبدیلیاں کی ہیں مگر انہیں محفوظ نہیں "
+"کیا. کیا آپ واقعی اسے بند کرنا چاہتے ہیں؟"
 
 #: ../boot.c:271
 msgid "Item selected is not a regular file and cannot be used as a boot record"
-msgstr "منتخب کردہ عنصر باضابطہ فائل نہیں ہے اور بوٹ ریکارڈ کے طور پر استعمال نہیں کی جاسکتی"
+msgstr ""
+"منتخب کردہ عنصر باضابطہ فائل نہیں ہے اور بوٹ ریکارڈ کے طور پر استعمال نہیں "
+"کی جاسکتی"
 
-#: ../boot.c:373
-#: ../boot.c:380
+#: ../boot.c:373 ../boot.c:380
 #, c-format
 msgid "Location: on original image at 0x%llX"
 msgstr "مقام: اصل تصویر میں بر 0x%llX"
 
-#: ../boot.c:375
-#: ../boot.c:382
+#: ../boot.c:375 ../boot.c:382
 #, c-format
 msgid "Location: to be added from '%s'"
 msgstr "مقام: شامل کی جائے گی از '%s'"
@@ -333,18 +325,15 @@ msgstr "MDF تصاویر"
 msgid "NRG Images"
 msgstr "NRG تصاویر"
 
-#: ../fsbrowser.c:121
-#: ../isobrowser.c:482
+#: ../fsbrowser.c:121 ../isobrowser.c:482
 msgid "Name"
 msgstr "نام"
 
-#: ../window.c:61
-#: ../window.c:398
+#: ../window.c:61 ../window.c:398
 msgid "New Directory"
 msgstr "نئی ڈائریکٹری"
 
-#: ../boot.c:149
-#: ../boot.c:327
+#: ../boot.c:149 ../boot.c:327
 msgid "No boot record read from original or set on image"
 msgstr "اصل سے کوئی بوٹ ریکارڈ نہیں پڑھا گیا یا تصویر میں متعین نہیں کیا گیا"
 
@@ -362,7 +351,9 @@ msgstr "اختیارات"
 
 #: ../boot.c:229
 msgid "Please select a file in the ISO browser to use as the boot record"
-msgstr "بوٹ ریکارڈ کے طور پر استعمال کرنے کے لیے آئی ایس او براؤزر میں فائل منتخب کریں"
+msgstr ""
+"بوٹ ریکارڈ کے طور پر استعمال کرنے کے لیے آئی ایس او براؤزر میں فائل منتخب "
+"کریں"
 
 #: ../boot.c:243
 msgid "Please select no more than one file in the ISO browser"
@@ -374,7 +365,8 @@ msgstr "ازراہِ کرم جب تک میں منتخب کردہ عناصر شا
 
 #: ../isobrowser.c:905
 msgid "Please wait while I'm extracting the selected files..."
-msgstr "ازراہِ کرم جب تک میں منتخب کردہ فائلیں کشید نہ کر لوں تب تک انتظار فرمائیں..."
+msgstr ""
+"ازراہِ کرم جب تک میں منتخب کردہ فائلیں کشید نہ کر لوں تب تک انتظار فرمائیں..."
 
 #: ../isobrowser.c:1306
 msgid "Please wait while I'm reading the image..."
@@ -382,11 +374,11 @@ msgstr "ازراہِ کرم جب تک میں تصویر کو پڑھ نہ لو ت
 
 #: ../isobrowser.c:1657
 msgid "Please wait while I'm saving the new image to disk..."
-msgstr "ازراہِ کرم جب تک میں نئی تصویر کو ڈسک پر محفوظ نہ کر لوں تب تک انتظار فرمائیں..."
+msgstr ""
+"ازراہِ کرم جب تک میں نئی تصویر کو ڈسک پر محفوظ نہ کر لوں تب تک انتظار "
+"فرمائیں..."
 
-#: ../isobrowser.c:129
-#: ../isobrowser.c:897
-#: ../isobrowser.c:1299
+#: ../isobrowser.c:129 ../isobrowser.c:897 ../isobrowser.c:1299
 #: ../isobrowser.c:1647
 msgid "Progress"
 msgstr "پیش رفت"
@@ -419,8 +411,7 @@ msgstr "مثنی فائلوں کے لیے تلاش کریں (سست)"
 msgid "Show _hidden files"
 msgstr "_پوشیدہ فائلیں دکھائیں"
 
-#: ../fsbrowser.c:142
-#: ../isobrowser.c:505
+#: ../fsbrowser.c:142 ../isobrowser.c:505
 msgid "Size"
 msgstr "حجم"
 
@@ -430,8 +421,11 @@ msgid "Size: %d bytes"
 msgstr "حجم: %d بائٹس"
 
 #: ../fsbrowser.c:280
-msgid "Skipping directory entry because cannot handle filename longer than 256 chars"
-msgstr "ڈائریکٹری کی انٹری پھلانگی جارہی ہے کیونکہ 256 حروف سے زیادہ کے فائل نام کو ہینڈل نہیں کیا جاسکتا"
+msgid ""
+"Skipping directory entry because cannot handle filename longer than 256 chars"
+msgstr ""
+"ڈائریکٹری کی انٹری پھلانگی جارہی ہے کیونکہ 256 حروف سے زیادہ کے فائل نام کو "
+"ہینڈل نہیں کیا جاسکتا"
 
 #: ../fsbrowser.c:299
 #, c-format
@@ -442,12 +436,11 @@ msgstr "ڈائریکٹری کی انٹری پھلانگی جارہی ہے کیو
 msgid "Sort is _case sensitive"
 msgstr "چھانٹنا _حساس ہے"
 
-#: ../settings.c:746
-#: ../settings.c:750
+#: ../settings.c:746 ../settings.c:750
 msgid "Temporary directory"
 msgstr "عارضی ڈائریکٹری"
 
-#: ../about.c:313
+#: ../about.c:323
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -474,31 +467,38 @@ msgid ""
 msgstr ""
 "آئی ایس او ماسٹر کا دریچہ دو حصوں میں منقسم ہے:\n"
 " - اوپر کا فائل براؤزر آپ کے کمپیوٹر کی ڈائریکٹریاں اور فائلیں دکھاتا ہے.\n"
-" - نیچے کا فائل براؤزر آئی ایس او تصویر کی ڈائریکٹریاں اور فائلیں دکھاتا ہے.\n"
+" - نیچے کا فائل براؤزر آئی ایس او تصویر کی ڈائریکٹریاں اور فائلیں دکھاتا "
+"ہے.\n"
 "\n"
 "کوئی سابقہ آئی ایس او کھولنے کے لیے 'فائل' پھر 'کھولیں' پر کلک کریں\n"
 "نئی آئی ایس او فائل بنانے کے لیے 'فائل' پھر 'نیا' پر کلک کریں.\n"
 "\n"
-"آئی ایس او میں ایک یا زیادہ فائلیں یا ڈائریکٹریاں شامل کرنے کے لیے انہیں اوپر کے فائل\n"
-"براؤزر میں منتخب کریں اور درمیانی اوزار پٹی میں 'شامل کریں' کے بٹن پر کلک کریں.\n"
+"آئی ایس او میں ایک یا زیادہ فائلیں یا ڈائریکٹریاں شامل کرنے کے لیے انہیں "
+"اوپر کے فائل\n"
+"براؤزر میں منتخب کریں اور درمیانی اوزار پٹی میں 'شامل کریں' کے بٹن پر کلک "
+"کریں.\n"
 "\n"
-"آئی ایس اور سے ایک یا زیادہ فائلیں یا ڈائریکٹریاں کشید کرنے کے لیے انہیں نیچے کے فائل\n"
-"براؤزر میں منتخب کریں اور درمیان کی اوزار پٹی میں 'کشید کریں' کے بٹن پر کلک کریں.\n"
+"آئی ایس اور سے ایک یا زیادہ فائلیں یا ڈائریکٹریاں کشید کرنے کے لیے انہیں "
+"نیچے کے فائل\n"
+"براؤزر میں منتخب کریں اور درمیان کی اوزار پٹی میں 'کشید کریں' کے بٹن پر کلک "
+"کریں.\n"
 "\n"
-"آپ آئی ایس او میں اور اپنے فائل نظام میں فائلیں اور ڈائریکٹریاں بھی حذف کرسکتے ہیں\n"
+"آپ آئی ایس او میں اور اپنے فائل نظام میں فائلیں اور ڈائریکٹریاں بھی حذف "
+"کرسکتے ہیں\n"
 "\n"
-"اگر آپ نیچے کے فائل براؤزر پر کچھ منتخب کر کے اس پر دایاں کلک کریں گے تو آپ کے لیے\n"
+"اگر آپ نیچے کے فائل براؤزر پر کچھ منتخب کر کے اس پر دایاں کلک کریں گے تو آپ "
+"کے لیے\n"
 "کچھ مزید اختیارات دستیاب ہوں گے.\n"
 "\n"
-"جب آپ آئی ایس او تصویر میں تمام تبدیلیاں کر لیں تو 'فائل' سے 'محفوظ بنام' منتخب کریں.\n"
+"جب آپ آئی ایس او تصویر میں تمام تبدیلیاں کر لیں تو 'فائل' سے 'محفوظ بنام' "
+"منتخب کریں.\n"
 "آپ اصل آئی ایس او کے اوپر نہیں لکھ سکتے.\n"
 
 #: ../window.c:314
 msgid "Use selected file on image (no emulation)"
 msgstr "تصویر میں منتخب کردہ فائل استعمال کریں (کوئی شبیہ سازی نہیں)"
 
-#: ../fsbrowser.c:583
-#: ../isobrowser.c:1904
+#: ../fsbrowser.c:583 ../isobrowser.c:1904
 msgid "View"
 msgstr "منظر"
 
@@ -515,8 +515,11 @@ msgid "Volume name:"
 msgstr "حُجم کا نام:"
 
 #: ../settings.c:674
-msgid "You will have to close and reopen the ISO for this change to take effect"
-msgstr "اس تبدیلی کو اثر پذیر ہونے کے لیے آپ کو چاہیے کہ آئی ایس او کو بند کر کے دوبارہ کھولیں"
+msgid ""
+"You will have to close and reopen the ISO for this change to take effect"
+msgstr ""
+"اس تبدیلی کو اثر پذیر ہونے کے لیے آپ کو چاہیے کہ آئی ایس او کو بند کر کے "
+"دوبارہ کھولیں"
 
 #: ../window.c:282
 msgid "_Boot Record"
@@ -549,4 +552,3 @@ msgstr "_اوزار"
 #: ../window.c:227
 msgid "_View"
 msgstr "_منظر"
-
