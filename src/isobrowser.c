@@ -9,6 +9,7 @@
 * Andrew Smith, http://littlesvr.ca/misc/contactandrew.php
 *
 * Contributors:
+* Sebastian Pipping <sebastian@pipping.org>
 * 
 ******************************************************************************/
 
@@ -1454,19 +1455,26 @@ gboolean openIsoCbk(GtkMenuItem* menuItem, gpointer data)
         
         /* RECORD last iso dir */
         char* lastIsoDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
-        
-        if(GBLappSettings.lastIsoDir != NULL && strlen(lastIsoDir) > strlen(GBLappSettings.lastIsoDir))
+        if(lastIsoDir)
+        {
+            if(GBLappSettings.lastIsoDir != NULL && strlen(lastIsoDir) > strlen(GBLappSettings.lastIsoDir))
+            {
+                free(GBLappSettings.lastIsoDir);
+                GBLappSettings.lastIsoDir = NULL;
+            }
+
+            if(GBLappSettings.lastIsoDir == NULL)
+                GBLappSettings.lastIsoDir = malloc(strlen(lastIsoDir) + 1);
+
+            strcpy(GBLappSettings.lastIsoDir, lastIsoDir);
+
+            g_free(lastIsoDir);
+        }
+        else /* e.g. when opening a file from the <Recently used> view */
         {
             free(GBLappSettings.lastIsoDir);
             GBLappSettings.lastIsoDir = NULL;
         }
-        
-        if(GBLappSettings.lastIsoDir == NULL)
-            GBLappSettings.lastIsoDir = malloc(strlen(lastIsoDir) + 1);
-        
-        strcpy(GBLappSettings.lastIsoDir, lastIsoDir);
-        
-        g_free(lastIsoDir);
         /* END RECORD last iso dir */
     }
     
@@ -1758,20 +1766,27 @@ gboolean saveIsoCbk(GtkWidget *widget, GdkEvent *event)
         
         /* RECORD last iso dir */
         char* lastIsoDir = gtk_file_chooser_get_current_folder(GTK_FILE_CHOOSER(dialog));
-        
-        if(GBLappSettings.lastIsoDir != NULL && strlen(lastIsoDir) > strlen(GBLappSettings.lastIsoDir))
+        if(lastIsoDir)
+        {
+            if(GBLappSettings.lastIsoDir != NULL && strlen(lastIsoDir) > strlen(GBLappSettings.lastIsoDir))
+            {
+                free(GBLappSettings.lastIsoDir);
+                GBLappSettings.lastIsoDir = NULL;
+            }
+
+            if(GBLappSettings.lastIsoDir == NULL)
+                GBLappSettings.lastIsoDir = malloc(strlen(lastIsoDir) + 1);
+
+            strcpy(GBLappSettings.lastIsoDir, lastIsoDir);
+
+            g_free(lastIsoDir);
+        }
+        else /* e.g. when opening a file from the <Recently used> view */
         {
             free(GBLappSettings.lastIsoDir);
             GBLappSettings.lastIsoDir = NULL;
         }
-        
-        if(GBLappSettings.lastIsoDir == NULL)
-            GBLappSettings.lastIsoDir = malloc(strlen(lastIsoDir) + 1);
-        
-        strcpy(GBLappSettings.lastIsoDir, lastIsoDir);
-        
-        g_free(lastIsoDir);
-        /* END RECORD iso save dir */
+        /* END RECORD last iso dir */
         
         askedToAddExtension = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(addExtensionCheckbox));
     }
