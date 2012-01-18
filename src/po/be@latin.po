@@ -7,22 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-05 22:40-0500\n"
+"POT-Creation-Date: 2012-01-18 14:19-0500\n"
 "PO-Revision-Date: 2008-01-06 01:33+0200\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: i18n@mova.org <i18n@mova.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Language: Belarusian latin\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
-"10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: ../window.c:417
 msgid "      Estimated ISO Size: "
 msgstr "      Astatny pamier ISO: "
 
-#: ../isobrowser.c:1504
+#: ../isobrowser.c:1512
 #, c-format
 msgid ""
 "%s\n"
@@ -38,7 +39,7 @@ msgstr ""
 msgid "'%s' is not a regular file"
 msgstr "\"%s\" nie źjaŭlajecca zvyčajnym fajłam"
 
-#: ../isobrowser.c:142 ../isobrowser.c:1312
+#: ../isobrowser.c:143 ../isobrowser.c:1313
 msgid "(scanning for duplicate files)"
 msgstr "(pošuk paŭtornych fajłaŭ)"
 
@@ -46,7 +47,7 @@ msgstr "(pošuk paŭtornych fajłaŭ)"
 msgid "Add"
 msgstr "Dadaj"
 
-#: ../isobrowser.c:1742
+#: ../isobrowser.c:1750
 msgid "Add extension automatically"
 msgstr "Aŭtamatyčna dadavaj pašyreńnie"
 
@@ -54,7 +55,7 @@ msgstr "Aŭtamatyčna dadavaj pašyreńnie"
 msgid "Add to the ISO"
 msgstr "Dadaj da vyjavy ISO"
 
-#: ../isobrowser.c:1443 ../isobrowser.c:1739
+#: ../isobrowser.c:1444 ../isobrowser.c:1747
 msgid "All files"
 msgstr "Usie fajły"
 
@@ -86,7 +87,7 @@ msgstr "Typ zahruzačnaha zapisu: dyskieta 2880KiB"
 msgid "Boot record type: No Emulation"
 msgstr "Typ zahruzačnaha zapisu: biez emulacyi"
 
-#: ../isobrowser.c:267 ../isobrowser.c:1918
+#: ../isobrowser.c:268 ../isobrowser.c:1933
 msgid "Change permissions"
 msgstr "Źmiani pravy"
 
@@ -110,7 +111,7 @@ msgstr "Čas stvareńnia:"
 msgid "Delete from the ISO"
 msgstr "Vydal z vyjavy ISO"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1911
+#: ../fsbrowser.c:590 ../isobrowser.c:1926
 msgid "Edit"
 msgstr "Redahuj"
 
@@ -122,7 +123,7 @@ msgstr "Niaŭdałaje redahavańnie, pravier Opcyi/Redaktar"
 msgid "Editor"
 msgstr "Redaktar"
 
-#: ../isobrowser.c:1583
+#: ../isobrowser.c:1591
 msgid "Enter a new name:"
 msgstr "Uviadzi novuju nazvu:"
 
@@ -138,7 +139,7 @@ msgstr "Vyjmi"
 msgid "Extract from the ISO"
 msgstr "Vyjmi z vyjavy ISO"
 
-#: ../editfile.c:473 ../isobrowser.c:215
+#: ../editfile.c:473 ../isobrowser.c:216
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "Pamyłka dadańnia \"%s\": \"%s\""
@@ -148,7 +149,7 @@ msgstr "Pamyłka dadańnia \"%s\": \"%s\""
 msgid "Failed to add boot record: '%s'"
 msgstr "Niaŭdałaje dadańnie zahruzačnaha zapisu: \"%s\""
 
-#: ../isobrowser.c:555
+#: ../isobrowser.c:556
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr "Niaŭdałaja źmiena katalohu: \"%s\""
@@ -163,12 +164,12 @@ msgstr "Niaŭdałaje stvareńnie katalohu %s"
 msgid "Failed to create directory %s: '%s'"
 msgstr "Niaŭdałaje stvareńnie katalohu %s: \"%s\""
 
-#: ../editfile.c:447 ../isobrowser.c:850
+#: ../editfile.c:447 ../isobrowser.c:851
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "Niaŭdałaje vydaleńnie \"%s\": \"%s\""
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:963
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:964
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Niaŭdałaje vyjmańnie \"%s\": \"%s\""
@@ -178,7 +179,7 @@ msgstr "Niaŭdałaje vyjmańnie \"%s\": \"%s\""
 msgid "Failed to extract boot record: '%s'"
 msgstr "Niaŭdałaje vyjmańnie zahruzačnaha zapisu: \"%s\""
 
-#: ../isobrowser.c:1146 ../isobrowser.c:1248
+#: ../isobrowser.c:1147 ../isobrowser.c:1249
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Niaŭdałaja inicyjalizacyja bkisofs: \"%s\""
@@ -188,22 +189,22 @@ msgstr "Niaŭdałaja inicyjalizacyja bkisofs: \"%s\""
 msgid "Failed to open directory '%s', error %d"
 msgstr "Niaŭdałaje adčynieńnie katalohu \"%s\", pamyłka %d"
 
-#: ../isobrowser.c:1267
+#: ../isobrowser.c:1268
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Niaŭdałaje adčynieńnie vyjavy ISO, kab pračytać: \"%s\""
 
-#: ../isobrowser.c:1342
+#: ../isobrowser.c:1343
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Niaŭdałaje adčytańnie dreva katalohaŭ: \"%s\""
 
-#: ../isobrowser.c:1282
+#: ../isobrowser.c:1283
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Niaŭdałaje adčytańnie źviestak ab masivie: \"%s\""
 
-#: ../isobrowser.c:1612
+#: ../isobrowser.c:1620
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Niaŭdałaja źmiena nazvy \"%s\": %s"
@@ -213,7 +214,7 @@ msgstr "Niaŭdałaja źmiena nazvy \"%s\": %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Pamyłka akreśleńnia %s jak zahruzačnaha zapisu: \"%s\""
 
-#: ../isobrowser.c:1685
+#: ../isobrowser.c:1693
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Niaŭdały zapis vyjavy ŭ \"%s\": \"%s\""
@@ -242,7 +243,7 @@ msgstr "Z fajłu: dyskieta 2880KiB"
 msgid "From file: no emulation"
 msgstr "Z fajłu: biez emulacyi"
 
-#: ../isobrowser.c:868
+#: ../isobrowser.c:869
 msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr ""
@@ -261,11 +262,11 @@ msgstr "Viarnisia na ŭzrovień vyšej u vyjavie ISO"
 msgid "Go back up one directory on the filesystem"
 msgstr "Viarnisia na ŭzrovień vyšej na fajłavaj systemie"
 
-#: ../isobrowser.c:1428 ../isobrowser.c:1734
+#: ../isobrowser.c:1429 ../isobrowser.c:1742
 msgid "ISO Images"
 msgstr "Vyjavy ISO"
 
-#: ../about.c:385
+#: ../about.c:392
 msgid "ISO Master Help"
 msgstr "Daviedka dla Majstra ISO"
 
@@ -293,7 +294,7 @@ msgstr "Niabačna na vyjavie"
 msgid "Is visible on image as '%s'"
 msgstr "Bačna na vyjavie jak \"%s\""
 
-#: ../isobrowser.c:770
+#: ../isobrowser.c:771
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
@@ -317,15 +318,15 @@ msgstr "Pałažeńnie: na aryhinalnaj vyjavie u 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Pałažeńnie: dadać z \"%s\""
 
-#: ../isobrowser.c:1438
+#: ../isobrowser.c:1439
 msgid "MDF Images"
 msgstr "Vyjavy MDF"
 
-#: ../isobrowser.c:1433
+#: ../isobrowser.c:1434
 msgid "NRG Images"
 msgstr "Vyjavy NRG"
 
-#: ../fsbrowser.c:121 ../isobrowser.c:482
+#: ../fsbrowser.c:121 ../isobrowser.c:483
 msgid "Name"
 msgstr "Nazva"
 
@@ -360,24 +361,24 @@ msgstr ""
 msgid "Please select no more than one file in the ISO browser"
 msgstr "Zaznač nia bolš za adzin fajł u prahladalniku ISO"
 
-#: ../isobrowser.c:136
+#: ../isobrowser.c:137
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Kali łaska, pačakaj, pakul ja dadam zaznačanyja elementy..."
 
-#: ../isobrowser.c:905
+#: ../isobrowser.c:906
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Kali łaska, pačakaj, pakul ja vyjmu zaznačanyja fajły..."
 
-#: ../isobrowser.c:1306
+#: ../isobrowser.c:1307
 msgid "Please wait while I'm reading the image..."
 msgstr "Kali łaska, pačakaj, pakul ja čytaju vyjavu..."
 
-#: ../isobrowser.c:1657
+#: ../isobrowser.c:1665
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Kali łaska, pačakaj, pakul ja zapisvaju novuju vyjavu na dysku..."
 
-#: ../isobrowser.c:129 ../isobrowser.c:897 ../isobrowser.c:1299
-#: ../isobrowser.c:1647
+#: ../isobrowser.c:130 ../isobrowser.c:898 ../isobrowser.c:1300
+#: ../isobrowser.c:1655
 msgid "Progress"
 msgstr "Prahres"
 
@@ -389,11 +390,11 @@ msgstr "Vydaviec:"
 msgid "Remove"
 msgstr "Vydal"
 
-#: ../isobrowser.c:1895
+#: ../isobrowser.c:1910
 msgid "Rename"
 msgstr "Źmiani nazvu"
 
-#: ../isobrowser.c:1723
+#: ../isobrowser.c:1731
 msgid "Save File"
 msgstr "Zapišy fajł"
 
@@ -409,7 +410,7 @@ msgstr "Šukaj paŭtornyja fajły (marudna)"
 msgid "Show _hidden files"
 msgstr "Pakažy _schavanyja fajły"
 
-#: ../fsbrowser.c:142 ../isobrowser.c:505
+#: ../fsbrowser.c:142 ../isobrowser.c:506
 msgid "Size"
 msgstr "Pamier"
 
@@ -438,7 +439,7 @@ msgstr "Paradak, jaki _ŭličvaje rehistar"
 msgid "Temporary directory"
 msgstr "Časovy kataloh"
 
-#: ../about.c:323
+#: ../about.c:330
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -468,7 +469,7 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "Užyj zaznačany fajł dla vyjavy (biez emulacyi)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1904
+#: ../fsbrowser.c:583 ../isobrowser.c:1919
 msgid "View"
 msgstr "Pakažy"
 

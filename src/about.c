@@ -68,6 +68,7 @@ GBLauthors[2] = {
 "- gave me access to a big endian SuperSPARC II box running Debian for testing\n"
 "\n"
 "Sebastian Pipping\n"
+"https://blog.hartwork.org/\n"
 "- Patch to fix a crash when opening a file from the \"Recently used\" section of the file browser\n"
 "\n"
 "Ernst W. Winter\n"

@@ -6,10 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zh_CN\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-01-05 22:40-0500\n"
+"POT-Creation-Date: 2012-01-18 14:19-0500\n"
 "PO-Revision-Date: 2007-12-12 16:35-0500\n"
 "Last-Translator: Sun Minchao <sunminchao@gmx.de>\n"
 "Language-Team:  <zh@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,7 +19,7 @@ msgstr ""
 msgid "      Estimated ISO Size: "
 msgstr "估计的 ISO 文件大小："
 
-#: ../isobrowser.c:1504
+#: ../isobrowser.c:1512
 #, c-format
 msgid ""
 "%s\n"
@@ -34,7 +35,7 @@ msgstr ""
 msgid "'%s' is not a regular file"
 msgstr "'%s' 不是正规文件"
 
-#: ../isobrowser.c:142 ../isobrowser.c:1312
+#: ../isobrowser.c:143 ../isobrowser.c:1313
 msgid "(scanning for duplicate files)"
 msgstr "（正在扫描重复文件）"
 
@@ -42,7 +43,7 @@ msgstr "（正在扫描重复文件）"
 msgid "Add"
 msgstr "添加"
 
-#: ../isobrowser.c:1742
+#: ../isobrowser.c:1750
 msgid "Add extension automatically"
 msgstr "自动添加扩展"
 
@@ -50,7 +51,7 @@ msgstr "自动添加扩展"
 msgid "Add to the ISO"
 msgstr "添加到 ISO"
 
-#: ../isobrowser.c:1443 ../isobrowser.c:1739
+#: ../isobrowser.c:1444 ../isobrowser.c:1747
 msgid "All files"
 msgstr "所有文件"
 
@@ -82,7 +83,7 @@ msgstr "引导记录类型：2880KB 软盘"
 msgid "Boot record type: No Emulation"
 msgstr "引导记录类型：不模拟"
 
-#: ../isobrowser.c:267 ../isobrowser.c:1918
+#: ../isobrowser.c:268 ../isobrowser.c:1933
 msgid "Change permissions"
 msgstr "改变权限"
 
@@ -106,7 +107,7 @@ msgstr "创建时间"
 msgid "Delete from the ISO"
 msgstr "从 ISO 中删除"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1911
+#: ../fsbrowser.c:590 ../isobrowser.c:1926
 msgid "Edit"
 msgstr "编辑"
 
@@ -118,7 +119,7 @@ msgstr "编辑失败，请检查 “设置/编辑器”"
 msgid "Editor"
 msgstr "编辑器"
 
-#: ../isobrowser.c:1583
+#: ../isobrowser.c:1591
 msgid "Enter a new name:"
 msgstr "输入一个新名称："
 
@@ -134,7 +135,7 @@ msgstr "提取"
 msgid "Extract from the ISO"
 msgstr "从 ISO 中提取"
 
-#: ../editfile.c:473 ../isobrowser.c:215
+#: ../editfile.c:473 ../isobrowser.c:216
 #, c-format
 msgid "Failed to add '%s': '%s'"
 msgstr "无法添加 '%s'：'%s'"
@@ -144,7 +145,7 @@ msgstr "无法添加 '%s'：'%s'"
 msgid "Failed to add boot record: '%s'"
 msgstr "无法添加引导记录：'%s' "
 
-#: ../isobrowser.c:555
+#: ../isobrowser.c:556
 #, c-format
 msgid "Failed to change directory: '%s'"
 msgstr "无法改变目录：'%s'"
@@ -159,12 +160,12 @@ msgstr "无法创建目录：'%s'"
 msgid "Failed to create directory %s: '%s'"
 msgstr "无法创建目录 %s：'%s'"
 
-#: ../editfile.c:447 ../isobrowser.c:850
+#: ../editfile.c:447 ../isobrowser.c:851
 #, c-format
 msgid "Failed to delete '%s': '%s'"
 msgstr "无法删除 '%s'：'%s'"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:963
+#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:964
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "无法提取 '%s'：'%s'"
@@ -174,7 +175,7 @@ msgstr "无法提取 '%s'：'%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "无法提取引导记录：'%s'"
 
-#: ../isobrowser.c:1146 ../isobrowser.c:1248
+#: ../isobrowser.c:1147 ../isobrowser.c:1249
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "无法初始化 bkisofs：'%s'"
@@ -184,22 +185,22 @@ msgstr "无法初始化 bkisofs：'%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "无法打开目录 '%s'：错误 %d"
 
-#: ../isobrowser.c:1267
+#: ../isobrowser.c:1268
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "无法打开 ISO 文件：'%s'"
 
-#: ../isobrowser.c:1342
+#: ../isobrowser.c:1343
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "无法读取目录树：'%s'"
 
-#: ../isobrowser.c:1282
+#: ../isobrowser.c:1283
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "无法读取卷信息：'%s'"
 
-#: ../isobrowser.c:1612
+#: ../isobrowser.c:1620
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "无法重命名 '%s'：'%s'"
@@ -209,7 +210,7 @@ msgstr "无法重命名 '%s'：'%s'"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "无法设置 %s 为引导记录：'%s'"
 
-#: ../isobrowser.c:1685
+#: ../isobrowser.c:1693
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "无法写入映像到 '%s'：'%s'"
@@ -238,7 +239,7 @@ msgstr "从文件：2880KB 软盘"
 msgid "From file: no emulation"
 msgstr "从文件：不模拟"
 
-#: ../isobrowser.c:868
+#: ../isobrowser.c:869
 msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "GUI 错误，正在删除错误的文件与目录"
@@ -255,11 +256,11 @@ msgstr "在 ISO 中返回上一级目录"
 msgid "Go back up one directory on the filesystem"
 msgstr "在文件系统中返回上一级目录"
 
-#: ../isobrowser.c:1428 ../isobrowser.c:1734
+#: ../isobrowser.c:1429 ../isobrowser.c:1742
 msgid "ISO Images"
 msgstr "ISO 映像文件"
 
-#: ../about.c:385
+#: ../about.c:392
 msgid "ISO Master Help"
 msgstr "ISO Master 帮助"
 
@@ -287,7 +288,7 @@ msgstr "在映像文件中不显示"
 msgid "Is visible on image as '%s'"
 msgstr "在映像文件中显示为 '%s'"
 
-#: ../isobrowser.c:770
+#: ../isobrowser.c:771
 msgid ""
 "It seems that you have made changes to the ISO but haven't saved them. Are "
 "you sure you want to close it?"
@@ -307,15 +308,15 @@ msgstr "位置：于原始映像文件的 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "位置：添加自 '%s'"
 
-#: ../isobrowser.c:1438
+#: ../isobrowser.c:1439
 msgid "MDF Images"
 msgstr "MDF 映像文件"
 
-#: ../isobrowser.c:1433
+#: ../isobrowser.c:1434
 msgid "NRG Images"
 msgstr "NGR 映像文件"
 
-#: ../fsbrowser.c:121 ../isobrowser.c:482
+#: ../fsbrowser.c:121 ../isobrowser.c:483
 msgid "Name"
 msgstr "名称"
 
@@ -347,24 +348,24 @@ msgstr "请在 ISO 浏览器中指定一个文件作为引导记录"
 msgid "Please select no more than one file in the ISO browser"
 msgstr "请在 ISO 浏览器中至多选择一个文件"
 
-#: ../isobrowser.c:136
+#: ../isobrowser.c:137
 msgid "Please wait while I'm adding the selected items..."
 msgstr "正在添加所选项，请稍候..."
 
-#: ../isobrowser.c:905
+#: ../isobrowser.c:906
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "正在提取所选文件，请稍候..."
 
-#: ../isobrowser.c:1306
+#: ../isobrowser.c:1307
 msgid "Please wait while I'm reading the image..."
 msgstr "正在读取映像，请稍候..."
 
-#: ../isobrowser.c:1657
+#: ../isobrowser.c:1665
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "正在保存新映像至磁盘，请稍候..."
 
-#: ../isobrowser.c:129 ../isobrowser.c:897 ../isobrowser.c:1299
-#: ../isobrowser.c:1647
+#: ../isobrowser.c:130 ../isobrowser.c:898 ../isobrowser.c:1300
+#: ../isobrowser.c:1655
 msgid "Progress"
 msgstr "进度"
 
@@ -376,11 +377,11 @@ msgstr "发布者："
 msgid "Remove"
 msgstr "移除"
 
-#: ../isobrowser.c:1895
+#: ../isobrowser.c:1910
 msgid "Rename"
 msgstr "重命名"
 
-#: ../isobrowser.c:1723
+#: ../isobrowser.c:1731
 msgid "Save File"
 msgstr "保存文件"
 
@@ -396,7 +397,7 @@ msgstr "扫描重复文件（慢）"
 msgid "Show _hidden files"
 msgstr "显示隐藏文件(_h)"
 
-#: ../fsbrowser.c:142 ../isobrowser.c:505
+#: ../fsbrowser.c:142 ../isobrowser.c:506
 msgid "Size"
 msgstr "大小"
 
@@ -423,7 +424,7 @@ msgstr "按大小写敏感排序(_c)"
 msgid "Temporary directory"
 msgstr "临时目录"
 
-#: ../about.c:323
+#: ../about.c:330
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -471,7 +472,7 @@ msgstr ""
 msgid "Use selected file on image (no emulation)"
 msgstr "在映像文件中使用所选文件（不模拟）"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1904
+#: ../fsbrowser.c:583 ../isobrowser.c:1919
 msgid "View"
 msgstr "查看"
 

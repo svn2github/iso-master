@@ -40,6 +40,9 @@ DEFAULT_VIEWER ?= firefox
 # don't uncomment it unless you are willing to risk losing data.
 #CPPFLAGS += -DENABLE_SAVE_OVERWRITE
 
+# Define this on the command-line to use the system iniparser
+#USE_SYSTEM_INIPARSER = 1
+
 # programs used in the Makefiles:
 export CC      ?= gcc
 export AR      = ar
@@ -48,7 +51,7 @@ export INSTALL = install
 export CP      = cp
 export ECHO    = echo
 
-VERSION = 1.3.8
+VERSION = 1.3.9
 
 # -DDEBUG and -g only used during development
 CFLAGS += -Wall -pedantic -std=gnu99 -Wundef -Wcast-align -W -Wpointer-arith -Wwrite-strings -Wno-unused-parameter `pkg-config --cflags gtk+-2.0`
@@ -67,18 +70,26 @@ all: translations isomaster.desktop isomaster
 
 isomaster: $(OBJECTS) lib iniparser
 	@echo 'Linking isomaster'
-	@$(CC) $(OBJECTS) bk/bk.a iniparser-2.17/libiniparser.a $(LDFLAGS) $(CFLAGS) $(CPPFLAGS) `pkg-config --libs gtk+-2.0` -o isomaster
+ifndef USE_SYSTEM_INIPARSER
+	@$(CC) $(LDFLAGS) `pkg-config --libs gtk+-2.0` $(OBJECTS) bk/bk.a iniparser-2.17/libiniparser.a -o isomaster
+else
+	@$(CC) $(LDFLAGS) `pkg-config --libs gtk+-2.0` $(OBJECTS) bk/bk.a -liniparser -o isomaster
+endif
 
 # static pattern rule
 $(OBJECTS): %.o: %.c %.h bk/bk.h Makefile
 	@echo 'Compiling' $<
-	@$(CC) $< $(CFLAGS) $(CPPFLAGS) -c -o $@
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@
 
 lib:
 	cd bk && $(MAKE)
 
 iniparser:
+ifndef USE_SYSTEM_INIPARSER
 	cd iniparser-2.17 && $(MAKE)
+else
+	@echo "Will use system iniparser";
+endif
 
 translations:
 ifndef WITHOUT_NLS
