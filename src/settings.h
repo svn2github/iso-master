@@ -4,8 +4,11 @@
 #include <stdbool.h>
 
 #include "isomaster.h"
+#ifndef USE_SYSTEM_INIPARSER
 #include "iniparser-2.17/src/iniparser.h"
-
+#else
+#include <iniparser.h>
+#endif
 #define ISOMASTER_DEFAULT_WINDOW_WIDTH 500
 #define ISOMASTER_DEFAULT_WINDOW_HEIGHT 550
 #define ISOMASTER_DEFAULT_TOPPANE_HEIGHT 170

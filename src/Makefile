@@ -64,6 +64,10 @@ CPPFLAGS +=  -DICONPATH=\"$(ICONPATH)\" -DLOCALEDIR=\"$(LOCALEDIR)\" -DDEFAULT_E
 # the _FILE_OFFSET_BITS=64 is to enable stat() for large files on linuxish systems
 CPPFLAGS += -D_FILE_OFFSET_BITS=64
 
+ifdef USE_SYSTEM_INIPARSER
+CPPFLAGS += -DUSE_SYSTEM_INIPARSER=$(USE_SYSTEM_INIPARSER)
+endif
+
 OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o editfile.o
 
 all: translations isomaster.desktop isomaster
