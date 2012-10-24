@@ -163,7 +163,7 @@ void formatSize(bk_off_t sizeInt, char* sizeStr, int sizeStrLen)
         snprintf(sizeStr, sizeStrLen, "%.1f KB", (double)sizeInt / 1024);
     else
     /* print bytes */
-        snprintf(sizeStr, sizeStrLen, "%llu B", sizeInt);
+        snprintf(sizeStr, sizeStrLen, "%ld B", sizeInt);
     
     sizeStr[sizeStrLen - 1] = '\0';
 }
