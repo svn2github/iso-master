@@ -69,7 +69,7 @@ void addBootRecordFromFileCbk(GtkButton *button, gpointer bootRecordType)
         g_free(lastBootRecordDir);
         /* END RECORD last boot record dir */
         
-        rc = bk_add_boot_record(&GBLvolInfo, filename, (int)bootRecordType);
+        rc = bk_add_boot_record(&GBLvolInfo, filename, (int)(long long)bootRecordType);
         if(rc <= 0)
         {
             warningDialog = gtk_message_dialog_new(GTK_WINDOW(GBLmainWindow),
@@ -370,14 +370,14 @@ void showBootInfoCbk(GtkButton *button, gpointer data)
     /* get this info from the original file */
     {
         if(GBLvolInfo.bootRecordOnImage->onImage)
-            snprintf(str, 100, _("Location: on original image at 0x%llX"), GBLvolInfo.bootRecordOnImage->position);
+            snprintf(str, 100, _("Location: on original image at 0x%llX"), (long long unsigned)GBLvolInfo.bootRecordOnImage->position);
         else
             snprintf(str, 100, _("Location: to be added from '%s'"), GBLvolInfo.bootRecordOnImage->pathAndName);
     }
     else
     {
         if(GBLvolInfo.bootRecordIsOnImage)
-            snprintf(str, 100, _("Location: on original image at 0x%llX"), GBLvolInfo.bootRecordOffset);
+            snprintf(str, 100, _("Location: on original image at 0x%llX"), (long long unsigned)GBLvolInfo.bootRecordOffset);
         else
             snprintf(str, 100, _("Location: to be added from '%s'"), GBLvolInfo.bootRecordPathAndName);
     }
