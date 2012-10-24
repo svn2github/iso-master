@@ -45,22 +45,21 @@ extern bool GBLisoChangesProbable;
 void buildMainToolbar(GtkWidget* boxToPackInto)
 {
     GtkWidget* toolbar;
-    GtkWidget* button;
     
     toolbar = gtk_toolbar_new();
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, FALSE, 0);
     gtk_widget_show(toolbar);
     
-    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     _("Go back"), 
-                                     _("Go back up one directory on the filesystem"), "Private",
-                                     GBLgoBackIcon, G_CALLBACK(fsGoUpDirTreeCbk),
-                                     NULL);
+    gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                            _("Go back"), 
+                            _("Go back up one directory on the filesystem"), "Private",
+                            GBLgoBackIcon, G_CALLBACK(fsGoUpDirTreeCbk),
+                            NULL);
 
-    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     _("New Directory"), 
-                                     _("Create new directory on the filesystem"), "Private",
-                                     GBLnewDirIcon, G_CALLBACK(createDirCbk), (gpointer)1);
+    gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                            _("New Directory"), 
+                            _("Create new directory on the filesystem"), "Private",
+                            GBLnewDirIcon, G_CALLBACK(createDirCbk), (gpointer)1);
 }
 
 void buildMenu(GtkWidget* boxToPackInto)
@@ -381,38 +380,37 @@ void buildMenu(GtkWidget* boxToPackInto)
 void buildMiddleToolbar(GtkWidget* boxToPackInto)
 {
     GtkWidget* toolbar;
-    GtkWidget* button;
     GtkWidget* sizeTitleLabel;
     
     toolbar = gtk_toolbar_new();
     gtk_box_pack_start(GTK_BOX(boxToPackInto), toolbar, FALSE, TRUE, 0);
     gtk_widget_show(toolbar);
     
-    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     _("Go back"), 
-                                     _("Go back up one directory on the ISO"), "Private",
-                                     GBLgoBackIcon2, G_CALLBACK(isoGoUpDirTreeCbk),
-                                     NULL);
+    gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                            _("Go back"), 
+                            _("Go back up one directory on the ISO"), "Private",
+                            GBLgoBackIcon2, G_CALLBACK(isoGoUpDirTreeCbk),
+                            NULL);
     
-    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     _("New Directory"), 
-                                     _("Create new directory on the ISO"), "Private",
-                                     GBLnewDirIcon2, G_CALLBACK(createDirCbk), (gpointer)0);
+    gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                            _("New Directory"), 
+                            _("Create new directory on the ISO"), "Private",
+                            GBLnewDirIcon2, G_CALLBACK(createDirCbk), (gpointer)0);
     
-    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     _("Add"), _("Add to the ISO"), "Private",
-                                     GBLaddIcon, G_CALLBACK(addToIsoCbk),
-                                     NULL);
+    gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                            _("Add"), _("Add to the ISO"), "Private",
+                            GBLaddIcon, G_CALLBACK(addToIsoCbk),
+                            NULL);
 
-    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     _("Extract"), _("Extract from the ISO"), "Private",
-                                     GBLextractIcon, G_CALLBACK(extractFromIsoCbk),
-                                     NULL);
+    gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                            _("Extract"), _("Extract from the ISO"), "Private",
+                            GBLextractIcon, G_CALLBACK(extractFromIsoCbk),
+                            NULL);
 
-    button = gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
-                                     _("Remove"), _("Delete from the ISO"), "Private",
-                                     GBLdeleteIcon2, G_CALLBACK(deleteFromIsoCbk),
-                                     NULL);
+    gtk_toolbar_append_item(GTK_TOOLBAR(toolbar),
+                            _("Remove"), _("Delete from the ISO"), "Private",
+                            GBLdeleteIcon2, G_CALLBACK(deleteFromIsoCbk),
+                            NULL);
     
     sizeTitleLabel = gtk_label_new(_("      Estimated ISO Size: "));
     gtk_toolbar_append_element(GTK_TOOLBAR(toolbar), GTK_TOOLBAR_CHILD_WIDGET,

@@ -881,7 +881,6 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
     GtkTreeSelection* selection;
     GtkWidget* progressWindow = NULL;
     GtkWidget* descriptionLabel;
-    GtkWidget* cancelButton;
     
     if(!GBLisoPaneActive)
     /* no iso open */
@@ -913,7 +912,7 @@ void extractFromIsoCbk(GtkButton *button, gpointer data)
         gtk_widget_show(GBLactivityProgressBar);
         
         /* button to cancel extracting */
-        cancelButton = gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_NONE);
+        gtk_dialog_add_button(GTK_DIALOG(progressWindow), GTK_STOCK_CANCEL, GTK_RESPONSE_NONE);
         
         /* if i show it before i add the children, the window ends up being not centered */
         gtk_widget_show(progressWindow);
