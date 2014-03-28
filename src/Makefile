@@ -128,7 +128,7 @@ endif
 	$(INSTALL) -m 644 isomaster.1 $(DESTDIR)$(MYMANPATH)
 	$(INSTALL) -d $(DESTDIR)$(DESKTOPPATH)
 	$(INSTALL) -m 644 isomaster.desktop $(DESTDIR)$(DESKTOPPATH)
-	$(INSTALL) -d $(DESTDIR)$(MYDOCPATH)
+	#$(INSTALL) -d $(DESTDIR)$(MYDOCPATH)
 	for FILE in bkisofs-manual/*html; do \
             $(INSTALL) -m 644 $$FILE $(DESTDIR)$(MYDOCPATH); \
         done;

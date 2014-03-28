@@ -124,7 +124,9 @@ int main(int argc, char** argv)
     if(argv[1] != NULL)
         openIso(argv[1]);
     
+#ifndef HAVE_ARC4RANDOM
     srandom((int)time(NULL));
+#endif
     
     gtk_main();
     

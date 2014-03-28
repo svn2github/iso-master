@@ -508,6 +508,9 @@ char* makeRandomFilename(const char* sourceName)
         char oneRandomChar;
         bool gotGoodChar;
         
+#ifdef HAVE_ARC4RANDOM
+        oneRandomChar = arc4random_uniform('Z'-'A'+1) + 'A';
+#else
         gotGoodChar = false;
         while(!gotGoodChar)
         {
@@ -517,6 +520,7 @@ char* makeRandomFilename(const char* sourceName)
                 gotGoodChar = true;
             }
         }
+#endif
         
         randomStr[numRandomCharsFilled] = oneRandomChar;
         
