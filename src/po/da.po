@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-18 14:19-0500\n"
+"POT-Creation-Date: 2014-04-17 13:43-0400\n"
 "PO-Revision-Date: 2009-08-24 07:35+0200\n"
 "Last-Translator: Henrik Kristiansen <henrik.g.kristiansen@gmail.com>\n"
 "Language-Team: Danish < >\n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:417
+#: ../window.c:415
 msgid "      Estimated ISO Size: "
 msgstr "    Beregnet ISO størelse"
 
-#: ../isobrowser.c:1512
+#: ../isobrowser.c:1511
 #, c-format
 msgid ""
 "%s\n"
@@ -29,28 +29,28 @@ msgstr ""
 "\n"
 "Ønsker du at fortsætte?"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:605 ../editfile.c:700
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' er ikke en billede fil"
 
-#: ../isobrowser.c:143 ../isobrowser.c:1313
+#: ../isobrowser.c:143 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(skanning for dobbelte filer"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add"
 msgstr "Tilføj"
 
-#: ../isobrowser.c:1750
+#: ../isobrowser.c:1749
 msgid "Add extension automatically"
 msgstr "Tilføj efternavn automatisk"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add to the ISO"
 msgstr "Tilføj til ISO billedet"
 
-#: ../isobrowser.c:1444 ../isobrowser.c:1747
+#: ../isobrowser.c:1443 ../isobrowser.c:1746
 msgid "All files"
 msgstr "Alle filer"
 
@@ -82,7 +82,7 @@ msgstr "Boot record type: 2880KiB Diskette"
 msgid "Boot record type: No Emulation"
 msgstr "Boot record type: Ingen Emulation"
 
-#: ../isobrowser.c:268 ../isobrowser.c:1933
+#: ../isobrowser.c:268 ../isobrowser.c:1932
 msgid "Change permissions"
 msgstr "Ændre tilladelser"
 
@@ -90,11 +90,11 @@ msgstr "Ændre tilladelser"
 msgid "Choose Boot Record File"
 msgstr "Ændre Boot Record fil"
 
-#: ../window.c:399
+#: ../window.c:397
 msgid "Create new directory on the ISO"
 msgstr "Opret nyt bibliotek i ISO billede"
 
-#: ../window.c:62
+#: ../window.c:61
 msgid "Create new directory on the filesystem"
 msgstr "Opret nyt bibliotek i filsystemet"
 
@@ -102,11 +102,11 @@ msgstr "Opret nyt bibliotek i filsystemet"
 msgid "Creation time:"
 msgstr "Oprettelse tidspunkt"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Delete from the ISO"
 msgstr "Slet fra ISO billedet"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1926
+#: ../fsbrowser.c:590 ../isobrowser.c:1925
 msgid "Edit"
 msgstr "Rediger"
 
@@ -118,7 +118,7 @@ msgstr "Redigeringen mislykkedes, Check Indstillinger/Redigerings program"
 msgid "Editor"
 msgstr "Redigerings program"
 
-#: ../isobrowser.c:1591
+#: ../isobrowser.c:1590
 msgid "Enter a new name:"
 msgstr "Indtast nyt navn"
 
@@ -126,11 +126,11 @@ msgstr "Indtast nyt navn"
 msgid "Enter name for new directory"
 msgstr "Intast navn på nyt bibliotek"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract"
 msgstr "Udpak"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract from the ISO"
 msgstr "Udpak fra ISO billedet"
 
@@ -164,7 +164,7 @@ msgstr "Det lykkedes ikke at oprette bibliotek '%s': '%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "Det lykkedes ikke at slette '%s': '%s'"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:964
+#: ../editfile.c:412 ../editfile.c:744 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Det lykkedes ikke at udpakke '%s': '%s'"
@@ -174,7 +174,7 @@ msgstr "Det lykkedes ikke at udpakke '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Det lykkedes ikke at udpakke boot record: '%s'"
 
-#: ../isobrowser.c:1147 ../isobrowser.c:1249
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Det lykkedes ikke at finde bkisofs: '%s'"
@@ -184,22 +184,22 @@ msgstr "Det lykkedes ikke at finde bkisofs: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Det lykkedes ikke at åbne bibliotekket '%s', error %d"
 
-#: ../isobrowser.c:1268
+#: ../isobrowser.c:1267
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Det lykkedes ikke at åbne ISO billedet for læsning: '%s'"
 
-#: ../isobrowser.c:1343
+#: ../isobrowser.c:1342
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Det lykkedes ikke at læse biblioteks træet: '%s'"
 
-#: ../isobrowser.c:1283
+#: ../isobrowser.c:1282
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Det lykkedes ikke at læse volume info: '%s'"
 
-#: ../isobrowser.c:1620
+#: ../isobrowser.c:1619
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Det lykkedes ikke at ændre navnet '%s': %s"
@@ -209,7 +209,7 @@ msgstr "Det lykkedes ikke at ændre navnet '%s': %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Det lykkedes ikke at sætte %s som boot record: '%s'"
 
-#: ../isobrowser.c:1693
+#: ../isobrowser.c:1692
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Det lykkedes ikke at skrive billedet til '%s': '%s'"
@@ -222,19 +222,19 @@ msgstr "Filnavn type (begge anbefales)"
 msgid "Follow symbolic links"
 msgstr "Følg symbol links"
 
-#: ../window.c:326
+#: ../window.c:325
 msgid "From file: 1200KiB floppy"
 msgstr "Fra fil: 1200KiB Diskette"
 
-#: ../window.c:332
+#: ../window.c:331
 msgid "From file: 1440KiB floppy"
 msgstr "Fra fil: 1440KiB Diskette"
 
-#: ../window.c:338
+#: ../window.c:337
 msgid "From file: 2880KiB floppy"
 msgstr "Fra fil: 2880KiB Diskette"
 
-#: ../window.c:320
+#: ../window.c:319
 msgid "From file: no emulation"
 msgstr "Fra fil: ingen emulation"
 
@@ -243,23 +243,23 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "GUI fejl, sletter alt andet end filer og biblioteker der ikke virker"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:54 ../window.c:390
 msgid "Go back"
 msgstr "Tilbage"
 
-#: ../window.c:393
+#: ../window.c:391
 msgid "Go back up one directory on the ISO"
 msgstr "Et bibliotek tilbage i ISO billedet"
 
-#: ../window.c:56
+#: ../window.c:55
 msgid "Go back up one directory on the filesystem"
 msgstr "Et bibliotek tilbage i fil systemet"
 
-#: ../isobrowser.c:1429 ../isobrowser.c:1742
+#: ../isobrowser.c:1428 ../isobrowser.c:1741
 msgid "ISO Images"
 msgstr "ISO billede"
 
-#: ../about.c:392
+#: ../about.c:402
 msgid "ISO Master Help"
 msgstr "ISO Master hjælp"
 
@@ -310,11 +310,11 @@ msgstr "Destination: på orginal billede på Ox%llx"
 msgid "Location: to be added from '%s'"
 msgstr "Destination: bliver tilføjet fra '%s'"
 
-#: ../isobrowser.c:1439
+#: ../isobrowser.c:1438
 msgid "MDF Images"
 msgstr "MDF billede"
 
-#: ../isobrowser.c:1434
+#: ../isobrowser.c:1433
 msgid "NRG Images"
 msgstr "NRG billede"
 
@@ -322,7 +322,7 @@ msgstr "NRG billede"
 msgid "Name"
 msgstr "Navn"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:60 ../window.c:396
 msgid "New Directory"
 msgstr "Nyt bibliotek"
 
@@ -334,7 +334,7 @@ msgstr "Ingen boot record læst fra orginal billede"
 msgid "No boot to delete"
 msgstr "Ingen boot at slette"
 
-#: ../window.c:168
+#: ../window.c:167
 msgid "Open Recent"
 msgstr "Åben Nyeste"
 
@@ -354,20 +354,20 @@ msgstr "Vælg en eller flere filer i ISO browserne"
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Vent venligst men jeg tilføjer de valgte emner"
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:905
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Vent venligst mens jeg udpakker de valgte filer"
 
-#: ../isobrowser.c:1307
+#: ../isobrowser.c:1306
 msgid "Please wait while I'm reading the image..."
 msgstr "Vent venligst mens jeg læser billedet"
 
-#: ../isobrowser.c:1665
+#: ../isobrowser.c:1664
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Vent venligst men jeg gemmer det nye billede på disken"
 
-#: ../isobrowser.c:130 ../isobrowser.c:898 ../isobrowser.c:1300
-#: ../isobrowser.c:1655
+#: ../isobrowser.c:130 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:1654
 msgid "Progress"
 msgstr "Progress"
 
@@ -375,15 +375,15 @@ msgstr "Progress"
 msgid "Publisher:"
 msgstr "Udgiver:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Remove"
 msgstr "Fjern"
 
-#: ../isobrowser.c:1910
+#: ../isobrowser.c:1909
 msgid "Rename"
 msgstr "Ændre navn"
 
-#: ../isobrowser.c:1731
+#: ../isobrowser.c:1730
 msgid "Save File"
 msgstr "Gem fil"
 
@@ -395,7 +395,7 @@ msgstr "Gem en kopi af boot record"
 msgid "Scan for duplicate files (slow)"
 msgstr "Skan for dobbelt filer (langsom)"
 
-#: ../window.c:242
+#: ../window.c:241
 msgid "Show _hidden files"
 msgstr "Vis _gemte filer"
 
@@ -420,7 +420,7 @@ msgstr ""
 msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Skipper biblioteks intastningen fordi stat(%s) fejlede med %d"
 
-#: ../window.c:262
+#: ../window.c:261
 msgid "Sort is _case sensitive"
 msgstr "Sorteringe er _case sensitive"
 
@@ -428,7 +428,7 @@ msgstr "Sorteringe er _case sensitive"
 msgid "Temporary directory"
 msgstr "Midlertidig bibliotek"
 
-#: ../about.c:330
+#: ../about.c:340
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -478,11 +478,11 @@ msgstr ""
 "Når du har lavet alle ændringerne til det nye ISO billede, klik på 'Fil' og\n"
 "'Gem som'. Du kan overskrive det eksisterende ISO billede.\n"
 
-#: ../window.c:314
+#: ../window.c:313
 msgid "Use selected file on image (no emulation)"
 msgstr "Brug de valgte filer til ISO billedet (ingen emulation)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1919
+#: ../fsbrowser.c:583 ../isobrowser.c:1918
 msgid "View"
 msgstr "Vis"
 
@@ -503,34 +503,34 @@ msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Du skal lukke og genåbne ISO billedet for at ændringerne virker"
 
-#: ../window.c:282
+#: ../window.c:281
 msgid "_Boot Record"
 msgstr "_Boot Record"
 
-#: ../window.c:143
+#: ../window.c:142
 msgid "_File"
 msgstr "_Fil"
 
-#: ../window.c:354
+#: ../window.c:353
 msgid "_Help"
 msgstr "_Hjælp"
 
-#: ../window.c:346
+#: ../window.c:345
 msgid "_Options"
 msgstr "_Indstillinger"
 
-#: ../window.c:363
+#: ../window.c:362
 msgid "_Overview"
 msgstr "_Overblik"
 
-#: ../window.c:252
+#: ../window.c:251
 msgid "_Sort directories first"
 msgstr "Sorter biblioteker først"
 
-#: ../window.c:274
+#: ../window.c:273
 msgid "_Tools"
 msgstr "_Værktøj"
 
-#: ../window.c:227
+#: ../window.c:226
 msgid "_View"
 msgstr "_Vis"

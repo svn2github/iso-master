@@ -25,6 +25,10 @@ Steffen Winterfeldt
 September 2006
 - helped me figure out how to work with isolinux boot records
 
+TJ
+January 2014
+- Patch to allow boot records larger than 4 sectors
+
 Roman Hubatsch (kearone)
 http://kearone.deviantart.com/
 December 2006 - January 2007
@@ -132,6 +136,9 @@ Ihar Hrachyshka
 Dessislav Petrov
 - bg (Bulgarian) translation of ISO Master versions 0.6 - 1.3
 
+Rajib Lochan Dhibar
+- bn_IN (Bengali/India) translation of ISO Master version 1.3
+
 Rafael Carreras
 - ca (Catalan) translation of ISO Master version 1.1
 
@@ -185,6 +192,9 @@ Andrew Smith
 
 Bruno Bord
 - fr (French) translation of ISO Master versions 0.8 - 1.3
+
+Miguel Anxo Bouzada 
+- gl (Galician) translation of ISO Master version 1.3
 
 Fima Kachinski
 - he (Hebrew) translation of ISO Master version 1.3

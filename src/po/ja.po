@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster 1.3.7\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-18 14:19-0500\n"
+"POT-Creation-Date: 2014-04-17 13:43-0400\n"
 "PO-Revision-Date: 2010-11-15 16:30+0900\n"
 "Last-Translator: Hajime Taira <htaira@redhat.com>\n"
 "Language-Team: Japanese <jp@li.org>\n"
@@ -16,11 +16,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:417
+#: ../window.c:415
 msgid "      Estimated ISO Size: "
 msgstr "      ISO イメージのサイズ: "
 
-#: ../isobrowser.c:1512
+#: ../isobrowser.c:1511
 #, c-format
 msgid ""
 "%s\n"
@@ -31,28 +31,28 @@ msgstr ""
 "\n"
 "続行しますか？"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:605 ../editfile.c:700
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' は一般のファイルではありません。"
 
-#: ../isobrowser.c:143 ../isobrowser.c:1313
+#: ../isobrowser.c:143 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "（重複ファイルをスキャニング中...）"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add"
 msgstr "追加"
 
-#: ../isobrowser.c:1750
+#: ../isobrowser.c:1749
 msgid "Add extension automatically"
 msgstr "拡張を自動的に追加"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add to the ISO"
 msgstr "ISO イメージに追加"
 
-#: ../isobrowser.c:1444 ../isobrowser.c:1747
+#: ../isobrowser.c:1443 ../isobrowser.c:1746
 msgid "All files"
 msgstr "すべてのファイル"
 
@@ -84,7 +84,7 @@ msgstr "ブートレコードの形式: 2.88MB フロッピー"
 msgid "Boot record type: No Emulation"
 msgstr "ブートレコードの形式: No Emulation"
 
-#: ../isobrowser.c:268 ../isobrowser.c:1933
+#: ../isobrowser.c:268 ../isobrowser.c:1932
 msgid "Change permissions"
 msgstr "パーミッションの変更"
 
@@ -92,11 +92,11 @@ msgstr "パーミッションの変更"
 msgid "Choose Boot Record File"
 msgstr "ブートレコードファイルの選択"
 
-#: ../window.c:399
+#: ../window.c:397
 msgid "Create new directory on the ISO"
 msgstr "ISO イメージ内に新しいディレクトリーを生成"
 
-#: ../window.c:62
+#: ../window.c:61
 msgid "Create new directory on the filesystem"
 msgstr "ファイルシステム上に新しいディレクトリーを生成"
 
@@ -104,11 +104,11 @@ msgstr "ファイルシステム上に新しいディレクトリーを生成"
 msgid "Creation time:"
 msgstr "作成時刻:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Delete from the ISO"
 msgstr "ISO イメージから削除"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1926
+#: ../fsbrowser.c:590 ../isobrowser.c:1925
 msgid "Edit"
 msgstr "編集"
 
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Editor"
 msgstr "エディタ"
 
-#: ../isobrowser.c:1591
+#: ../isobrowser.c:1590
 msgid "Enter a new name:"
 msgstr "新しい名前を入力して下さい:"
 
@@ -130,11 +130,11 @@ msgstr "新しい名前を入力して下さい:"
 msgid "Enter name for new directory"
 msgstr "新しいディレクトリー名を入力して下さい:"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract"
 msgstr "展開"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract from the ISO"
 msgstr "ISO イメージから展開"
 
@@ -168,7 +168,7 @@ msgstr "ディレクトリー %s の作成に失敗: '%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "'%s' の削除に失敗: '%s'"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:964
+#: ../editfile.c:412 ../editfile.c:744 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "'%s' の展開に失敗: %s"
@@ -178,7 +178,7 @@ msgstr "'%s' の展開に失敗: %s"
 msgid "Failed to extract boot record: '%s'"
 msgstr "ブートレコードの展開に失敗: %s"
 
-#: ../isobrowser.c:1147 ../isobrowser.c:1249
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "bkisofs の初期化に失敗: %s"
@@ -188,22 +188,22 @@ msgstr "bkisofs の初期化に失敗: %s"
 msgid "Failed to open directory '%s', error %d"
 msgstr "ディレクトリー '%s' を開けません。エラー番号 %d"
 
-#: ../isobrowser.c:1268
+#: ../isobrowser.c:1267
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "ISO イメージファイルの読み込みに失敗: '%s'"
 
-#: ../isobrowser.c:1343
+#: ../isobrowser.c:1342
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "ディレクトリー階層の読み出しに失敗: '%s'"
 
-#: ../isobrowser.c:1283
+#: ../isobrowser.c:1282
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "ボリューム情報の読み込みに失敗: '%s'"
 
-#: ../isobrowser.c:1620
+#: ../isobrowser.c:1619
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "ファイル '%s' の名前変更に失敗: %s"
@@ -213,7 +213,7 @@ msgstr "ファイル '%s' の名前変更に失敗: %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "ブートレコード %s の設定に失敗: '%s'"
 
-#: ../isobrowser.c:1693
+#: ../isobrowser.c:1692
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "イメージ '%s' の保存に失敗: '%s'"
@@ -226,19 +226,19 @@ msgstr "ファイル名の形式（両方を推奨）:"
 msgid "Follow symbolic links"
 msgstr "シンボリックリンクの参照を許可"
 
-#: ../window.c:326
+#: ../window.c:325
 msgid "From file: 1200KiB floppy"
 msgstr "ファイル形式: 1.20 MB フロッピー"
 
-#: ../window.c:332
+#: ../window.c:331
 msgid "From file: 1440KiB floppy"
 msgstr "ファイル形式: 1.44 MB フロッピー"
 
-#: ../window.c:338
+#: ../window.c:337
 msgid "From file: 2880KiB floppy"
 msgstr "ファイル形式: 2.88 MB フロッピー"
 
-#: ../window.c:320
+#: ../window.c:319
 msgid "From file: no emulation"
 msgstr "ファイル形式: No Emulation"
 
@@ -247,23 +247,23 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "GUI エラー: ファイルやディレクトリー以外は削除できません。"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:54 ../window.c:390
 msgid "Go back"
 msgstr "親ディレクトリーへ移動"
 
-#: ../window.c:393
+#: ../window.c:391
 msgid "Go back up one directory on the ISO"
 msgstr "ISO イメージ上の親ディレクトリーへ移動"
 
-#: ../window.c:56
+#: ../window.c:55
 msgid "Go back up one directory on the filesystem"
 msgstr "ファイルシステム上の親ディレクトリーへ移動"
 
-#: ../isobrowser.c:1429 ../isobrowser.c:1742
+#: ../isobrowser.c:1428 ../isobrowser.c:1741
 msgid "ISO Images"
 msgstr "ISO イメージ"
 
-#: ../about.c:392
+#: ../about.c:402
 msgid "ISO Master Help"
 msgstr "ISO Master のヘルプ"
 
@@ -315,11 +315,11 @@ msgstr "場所: オリジナルイメージの 0x%llX 上"
 msgid "Location: to be added from '%s'"
 msgstr "場所: '%s' から追加された"
 
-#: ../isobrowser.c:1439
+#: ../isobrowser.c:1438
 msgid "MDF Images"
 msgstr "MDF イメージ"
 
-#: ../isobrowser.c:1434
+#: ../isobrowser.c:1433
 msgid "NRG Images"
 msgstr "NRG イメージ"
 
@@ -327,7 +327,7 @@ msgstr "NRG イメージ"
 msgid "Name"
 msgstr "名前"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:60 ../window.c:396
 msgid "New Directory"
 msgstr "新しいディレクトリー"
 
@@ -339,7 +339,7 @@ msgstr "オリジナルもしくは編集中のイメージにはブートレコ
 msgid "No boot to delete"
 msgstr "削除するブートレコードはありません。"
 
-#: ../window.c:168
+#: ../window.c:167
 msgid "Open Recent"
 msgstr "最近開いたファイル"
 
@@ -360,20 +360,20 @@ msgstr "ISO ブラウザーで選択するファイルは１つにしてくだ�
 msgid "Please wait while I'm adding the selected items..."
 msgstr "選択されたファイルを追加しています。しばらくお待ちください。"
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:905
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "選択されたファイルを展開しています。しばらくお待ち下さい。"
 
-#: ../isobrowser.c:1307
+#: ../isobrowser.c:1306
 msgid "Please wait while I'm reading the image..."
 msgstr "イメージを読み込んでいます。しばらくお待ち下さい。"
 
-#: ../isobrowser.c:1665
+#: ../isobrowser.c:1664
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "新しいイメージを保存しています。しばらくお待ち下さい。"
 
-#: ../isobrowser.c:130 ../isobrowser.c:898 ../isobrowser.c:1300
-#: ../isobrowser.c:1655
+#: ../isobrowser.c:130 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:1654
 msgid "Progress"
 msgstr "進捗状況"
 
@@ -381,15 +381,15 @@ msgstr "進捗状況"
 msgid "Publisher:"
 msgstr "出版元:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Remove"
 msgstr "削除"
 
-#: ../isobrowser.c:1910
+#: ../isobrowser.c:1909
 msgid "Rename"
 msgstr "名前を変更する"
 
-#: ../isobrowser.c:1731
+#: ../isobrowser.c:1730
 msgid "Save File"
 msgstr "ファイルを保存します"
 
@@ -401,7 +401,7 @@ msgstr "ブートレコードのコピーを保存"
 msgid "Scan for duplicate files (slow)"
 msgstr "重複ファイルをスキャンする (遅い動作)"
 
-#: ../window.c:242
+#: ../window.c:241
 msgid "Show _hidden files"
 msgstr "隠しファイルを表示する(_H)"
 
@@ -429,7 +429,7 @@ msgstr ""
 "stat(%s) エラー番号 %d で失敗したため、ディレクトリーエントリーをスキップして"
 "います。"
 
-#: ../window.c:262
+#: ../window.c:261
 msgid "Sort is _case sensitive"
 msgstr "大/小文字を区別する(_C)"
 
@@ -437,7 +437,7 @@ msgstr "大/小文字を区別する(_C)"
 msgid "Temporary directory"
 msgstr "作業用ディレクトリー"
 
-#: ../about.c:330
+#: ../about.c:340
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -493,11 +493,11 @@ msgstr ""
 "ください。\n"
 "オリジナル ISO イメージには上書きはできません。\n"
 
-#: ../window.c:314
+#: ../window.c:313
 msgid "Use selected file on image (no emulation)"
 msgstr "イメージ上の指定されたファイルを使用（No Emulation）"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1919
+#: ../fsbrowser.c:583 ../isobrowser.c:1918
 msgid "View"
 msgstr "表示"
 
@@ -521,35 +521,35 @@ msgid ""
 msgstr ""
 "この変更に対する適用させるためには、ISO イメージを再度開く必要があります。"
 
-#: ../window.c:282
+#: ../window.c:281
 msgid "_Boot Record"
 msgstr "ブートレコード(_B)"
 
-#: ../window.c:143
+#: ../window.c:142
 msgid "_File"
 msgstr "ファイル(_F)"
 
-#: ../window.c:354
+#: ../window.c:353
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: ../window.c:346
+#: ../window.c:345
 msgid "_Options"
 msgstr "オプション(_O)"
 
-#: ../window.c:363
+#: ../window.c:362
 msgid "_Overview"
 msgstr "簡単な使い方(_O)"
 
-#: ../window.c:252
+#: ../window.c:251
 msgid "_Sort directories first"
 msgstr "ディレクトリーを優先的に並び替え(_S)"
 
-#: ../window.c:274
+#: ../window.c:273
 msgid "_Tools"
 msgstr "ツール(_T)"
 
-#: ../window.c:227
+#: ../window.c:226
 msgid "_View"
 msgstr "表示(_V)"
 

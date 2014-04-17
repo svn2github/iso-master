@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-18 14:19-0500\n"
+"POT-Creation-Date: 2014-04-17 13:43-0400\n"
 "PO-Revision-Date: 2010-12-27 22:45+0200\n"
 "Last-Translator: Muhammad Ali Makki <makkiabufaris@aol.com>\n"
 "Language-Team: Urdu <makkiabufaris@aol.com>\n"
@@ -20,11 +20,11 @@ msgstr ""
 "X-Poedit-Country: PAKISTAN\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../window.c:417
+#: ../window.c:415
 msgid "      Estimated ISO Size: "
 msgstr "      آئی ایس او کا اندازاً حجم: "
 
-#: ../isobrowser.c:1512
+#: ../isobrowser.c:1511
 #, c-format
 msgid ""
 "%s\n"
@@ -35,28 +35,28 @@ msgstr ""
 "\n"
 "کیا آپ آگے بڑھنا چاہتے ہیں؟"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:605 ../editfile.c:700
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' باضابطہ فائل نہیں ہے"
 
-#: ../isobrowser.c:143 ../isobrowser.c:1313
+#: ../isobrowser.c:143 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(مثنی فائلوں کے لیے سکین کیا جارہا ہے)"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add"
 msgstr "شامل کریں"
 
-#: ../isobrowser.c:1750
+#: ../isobrowser.c:1749
 msgid "Add extension automatically"
 msgstr "لاحقہ خودکار شامل کریں"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add to the ISO"
 msgstr "آئی ایس او میں شامل کریں"
 
-#: ../isobrowser.c:1444 ../isobrowser.c:1747
+#: ../isobrowser.c:1443 ../isobrowser.c:1746
 msgid "All files"
 msgstr "تمام فائلیں"
 
@@ -88,7 +88,7 @@ msgstr "بوٹ ریکارڈ کی نوعیت: 2880KiB فلاپی"
 msgid "Boot record type: No Emulation"
 msgstr "بوٹ ریکارڈ کی نوعیت: کوئی شبیہ سازی نہیں"
 
-#: ../isobrowser.c:268 ../isobrowser.c:1933
+#: ../isobrowser.c:268 ../isobrowser.c:1932
 msgid "Change permissions"
 msgstr "اجازے بدلیں"
 
@@ -96,11 +96,11 @@ msgstr "اجازے بدلیں"
 msgid "Choose Boot Record File"
 msgstr "بوٹ ریکارڈ کی فائل منتخب کریں"
 
-#: ../window.c:399
+#: ../window.c:397
 msgid "Create new directory on the ISO"
 msgstr "آئی ایس او میں نئی ڈائریکٹری بنائیں"
 
-#: ../window.c:62
+#: ../window.c:61
 msgid "Create new directory on the filesystem"
 msgstr "فائل نظام میں نئی ڈائریکٹری بنائیں"
 
@@ -108,11 +108,11 @@ msgstr "فائل نظام میں نئی ڈائریکٹری بنائیں"
 msgid "Creation time:"
 msgstr "بنانے کا وقت:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Delete from the ISO"
 msgstr "آئی ایس او سے حذف کریں"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1926
+#: ../fsbrowser.c:590 ../isobrowser.c:1925
 msgid "Edit"
 msgstr "تدوین"
 
@@ -124,7 +124,7 @@ msgstr "تدوین ناکام، ازراہِ کرم اختیارات/مدون د
 msgid "Editor"
 msgstr "مدون"
 
-#: ../isobrowser.c:1591
+#: ../isobrowser.c:1590
 msgid "Enter a new name:"
 msgstr "نیا نام داخل کریں:"
 
@@ -132,11 +132,11 @@ msgstr "نیا نام داخل کریں:"
 msgid "Enter name for new directory"
 msgstr "نئی ڈائریکٹری کے لیے نام داخل کریں"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract"
 msgstr "کشید کریں"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract from the ISO"
 msgstr "آئی ایس او سے کشید کریں"
 
@@ -170,7 +170,7 @@ msgstr "ڈائریکٹری بنانے میں ناکامی %s: '%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "حذف کرنے میں ناکامی '%s': '%s'"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:964
+#: ../editfile.c:412 ../editfile.c:744 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "کشید کرنے میں ناکامی '%s': '%s'"
@@ -180,7 +180,7 @@ msgstr "کشید کرنے میں ناکامی '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "بوٹ ریکارڈ کشید کرنے میں ناکامی: '%s'"
 
-#: ../isobrowser.c:1147 ../isobrowser.c:1249
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "bkisofs کی ابتداء کرنے میں ناکامی: '%s'"
@@ -190,22 +190,22 @@ msgstr "bkisofs کی ابتداء کرنے میں ناکامی: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "ڈائریکٹری کھولنے میں غلطی '%s', غلطی %d"
 
-#: ../isobrowser.c:1268
+#: ../isobrowser.c:1267
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "پڑھنے کے لیے فائل کھولنے میں ناکامی: '%s'"
 
-#: ../isobrowser.c:1343
+#: ../isobrowser.c:1342
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "ڈائریکٹری کا شجرہ پڑھنے میں ناکامی: '%s'"
 
-#: ../isobrowser.c:1283
+#: ../isobrowser.c:1282
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "حُجم کی معلومات پڑھنے میں ناکامی: '%s'"
 
-#: ../isobrowser.c:1620
+#: ../isobrowser.c:1619
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "نام بدلنے میں ناکامی '%s': %s"
@@ -215,7 +215,7 @@ msgstr "نام بدلنے میں ناکامی '%s': %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "ناکامی برائے تعیناتی %s کو بطور بوٹ ریکارڈ: '%s'"
 
-#: ../isobrowser.c:1693
+#: ../isobrowser.c:1692
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "تصویر لکھنے میں ناکامی تا '%s': '%s'"
@@ -228,19 +228,19 @@ msgstr "فائل نام کی نوعیتیں (دونوں کی تجویز دی ج�
 msgid "Follow symbolic links"
 msgstr "علامتی روابط کا پیچھا کریں"
 
-#: ../window.c:326
+#: ../window.c:325
 msgid "From file: 1200KiB floppy"
 msgstr "از فائل: 1200KiB فلاپی"
 
-#: ../window.c:332
+#: ../window.c:331
 msgid "From file: 1440KiB floppy"
 msgstr "از فائل: 1440KiB فلاپی"
 
-#: ../window.c:338
+#: ../window.c:337
 msgid "From file: 2880KiB floppy"
 msgstr "از فائل: 2880KiB فلاپی"
 
-#: ../window.c:320
+#: ../window.c:319
 msgid "From file: no emulation"
 msgstr "از فائل: کوئی شبیہ سازی نہیں"
 
@@ -250,23 +250,23 @@ msgid ""
 msgstr ""
 "مواجہ غلطی: فائلوں اور ڈائریکٹریوں کے علاوہ کچھ بھی حذف کرنا کام نہیں کرے گا"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:54 ../window.c:390
 msgid "Go back"
 msgstr "پیچھے جائیں"
 
-#: ../window.c:393
+#: ../window.c:391
 msgid "Go back up one directory on the ISO"
 msgstr "آئی ایس او میں ایک ڈائریکٹری پیچھے جائیں"
 
-#: ../window.c:56
+#: ../window.c:55
 msgid "Go back up one directory on the filesystem"
 msgstr "فائل نظام میں ایک ڈائریکٹری پیچھے جائیں"
 
-#: ../isobrowser.c:1429 ../isobrowser.c:1742
+#: ../isobrowser.c:1428 ../isobrowser.c:1741
 msgid "ISO Images"
 msgstr "آئی ایس او تصاویر"
 
-#: ../about.c:392
+#: ../about.c:402
 msgid "ISO Master Help"
 msgstr "آئی ایس او ماسٹر کی ہدایات"
 
@@ -318,11 +318,11 @@ msgstr "مقام: اصل تصویر میں بر 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "مقام: شامل کی جائے گی از '%s'"
 
-#: ../isobrowser.c:1439
+#: ../isobrowser.c:1438
 msgid "MDF Images"
 msgstr "MDF تصاویر"
 
-#: ../isobrowser.c:1434
+#: ../isobrowser.c:1433
 msgid "NRG Images"
 msgstr "NRG تصاویر"
 
@@ -330,7 +330,7 @@ msgstr "NRG تصاویر"
 msgid "Name"
 msgstr "نام"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:60 ../window.c:396
 msgid "New Directory"
 msgstr "نئی ڈائریکٹری"
 
@@ -342,7 +342,7 @@ msgstr "اصل سے کوئی بوٹ ریکارڈ نہیں پڑھا گیا یا �
 msgid "No boot to delete"
 msgstr "حذف کرنے کے لیے کوئی بوٹ نہیں"
 
-#: ../window.c:168
+#: ../window.c:167
 msgid "Open Recent"
 msgstr "حالیہ کھولیں"
 
@@ -364,23 +364,23 @@ msgstr "ازراہِ کرم فائل براؤزر میں ایک فائل منت�
 msgid "Please wait while I'm adding the selected items..."
 msgstr "ازراہِ کرم جب تک میں منتخب کردہ عناصر شامل کروں تب تک انتظار فرمائیں..."
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:905
 msgid "Please wait while I'm extracting the selected files..."
 msgstr ""
 "ازراہِ کرم جب تک میں منتخب کردہ فائلیں کشید نہ کر لوں تب تک انتظار فرمائیں..."
 
-#: ../isobrowser.c:1307
+#: ../isobrowser.c:1306
 msgid "Please wait while I'm reading the image..."
 msgstr "ازراہِ کرم جب تک میں تصویر کو پڑھ نہ لو تب تک انتظار فرمائیں..."
 
-#: ../isobrowser.c:1665
+#: ../isobrowser.c:1664
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr ""
 "ازراہِ کرم جب تک میں نئی تصویر کو ڈسک پر محفوظ نہ کر لوں تب تک انتظار "
 "فرمائیں..."
 
-#: ../isobrowser.c:130 ../isobrowser.c:898 ../isobrowser.c:1300
-#: ../isobrowser.c:1655
+#: ../isobrowser.c:130 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:1654
 msgid "Progress"
 msgstr "پیش رفت"
 
@@ -388,15 +388,15 @@ msgstr "پیش رفت"
 msgid "Publisher:"
 msgstr "ناشر:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Remove"
 msgstr "حذف کریں"
 
-#: ../isobrowser.c:1910
+#: ../isobrowser.c:1909
 msgid "Rename"
 msgstr "نام بدلیں"
 
-#: ../isobrowser.c:1731
+#: ../isobrowser.c:1730
 msgid "Save File"
 msgstr "فائل محفوظ کریں"
 
@@ -408,7 +408,7 @@ msgstr "بوٹ ریکارڈ کی ایک کاپی محفوظ کریں"
 msgid "Scan for duplicate files (slow)"
 msgstr "مثنی فائلوں کے لیے تلاش کریں (سست)"
 
-#: ../window.c:242
+#: ../window.c:241
 msgid "Show _hidden files"
 msgstr "_پوشیدہ فائلیں دکھائیں"
 
@@ -433,7 +433,7 @@ msgstr ""
 msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "ڈائریکٹری کی انٹری پھلانگی جارہی ہے کیونکہ حالت(%s) ناکام ہوگئی بمع %d"
 
-#: ../window.c:262
+#: ../window.c:261
 msgid "Sort is _case sensitive"
 msgstr "چھانٹنا _حساس ہے"
 
@@ -441,7 +441,7 @@ msgstr "چھانٹنا _حساس ہے"
 msgid "Temporary directory"
 msgstr "عارضی ڈائریکٹری"
 
-#: ../about.c:330
+#: ../about.c:340
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -495,11 +495,11 @@ msgstr ""
 "منتخب کریں.\n"
 "آپ اصل آئی ایس او کے اوپر نہیں لکھ سکتے.\n"
 
-#: ../window.c:314
+#: ../window.c:313
 msgid "Use selected file on image (no emulation)"
 msgstr "تصویر میں منتخب کردہ فائل استعمال کریں (کوئی شبیہ سازی نہیں)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1919
+#: ../fsbrowser.c:583 ../isobrowser.c:1918
 msgid "View"
 msgstr "منظر"
 
@@ -522,34 +522,34 @@ msgstr ""
 "اس تبدیلی کو اثر پذیر ہونے کے لیے آپ کو چاہیے کہ آئی ایس او کو بند کر کے "
 "دوبارہ کھولیں"
 
-#: ../window.c:282
+#: ../window.c:281
 msgid "_Boot Record"
 msgstr "_بوٹ ریکارڈ"
 
-#: ../window.c:143
+#: ../window.c:142
 msgid "_File"
 msgstr "_فائل"
 
-#: ../window.c:354
+#: ../window.c:353
 msgid "_Help"
 msgstr "_ہدایات"
 
-#: ../window.c:346
+#: ../window.c:345
 msgid "_Options"
 msgstr "_اختیارات"
 
-#: ../window.c:363
+#: ../window.c:362
 msgid "_Overview"
 msgstr "_عمومی جائزہ"
 
-#: ../window.c:252
+#: ../window.c:251
 msgid "_Sort directories first"
 msgstr "پہلے ڈائریکٹریاں _چھانٹیں"
 
-#: ../window.c:274
+#: ../window.c:273
 msgid "_Tools"
 msgstr "_اوزار"
 
-#: ../window.c:227
+#: ../window.c:226
 msgid "_View"
 msgstr "_منظر"

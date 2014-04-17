@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ISO Master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-18 14:19-0500\n"
+"POT-Creation-Date: 2014-04-17 13:43-0400\n"
 "PO-Revision-Date: 2010-04-25 17:42+0100\n"
 "Last-Translator: Danijel Muharemovic <majstor_dane@inbox.com>\n"
 "Language-Team: \n"
@@ -14,11 +14,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../window.c:417
+#: ../window.c:415
 msgid "      Estimated ISO Size: "
 msgstr "Прорачуната величина ISO датотеке:"
 
-#: ../isobrowser.c:1512
+#: ../isobrowser.c:1511
 #, c-format
 msgid ""
 "%s\n"
@@ -29,28 +29,28 @@ msgstr ""
 "\n"
 "Да ли желите да наставите?"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:605 ../editfile.c:700
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' није прописна датотека"
 
-#: ../isobrowser.c:143 ../isobrowser.c:1313
+#: ../isobrowser.c:143 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(претрага за дуплираним датотекама)"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add"
 msgstr "Додај"
 
-#: ../isobrowser.c:1750
+#: ../isobrowser.c:1749
 msgid "Add extension automatically"
 msgstr "Аутоматски додај екстензију"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add to the ISO"
 msgstr "Додај у ISO"
 
-#: ../isobrowser.c:1444 ../isobrowser.c:1747
+#: ../isobrowser.c:1443 ../isobrowser.c:1746
 msgid "All files"
 msgstr "Све датотеке"
 
@@ -82,7 +82,7 @@ msgstr "Врста бутабилне датотеке: 2880KiB Флопи"
 msgid "Boot record type: No Emulation"
 msgstr "Врста бутабилне датотеке: Без емулације"
 
-#: ../isobrowser.c:268 ../isobrowser.c:1933
+#: ../isobrowser.c:268 ../isobrowser.c:1932
 msgid "Change permissions"
 msgstr "Измени дозволе за приступ"
 
@@ -90,11 +90,11 @@ msgstr "Измени дозволе за приступ"
 msgid "Choose Boot Record File"
 msgstr "Изабери бутабилну датотеку"
 
-#: ../window.c:399
+#: ../window.c:397
 msgid "Create new directory on the ISO"
 msgstr "Креирај нови директоријум у ISO-у"
 
-#: ../window.c:62
+#: ../window.c:61
 msgid "Create new directory on the filesystem"
 msgstr "Креирај нови директоријум у фајлсистему"
 
@@ -102,11 +102,11 @@ msgstr "Креирај нови директоријум у фајлсистем
 msgid "Creation time:"
 msgstr "Време креирања:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Delete from the ISO"
 msgstr "Избриши из ISO-а"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1926
+#: ../fsbrowser.c:590 ../isobrowser.c:1925
 msgid "Edit"
 msgstr "Измени"
 
@@ -118,7 +118,7 @@ msgstr "Измене неуспеле, молим проверите Опциј�
 msgid "Editor"
 msgstr "Уређивање"
 
-#: ../isobrowser.c:1591
+#: ../isobrowser.c:1590
 msgid "Enter a new name:"
 msgstr "Унеси ново име:"
 
@@ -126,11 +126,11 @@ msgstr "Унеси ново име:"
 msgid "Enter name for new directory"
 msgstr "Унеси име новог директоријума"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract"
 msgstr "Екстракција"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract from the ISO"
 msgstr "Екстрактуј из ISO-а"
 
@@ -164,7 +164,7 @@ msgstr "Неуспешно креирање директоријума %s: '%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "Неуспешно брисање '%s': '%s'"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:964
+#: ../editfile.c:412 ../editfile.c:744 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Неуспешна екстракција '%s': '%s'"
@@ -174,7 +174,7 @@ msgstr "Неуспешна екстракција '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Неуспешна екстракција бутабилне датотеке: '%s'"
 
-#: ../isobrowser.c:1147 ../isobrowser.c:1249
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Неуспешно покретање bkisofs: '%s'"
@@ -184,22 +184,22 @@ msgstr "Неуспешно покретање bkisofs: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Неуспешно отварање директоријума '%s', greška %d"
 
-#: ../isobrowser.c:1268
+#: ../isobrowser.c:1267
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Неуспешно отварање ISO датотеке за читање: '%s'"
 
-#: ../isobrowser.c:1343
+#: ../isobrowser.c:1342
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Неуспешно читање стабла директоријума: '%s'"
 
-#: ../isobrowser.c:1283
+#: ../isobrowser.c:1282
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Неуспешно очитавање информација о величини: '%s' "
 
-#: ../isobrowser.c:1620
+#: ../isobrowser.c:1619
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Неуспешно преименовање '%s': %s"
@@ -209,7 +209,7 @@ msgstr "Неуспешно преименовање '%s': %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Неуспешна поставка %s као бутабилне датотеке: '%s'"
 
-#: ../isobrowser.c:1693
+#: ../isobrowser.c:1692
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Неуспешна забелешка имиџа у '%s': '%s'"
@@ -222,19 +222,19 @@ msgstr "Типови датотека (оба препоручена)"
 msgid "Follow symbolic links"
 msgstr "Следи симболични линк"
 
-#: ../window.c:326
+#: ../window.c:325
 msgid "From file: 1200KiB floppy"
 msgstr "Из датотеке: 1200KiB Флопи"
 
-#: ../window.c:332
+#: ../window.c:331
 msgid "From file: 1440KiB floppy"
 msgstr "Из датотеке: 1440KiB Флопи"
 
-#: ../window.c:338
+#: ../window.c:337
 msgid "From file: 2880KiB floppy"
 msgstr "Из датотеке: 2880KiB Флопи"
 
-#: ../window.c:320
+#: ../window.c:319
 msgid "From file: no emulation"
 msgstr "Из датотеке: без емулације"
 
@@ -243,23 +243,23 @@ msgid ""
 "GUI error, deleting anything other than files and directories doesn't work"
 msgstr "ГРЕШКА, брисање било чега осим датотека и директоријума није могуће"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:54 ../window.c:390
 msgid "Go back"
 msgstr "Назад"
 
-#: ../window.c:393
+#: ../window.c:391
 msgid "Go back up one directory on the ISO"
 msgstr "Повратак у надређени директоријум у ISO-у"
 
-#: ../window.c:56
+#: ../window.c:55
 msgid "Go back up one directory on the filesystem"
 msgstr "Повратак у надређени директоријум у фајлсистему"
 
-#: ../isobrowser.c:1429 ../isobrowser.c:1742
+#: ../isobrowser.c:1428 ../isobrowser.c:1741
 msgid "ISO Images"
 msgstr "ISO имиџи"
 
-#: ../about.c:392
+#: ../about.c:402
 msgid "ISO Master Help"
 msgstr "ISO Master Помоћ"
 
@@ -311,11 +311,11 @@ msgstr "Локација: у оригиналном имиџу на 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Локација: за додавање из '%s'"
 
-#: ../isobrowser.c:1439
+#: ../isobrowser.c:1438
 msgid "MDF Images"
 msgstr "MDF имиџи"
 
-#: ../isobrowser.c:1434
+#: ../isobrowser.c:1433
 msgid "NRG Images"
 msgstr "NRG имиџ"
 
@@ -323,7 +323,7 @@ msgstr "NRG имиџ"
 msgid "Name"
 msgstr "Име"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:60 ../window.c:396
 msgid "New Directory"
 msgstr "Нови директоријум"
 
@@ -335,7 +335,7 @@ msgstr "Не постоји бутабилна датотека у оригин�
 msgid "No boot to delete"
 msgstr "Без бутабилне датотеке за брисање"
 
-#: ../window.c:168
+#: ../window.c:167
 msgid "Open Recent"
 msgstr "Отвори недавно отварано"
 
@@ -355,20 +355,20 @@ msgstr "Молим изаберите само једну бутабилну д�
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Молим причекајте док се изабране ставке додају..."
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:905
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Молим причекајте док се изабране ставке екстрактују..."
 
-#: ../isobrowser.c:1307
+#: ../isobrowser.c:1306
 msgid "Please wait while I'm reading the image..."
 msgstr "Молим причекајте док се имиџ учитава..."
 
-#: ../isobrowser.c:1665
+#: ../isobrowser.c:1664
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Молим причекајте док се нови имиџ записује на диск..."
 
-#: ../isobrowser.c:130 ../isobrowser.c:898 ../isobrowser.c:1300
-#: ../isobrowser.c:1655
+#: ../isobrowser.c:130 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:1654
 msgid "Progress"
 msgstr "Напредак"
 
@@ -376,15 +376,15 @@ msgstr "Напредак"
 msgid "Publisher:"
 msgstr "Издавач:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Remove"
 msgstr "Уклони"
 
-#: ../isobrowser.c:1910
+#: ../isobrowser.c:1909
 msgid "Rename"
 msgstr "Преименуј"
 
-#: ../isobrowser.c:1731
+#: ../isobrowser.c:1730
 msgid "Save File"
 msgstr "Сачувај датотеку"
 
@@ -396,7 +396,7 @@ msgstr "Екстрактуј бутабилну датотеку из ISO-а"
 msgid "Scan for duplicate files (slow)"
 msgstr "Претраживање дуплих датотека (споро)"
 
-#: ../window.c:242
+#: ../window.c:241
 msgid "Show _hidden files"
 msgstr "Прикажи _скривене датотеке"
 
@@ -421,7 +421,7 @@ msgstr ""
 msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Поништавам унос директоријума због статуса(%s) неуспело са %d"
 
-#: ../window.c:262
+#: ../window.c:261
 msgid "Sort is _case sensitive"
 msgstr "На сортирање утичу _велика слова"
 
@@ -429,7 +429,7 @@ msgstr "На сортирање утичу _велика слова"
 msgid "Temporary directory"
 msgstr "Привремени директоријум"
 
-#: ../about.c:330
+#: ../about.c:340
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -480,11 +480,11 @@ msgstr ""
 "Када направите жељене измене у ISO имиџу, кликните на 'Датотека' и\n"
 "'Сачувај као'. Не можете пребрисати оригинални ISO.\n"
 
-#: ../window.c:314
+#: ../window.c:313
 msgid "Use selected file on image (no emulation)"
 msgstr "Користи одабрану датотеку у имиџу (без емулације)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1919
+#: ../fsbrowser.c:583 ../isobrowser.c:1918
 msgid "View"
 msgstr "Прикажи"
 
@@ -505,35 +505,35 @@ msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Морате затворити ISO и поново га отворити да би промене биле видљиве"
 
-#: ../window.c:282
+#: ../window.c:281
 msgid "_Boot Record"
 msgstr "_Бутабилни-фајл"
 
-#: ../window.c:143
+#: ../window.c:142
 msgid "_File"
 msgstr "_Датотека"
 
-#: ../window.c:354
+#: ../window.c:353
 msgid "_Help"
 msgstr "По_моћ"
 
-#: ../window.c:346
+#: ../window.c:345
 msgid "_Options"
 msgstr "_Опције"
 
-#: ../window.c:363
+#: ../window.c:362
 msgid "_Overview"
 msgstr "Кратко _упутство"
 
-#: ../window.c:252
+#: ../window.c:251
 msgid "_Sort directories first"
 msgstr "Прво сортирај _директоријуме"
 
-#: ../window.c:274
+#: ../window.c:273
 msgid "_Tools"
 msgstr "_Алатке"
 
-#: ../window.c:227
+#: ../window.c:226
 msgid "_View"
 msgstr "_Прикажи"
 

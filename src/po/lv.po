@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: isomaster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-18 14:19-0500\n"
+"POT-Creation-Date: 2014-04-17 13:43-0400\n"
 "PO-Revision-Date: 2009-08-23 21:57+0100\n"
 "Last-Translator: Rihards Priedītis <rprieditis@gmail.com>\n"
 "Language-Team: Latvian <rprieditis@gmail.com>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
-#: ../window.c:417
+#: ../window.c:415
 msgid "      Estimated ISO Size: "
 msgstr "      Paredzamais ISO izmērs: "
 
-#: ../isobrowser.c:1512
+#: ../isobrowser.c:1511
 #, c-format
 msgid ""
 "%s\n"
@@ -33,28 +33,28 @@ msgstr ""
 "\n"
 "Vai vēlaties turpināt?"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:605 ../editfile.c:700
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "\"%s\" nav parasts fails"
 
-#: ../isobrowser.c:143 ../isobrowser.c:1313
+#: ../isobrowser.c:143 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(notiek dublikātu skenešana)"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add"
 msgstr "Pievienot"
 
-#: ../isobrowser.c:1750
+#: ../isobrowser.c:1749
 msgid "Add extension automatically"
 msgstr "Pievienot paplašinājums automātiski"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add to the ISO"
 msgstr "Pievienot iekš ISO"
 
-#: ../isobrowser.c:1444 ../isobrowser.c:1747
+#: ../isobrowser.c:1443 ../isobrowser.c:1746
 msgid "All files"
 msgstr "Visi faili"
 
@@ -86,7 +86,7 @@ msgstr "Ielādes ieraksta veids: 2880KiB diskete"
 msgid "Boot record type: No Emulation"
 msgstr "Ielādes ieraksta veids: Bez emulācijas"
 
-#: ../isobrowser.c:268 ../isobrowser.c:1933
+#: ../isobrowser.c:268 ../isobrowser.c:1932
 msgid "Change permissions"
 msgstr "Mainīt atļaujas"
 
@@ -94,11 +94,11 @@ msgstr "Mainīt atļaujas"
 msgid "Choose Boot Record File"
 msgstr "Izvēlēties ielādes ieraksta failu"
 
-#: ../window.c:399
+#: ../window.c:397
 msgid "Create new directory on the ISO"
 msgstr "Izveidot jaunu direktoriju iekš ISO"
 
-#: ../window.c:62
+#: ../window.c:61
 msgid "Create new directory on the filesystem"
 msgstr "Izveidot jaunu direktoriju failusistēmā"
 
@@ -106,11 +106,11 @@ msgstr "Izveidot jaunu direktoriju failusistēmā"
 msgid "Creation time:"
 msgstr "Izveides laiks:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Delete from the ISO"
 msgstr "Dzest no ISO"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1926
+#: ../fsbrowser.c:590 ../isobrowser.c:1925
 msgid "Edit"
 msgstr "Rediģēt"
 
@@ -122,7 +122,7 @@ msgstr "Rediģēšana neizdevās, lūdzu pārbaudiet Uzstādījumi/Redaktors"
 msgid "Editor"
 msgstr "Redaktors"
 
-#: ../isobrowser.c:1591
+#: ../isobrowser.c:1590
 msgid "Enter a new name:"
 msgstr "Ievadiet jauno nosaukumu:"
 
@@ -130,11 +130,11 @@ msgstr "Ievadiet jauno nosaukumu:"
 msgid "Enter name for new directory"
 msgstr "Ievadiet jaunās direktorijas nosaukumu"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract"
 msgstr "Atspiest"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract from the ISO"
 msgstr "Atspiest no ISO"
 
@@ -168,7 +168,7 @@ msgstr "Neizdevās izveidot direktoriju %s: \"%s\""
 msgid "Failed to delete '%s': '%s'"
 msgstr "Neizdevās dzēst \"%s\": \"%s\""
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:964
+#: ../editfile.c:412 ../editfile.c:744 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Neizdevās atspiest \"%s\": \"%s\""
@@ -178,7 +178,7 @@ msgstr "Neizdevās atspiest \"%s\": \"%s\""
 msgid "Failed to extract boot record: '%s'"
 msgstr "Neizdevās atspiest ielādes ierakstu: \"%s\""
 
-#: ../isobrowser.c:1147 ../isobrowser.c:1249
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Neizdevās inicializēt bkisofs: \"%s\""
@@ -188,22 +188,22 @@ msgstr "Neizdevās inicializēt bkisofs: \"%s\""
 msgid "Failed to open directory '%s', error %d"
 msgstr "Neizdevās atvērt direktoriju \"%s\", kļūda %d"
 
-#: ../isobrowser.c:1268
+#: ../isobrowser.c:1267
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Neizdevās atvērt iso failu ladīšanai: \"%s\""
 
-#: ../isobrowser.c:1343
+#: ../isobrowser.c:1342
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Neizdevās nolasīt direktorijas koku: \"%s\""
 
-#: ../isobrowser.c:1283
+#: ../isobrowser.c:1282
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Neizdevās nolasīt sējuma informāciju: \"%s\""
 
-#: ../isobrowser.c:1620
+#: ../isobrowser.c:1619
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Neizdevās pārdēvēt \"%s\": %s"
@@ -213,7 +213,7 @@ msgstr "Neizdevās pārdēvēt \"%s\": %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Neizdevās uzstādīt %s kā ielādes ierkastu: \"%s\""
 
-#: ../isobrowser.c:1693
+#: ../isobrowser.c:1692
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Neizdevās attēla rakstīšana uz \"%s\": \"%s\""
@@ -226,19 +226,19 @@ msgstr "Faila nosaukuma tipi (abi ieteicami):"
 msgid "Follow symbolic links"
 msgstr "Sekot simboliskai saitei"
 
-#: ../window.c:326
+#: ../window.c:325
 msgid "From file: 1200KiB floppy"
 msgstr "No faila: 1200KiB diskete"
 
-#: ../window.c:332
+#: ../window.c:331
 msgid "From file: 1440KiB floppy"
 msgstr "No faila: 1440KiB diskete"
 
-#: ../window.c:338
+#: ../window.c:337
 msgid "From file: 2880KiB floppy"
 msgstr "No faila: 2880KiB diskete"
 
-#: ../window.c:320
+#: ../window.c:319
 msgid "From file: no emulation"
 msgstr "No faila: bez emulācijas"
 
@@ -248,23 +248,23 @@ msgid ""
 msgstr ""
 "GUI kļuda, var dzēst tikai failus un direktorijas, citāda dzēšana nestrādā"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:54 ../window.c:390
 msgid "Go back"
 msgstr "Doties atpakaļ"
 
-#: ../window.c:393
+#: ../window.c:391
 msgid "Go back up one directory on the ISO"
 msgstr "Doties vienu direktorijas līmeni uz augšu iekš ISO"
 
-#: ../window.c:56
+#: ../window.c:55
 msgid "Go back up one directory on the filesystem"
 msgstr "Doties atpakaļ vienu direktoriju failusistēmā"
 
-#: ../isobrowser.c:1429 ../isobrowser.c:1742
+#: ../isobrowser.c:1428 ../isobrowser.c:1741
 msgid "ISO Images"
 msgstr "ISO attēli"
 
-#: ../about.c:392
+#: ../about.c:402
 msgid "ISO Master Help"
 msgstr "ISO Master palīdzība"
 
@@ -316,11 +316,11 @@ msgstr "Atrašanās vieta: uz sākotnējā attēla ir 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Atrašanās vieta: tiks pievienota no \"%s\""
 
-#: ../isobrowser.c:1439
+#: ../isobrowser.c:1438
 msgid "MDF Images"
 msgstr "MDF attēls"
 
-#: ../isobrowser.c:1434
+#: ../isobrowser.c:1433
 msgid "NRG Images"
 msgstr "NRG attēls"
 
@@ -328,7 +328,7 @@ msgstr "NRG attēls"
 msgid "Name"
 msgstr "Nosaukums"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:60 ../window.c:396
 msgid "New Directory"
 msgstr "Jauna direktorija"
 
@@ -341,7 +341,7 @@ msgstr ""
 msgid "No boot to delete"
 msgstr "Nav ielādes ko dzēst"
 
-#: ../window.c:168
+#: ../window.c:167
 msgid "Open Recent"
 msgstr "Atvērt nesenos"
 
@@ -361,20 +361,20 @@ msgstr "Lūdzu norādiet ne vairāk kā vienu failu ISO pārlūkā"
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Lūdzu pagaidiet kamēr notiek atlasīto vienumu pievienošana..."
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:905
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Lūdzu pagaidiet kamēr notiek atlasīto failu atspiešana..."
 
-#: ../isobrowser.c:1307
+#: ../isobrowser.c:1306
 msgid "Please wait while I'm reading the image..."
 msgstr "Lūdzu pagaidiet kamēr notiek attēla lasīšana..."
 
-#: ../isobrowser.c:1665
+#: ../isobrowser.c:1664
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Lūdzu pagaidiet kamēr notiek jaunā attēla saglabāšana diskā..."
 
-#: ../isobrowser.c:130 ../isobrowser.c:898 ../isobrowser.c:1300
-#: ../isobrowser.c:1655
+#: ../isobrowser.c:130 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:1654
 msgid "Progress"
 msgstr "Progress"
 
@@ -382,15 +382,15 @@ msgstr "Progress"
 msgid "Publisher:"
 msgstr "Izdevējs:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Remove"
 msgstr "Noņemt"
 
-#: ../isobrowser.c:1910
+#: ../isobrowser.c:1909
 msgid "Rename"
 msgstr "Pārdēvēt"
 
-#: ../isobrowser.c:1731
+#: ../isobrowser.c:1730
 msgid "Save File"
 msgstr "Saglabāt failu"
 
@@ -402,7 +402,7 @@ msgstr "Saglabāt ielādes ieraksta kopiju"
 msgid "Scan for duplicate files (slow)"
 msgstr "Dublikātu failu skenēšana (lēni)"
 
-#: ../window.c:242
+#: ../window.c:241
 msgid "Show _hidden files"
 msgstr "Slēpt _slēptos failus"
 
@@ -427,7 +427,7 @@ msgstr ""
 msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Tiek izlaists direktorijas ieraksts, jo stat(%s) neizdevās ar %d"
 
-#: ../window.c:262
+#: ../window.c:261
 msgid "Sort is _case sensitive"
 msgstr "_Reģistra jūtīga kārtošana"
 
@@ -435,7 +435,7 @@ msgstr "_Reģistra jūtīga kārtošana"
 msgid "Temporary directory"
 msgstr "Pagaidu direktorija"
 
-#: ../about.c:330
+#: ../about.c:340
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -490,11 +490,11 @@ msgstr ""
 "\"Fails\" un\n"
 "\"Saglabāt kā\". Jūs nevarat pārrakstīt pāri sākotnējam ISO.\n"
 
-#: ../window.c:314
+#: ../window.c:313
 msgid "Use selected file on image (no emulation)"
 msgstr "Izmantot atlasīto failu uz attēla (bez emulācijas)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1919
+#: ../fsbrowser.c:583 ../isobrowser.c:1918
 msgid "View"
 msgstr "Apskatīt"
 
@@ -515,34 +515,34 @@ msgid ""
 "You will have to close and reopen the ISO for this change to take effect"
 msgstr "Jums būs jāaizver un jāataisa ISO, lai izmaiņas stātos spēkā"
 
-#: ../window.c:282
+#: ../window.c:281
 msgid "_Boot Record"
 msgstr "_Ielādes ieraksts"
 
-#: ../window.c:143
+#: ../window.c:142
 msgid "_File"
 msgstr "_Fails"
 
-#: ../window.c:354
+#: ../window.c:353
 msgid "_Help"
 msgstr "_Palīdzība"
 
-#: ../window.c:346
+#: ../window.c:345
 msgid "_Options"
 msgstr "_Uzstādījumi"
 
-#: ../window.c:363
+#: ../window.c:362
 msgid "_Overview"
 msgstr "_Pārskats"
 
-#: ../window.c:252
+#: ../window.c:251
 msgid "_Sort directories first"
 msgstr "_Kārtot direktorijas pirmās"
 
-#: ../window.c:274
+#: ../window.c:273
 msgid "_Tools"
 msgstr "_Rīki"
 
-#: ../window.c:227
+#: ../window.c:226
 msgid "_View"
 msgstr "_Skats"

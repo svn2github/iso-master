@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-18 14:19-0500\n"
+"POT-Creation-Date: 2014-04-17 13:43-0400\n"
 "PO-Revision-Date: 2011-08-31 13:12+0300\n"
 "Last-Translator: Mindaugas Baranauskas <embar@users.berlios.de>\n"
 "Language-Team: Lithuanian <kde-i18n-doc@kde.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
 "%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../window.c:417
+#: ../window.c:415
 msgid "      Estimated ISO Size: "
 msgstr "      ISO dydis tikriausiai bus: "
 
-#: ../isobrowser.c:1512
+#: ../isobrowser.c:1511
 #, c-format
 msgid ""
 "%s\n"
@@ -33,28 +33,28 @@ msgstr ""
 "\n"
 "Tęsti?"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:605 ../editfile.c:700
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "„%s“ nėra normali rinkmena"
 
-#: ../isobrowser.c:143 ../isobrowser.c:1313
+#: ../isobrowser.c:143 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(ieškoma besidubliuojančių rinkmenų)"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add"
 msgstr "Pridėti"
 
-#: ../isobrowser.c:1750
+#: ../isobrowser.c:1749
 msgid "Add extension automatically"
 msgstr "Automatiškai pridėti prievardį"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add to the ISO"
 msgstr "Įtraukti į ISO"
 
-#: ../isobrowser.c:1444 ../isobrowser.c:1747
+#: ../isobrowser.c:1443 ../isobrowser.c:1746
 msgid "All files"
 msgstr "Visos rinkmenos"
 
@@ -86,7 +86,7 @@ msgstr "Paleidimo įrašo tipas: 2880KiB diskelis"
 msgid "Boot record type: No Emulation"
 msgstr "Paleidimo įrašo tipas: be emuliacijos"
 
-#: ../isobrowser.c:268 ../isobrowser.c:1933
+#: ../isobrowser.c:268 ../isobrowser.c:1932
 msgid "Change permissions"
 msgstr "Keisti leidimus"
 
@@ -94,11 +94,11 @@ msgstr "Keisti leidimus"
 msgid "Choose Boot Record File"
 msgstr "Pasirinkite paleidimo įrašo rinkmeną"
 
-#: ../window.c:399
+#: ../window.c:397
 msgid "Create new directory on the ISO"
 msgstr "ISO atvaizdyje sukurti naują katalogą"
 
-#: ../window.c:62
+#: ../window.c:61
 msgid "Create new directory on the filesystem"
 msgstr "Rinkmenų sistemoje atvaizdyje sukurti naują katalogą"
 
@@ -106,11 +106,11 @@ msgstr "Rinkmenų sistemoje atvaizdyje sukurti naują katalogą"
 msgid "Creation time:"
 msgstr "Sukūrimo laikas:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Delete from the ISO"
 msgstr "Pašalinti iš ISO"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1926
+#: ../fsbrowser.c:590 ../isobrowser.c:1925
 msgid "Edit"
 msgstr "Redaguoti"
 
@@ -122,7 +122,7 @@ msgstr "Redaguoti nepavyks, patikrinkite nuostatas ties Parinktys/Rengyklė"
 msgid "Editor"
 msgstr "Rengyklė"
 
-#: ../isobrowser.c:1591
+#: ../isobrowser.c:1590
 msgid "Enter a new name:"
 msgstr "Įveskite naują vardą:"
 
@@ -130,11 +130,11 @@ msgstr "Įveskite naują vardą:"
 msgid "Enter name for new directory"
 msgstr "Įveskite naujo katalogo vardą"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract"
 msgstr "Ištraukti"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract from the ISO"
 msgstr "Išpakuoti iš ISO"
 
@@ -168,7 +168,7 @@ msgstr "Nepavyko sukurti katalogo %s: „%s“"
 msgid "Failed to delete '%s': '%s'"
 msgstr "Nepavyko pašalinti „%s“: „%s“"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:964
+#: ../editfile.c:412 ../editfile.c:744 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Nepavyko išpakuoti „%s“: „%s“"
@@ -178,7 +178,7 @@ msgstr "Nepavyko išpakuoti „%s“: „%s“"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Nepavyko ištraukti paleidimo įrašo: „%s“"
 
-#: ../isobrowser.c:1147 ../isobrowser.c:1249
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Nepavyko paleisti bkisofs: „%s“"
@@ -188,22 +188,22 @@ msgstr "Nepavyko paleisti bkisofs: „%s“"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Nepavyko atverti katalogo „%s“, %d klaida"
 
-#: ../isobrowser.c:1268
+#: ../isobrowser.c:1267
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Nepavyko atverti iso atvaizdžio skaitymui: „%s“"
 
-#: ../isobrowser.c:1343
+#: ../isobrowser.c:1342
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Nepavyko nuskaityti katalogų medžio: „%s“"
 
-#: ../isobrowser.c:1283
+#: ../isobrowser.c:1282
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Nepavyko nuskaityti tomo informacijos: „%s“"
 
-#: ../isobrowser.c:1620
+#: ../isobrowser.c:1619
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Nepavyko pervadinti „%s“: %s"
@@ -213,7 +213,7 @@ msgstr "Nepavyko pervadinti „%s“: %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Nepavyko %s nustatyti kaip paleidimo įrašo: „%s“"
 
-#: ../isobrowser.c:1693
+#: ../isobrowser.c:1692
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Nepavyko įrašyti atvaizdžio į „%s“: „%s“"
@@ -226,19 +226,19 @@ msgstr "Rinkmenų vardų tipai (rekomenduojami abu):"
 msgid "Follow symbolic links"
 msgstr "Sekti simbolinėmis nuorodomis"
 
-#: ../window.c:326
+#: ../window.c:325
 msgid "From file: 1200KiB floppy"
 msgstr "Iš rinkmenos: 1200KiB diskelis"
 
-#: ../window.c:332
+#: ../window.c:331
 msgid "From file: 1440KiB floppy"
 msgstr "Iš rinkmenos: 1440KiB diskelis"
 
-#: ../window.c:338
+#: ../window.c:337
 msgid "From file: 2880KiB floppy"
 msgstr "Iš rinkmenos: 2880KiB diskelis"
 
-#: ../window.c:320
+#: ../window.c:319
 msgid "From file: no emulation"
 msgstr "Iš rinkmenos: be emuliacijos"
 
@@ -248,23 +248,23 @@ msgid ""
 msgstr ""
 "Grafinės sąsajos klaida, be rinkmenų ir katalogų nieko nepavyks pašalinti"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:54 ../window.c:390
 msgid "Go back"
 msgstr "Aukštyn"
 
-#: ../window.c:393
+#: ../window.c:391
 msgid "Go back up one directory on the ISO"
 msgstr "Eiti prie vienu katalogu aukščiau ISO atvaizdyje esančio katalogo"
 
-#: ../window.c:56
+#: ../window.c:55
 msgid "Go back up one directory on the filesystem"
 msgstr "Eiti prie vienu katalogu aukščiau rinkmenų sistemoje esančio katalogo"
 
-#: ../isobrowser.c:1429 ../isobrowser.c:1742
+#: ../isobrowser.c:1428 ../isobrowser.c:1741
 msgid "ISO Images"
 msgstr "ISO atvaizdžiai"
 
-#: ../about.c:392
+#: ../about.c:402
 msgid "ISO Master Help"
 msgstr "ISO Master pagalba"
 
@@ -316,11 +316,11 @@ msgstr "Vieta: originaliame atvaizdyje ties 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Vieta: bus pridėta iš „%s“"
 
-#: ../isobrowser.c:1439
+#: ../isobrowser.c:1438
 msgid "MDF Images"
 msgstr "MDF atvaizdžiai"
 
-#: ../isobrowser.c:1434
+#: ../isobrowser.c:1433
 msgid "NRG Images"
 msgstr "NRG atvaizdžiai"
 
@@ -328,7 +328,7 @@ msgstr "NRG atvaizdžiai"
 msgid "Name"
 msgstr "Vardas"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:60 ../window.c:396
 msgid "New Directory"
 msgstr "Naujas katalogas"
 
@@ -341,7 +341,7 @@ msgstr ""
 msgid "No boot to delete"
 msgstr "Nėra pašalintino paleidimo įrašo"
 
-#: ../window.c:168
+#: ../window.c:167
 msgid "Open Recent"
 msgstr "Atverti paskiausią"
 
@@ -361,20 +361,20 @@ msgstr "ISO naršyklėje galite rinktis tik vieną rinkmeną"
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Pridedami pasirinkti elementai, palaukite..."
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:905
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Išpakuojamos pasirinktos rinkmenos, palaukite..."
 
-#: ../isobrowser.c:1307
+#: ../isobrowser.c:1306
 msgid "Please wait while I'm reading the image..."
 msgstr "Skaitomas atvaizdis, palaukite..."
 
-#: ../isobrowser.c:1665
+#: ../isobrowser.c:1664
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Atvaizdis įrašomas į diską, palaukite..."
 
-#: ../isobrowser.c:130 ../isobrowser.c:898 ../isobrowser.c:1300
-#: ../isobrowser.c:1655
+#: ../isobrowser.c:130 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:1654
 msgid "Progress"
 msgstr "Eiga"
 
@@ -382,15 +382,15 @@ msgstr "Eiga"
 msgid "Publisher:"
 msgstr "Išleido:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Remove"
 msgstr "Naikinti"
 
-#: ../isobrowser.c:1910
+#: ../isobrowser.c:1909
 msgid "Rename"
 msgstr "Pervadinti"
 
-#: ../isobrowser.c:1731
+#: ../isobrowser.c:1730
 msgid "Save File"
 msgstr "Įrašyti rinkmeną"
 
@@ -402,7 +402,7 @@ msgstr "Išsaugoti paleidimo įrašo kopiją"
 msgid "Scan for duplicate files (slow)"
 msgstr "Ieškoti besidubliuojančių rinkmenų (lėtai)"
 
-#: ../window.c:242
+#: ../window.c:241
 msgid "Show _hidden files"
 msgstr "Rodyti _slepiamąsias"
 
@@ -427,7 +427,7 @@ msgstr ""
 msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Katalogo elementas praleidžiamas, nes stat(%s) nepavyko su %d"
 
-#: ../window.c:262
+#: ../window.c:261
 msgid "Sort is _case sensitive"
 msgstr "_Rikiuoti skiriant raidžių lygį"
 
@@ -435,7 +435,7 @@ msgstr "_Rikiuoti skiriant raidžių lygį"
 msgid "Temporary directory"
 msgstr "Laikinasis katalogas"
 
-#: ../about.c:330
+#: ../about.c:340
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -485,11 +485,11 @@ msgstr ""
 "Atlikę visus norimus ISO atvaizdžio pakeitimus, eikite „Rinkmena“ ir \n"
 "„Įrašyti kaip“. Tačiau negalite perrašyti originalaus ISO atvaizdžio.\n"
 
-#: ../window.c:314
+#: ../window.c:313
 msgid "Use selected file on image (no emulation)"
 msgstr "Naudoti pasirinktą atvaizdžio rinkmeną (be emuliacijos)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1919
+#: ../fsbrowser.c:583 ../isobrowser.c:1918
 msgid "View"
 msgstr "Rodymas"
 
@@ -511,34 +511,34 @@ msgid ""
 msgstr ""
 "Šie pakeitimai įsigaliojus po to, kai užversite ir iš naujo atversite ISO"
 
-#: ../window.c:282
+#: ../window.c:281
 msgid "_Boot Record"
 msgstr "Paleidimo į_rašas"
 
-#: ../window.c:143
+#: ../window.c:142
 msgid "_File"
 msgstr "_Rinkmena"
 
-#: ../window.c:354
+#: ../window.c:353
 msgid "_Help"
 msgstr "_Pagalba"
 
-#: ../window.c:346
+#: ../window.c:345
 msgid "_Options"
 msgstr "_Parinktys"
 
-#: ../window.c:363
+#: ../window.c:362
 msgid "_Overview"
 msgstr "_Apžvalga"
 
-#: ../window.c:252
+#: ../window.c:251
 msgid "_Sort directories first"
 msgstr "Pirmiau _katalogai"
 
-#: ../window.c:274
+#: ../window.c:273
 msgid "_Tools"
 msgstr "Įran_kiai"
 
-#: ../window.c:227
+#: ../window.c:226
 msgid "_View"
 msgstr "Ro_dymas"

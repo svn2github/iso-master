@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ro\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-01-18 14:19-0500\n"
+"POT-Creation-Date: 2014-04-17 13:43-0400\n"
 "PO-Revision-Date: 2009-09-18 11:04-0000\n"
 "Last-Translator: Bogdan Radulescu <bogdan@nimblex.net>\n"
 "Language-Team: English <en@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 1.11.4\n"
 
-#: ../window.c:417
+#: ../window.c:415
 msgid "      Estimated ISO Size: "
 msgstr "      Dimensiunea ISO Estimată: "
 
-#: ../isobrowser.c:1512
+#: ../isobrowser.c:1511
 #, c-format
 msgid ""
 "%s\n"
@@ -32,28 +32,28 @@ msgstr ""
 "\n"
 "Doreşti să continui?"
 
-#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:601 ../editfile.c:696
+#: ../editfile.c:272 ../editfile.c:368 ../editfile.c:605 ../editfile.c:700
 #, c-format
 msgid "'%s' is not a regular file"
 msgstr "'%s' nu este un fişier normal"
 
-#: ../isobrowser.c:143 ../isobrowser.c:1313
+#: ../isobrowser.c:143 ../isobrowser.c:1312
 msgid "(scanning for duplicate files)"
 msgstr "(scanez fişiere duplicate)"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add"
 msgstr "Adaugă"
 
-#: ../isobrowser.c:1750
+#: ../isobrowser.c:1749
 msgid "Add extension automatically"
 msgstr "Adaugă extensie automat"
 
-#: ../window.c:403
+#: ../window.c:401
 msgid "Add to the ISO"
 msgstr "Adaugă la ISO"
 
-#: ../isobrowser.c:1444 ../isobrowser.c:1747
+#: ../isobrowser.c:1443 ../isobrowser.c:1746
 msgid "All files"
 msgstr "Toate fişierele"
 
@@ -85,7 +85,7 @@ msgstr "Tip boot record: 2880KiB Floppy"
 msgid "Boot record type: No Emulation"
 msgstr "Tip boot record: Fără emulare"
 
-#: ../isobrowser.c:268 ../isobrowser.c:1933
+#: ../isobrowser.c:268 ../isobrowser.c:1932
 msgid "Change permissions"
 msgstr "Modifică permisiunile"
 
@@ -93,11 +93,11 @@ msgstr "Modifică permisiunile"
 msgid "Choose Boot Record File"
 msgstr "Alege fişierul boot record"
 
-#: ../window.c:399
+#: ../window.c:397
 msgid "Create new directory on the ISO"
 msgstr "Crează un nou director pe ISO"
 
-#: ../window.c:62
+#: ../window.c:61
 msgid "Create new directory on the filesystem"
 msgstr "Crează un nou director în sistemul de fişiere"
 
@@ -105,11 +105,11 @@ msgstr "Crează un nou director în sistemul de fişiere"
 msgid "Creation time:"
 msgstr "Momentul creării:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Delete from the ISO"
 msgstr "Şterge din ISO"
 
-#: ../fsbrowser.c:590 ../isobrowser.c:1926
+#: ../fsbrowser.c:590 ../isobrowser.c:1925
 msgid "Edit"
 msgstr "Editează"
 
@@ -121,7 +121,7 @@ msgstr "Editarea a eşuat, te rog verifică Setari/Editor"
 msgid "Editor"
 msgstr "Editor"
 
-#: ../isobrowser.c:1591
+#: ../isobrowser.c:1590
 msgid "Enter a new name:"
 msgstr "Introdu un nou nume:"
 
@@ -129,11 +129,11 @@ msgstr "Introdu un nou nume:"
 msgid "Enter name for new directory"
 msgstr "Introdu numele noului director"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract"
 msgstr "Extrage"
 
-#: ../window.c:408
+#: ../window.c:406
 msgid "Extract from the ISO"
 msgstr "Extrage din ISO"
 
@@ -167,7 +167,7 @@ msgstr "Nu pot să creez director %s: '%s'"
 msgid "Failed to delete '%s': '%s'"
 msgstr "Nu pot să şterg '%s': '%s'"
 
-#: ../editfile.c:412 ../editfile.c:740 ../isobrowser.c:964
+#: ../editfile.c:412 ../editfile.c:744 ../isobrowser.c:963
 #, c-format
 msgid "Failed to extract '%s': '%s'"
 msgstr "Nu pot să extrag '%s': '%s'"
@@ -177,7 +177,7 @@ msgstr "Nu pot să extrag '%s': '%s'"
 msgid "Failed to extract boot record: '%s'"
 msgstr "Nu pot să extrag boot record: ''%s"
 
-#: ../isobrowser.c:1147 ../isobrowser.c:1249
+#: ../isobrowser.c:1146 ../isobrowser.c:1248
 #, c-format
 msgid "Failed to initialise bkisofs: '%s'"
 msgstr "Nu pot să initiez bkisofs: '%s'"
@@ -187,22 +187,22 @@ msgstr "Nu pot să initiez bkisofs: '%s'"
 msgid "Failed to open directory '%s', error %d"
 msgstr "Nu pot să deschid directorul '%s', eroare %d"
 
-#: ../isobrowser.c:1268
+#: ../isobrowser.c:1267
 #, c-format
 msgid "Failed to open iso file for reading: '%s'"
 msgstr "Nu pot să deschid fişierul iso pentru a citii: '%s'"
 
-#: ../isobrowser.c:1343
+#: ../isobrowser.c:1342
 #, c-format
 msgid "Failed to read directory tree: '%s'"
 msgstr "Nu pot să accesez directoarele: '%s'"
 
-#: ../isobrowser.c:1283
+#: ../isobrowser.c:1282
 #, c-format
 msgid "Failed to read volume info: '%s'"
 msgstr "Nu pot să citesc informaţia volumului: '%s'"
 
-#: ../isobrowser.c:1620
+#: ../isobrowser.c:1619
 #, c-format
 msgid "Failed to rename '%s': %s"
 msgstr "Redenumire esuată '%s': %s"
@@ -212,7 +212,7 @@ msgstr "Redenumire esuată '%s': %s"
 msgid "Failed to set %s as boot record: '%s'"
 msgstr "Nu pot să setez %s ca boot record: '%s'"
 
-#: ../isobrowser.c:1693
+#: ../isobrowser.c:1692
 #, c-format
 msgid "Failed to write image to '%s': '%s'"
 msgstr "Nu pot să scriu imaginea pe '%s': '%s'"
@@ -225,19 +225,19 @@ msgstr "Tipurile fişierelor (recomandat ambele)"
 msgid "Follow symbolic links"
 msgstr "Urmareşte legăturile simbolice"
 
-#: ../window.c:326
+#: ../window.c:325
 msgid "From file: 1200KiB floppy"
 msgstr "Din fişier: 1200KiB floppy"
 
-#: ../window.c:332
+#: ../window.c:331
 msgid "From file: 1440KiB floppy"
 msgstr "Din fişier: 1440KiB floppy"
 
-#: ../window.c:338
+#: ../window.c:337
 msgid "From file: 2880KiB floppy"
 msgstr "Din fişier: 2880KiB floppy"
 
-#: ../window.c:320
+#: ../window.c:319
 msgid "From file: no emulation"
 msgstr "Din fişier: fără emulare"
 
@@ -248,23 +248,23 @@ msgstr ""
 "Eroare de interfaţă; şterg orice altceva în afară de fişierele şi "
 "directoarele care nu funcţionează"
 
-#: ../window.c:55 ../window.c:392
+#: ../window.c:54 ../window.c:390
 msgid "Go back"
 msgstr "Înapoi"
 
-#: ../window.c:393
+#: ../window.c:391
 msgid "Go back up one directory on the ISO"
 msgstr "Du-te un director în sus pe ISO"
 
-#: ../window.c:56
+#: ../window.c:55
 msgid "Go back up one directory on the filesystem"
 msgstr "Du-te un director în sus pe sistemul de fişiere"
 
-#: ../isobrowser.c:1429 ../isobrowser.c:1742
+#: ../isobrowser.c:1428 ../isobrowser.c:1741
 msgid "ISO Images"
 msgstr "Imagini ISO"
 
-#: ../about.c:392
+#: ../about.c:402
 msgid "ISO Master Help"
 msgstr "ISO Master Ajutor"
 
@@ -316,11 +316,11 @@ msgstr "Locaţie: pe imaginea originală la 0x%llX"
 msgid "Location: to be added from '%s'"
 msgstr "Locaţie:pentru a fi adăugată din '%s'"
 
-#: ../isobrowser.c:1439
+#: ../isobrowser.c:1438
 msgid "MDF Images"
 msgstr "Imagini MDF"
 
-#: ../isobrowser.c:1434
+#: ../isobrowser.c:1433
 msgid "NRG Images"
 msgstr "Imagini NRG"
 
@@ -328,7 +328,7 @@ msgstr "Imagini NRG"
 msgid "Name"
 msgstr "Nume"
 
-#: ../window.c:61 ../window.c:398
+#: ../window.c:60 ../window.c:396
 msgid "New Directory"
 msgstr "Director Nou"
 
@@ -340,7 +340,7 @@ msgstr "Nu am găsit nici un boot record pe original sau nu este prezent"
 msgid "No boot to delete"
 msgstr "Nici un boot de şters"
 
-#: ../window.c:168
+#: ../window.c:167
 msgid "Open Recent"
 msgstr "Deschide Recent"
 
@@ -360,20 +360,20 @@ msgstr "Te rog să nu selectezi mai mult de un fişier"
 msgid "Please wait while I'm adding the selected items..."
 msgstr "Te rog să aştepţi cât adaug fişierele selectate..."
 
-#: ../isobrowser.c:906
+#: ../isobrowser.c:905
 msgid "Please wait while I'm extracting the selected files..."
 msgstr "Te rog să aştepţi cât extrag fişierele selectate..."
 
-#: ../isobrowser.c:1307
+#: ../isobrowser.c:1306
 msgid "Please wait while I'm reading the image..."
 msgstr "Te rog să aştepţi cât citesc imaginea..."
 
-#: ../isobrowser.c:1665
+#: ../isobrowser.c:1664
 msgid "Please wait while I'm saving the new image to disk..."
 msgstr "Te rog să aştepţi cât salvez noua imagine pe disc..."
 
-#: ../isobrowser.c:130 ../isobrowser.c:898 ../isobrowser.c:1300
-#: ../isobrowser.c:1655
+#: ../isobrowser.c:130 ../isobrowser.c:897 ../isobrowser.c:1299
+#: ../isobrowser.c:1654
 msgid "Progress"
 msgstr "Progres"
 
@@ -381,15 +381,15 @@ msgstr "Progres"
 msgid "Publisher:"
 msgstr "Editor:"
 
-#: ../window.c:413
+#: ../window.c:411
 msgid "Remove"
 msgstr "Şterge"
 
-#: ../isobrowser.c:1910
+#: ../isobrowser.c:1909
 msgid "Rename"
 msgstr "Redenumeşte"
 
-#: ../isobrowser.c:1731
+#: ../isobrowser.c:1730
 msgid "Save File"
 msgstr "SalveazÄ fisier"
 
@@ -401,7 +401,7 @@ msgstr "Salvează o copie la boot record"
 msgid "Scan for duplicate files (slow)"
 msgstr "Scanez fişiere duplicate (lent)"
 
-#: ../window.c:242
+#: ../window.c:241
 msgid "Show _hidden files"
 msgstr "Arata fisierele _ascunse"
 
@@ -426,7 +426,7 @@ msgstr ""
 msgid "Skipping directory entry because stat(%s) failed with %d"
 msgstr "Exclud această intrare pentru că stat(%s) a eşuat cu %d"
 
-#: ../window.c:262
+#: ../window.c:261
 msgid "Sort is _case sensitive"
 msgstr "Sortarea este sensibila la _majuscule"
 
@@ -434,7 +434,7 @@ msgstr "Sortarea este sensibila la _majuscule"
 msgid "Temporary directory"
 msgstr "Director Temporar"
 
-#: ../about.c:330
+#: ../about.c:340
 msgid ""
 "The ISO Master window is split in 2 parts:\n"
 " - The top file browser shows files and directories on your machine.\n"
@@ -484,11 +484,11 @@ msgstr ""
 "Odată ce aţi făcut toate modificările pe noua imagine ISO daţi click\n"
 "pe 'Imagine' si pe 'Salveaza ca'.Nu puteţi rescrie imaginea originală.\n"
 
-#: ../window.c:314
+#: ../window.c:313
 msgid "Use selected file on image (no emulation)"
 msgstr "Foloseşte fişierul selectat pe imagine (fără emulare)"
 
-#: ../fsbrowser.c:583 ../isobrowser.c:1919
+#: ../fsbrowser.c:583 ../isobrowser.c:1918
 msgid "View"
 msgstr "Vizualizează"
 
@@ -511,35 +511,35 @@ msgstr ""
 "Va trebui să închizi şi să redeschizi ISO pentru ca aceste modificări să "
 "aibă efect"
 
-#: ../window.c:282
+#: ../window.c:281
 msgid "_Boot Record"
 msgstr "_Boot Record"
 
-#: ../window.c:143
+#: ../window.c:142
 msgid "_File"
 msgstr "_Fişier"
 
-#: ../window.c:354
+#: ../window.c:353
 msgid "_Help"
 msgstr "_Ajutor"
 
-#: ../window.c:346
+#: ../window.c:345
 msgid "_Options"
 msgstr "_Opţiuni"
 
-#: ../window.c:363
+#: ../window.c:362
 msgid "_Overview"
 msgstr "_Ansamblu"
 
-#: ../window.c:252
+#: ../window.c:251
 msgid "_Sort directories first"
 msgstr "_Sortează directoarele primele"
 
-#: ../window.c:274
+#: ../window.c:273
 msgid "_Tools"
 msgstr "_Utilitare"
 
-#: ../window.c:227
+#: ../window.c:226
 msgid "_View"
 msgstr "_Vizualizează"
 
