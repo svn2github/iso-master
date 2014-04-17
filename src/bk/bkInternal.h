@@ -26,6 +26,8 @@
 #define NLS_SYSTEM_AREA 16
 /* number of bytes in a logical block (in practice always 2048) */
 #define NBYTES_LOGICAL_BLOCK 2048
+/* for el torito boot images */
+#define NBYTES_VIRTUAL_SECTOR 512
 
 /*******************************************************************************
 * Joliet allows max 128 bytes
