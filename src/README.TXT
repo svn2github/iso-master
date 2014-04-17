@@ -10,6 +10,8 @@ Prerequisites for Compiling from Source
 ---------------------------------------
 You need a C compiler, make and whatever packages required for compiling GTK2 applications. On ubuntu I had to install (using Synaptic): build-essential, libgtk2.0-dev, pkg-config and gettext. On Slackware I didn't have to install anything.
 
+To compile the documentation you'll need db2html, which may come in a package named docbook-utils.
+
 Compiling and Installing from Source
 ------------------------------------
 At this time bkisofs comes in the same package as ISO Master so it doesn't need to be downloaded/built separately.
