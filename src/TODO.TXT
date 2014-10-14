@@ -57,8 +57,7 @@ ISOMASTER_VERSION=1.3.9
 svn export src releases/isomaster-$ISOMASTER_VERSION
 rm releases/isomaster-$ISOMASTER_VERSION/bkisofs-manual
 svn export doc/byme/bkisofs-manual/ releases/isomaster-$ISOMASTER_VERSION/bkisofs-manual
-make -C doc/byme/bkisofs-manual
-cp -r doc/byme/bkisofs-manual/manual releases/isomaster-$ISOMASTER_VERSION/bkisofs-manual
+cp -r doc/byme/bkisofs-manual releases/isomaster-$ISOMASTER_VERSION/bkisofs-manual
 rm -r releases/isomaster-$ISOMASTER_VERSION/icons/originals
 cd releases
 tar cvjf isomaster-$ISOMASTER_VERSION.tar.bz2 isomaster-$ISOMASTER_VERSION/
