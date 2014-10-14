@@ -19,12 +19,7 @@ do
 
   if [[ -e "$FIRST/$NAME" ]] && [[ ! -e "$SECOND/$NAME" ]]
   then
-    echo -n "$FIRST/$NAME doesn't exist in $SECOND continue? (Y/n) "
-    read GOON
-    if [[ $GOON = "n" ]]
-    then
-      exit 1
-    fi
+    echo "$FIRST/$NAME doesn't exist in $SECOND!"
     continue
   fi
   
@@ -37,12 +32,7 @@ do
     echo -n "Checking $NAME: "
     if [[ `md5sum "$FIRST/$NAME" | cut -f 1 -d ' '` != `md5sum "$SECOND/$NAME" | cut -f 1 -d ' '` ]]
     then
-      echo -n "Files are not the same, continue? (y/n) "
-      read GOON
-      if [[ $GOON = "n" ]]
-      then
-        exit 3
-      fi
+      echo "Files are not the same!"
     else
       echo "OK."
     fi
