@@ -87,7 +87,7 @@ typedef struct FileToWrite
     unsigned size; /* in bytes */
     BkHardLink* location; /* basically a copy of the following variables */
     bool onImage;
-    unsigned offset; /* if on image, in bytes */
+    bk_off_t offset; /* if on image, in bytes */
     char* pathAndName; /* if on filesystem, full path + filename
                        * is to be freed by whenever the File is freed */
     BkFile* origFile; /* this pointer only has one purpose: to potentially 
