@@ -52,6 +52,7 @@ to package a release:
 - update credits and credits.txt
 - check readme.txt
 - build bkisofs-manual
+- update https://littlesvr.ca/bugs/show_bug.cgi?id=1 and add that version to bugzilla
 
 ISOMASTER_VERSION=1.3.9
 svn export src releases/isomaster-$ISOMASTER_VERSION
