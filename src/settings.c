@@ -294,7 +294,7 @@ void loadSettings(void)
     int sortDirsFirst;
     int scanForDuplicateFiles;
     int followSymLinks;
-    char* tempStr;
+    const char* tempStr;
     int appendExtension;
     int caseSensitiveSort;
     
@@ -830,72 +830,72 @@ void writeSettings(void)
     
     free(configFileName);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui", NULL);
+    iniparser_set(GBLsettingsDictionary, "ui", NULL);
     
     gtk_window_get_size(GTK_WINDOW(GBLmainWindow), &width, &height);
     snprintf(numberStr, 20, "%d", width);
-    iniparser_setstr(GBLsettingsDictionary, "ui:windowwidth", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:windowwidth", numberStr);
     snprintf(numberStr, 20, "%d", height);
-    iniparser_setstr(GBLsettingsDictionary, "ui:windowheight", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:windowheight", numberStr);
     
     height = gtk_paned_get_position(GTK_PANED(GBLbrowserPaned));
     snprintf(numberStr, 20, "%d", height);
-    iniparser_setstr(GBLsettingsDictionary, "ui:toppaneheight", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:toppaneheight", numberStr);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:fscurrentdir", GBLfsCurrentDir);
+    iniparser_set(GBLsettingsDictionary, "ui:fscurrentdir", GBLfsCurrentDir);
     
     snprintf(numberStr, 20, "%d", GBLappSettings.showHiddenFilesFs);
-    iniparser_setstr(GBLsettingsDictionary, "ui:showhiddenfilesfs", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:showhiddenfilesfs", numberStr);
     
     snprintf(numberStr, 20, "%d", GBLappSettings.sortDirectoriesFirst);
-    iniparser_setstr(GBLsettingsDictionary, "ui:sortdirsfirst", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:sortdirsfirst", numberStr);
     
     snprintf(numberStr, 20, "%d", GBLappSettings.scanForDuplicateFiles);
-    iniparser_setstr(GBLsettingsDictionary, "ui:scanforduplicatefiles", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:scanforduplicatefiles", numberStr);
     
     snprintf(numberStr, 20, "%d", GBLappSettings.followSymLinks);
-    iniparser_setstr(GBLsettingsDictionary, "ui:followsymlinks", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:followsymlinks", numberStr);
     
     if(GBLappSettings.lastIsoDir != NULL)
-        iniparser_setstr(GBLsettingsDictionary, "ui:lastisodir", GBLappSettings.lastIsoDir);
+        iniparser_set(GBLsettingsDictionary, "ui:lastisodir", GBLappSettings.lastIsoDir);
     
     if(GBLappSettings.lastBootRecordDir != NULL)
-        iniparser_setstr(GBLsettingsDictionary, "ui:lastbootrecorddir", GBLappSettings.lastBootRecordDir);
+        iniparser_set(GBLsettingsDictionary, "ui:lastbootrecorddir", GBLappSettings.lastBootRecordDir);
     
     snprintf(numberStr, 20, "%d", GBLappSettings.appendExtension);
-    iniparser_setstr(GBLsettingsDictionary, "ui:appendextension", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:appendextension", numberStr);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:editor", GBLappSettings.editor);
+    iniparser_set(GBLsettingsDictionary, "ui:editor", GBLappSettings.editor);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:viewer", GBLappSettings.viewer);
+    iniparser_set(GBLsettingsDictionary, "ui:viewer", GBLappSettings.viewer);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:tempdir", GBLappSettings.tempDir);
+    iniparser_set(GBLsettingsDictionary, "ui:tempdir", GBLappSettings.tempDir);
     
     gtk_tree_sortable_get_sort_column_id(GTK_TREE_SORTABLE(GBLisoListStore), 
                                          &sortColumnId, &sortDirection);
     snprintf(numberStr, 20, "%d", sortColumnId);
-    iniparser_setstr(GBLsettingsDictionary, "ui:isosortcolumnid", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:isosortcolumnid", numberStr);
     snprintf(numberStr, 20, "%d", sortDirection);
-    iniparser_setstr(GBLsettingsDictionary, "ui:isosortdirection", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:isosortdirection", numberStr);
     
     gtk_tree_sortable_get_sort_column_id(GTK_TREE_SORTABLE(GBLfsListStore), 
                                          &sortColumnId, &sortDirection);
     snprintf(numberStr, 20, "%d", sortColumnId);
-    iniparser_setstr(GBLsettingsDictionary, "ui:fssortcolumnid", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:fssortcolumnid", numberStr);
     snprintf(numberStr, 20, "%d", sortDirection);
-    iniparser_setstr(GBLsettingsDictionary, "ui:fssortdirection", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:fssortdirection", numberStr);
     
-    iniparser_setstr(GBLsettingsDictionary, "ui:fsdrive", GBLappSettings.fsDrive);
+    iniparser_set(GBLsettingsDictionary, "ui:fsdrive", GBLappSettings.fsDrive);
     
     snprintf(numberStr, 20, "%d", GBLappSettings.caseSensitiveSort);
-    iniparser_setstr(GBLsettingsDictionary, "ui:casesensitivesort", numberStr);
+    iniparser_set(GBLsettingsDictionary, "ui:casesensitivesort", numberStr);
     
     for(int i = 0; i < 5; i++)
     {
         char configNameStr[20] = "ui:recentlyopen";
         snprintf(configNameStr + 15, 5, "%d", i);
         
-        iniparser_setstr(GBLsettingsDictionary, configNameStr, 
+        iniparser_set(GBLsettingsDictionary, configNameStr, 
             gtk_label_get_text(GTK_LABEL(
                 gtk_bin_get_child(GTK_BIN(GBLrecentlyOpenWidgets[i])))));
     }

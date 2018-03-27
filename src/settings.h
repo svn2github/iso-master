@@ -5,7 +5,7 @@
 
 #include "isomaster.h"
 #ifndef USE_SYSTEM_INIPARSER
-#include "iniparser-2.17/src/iniparser.h"
+#include "iniparser-4.1/src/iniparser.h"
 #else
 #include <iniparser.h>
 #endif
@@ -23,7 +23,7 @@ typedef struct
     int windowWidth;
     int windowHeight;
     int topPaneHeight;
-    char* fsCurrentDir;
+    const char* fsCurrentDir;
     int isoSortColumnId;
     int isoSortDirection;
     int fsSortColumnId;

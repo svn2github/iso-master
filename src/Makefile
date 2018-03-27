@@ -75,7 +75,7 @@ all: translations isomaster.desktop isomaster
 isomaster: $(OBJECTS) lib iniparser
 	@echo 'Linking isomaster'
 ifndef USE_SYSTEM_INIPARSER
-	@$(CC) $(LDFLAGS) $(OBJECTS) bk/bk.a iniparser-2.17/libiniparser.a -o isomaster `pkg-config --libs gtk+-2.0`
+	@$(CC) $(LDFLAGS) $(OBJECTS) bk/bk.a iniparser-4.1/libiniparser.a -o isomaster `pkg-config --libs gtk+-2.0`
 else
 	@$(CC) $(LDFLAGS) $(OBJECTS) bk/bk.a -liniparser -o isomaster `pkg-config --libs gtk+-2.0`
 endif
@@ -90,7 +90,7 @@ lib:
 
 iniparser:
 ifndef USE_SYSTEM_INIPARSER
-	cd iniparser-2.17 && $(MAKE)
+	cd iniparser-4.1 && $(MAKE)
 else
 	@echo "Will use system iniparser";
 endif
@@ -109,7 +109,7 @@ bk-doc:
 
 clean: 
 	cd bk && $(MAKE) clean
-	cd iniparser-2.17 && $(MAKE) clean
+	cd iniparser-4.1 && $(MAKE) clean
 ifndef WITHOUT_NLS
 	cd po && $(MAKE) clean
 endif
