@@ -86,18 +86,18 @@ $(OBJECTS): %.o: %.c %.h bk/bk.h Makefile
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $< -c -o $@
 
 lib:
-	cd bk && $(MAKE)
+	$(MAKE) -C bk
 
 iniparser:
 ifndef USE_SYSTEM_INIPARSER
-	cd iniparser-4.1 && $(MAKE)
+	$(MAKE) -C iniparser-4.1
 else
 	@echo "Will use system iniparser";
 endif
 
 translations:
 ifndef WITHOUT_NLS
-	cd po && $(MAKE)
+	$(MAKE) -C po
 endif
 
 isomaster.desktop: isomaster.desktop.src
@@ -105,13 +105,13 @@ isomaster.desktop: isomaster.desktop.src
 	$(ECHO) Icon=$(ICONPATH)/isomaster.png >> isomaster.desktop
 
 bk-doc:
-	cd bkisofs-manual && $(MAKE)
+	$(MAKE) -C bkisofs-manual
 
 clean: 
-	cd bk && $(MAKE) clean
-	cd iniparser-4.1 && $(MAKE) clean
+	$(MAKE) -C bk clean
+	$(MAKE) -C iniparser-4.1 clean
 ifndef WITHOUT_NLS
-	cd po && $(MAKE) clean
+	$(MAKE) -C po clean
 endif
 	$(RM) *.o isomaster isomaster.desktop
 
@@ -120,9 +120,9 @@ endif
 install: all
 	$(INSTALL) -d $(DESTDIR)$(BINPATH)
 	$(INSTALL) isomaster $(DESTDIR)$(BINPATH)
-	cd icons && $(MAKE) install
+	$(MAKE) -C icons install
 ifndef WITHOUT_NLS
-	cd po && $(MAKE) install
+	$(MAKE) -C po install
 endif
 	$(INSTALL) -d $(DESTDIR)$(MYMANPATH)
 	$(INSTALL) -m 644 isomaster.1 $(DESTDIR)$(MYMANPATH)
@@ -132,9 +132,9 @@ endif
 
 uninstall: 
 	$(RM) -f $(DESTDIR)$(BINPATH)/isomaster
-	cd icons && $(MAKE) uninstall
+	$(MAKE) -C icons uninstall
 ifndef WITHOUT_NLS
-	cd po && $(MAKE) uninstall
+	$(MAKE) -C po uninstall
 endif
 	$(RM) -f $(DESTDIR)$(MYMANPATH)/isomaster.1
 	$(RM) -f $(DESTDIR)$(DESKTOPPATH)/isomaster.desktop
