@@ -50,7 +50,7 @@ sudo make uninstall
 
 Contact
 -------
-I would love to hear from you, to know how you made use of either ISO Master or bkisofs, or with bug reports, or feature requests. Please use the form at http://www.littlesvr.ca/isomaster/email/ to send me email. Thanks in advance!
+I would love to hear from you, to know how you made use of either ISO Master or bkisofs, or with bug reports, or feature requests. Please use the form at http://littlesvr.ca/contact.php to send me email. Thanks in advance!
 
 Bug Reports
 -----------
