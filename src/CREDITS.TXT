@@ -2,7 +2,7 @@ Many thanks to all the following people:
 
 Andrew Smith
 http://littlesvr.ca/misc/contactandrew.php
-Summer 2005 - Summer 2007
+2005 - 2018
 - author and maintainer
 
 Barb Czegel
@@ -46,6 +46,7 @@ September 2006 - February 2007
 Sebastian Pipping
 https://blog.hartwork.org/
 - Patch to fix a crash when opening a file from the "Recently used" section of the file browser
+- Patch to use iniparser 4.1 instead of iniparser 2.17
 
 Ernst W. Winter
 December 2006

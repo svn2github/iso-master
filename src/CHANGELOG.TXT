@@ -1,3 +1,8 @@
+28 Mar 2018 - 1.3.14
+====================
+- Migrated to iniparser 4.1.
+- Switched default text editor to leafpad.
+
 16 Nov 2014 - 1.3.13
 ====================
 - Used the OSTD ( http://littlesvr.ca/ostd/ ) to add 77 more translations: Afrikaans, Amharic, Aragonese, Armenian, Assamese, Azerbaijani, Basque, Belarusian, Bengali, Bosnian, Breton, Burmese, Central, Khmer, Cornish, Dzongkha, Esperanto, Fulah, Ganda, Georgian, Gujarati, Haitian, Hausa, Hindi, Icelandic, Ido, Igbo, Interlingua, Irish, Javanese, Kannada, Kanuri, Kazakh, Kinyarwanda, Kirghiz, Korean, Kurdish, Latin, Limburgan, Luxembourgish, Macedonian, Malagasy, Malay, Malayalam, Manx, Maori, Marathi, Mongolian, Nepali, Occitan, Oriya, Panjabi, Persian, Pushto, Scottish, Sinhala, Southern, Swahili, Tagalog, Tajik, Tamil, Tatar, Telugu, Thai, Tsonga, Turkmen, Uighur, Urdu, Uzbek, Uzbek, (Cyrillic), Walloon, Welsh, Western, Wolof, Xhosa, Yiddish, Yoruba, and Zulu.

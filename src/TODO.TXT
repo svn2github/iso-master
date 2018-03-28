@@ -52,7 +52,7 @@ to package a release:
 - check readme.txt
 - update https://littlesvr.ca/bugs/show_bug.cgi?id=1 and add that version to bugzilla
 
-ISOMASTER_VERSION=1.3.9
+ISOMASTER_VERSION=1.3.14
 svn export src releases/isomaster-$ISOMASTER_VERSION
 rm releases/isomaster-$ISOMASTER_VERSION/bkisofs-manual
 rm -r releases/isomaster-$ISOMASTER_VERSION/icons/originals
