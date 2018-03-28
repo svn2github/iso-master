@@ -70,6 +70,9 @@ endif
 
 OBJECTS = isomaster.o window.o browser.o fsbrowser.o isobrowser.o error.o about.o settings.o boot.o editfile.o
 
+# Allow overriding to iniparser4 for some distros
+LIB_INIPARSER = iniparser
+
 all: translations isomaster.desktop isomaster
 
 isomaster: $(OBJECTS) lib iniparser
@@ -77,7 +80,7 @@ isomaster: $(OBJECTS) lib iniparser
 ifndef USE_SYSTEM_INIPARSER
 	@$(CC) $(LDFLAGS) $(OBJECTS) bk/bk.a iniparser-4.1/libiniparser.a -o isomaster `pkg-config --libs gtk+-2.0`
 else
-	@$(CC) $(LDFLAGS) $(OBJECTS) bk/bk.a -liniparser -o isomaster `pkg-config --libs gtk+-2.0`
+	@$(CC) $(LDFLAGS) $(OBJECTS) bk/bk.a -l$(LIB_INIPARSER) -o isomaster `pkg-config --libs gtk+-2.0`
 endif
 
 # static pattern rule
